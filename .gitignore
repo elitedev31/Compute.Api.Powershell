@@ -6,6 +6,16 @@
 *.user
 *.sln.docstates
 
+# Ignore NuGet package build folder
+NuGetPackages/
+
+# Don't exclude Brunch.io or WebFramework
+!Brunch.io/
+!WebFramework/
+
+# Built help
+Documentation/ApiDocs/ApiDocs/Help/
+
 # Build results
 
 [Dd]ebug/
@@ -15,8 +25,8 @@ build/
 [Bb]in/
 [Oo]bj/
 
-# Enable "build/" folder in the NuGet Packages folder since NuGet packages use it for MSBuild targets
-!packages/*/build/
+# Staging areas
+[Ss]tage/
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
@@ -59,6 +69,9 @@ ipch/
 *.vsp
 *.vspx
 
+# Database projects
+*.dbmdl
+
 # Guidance Automation Toolkit
 *.gpState
 
@@ -93,11 +106,7 @@ DocProject/Help/html
 publish/
 
 # Publish Web Output
-*.Publish.xml
-
-# NuGet Packages Directory
-## TODO: If you have NuGet Package Restore enabled, uncomment the next line
-#packages/
+*.pubxml
 
 # Windows Azure Build Output
 csx
@@ -113,10 +122,7 @@ ClientBin/
 [Ss]tyle[Cc]op.*
 ~$*
 *~
-*.dbmdl
-*.[Pp]ublish.xml
 *.pfx
-*.publishsettings
 
 # RIA/Silverlight projects
 Generated_Code/

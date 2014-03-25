@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Dictionary>
+	<Words>
+		<Recognized>
+			<Word>Autofac</Word>
+			<Word>CBU</Word>
+		</Recognized>
+		<Compound>
+			<Term PreferredAlternate="DiData">didata</Term>
+			<Term PreferredAlternate="IntelliDoc">intellidoc</Term>
+		</Compound>
+		<DiscreteExceptions>
+			<Term>Di</Term>
+			<Term>Intelli</Term>
+		</DiscreteExceptions>
+	</Words>
+	<Acronyms>
+		<CasingExceptions>
+			<Acronym>API</Acronym>
+			<Acronym>CBU</Acronym>
+			<Acronym>FDT</Acronym>
+			<Acronym>Rx</Acronym>
+			<Acronym>Di</Acronym>
+			<Acronym>BaaS</Acronym>
+			<Acronym>EMaaS</Acronym>
+			<Acronym>DAC</Acronym>
+			<Acronym>dacpac</Acronym>
+		</CasingExceptions>
+	</Acronyms>
+</Dictionary>

@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Code Analysis", "Code Analysis", "{E5E0F4D1-CC44-429B-A48B-D41501BDCC0C}"
+	ProjectSection(SolutionItems) = preProject
+		..\CaaS_PS (unit-test).ruleset = ..\CaaS_PS (unit-test).ruleset
+		..\CaaS_PS (web).ruleset = ..\CaaS_PS (web).ruleset
+		..\CaaS_PS.ruleset = ..\CaaS_PS.ruleset
+		..\CustomDictionary.xml = ..\CustomDictionary.xml
+		..\Settings.StyleCop = ..\Settings.StyleCop
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{B01410A7-D99E-4F0F-B4DB-AF1AB407C3FB}"
+	ProjectSection(SolutionItems) = preProject
+		..\LICENSE = ..\LICENSE
+		..\README.md = ..\README.md
+		SolutionAssemblyInfo.cs = SolutionAssemblyInfo.cs
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Compute.Contracts", "Compute.Contracts\Compute.Contracts.csproj", "{4ACBF469-17A8-407B-8C84-0FA112D5CFCF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Compute.Client", "Compute.Client\Compute.Client.csproj", "{C1F76663-78B7-4C29-B73B-206986567562}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{19AFA63F-B7A0-4DF1-A630-F67D3EE44903}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Compute.Client.IntegrationTests", "Tests\Compute.Client.IntegrationTests\Compute.Client.IntegrationTests.csproj", "{538F64E8-65D6-406F-BEF8-10C03AC53041}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4ACBF469-17A8-407B-8C84-0FA112D5CFCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4ACBF469-17A8-407B-8C84-0FA112D5CFCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4ACBF469-17A8-407B-8C84-0FA112D5CFCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4ACBF469-17A8-407B-8C84-0FA112D5CFCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1F76663-78B7-4C29-B73B-206986567562}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1F76663-78B7-4C29-B73B-206986567562}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1F76663-78B7-4C29-B73B-206986567562}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1F76663-78B7-4C29-B73B-206986567562}.Release|Any CPU.Build.0 = Release|Any CPU
+		{538F64E8-65D6-406F-BEF8-10C03AC53041}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{538F64E8-65D6-406F-BEF8-10C03AC53041}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{538F64E8-65D6-406F-BEF8-10C03AC53041}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{538F64E8-65D6-406F-BEF8-10C03AC53041}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E5E0F4D1-CC44-429B-A48B-D41501BDCC0C} = {B01410A7-D99E-4F0F-B4DB-AF1AB407C3FB}
+		{538F64E8-65D6-406F-BEF8-10C03AC53041} = {19AFA63F-B7A0-4DF1-A630-F67D3EE44903}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ComputeClient", "ComputeClient", "{2E5F57F1-0AD7-4CB4-9FEF-C4474F31CE08}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudCompute.Powershell", "CloudCompute.Powershell\CloudCompute.Powershell.csproj", "{311D58DB-8DC6-45D7-BA45-566AE443E985}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{5F5803AC-EBDD-4D5E-A7D8-0A0DCEFD2EDD}"
+	ProjectSection(SolutionItems) = preProject
+		..\CaaS_PS (unit-test).ruleset = ..\CaaS_PS (unit-test).ruleset
+		..\CaaS_PS (web).ruleset = ..\CaaS_PS (web).ruleset
+		..\CaaS_PS.ruleset = ..\CaaS_PS.ruleset
+		..\Settings.StyleCop = ..\Settings.StyleCop
+		SolutionAssemblyInfo.cs = SolutionAssemblyInfo.cs
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Compute.Contracts", "..\ComputeClient\Compute.Contracts\Compute.Contracts.csproj", "{4ACBF469-17A8-407B-8C84-0FA112D5CFCF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Compute.Client", "..\ComputeClient\Compute.Client\Compute.Client.csproj", "{C1F76663-78B7-4C29-B73B-206986567562}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{311D58DB-8DC6-45D7-BA45-566AE443E985}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{311D58DB-8DC6-45D7-BA45-566AE443E985}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{311D58DB-8DC6-45D7-BA45-566AE443E985}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{311D58DB-8DC6-45D7-BA45-566AE443E985}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4ACBF469-17A8-407B-8C84-0FA112D5CFCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4ACBF469-17A8-407B-8C84-0FA112D5CFCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4ACBF469-17A8-407B-8C84-0FA112D5CFCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4ACBF469-17A8-407B-8C84-0FA112D5CFCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1F76663-78B7-4C29-B73B-206986567562}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1F76663-78B7-4C29-B73B-206986567562}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1F76663-78B7-4C29-B73B-206986567562}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1F76663-78B7-4C29-B73B-206986567562}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4ACBF469-17A8-407B-8C84-0FA112D5CFCF} = {2E5F57F1-0AD7-4CB4-9FEF-C4474F31CE08}
+		{C1F76663-78B7-4C29-B73B-206986567562} = {2E5F57F1-0AD7-4CB4-9FEF-C4474F31CE08}
+	EndGlobalSection
+EndGlobal
