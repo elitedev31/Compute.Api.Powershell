@@ -236,6 +236,11 @@ namespace DD.CBU.Compute.Api.Client
 			return imagesWithSoftwareLabels.Images;
 		}
 
+        /// <summary>
+        /// Gets a list of OS Images
+        /// </summary>
+        /// <param name="networkLocation"></param>
+        /// <returns></returns>
         public async Task<DeployedImagesWithSoftwareLabels> GetOsServerImagesTask(string networkLocation)
 	    {
             return await ApiGetAsync<DeployedImagesWithSoftwareLabels>(ApiUris.OsServerImages(networkLocation));

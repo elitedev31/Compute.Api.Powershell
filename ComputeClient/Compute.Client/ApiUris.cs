@@ -88,7 +88,17 @@ namespace DD.CBU.Compute.Api.Client
 	    {
 	        Contract.Requires<ArgumentException>(orgId != Guid.Empty, "Organization Id cannot be empty");
 
-	        return new Uri(string.Format("{0}/server/deployed", orgId), UriKind.Relative);
+	        return new Uri(string.Format("{0}/serverWithBackup", orgId), UriKind.Relative);
 	    }
-	}
+
+        internal static Uri OsServerImages(string networkLocation)
+        {
+            return new Uri(string.Format("base/image/deployedWithSoftwareLabels/{0}", networkLocation), UriKind.Relative);
+        }
+
+        internal static Uri NetworkWithLocations(Guid orgId)
+        {
+            return new Uri(string.Format("{0}/networkWithLocation", orgId), UriKind.Relative);
+        }
+    }
 }
