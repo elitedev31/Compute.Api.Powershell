@@ -283,7 +283,7 @@ namespace DD.CBU.Compute.Api.Client
 		/// <returns>
 		///		The operation result.
 		/// </returns>
-		async Task<TResult> ApiGetAsync<TResult>(Uri relativeOperationUri)
+		public async Task<TResult> ApiGetAsync<TResult>(Uri relativeOperationUri)
 		{
 			if (relativeOperationUri == null)
 				throw new ArgumentNullException("relativeOperationUri");
