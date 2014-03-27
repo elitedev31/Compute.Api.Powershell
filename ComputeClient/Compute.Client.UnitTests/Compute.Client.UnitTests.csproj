@@ -85,6 +85,8 @@
     <Content Include="SampleOutputs\DesignatePrimaryAdministratorAccount.xml" />
     <Content Include="SampleOutputs\GetMyAccountDetails.xml" />
     <Content Include="SampleOutputs\ListAccounts.xml" />
+    <Content Include="SampleOutputs\ListDataCentersWithMaintenanceStatus.xml" />
+    <Content Include="SampleOutputs\ListMultiGeographyRegionsWithKey.xml" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

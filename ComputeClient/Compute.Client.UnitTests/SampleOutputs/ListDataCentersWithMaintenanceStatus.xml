@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<DatacentersWithMaintenanceStatus xmlns:ns7="http://oec.api.opsource.net/schemas/datacenter" >
+  <!-- 1 to many occurrences -->
+  <datacenter location="NA5" default="true">
+    <displayName>US - East 2</displayName>
+    <city>Ashburn</city>
+    <state>Virginia</state>
+    <country>US</country>
+    <vpnUrl>https://na5.cloud-vpn.net</vpnUrl>
+    <networking maintenanceStatus="NORMAL" type="CISCO">
+      <property value="20" name="MAX_SERVER_TO_VIP_CONNECTIONS"/>
+    </networking>
+    <hypervisor maintenanceStatus="NORMAL" type="VMWARE">
+      <diskSpeed available="true" default="true" id="STANDARD">
+        <displayName>Standard</displayName>
+        <abbreviation>STD</abbreviation>
+        <description>Standard Disk Speed</description>
+      </diskSpeed>
+      <diskSpeed available="true" default="false" id="HIGHPERFORMANCE">
+        <displayName>High Performance</displayName>
+        <abbreviation>HPF</abbreviation>
+        <description>
+          Faster than Standard. Uses 15000 RPM disk with
+          Fast Cache.
+        </description>
+      </diskSpeed>
+      <diskSpeed available="true" default="false" id="ECONOMY">
+        <displayName>Economy</displayName>
+        <abbreviation>ECN</abbreviation>
+        <description>
+          Slower than Standard. Uses 7200 RPM disk without
+          Fast Cache.
+        </description>
+      </diskSpeed>
+      <!-- Optional. Present if datacenter has Backup service enabled-->
+      <backup type="COMMVAULT" maintenanceStatus="NORMAL"/>
+      <!-- 0 to many occurrences of property -->
+      <property name="MIN_DISK_SIZE_GB" value="10" />
+      <property name="MAX_DISK_SIZE_GB" value="1000" />
+      <property name="MAX_TOTAL_ADDITIONAL_STORAGE_GB" value="10000"/>
+      <property name="MAX_TOTAL_IMAGE_STORAGE_GB" value="2600"/>
+      <property name="MAX_CPU_COUNT" value="16" />
+      <property name="MIN_MEMORY_MB" value="1024" />
+      <property name="MAX_MEMORY_MB" value="131072" />
+    </hypervisor>
+  </datacenter>
+</DatacentersWithMaintenanceStatus>

@@ -3,6 +3,7 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using DD.CBU.Compute.Api.Client;
 using DD.CBU.Compute.Api.Client.Interfaces;
 using FakeItEasy;
 
@@ -38,6 +39,13 @@ namespace Compute.Client.UnitTests
 
         protected virtual void ConfigureFakeHttpClient(IHttpClient client)
         {            
+        }
+
+        protected ComputeApiClient GetApiClient(string sampleXmlFileName, string expectedRelativeUrl)
+        {
+            var httpClient = GetFakeHttpClientFromSampleFile(sampleXmlFileName, expectedRelativeUrl);
+            var client = new ComputeApiClient(httpClient);
+            return client;
         }
     }
 }

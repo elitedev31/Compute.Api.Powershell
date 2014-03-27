@@ -55,8 +55,11 @@
     <Compile Include="Datacenter\DatacenterDetail.cs" />
     <Compile Include="Datacenter\DatacenterSummary.cs" />
     <Compile Include="Datacenter\DatacentersWithDiskSpeedDetails.cs" />
+    <Compile Include="Datacenter\DatacentersWithMaintenanceStatus.cs" />
+    <Compile Include="Datacenter\DataCenterWithMaintenanceStatus.cs" />
     <Compile Include="Datacenter\DiskSpeedDetail.cs" />
-    <Compile Include="Datacenter\Geos.cs" />
+    <Compile Include="Datacenter\Region.cs" />
+    <Compile Include="Datacenter\Regions.cs" />
     <Compile Include="Datacenter\IDatacenterSummary.cs" />
     <Compile Include="Datacenter\IDatacenterDetail.cs" />
     <Compile Include="Datacenter\IDiskSpeedDetail.cs" />

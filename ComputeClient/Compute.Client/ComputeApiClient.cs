@@ -173,16 +173,32 @@ namespace DD.CBU.Compute.Api.Client
         /// The Sub-Administrator is identified by their <paramref name="username"/>.
         /// </summary>
         /// <param name="orgId">The org ID of the account.</param>
-        /// <param name="username">The username of the account that will be deleted.</param>
+        /// <param name="username">The Sub-Administrator account.</param>
         /// <returns>A <see cref="ApiStatus"/> result that describes whether or not the operation was successful.</returns>
         public async Task<ApiStatus> DeleteSubAdministratorAccount(Guid orgId, string username)
         {
             return ExecuteAccountCommand(orgId, username, "{0}/account/{1}?delete").Result;
         }
 
+        /// <summary>
+        /// Allows the current Primary Administrator user to designate a Sub-Administrator user belonging to the 
+        /// same organization <paramref name="orgId"/> to become the Primary Administrator for the organization.
+        /// The Sub-Administrator is identified by their <paramref name="username"/>.
+        /// </summary>
+        /// <param name="orgId">The org ID of the account.</param>
+        /// <param name="username">The Sub-Administrator account.</param>
+        /// <returns>A <see cref="ApiStatus"/> result that describes whether or not the operation was successful.</returns>
         public async Task<ApiStatus> DesignatePrimaryAdministratorAccount(Guid orgId, string username)
         {
             return ExecuteAccountCommand(orgId, username, "{0}/account/{1}?primary").Result;
+        }
+
+        public async Task<IEnumerable<DataCenterWithMaintenanceStatus>> GetListOfDataCentersWithMaintenanceStatuses(
+            Guid orgId)
+        {
+            var url = string.Format("{0}/datacenterWithMaintenanceStatus?", orgId);
+            var dataCenters = ApiGetAsync<DatacentersWithMaintenanceStatus>(new Uri(url, UriKind.Relative)).Result;
+            return dataCenters.Items;
         }
 
         /// <summary>
