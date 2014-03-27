@@ -4,10 +4,10 @@
     using System.Threading.Tasks;
 
     /// <summary>
-    /// The get deployed servers cmdlet.
+    /// The get deployed server/s cmdlet.
     /// </summary>
-    [Cmdlet(VerbsCommon.Get, "CaasDeployedServers")]
-    public class GetCaasDeployedServersCmdlet : Cmdlet
+    [Cmdlet(VerbsCommon.Get, "CaasDeployedServer")]
+    public class GetCaasDeployedServerCmdlet : Cmdlet
     {
         /// <summary>
         /// The CaaS connection created by <see cref="NewCaasConnectionCmdlet"/> 
@@ -15,6 +15,12 @@
         [Parameter(Mandatory = true, ValueFromPipeline = true,
             HelpMessage = "The CaaS Connection created by New-ComputeServiceConnection")]
         public ComputeServiceConnection CaaS { get; set; }
+
+        [Parameter(HelpMessage = "The server ID to search for")]
+        public string ServerId { get; set; }
+
+        [Parameter(HelpMessage = "The search criteria that will be used to retrieve deployed servers")]
+        public ServersWithBackupServer ServerSearchCriteria { get; set; }
 
         /// <summary>
         /// The process record method.

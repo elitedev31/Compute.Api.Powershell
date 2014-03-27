@@ -60,7 +60,9 @@
     <Compile Include="ApiClientException.cs" />
     <Compile Include="ApiUris.cs" />
     <Compile Include="ClientError.cs" />
-    <Compile Include="ComputeApiClient.cs" />
+    <Compile Include="ComputeApiClient.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="ComputeApiClientException.cs" />
     <Compile Include="ComputeApiException.cs" />
     <Compile Include="ComputeApiError.cs" />

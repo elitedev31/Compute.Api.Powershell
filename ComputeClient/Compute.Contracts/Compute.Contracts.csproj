@@ -75,10 +75,12 @@
     <Compile Include="Server\IOperatingSystem.cs" />
     <Compile Include="Server\MachineSpecification.cs" />
     <Compile Include="Server\NetworkWithLocations.cs" />
+    <Compile Include="Server\NewServerToDeploy.cs" />
     <Compile Include="Server\OperatingSystem.cs" />
     <Compile Include="Server\OperatingSystemType.cs" />
     <Compile Include="Server\Server.cs" />
     <Compile Include="Server\ServerImage.cs" />
+    <Compile Include="Server\Status.cs" />
     <Compile Include="XmlNamespaceConstants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

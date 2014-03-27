@@ -100,5 +100,40 @@ namespace DD.CBU.Compute.Api.Client
         {
             return new Uri(string.Format("{0}/networkWithLocation", orgId), UriKind.Relative);
         }
+
+        /// <summary>
+        /// The relative URI for the CaaS API action that allows a server to be deployed
+        /// </summary>
+        /// <param name="orgId"></param>
+        /// <returns></returns>
+	    internal static Uri DeployServer(Guid orgId)
+	    {
+	        return new Uri(string.Format("{0}/server", orgId), UriKind.Relative);
+	    }
+
+        internal static Uri DeleteServer(Guid orgId, string serverId)
+        {
+            return new Uri(string.Format("{0}/server/{1}?delete", orgId, serverId), UriKind.Relative);
+        }
+
+	    internal static Uri ShutdownServer(Guid orgId, string serverId)
+	    {
+	        return new Uri(string.Format("{0}/server/{1}?shutdown", orgId, serverId), UriKind.Relative);
+	    }
+
+	    internal static Uri PowerOnServer(Guid orgId, string serverId)
+	    {
+            return new Uri(string.Format("{0}/server/{1}?start", orgId, serverId), UriKind.Relative);
+	    }
+
+        internal static Uri PoweroffServer(Guid orgId, string serverId)
+        {
+            return new Uri(string.Format("{0}/server/{1}?poweroff", orgId, serverId), UriKind.Relative);
+        }
+        
+        internal static Uri RestartServer(Guid orgId, string serverId)
+        {
+            return new Uri(string.Format("{0}/server/{1}?restart", orgId, serverId), UriKind.Relative);
+        }
     }
 }
