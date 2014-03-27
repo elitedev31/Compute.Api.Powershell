@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Geos xmlns="http://oec.api.opsource.net/schemas/multigeo">
+<geo>
+  <id>lk76kf30-2cb3-1791-5476-231567-09gt87</id>
+  <geoKey>northamerica</geoKey>
+  <name>North America</name>
+  <cloudUiUrl>https://admin.opsourcecloud.net</cloudUiUrl>
+  <cloudApiUrl>https://api.opsourcecloud.net/oec/0.9</cloudApiUrl>
+  <isHome>true</isHome>
+  <productKey>OBPK-PRD-7f5e343hg6-dahb-4fe8-835a-d5465gt01b</productKey>
+  <pricingUrl>http://www.opsource.net/pricing</pricingUrl>
+  <state>ENABLED</state>
+</geo>
+<geo>
+  <id>bf43kf30-2c83-11e1-9963-001517-45hj54</id>
+  <geoKey>europe</geoKey>
+  <name>Europe</name>
+  <cloudUiUrl>https://eu.opsourcecloud.net</cloudUiUrl>
+  <cloudApiUrl>https://euapi.opsourcecloud.net/oec/0.9</cloudApiUrl>
+  <isHome>false</isHome>
+  <productKey>OBPK-PRD-7f5eahg6-daeb-4ee8-835a-a1034fb0de</productKey>
+  <pricingUrl>http://www.opsource.net/pricing</pricingUrl>
+  <state>ENABLED</state>
+</geo>
+</Geos>
