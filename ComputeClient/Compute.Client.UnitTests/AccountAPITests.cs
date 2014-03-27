@@ -79,9 +79,11 @@ namespace Compute.Client.UnitTests
             var expectedRelativeUrl = string.Format("{0}/multigeo", someOrgId);
             
             var client = GetApiClient("ListMultiGeographyRegionsWithKey.xml", expectedRelativeUrl);
-            //var regions = client.GetListOfMultiGeographyRegions(someOrgId).Result;
+            var regions = client.GetListOfMultiGeographyRegions(someOrgId).Result.ToArray();
 
-            Assert.Inconclusive("TODO: Finish this test");
+            Assert.AreEqual(2, regions.Count());
+            Assert.AreEqual("lk76kf30-2cb3-1791-5476-231567-09gt87", regions[0].id);
+            Assert.AreEqual("bf43kf30-2c83-11e1-9963-001517-45hj54", regions[1].id);
         }
 
         [TestMethod]
