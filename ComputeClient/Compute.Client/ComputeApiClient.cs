@@ -21,7 +21,8 @@ using DD.CBU.Compute.Api.Contracts.General;
     /// </summary>
     public sealed class ComputeApiClient
         : DisposableObject
-    {
+    {  
+        #region Instance data
         /// <summary>
         ///		Media type formatters used to serialise and deserialise data contracts when communicating with the CaaS API.
         /// </summary>
@@ -86,6 +87,35 @@ using DD.CBU.Compute.Api.Contracts.General;
             _httpClient = client;
         }
 
+        /// <summary>
+        ///		Dispose of resources being used by the CaaS API client.
+        /// </summary>
+        /// <param name="disposing">
+        ///		Explicit disposal?
+        /// </param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (_clientMessageHandler != null)
+                {
+                    _clientMessageHandler.Dispose();
+                    _clientMessageHandler = null;
+                }
+
+                if (_httpClient != null)
+                {
+                    _httpClient.Dispose();
+                    _httpClient = null;
+                }
+
+                _account = null;
+            }
+        }
+
+        #endregion // Construction / disposal
+
+        #region Public properties
         /// <summary>
         ///		Read-only information about the CaaS account targeted by the CaaS API client.
         /// </summary>
