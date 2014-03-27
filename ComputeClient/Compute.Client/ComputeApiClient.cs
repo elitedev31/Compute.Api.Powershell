@@ -167,12 +167,45 @@ namespace DD.CBU.Compute.Api.Client
             _clientMessageHandler.PreAuthenticate = false;
         }
 
+        /// <summary>
+        /// Allows the current Primary Administrator user to designate a Sub-Administrator user belonging to the 
+        /// same organization <paramref name="orgId"/> to become the Primary Administrator for the organization.
+        /// The Sub-Administrator is identified by their <paramref name="username"/>.
+        /// </summary>
+        /// <param name="orgId">The org ID of the account.</param>
+        /// <param name="username">The username of the account that will be deleted.</param>
+        /// <returns>A <see cref="ApiStatus"/> result that describes whether or not the operation was successful.</returns>
         public async Task<ApiStatus> DeleteSubAdministratorAccount(Guid orgId, string username)
         {
-            var uriText = string.Format("{0}/account/{1}?delete", orgId, username);
+            return ExecuteAccountCommand(orgId, username, "{0}/account/{1}?delete").Result;
+        }
+
+        public async Task<ApiStatus> DesignatePrimaryAdministratorAccount(Guid orgId, string username)
+        {
+            return ExecuteAccountCommand(orgId, username, "{0}/account/{1}?primary").Result;
+        }
+
+        /// <summary>
+        /// Lists the Accounts belonging to the Organization identified by <paramref name="orgId"/>. The list will include all 
+        /// SubAdministrator accounts and the Primary Administrator account. The Primary Administrator is unique and is 
+        /// identified by the “primary administrator” role.
+        /// </summary>
+        /// <param name="orgId">The org ID of the accounts.</param>
+        /// <returns>A list of accounts associated with the <paramref name="orgId"/>.</returns>
+        public async Task<IEnumerable<Account>> GetAccounts(Guid orgId)
+        {
+            var relativeUrl = string.Format("{0}/account", orgId);
+            var accounts = await ApiGetAsync<Accounts>(new Uri(relativeUrl, UriKind.Relative));
+            return accounts.Items;
+        }
+
+        private async Task<ApiStatus> ExecuteAccountCommand(Guid orgId, string username, string uriFormat)
+        {
+            var uriText = string.Format(uriFormat, orgId, username);
             var uri = new Uri(uriText, UriKind.Relative);
             return ApiGetAsync<ApiStatus>(uri).Result;
         }
+
         /// <summary>
         ///		Asynchronously get a list of all CaaS data centres that are available for use by the specified organisation.
         /// </summary>

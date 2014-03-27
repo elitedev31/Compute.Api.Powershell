@@ -21,8 +21,8 @@ namespace DD.CBU.Compute.Api.Contracts.Datacenter
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://oec.api.opsource.net/schemas/multigeo")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://oec.api.opsource.net/schemas/multigeo", IsNullable = false)]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = XmlNamespaceConstants.MultiGeo)]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = XmlNamespaceConstants.MultiGeo, IsNullable = false)]
     public partial class Geos
     {
 
@@ -38,7 +38,7 @@ namespace DD.CBU.Compute.Api.Contracts.Datacenter
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://oec.api.opsource.net/schemas/multigeo")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = XmlNamespaceConstants.MultiGeo)]
     public partial class GeosGeo
     {
 
