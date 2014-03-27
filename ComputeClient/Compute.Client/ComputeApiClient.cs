@@ -198,6 +198,15 @@ using DD.CBU.Compute.Api.Contracts.General;
             _clientMessageHandler.PreAuthenticate = false;
         }
 
+        public async Task<IEnumerable<Region>> GetListOfMultiGeographyRegions(Guid orgId)
+        {
+            var relativeUrl = string.Format("{0}/multigeo", orgId);
+            var uri = new Uri(relativeUrl, UriKind.Relative);
+
+            var regions = this.ApiGetAsync<Geos>(uri).Result;
+            return regions.Items;
+        }
+
         /// <summary>
         /// Returns a list of the Multi-Geography Regions available for the supplied {org-id
         /// An element is returned for each available Geographic Region.
