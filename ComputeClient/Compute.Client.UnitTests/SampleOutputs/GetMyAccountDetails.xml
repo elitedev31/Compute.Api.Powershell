@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns3:Account xmlns:ns3="http://oec.api.opsource.net/schemas/directory">
+  <ns3:userName>rdyer</ns3:userName>
+  <ns3:fullName>Joe Public</ns3:fullName>
+  <ns3:firstName>Joe</ns3:firstName>
+  <ns3:lastName>Public</ns3:lastName>
+  <ns3:emailAddress>jpublic24583@example.com</ns3:emailAddress>
+  <ns3:orgId>1831c1a9-9c03-44df-a5a4-f2a4662d6bde</ns3:orgId>
+  <ns3:roles>
+    <ns3:role>
+      <ns3:name>primary administrator</ns3:name>
+    </ns3:role>
+  </ns3:roles>
+</ns3:Account>

@@ -12,7 +12,7 @@ namespace DD.CBU.Compute.Client.IntegrationTests
 	///		Integration tests for the CaaS API client's server-related functionality.
 	/// </summary>
 	[TestClass]
-	public class ServerTests
+	public class ServerTests : BaseTestFixture
 	{
 		/// <summary>
 		///		Create a new CaaS API client integration test-set for server-related functionality.
@@ -43,7 +43,7 @@ namespace DD.CBU.Compute.Client.IntegrationTests
 			using (ComputeApiClient apiClient = new ComputeApiClient("AU"))
 			{
 				await apiClient.LoginAsync(
-					accountCredentials: AccountTests.GetIntegrationTestCredentials()
+					accountCredentials: GetIntegrationTestCredentials()
 				);
 
 				images = await apiClient.GetImages("AU1");
@@ -79,7 +79,7 @@ namespace DD.CBU.Compute.Client.IntegrationTests
 			using (ComputeApiClient apiClient = new ComputeApiClient("AU"))
 			{
 				await apiClient.LoginAsync(
-					accountCredentials: AccountTests.GetIntegrationTestCredentials()
+					accountCredentials: GetIntegrationTestCredentials()
 				);
 
 				foreach (DatacenterSummary datacenter in await apiClient.GetAvailableDataCenters(apiClient.Account.OrganizationId))

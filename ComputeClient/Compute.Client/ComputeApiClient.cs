@@ -86,6 +86,7 @@ namespace DD.CBU.Compute.Api.Client
             if (client == null)
                 throw new ArgumentNullException("client", "Argument cannot be null");
 
+            _mediaTypeFormatters.XmlFormatter.UseXmlSerializer = true;
             _httpClient = client;
         }
 
