@@ -61,6 +61,7 @@
     <Compile Include="Datacenter\IDatacenterDetail.cs" />
     <Compile Include="Datacenter\IDiskSpeedDetail.cs" />
     <Compile Include="Directory\Account.cs" />
+    <Compile Include="Directory\Accounts.cs" />
     <Compile Include="Directory\IAccount.cs" />
     <Compile Include="Directory\IRole.cs" />
     <Compile Include="Directory\Role.cs" />

@@ -1,19 +1,20 @@
 ﻿namespace DD.CBU.Compute.Api.Client
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
     using System.Diagnostics.Contracts;
-    using System.Net;
-    using System.Net.Http;
-    using System.Net.Http.Formatting;
-    using System.Threading.Tasks;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Formatting;
+using System.Threading.Tasks;
 
-    using DD.CBU.Compute.Api.Client.Interfaces;
+using DD.CBU.Compute.Api.Client.Interfaces;
     using DD.CBU.Compute.Api.Client.Utilities;
     using DD.CBU.Compute.Api.Contracts.Datacenter;
     using DD.CBU.Compute.Api.Contracts.Directory;
     using DD.CBU.Compute.Api.Contracts.Server;
+using DD.CBU.Compute.Api.Contracts.General;
 
     /// <summary>
     ///		A client for the Dimension Data Compute-as-a-Service (CaaS) API.
@@ -21,8 +22,6 @@
     public sealed class ComputeApiClient
         : DisposableObject
     {
-        #region Instance data
-
         /// <summary>
         ///		Media type formatters used to serialise and deserialise data contracts when communicating with the CaaS API.
         /// </summary>
@@ -42,10 +41,6 @@
         ///		The details for the CaaS account associated with the supplied credentials.
         /// </summary>
         Account _account;
-
-        #endregion // Instance data
-
-        #region Construction / disposal
 
         /// <summary>
         ///		Create a new Compute-as-a-Service API client.
@@ -75,7 +70,7 @@
                 throw new ArgumentException("Base URI supplied is not an absolute URI", "baseUri");
 
             _mediaTypeFormatters.XmlFormatter.UseXmlSerializer = true;
-            _httpClient = new HttpClientAdapter(new HttpClient(_clientMessageHandler) {BaseAddress = baseUri});
+            _httpClient = new HttpClientAdapter(new HttpClient(_clientMessageHandler) { BaseAddress = baseUri });
         }
 
         /// <summary>
@@ -87,38 +82,9 @@
             if (client == null)
                 throw new ArgumentNullException("client", "Argument cannot be null");
 
+            _mediaTypeFormatters.XmlFormatter.UseXmlSerializer = true;
             _httpClient = client;
         }
-
-        /// <summary>
-        ///		Dispose of resources being used by the CaaS API client.
-        /// </summary>
-        /// <param name="disposing">
-        ///		Explicit disposal?
-        /// </param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                if (_clientMessageHandler != null)
-                {
-                    _clientMessageHandler.Dispose();
-                    _clientMessageHandler = null;
-                }
-
-                if (_httpClient != null)
-                {
-                    _httpClient.Dispose();
-                    _httpClient = null;
-                }
-
-                _account = null;
-            }
-        }
-
-        #endregion // Construction / disposal
-
-        #region Public properties
 
         /// <summary>
         ///		Read-only information about the CaaS account targeted by the CaaS API client.
@@ -149,10 +115,6 @@
                 return _account != null;
             }
         }
-
-        #endregion // Public properties
-
-        #region Public methods
 
         /// <summary>
         ///		Asynchronously log into the CaaS API.
@@ -204,6 +166,45 @@
             _account = null;
             _clientMessageHandler.Credentials = null;
             _clientMessageHandler.PreAuthenticate = false;
+        }
+
+        /// <summary>
+        /// Allows the current Primary Administrator user to designate a Sub-Administrator user belonging to the 
+        /// same organization <paramref name="orgId"/> to become the Primary Administrator for the organization.
+        /// The Sub-Administrator is identified by their <paramref name="username"/>.
+        /// </summary>
+        /// <param name="orgId">The org ID of the account.</param>
+        /// <param name="username">The username of the account that will be deleted.</param>
+        /// <returns>A <see cref="ApiStatus"/> result that describes whether or not the operation was successful.</returns>
+        public async Task<ApiStatus> DeleteSubAdministratorAccount(Guid orgId, string username)
+        {
+            return ExecuteAccountCommand(orgId, username, "{0}/account/{1}?delete").Result;
+        }
+
+        public async Task<ApiStatus> DesignatePrimaryAdministratorAccount(Guid orgId, string username)
+        {
+            return ExecuteAccountCommand(orgId, username, "{0}/account/{1}?primary").Result;
+        }
+
+        /// <summary>
+        /// Lists the Accounts belonging to the Organization identified by <paramref name="orgId"/>. The list will include all 
+        /// SubAdministrator accounts and the Primary Administrator account. The Primary Administrator is unique and is 
+        /// identified by the “primary administrator” role.
+        /// </summary>
+        /// <param name="orgId">The org ID of the accounts.</param>
+        /// <returns>A list of accounts associated with the <paramref name="orgId"/>.</returns>
+        public async Task<IEnumerable<Account>> GetAccounts(Guid orgId)
+        {
+            var relativeUrl = string.Format("{0}/account", orgId);
+            var accounts = await ApiGetAsync<Accounts>(new Uri(relativeUrl, UriKind.Relative));
+            return accounts.Items;
+        }
+
+        private async Task<ApiStatus> ExecuteAccountCommand(Guid orgId, string username, string uriFormat)
+        {
+            var uriText = string.Format(uriFormat, orgId, username);
+            var uri = new Uri(uriText, UriKind.Relative);
+            return ApiGetAsync<ApiStatus>(uri).Result;
         }
 
         /// <summary>
@@ -329,10 +330,10 @@
             return await this.ApiGetAsync<Status>(ApiUris.DeleteServer(Account.OrganizationId, serverId));
         }
 
-	    public async Task<ServersWithBackup> GetDeployedServers()
-	    {
-	        return await this.ApiGetAsync<ServersWithBackup>(ApiUris.DeployedServers(Account.OrganizationId));
-	    }
+        public async Task<ServersWithBackup> GetDeployedServers()
+        {
+            return await this.ApiGetAsync<ServersWithBackup>(ApiUris.DeployedServers(Account.OrganizationId));
+        }
 
         #endregion // Public methods
 
@@ -388,7 +389,7 @@
 	            var response =
 	                await
 	                _httpClient.PostAsync(relativeOperationUri, objectContent))
-	        {
+            {
 	            if (response.IsSuccessStatusCode) return await response.Content.ReadAsAsync<TResult>(_mediaTypeFormatters);
 
                 switch (response.StatusCode)
@@ -408,9 +409,9 @@
                                     response.RequestMessage.RequestUri));
                         }
                 }
-	        }
-	    }
+            }
+        }
 
-	    #endregion // WebAPI invocation
+        #endregion // WebAPI invocation
     }
 }
