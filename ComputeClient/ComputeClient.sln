@@ -1,12 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Code Analysis", "Code Analysis", "{E5E0F4D1-CC44-429B-A48B-D41501BDCC0C}"
 	ProjectSection(SolutionItems) = preProject
 		..\CaaS_PS (unit-test).ruleset = ..\CaaS_PS (unit-test).ruleset
 		..\CaaS_PS (web).ruleset = ..\CaaS_PS (web).ruleset
 		..\CaaS_PS.ruleset = ..\CaaS_PS.ruleset
 		..\CustomDictionary.xml = ..\CustomDictionary.xml
+		..\LICENSE = ..\LICENSE
 		..\Settings.StyleCop = ..\Settings.StyleCop
 	EndProjectSection
 EndProject
