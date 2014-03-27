@@ -26,19 +26,23 @@ namespace Compute.Client.UnitTests
 
         protected IHttpClient GetFakeHttpClient(string xmlResponse, Uri expectedUri)
         {
-            var message = new HttpResponseMessage(HttpStatusCode.OK);
-            message.Content = new StringContent(xmlResponse, Encoding.UTF8, "text/xml");
+            var message = CreateMessage(xmlResponse);
+            Action<IHttpClient> configureClient = fakeClient => A.CallTo(() => fakeClient.GetAsync(expectedUri)).Returns(message);
+            return GetFakeHttpClient(xmlResponse, expectedUri, configureClient);
+        }
 
+        protected IHttpClient GetFakeHttpClient(string xmlResponse, Uri expectedUri, Action<IHttpClient> configureFakeClient)
+        {            
             var fakeClient = A.Fake<IHttpClient>();
-            A.CallTo(() => fakeClient.GetAsync(expectedUri)).Returns(message);
-
-            ConfigureFakeHttpClient(fakeClient);
-
+            configureFakeClient(fakeClient);
             return fakeClient;
         }
 
-        protected virtual void ConfigureFakeHttpClient(IHttpClient client)
-        {            
+        protected HttpResponseMessage CreateMessage(string xmlResponse, HttpStatusCode httpStatusCode = HttpStatusCode.OK)
+        {
+            var message = new HttpResponseMessage(httpStatusCode);
+            message.Content = new StringContent(xmlResponse, Encoding.UTF8, "text/xml");
+            return message;
         }
 
         protected ComputeApiClient GetApiClient(string sampleXmlFileName, string expectedRelativeUrl)

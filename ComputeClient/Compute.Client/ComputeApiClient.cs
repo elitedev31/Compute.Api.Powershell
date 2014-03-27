@@ -19,7 +19,7 @@ using DD.CBU.Compute.Api.Contracts.General;
     /// <summary>
     ///		A client for the Dimension Data Compute-as-a-Service (CaaS) API.
     /// </summary>
-    public sealed class ComputeApiClient
+    public sealed partial class ComputeApiClient
         : DisposableObject
     {  
         #region Instance data
@@ -196,6 +196,21 @@ using DD.CBU.Compute.Api.Contracts.General;
             _account = null;
             _clientMessageHandler.Credentials = null;
             _clientMessageHandler.PreAuthenticate = false;
+        }
+
+        /// <summary>
+        /// Returns a list of the Multi-Geography Regions available for the supplied {org-id
+        /// An element is returned for each available Geographic Region.
+        /// </summary>
+        /// <param name="orgId">The org ID.</param>
+        /// <returns>A list of regions associated with the org ID.</returns>
+        public async Task<IEnumerable<Region>> GetListOfMultiGeographyRegions(Guid orgId)
+        {
+            var relativeUrl = string.Format("{0}/multigeo", orgId);
+            var uri = new Uri(relativeUrl, UriKind.Relative);
+
+            var regions = this.ApiGetAsync<Geos>(uri).Result;
+            return regions.Items;
         }
 
         /// <summary>
