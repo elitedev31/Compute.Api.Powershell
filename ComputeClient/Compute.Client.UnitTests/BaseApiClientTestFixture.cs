@@ -30,7 +30,14 @@ namespace Compute.Client.UnitTests
 
             var fakeClient = A.Fake<IHttpClient>();
             A.CallTo(() => fakeClient.GetAsync(expectedUri)).Returns(message);
+
+            ConfigureFakeHttpClient(fakeClient);
+
             return fakeClient;
+        }
+
+        protected virtual void ConfigureFakeHttpClient(IHttpClient client)
+        {            
         }
     }
 }

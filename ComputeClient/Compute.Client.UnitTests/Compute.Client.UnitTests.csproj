@@ -81,6 +81,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="SampleOutputs\DeleteSubAdministratorAccount.xml" />
     <Content Include="SampleOutputs\GetMyAccountDetails.xml" />
   </ItemGroup>
   <Choose>

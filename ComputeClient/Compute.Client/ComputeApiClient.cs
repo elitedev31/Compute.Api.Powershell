@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Threading.Tasks;
 using DD.CBU.Compute.Api.Client.Interfaces;
+using DD.CBU.Compute.Api.Contracts.General;
 
 namespace DD.CBU.Compute.Api.Client
 {
@@ -20,8 +21,6 @@ namespace DD.CBU.Compute.Api.Client
     public sealed class ComputeApiClient
         : DisposableObject
     {
-        #region Instance data
-
         /// <summary>
         ///		Media type formatters used to serialise and deserialise data contracts when communicating with the CaaS API.
         /// </summary>
@@ -42,17 +41,13 @@ namespace DD.CBU.Compute.Api.Client
         /// </summary>
         Account _account;
 
-        #endregion // Instance data
-
-        #region Construction / disposal
-
         /// <summary>
         ///		Create a new Compute-as-a-Service API client.
         /// </summary>
         /// <param name="targetRegionName">
         ///		The name of the region whose CaaS API end-point is targeted by the client.
         /// </param>
-        public ComputeApiClient(string targetRegionName) 
+        public ComputeApiClient(string targetRegionName)
         {
             if (String.IsNullOrWhiteSpace(targetRegionName))
                 throw new ArgumentException("Argument cannot be null, empty, or composed entirely of whitespace: 'targetRegionName'.", "targetRegionName");
@@ -65,7 +60,7 @@ namespace DD.CBU.Compute.Api.Client
         /// Creates a new CaaS API client using a base URI.
         /// </summary>
         /// <param name="baseUri">The base URI to use for the CaaS API.</param>
-        public ComputeApiClient(Uri baseUri)           
+        public ComputeApiClient(Uri baseUri)
         {
             if (baseUri == null)
                 throw new ArgumentNullException("baseUri", "Argument cannot be null");
@@ -74,7 +69,7 @@ namespace DD.CBU.Compute.Api.Client
                 throw new ArgumentException("Base URI supplied is not an absolute URI", "baseUri");
 
             _mediaTypeFormatters.XmlFormatter.UseXmlSerializer = true;
-            _httpClient = new HttpClientAdapter(new HttpClient(_clientMessageHandler) {BaseAddress = baseUri});
+            _httpClient = new HttpClientAdapter(new HttpClient(_clientMessageHandler) { BaseAddress = baseUri });
         }
 
         /// <summary>
@@ -89,36 +84,6 @@ namespace DD.CBU.Compute.Api.Client
             _mediaTypeFormatters.XmlFormatter.UseXmlSerializer = true;
             _httpClient = client;
         }
-
-        /// <summary>
-        ///		Dispose of resources being used by the CaaS API client.
-        /// </summary>
-        /// <param name="disposing">
-        ///		Explicit disposal?
-        /// </param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                if (_clientMessageHandler != null)
-                {
-                    _clientMessageHandler.Dispose();
-                    _clientMessageHandler = null;
-                }
-
-                if (_httpClient != null)
-                {
-                    _httpClient.Dispose();
-                    _httpClient = null;
-                }
-
-                _account = null;
-            }
-        }
-
-        #endregion // Construction / disposal
-
-        #region Public properties
 
         /// <summary>
         ///		Read-only information about the CaaS account targeted by the CaaS API client.
@@ -149,10 +114,6 @@ namespace DD.CBU.Compute.Api.Client
                 return _account != null;
             }
         }
-
-        #endregion // Public properties
-
-        #region Public methods
 
         /// <summary>
         ///		Asynchronously log into the CaaS API.
@@ -206,6 +167,12 @@ namespace DD.CBU.Compute.Api.Client
             _clientMessageHandler.PreAuthenticate = false;
         }
 
+        public async Task<ApiStatus> DeleteSubAdministratorAccount(Guid orgId, string username)
+        {
+            var uriText = string.Format("{0}/account/{1}?delete", orgId, username);
+            var uri = new Uri(uriText, UriKind.Relative);
+            return ApiGetAsync<ApiStatus>(uri).Result;
+        }
         /// <summary>
         ///		Asynchronously get a list of all CaaS data centres that are available for use by the specified organisation.
         /// </summary>
@@ -271,20 +238,21 @@ namespace DD.CBU.Compute.Api.Client
         }
 
         //public async Task<string> DeployServerImageTask(string name, string password, string desc, bool isStarted, Guid networkId, Guid imageId)
+
         //{
+
         //    return
+
         //        await
+
         //        ApiGetAsync<string>(ApiUris.DeployServer(Account.OrganizationId, name, password, desc, isStarted, networkId, imageId));
+
         //}
 
         public async Task<ServersWithBackup> GetDeployedServers()
         {
             return await this.ApiGetAsync<ServersWithBackup>(ApiUris.DeployedServers(Account.OrganizationId));
         }
-
-        #endregion // Public methods
-
-        #region WebAPI invocation
 
         /// <summary>
         ///		Invoke a CaaS API operation using a HTTP GET request.
@@ -337,6 +305,30 @@ namespace DD.CBU.Compute.Api.Client
             }
         }
 
-        #endregion // WebAPI invocation
+        /// <summary>
+        ///		Dispose of resources being used by the CaaS API client.
+        /// </summary>
+        /// <param name="disposing">
+        ///		Explicit disposal?
+        /// </param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (_clientMessageHandler != null)
+                {
+                    _clientMessageHandler.Dispose();
+                    _clientMessageHandler = null;
+                }
+
+                if (_httpClient != null)
+                {
+                    _httpClient.Dispose();
+                    _httpClient = null;
+                }
+
+                _account = null;
+            }
+        }
     }
 }
