@@ -36,11 +36,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FakeItEasy">
+    <Reference Include="FakeItEasy, Version=1.18.0.0, Culture=neutral, PublicKeyToken=eff28e2146d5fd2c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\FakeItEasy.1.18.0\lib\net40\FakeItEasy.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Net.Http" />
@@ -63,11 +64,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AccountAPITests.cs" />
+    <Compile Include="AssemblyInfo.cs" />
     <Compile Include="BaseApiClientTestFixture.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Compute.Client\Compute.Client.csproj">
@@ -79,14 +77,22 @@
       <Name>Compute.Contracts</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="SampleOutputs\DeleteSubAdministratorAccount.xml" />
     <Content Include="SampleOutputs\DesignatePrimaryAdministratorAccount.xml" />
-    <Content Include="SampleOutputs\GetMyAccountDetails.xml" />
+    <Content Include="SampleOutputs\GetMyAccountDetails.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="SampleOutputs\ListAccounts.xml" />
     <Content Include="SampleOutputs\ListDataCentersWithMaintenanceStatus.xml" />
     <Content Include="SampleOutputs\ListMultiGeographyRegionsWithKey.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

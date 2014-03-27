@@ -81,7 +81,7 @@ namespace Compute.Client.UnitTests
             var client = GetApiClient("ListMultiGeographyRegionsWithKey.xml", expectedRelativeUrl);
             //var regions = client.GetListOfMultiGeographyRegions(someOrgId).Result;
 
-            
+            Assert.Inconclusive("TODO: Finish this test");
         }
 
         [TestMethod]

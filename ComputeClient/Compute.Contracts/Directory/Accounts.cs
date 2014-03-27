@@ -1,4 +1,10 @@
-﻿namespace DD.CBU.Compute.Api.Contracts.Directory
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DD.CBU.Compute.Api.Contracts.Directory
 {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.18020")]
     [System.SerializableAttribute()]
@@ -8,7 +14,7 @@
     [System.Xml.Serialization.XmlRootAttribute(Namespace = XmlNamespaceConstants.Directory, IsNullable = false)]
     public class Accounts
     {
-        [System.Xml.Serialization.XmlElementAttribute("Account")] 
+        [System.Xml.Serialization.XmlElementAttribute("Account")]
         public Account[] Items;
     }
 }

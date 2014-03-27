@@ -53,9 +53,10 @@
     </Compile>
     <Compile Include="ComputeCmdletProvider.cs" />
     <Compile Include="ComputeServiceConnection.cs" />
+    <Compile Include="SetCaasServerActionCmdlet.cs" />
     <Compile Include="GetCaasDeployedServersCmdlet.cs" />
     <Compile Include="GetCaasNetworksCmdlet.cs" />
-    <Compile Include="DeployServerCmdlet.cs" />
+    <Compile Include="NewCaasServerDeploymentCmdlet.cs" />
     <Compile Include="GetCaasOsImagesCmdlet.cs" />
     <Compile Include="NewCaasConnectionCmdlet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

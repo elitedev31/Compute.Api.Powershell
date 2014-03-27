@@ -1,26 +1,28 @@
-﻿using System;
+﻿namespace DD.CBU.Compute.Api.Client
+{
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+    using System.Diagnostics.Contracts;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Threading.Tasks;
-using DD.CBU.Compute.Api.Client.Interfaces;
-using DD.CBU.Compute.Api.Contracts.General;
 
-namespace DD.CBU.Compute.Api.Client
-{
-    using Contracts.Datacenter;
-    using Contracts.Directory;
-    using Contracts.Server;
-    using Utilities;
+using DD.CBU.Compute.Api.Client.Interfaces;
+    using DD.CBU.Compute.Api.Client.Utilities;
+    using DD.CBU.Compute.Api.Contracts.Datacenter;
+    using DD.CBU.Compute.Api.Contracts.Directory;
+    using DD.CBU.Compute.Api.Contracts.Server;
+using DD.CBU.Compute.Api.Contracts.General;
 
     /// <summary>
     ///		A client for the Dimension Data Compute-as-a-Service (CaaS) API.
     /// </summary>
     public sealed class ComputeApiClient
         : DisposableObject
-    {
+    {  
+        #region Instance data
         /// <summary>
         ///		Media type formatters used to serialise and deserialise data contracts when communicating with the CaaS API.
         /// </summary>
@@ -47,7 +49,7 @@ namespace DD.CBU.Compute.Api.Client
         /// <param name="targetRegionName">
         ///		The name of the region whose CaaS API end-point is targeted by the client.
         /// </param>
-        public ComputeApiClient(string targetRegionName)
+        public ComputeApiClient(string targetRegionName) 
         {
             if (String.IsNullOrWhiteSpace(targetRegionName))
                 throw new ArgumentException("Argument cannot be null, empty, or composed entirely of whitespace: 'targetRegionName'.", "targetRegionName");
@@ -60,7 +62,7 @@ namespace DD.CBU.Compute.Api.Client
         /// Creates a new CaaS API client using a base URI.
         /// </summary>
         /// <param name="baseUri">The base URI to use for the CaaS API.</param>
-        public ComputeApiClient(Uri baseUri)
+        public ComputeApiClient(Uri baseUri)           
         {
             if (baseUri == null)
                 throw new ArgumentNullException("baseUri", "Argument cannot be null");
@@ -85,6 +87,35 @@ namespace DD.CBU.Compute.Api.Client
             _httpClient = client;
         }
 
+        /// <summary>
+        ///		Dispose of resources being used by the CaaS API client.
+        /// </summary>
+        /// <param name="disposing">
+        ///		Explicit disposal?
+        /// </param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (_clientMessageHandler != null)
+                {
+                    _clientMessageHandler.Dispose();
+                    _clientMessageHandler = null;
+                }
+
+                if (_httpClient != null)
+                {
+                    _httpClient.Dispose();
+                    _httpClient = null;
+                }
+
+                _account = null;
+            }
+        }
+
+        #endregion // Construction / disposal
+
+        #region Public properties
         /// <summary>
         ///		Read-only information about the CaaS account targeted by the CaaS API client.
         /// </summary>
@@ -286,22 +317,74 @@ namespace DD.CBU.Compute.Api.Client
             return await this.ApiGetAsync<NetworkWithLocations>(ApiUris.NetworkWithLocations(Account.OrganizationId));
         }
 
-        //public async Task<string> DeployServerImageTask(string name, string password, string desc, bool isStarted, Guid networkId, Guid imageId)
+        /// <summary>
+        /// Deploys a server using an image into a specified network.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="description"></param>
+        /// <param name="networkId"></param>
+        /// <param name="imageId"></param>
+        /// <param name="adminPassword"></param>
+        /// <param name="isStarted"></param>
+        /// <returns></returns>
+	    public async Task<Status> DeployServerImageTask(string name, string description, string networkId, string imageId, string adminPassword, bool isStarted)
+	    {
+            Contract.Requires(!string.IsNullOrEmpty(name), "name argument must not be empty");
+            Contract.Requires(!string.IsNullOrWhiteSpace(networkId), "network id must not be empty");
+            Contract.Requires(!string.IsNullOrWhiteSpace(imageId), "Image id must not be empty");
+            Contract.Requires(!string.IsNullOrWhiteSpace(adminPassword), "administrator password cannot be null or empty");
 
-        //{
 
-        //    return
+            return
+                await
+                this.ApiPostAsync<NewServerToDeploy, Status>(
+                    ApiUris.DeployServer(Account.OrganizationId),
+                    new NewServerToDeploy
+                        {
+                            name = name,
+                            description = description,
+                            vlanResourcePath =
+                                string.Format("/oec/{0}/network/{1}", Account.OrganizationId, networkId),
+                            imageResourcePath = string.Format("/oec/base/image/{0}", imageId),
+                            administratorPassword = adminPassword,
+                            isStarted = isStarted.ToString()
+                        });
+	    }
 
-        //        await
+	    public async Task<Status> ServerPowerOn(string serverId)
+	    {
+	        return await this.ApiGetAsync<Status>(ApiUris.PowerOnServer(Account.OrganizationId, serverId));
+	    }
+        
+        public async Task<Status> ServerPowerOff(string serverId)
+        {
+            return await this.ApiGetAsync<Status>(ApiUris.PoweroffServer(Account.OrganizationId, serverId));
+        }
 
-        //        ApiGetAsync<string>(ApiUris.DeployServer(Account.OrganizationId, name, password, desc, isStarted, networkId, imageId));
+        public async Task<Status> ServerRestart(string serverId)
+        {
+            return await this.ApiGetAsync<Status>(ApiUris.RestartServer(Account.OrganizationId, serverId));
+        }
 
-        //}
+        public async Task<Status> ServerShutdown(string serverId)
+        {
+            return await this.ApiGetAsync<Status>(ApiUris.ShutdownServer(Account.OrganizationId, serverId));
+        }
+
+        public async Task<Status> ServerDelete(string serverId)
+        {
+            return await this.ApiGetAsync<Status>(ApiUris.DeleteServer(Account.OrganizationId, serverId));
+        }
 
         public async Task<ServersWithBackup> GetDeployedServers()
         {
             return await this.ApiGetAsync<ServersWithBackup>(ApiUris.DeployedServers(Account.OrganizationId));
         }
+
+        #endregion // Public methods
+
+        #region WebAPI invocation
+
 
         /// <summary>
         ///		Invoke a CaaS API operation using a HTTP GET request.
@@ -317,29 +400,19 @@ namespace DD.CBU.Compute.Api.Client
         /// </returns>
         public async Task<TResult> ApiGetAsync<TResult>(Uri relativeOperationUri)
         {
-            if (relativeOperationUri == null)
-                throw new ArgumentNullException("relativeOperationUri");
+            if (relativeOperationUri == null) throw new ArgumentNullException("relativeOperationUri");
 
-            if (relativeOperationUri.IsAbsoluteUri)
-                throw new ArgumentException("The supplied URI is not a relative URI.", "relativeOperationUri");
+            if (relativeOperationUri.IsAbsoluteUri) throw new ArgumentException("The supplied URI is not a relative URI.", "relativeOperationUri");
 
-            CheckDisposed();
-
-            using (HttpResponseMessage response = await _httpClient.GetAsync(relativeOperationUri))
+            using (var response = await _httpClient.GetAsync(relativeOperationUri))
             {
-                if (response.IsSuccessStatusCode)
-                    return await response.Content.ReadAsAsync<TResult>(_mediaTypeFormatters);
-
+                if (response.IsSuccessStatusCode) return await response.Content.ReadAsAsync<TResult>(_mediaTypeFormatters);
                 switch (response.StatusCode)
                 {
                     case HttpStatusCode.Unauthorized:
                         {
                             throw ComputeApiException.InvalidCredentials(
-                                (
-                                    (NetworkCredential)_clientMessageHandler.Credentials
-                                )
-                                .UserName
-                            );
+                                ((NetworkCredential)_clientMessageHandler.Credentials).UserName);
                         }
                     default:
                         {
@@ -354,30 +427,37 @@ namespace DD.CBU.Compute.Api.Client
             }
         }
 
-        /// <summary>
-        ///		Dispose of resources being used by the CaaS API client.
-        /// </summary>
-        /// <param name="disposing">
-        ///		Explicit disposal?
-        /// </param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
+
+        public async Task<TResult> ApiPostAsync<TObject, TResult>(Uri relativeOperationUri, TObject content)
+	    {
+	        var objectContent = new ObjectContent<TObject>(content, _mediaTypeFormatters.XmlFormatter);
+	        using (
+	            var response =
+	                await
+	                _httpClient.PostAsync(relativeOperationUri, objectContent))
             {
-                if (_clientMessageHandler != null)
-                {
-                    _clientMessageHandler.Dispose();
-                    _clientMessageHandler = null;
-                }
+	            if (response.IsSuccessStatusCode) return await response.Content.ReadAsAsync<TResult>(_mediaTypeFormatters);
 
-                if (_httpClient != null)
+                switch (response.StatusCode)
                 {
-                    _httpClient.Dispose();
-                    _httpClient = null;
+                    case HttpStatusCode.Unauthorized:
+                        {
+                            throw ComputeApiException.InvalidCredentials(
+                                ((NetworkCredential)_clientMessageHandler.Credentials).UserName);
+                        }
+                    default:
+                        {
+                            throw new HttpRequestException(
+                                String.Format(
+                                    "CaaS API returned HTTP status code {0} ({1}) when performing HTTP POST on '{2}'.",
+                                    (int)response.StatusCode,
+                                    response.StatusCode,
+                                    response.RequestMessage.RequestUri));
+                        }
                 }
-
-                _account = null;
             }
         }
+
+        #endregion // WebAPI invocation
     }
 }

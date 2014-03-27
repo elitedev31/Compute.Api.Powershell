@@ -7,8 +7,8 @@
     /// <summary>
     /// The get network servers cmdlet.
     /// </summary>
-    [Cmdlet("Deploy", "Server")]
-    public class DeployServerCmdlet : Cmdlet
+    [Cmdlet("New", "CaasServerDeployment")]
+    public class NewCaasServerDeploymentCmdlet : Cmdlet
     {
         /// <summary>
         /// The CaaS connection created by <see cref="NewCaasConnectionCmdlet"/> 
@@ -30,13 +30,13 @@
         public bool IsStarted { get; set; }
 
         [Parameter(Mandatory = true, HelpMessage = "The OS Server Image to use for deployment")]
-        public ServerImage OsServerImage { get; set; }
+        public DeployedImageWithSoftwareLabels OsServerImage { get; set; }
 
         /// <summary>
         /// The network to deploy the machine to
         /// </summary>
         [Parameter(Mandatory = true, HelpMessage = "The network to deploy the machine to")]
-        public Guid Network { get; set; }
+        public NetworkWithLocationsNetwork Network { get; set; }
 
         /// <summary>
         /// The process record method.
@@ -45,21 +45,24 @@
         {
             base.ProcessRecord();
 
-            //var server = DeployServerTask().Result;
-            WriteObject(true);
+            var status = DeployServerTask().Result;
+            if (status != null)
+            {
+                WriteObject(status);
+            }
         }
 
-        //private async Task<string> DeployServerTask()
-        //{
-        //    return
-        //        await
-        //        CaaS.ApiClient.DeployServerImageTask(
-        //            Name,
-        //            AdminPassword,
-        //            Description,
-        //            IsStarted,
-        //            Network,
-        //            Guid.Parse(OsServerImage.id));
-        //}
+        private async Task<Status> DeployServerTask()
+        {
+            return
+                await
+                CaaS.ApiClient.DeployServerImageTask(
+                    Name,
+                    Description,
+                    Network.id,
+                    OsServerImage.id,
+                    AdminPassword,
+                    IsStarted);
+        }
     }
 }
