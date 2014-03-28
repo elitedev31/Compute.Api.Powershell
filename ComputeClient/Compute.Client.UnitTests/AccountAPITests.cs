@@ -73,7 +73,8 @@ namespace Compute.Client.UnitTests
         }
 
         [TestMethod]
-        public void ShouldListMultiGeographyRegionsWithKey()
+        [TestCategory("Http GET Methods")]
+        public void Should_list_multi_geography_regions_with_key()
         {
             var someOrgId = Guid.NewGuid();
             var expectedRelativeUrl = string.Format("{0}/multigeo", someOrgId);
@@ -84,6 +85,21 @@ namespace Compute.Client.UnitTests
             Assert.AreEqual(2, regions.Count());
             Assert.AreEqual("lk76kf30-2cb3-1791-5476-231567-09gt87", regions[0].id);
             Assert.AreEqual("bf43kf30-2c83-11e1-9963-001517-45hj54", regions[1].id);
+        }
+
+        [TestMethod]
+        [TestCategory("Http GET Methods")]
+        public void Should_list_software_labels()
+        {
+            var someOrgId = Guid.NewGuid();
+            var expectedRelativeUrl = string.Format("{0}/softwarelabel", someOrgId);
+            var client = GetApiClient("ListSoftwareLabels.xml", expectedRelativeUrl);
+
+            var result = client.GetListOfSoftwareLabels(someOrgId).Result;
+            var labels = result.ToArray();
+            Assert.AreEqual(5, labels.Count());
+            Assert.AreEqual("MSSQL2008R2E", labels[1].id);
+            Assert.AreEqual("MSSQL2012R2S", labels[4].id);
         }
 
         [TestMethod]

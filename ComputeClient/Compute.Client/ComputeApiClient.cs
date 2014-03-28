@@ -1,4 +1,6 @@
-﻿namespace DD.CBU.Compute.Api.Client
+﻿using DD.CBU.Compute.Api.Contracts.Software;
+
+namespace DD.CBU.Compute.Api.Client
 {
 using System;
 using System.Collections.Generic;
@@ -196,7 +198,17 @@ using DD.CBU.Compute.Api.Contracts.General;
             _account = null;
             _clientMessageHandler.Credentials = null;
             _clientMessageHandler.PreAuthenticate = false;
-        }        
+        }
+
+        public async Task<IEnumerable<SoftwareLabel>> GetListOfSoftwareLabels(Guid orgId)
+        {
+            var relativeUrl = string.Format("{0}/softwarelabel", orgId);
+            var uri = new Uri(relativeUrl, UriKind.Relative);
+
+            var labels = ApiGetAsync<SoftwareLabels>(uri).Result;
+
+            return labels.Items;
+        }
 
         /// <summary>
         /// Returns a list of the Multi-Geography Regions available for the supplied {org-id
