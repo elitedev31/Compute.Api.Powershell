@@ -89,6 +89,7 @@
     <Content Include="SampleOutputs\ListAccounts.xml" />
     <Content Include="SampleOutputs\ListDataCentersWithMaintenanceStatus.xml" />
     <Content Include="SampleOutputs\ListMultiGeographyRegionsWithKey.xml" />
+    <Content Include="SampleOutputs\ListSoftwareLabels.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
