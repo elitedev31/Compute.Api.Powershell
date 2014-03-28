@@ -53,6 +53,7 @@
     </Compile>
     <Compile Include="ComputeCmdletProvider.cs" />
     <Compile Include="ComputeServiceConnection.cs" />
+    <Compile Include="SessionStateExtensions.cs" />
     <Compile Include="SetCaasServerActionCmdlet.cs" />
     <Compile Include="GetCaasDeployedServersCmdlet.cs" />
     <Compile Include="GetCaasNetworksCmdlet.cs" />

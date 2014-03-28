@@ -1,9 +1,8 @@
-﻿namespace DD.CBU.Compute.Powershell
-{
-    using System.Linq;
-    using System.Management.Automation;
-    using System.Threading.Tasks;
+﻿using System.Management.Automation;
+using System.Threading.Tasks;
 
+namespace DD.CBU.Compute.Powershell
+{
     /// <summary>
     /// The get networks cmdlet.
     /// </summary>
@@ -31,7 +30,7 @@
             }
         }
 
-        /// <summary>
+	    /// <summary>
         /// Gets the network servers from the CaaS
         /// </summary>
         /// <returns>The images</returns>

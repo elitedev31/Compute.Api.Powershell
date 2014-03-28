@@ -208,7 +208,7 @@ namespace DD.CBU.Compute.Api.Client
             var relativeUrl = string.Format("{0}/softwarelabel", orgId);
             var uri = new Uri(relativeUrl, UriKind.Relative);
 
-            var labels = ApiGetAsync<SoftwareLabels>(uri).Result;
+            var labels = await ApiGetAsync<SoftwareLabels>(uri);
 
             return labels.Items;
         }
@@ -224,7 +224,8 @@ namespace DD.CBU.Compute.Api.Client
             var relativeUrl = string.Format("{0}/multigeo", orgId);
             var uri = new Uri(relativeUrl, UriKind.Relative);
 
-            var regions = this.ApiGetAsync<Geos>(uri).Result;
+            var regions = await ApiGetAsync<Geos>(uri);
+
             return regions.Items;
         }
 
@@ -236,9 +237,9 @@ namespace DD.CBU.Compute.Api.Client
         /// <param name="orgId">The org ID of the account.</param>
         /// <param name="username">The Sub-Administrator account.</param>
         /// <returns>A <see cref="ApiStatus"/> result that describes whether or not the operation was successful.</returns>
-        public async Task<ApiStatus> DeleteSubAdministratorAccount(Guid orgId, string username)
+        public Task<ApiStatus> DeleteSubAdministratorAccount(Guid orgId, string username)
         {
-            return ExecuteAccountCommand(orgId, username, "{0}/account/{1}?delete").Result;
+            return ExecuteAccountCommand(orgId, username, "{0}/account/{1}?delete");
         }
 
         /// <summary>
@@ -249,9 +250,9 @@ namespace DD.CBU.Compute.Api.Client
         /// <param name="orgId">The org ID of the account.</param>
         /// <param name="username">The Sub-Administrator account.</param>
         /// <returns>A <see cref="ApiStatus"/> result that describes whether or not the operation was successful.</returns>
-        public async Task<ApiStatus> DesignatePrimaryAdministratorAccount(Guid orgId, string username)
+        public Task<ApiStatus> DesignatePrimaryAdministratorAccount(Guid orgId, string username)
         {
-            return ExecuteAccountCommand(orgId, username, "{0}/account/{1}?primary").Result;
+            return ExecuteAccountCommand(orgId, username, "{0}/account/{1}?primary");
         }
 
         /// <summary>
@@ -262,7 +263,7 @@ namespace DD.CBU.Compute.Api.Client
         public async Task<IEnumerable<DataCenterWithMaintenanceStatus>> GetListOfDataCentersWithMaintenanceStatuses(Guid orgId)
         {
             var url = string.Format("{0}/datacenterWithMaintenanceStatus?", orgId);
-            var dataCenters = ApiGetAsync<DatacentersWithMaintenanceStatus>(new Uri(url, UriKind.Relative)).Result;
+            var dataCenters = await ApiGetAsync<DatacentersWithMaintenanceStatus>(new Uri(url, UriKind.Relative));
             return dataCenters.Items;
         }
 
@@ -292,7 +293,8 @@ namespace DD.CBU.Compute.Api.Client
         public async Task<Status> AddSubAdministratorAccount(Guid orgId, Account account)
         {
             var relativeUrl = string.Format("{0}/account", orgId);
-            return ApiPostAsync<Account, Status>(new Uri(relativeUrl, UriKind.Relative), new Account()).Result;
+            
+			return await ApiPostAsync<Account, Status>(new Uri(relativeUrl, UriKind.Relative), new Account());
         }
 
         /// <summary>
@@ -323,14 +325,16 @@ namespace DD.CBU.Compute.Api.Client
             var postBody = string.Join("&", parameterText, roleParameters);
 
             var relativeUrl = string.Format("{0}/account/{1}", orgId, account.UserName);
-            return ApiPostAsync<string, Status>(new Uri(relativeUrl, UriKind.Relative), postBody).Result;
+            
+			return await ApiPostAsync<string, Status>(new Uri(relativeUrl, UriKind.Relative), postBody);
         }
 
         private async Task<ApiStatus> ExecuteAccountCommand(Guid orgId, string username, string uriFormat)
         {
             var uriText = string.Format(uriFormat, orgId, username);
             var uri = new Uri(uriText, UriKind.Relative);
-            return ApiGetAsync<ApiStatus>(uri).Result;
+           
+			return await ApiGetAsync<ApiStatus>(uri);
         }
 
         /// <summary>
