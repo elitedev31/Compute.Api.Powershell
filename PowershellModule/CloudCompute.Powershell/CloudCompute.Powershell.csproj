@@ -51,12 +51,14 @@
     <Compile Include="..\SolutionAssemblyInfo.cs">
       <Link>Properties\SolutionAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="CaasServerDetails.cs" />
     <Compile Include="ComputeCmdletProvider.cs" />
     <Compile Include="ComputeServiceConnection.cs" />
+    <Compile Include="NewCaasServerDetailsCmdlet.cs" />
     <Compile Include="SetCaasServerActionCmdlet.cs" />
     <Compile Include="GetCaasDeployedServersCmdlet.cs" />
     <Compile Include="GetCaasNetworksCmdlet.cs" />
-    <Compile Include="NewCaasServerDeploymentCmdlet.cs" />
+    <Compile Include="NewCaasVmCmdlet.cs" />
     <Compile Include="GetCaasOsImagesCmdlet.cs" />
     <Compile Include="NewCaasConnectionCmdlet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -17,11 +17,11 @@
             HelpMessage = "The CaaS Connection created by New-ComputeServiceConnection")]
         public ComputeServiceConnection CaaS { get; set; }
 
-        [Parameter(HelpMessage = "The server ID to search for")]
-        public string ServerId { get; set; }
+        //[Parameter(HelpMessage = "The server ID to search for")]
+        //public string ServerId { get; set; }
 
         [Parameter(HelpMessage = "The search criteria that will be used to retrieve deployed servers")]
-        public ServersWithBackupServer ServerSearchCriteria { get; set; }
+        public CaasServerDetails ServerDetails { get; set; }
 
         /// <summary>
         /// The process record method.
