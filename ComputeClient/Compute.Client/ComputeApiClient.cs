@@ -121,6 +121,7 @@ namespace DD.CBU.Compute.Api.Client
         #endregion // Construction / disposal
 
         #region Public properties
+
         /// <summary>
         ///		Read-only information about the CaaS account targeted by the CaaS API client.
         /// </summary>

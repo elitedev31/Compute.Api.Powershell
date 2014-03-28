@@ -36,7 +36,7 @@ namespace DD.CBU.Compute.Powershell
 		#endregion // Constants
 
 		/// <summary>
-		///		Add the specified CaaS connection to the '_CloudComputeSessions' variable in the current session.
+		///		Get all active CaaS connections in the current session.
 		/// </summary>
 		/// <param name="sessionState">
 		///		The current PowerShell session state.
@@ -61,7 +61,7 @@ namespace DD.CBU.Compute.Powershell
 		}
 
 		/// <summary>
-		///		Add the specified CaaS connection to the '_CloudComputeSessions' variable in the current session.
+		///		Add the specified CaaS connection to the current session.
 		/// </summary>
 		/// <param name="sessionState">
 		///		The current PowerShell session state.
@@ -84,14 +84,15 @@ namespace DD.CBU.Compute.Powershell
 				throw new ArgumentNullException("connection");
 
 			List<ComputeServiceConnection> connections;
-
 			PSVariable connectionsVariable = sessionState.PSVariable.Get(VariableNames.ComputeSessions);
 			if (connectionsVariable == null)
 			{
 				connectionsVariable = new PSVariable(
 					VariableNames.ComputeSessions,
 					value:
-						connections = new List<ComputeServiceConnection>()
+						connections = new List<ComputeServiceConnection>(),
+					options:
+						ScopedItemOptions.AllScope
 					);
 				sessionState.PSVariable.Set(connectionsVariable); // AF: If this is getting serialised (can't remember), then you need to call Set() AFTER updating the collection.
 			}
@@ -112,7 +113,7 @@ namespace DD.CBU.Compute.Powershell
 		}
 
 		/// <summary>
-		///		Add the specified CaaS connection to the '_CloudComputeSessions' variable in the current session.
+		///		Remove the specified CaaS connection from the current session.
 		/// </summary>
 		/// <param name="sessionState">
 		///		The current PowerShell session state.

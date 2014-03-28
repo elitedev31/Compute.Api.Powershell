@@ -7,7 +7,7 @@ namespace DD.CBU.Compute.Powershell
     /// The get networks cmdlet.
     /// </summary>
     [Cmdlet(VerbsCommon.Get, "CaasNetworks")]
-    public class GetCaasNetworksCmdlet : Cmdlet
+    public class GetCaasNetworksCmdlet : PSCmdlet
     {
         /// <summary>
         /// The CaaS connection created by <see cref="NewCaasConnectionCmdlet"/> 
