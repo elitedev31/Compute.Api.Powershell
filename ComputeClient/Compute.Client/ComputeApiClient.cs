@@ -178,7 +178,8 @@ using DD.CBU.Compute.Api.Contracts.General;
 
                 throw;
             }
-            Debug.Assert(_account != null, "_account != null");
+
+            Contract.Ensures(Contract.Result<IAccount>() != null, "Account cannot be null after login");
 
             return _account;
         }

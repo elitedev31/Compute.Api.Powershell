@@ -7,6 +7,7 @@
     /// The get deployed server/s cmdlet.
     /// </summary>
     [Cmdlet(VerbsCommon.Get, "CaasDeployedServer")]
+    [OutputType(typeof(ServersWithBackupServer[]))]
     public class GetCaasDeployedServerCmdlet : Cmdlet
     {
         /// <summary>

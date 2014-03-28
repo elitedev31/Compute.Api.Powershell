@@ -13,6 +13,7 @@
     ///		Used to create a new connection to the CaaS API.
     /// </remarks>
     [Cmdlet(VerbsCommon.New, "CaasConnection", SupportsShouldProcess = true)]
+    [OutputType(typeof(ComputeServiceConnection))]
     public class NewCaasConnectionCmdlet : Cmdlet
     {
         /// <summary>
@@ -35,11 +36,23 @@
         {
             base.ProcessRecord();
             WriteDebug("Trying to login to the REST API");
-            var caas = LoginTask().Result;
-            if (caas != null)
+            var caas = new ComputeServiceConnection(new ComputeApiClient(ApiBaseUri));
+            WriteDebug("CaaS object created");
+
+            try
             {
-                WriteDebug(string.Format("CaaS connection created successfully: {0}", caas));
+                LoginTask(caas);
+
+                WriteDebug("CaaS connection created successfully");
                 WriteObject(caas);
+            }
+            catch (ComputeApiClientException exception)
+            {
+                WriteError(new ErrorRecord(exception, "-100", ErrorCategory.AuthenticationError, caas));
+            }
+            catch (Exception exception)
+            {
+                ThrowTerminatingError(new ErrorRecord(exception, "-1", ErrorCategory.InvalidOperation, caas));
             }
         }
 
@@ -48,15 +61,10 @@
         /// If succeed, it will return the account details.
         /// </summary>
         /// <returns>The CaaS connection</returns>
-        private async Task<ComputeServiceConnection> LoginTask()
+        private async void LoginTask(ComputeServiceConnection caas)
         {
-            // Login to the CaaS REST API
-            var caas = new ComputeServiceConnection(new ComputeApiClient(ApiBaseUri));
-            WriteDebug("CaaS object created");
-
+            WriteDebug("Trying to login into the CaaS");
             await caas.ApiClient.LoginAsync(ApiCredentials.GetNetworkCredential());
-
-            return caas;
         }
     }
 }

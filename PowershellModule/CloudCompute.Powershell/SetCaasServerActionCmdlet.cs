@@ -8,6 +8,7 @@
     /// The set server state cmdlet.
     /// </summary>
     [Cmdlet(VerbsCommon.Set, "CaasServerState")]
+    [OutputType(typeof(ServersWithBackupServer))]
     public class SetCaasServerActionCmdlet : Cmdlet
     {
         public enum ServerActions
@@ -18,13 +19,14 @@
         /// <summary>
         /// The CaaS connection created by <see cref="NewCaasConnectionCmdlet"/> 
         /// </summary>
-        [Parameter(Mandatory = true, ValueFromPipeline = true,
+        [Parameter(Mandatory = true,
             HelpMessage = "The CaaS Connection created by New-ComputeServiceConnection")]
         public ComputeServiceConnection CaaS { get; set; }
 
         [Parameter(Mandatory = true, HelpMessage = "The server action to take")]
         public ServerActions ServerAction { get; set; }
 
+        [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The server to action on")]
         public ServersWithBackupServer Server { get; set; }
 
         /// <summary>
@@ -34,32 +36,37 @@
         {
             base.ProcessRecord();
 
-            var status = SetServerActionTask().Result;
-            if (status != null)
-            {
-                WriteObject(status);
-            }
+            SetServerActionTask();
+            WriteObject(Server);
         }
 
         /// <summary>
         /// Gets the network servers from the CaaS
         /// </summary>
         /// <returns>The images</returns>
-        private async Task<Status> SetServerActionTask()
+        private async void SetServerActionTask()
         {
+            Status status = null;
             switch (ServerAction)
             {
                 case ServerActions.PowerOff:
-                    return await CaaS.ApiClient.ServerPowerOff(Server.id);
+                    status = await CaaS.ApiClient.ServerPowerOff(Server.id);
+                    break;
                 case ServerActions.PowerOn:
-                    return await CaaS.ApiClient.ServerPowerOn(Server.id);
+                    status = await CaaS.ApiClient.ServerPowerOn(Server.id);
+                    break;
                 case ServerActions.Restart:
-                    return await CaaS.ApiClient.ServerRestart(Server.id);
+                    status = await CaaS.ApiClient.ServerRestart(Server.id);
+                    break;
                 case ServerActions.Shutdown:
-                    return await CaaS.ApiClient.ServerShutdown(Server.id);
+                    status = await CaaS.ApiClient.ServerShutdown(Server.id);
+                    break;
                 default:
-                    throw new NotSupportedException("The server action is not supported by this cmdlet");
+                    ThrowTerminatingError(new ErrorRecord(new NotImplementedException(), "-1", ErrorCategory.InvalidOperation, ServerAction));
+                    break;
             }
+            if (status != null)
+                WriteDebug(string.Format("{0} resulted in {1} ({2}): {3}", status.operation, status.result, status.resultCode, status.resultDetail));
         }
     }
 }

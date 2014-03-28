@@ -8,6 +8,7 @@
     /// The get CaaS OS Images cmdlet.
     /// </summary>
     [Cmdlet(VerbsCommon.Get, "CaasOsImages")]
+    [OutputType(typeof(DeployedImageWithSoftwareLabels[]))]
     public class GetCaasOsImagesCmdlet : Cmdlet
     {
         /// <summary>

@@ -8,6 +8,7 @@
     /// The get networks cmdlet.
     /// </summary>
     [Cmdlet(VerbsCommon.Get, "CaasNetworks")]
+    [OutputType(typeof(NetworkWithLocationsNetwork[]))]
     public class GetCaasNetworksCmdlet : Cmdlet
     {
         /// <summary>
