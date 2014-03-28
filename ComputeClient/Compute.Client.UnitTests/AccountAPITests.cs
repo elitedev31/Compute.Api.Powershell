@@ -64,7 +64,7 @@ namespace Compute.Client.UnitTests
             var someOrgId = Guid.NewGuid();
             var expectedRelativeUrl = string.Format("{0}/datacenterWithMaintenanceStatus?", someOrgId);
             var client = GetApiClient("ListDataCentersWithMaintenanceStatus.xml", expectedRelativeUrl);
-            
+
             var dataCenters = client.GetListOfDataCentersWithMaintenanceStatuses(someOrgId).Result.ToArray();
 
             Assert.AreEqual(1, dataCenters.Count());
@@ -79,7 +79,7 @@ namespace Compute.Client.UnitTests
         {
             var someOrgId = Guid.NewGuid();
             var expectedRelativeUrl = string.Format("{0}/multigeo", someOrgId);
-            
+
             var client = GetApiClient("ListMultiGeographyRegionsWithKey.xml", expectedRelativeUrl);
             var regions = client.GetListOfMultiGeographyRegions(someOrgId).Result.ToArray();
 
@@ -104,6 +104,46 @@ namespace Compute.Client.UnitTests
         }
 
         [TestMethod]
+        [TestCategory("Http POST Methods")]
+        public void Should_add_sub_administrator_account()
+        {
+            var someOrgId = Guid.NewGuid();
+            var relativeUrl = string.Format("{0}/account", someOrgId);
+            var sampleFile = "AddSubAdministratorAccount.xml";
+
+            var apiClient = GetComputeApiClientWithMockedPostCalls(sampleFile, relativeUrl);
+
+            var status = apiClient.AddSubAdministratorAccount(someOrgId, new Account()).Result;
+
+            Assert.AreEqual(status.result, "SUCCESS");
+        }
+
+        [TestMethod]
+        [TestCategory("Http POST Methods")]
+        public void Should_update_administrator_account()
+        {
+            var someOrgId = Guid.NewGuid();
+            var username = "SomeUser123";
+
+            var relativeUrl = string.Format("{0}/account/{1}", someOrgId, username);
+            var sampleFile = "UpdateAdministratorAccount.xml";
+
+            var account = new Account()
+            {
+                UserName = "User123",
+                FullName = "John Smith",
+            };
+
+            account.MemberOfRoles.Add(new Role() { Name = "Administrator1" });
+            account.MemberOfRoles.Add(new Role() { Name = "Administrator2" });
+
+            var apiClient = GetComputeApiClientWithMockedPostCalls(sampleFile, relativeUrl);
+            var status = apiClient.UpdateAdministratorAccount(someOrgId, account).Result;
+
+            Assert.AreEqual(status.result, "SUCCESS");
+        }
+
+        [TestMethod]
         [TestCategory("Http GET Methods")]
         public void Should_be_able_to_list_accounts()
         {
@@ -113,6 +153,18 @@ namespace Compute.Client.UnitTests
 
             var accounts = client.GetAccounts(someOrgid).Result;
             Assert.AreEqual(2, accounts.Count());
+        }
+
+        private ComputeApiClient GetComputeApiClientWithMockedPostCalls(string sampleFile, string relativeUrl)
+        {
+            Action<IHttpClient, string> configureFakeHttpClient =
+                (client, xml) =>
+                    A.CallTo(() => client.PostAsync(A<Uri>.Ignored, A<HttpContent>.Ignored)).Returns(CreateMessage(xml));
+            var sampleFolderLocation = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\SampleOutputs");
+            var sampleFileLocation = Path.Combine(sampleFolderLocation, sampleFile);
+
+            var apiClient = GetApiClient(sampleFileLocation, relativeUrl, configureFakeHttpClient);
+            return apiClient;
         }
     }
 }

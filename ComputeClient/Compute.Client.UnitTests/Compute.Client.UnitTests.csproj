@@ -81,6 +81,7 @@
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SampleOutputs\AddSubAdministratorAccount.xml" />
     <Content Include="SampleOutputs\DeleteSubAdministratorAccount.xml" />
     <Content Include="SampleOutputs\DesignatePrimaryAdministratorAccount.xml" />
     <Content Include="SampleOutputs\GetMyAccountDetails.xml">
@@ -90,6 +91,7 @@
     <Content Include="SampleOutputs\ListDataCentersWithMaintenanceStatus.xml" />
     <Content Include="SampleOutputs\ListMultiGeographyRegionsWithKey.xml" />
     <Content Include="SampleOutputs\ListSoftwareLabels.xml" />
+    <Content Include="SampleOutputs\UpdateAdministratorAccount.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

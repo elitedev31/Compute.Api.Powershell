@@ -1,29 +1,32 @@
-﻿using DD.CBU.Compute.Api.Contracts.Software;
+﻿using System.Collections.Specialized;
+using System.Linq;
+using System.Text;
+using DD.CBU.Compute.Api.Contracts.Software;
 
 namespace DD.CBU.Compute.Api.Client
 {
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Diagnostics.Contracts;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Formatting;
-using System.Threading.Tasks;
+    using System.Net;
+    using System.Net.Http;
+    using System.Net.Http.Formatting;
+    using System.Threading.Tasks;
 
-using DD.CBU.Compute.Api.Client.Interfaces;
+    using DD.CBU.Compute.Api.Client.Interfaces;
     using DD.CBU.Compute.Api.Client.Utilities;
     using DD.CBU.Compute.Api.Contracts.Datacenter;
     using DD.CBU.Compute.Api.Contracts.Directory;
     using DD.CBU.Compute.Api.Contracts.Server;
-using DD.CBU.Compute.Api.Contracts.General;
+    using DD.CBU.Compute.Api.Contracts.General;
 
     /// <summary>
     ///		A client for the Dimension Data Compute-as-a-Service (CaaS) API.
     /// </summary>
     public sealed partial class ComputeApiClient
         : DisposableObject
-    {  
+    {
         #region Instance data
         /// <summary>
         ///		Media type formatters used to serialise and deserialise data contracts when communicating with the CaaS API.
@@ -51,7 +54,7 @@ using DD.CBU.Compute.Api.Contracts.General;
         /// <param name="targetRegionName">
         ///		The name of the region whose CaaS API end-point is targeted by the client.
         /// </param>
-        public ComputeApiClient(string targetRegionName) 
+        public ComputeApiClient(string targetRegionName)
         {
             if (String.IsNullOrWhiteSpace(targetRegionName))
                 throw new ArgumentException("Argument cannot be null, empty, or composed entirely of whitespace: 'targetRegionName'.", "targetRegionName");
@@ -64,7 +67,7 @@ using DD.CBU.Compute.Api.Contracts.General;
         /// Creates a new CaaS API client using a base URI.
         /// </summary>
         /// <param name="baseUri">The base URI to use for the CaaS API.</param>
-        public ComputeApiClient(Uri baseUri)           
+        public ComputeApiClient(Uri baseUri)
         {
             if (baseUri == null)
                 throw new ArgumentNullException("baseUri", "Argument cannot be null");
@@ -251,8 +254,12 @@ using DD.CBU.Compute.Api.Contracts.General;
             return ExecuteAccountCommand(orgId, username, "{0}/account/{1}?primary").Result;
         }
 
-        public async Task<IEnumerable<DataCenterWithMaintenanceStatus>> GetListOfDataCentersWithMaintenanceStatuses(
-            Guid orgId)
+        /// <summary>
+        /// This function identifies the list of data centers available to the organization of the authenticating user. 
+        /// </summary>
+        /// <param name="orgId">The organization that is associated with the data centers.</param>
+        /// <returns>The list of data centers associated with the organization.</returns>
+        public async Task<IEnumerable<DataCenterWithMaintenanceStatus>> GetListOfDataCentersWithMaintenanceStatuses(Guid orgId)
         {
             var url = string.Format("{0}/datacenterWithMaintenanceStatus?", orgId);
             var dataCenters = ApiGetAsync<DatacentersWithMaintenanceStatus>(new Uri(url, UriKind.Relative)).Result;
@@ -271,6 +278,52 @@ using DD.CBU.Compute.Api.Contracts.General;
             var relativeUrl = string.Format("{0}/account", orgId);
             var accounts = await ApiGetAsync<Accounts>(new Uri(relativeUrl, UriKind.Relative));
             return accounts.Items;
+        }
+
+        /// <summary>
+        /// Adds a new Sub-Administrator Account to the organization. 
+        /// The account is created with a set of roles defining the level of access to the organization’s Cloud 
+        /// resources or the account can be created as “read only”, restricted to just viewing Cloud resources and 
+        /// unable to generate Cloud Reports.
+        /// </summary>
+        /// <param name="orgId">The org ID that will be associated with the account.</param>
+        /// <param name="account">The account that will be added to the org.</param>
+        /// <returns>A <see cref="Status"/> object instance that shows the results of the operation.</returns>
+        public async Task<Status> AddSubAdministratorAccount(Guid orgId, Account account)
+        {
+            var relativeUrl = string.Format("{0}/account", orgId);
+            return ApiPostAsync<Account, Status>(new Uri(relativeUrl, UriKind.Relative), new Account()).Result;
+        }
+
+        /// <summary>
+        /// This function updates an existing Administrator Account.
+        /// </summary>
+        /// <param name="orgId">The org ID that is associated with the account.</param>
+        /// <param name="account">The account to be updated.</param>
+        /// <returns>A <see cref="Status"/> object instance that shows the results of the operation.</returns>
+        public async Task<Status> UpdateAdministratorAccount(Guid orgId, Account account)
+        {
+            var parameters = new Dictionary<string, string>();
+            parameters["username"] = account.UserName;
+            parameters["password"] = account.Password;
+            parameters["email"] = account.EmailAddress;
+            parameters["fullname"] = account.FullName;
+            parameters["firstName"] = account.FirstName;
+            parameters["lastName"] = account.LastName;
+            parameters["department"] = account.Department;
+            parameters["customDefined1"] = account.CustomDefined1;
+            parameters["customDefined2"] = account.CustomDefined2;
+
+            var parameterStrings = parameters.Where(kvp=>kvp.Value != null).Select(kvp => string.Format("{0}={1}", kvp.Key, kvp.Value));
+            var parameterText = string.Join("&", parameterStrings);
+
+            var roles = account.MemberOfRoles.Select(role => string.Format("role={0}", role.Name));
+            var roleParameters = string.Join("&", roles);
+
+            var postBody = string.Join("&", parameterText, roleParameters);
+
+            var relativeUrl = string.Format("{0}/account/{1}", orgId, account.UserName);
+            return ApiPostAsync<string, Status>(new Uri(relativeUrl, UriKind.Relative), postBody).Result;
         }
 
         private async Task<ApiStatus> ExecuteAccountCommand(Guid orgId, string username, string uriFormat)
@@ -354,8 +407,8 @@ using DD.CBU.Compute.Api.Contracts.General;
         /// <param name="adminPassword"></param>
         /// <param name="isStarted"></param>
         /// <returns></returns>
-	    public async Task<Status> DeployServerImageTask(string name, string description, string networkId, string imageId, string adminPassword, bool isStarted)
-	    {
+        public async Task<Status> DeployServerImageTask(string name, string description, string networkId, string imageId, string adminPassword, bool isStarted)
+        {
             Contract.Requires(!string.IsNullOrEmpty(name), "name argument must not be empty");
             Contract.Requires(!string.IsNullOrWhiteSpace(networkId), "network id must not be empty");
             Contract.Requires(!string.IsNullOrWhiteSpace(imageId), "Image id must not be empty");
@@ -376,13 +429,13 @@ using DD.CBU.Compute.Api.Contracts.General;
                             administratorPassword = adminPassword,
                             isStarted = isStarted.ToString()
                         });
-	    }
+        }
 
-	    public async Task<Status> ServerPowerOn(string serverId)
-	    {
-	        return await this.ApiGetAsync<Status>(ApiUris.PowerOnServer(Account.OrganizationId, serverId));
-	    }
-        
+        public async Task<Status> ServerPowerOn(string serverId)
+        {
+            return await this.ApiGetAsync<Status>(ApiUris.PowerOnServer(Account.OrganizationId, serverId));
+        }
+
         public async Task<Status> ServerPowerOff(string serverId)
         {
             return await this.ApiGetAsync<Status>(ApiUris.PoweroffServer(Account.OrganizationId, serverId));
@@ -456,14 +509,14 @@ using DD.CBU.Compute.Api.Contracts.General;
 
 
         public async Task<TResult> ApiPostAsync<TObject, TResult>(Uri relativeOperationUri, TObject content)
-	    {
-	        var objectContent = new ObjectContent<TObject>(content, _mediaTypeFormatters.XmlFormatter);
-	        using (
-	            var response =
-	                await
-	                _httpClient.PostAsync(relativeOperationUri, objectContent))
+        {
+            var objectContent = new ObjectContent<TObject>(content, _mediaTypeFormatters.XmlFormatter);
+            using (
+                var response =
+                    await
+                    _httpClient.PostAsync(relativeOperationUri, objectContent))
             {
-	            if (response.IsSuccessStatusCode) return await response.Content.ReadAsAsync<TResult>(_mediaTypeFormatters);
+                if (response.IsSuccessStatusCode) return await response.Content.ReadAsAsync<TResult>(_mediaTypeFormatters);
 
                 switch (response.StatusCode)
                 {

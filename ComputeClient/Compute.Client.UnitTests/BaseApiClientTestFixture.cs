@@ -26,15 +26,17 @@ namespace Compute.Client.UnitTests
 
         protected IHttpClient GetFakeHttpClient(string xmlResponse, Uri expectedUri)
         {
-            var message = CreateMessage(xmlResponse);
-            Action<IHttpClient> configureClient = fakeClient => A.CallTo(() => fakeClient.GetAsync(expectedUri)).Returns(message);
+            Action<IHttpClient, string> configureClient = (fakeClient, xml) => A.CallTo(() => fakeClient.GetAsync(expectedUri)).Returns(CreateMessage(xml));
             return GetFakeHttpClient(xmlResponse, expectedUri, configureClient);
         }
 
-        protected IHttpClient GetFakeHttpClient(string xmlResponse, Uri expectedUri, Action<IHttpClient> configureFakeClient)
-        {            
+        protected IHttpClient GetFakeHttpClient(string xmlResponse, Uri expectedUri, Action<IHttpClient, string> configureFakeClient)
+        {
             var fakeClient = A.Fake<IHttpClient>();
-            configureFakeClient(fakeClient);
+
+            if (configureFakeClient != null)
+                configureFakeClient(fakeClient, xmlResponse);
+
             return fakeClient;
         }
 
@@ -43,6 +45,14 @@ namespace Compute.Client.UnitTests
             var message = new HttpResponseMessage(httpStatusCode);
             message.Content = new StringContent(xmlResponse, Encoding.UTF8, "text/xml");
             return message;
+        }
+
+        protected ComputeApiClient GetApiClient(string sampleXmlFileName, string expectedRelativeUrl, Action<IHttpClient, string> configureFakeClient)
+        {
+            var xmlResponse = File.ReadAllText(sampleXmlFileName);
+            var httpClient = GetFakeHttpClient(xmlResponse, new Uri(expectedRelativeUrl, UriKind.Relative), configureFakeClient);
+            var client = new ComputeApiClient(httpClient);
+            return client;
         }
 
         protected ComputeApiClient GetApiClient(string sampleXmlFileName, string expectedRelativeUrl)
