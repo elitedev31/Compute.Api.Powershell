@@ -86,7 +86,7 @@ namespace DD.CBU.Compute.Api.Client
         /// <returns>A list of deployed servers</returns>
 	    public static Uri DeployedServers(Guid orgId)
 	    {
-	        Contract.Requires<ArgumentException>(orgId != Guid.Empty, "Organization Id cannot be empty");
+	        Contract.Requires(orgId != Guid.Empty, "Organization Id cannot be empty");
 
 	        return new Uri(string.Format("{0}/serverWithBackup", orgId), UriKind.Relative);
 	    }

@@ -2,6 +2,7 @@
 {
     using System;
     using System.Management.Automation;
+    using System.Management.Automation.Runspaces;
     using System.Threading.Tasks;
 
     using DD.CBU.Compute.Api.Client;
@@ -45,6 +46,9 @@
 
                 WriteDebug("CaaS connection created successfully");
                 WriteObject(caas);
+                WriteDebug(string.Format("Organization Id is {0}", caas.Account.OrganizationId));
+                // Set the CaaS connection as a variable in the runspace
+                //Runspace.DefaultRunspace.SessionStateProxy.SetVariable("CaasConnection", caas);
             }
             catch (ComputeApiClientException exception)
             {
@@ -61,10 +65,10 @@
         /// If succeed, it will return the account details.
         /// </summary>
         /// <returns>The CaaS connection</returns>
-        private async void LoginTask(ComputeServiceConnection caas)
+        private void LoginTask(ComputeServiceConnection caas)
         {
             WriteDebug("Trying to login into the CaaS");
-            await caas.ApiClient.LoginAsync(ApiCredentials.GetNetworkCredential());
+            caas.ApiClient.LoginAsync(ApiCredentials.GetNetworkCredential()).Wait();
         }
     }
 }

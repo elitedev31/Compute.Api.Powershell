@@ -306,6 +306,8 @@ using DD.CBU.Compute.Api.Contracts.General;
         /// <returns></returns>
         public async Task<DeployedImagesWithSoftwareLabels> GetOsServerImagesTask(string networkLocation)
         {
+            Contract.Requires(!string.IsNullOrWhiteSpace(networkLocation), "Network location must not be empty or null");
+
             return await ApiGetAsync<DeployedImagesWithSoftwareLabels>(ApiUris.OsServerImages(networkLocation));
         }
 
@@ -334,7 +336,6 @@ using DD.CBU.Compute.Api.Contracts.General;
             Contract.Requires(!string.IsNullOrWhiteSpace(networkId), "network id must not be empty");
             Contract.Requires(!string.IsNullOrWhiteSpace(imageId), "Image id must not be empty");
             Contract.Requires(!string.IsNullOrWhiteSpace(adminPassword), "administrator password cannot be null or empty");
-
 
             return
                 await

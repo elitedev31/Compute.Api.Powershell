@@ -1,6 +1,8 @@
 ﻿namespace DD.CBU.Compute.Powershell
 {
     using System.Management.Automation;
+    using System.Management.Automation.Runspaces;
+    using System.Security.Authentication;
     using System.Threading.Tasks;
 
     /// <summary>
@@ -17,11 +19,35 @@
             HelpMessage = "The CaaS Connection created by New-ComputeServiceConnection")]
         public ComputeServiceConnection CaaS { get; set; }
 
-        //[Parameter(HelpMessage = "The server ID to search for")]
-        //public string ServerId { get; set; }
+        protected override void BeginProcessing()
+        {
+            base.BeginProcessing();
 
-        [Parameter(HelpMessage = "The search criteria that will be used to retrieve deployed servers")]
-        public CaasServerDetails ServerDetails { get; set; }
+            //if (CaaS != null)
+            //{
+            //    WriteDebug("Received CaaS connection as a paramenter");
+            //    return;
+            //}
+            //WriteDebug("Trying to retrieve the CaaS connection from the runspace");
+            //var caas = Runspace.DefaultRunspace.SessionStateProxy.GetVariable("CaasConnection");
+            //if (!(caas is ComputeServiceConnection))
+            //{
+            //    ThrowTerminatingError(
+            //        new ErrorRecord(
+            //            new InvalidRunspaceStateException("CaaS connection is not a valid object"),
+            //            "-1",
+            //            ErrorCategory.InvalidType,
+            //            caas));
+            //}
+            //else
+            //{
+            //    var caasConnection = caas as ComputeServiceConnection;
+            //    if (!caasConnection.ApiClient.IsLoggedIn)
+            //    {
+            //        ThrowTerminatingError(new ErrorRecord(new AuthenticationException(), "-1", ErrorCategory.PermissionDenied, caas));
+            //    }
+            //}
+        }
 
         /// <summary>
         /// The process record method.
