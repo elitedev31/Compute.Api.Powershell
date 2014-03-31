@@ -414,11 +414,10 @@ namespace DD.CBU.Compute.Api.Client
         /// <returns></returns>
         public async Task<Status> DeployServerImageTask(string name, string description, string networkId, string imageId, string adminPassword, bool isStarted)
         {
-            Contract.Requires(!string.IsNullOrEmpty(name), "name argument must not be empty");
-            Contract.Requires(!string.IsNullOrWhiteSpace(networkId), "network id must not be empty");
-            Contract.Requires(!string.IsNullOrWhiteSpace(imageId), "Image id must not be empty");
-            Contract.Requires(!string.IsNullOrWhiteSpace(adminPassword), "administrator password cannot be null or empty");
-
+            Contract.Requires<ArgumentException>(!string.IsNullOrEmpty(name), "name argument must not be empty");
+            Contract.Requires<ArgumentException>(!string.IsNullOrWhiteSpace(networkId), "network id must not be empty");
+            Contract.Requires<ArgumentException>(!string.IsNullOrWhiteSpace(imageId), "Image id must not be empty");
+            Contract.Requires<ArgumentException>(!string.IsNullOrWhiteSpace(adminPassword), "administrator password cannot be null or empty");
 
             return
                 await
