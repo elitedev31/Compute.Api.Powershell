@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace DD.CBU.Compute.Api.Client
 {
-    public static class Contracts
+    public static class Contract
     {
-        public static void Requires<TException>(Func<bool> predicate, string message)
+        public static void Requires<TException>(bool predicate, string message)
         where TException : Exception, new()
         {
-            if (predicate()) 
+            if (predicate) 
                 return;
             Debug.WriteLine(message);
             throw new TException();

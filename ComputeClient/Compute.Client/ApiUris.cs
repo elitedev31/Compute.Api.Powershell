@@ -2,8 +2,6 @@
 
 namespace DD.CBU.Compute.Api.Client
 {
-    using System.Diagnostics.Contracts;
-
 	/// <summary>
 	///		Constants and formatters for API URLs.
 	/// </summary>

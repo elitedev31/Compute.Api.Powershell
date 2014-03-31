@@ -8,7 +8,6 @@ namespace DD.CBU.Compute.Api.Client
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Diagnostics.Contracts;
     using System.Net;
     using System.Net.Http;
     using System.Net.Http.Formatting;
