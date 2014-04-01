@@ -45,7 +45,7 @@ namespace DD.CBU.Compute.Api.Client
         /// <summary>
         ///		The details for the CaaS account associated with the supplied credentials.
         /// </summary>
-        Account _account;
+        IAccount _account;
 
         /// <summary>
         ///		Create a new Compute-as-a-Service API client.
@@ -183,8 +183,6 @@ namespace DD.CBU.Compute.Api.Client
 
                 throw;
             }
-
-            Contract.Ensures(Contract.Result<IAccount>() != null, "Account cannot be null after login");
 
             return _account;
         }
@@ -388,20 +386,22 @@ namespace DD.CBU.Compute.Api.Client
         /// </summary>
         /// <param name="networkLocation"></param>
         /// <returns></returns>
-        public async Task<DeployedImagesWithSoftwareLabels> GetOsServerImagesTask(string networkLocation)
+        public async Task<IEnumerable<DeployedImageWithSoftwareLabels>> GetOsServerImagesTask(string networkLocation)
         {
             Contract.Requires(!string.IsNullOrWhiteSpace(networkLocation), "Network location must not be empty or null");
 
-            return await ApiGetAsync<DeployedImagesWithSoftwareLabels>(ApiUris.OsServerImages(networkLocation));
+            var images = await ApiGetAsync<DeployedImagesWithSoftwareLabels>(ApiUris.OsServerImages(networkLocation));
+            return images.Items;
         }
 
         /// <summary>
         /// Gets the networks with locations
         /// </summary>
         /// <returns>The networks</returns>
-        public async Task<NetworkWithLocations> GetNetworksTask()
+        public async Task<IEnumerable<NetworkWithLocationsNetwork>> GetNetworksTask()
         {
-            return await this.ApiGetAsync<NetworkWithLocations>(ApiUris.NetworkWithLocations(Account.OrganizationId));
+            var networks = await this.ApiGetAsync<NetworkWithLocations>(ApiUris.NetworkWithLocations(Account.OrganizationId));
+            return networks.Items;
         }
 
         /// <summary>

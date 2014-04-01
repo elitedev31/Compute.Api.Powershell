@@ -50,9 +50,14 @@ namespace DD.CBU.Compute.Powershell
                     WriteObject(newCloudComputeConnection);
                 }
             }
-            catch (Exception exception)
+            catch (AggregateException ae)
             {
-                ThrowTerminatingError(new ErrorRecord(exception, "-1", ErrorCategory.InvalidOperation, newCloudComputeConnection));
+                ae.Handle(
+                    e =>
+                    {
+                        ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.AuthenticationError, newCloudComputeConnection));
+                        return true;
+                    });
             }
         }
 

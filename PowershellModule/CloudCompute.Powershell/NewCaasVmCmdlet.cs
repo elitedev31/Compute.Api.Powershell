@@ -48,20 +48,25 @@
             WriteObject(ServerDetails);
         }
 
-        private async void DeployServerTask()
+        private void DeployServerTask()
         {
             var status =
-                await
                 CaaS.ApiClient.DeployServerImageTask(
                     ServerDetails.Name,
                     ServerDetails.Description,
                     ServerDetails.Network.id,
                     ServerDetails.OsImage.id,
                     ServerDetails.AdministratorPassword,
-                    ServerDetails.IsStarted);
+                    ServerDetails.IsStarted).Result;
 
             if (status != null)
-                WriteDebug(string.Format("{0} resulted in {1} ({2}): {3}", status.operation, status.result, status.resultCode, status.resultDetail));
+                WriteDebug(
+                    string.Format(
+                        "{0} resulted in {1} ({2}): {3}",
+                        status.operation,
+                        status.result,
+                        status.resultCode,
+                        status.resultDetail));
         }
     }
 }

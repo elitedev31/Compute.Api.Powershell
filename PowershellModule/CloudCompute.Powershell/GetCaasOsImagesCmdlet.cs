@@ -1,6 +1,8 @@
 ﻿namespace DD.CBU.Compute.Powershell
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Management.Automation;
     using System.Threading.Tasks;
 
@@ -29,9 +31,9 @@
             try
             {
                 var servers = GetOsImagesTask().Result;
-                if (servers.Items.Length > 0)
+                if (servers.Any())
                 {
-                    WriteObject(servers.Items, true);
+                    WriteObject(servers, true);
                 }
             }
             catch (AggregateException ae)
@@ -56,7 +58,7 @@
         /// Gets the network servers from the CaaS
         /// </summary>
         /// <returns>The images</returns>
-        private async Task<DeployedImagesWithSoftwareLabels> GetOsImagesTask()
+        private async Task<IEnumerable<DeployedImageWithSoftwareLabels>> GetOsImagesTask()
         {
             return await CaaS.ApiClient.GetOsServerImagesTask(NetworkWithLocations.location);
         }

@@ -2,7 +2,11 @@
 {
     using System.Linq;
     using System.Management.Automation;
+    using System.Security.Authentication;
 
+    /// <summary>
+    /// This base Cmdlet is used for authenticating cmdlets that requires an active CaaS Connection.
+    /// </summary>
     public abstract class PSCmdletCaasBase : PSCmdlet
     {
         /// <summary>
@@ -20,6 +24,13 @@
             {
                 // TODO: Choose the correct connection in case of more than one connections in one session
                 CaaS = SessionState.GetComputeServiceConnections().FirstOrDefault();
+                if (CaaS == null)
+                    this.ThrowTerminatingError(
+                        new ErrorRecord(
+                            new AuthenticationException("Cannot find a valid CaaS connection"),
+                            "-1",
+                            ErrorCategory.AuthenticationError,
+                            this));
             }
         }
     }
