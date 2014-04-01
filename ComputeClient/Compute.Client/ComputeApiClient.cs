@@ -400,9 +400,9 @@ using DD.CBU.Compute.Api.Contracts.General;
         /// Gets the networks with locations
         /// </summary>
         /// <returns>The networks</returns>
-        public async Task<IEnumerable<NetworkWithLocationsNetwork>> GetNetworksTask()
+        public async Task<NetworkWithLocations> GetNetworksTask()
         {
-            return this.ApiGetAsync<NetworkWithLocations>(ApiUris.NetworkWithLocations(Account.OrganizationId)).Result.Items;
+            return await this.ApiGetAsync<NetworkWithLocations>(ApiUris.NetworkWithLocations(Account.OrganizationId));
         }
 
         /// <summary>
@@ -463,9 +463,9 @@ using DD.CBU.Compute.Api.Contracts.General;
             return await this.ApiGetAsync<Status>(ApiUris.DeleteServer(Account.OrganizationId, serverId));
         }
 
-        public async Task<IEnumerable<ServersWithBackupServer>> GetDeployedServers()
+        public async Task<ServersWithBackup> GetDeployedServers()
         {
-            return await this.ApiGetAsync<IEnumerable<ServersWithBackupServer>>(ApiUris.DeployedServers(Account.OrganizationId));
+            return await this.ApiGetAsync<ServersWithBackup>(ApiUris.DeployedServers(Account.OrganizationId));
         }
 
         #endregion // Public methods

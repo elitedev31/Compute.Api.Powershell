@@ -60,9 +60,9 @@
             base.ProcessRecord();
 
             var servers = GetNetworksTask().Result;
-            if (servers.Any())
+            if (servers.Items.Any())
             {
-                WriteObject(servers, true);
+                WriteObject(servers.Items, true);
             }
         }
 
@@ -70,7 +70,7 @@
         /// Gets the network servers from the CaaS
         /// </summary>
         /// <returns>The images</returns>
-        private async Task<IEnumerable<ServersWithBackupServer>> GetNetworksTask()
+        private async Task<ServersWithBackup> GetNetworksTask()
         {
             return await CaaS.ApiClient.GetDeployedServers();
         }

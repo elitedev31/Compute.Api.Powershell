@@ -3,8 +3,6 @@
 
 namespace DD.CBU.Compute.Powershell
 {
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
@@ -29,9 +27,9 @@ namespace DD.CBU.Compute.Powershell
             base.ProcessRecord();
 
             var networks = GetNetworksTask().Result;
-            if (networks.Any())
+            if (networks.Items.Any())
             {
-                WriteObject(networks, true);
+                WriteObject(networks.Items, true);
             }
         }
 
@@ -39,7 +37,7 @@ namespace DD.CBU.Compute.Powershell
         /// Gets the network servers from the CaaS
         /// </summary>
         /// <returns>The images</returns>
-        private async Task<IEnumerable<NetworkWithLocationsNetwork>> GetNetworksTask()
+        private async Task<NetworkWithLocations> GetNetworksTask()
         {
             return await CaaS.ApiClient.GetNetworksTask();
         }
