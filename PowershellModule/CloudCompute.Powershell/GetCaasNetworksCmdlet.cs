@@ -1,15 +1,18 @@
-﻿namespace DD.CBU.Compute.Powershell
-{
-    using System.Linq;
-    using System.Management.Automation;
+﻿    using System.Management.Automation;
     using System.Threading.Tasks;
+
+namespace DD.CBU.Compute.Powershell
+{
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq;
 
     /// <summary>
     /// The get networks cmdlet.
     /// </summary>
     [Cmdlet(VerbsCommon.Get, "CaasNetworks")]
     [OutputType(typeof(NetworkWithLocationsNetwork[]))]
-    public class GetCaasNetworksCmdlet : Cmdlet
+    public class GetCaasNetworksCmdlet : PSCmdlet
     {
         /// <summary>
         /// The CaaS connection created by <see cref="NewCaasConnectionCmdlet"/> 
@@ -26,9 +29,9 @@
             base.ProcessRecord();
 
             var networks = GetNetworksTask().Result;
-            if (networks.Items.Length > 0)
+            if (networks.Any())
             {
-                WriteObject(networks.Items, true);
+                WriteObject(networks, true);
             }
         }
 
@@ -36,7 +39,7 @@
         /// Gets the network servers from the CaaS
         /// </summary>
         /// <returns>The images</returns>
-        private async Task<NetworkWithLocations> GetNetworksTask()
+        private async Task<IEnumerable<NetworkWithLocationsNetwork>> GetNetworksTask()
         {
             return await CaaS.ApiClient.GetNetworksTask();
         }

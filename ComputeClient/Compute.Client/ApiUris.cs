@@ -4,7 +4,7 @@ namespace DD.CBU.Compute.Api.Client
 {
     using System.Diagnostics.Contracts;
 
-	/// <summary>
+    /// <summary>
 	///		Constants and formatters for API URLs.
 	/// </summary>
 	public static class ApiUris

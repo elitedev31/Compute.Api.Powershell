@@ -13,6 +13,14 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
     /// </summary>
     public interface IHttpClient : IDisposable
     {
+		/// <summary>
+		///		The base address used by the HTTP client.
+		/// </summary>
+		Uri BaseAddress
+		{
+			get;
+		}
+
         Task<HttpResponseMessage> GetAsync(Uri uri);
         Task<HttpResponseMessage> DeleteAsync(Uri uri);
         Task<HttpResponseMessage> PutAsync(Uri uri, HttpContent content);

@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Status xmlns="http://oec.api.opsource.net/schemas/server">
+  <operation>Edit Account</operation>
+  <result>SUCCESS</result>
+  <resultDetail>Account {userName} updated</resultDetail>
+  <resultCode>REASON_0</resultCode>
+</Status>

@@ -1,5 +1,8 @@
 ﻿namespace DD.CBU.Compute.Powershell
 {
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Management.Automation;
     using System.Management.Automation.Runspaces;
     using System.Security.Authentication;
@@ -57,9 +60,9 @@
             base.ProcessRecord();
 
             var servers = GetNetworksTask().Result;
-            if (servers.Items.Length > 0)
+            if (servers.Any())
             {
-                WriteObject(servers.Items, true);
+                WriteObject(servers, true);
             }
         }
 
@@ -67,7 +70,7 @@
         /// Gets the network servers from the CaaS
         /// </summary>
         /// <returns>The images</returns>
-        private async Task<ServersWithBackup> GetNetworksTask()
+        private async Task<IEnumerable<ServersWithBackupServer>> GetNetworksTask()
         {
             return await CaaS.ApiClient.GetDeployedServers();
         }

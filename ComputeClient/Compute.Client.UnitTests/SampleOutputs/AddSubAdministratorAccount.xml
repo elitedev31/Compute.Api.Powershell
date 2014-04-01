@@ -1,0 +1,6 @@
+﻿<Status xmlns="http://oec.api.opsource.net/schemas/server">
+  <operation>Add Account</operation>
+  <result>SUCCESS</result>
+  <resultDetail>Account jpublic created</resultDetail>
+  <resultCode>REASON_0</resultCode>
+</Status>

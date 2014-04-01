@@ -1,11 +1,11 @@
-﻿namespace DD.CBU.Compute.Powershell
-{
-    using System;
+﻿    using System;
     using System.Management.Automation;
     using System.Management.Automation.Runspaces;
     using System.Threading.Tasks;
 
-    using DD.CBU.Compute.Api.Client;
+namespace DD.CBU.Compute.Powershell
+{
+    using Api.Client;
 
     /// <summary>
     ///		The "New-CaasConnection" Cmdlet.
@@ -15,7 +15,7 @@
     /// </remarks>
     [Cmdlet(VerbsCommon.New, "CaasConnection", SupportsShouldProcess = true)]
     [OutputType(typeof(ComputeServiceConnection))]
-    public class NewCaasConnectionCmdlet : Cmdlet
+    public class NewCaasConnectionCmdlet : PSCmdlet
     {
         /// <summary>
         ///		The credentials used to connect to the CaaS API.
@@ -36,27 +36,24 @@
         protected override void ProcessRecord()
         {
             base.ProcessRecord();
+            
+            ComputeServiceConnection newCloudComputeConnection = null;
+            
             WriteDebug("Trying to login to the REST API");
-            var caas = new ComputeServiceConnection(new ComputeApiClient(ApiBaseUri));
-            WriteDebug("CaaS object created");
-
             try
             {
-                LoginTask(caas);
+                newCloudComputeConnection = LoginTask().Result;
+                if (newCloudComputeConnection != null)
+                {
+                    WriteDebug(String.Format("CaaS connection created successfully: {0}", newCloudComputeConnection));
 
-                WriteDebug("CaaS connection created successfully");
-                WriteObject(caas);
-                WriteDebug(string.Format("Organization Id is {0}", caas.Account.OrganizationId));
-                // Set the CaaS connection as a variable in the runspace
-                //Runspace.DefaultRunspace.SessionStateProxy.SetVariable("CaasConnection", caas);
-            }
-            catch (ComputeApiClientException exception)
-            {
-                WriteError(new ErrorRecord(exception, "-100", ErrorCategory.AuthenticationError, caas));
+                    SessionState.AddComputeServiceConnection(newCloudComputeConnection);
+                    WriteObject(newCloudComputeConnection);
+                }
             }
             catch (Exception exception)
             {
-                ThrowTerminatingError(new ErrorRecord(exception, "-1", ErrorCategory.InvalidOperation, caas));
+                ThrowTerminatingError(new ErrorRecord(exception, "-1", ErrorCategory.InvalidOperation, newCloudComputeConnection));
             }
         }
 
@@ -65,10 +62,14 @@
         /// If succeed, it will return the account details.
         /// </summary>
         /// <returns>The CaaS connection</returns>
-        private void LoginTask(ComputeServiceConnection caas)
+        private async Task<ComputeServiceConnection> LoginTask()
         {
+            var newCloudComputeConnection = new ComputeServiceConnection(new ComputeApiClient(ApiBaseUri)); ;
+
             WriteDebug("Trying to login into the CaaS");
-            caas.ApiClient.LoginAsync(ApiCredentials.GetNetworkCredential()).Wait();
+            await newCloudComputeConnection.ApiClient.LoginAsync(ApiCredentials.GetNetworkCredential());
+
+            return newCloudComputeConnection;
         }
     }
 }

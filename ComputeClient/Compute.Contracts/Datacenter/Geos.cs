@@ -23,7 +23,7 @@ namespace DD.CBU.Compute.Api.Contracts.Datacenter
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = XmlNamespaceConstants.MultiGeo)]
     [System.Xml.Serialization.XmlRootAttribute(Namespace = XmlNamespaceConstants.MultiGeo, IsNullable = false)]
-    public partial class Regions
+    public partial class Geos
     {
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("geo")] 

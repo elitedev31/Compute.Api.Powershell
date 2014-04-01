@@ -22,7 +22,6 @@
 			if (apiClient == null)
 				throw new ArgumentNullException("apiClient");
 
-
 			ApiClient = apiClient;
 		}
 

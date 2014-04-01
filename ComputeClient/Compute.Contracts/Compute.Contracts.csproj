@@ -59,7 +59,7 @@
     <Compile Include="Datacenter\DataCenterWithMaintenanceStatus.cs" />
     <Compile Include="Datacenter\DiskSpeedDetail.cs" />
     <Compile Include="Datacenter\Region.cs" />
-    <Compile Include="Datacenter\Regions.cs" />
+    <Compile Include="Datacenter\Geos.cs" />
     <Compile Include="Datacenter\IDatacenterSummary.cs" />
     <Compile Include="Datacenter\IDatacenterDetail.cs" />
     <Compile Include="Datacenter\IDiskSpeedDetail.cs" />
@@ -86,6 +86,7 @@
     <Compile Include="Server\Server.cs" />
     <Compile Include="Server\ServerImage.cs" />
     <Compile Include="Server\Status.cs" />
+    <Compile Include="Software\SoftwareLabels.cs" />
     <Compile Include="XmlNamespaceConstants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
