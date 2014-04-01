@@ -90,6 +90,7 @@
     <Compile Include="CaasServerDetails.cs" />
     <Compile Include="ComputeCmdletProvider.cs" />
     <Compile Include="ComputeServiceConnection.cs" />
+    <Compile Include="PSCmdletCaasBase.cs" />
     <Compile Include="SessionStateExtensions.cs" />
     <Compile Include="NewCaasServerDetailsCmdlet.cs" />
     <Compile Include="SetCaasServerActionCmdlet.cs" />

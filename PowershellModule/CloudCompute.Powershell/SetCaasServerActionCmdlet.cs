@@ -3,26 +3,20 @@
     using System;
     using System.Management.Automation;
     using System.Net.Http;
-    using System.Threading.Tasks;
+
+    using DD.CBU.Compute.Api.Client;
 
     /// <summary>
     /// The set server state cmdlet.
     /// </summary>
     [Cmdlet(VerbsCommon.Set, "CaasServerState")]
     [OutputType(typeof(ServersWithBackupServer))]
-    public class SetCaasServerActionCmdlet : Cmdlet
+    public class SetCaasServerActionCmdlet : PSCmdletCaasBase
     {
         public enum ServerActions
         {
             PowerOff, PowerOn, Restart, Shutdown
         }
-
-        /// <summary>
-        /// The CaaS connection created by <see cref="NewCaasConnectionCmdlet"/> 
-        /// </summary>
-        [Parameter(Mandatory = true,
-            HelpMessage = "The CaaS Connection created by New-ComputeServiceConnection")]
-        public ComputeServiceConnection CaaS { get; set; }
 
         [Parameter(Mandatory = true, HelpMessage = "The server action to take")]
         public ServerActions ServerAction { get; set; }
@@ -82,10 +76,30 @@
                             status.resultCode,
                             status.resultDetail));
             }
-            catch (HttpRequestException exception)
+            catch (AggregateException ae)
             {
-                ThrowTerminatingError(new ErrorRecord(exception, "-1", ErrorCategory.InvalidOperation, CaaS));
+                ae.Handle(
+                    e =>
+                        {
+                            if (e is ComputeApiException)
+                            {
+                                WriteError(new ErrorRecord(e, "-2", ErrorCategory.InvalidOperation, CaaS));
+                            }
+                            else //if (e is HttpRequestException)
+                            {
+                                ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, CaaS));
+                            }
+                            return true;
+                        });
             }
+            //catch (HttpRequestException exception)
+            //{
+            //    ThrowTerminatingError(new ErrorRecord(exception, "-1", ErrorCategory.InvalidOperation, CaaS));
+            //}
+            //catch (Exception exception)
+            //{
+            //    WriteError(new ErrorRecord(exception, "-2", ErrorCategory.InvalidArgument, CaaS));
+            //}
         }
     }
 }

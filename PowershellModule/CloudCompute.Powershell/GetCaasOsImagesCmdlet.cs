@@ -1,23 +1,18 @@
 ﻿namespace DD.CBU.Compute.Powershell
 {
-    using System.Linq;
+    using System;
     using System.Management.Automation;
     using System.Threading.Tasks;
+
+    using DD.CBU.Compute.Api.Client;
 
     /// <summary>
     /// The get CaaS OS Images cmdlet.
     /// </summary>
     [Cmdlet(VerbsCommon.Get, "CaasOsImages")]
     [OutputType(typeof(DeployedImageWithSoftwareLabels[]))]
-    public class GetCaasOsImagesCmdlet : Cmdlet
+    public class GetCaasOsImagesCmdlet : PSCmdletCaasBase
     {
-        /// <summary>
-        /// The CaaS connection created by <see cref="NewCaasConnectionCmdlet"/> 
-        /// </summary>
-        [Parameter(Mandatory = true, ValueFromPipeline = true,
-            HelpMessage = "The CaaS Connection created by New-ComputeServiceConnection")]
-        public ComputeServiceConnection CaaS { get; set; }
-
         /// <summary>
         /// The network to show the images from
         /// </summary>
@@ -31,10 +26,29 @@
         {
             base.ProcessRecord();
 
-            var servers = GetOsImagesTask().Result;
-            if (servers.Items.Length > 0)
+            try
             {
-                WriteObject(servers.Items, true);
+                var servers = GetOsImagesTask().Result;
+                if (servers.Items.Length > 0)
+                {
+                    WriteObject(servers.Items, true);
+                }
+            }
+            catch (AggregateException ae)
+            {
+                ae.Handle(
+                    e =>
+                    {
+                        if (e is ComputeApiException)
+                        {
+                            WriteError(new ErrorRecord(e, "-2", ErrorCategory.InvalidOperation, CaaS));
+                        }
+                        else //if (e is HttpRequestException)
+                        {
+                            ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, CaaS));
+                        }
+                        return true;
+                    });
             }
         }
 

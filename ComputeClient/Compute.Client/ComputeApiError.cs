@@ -16,6 +16,11 @@
 		/// <summary>
 		///		The CaaS API indicates that the supplied credentials are invalid.
 		/// </summary>
-		InvalidCredentials = 1
+		InvalidCredentials = 1,
+
+        /// <summary>
+        /// The CaaS API indicates a bad request and return a descriptive (Status) error
+        /// </summary>
+        BadRequest
 	}
 }

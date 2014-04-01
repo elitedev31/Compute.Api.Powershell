@@ -1,57 +1,19 @@
 ﻿namespace DD.CBU.Compute.Powershell
 {
-    using System.Collections;
-    using System.Collections.Generic;
+    using System;
     using System.Linq;
     using System.Management.Automation;
-    using System.Management.Automation.Runspaces;
-    using System.Security.Authentication;
     using System.Threading.Tasks;
+
+    using DD.CBU.Compute.Api.Client;
 
     /// <summary>
     /// The get deployed server/s cmdlet.
     /// </summary>
     [Cmdlet(VerbsCommon.Get, "CaasDeployedServer")]
     [OutputType(typeof(ServersWithBackupServer[]))]
-    public class GetCaasDeployedServerCmdlet : Cmdlet
+    public class GetCaasDeployedServerCmdlet : PSCmdletCaasBase
     {
-        /// <summary>
-        /// The CaaS connection created by <see cref="NewCaasConnectionCmdlet"/> 
-        /// </summary>
-        [Parameter(Mandatory = true, ValueFromPipeline = true,
-            HelpMessage = "The CaaS Connection created by New-ComputeServiceConnection")]
-        public ComputeServiceConnection CaaS { get; set; }
-
-        protected override void BeginProcessing()
-        {
-            base.BeginProcessing();
-
-            //if (CaaS != null)
-            //{
-            //    WriteDebug("Received CaaS connection as a paramenter");
-            //    return;
-            //}
-            //WriteDebug("Trying to retrieve the CaaS connection from the runspace");
-            //var caas = Runspace.DefaultRunspace.SessionStateProxy.GetVariable("CaasConnection");
-            //if (!(caas is ComputeServiceConnection))
-            //{
-            //    ThrowTerminatingError(
-            //        new ErrorRecord(
-            //            new InvalidRunspaceStateException("CaaS connection is not a valid object"),
-            //            "-1",
-            //            ErrorCategory.InvalidType,
-            //            caas));
-            //}
-            //else
-            //{
-            //    var caasConnection = caas as ComputeServiceConnection;
-            //    if (!caasConnection.ApiClient.IsLoggedIn)
-            //    {
-            //        ThrowTerminatingError(new ErrorRecord(new AuthenticationException(), "-1", ErrorCategory.PermissionDenied, caas));
-            //    }
-            //}
-        }
-
         /// <summary>
         /// The process record method.
         /// </summary>
@@ -59,18 +21,37 @@
         {
             base.ProcessRecord();
 
-            var servers = GetNetworksTask().Result;
-            if (servers.Items.Any())
+            try
             {
-                WriteObject(servers.Items, true);
+                var servers = this.GetDeployedServers().Result;
+                if (servers.Items.Any())
+                {
+                    WriteObject(servers.Items, true);
+                }
+            }
+            catch (AggregateException ae)
+            {
+                ae.Handle(
+                    e =>
+                        {
+                            if (e is ComputeApiException)
+                            {
+                                WriteError(new ErrorRecord(e, "-2", ErrorCategory.InvalidOperation, CaaS));
+                            }
+                            else //if (e is HttpRequestException)
+                            {
+                                ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, CaaS));
+                            }
+                            return true;
+                        });
             }
         }
 
         /// <summary>
-        /// Gets the network servers from the CaaS
+        /// Gets the deployed servers from the CaaS
         /// </summary>
         /// <returns>The images</returns>
-        private async Task<ServersWithBackup> GetNetworksTask()
+        private async Task<ServersWithBackup> GetDeployedServers()
         {
             return await CaaS.ApiClient.GetDeployedServers();
         }

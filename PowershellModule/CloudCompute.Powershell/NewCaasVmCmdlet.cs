@@ -1,20 +1,17 @@
 ﻿namespace DD.CBU.Compute.Powershell
 {
+    using System;
     using System.Management.Automation;
+
+    using DD.CBU.Compute.Api.Client;
 
     /// <summary>
     /// The new CaaS Virtual Machine cmdlet.
     /// </summary>
     [Cmdlet(VerbsCommon.New, "CaasVM")]
     [OutputType(typeof(CaasServerDetails))]
-    public class NewCaasVmCmdlet : Cmdlet
+    public class NewCaasVmCmdlet : PSCmdletCaasBase
     {
-        /// <summary>
-        /// The CaaS connection created by <see cref="NewCaasConnectionCmdlet"/> 
-        /// </summary>
-        [Parameter(Mandatory = true, HelpMessage = "The CaaS Connection created by New-ComputeServiceConnection")]
-        public ComputeServiceConnection CaaS { get; set; }
-
         /// <summary>
         /// The Server Details that will be used to deploy the VM
         /// </summary>
@@ -27,7 +24,26 @@
         {
             base.ProcessRecord();
 
-            DeployServerTask();
+            try
+            {
+                DeployServerTask();
+            }
+            catch (AggregateException ae)
+            {
+                ae.Handle(
+                    e =>
+                    {
+                        if (e is ComputeApiException)
+                        {
+                            WriteError(new ErrorRecord(e, "-2", ErrorCategory.InvalidOperation, CaaS));
+                        }
+                        else //if (e is HttpRequestException)
+                        {
+                            ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, CaaS));
+                        }
+                        return true;
+                    });
+            }
             
             WriteObject(ServerDetails);
         }

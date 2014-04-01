@@ -1,6 +1,5 @@
 ﻿    using System;
     using System.Management.Automation;
-    using System.Management.Automation.Runspaces;
     using System.Threading.Tasks;
 
 namespace DD.CBU.Compute.Powershell
@@ -18,7 +17,7 @@ namespace DD.CBU.Compute.Powershell
     public class NewCaasConnectionCmdlet : PSCmdlet
     {
         /// <summary>
-        ///		The credentials used to connect to the CaaS API.
+        ///	The credentials used to connect to the CaaS API.
         /// </summary>
         [Parameter(Mandatory = true, ValueFromPipeline = true)]
         [ValidateNotNullOrEmpty]

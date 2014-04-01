@@ -35,16 +35,3 @@ public class Status {
     /// <remarks/>
     public string resultCode { get; set; }
 }
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.18020")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://oec.api.opsource.net/schemas/general")]
-[System.Xml.Serialization.XmlRootAttribute(Namespace="http://oec.api.opsource.net/schemas/general", IsNullable=false)]
-public class Statuses {
-    /// <remarks/>
-    [XmlElement("Status")]
-    public Status[] Items { get; set; }
-}

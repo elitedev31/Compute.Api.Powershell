@@ -1,25 +1,24 @@
-﻿using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
+
 using DD.CBU.Compute.Api.Contracts.Software;
 
 namespace DD.CBU.Compute.Api.Client
 {
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Diagnostics.Contracts;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Formatting;
-using System.Threading.Tasks;
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Diagnostics.Contracts;
+    using System.Net;
+    using System.Net.Http;
+    using System.Net.Http.Formatting;
+    using System.Threading.Tasks;
 
-using DD.CBU.Compute.Api.Client.Interfaces;
+    using DD.CBU.Compute.Api.Client.Interfaces;
     using DD.CBU.Compute.Api.Client.Utilities;
     using DD.CBU.Compute.Api.Contracts.Datacenter;
     using DD.CBU.Compute.Api.Contracts.Directory;
     using DD.CBU.Compute.Api.Contracts.Server;
-using DD.CBU.Compute.Api.Contracts.General;
+    using DD.CBU.Compute.Api.Contracts.General;
 
     /// <summary>
     ///		A client for the Dimension Data Compute-as-a-Service (CaaS) API.
@@ -501,6 +500,12 @@ using DD.CBU.Compute.Api.Contracts.General;
                             throw ComputeApiException.InvalidCredentials(
                                 ((NetworkCredential)_clientMessageHandler.Credentials).UserName);
                         }
+                    case HttpStatusCode.BadRequest:
+                        {
+                            // Handle specific CaaS Status response when getting a bad request
+                            var status = response.Content.ReadAsAsync<Status>(_mediaTypeFormatters).Result;
+                            throw ComputeApiException.InvalidRequest(status.operation, status.resultDetail);
+                        }
                     default:
                         {
                             throw new HttpRequestException(
@@ -531,6 +536,12 @@ using DD.CBU.Compute.Api.Contracts.General;
                         {
                             throw ComputeApiException.InvalidCredentials(
                                 ((NetworkCredential)_clientMessageHandler.Credentials).UserName);
+                        }
+                    case HttpStatusCode.BadRequest:
+                        {
+                            // Handle specific CaaS Status response when posting a bad request
+                            var status = response.Content.ReadAsAsync<Status>(_mediaTypeFormatters).Result;
+                            throw ComputeApiException.InvalidRequest(status.operation, status.resultDetail);
                         }
                     default:
                         {

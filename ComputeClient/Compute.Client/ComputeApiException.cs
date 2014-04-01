@@ -190,7 +190,21 @@ namespace DD.CBU.Compute.Api.Client
 				"The supplied credentials are not valid."
 			);
 		}
-		
-		#endregion // Factory methods
+
+        /// <summary>
+        /// Creates a <see cref="ComputeApiException" /> to be raised because the CaaS API indicates a bad HTTP request
+        /// </summary>
+        /// <param name="operation">The operation that was attempted</param>
+        /// <param name="details">Further error details</param>
+        /// <returns>The configured <see cref="ComputeApiException"/></returns>
+	    public static ComputeApiException InvalidRequest(string operation, string details)
+	    {
+	        return new ComputeApiException(
+	            ComputeApiError.BadRequest,
+	            details,
+	            string.Format("The operation {0} failed with an error: {1}", operation, details));
+	    }
+
+	    #endregion // Factory methods
 	}
 }
