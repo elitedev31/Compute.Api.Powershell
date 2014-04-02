@@ -449,7 +449,7 @@ namespace DD.CBU.Compute.Api.Client
 
         public async Task<Status> ServerRestart(string serverId)
         {
-            return await this.ApiGetAsync<Status>(ApiUris.RestartServer(Account.OrganizationId, serverId));
+            return await this.ApiGetAsync<Status>(ApiUris.RebootServer(Account.OrganizationId, serverId));
         }
 
         public async Task<Status> ServerShutdown(string serverId)
