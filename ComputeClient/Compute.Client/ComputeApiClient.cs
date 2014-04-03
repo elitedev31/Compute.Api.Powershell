@@ -23,7 +23,7 @@ namespace DD.CBU.Compute.Api.Client
     /// <summary>
     ///		A client for the Dimension Data Compute-as-a-Service (CaaS) API.
     /// </summary>
-    public sealed partial class ComputeApiClient
+    public sealed class ComputeApiClient
         : DisposableObject
     {  
         #region Instance data
@@ -437,34 +437,64 @@ namespace DD.CBU.Compute.Api.Client
                         });
 	    }
 
-	    public async Task<Status> ServerPowerOn(string serverId)
+        /// <summary>
+        /// Powers on the server.
+        /// </summary>
+        /// <param name="serverId">The server id</param>
+        /// <returns>Returns a status of the HTTP request</returns>
+        public async Task<Status> ServerPowerOn(string serverId)
 	    {
 	        return await this.ApiGetAsync<Status>(ApiUris.PowerOnServer(Account.OrganizationId, serverId));
 	    }
         
+        /// <summary>
+        /// Powers off the server
+        /// </summary>
+        /// <param name="serverId">The server id</param>
+        /// <returns>Returns a status of the HTTP request</returns>
         public async Task<Status> ServerPowerOff(string serverId)
         {
             return await this.ApiGetAsync<Status>(ApiUris.PoweroffServer(Account.OrganizationId, serverId));
         }
 
+        /// <summary>
+        /// Hard boot of the server.
+        /// </summary>
+        /// <param name="serverId">The server id</param>
+        /// <returns>Returns a status of the HTTP request</returns>
         public async Task<Status> ServerRestart(string serverId)
         {
             return await this.ApiGetAsync<Status>(ApiUris.RebootServer(Account.OrganizationId, serverId));
         }
 
+        /// <summary>
+        /// "Graceful" shutdown of the server.
+        /// </summary>
+        /// <param name="serverId">The server id</param>
+        /// <returns>Returns a status of the HTTP request</returns>
         public async Task<Status> ServerShutdown(string serverId)
         {
             return await this.ApiGetAsync<Status>(ApiUris.ShutdownServer(Account.OrganizationId, serverId));
         }
 
+        /// <summary>
+        /// Deletes the server. <remarks>The server must be turned off and with backup disabled</remarks>
+        /// </summary>
+        /// <param name="serverId">The server id</param>
+        /// <returns>Returns a status of the HTTP request</returns>
         public async Task<Status> ServerDelete(string serverId)
         {
             return await this.ApiGetAsync<Status>(ApiUris.DeleteServer(Account.OrganizationId, serverId));
         }
 
-        public async Task<ServersWithBackup> GetDeployedServers()
+        /// <summary>
+        /// Gets all the deployed servers.
+        /// </summary>
+        /// <returns>A list of deployed servers</returns>
+        public async Task<IEnumerable<ServersWithBackupServer>> GetDeployedServers()
         {
-            return await this.ApiGetAsync<ServersWithBackup>(ApiUris.DeployedServers(Account.OrganizationId));
+            var servers = await this.ApiGetAsync<ServersWithBackup>(ApiUris.DeployedServers(Account.OrganizationId));
+            return servers.Items;
         }
 
         #endregion // Public methods
@@ -519,7 +549,14 @@ namespace DD.CBU.Compute.Api.Client
             }
         }
 
-
+        /// <summary>
+        /// Invoke a CaaS API operation using a HTTP POST request.
+        /// </summary>
+        /// <typeparam name="TObject">The XML-Serialisable data contract type that the request will be sent.</typeparam>
+        /// <typeparam name="TResult">The XML-serialisable data contract type into which the response will be deserialised.</typeparam>
+        /// <param name="relativeOperationUri">The operation URI (relative to the CaaS API's base URI).</param>
+        /// <param name="content">The content of type <see cref="TObject"/> that will be deserialised and passed in the body of the POST request.</param>
+        /// <returns>The operation result.</returns>
         public async Task<TResult> ApiPostAsync<TObject, TResult>(Uri relativeOperationUri, TObject content)
 	    {
 	        var objectContent = new ObjectContent<TObject>(content, _mediaTypeFormatters.XmlFormatter);

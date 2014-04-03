@@ -1,21 +1,25 @@
 ﻿namespace DD.CBU.Compute.Powershell
 {
     using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Management.Automation;
-    using System.Threading.Tasks;
 
     using DD.CBU.Compute.Api.Client;
+    using DD.CBU.Compute.Api.Client.Backup;
+    using DD.CBU.Compute.Api.Contracts.Backup;
 
     /// <summary>
-    /// The get deployed server/s cmdlet.
+    /// The set backup service plan cmdlet.
     /// </summary>
-    [Cmdlet(VerbsCommon.Get, "CaasDeployedServer")]
-    [OutputType(typeof(ServersWithBackupServer[]))]
-    public class GetCaasDeployedServerCmdlet : PSCmdletCaasBase
+    [Cmdlet(VerbsCommon.Set, "CaasBackupPlan")]
+    [OutputType(typeof(ServersWithBackupServer))]
+    public class SetCaasBackupPlanCmdlet : PSCmdletCaasBase
     {
+        [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The server to action on")]
+        public ServersWithBackupServer Server { get; set; }
+
+        [Parameter(Mandatory = true, HelpMessage = "The service plan of the backup")]
+        public BackupServicePlans BackupServicePlan { get; set; }
+
         /// <summary>
         /// The process record method.
         /// </summary>
@@ -25,10 +29,17 @@
 
             try
             {
-                var servers = this.GetDeployedServers().Result;
-                if (servers.Any())
+                var status = CaaS.ApiClient.ChangeBackupPlan(Server.id, BackupServicePlan).Result;
+
+                if (status != null)
                 {
-                    WriteObject(servers, true);
+                    WriteDebug(
+                        string.Format(
+                            "{0} resulted in {1} ({2}): {3}",
+                            status.operation,
+                            status.result,
+                            status.resultCode,
+                            status.resultDetail));
                 }
             }
             catch (AggregateException ae)
@@ -47,15 +58,7 @@
                             return true;
                         });
             }
-        }
-
-        /// <summary>
-        /// Gets the deployed servers from the CaaS
-        /// </summary>
-        /// <returns>The images</returns>
-        private async Task<IEnumerable<ServersWithBackupServer>> GetDeployedServers()
-        {
-            return await CaaS.ApiClient.GetDeployedServers();
+            WriteObject(Server);
         }
     }
 }

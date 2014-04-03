@@ -87,6 +87,9 @@
     <Compile Include="..\SolutionAssemblyInfo.cs">
       <Link>Properties\SolutionAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Backup\BackupClientTypes.cs" />
+    <Compile Include="Backup\ModifyBackup.cs" />
+    <Compile Include="Backup\NewBackup.cs" />
     <Compile Include="Datacenter\DatacenterDetail.cs" />
     <Compile Include="Datacenter\DatacenterSummary.cs" />
     <Compile Include="Datacenter\DatacentersWithDiskSpeedDetails.cs" />

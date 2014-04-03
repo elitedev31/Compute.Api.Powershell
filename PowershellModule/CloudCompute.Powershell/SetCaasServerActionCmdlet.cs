@@ -36,9 +36,8 @@
         }
 
         /// <summary>
-        /// Gets the network servers from the CaaS
+        /// Sets the state of the server
         /// </summary>
-        /// <returns>The images</returns>
         private void SetServerActionTask()
         {
             try
@@ -92,14 +91,6 @@
                             return true;
                         });
             }
-            //catch (HttpRequestException exception)
-            //{
-            //    ThrowTerminatingError(new ErrorRecord(exception, "-1", ErrorCategory.InvalidOperation, CaaS));
-            //}
-            //catch (Exception exception)
-            //{
-            //    WriteError(new ErrorRecord(exception, "-2", ErrorCategory.InvalidArgument, CaaS));
-            //}
         }
     }
 }
