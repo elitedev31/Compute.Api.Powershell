@@ -11,8 +11,8 @@
     [XmlRoot(Namespace = XmlNamespaceConstants.Backup, IsNullable = false)]
     public class BackupClientTypes
     {
-        [XmlElement]
-        public BackupClientType[] backupClientType { get; set; }
+        [XmlElement(ElementName = "backupClientType")]
+        public BackupClientType[] Items { get; set; }
     }
 
     [Serializable]

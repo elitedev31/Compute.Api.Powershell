@@ -195,5 +195,16 @@ namespace DD.CBU.Compute.Api.Client
         {
             return new Uri(string.Format("{0}/server/{1}/backup/modify", orgId, serverId), UriKind.Relative);
         }
+
+        /// <summary>
+        /// Backup client types associated with a specific server.
+        /// </summary>
+        /// <param name="orgId">The organization id</param>
+        /// <param name="serverId">The server id</param>
+        /// <returns>Returns the relative URI of the REST request listing the client types for the server</returns>
+        internal static Uri BackupClientTypes(Guid orgId, string serverId)
+        {
+            return new Uri(string.Format("{0}/server/{1}/backup/client/type", orgId, serverId), UriKind.Relative);
+        }
     }
 }

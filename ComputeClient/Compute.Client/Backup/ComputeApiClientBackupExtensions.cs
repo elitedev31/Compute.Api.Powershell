@@ -1,5 +1,8 @@
 ﻿namespace DD.CBU.Compute.Api.Client.Backup
 {
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Data.SqlTypes;
     using System.Threading.Tasks;
 
     using DD.CBU.Compute.Api.Contracts.Backup;
@@ -46,6 +49,18 @@
         public static async Task<Status> ChangeBackupPlan(this ComputeApiClient client, string serverId, BackupServicePlans plan)
         {
             return await client.ApiPostAsync<ModifyBackup, Status>(ApiUris.ChangeBackupPlan(client.Account.OrganizationId, serverId), ModifyBackup.Create(plan));
+        }
+
+        /// <summary>
+        /// List the client types for a specified server
+        /// </summary>
+        /// <param name="client">The <see cref="ComputeApiClient"/> object</param>
+        /// <param name="serverId">The server id</param>
+        /// <returns>The status of the request</returns>
+        public static async Task<IEnumerable<BackupClientType>> GetBackupClientTypes(this ComputeApiClient client, string serverId)
+        {
+            var types = await client.ApiGetAsync<BackupClientTypes>(ApiUris.BackupClientTypes(client.Account.OrganizationId, serverId));
+            return types.Items;
         }
     }
 }
