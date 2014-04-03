@@ -163,6 +163,8 @@ namespace DD.CBU.Compute.Api.Client
             return new Uri(string.Format("{0}/server/{1}?reboot", orgId, serverId), UriKind.Relative);
         }
 
+        #region Backup URIs
+
         /// <summary>
         /// Enables the Backup service for a deployed Server. Requires the Organization ID, Server ID and the Service Plan being enabled.
         /// </summary>
@@ -206,5 +208,20 @@ namespace DD.CBU.Compute.Api.Client
         {
             return new Uri(string.Format("{0}/server/{1}/backup/client/type", orgId, serverId), UriKind.Relative);
         }
+
+        /// <summary>
+        /// Backup storage policies associated with a specific server.
+        /// </summary>
+        /// <param name="orgId">The organization id</param>
+        /// <param name="serverId">The server id</param>
+        /// <returns>Returns the relative URI of the REST request listing the storage policies for the server</returns>
+        internal static Uri BackupStoragePolicies(Guid orgId, string serverId)
+        {
+            return new Uri(
+                string.Format("{0}/server/{1}/backup/client/storagePolicy", orgId, serverId),
+                UriKind.Relative);
+        }
+
+        #endregion // Backup URIs
     }
 }

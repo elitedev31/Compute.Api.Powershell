@@ -62,5 +62,17 @@
             var types = await client.ApiGetAsync<BackupClientTypes>(ApiUris.BackupClientTypes(client.Account.OrganizationId, serverId));
             return types.Items;
         }
+
+        /// <summary>
+        /// List the storage policies for a specified server
+        /// </summary>
+        /// <param name="client">The <see cref="ComputeApiClient"/> object</param>
+        /// <param name="serverId">The server id</param>
+        /// <returns>The status of the request</returns>
+        public static async Task<IEnumerable<BackupStoragePolicy>> GetBackupStoragePolicies(this ComputeApiClient client, string serverId)
+        {
+            var types = await client.ApiGetAsync<BackupStoragePolicies>(ApiUris.BackupStoragePolicies(client.Account.OrganizationId, serverId));
+            return types.Items;
+        }
     }
 }

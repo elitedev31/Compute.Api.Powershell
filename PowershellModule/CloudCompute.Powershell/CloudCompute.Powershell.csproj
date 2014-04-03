@@ -90,6 +90,7 @@
     <Compile Include="CaasServerDetails.cs" />
     <Compile Include="ComputeCmdletProvider.cs" />
     <Compile Include="ComputeServiceConnection.cs" />
+    <Compile Include="GetCaasBackupStoragePoliciesCmdlet.cs" />
     <Compile Include="GetCaasBackupClientTypesCmdlet.cs" />
     <Compile Include="SetCaasBackupPlanCmdlet.cs" />
     <Compile Include="SetCaasProvisionBackupCmdlet.cs" />

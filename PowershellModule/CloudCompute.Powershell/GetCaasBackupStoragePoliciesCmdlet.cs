@@ -10,13 +10,13 @@
     using DD.CBU.Compute.Api.Contracts.Backup;
 
     /// <summary>
-    /// The get backup client types cmdlet.
+    /// The get backup storage policies cmdlet.
     /// </summary>
-    [Cmdlet(VerbsCommon.Get, "CaasBackupClientTypes")]
+    [Cmdlet(VerbsCommon.Get, "CaasBackupStoragePolicies")]
     [OutputType(typeof(BackupClientType[]))]
-    public class GetCaasBackupClientTypesCmdlet : PSCmdletCaasBase
+    public class GetCaasBackupStragePoliciesCmdlet : PSCmdletCaasBase
     {
-        [Parameter(Mandatory = true, HelpMessage = "The server associated with the backup client types",
+        [Parameter(Mandatory = true, HelpMessage = "The server associated with the backup storage policies",
             ValueFromPipeline = true)]
         public ServersWithBackupServer Server { get; set; }
 
@@ -29,11 +29,11 @@
 
             try
             {
-                var clientTypes = GetBackupClientTypes();
+                var storagePolicies = GetBackupStoragePolicies();
 
-                if (clientTypes.Any())
+                if (storagePolicies.Any())
                 {
-                    WriteObject(clientTypes, true);
+                    WriteObject(storagePolicies, true);
                 }
             }
             catch (AggregateException ae)
@@ -55,12 +55,12 @@
         }
 
         /// <summary>
-        /// Gets the network servers from the CaaS
+        /// Gets the storage policies
         /// </summary>
-        /// <returns>The images</returns>
-        private IEnumerable<BackupClientType> GetBackupClientTypes()
+        /// <returns>The storage policies</returns>
+        private IEnumerable<BackupStoragePolicy> GetBackupStoragePolicies()
         {
-            return CaaS.ApiClient.GetBackupClientTypes(Server.id).Result;
+            return CaaS.ApiClient.GetBackupStoragePolicies(Server.id).Result;
         }
     }
 }
