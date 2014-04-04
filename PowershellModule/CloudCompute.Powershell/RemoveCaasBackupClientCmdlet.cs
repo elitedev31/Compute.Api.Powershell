@@ -5,20 +5,19 @@
 
     using DD.CBU.Compute.Api.Client;
     using DD.CBU.Compute.Api.Client.Backup;
-    using DD.CBU.Compute.Api.Contracts.Backup;
 
     /// <summary>
-    /// The set backup service plan cmdlet.
+    /// The Add backup client cmdlet.
     /// </summary>
-    [Cmdlet(VerbsCommon.Set, "CaasBackupPlan")]
-    [OutputType(typeof(ServersWithBackupServer))]
-    public class SetCaasBackupPlanCmdlet : PSCmdletCaasBase
+    [Cmdlet(VerbsCommon.Remove, "CaasBackupClient")]
+    public class RemoveCaasBackupClientCmdlet : PSCmdletCaasBase
     {
-        [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The server to action on")]
+        [Parameter(Mandatory = true, HelpMessage = "The server to remove the backup client from",
+            ValueFromPipeline = true)]
         public ServersWithBackupServer Server { get; set; }
 
-        [Parameter(Mandatory = true, HelpMessage = "The service plan of the backup")]
-        public ServicePlan BackupServicePlan { get; set; }
+        [Parameter(Mandatory = true, HelpMessage = "The backup client details to remove")]
+        public BackupClientDetailsType BackupClient { get; set; }
 
         /// <summary>
         /// The process record method.
@@ -29,18 +28,7 @@
 
             try
             {
-                var status = CaaS.ApiClient.ChangeBackupPlan(Server.id, BackupServicePlan).Result;
-
-                if (status != null)
-                {
-                    WriteDebug(
-                        string.Format(
-                            "{0} resulted in {1} ({2}): {3}",
-                            status.operation,
-                            status.result,
-                            status.resultCode,
-                            status.resultDetail));
-                }
+                RemoveBackupClient();
             }
             catch (AggregateException ae)
             {
@@ -58,7 +46,24 @@
                             return true;
                         });
             }
-            WriteObject(Server);
+        }
+
+        /// <summary>
+        /// Removes a backup client from the server
+        /// </summary>
+        private void RemoveBackupClient()
+        {
+            var status = CaaS.ApiClient.RemoveBackupClient(Server.id, BackupClient).Result;
+            if (status != null)
+            {
+                WriteDebug(
+                    string.Format(
+                        "{0} resulted in {1} ({2}): {3}",
+                        status.operation,
+                        status.result,
+                        status.resultCode,
+                        status.resultDetail));
+            }
         }
     }
 }

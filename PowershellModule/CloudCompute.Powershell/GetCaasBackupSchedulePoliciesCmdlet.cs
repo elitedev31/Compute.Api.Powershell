@@ -10,13 +10,13 @@
     using DD.CBU.Compute.Api.Contracts.Backup;
 
     /// <summary>
-    /// The get backup storage policies cmdlet.
+    /// The get backup schedule policies cmdlet.
     /// </summary>
-    [Cmdlet(VerbsCommon.Get, "CaasBackupStoragePolicies")]
-    [OutputType(typeof(BackupStoragePolicy[]))]
-    public class GetCaasBackupStragePoliciesCmdlet : PSCmdletCaasBase
+    [Cmdlet(VerbsCommon.Get, "CaasBackupSchedulePolicies")]
+    [OutputType(typeof(BackupSchedulePolicy[]))]
+    public class GetCaasBackupSchedulePoliciesCmdlet : PSCmdletCaasBase
     {
-        [Parameter(Mandatory = true, HelpMessage = "The server associated with the backup storage policies",
+        [Parameter(Mandatory = true, HelpMessage = "The server associated with the backup schedule policies",
             ValueFromPipeline = true)]
         public ServersWithBackupServer Server { get; set; }
 
@@ -29,11 +29,11 @@
 
             try
             {
-                var storagePolicies = GetBackupStoragePolicies();
+                var schedulePolicies = GetBackupSchedulePolicies();
 
-                if (storagePolicies.Any())
+                if (schedulePolicies.Any())
                 {
-                    WriteObject(storagePolicies, true);
+                    WriteObject(schedulePolicies, true);
                 }
             }
             catch (AggregateException ae)
@@ -55,12 +55,12 @@
         }
 
         /// <summary>
-        /// Gets the storage policies
+        /// Gets the schedule policies
         /// </summary>
-        /// <returns>The storage policies</returns>
-        private IEnumerable<BackupStoragePolicy> GetBackupStoragePolicies()
+        /// <returns>The schedule policies</returns>
+        private IEnumerable<BackupSchedulePolicy> GetBackupSchedulePolicies()
         {
-            return CaaS.ApiClient.GetBackupStoragePolicies(Server.id).Result;
+            return CaaS.ApiClient.GetBackupSchedulePolicies(Server.id).Result;
         }
     }
 }

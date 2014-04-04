@@ -222,6 +222,79 @@ namespace DD.CBU.Compute.Api.Client
                 UriKind.Relative);
         }
 
+        /// <summary>
+        /// Backup schedule policies associated with a specific server.
+        /// </summary>
+        /// <param name="orgId">The organization id</param>
+        /// <param name="serverId">The server id</param>
+        /// <returns>Returns the relative URI of the REST request listing the schedule policies for the server</returns>
+        internal static Uri BackupSchedulePolicies(Guid orgId, string serverId)
+        {
+            return new Uri(
+                string.Format("{0}/server/{1}/backup/client/schedulePolicy", orgId, serverId),
+                UriKind.Relative);
+        }
+
+        /// <summary>
+        /// Retrieves complete details of how the Backup service is configured for a specific deployed Server.
+        /// Requires the Organization ID and Server ID for the Server and that the Server already has the Backup service enabled.
+        /// The user must be the Primary Administrator or a Sub-Administrator with the “backup” role.         /// </summary>
+        /// <param name="orgId">The organization id</param>
+        /// <param name="serverId">The server id</param>
+        /// <returns>Returns the relative URI of the REST request for getting the backup details of the server</returns>
+        internal static Uri GetBackupDetails(Guid orgId, string serverId)
+        {
+            return new Uri(string.Format("{0}/server/{1}/backup", orgId, serverId), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// Provisions a new Backup Client for a deployed Server.
+        /// Requires the Organization ID, the Server ID for the server and that the Server already has the Backup service enabled.
+        /// The user must be the Primary Administrator or a Sub-Administrator with the “backup” role
+        /// </summary>
+        /// <param name="orgId">The organization id</param>
+        /// <param name="serverId">The server id</param>
+        /// <returns>Returns the relative URI of the REST request for adding a backup client to the server</returns>
+        internal static Uri AddBackupClient(Guid orgId, string serverId)
+        {
+            return new Uri(string.Format("{0}/server/{1}/backup/client", orgId, serverId), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// Removes a Backup Client for the Backup service on a deployed Server. Requires the Organization ID, 
+        /// Server ID and Backup Client ID for the relevant Backup Client and Server and that the Server already has 
+        /// the Backup service enabled. The user must be the Primary Administrator or a Sub-Administrator with the “backup” role. 
+        /// Note that the Backup Client ID is available from the backupClient.id additionalInformation element in the 
+        /// response received when the Backup Client was originally added. See Add Backup Client for details. 
+        /// </summary>
+        /// <param name="orgId">The organization id</param>
+        /// <param name="serverId">The server id</param>
+        /// <param name="backupClientId">The backup client id to remove</param>
+        /// <returns>Returns the relative URI of the REST request for removing a backup client from the server</returns>
+        internal static Uri RemoveBackupClient(Guid orgId, string serverId, string backupClientId)
+        {
+            return new Uri(
+                string.Format("{0}/server/{1}/backup/client/{2}?remove", orgId, serverId, backupClientId),
+                UriKind.Relative);
+        }
+
+        /// <summary>
+        /// Modifies the settings of an existing Backup Client for a deployed Server.
+        /// Requires the Organization ID, the Server ID for the server and that the Server already has the Backup service enabled.
+        /// The user must be the Primary Administrator or a Sub-Administrator with the “backup” role. 
+        /// <remarks>Note that the Backup Client type cannot be changed.</remarks>
+        /// </summary>
+        /// <param name="orgId">The organization id</param>
+        /// <param name="serverId">The server id</param>
+        /// <param name="backupClientId">The backup client id to modify</param>
+        /// <returns>Returns the relative URI of the REST request for modifying a backup client for the server</returns>
+        internal static Uri ModifyBackupClient(Guid orgId, string serverId, string backupClientId)
+        {
+            return new Uri(
+                string.Format("{0}/server/{1}/backup/client/{2}/modify", orgId, serverId, backupClientId),
+                UriKind.Relative);
+        }
+
         #endregion // Backup URIs
     }
 }

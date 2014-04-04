@@ -5,7 +5,9 @@ using System.Text;
 
 namespace DD.CBU.Compute.Api.Client
 {
-	/// <summary>
+    using System.Diagnostics.Contracts;
+
+    /// <summary>
 	///		Exception raised by the CaaS API client when it encounters an error.
 	/// </summary>
 	[Serializable]
@@ -33,7 +35,7 @@ namespace DD.CBU.Compute.Api.Client
 			: base(messageOrFormat, formatArguments)
 		{
 			Debug.Assert(error != ClientError.Unknown, "Reason.Unknown should not be used here.");
-			Debug.Assert(String.IsNullOrWhiteSpace(messageOrFormat), "Exception message should not be empty.");
+			Debug.Assert(!String.IsNullOrWhiteSpace(messageOrFormat), "Exception message should not be empty.");
 
 			_error = error;
 		}
@@ -57,7 +59,7 @@ namespace DD.CBU.Compute.Api.Client
 			: base(messageOrFormat, innerException, formatArguments)
 		{
 			Debug.Assert(error != ClientError.Unknown, "Reason.Unknown should not be used here.");
-			Debug.Assert(String.IsNullOrWhiteSpace(messageOrFormat), "Exception message should not be empty.");
+			Debug.Assert(!String.IsNullOrWhiteSpace(messageOrFormat), "Exception message should not be empty.");
 
 			_error = error;
 		}

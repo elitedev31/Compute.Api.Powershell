@@ -22,7 +22,7 @@
         public bool IsEnable { get; set; }
 
         [Parameter(Mandatory = false, HelpMessage = "The service plan of the backup")]
-        public BackupServicePlans? BackupServicePlan { get; set; }
+        public ServicePlan? BackupServicePlan { get; set; }
 
         /// <summary>
         /// The process record method.

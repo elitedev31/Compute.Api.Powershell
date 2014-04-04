@@ -87,10 +87,11 @@
     <Compile Include="..\SolutionAssemblyInfo.cs">
       <Link>Properties\SolutionAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Backup\account_backup_datacenter_general_network_server.cs" />
     <Compile Include="Backup\BackupClientTypes.cs" />
     <Compile Include="Backup\BackupStoragePolicies.cs" />
-    <Compile Include="Backup\ModifyBackup.cs" />
-    <Compile Include="Backup\NewBackup.cs" />
+    <Compile Include="Backup\BackupSchedulePolicies.cs" />
+    <Compile Include="Backup\NewBackupClient.cs" />
     <Compile Include="Datacenter\DatacenterDetail.cs" />
     <Compile Include="Datacenter\DatacenterSummary.cs" />
     <Compile Include="Datacenter\DatacentersWithDiskSpeedDetails.cs" />
