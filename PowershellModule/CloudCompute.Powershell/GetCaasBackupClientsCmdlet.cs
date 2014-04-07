@@ -7,7 +7,6 @@
 
     using DD.CBU.Compute.Api.Client;
     using DD.CBU.Compute.Api.Client.Backup;
-    using DD.CBU.Compute.Api.Contracts.Backup;
 
     /// <summary>
     /// The get backup client types cmdlet.

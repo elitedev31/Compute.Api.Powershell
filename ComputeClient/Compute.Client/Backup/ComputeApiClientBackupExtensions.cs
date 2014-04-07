@@ -1,8 +1,6 @@
 ﻿namespace DD.CBU.Compute.Api.Client.Backup
 {
-    using System.Collections;
     using System.Collections.Generic;
-    using System.Data.SqlTypes;
     using System.Diagnostics.Contracts;
     using System.Threading.Tasks;
 

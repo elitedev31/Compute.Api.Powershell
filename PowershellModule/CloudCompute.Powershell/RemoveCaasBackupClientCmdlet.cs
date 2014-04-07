@@ -7,7 +7,7 @@
     using DD.CBU.Compute.Api.Client.Backup;
 
     /// <summary>
-    /// The Add backup client cmdlet.
+    /// The Remove backup client cmdlet.
     /// </summary>
     [Cmdlet(VerbsCommon.Remove, "CaasBackupClient")]
     public class RemoveCaasBackupClientCmdlet : PSCmdletCaasBase

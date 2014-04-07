@@ -5,7 +5,6 @@
 
     using DD.CBU.Compute.Api.Client;
     using DD.CBU.Compute.Api.Client.Backup;
-    using DD.CBU.Compute.Api.Contracts.Backup;
 
     /// <summary>
     /// The provision/deprovision backup cmdlet.
