@@ -17,7 +17,7 @@
     {
         [Parameter(Mandatory = true, HelpMessage = "The server to add the backup client",
             ValueFromPipeline = true)]
-        public ServersWithBackupServer Server { get; set; }
+        public ServerWithBackupType Server { get; set; }
 
         [Parameter(Mandatory = true, HelpMessage = "The storage policy availabe from Get-CaasBackupStoragePolicies cmdlet")]
         public BackupStoragePolicy StoragePolicy { get; set; }

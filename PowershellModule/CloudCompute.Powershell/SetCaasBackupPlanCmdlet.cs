@@ -10,11 +10,11 @@
     /// The set backup service plan cmdlet.
     /// </summary>
     [Cmdlet(VerbsCommon.Set, "CaasBackupPlan")]
-    [OutputType(typeof(ServersWithBackupServer))]
+    [OutputType(typeof(ServerWithBackupType))]
     public class SetCaasBackupPlanCmdlet : PSCmdletCaasBase
     {
         [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The server to action on")]
-        public ServersWithBackupServer Server { get; set; }
+        public ServerWithBackupType Server { get; set; }
 
         [Parameter(Mandatory = true, HelpMessage = "The service plan of the backup")]
         public ServicePlan BackupServicePlan { get; set; }

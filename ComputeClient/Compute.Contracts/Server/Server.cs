@@ -16,97 +16,97 @@ using System.Xml.Serialization;
 
 
 /// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://oec.api.opsource.net/schemas/server")]
-[System.Xml.Serialization.XmlRootAttribute(Namespace="http://oec.api.opsource.net/schemas/server", IsNullable=false)]
-public partial class ServersWithBackup {
-    /// <remarks/>
-    [XmlElement("server")]
-    public ServersWithBackupServer[] Items { get; set; }
+//[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+//[System.SerializableAttribute()]
+//[System.Diagnostics.DebuggerStepThroughAttribute()]
+//[System.ComponentModel.DesignerCategoryAttribute("code")]
+//[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://oec.api.opsource.net/schemas/server")]
+//[System.Xml.Serialization.XmlRootAttribute(Namespace="http://oec.api.opsource.net/schemas/server", IsNullable=false)]
+//public partial class ServersWithBackup {
+//    /// <remarks/>
+//    [XmlElement("server")]
+//    public ServersWithBackupServer[] Items { get; set; }
 
-    /// <remarks/>
-    [XmlAttribute()]
-    public string pageNumber { get; set; }
+//    /// <remarks/>
+//    [XmlAttribute()]
+//    public string pageNumber { get; set; }
 
-    /// <remarks/>
-    [XmlAttribute()]
-    public string pageCount { get; set; }
+//    /// <remarks/>
+//    [XmlAttribute()]
+//    public string pageCount { get; set; }
 
-    /// <remarks/>
-    [XmlAttribute()]
-    public string totalCount { get; set; }
+//    /// <remarks/>
+//    [XmlAttribute()]
+//    public string totalCount { get; set; }
 
-    /// <remarks/>
-    [XmlAttribute()]
-    public string pageSize { get; set; }
-}
+//    /// <remarks/>
+//    [XmlAttribute()]
+//    public string pageSize { get; set; }
+//}
 
 /// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://oec.api.opsource.net/schemas/server")]
-public partial class ServersWithBackupServer {
-    /// <remarks/>
-    public string name { get; set; }
+//[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+//[System.SerializableAttribute()]
+//[System.Diagnostics.DebuggerStepThroughAttribute()]
+//[System.ComponentModel.DesignerCategoryAttribute("code")]
+//[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://oec.api.opsource.net/schemas/server")]
+//public partial class ServersWithBackupServer {
+//    /// <remarks/>
+//    public string name { get; set; }
 
-    /// <remarks/>
-    public string description { get; set; }
+//    /// <remarks/>
+//    public string description { get; set; }
 
-    /// <remarks/>
-    public string cpuCount { get; set; }
+//    /// <remarks/>
+//    public string cpuCount { get; set; }
 
-    /// <remarks/>
-    public string memoryMb { get; set; }
+//    /// <remarks/>
+//    public string memoryMb { get; set; }
 
-    /// <remarks/>
-    public string sourceImageId { get; set; }
+//    /// <remarks/>
+//    public string sourceImageId { get; set; }
 
-    /// <remarks/>
-    public string networkId { get; set; }
+//    /// <remarks/>
+//    public string networkId { get; set; }
 
-    /// <remarks/>
-    public string machineName { get; set; }
+//    /// <remarks/>
+//    public string machineName { get; set; }
 
-    /// <remarks/>
-    public string privateIp { get; set; }
+//    /// <remarks/>
+//    public string privateIp { get; set; }
 
-    /// <remarks/>
-    public string created { get; set; }
+//    /// <remarks/>
+//    public string created { get; set; }
 
-    /// <remarks/>
-    public string isDeployed { get; set; }
+//    /// <remarks/>
+//    public string isDeployed { get; set; }
 
-    /// <remarks/>
-    public string isStarted { get; set; }
+//    /// <remarks/>
+//    public string isStarted { get; set; }
 
-    /// <remarks/>
-    public string state { get; set; }
+//    /// <remarks/>
+//    public string state { get; set; }
 
-    /// <remarks/>
-    [XmlElement("operatingSystem")]
-    public ServersWithBackupServerOperatingSystem[] operatingSystem { get; set; }
+//    /// <remarks/>
+//    [XmlElement("operatingSystem")]
+//    public ServersWithBackupServerOperatingSystem[] operatingSystem { get; set; }
 
-    /// <remarks/>
-    [XmlElement("disk")]
-    public ServersWithBackupServerDisk[] disk { get; set; }
+//    /// <remarks/>
+//    [XmlElement("disk")]
+//    public ServersWithBackupServerDisk[] disk { get; set; }
 
-    /// <remarks/>
-    [XmlElement("machineStatus")]
-    public ServersWithBackupServerMachineStatus[] machineStatus { get; set; }
+//    /// <remarks/>
+//    [XmlElement("machineStatus")]
+//    public ServersWithBackupServerMachineStatus[] machineStatus { get; set; }
 
-    /// <remarks/>
-    [XmlAttribute()]
-    public string id { get; set; }
+//    /// <remarks/>
+//    [XmlAttribute()]
+//    public string id { get; set; }
 
-    /// <remarks/>
-    [XmlAttribute()]
-    public string location { get; set; }
-}
+//    /// <remarks/>
+//    [XmlAttribute()]
+//    public string location { get; set; }
+//}
 
 /// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]

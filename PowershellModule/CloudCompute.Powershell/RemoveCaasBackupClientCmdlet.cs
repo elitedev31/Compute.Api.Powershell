@@ -14,7 +14,7 @@
     {
         [Parameter(Mandatory = true, HelpMessage = "The server to remove the backup client from",
             ValueFromPipeline = true)]
-        public ServersWithBackupServer Server { get; set; }
+        public ServerWithBackupType Server { get; set; }
 
         [Parameter(Mandatory = true, HelpMessage = "The backup client details to remove")]
         public BackupClientDetailsType BackupClient { get; set; }

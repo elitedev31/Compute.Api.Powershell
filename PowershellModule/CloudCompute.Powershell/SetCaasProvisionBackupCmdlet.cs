@@ -10,11 +10,11 @@
     /// The provision/deprovision backup cmdlet.
     /// </summary>
     [Cmdlet(VerbsCommon.Set, "CaasProvisionBackup")]
-    [OutputType(typeof(ServersWithBackupServer))]
+    [OutputType(typeof(ServerWithBackupType))]
     public class SetCaasProvisionBackupCmdlet : PSCmdletCaasBase
     {
         [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The server to action on")]
-        public ServersWithBackupServer Server { get; set; }
+        public ServerWithBackupType Server { get; set; }
 
         [Parameter(Mandatory = true,
             HelpMessage = "Determines whether to enable or disable backup. If enable, you must use BackupServicePlan")]

@@ -13,7 +13,7 @@
     /// The get deployed server/s cmdlet.
     /// </summary>
     [Cmdlet(VerbsCommon.Get, "CaasDeployedServer")]
-    [OutputType(typeof(ServersWithBackupServer[]))]
+    [OutputType(typeof(ServerWithBackupType[]))]
     public class GetCaasDeployedServerCmdlet : PSCmdletCaasBase
     {
         /// <summary>
@@ -53,7 +53,7 @@
         /// Gets the deployed servers from the CaaS
         /// </summary>
         /// <returns>The images</returns>
-        private async Task<IEnumerable<ServersWithBackupServer>> GetDeployedServers()
+        private async Task<IEnumerable<ServerWithBackupType>> GetDeployedServers()
         {
             return await CaaS.ApiClient.GetDeployedServers();
         }

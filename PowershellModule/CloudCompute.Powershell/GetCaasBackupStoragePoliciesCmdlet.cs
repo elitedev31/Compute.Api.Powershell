@@ -18,7 +18,7 @@
     {
         [Parameter(Mandatory = true, HelpMessage = "The server associated with the backup storage policies",
             ValueFromPipeline = true)]
-        public ServersWithBackupServer Server { get; set; }
+        public ServerWithBackupType Server { get; set; }
 
         /// <summary>
         /// The process record method.

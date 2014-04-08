@@ -11,12 +11,12 @@
     /// The Set backup client cmdlet.
     /// </summary>
     [Cmdlet(VerbsCommon.Set, "CaasBackupClient")]
-    [OutputType(typeof(ServersWithBackupServer))]
+    [OutputType(typeof(ServerWithBackupType))]
     public class SetCaasBackupClientCmdlet : PSCmdletCaasBase
     {
         [Parameter(Mandatory = true, HelpMessage = "The server to modify the backup client",
             ValueFromPipeline = true)]
-        public ServersWithBackupServer Server { get; set; }
+        public ServerWithBackupType Server { get; set; }
 
         [Parameter(Mandatory = true, HelpMessage = "The backup client details to modify")]
         public BackupClientDetailsType BackupClient { get; set; }

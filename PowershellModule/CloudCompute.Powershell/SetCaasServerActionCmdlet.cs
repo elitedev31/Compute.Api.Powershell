@@ -9,7 +9,7 @@
     /// The set server state cmdlet.
     /// </summary>
     [Cmdlet(VerbsCommon.Set, "CaasServerState")]
-    [OutputType(typeof(ServersWithBackupServer))]
+    [OutputType(typeof(ServerWithBackupType))]
     public class SetCaasServerActionCmdlet : PSCmdletCaasBase
     {
         public enum ServerActions
@@ -21,7 +21,7 @@
         public ServerActions ServerAction { get; set; }
 
         [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The server to action on")]
-        public ServersWithBackupServer Server { get; set; }
+        public ServerWithBackupType Server { get; set; }
 
         /// <summary>
         /// The process record method.

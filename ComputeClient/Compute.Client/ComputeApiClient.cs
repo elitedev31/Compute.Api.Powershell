@@ -418,10 +418,10 @@ namespace DD.CBU.Compute.Api.Client
         /// Gets all the deployed servers.
         /// </summary>
         /// <returns>A list of deployed servers</returns>
-        public async Task<IEnumerable<ServersWithBackupServer>> GetDeployedServers()
+        public async Task<IEnumerable<ServerWithBackupType>> GetDeployedServers()
         {
             var servers = await this.WebApi.ApiGetAsync<ServersWithBackup>(ApiUris.DeployedServers(Account.OrganizationId));
-            return servers.Items;
+            return servers.server;
         }
 
         #endregion // Public methods
