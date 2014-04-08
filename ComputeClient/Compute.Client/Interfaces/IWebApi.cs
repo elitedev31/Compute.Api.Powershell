@@ -16,6 +16,8 @@
 
         void Logout();
 
+        bool IsLoggedIn { get; }
+
         IAccount Account { get; }
     }
 }
