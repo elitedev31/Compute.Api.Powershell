@@ -24,7 +24,7 @@ namespace Compute.Client.UnitTests
         {
             var client = GetApiClient("GetMyAccountDetails.xml", "myaccount");
             var result = client.LoginAsync(new NetworkCredential(string.Empty, string.Empty)).Result;
-            Assert.IsTrue(client.IsLoggedIn);
+            Assert.IsTrue(client.Account != null);
             Assert.AreEqual(result.OrganizationId, new Guid("1831c1a9-9c03-44df-a5a4-f2a4662d6bde"));
         }
 
