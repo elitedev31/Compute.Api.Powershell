@@ -6,11 +6,8 @@ namespace DD.CBU.Compute.Api.Client
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Diagnostics.Contracts;
     using System.Net;
-    using System.Net.Http;
-    using System.Net.Http.Formatting;
     using System.Threading.Tasks;
 
     using DD.CBU.Compute.Api.Client.Interfaces;
@@ -27,25 +24,6 @@ namespace DD.CBU.Compute.Api.Client
         : DisposableObject
     {  
         #region Instance data
-        /// <summary>
-        ///		Media type formatters used to serialise and deserialise data contracts when communicating with the CaaS API.
-        /// </summary>
-        readonly MediaTypeFormatterCollection _mediaTypeFormatters = new MediaTypeFormatterCollection();
-
-        /// <summary>
-        ///		The <see cref="HttpMessageHandler"/> used to customise communications with the CaaS API.
-        /// </summary>
-        HttpClientHandler _clientMessageHandler = new HttpClientHandler();
-
-        /// <summary>
-        ///		The <see cref="HttpClient"/> used to communicate with the CaaS API.
-        /// </summary>
-        IHttpClient _httpClient;
-
-        /// <summary>
-        ///		The details for the CaaS account associated with the supplied credentials.
-        /// </summary>
-        IAccount _account;
 
         /// <summary>
         ///		Create a new Compute-as-a-Service API client.
@@ -58,15 +36,14 @@ namespace DD.CBU.Compute.Api.Client
             if (String.IsNullOrWhiteSpace(targetRegionName))
                 throw new ArgumentException("Argument cannot be null, empty, or composed entirely of whitespace: 'targetRegionName'.", "targetRegionName");
 
-            _mediaTypeFormatters.XmlFormatter.UseXmlSerializer = true;
-            _httpClient = new HttpClientAdapter(new HttpClient(_clientMessageHandler) { BaseAddress = ApiUris.ComputeBase(targetRegionName) });
+            WebApi = new WebApi(targetRegionName);
         }
 
         /// <summary>
         /// Creates a new CaaS API client using a base URI.
         /// </summary>
         /// <param name="baseUri">The base URI to use for the CaaS API.</param>
-        public ComputeApiClient(Uri baseUri)           
+        public ComputeApiClient(Uri baseUri)
         {
             if (baseUri == null)
                 throw new ArgumentNullException("baseUri", "Argument cannot be null");
@@ -74,8 +51,7 @@ namespace DD.CBU.Compute.Api.Client
             if (!baseUri.IsAbsoluteUri)
                 throw new ArgumentException("Base URI supplied is not an absolute URI", "baseUri");
 
-            _mediaTypeFormatters.XmlFormatter.UseXmlSerializer = true;
-            _httpClient = new HttpClientAdapter(new HttpClient(_clientMessageHandler) { BaseAddress = baseUri });
+            WebApi = new WebApi(baseUri);
         }
 
         /// <summary>
@@ -83,12 +59,10 @@ namespace DD.CBU.Compute.Api.Client
         /// </summary>
         public ComputeApiClient(IHttpClient client)
         {
-
             if (client == null)
                 throw new ArgumentNullException("client", "Argument cannot be null");
 
-            _mediaTypeFormatters.XmlFormatter.UseXmlSerializer = true;
-            _httpClient = client;
+            WebApi = new WebApi(client);
         }
 
         /// <summary>
@@ -101,19 +75,11 @@ namespace DD.CBU.Compute.Api.Client
         {
             if (disposing)
             {
-                if (_clientMessageHandler != null)
+                if (WebApi != null)
                 {
-                    _clientMessageHandler.Dispose();
-                    _clientMessageHandler = null;
+                    WebApi.Dispose();
+                    WebApi = null;
                 }
-
-                if (_httpClient != null)
-                {
-                    _httpClient.Dispose();
-                    _httpClient = null;
-                }
-
-                _account = null;
             }
         }
 
@@ -127,79 +93,39 @@ namespace DD.CBU.Compute.Api.Client
         /// <remarks>
         ///		<c>null</c>, unless logged in.
         /// </remarks>
-        /// <seealso cref="LoginAsync"/>
         public IAccount Account
         {
             get
             {
-                CheckDisposed();
-
-                return _account;
+                return WebApi.Account;
             }
         }
 
         /// <summary>
-        ///		Is the API client currently logged in to the CaaS API?
+        /// Access to the web API for login/logout and account info
         /// </summary>
-        public bool IsLoggedIn
-        {
-            get
-            {
-                CheckDisposed();
-
-                return _account != null;
-            }
-        }
+        public IWebApi WebApi { get; private set; }
 
         /// <summary>
-        ///		Asynchronously log into the CaaS API.
+        ///	Asynchronously log into the CaaS API.
         /// </summary>
         /// <param name="accountCredentials">
-        ///		The CaaS account credentials used to authenticate against the CaaS API.
+        ///	The CaaS account credentials used to authenticate against the CaaS API.
         /// </param>
         /// <returns>
-        ///		An <see cref="IAccount"/> implementation representing the CaaS account that the client is logged into.
+        ///	An <see cref="IAccount"/> implementation representing the CaaS account that the client is logged into.
         /// </returns>
         public async Task<IAccount> LoginAsync(ICredentials accountCredentials)
         {
-            if (accountCredentials == null)
-                throw new ArgumentNullException("accountCredentials");
-
-            CheckDisposed();
-
-            if (_account != null)
-                throw ComputeApiClientException.AlreadyLoggedIn();
-
-            _clientMessageHandler.Credentials = accountCredentials;
-            _clientMessageHandler.PreAuthenticate = true;
-
-            try
-            {
-                _account = await ApiGetAsync<Account>(ApiUris.MyAccount);
-            }
-            catch (HttpRequestException eRequestFailure)
-            {
-                Debug.WriteLine(eRequestFailure.GetBaseException(), "BASE EXCEPTION");
-
-                throw;
-            }
-
-            return _account;
+            return await WebApi.LoginAsync(accountCredentials);
         }
 
         /// <summary>
-        ///		Log out of the CaaS API.
+        ///	Log out of the CaaS API.
         /// </summary>
         public void Logout()
         {
-            CheckDisposed();
-
-            if (_account == null)
-                throw ComputeApiClientException.NotLoggedIn();
-
-            _account = null;
-            _clientMessageHandler.Credentials = null;
-            _clientMessageHandler.PreAuthenticate = false;
+            WebApi.Logout();
         }
 
         public async Task<IEnumerable<SoftwareLabel>> GetListOfSoftwareLabels(Guid orgId)
@@ -207,7 +133,7 @@ namespace DD.CBU.Compute.Api.Client
             var relativeUrl = string.Format("{0}/softwarelabel", orgId);
             var uri = new Uri(relativeUrl, UriKind.Relative);
 
-            var labels = await ApiGetAsync<SoftwareLabels>(uri);
+            var labels = await WebApi.ApiGetAsync<SoftwareLabels>(uri);
 
             return labels.Items;
         }
@@ -223,7 +149,7 @@ namespace DD.CBU.Compute.Api.Client
             var relativeUrl = string.Format("{0}/multigeo", orgId);
             var uri = new Uri(relativeUrl, UriKind.Relative);
 
-            var regions = await ApiGetAsync<Geos>(uri);
+            var regions = await WebApi.ApiGetAsync<Geos>(uri);
 
             return regions.Items;
         }
@@ -254,6 +180,7 @@ namespace DD.CBU.Compute.Api.Client
             return ExecuteAccountCommand(orgId, username, "{0}/account/{1}?primary");
         }
 
+
         /// <summary>
         /// This function identifies the list of data centers available to the organization of the authenticating user. 
         /// </summary>
@@ -262,7 +189,7 @@ namespace DD.CBU.Compute.Api.Client
         public async Task<IEnumerable<DataCenterWithMaintenanceStatus>> GetListOfDataCentersWithMaintenanceStatuses(Guid orgId)
         {
             var url = string.Format("{0}/datacenterWithMaintenanceStatus?", orgId);
-            var dataCenters = await ApiGetAsync<DatacentersWithMaintenanceStatus>(new Uri(url, UriKind.Relative));
+            var dataCenters = await WebApi.ApiGetAsync<DatacentersWithMaintenanceStatus>(new Uri(url, UriKind.Relative));
             return dataCenters.Items;
         }
 
@@ -276,7 +203,7 @@ namespace DD.CBU.Compute.Api.Client
         public async Task<IEnumerable<Account>> GetAccounts(Guid orgId)
         {
             var relativeUrl = string.Format("{0}/account", orgId);
-            var accounts = await ApiGetAsync<Accounts>(new Uri(relativeUrl, UriKind.Relative));
+            var accounts = await WebApi.ApiGetAsync<Accounts>(new Uri(relativeUrl, UriKind.Relative));
             return accounts.Items;
         }
 
@@ -292,8 +219,8 @@ namespace DD.CBU.Compute.Api.Client
         public async Task<Status> AddSubAdministratorAccount(Guid orgId, Account account)
         {
             var relativeUrl = string.Format("{0}/account", orgId);
-            
-			return await ApiPostAsync<Account, Status>(new Uri(relativeUrl, UriKind.Relative), new Account());
+
+            return await WebApi.ApiPostAsync<Account, Status>(new Uri(relativeUrl, UriKind.Relative), new Account());
         }
 
         /// <summary>
@@ -325,15 +252,15 @@ namespace DD.CBU.Compute.Api.Client
 
             var relativeUrl = string.Format("{0}/account/{1}", orgId, account.UserName);
             
-			return await ApiPostAsync<string, Status>(new Uri(relativeUrl, UriKind.Relative), postBody);
+			return await WebApi.ApiPostAsync<string, Status>(new Uri(relativeUrl, UriKind.Relative), postBody);
         }
 
         private async Task<ApiStatus> ExecuteAccountCommand(Guid orgId, string username, string uriFormat)
         {
             var uriText = string.Format(uriFormat, orgId, username);
             var uri = new Uri(uriText, UriKind.Relative);
-           
-			return await ApiGetAsync<ApiStatus>(uri);
+
+            return await WebApi.ApiGetAsync<ApiStatus>(uri);
         }
 
         /// <summary>
@@ -350,7 +277,7 @@ namespace DD.CBU.Compute.Api.Client
             CheckDisposed();
 
             DatacentersWithDiskSpeedDetails datacentersWithDiskSpeedDetails =
-                await ApiGetAsync<DatacentersWithDiskSpeedDetails>(
+                await WebApi.ApiGetAsync<DatacentersWithDiskSpeedDetails>(
                     ApiUris.DatacentersWithDiskSpeedDetails(
                         organizationId
                     )
@@ -374,7 +301,7 @@ namespace DD.CBU.Compute.Api.Client
                 throw new ArgumentException("Argument cannot be null, empty, or composed entirely of whitespace: 'locationName'.", "locationName");
 
             ImagesWithSoftwareLabels imagesWithSoftwareLabels =
-                await ApiGetAsync<ImagesWithSoftwareLabels>(
+                await WebApi.ApiGetAsync<ImagesWithSoftwareLabels>(
                     ApiUris.ImagesWithSoftwareLabels(locationName)
                 );
 
@@ -390,7 +317,7 @@ namespace DD.CBU.Compute.Api.Client
         {
             Contract.Requires(!string.IsNullOrWhiteSpace(networkLocation), "Network location must not be empty or null");
 
-            var images = await ApiGetAsync<DeployedImagesWithSoftwareLabels>(ApiUris.OsServerImages(networkLocation));
+            var images = await WebApi.ApiGetAsync<DeployedImagesWithSoftwareLabels>(ApiUris.OsServerImages(networkLocation));
             return images.Items;
         }
 
@@ -400,7 +327,7 @@ namespace DD.CBU.Compute.Api.Client
         /// <returns>The networks</returns>
         public async Task<IEnumerable<NetworkWithLocationsNetwork>> GetNetworksTask()
         {
-            var networks = await this.ApiGetAsync<NetworkWithLocations>(ApiUris.NetworkWithLocations(Account.OrganizationId));
+            var networks = await this.WebApi.ApiGetAsync<NetworkWithLocations>(ApiUris.NetworkWithLocations(Account.OrganizationId));
             return networks.Items;
         }
 
@@ -423,7 +350,7 @@ namespace DD.CBU.Compute.Api.Client
 
             return
                 await
-                this.ApiPostAsync<NewServerToDeploy, Status>(
+                this.WebApi.ApiPostAsync<NewServerToDeploy, Status>(
                     ApiUris.DeployServer(Account.OrganizationId),
                     new NewServerToDeploy
                         {
@@ -444,7 +371,7 @@ namespace DD.CBU.Compute.Api.Client
         /// <returns>Returns a status of the HTTP request</returns>
         public async Task<Status> ServerPowerOn(string serverId)
 	    {
-	        return await this.ApiGetAsync<Status>(ApiUris.PowerOnServer(Account.OrganizationId, serverId));
+	        return await WebApi.ApiGetAsync<Status>(ApiUris.PowerOnServer(Account.OrganizationId, serverId));
 	    }
         
         /// <summary>
@@ -454,7 +381,7 @@ namespace DD.CBU.Compute.Api.Client
         /// <returns>Returns a status of the HTTP request</returns>
         public async Task<Status> ServerPowerOff(string serverId)
         {
-            return await this.ApiGetAsync<Status>(ApiUris.PoweroffServer(Account.OrganizationId, serverId));
+            return await this.WebApi.ApiGetAsync<Status>(ApiUris.PoweroffServer(Account.OrganizationId, serverId));
         }
 
         /// <summary>
@@ -464,7 +391,7 @@ namespace DD.CBU.Compute.Api.Client
         /// <returns>Returns a status of the HTTP request</returns>
         public async Task<Status> ServerRestart(string serverId)
         {
-            return await this.ApiGetAsync<Status>(ApiUris.RebootServer(Account.OrganizationId, serverId));
+            return await this.WebApi.ApiGetAsync<Status>(ApiUris.RebootServer(Account.OrganizationId, serverId));
         }
 
         /// <summary>
@@ -474,7 +401,7 @@ namespace DD.CBU.Compute.Api.Client
         /// <returns>Returns a status of the HTTP request</returns>
         public async Task<Status> ServerShutdown(string serverId)
         {
-            return await this.ApiGetAsync<Status>(ApiUris.ShutdownServer(Account.OrganizationId, serverId));
+            return await this.WebApi.ApiGetAsync<Status>(ApiUris.ShutdownServer(Account.OrganizationId, serverId));
         }
 
         /// <summary>
@@ -484,7 +411,7 @@ namespace DD.CBU.Compute.Api.Client
         /// <returns>Returns a status of the HTTP request</returns>
         public async Task<Status> ServerDelete(string serverId)
         {
-            return await this.ApiGetAsync<Status>(ApiUris.DeleteServer(Account.OrganizationId, serverId));
+            return await this.WebApi.ApiGetAsync<Status>(ApiUris.DeleteServer(Account.OrganizationId, serverId));
         }
 
         /// <summary>
@@ -493,106 +420,10 @@ namespace DD.CBU.Compute.Api.Client
         /// <returns>A list of deployed servers</returns>
         public async Task<IEnumerable<ServersWithBackupServer>> GetDeployedServers()
         {
-            var servers = await this.ApiGetAsync<ServersWithBackup>(ApiUris.DeployedServers(Account.OrganizationId));
+            var servers = await this.WebApi.ApiGetAsync<ServersWithBackup>(ApiUris.DeployedServers(Account.OrganizationId));
             return servers.Items;
         }
 
         #endregion // Public methods
-
-        #region WebAPI invocation
-
-
-        /// <summary>
-        ///		Invoke a CaaS API operation using a HTTP GET request.
-        /// </summary>
-        /// <typeparam name="TResult">
-        ///		The XML-serialisable data contract type into which the response will be deserialised.
-        /// </typeparam>
-        /// <param name="relativeOperationUri">
-        ///		The operation URI (relative to the CaaS API's base URI).
-        /// </param>
-        /// <returns>
-        ///		The operation result.
-        /// </returns>
-        public async Task<TResult> ApiGetAsync<TResult>(Uri relativeOperationUri)
-        {
-            if (relativeOperationUri == null) throw new ArgumentNullException("relativeOperationUri");
-
-            if (relativeOperationUri.IsAbsoluteUri) throw new ArgumentException("The supplied URI is not a relative URI.", "relativeOperationUri");
-
-            using (var response = await _httpClient.GetAsync(relativeOperationUri))
-            {
-                if (response.IsSuccessStatusCode) return await response.Content.ReadAsAsync<TResult>(_mediaTypeFormatters);
-                switch (response.StatusCode)
-                {
-                    case HttpStatusCode.Unauthorized:
-                        {
-                            throw ComputeApiException.InvalidCredentials(
-                                ((NetworkCredential)_clientMessageHandler.Credentials).UserName);
-                        }
-                    case HttpStatusCode.BadRequest:
-                        {
-                            // Handle specific CaaS Status response when getting a bad request
-                            var status = response.Content.ReadAsAsync<Status>(_mediaTypeFormatters).Result;
-                            throw ComputeApiException.InvalidRequest(status.operation, status.resultDetail);
-                        }
-                    default:
-                        {
-                            throw new HttpRequestException(
-                                String.Format(
-                                    "CaaS API returned HTTP status code {0} ({1}) when performing HTTP GET on '{2}'.",
-                                    (int)response.StatusCode,
-                                    response.StatusCode,
-                                    response.RequestMessage.RequestUri));
-                        }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Invoke a CaaS API operation using a HTTP POST request.
-        /// </summary>
-        /// <typeparam name="TObject">The XML-Serialisable data contract type that the request will be sent.</typeparam>
-        /// <typeparam name="TResult">The XML-serialisable data contract type into which the response will be deserialised.</typeparam>
-        /// <param name="relativeOperationUri">The operation URI (relative to the CaaS API's base URI).</param>
-        /// <param name="content">The content of type <see cref="TObject"/> that will be deserialised and passed in the body of the POST request.</param>
-        /// <returns>The operation result.</returns>
-        public async Task<TResult> ApiPostAsync<TObject, TResult>(Uri relativeOperationUri, TObject content)
-	    {
-	        var objectContent = new ObjectContent<TObject>(content, _mediaTypeFormatters.XmlFormatter);
-	        using (
-	            var response =
-	                await
-	                _httpClient.PostAsync(relativeOperationUri, objectContent))
-            {
-	            if (response.IsSuccessStatusCode) return await response.Content.ReadAsAsync<TResult>(_mediaTypeFormatters);
-
-                switch (response.StatusCode)
-                {
-                    case HttpStatusCode.Unauthorized:
-                        {
-                            throw ComputeApiException.InvalidCredentials(
-                                ((NetworkCredential)_clientMessageHandler.Credentials).UserName);
-                        }
-                    case HttpStatusCode.BadRequest:
-                        {
-                            // Handle specific CaaS Status response when posting a bad request
-                            var status = response.Content.ReadAsAsync<Status>(_mediaTypeFormatters).Result;
-                            throw ComputeApiException.InvalidRequest(status.operation, status.resultDetail);
-                        }
-                    default:
-                        {
-                            throw new HttpRequestException(
-                                String.Format(
-                                    "CaaS API returned HTTP status code {0} ({1}) when performing HTTP POST on '{2}'.",
-                                    (int)response.StatusCode,
-                                    response.StatusCode,
-                                    response.RequestMessage.RequestUri));
-                        }
-                }
-            }
-        }
-
-        #endregion // WebAPI invocation
     }
 }

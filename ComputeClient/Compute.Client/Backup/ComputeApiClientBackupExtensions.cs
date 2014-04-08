@@ -22,7 +22,7 @@
         {
             return
                 await
-                client.ApiPostAsync<NewBackup, Status>(
+                client.WebApi.ApiPostAsync<NewBackup, Status>(
                     ApiUris.EnableBackup(client.Account.OrganizationId, serverId),
                     new NewBackup { servicePlan = plan });
         }
@@ -36,7 +36,7 @@
         /// <returns>The status of the request</returns>
         public static async Task<Status> DisableBackup(this ComputeApiClient client, string serverId)
         {
-            return await client.ApiGetAsync<Status>(ApiUris.DisableBackup(client.Account.OrganizationId, serverId));
+            return await client.WebApi.ApiGetAsync<Status>(ApiUris.DisableBackup(client.Account.OrganizationId, serverId));
         }
 
         /// <summary>
@@ -50,7 +50,7 @@
         {
             return
                 await
-                client.ApiPostAsync<ModifyBackup, Status>(
+                client.WebApi.ApiPostAsync<ModifyBackup, Status>(
                     ApiUris.ChangeBackupPlan(client.Account.OrganizationId, serverId),
                     new ModifyBackup { servicePlan = plan });
         }
@@ -63,7 +63,7 @@
         /// <returns>The status of the request</returns>
         public static async Task<IEnumerable<BackupClientType>> GetBackupClientTypes(this ComputeApiClient client, string serverId)
         {
-            var types = await client.ApiGetAsync<BackupClientTypes>(ApiUris.BackupClientTypes(client.Account.OrganizationId, serverId));
+            var types = await client.WebApi.ApiGetAsync<BackupClientTypes>(ApiUris.BackupClientTypes(client.Account.OrganizationId, serverId));
             return types.Items;
         }
 
@@ -75,7 +75,7 @@
         /// <returns>The status of the request</returns>
         public static async Task<IEnumerable<BackupStoragePolicy>> GetBackupStoragePolicies(this ComputeApiClient client, string serverId)
         {
-            var types = await client.ApiGetAsync<BackupStoragePolicies>(ApiUris.BackupStoragePolicies(client.Account.OrganizationId, serverId));
+            var types = await client.WebApi.ApiGetAsync<BackupStoragePolicies>(ApiUris.BackupStoragePolicies(client.Account.OrganizationId, serverId));
             return types.Items;
         }
 
@@ -87,7 +87,7 @@
         /// <returns>The status of the request</returns>
         public static async Task<IEnumerable<BackupSchedulePolicy>> GetBackupSchedulePolicies(this ComputeApiClient client, string serverId)
         {
-            var types = await client.ApiGetAsync<BackupSchedulePolicies>(ApiUris.BackupSchedulePolicies(client.Account.OrganizationId, serverId));
+            var types = await client.WebApi.ApiGetAsync<BackupSchedulePolicies>(ApiUris.BackupSchedulePolicies(client.Account.OrganizationId, serverId));
             return types.Items;
         }
 
@@ -105,7 +105,7 @@
 
             var details =
                 await
-                client.ApiGetAsync<BackupDetails>(ApiUris.GetBackupDetails(client.Account.OrganizationId, serverId));
+                client.WebApi.ApiGetAsync<BackupDetails>(ApiUris.GetBackupDetails(client.Account.OrganizationId, serverId));
             return details.backupClient;
         }
 
@@ -134,7 +134,7 @@
 
             return
                 await
-                client.ApiPostAsync<NewBackupClient, Status>(
+                client.WebApi.ApiPostAsync<NewBackupClient, Status>(
                     ApiUris.AddBackupClient(client.Account.OrganizationId, serverId),
                     new NewBackupClient
                         {
@@ -162,7 +162,7 @@
 
             return
                 await
-                client.ApiGetAsync<Status>(
+                client.WebApi.ApiGetAsync<Status>(
                     ApiUris.RemoveBackupClient(client.Account.OrganizationId, serverId, backupClient.id));
         }
 
@@ -189,7 +189,7 @@
 
             return
                 await
-                client.ApiPostAsync<ModifyBackupClient, Status>(
+                client.WebApi.ApiPostAsync<ModifyBackupClient, Status>(
                     ApiUris.ModifyBackupClient(client.Account.OrganizationId, serverId, backupClient.id),
                     new ModifyBackupClient
                         {

@@ -106,8 +106,10 @@
     <Compile Include="HttpContentExtensions.cs" />
     <Compile Include="Interfaces\HttpClientAdapter.cs" />
     <Compile Include="Interfaces\IHttpClient.cs" />
+    <Compile Include="Interfaces\IWebApi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\DisposableObject.cs" />
+    <Compile Include="WebApi.cs" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\..\CustomDictionary.xml">
