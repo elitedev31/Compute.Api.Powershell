@@ -177,7 +177,7 @@ namespace DD.CBU.Compute.Api.Client
         /// <returns>Returns the relative URI of the REST request for creating an ACL rule</returns>
         internal static Uri CreateAclRule(Guid orgId, string networkId)
         {
-            return new Uri(string.Format("{0}/network/{1}/aclrule", orgId, networkId));
+            return new Uri(string.Format("{0}/network/{1}/aclrule", orgId, networkId), UriKind.Relative);
         }
 
         /// <summary>
@@ -189,7 +189,7 @@ namespace DD.CBU.Compute.Api.Client
         /// <returns>Returns the relative URI of the REST request for removing an ACL rule</returns>
         internal static Uri RemoveAclRule(Guid orgId, string networkId, string aclId)
         {
-            return new Uri(string.Format("{0}/network/{1}/aclrule/{2}?delete", orgId, networkId));
+            return new Uri(string.Format("{0}/network/{1}/aclrule/{2}?delete", orgId, networkId), UriKind.Relative);
         }
 
         /// <summary>
@@ -200,7 +200,7 @@ namespace DD.CBU.Compute.Api.Client
         /// <returns>Returns the relative URI of the REST request for getting ACL rules</returns>
         internal static Uri GetAclRules(Guid orgId, string networkId)
         {
-            return new Uri(string.Format("{0}/network/{1}/aclrule", orgId, networkId));
+            return new Uri(string.Format("{0}/network/{1}/aclrule", orgId, networkId), UriKind.Relative);
         }
 
         #region Backup URIs
@@ -336,5 +336,39 @@ namespace DD.CBU.Compute.Api.Client
         }
 
         #endregion // Backup URIs
+
+        #region Import and Export Customer Image API
+
+        /// <summary>
+        /// Gets the relative URI for the CaaS API action that retrieves a list of OVF Packages
+        /// </summary>
+        /// <param name="orgId">The organization id</param>
+        /// <returns>Returns the relative URI of the REST request for getting the OVF Packages</returns>
+        internal static Uri GetOvfPackages(Guid orgId)
+        {
+            return new Uri(string.Format("{0}/ovfPackage", orgId), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// Gets the relative URI for the CaaS API action that POST a request to import a customer image
+        /// </summary>
+        /// <param name="orgId">The organization id</param>
+        /// <returns>Returns the relative URI of the REST request for importing a customer image</returns>
+        internal static Uri ImportCustomerImage(Guid orgId)
+        {
+            return new Uri(string.Format("{0}/imageImport", orgId), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// Gets the relative URI for the CaaS API action that retrieves a list of customer image imports in progress.
+        /// </summary>
+        /// <param name="orgId">The organization id</param>
+        /// <returns>a list of customer image imports in progress</returns>
+        internal static Uri GetCustomerImageImports(Guid orgId)
+        {
+            return new Uri(string.Format("{0}/imageImport", orgId), UriKind.Relative);
+        }
+
+        #endregion // Import and Export Customer Image API
     }
 }

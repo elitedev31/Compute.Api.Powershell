@@ -91,6 +91,9 @@
     <Compile Include="ComputeCmdletProvider.cs" />
     <Compile Include="ComputeServiceConnection.cs" />
     <Compile Include="AddCaasBackupClientCmdlet.cs" />
+    <Compile Include="GetCaasCustomerImageImportsCmdlet.cs" />
+    <Compile Include="NewCaasImportCustomerImageCmdlet.cs" />
+    <Compile Include="GetCaasOvfPackagesCmdlet.cs" />
     <Compile Include="GetCaasCustomerImagesCmdlet.cs" />
     <Compile Include="SetCaasBackupClientCmdlet.cs" />
     <Compile Include="RemoveCaasBackupClientCmdlet.cs" />
