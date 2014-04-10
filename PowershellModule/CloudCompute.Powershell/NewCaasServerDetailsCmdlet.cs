@@ -38,7 +38,7 @@
         /// The OS image to use for deployment
         /// </summary>
         [Parameter(Mandatory = true, HelpMessage = "The OS Server Image to use for deployment")]
-        public DeployedImageWithSoftwareLabels OsServerImage { get; set; }
+        public DeployedImageWithSoftwareLabelsType OsServerImage { get; set; }
 
         /// <summary>
         /// The network to deploy the machine to

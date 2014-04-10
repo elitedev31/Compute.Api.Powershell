@@ -6,18 +6,19 @@
     using System.Management.Automation;
 
     using DD.CBU.Compute.Api.Client;
-    using DD.CBU.Compute.Api.Client.Backup;
 
     /// <summary>
-    /// The get backup client types cmdlet.
+    /// The get CaaS Customer Images cmdlet.
     /// </summary>
-    [Cmdlet(VerbsCommon.Get, "CaasBackupClients")]
-    [OutputType(typeof(BackupClientDetailsType[]))]
-    public class GetCaasBackupClientsCmdlet : PSCmdletCaasBase
+    [Cmdlet(VerbsCommon.Get, "CaasCustomerImages")]
+    [OutputType(typeof(DeployedImageWithSoftwareLabelsType[]))]
+    public class GetCaasCustomerImagesCmdlet : PSCmdletCaasBase
     {
-        [Parameter(Mandatory = true, HelpMessage = "The server associated with the backup client types",
-            ValueFromPipeline = true)]
-        public ServerWithBackupType Server { get; set; }
+        /// <summary>
+        /// The network to show the images from
+        /// </summary>
+        [Parameter(Mandatory = true, HelpMessage = "The network to show the images from")]
+        public NetworkWithLocationsNetwork NetworkWithLocations { get; set; }
 
         /// <summary>
         /// The process record method.
@@ -28,11 +29,10 @@
 
             try
             {
-                var clients = GetBackupClients();
-
-                if (clients != null && clients.Any())
+                var images = GetCustomerImages();
+                if (images != null && images.Any())
                 {
-                    WriteObject(clients, true);
+                    WriteObject(images, true);
                 }
             }
             catch (AggregateException ae)
@@ -54,12 +54,13 @@
         }
 
         /// <summary>
-        /// Gets the backup clients
+        /// Gets the customer images in the network
         /// </summary>
-        /// <returns>The backup clients</returns>
-        private IEnumerable<BackupClientDetailsType> GetBackupClients()
+        /// <returns>The images</returns>
+        private IEnumerable<DeployedImageWithSoftwareLabelsType> GetCustomerImages()
         {
-            return CaaS.ApiClient.GetBackupClients(Server.id).Result;
+            var customerImages = CaaS.ApiClient.GetCustomerServerImages(NetworkWithLocations.location).Result;
+            return customerImages;
         }
     }
 }

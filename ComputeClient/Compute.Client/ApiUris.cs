@@ -80,10 +80,16 @@ namespace DD.CBU.Compute.Api.Client
             return new Uri(string.Format("{0}/serverWithBackup", orgId), UriKind.Relative);
         }
 
-        internal static Uri OsServerImages(string networkLocation)
+        /// <summary>
+        /// Gets the relative URI for the CaaS API action that retrieves a list of customer images with software labels
+        /// </summary>
+        /// <param name="orgId">The organization id</param>
+        /// <param name="networkLocation">The network location id</param>
+        /// <returns>A list of OS server images</returns>
+        internal static Uri CustomerImagesWithSoftwareLabels(Guid orgId, string networkLocation)
         {
             return new Uri(
-                string.Format("base/image/deployedWithSoftwareLabels/{0}", networkLocation),
+                string.Format("{0}/image/deployedWithSoftwareLabels/{1}", orgId, networkLocation),
                 UriKind.Relative);
         }
 
@@ -161,6 +167,40 @@ namespace DD.CBU.Compute.Api.Client
         internal static Uri RebootServer(Guid orgId, string serverId)
         {
             return new Uri(string.Format("{0}/server/{1}?reboot", orgId, serverId), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// Create an ACL rule
+        /// </summary>
+        /// <param name="orgId">The organization id</param>
+        /// <param name="networkId">The network id</param>
+        /// <returns>Returns the relative URI of the REST request for creating an ACL rule</returns>
+        internal static Uri CreateAclRule(Guid orgId, string networkId)
+        {
+            return new Uri(string.Format("{0}/network/{1}/aclrule", orgId, networkId));
+        }
+
+        /// <summary>
+        /// Removes the ACL rule
+        /// </summary>
+        /// <param name="orgId">The organization id</param>
+        /// <param name="networkId">The network id</param>
+        /// <param name="aclId">The ACL rule id</param>
+        /// <returns>Returns the relative URI of the REST request for removing an ACL rule</returns>
+        internal static Uri RemoveAclRule(Guid orgId, string networkId, string aclId)
+        {
+            return new Uri(string.Format("{0}/network/{1}/aclrule/{2}?delete", orgId, networkId));
+        }
+
+        /// <summary>
+        /// Getting all the ACL rules in the network
+        /// </summary>
+        /// <param name="orgId">The organization id</param>
+        /// <param name="networkId">The network id</param>
+        /// <returns>Returns the relative URI of the REST request for getting ACL rules</returns>
+        internal static Uri GetAclRules(Guid orgId, string networkId)
+        {
+            return new Uri(string.Format("{0}/network/{1}/aclrule", orgId, networkId));
         }
 
         #region Backup URIs

@@ -293,32 +293,35 @@ namespace DD.CBU.Compute.Api.Client
         ///		The short name of the location in which the data centre is located.
         /// </param>
         /// <returns>
-        ///		A read-only list <see cref="ImageDetail"/>, sorted by UTC creation date / time, representing the images.
+        ///		A read-only list <see cref="DeployedImageWithSoftwareLabelsType"/>, sorted by UTC creation date / time, representing the images.
         /// </returns>
-        public async Task<IReadOnlyList<IImageDetail>> GetImages(string locationName)
+        public async Task<IReadOnlyList<DeployedImageWithSoftwareLabelsType>> GetImages(string locationName)
         {
             if (String.IsNullOrWhiteSpace(locationName))
-                throw new ArgumentException("Argument cannot be null, empty, or composed entirely of whitespace: 'locationName'.", "locationName");
+                throw new ArgumentException(
+                    "Argument cannot be null, empty, or composed entirely of whitespace: 'locationName'.",
+                    "locationName");
 
-            ImagesWithSoftwareLabels imagesWithSoftwareLabels =
-                await WebApi.ApiGetAsync<ImagesWithSoftwareLabels>(
-                    ApiUris.ImagesWithSoftwareLabels(locationName)
-                );
+            var imagesWithSoftwareLabels =
+                await
+                WebApi.ApiGetAsync<DeployedImagesWithSoftwareLabels>(ApiUris.ImagesWithSoftwareLabels(locationName));
 
-            return imagesWithSoftwareLabels.Images;
+            return imagesWithSoftwareLabels.DeployedImageWithSoftwareLabels;
         }
 
         /// <summary>
-        /// Gets a list of OS Images
+        /// This function lists the available Customer Images at a particular Location for the provided org-id.
+        /// The response adds to the deprecated List Deployed Customer Images in Location function with 
+        /// the addition of zero to many, optional softwareLabel elements, listing the Priced Software packages installed on the Customer Image.
         /// </summary>
-        /// <param name="networkLocation"></param>
-        /// <returns></returns>
-        public async Task<IEnumerable<DeployedImageWithSoftwareLabels>> GetOsServerImagesTask(string networkLocation)
+        /// <param name="networkLocation">The network location</param>
+        /// <returns>A list of deployed customer images with software labels in location</returns>
+        public async Task<IEnumerable<DeployedImageWithSoftwareLabelsType>> GetCustomerServerImages(string networkLocation)
         {
             Contract.Requires(!string.IsNullOrWhiteSpace(networkLocation), "Network location must not be empty or null");
 
-            var images = await WebApi.ApiGetAsync<DeployedImagesWithSoftwareLabels>(ApiUris.OsServerImages(networkLocation));
-            return images.Items;
+            var images = await WebApi.ApiGetAsync<DeployedImagesWithSoftwareLabels>(ApiUris.CustomerImagesWithSoftwareLabels(Account.OrganizationId, networkLocation));
+            return images.DeployedImageWithSoftwareLabels;
         }
 
         /// <summary>
@@ -360,7 +363,7 @@ namespace DD.CBU.Compute.Api.Client
                                 string.Format("/oec/{0}/network/{1}", Account.OrganizationId, networkId),
                             imageResourcePath = string.Format("/oec/base/image/{0}", imageId),
                             administratorPassword = adminPassword,
-                            isStarted = isStarted.ToString()
+                            isStarted = isStarted
                         });
 	    }
 

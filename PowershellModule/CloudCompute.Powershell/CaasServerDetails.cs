@@ -12,6 +12,6 @@
 
         public NetworkWithLocationsNetwork Network { get; set; }
 
-        public DeployedImageWithSoftwareLabels OsImage { get; set; }
+        public DeployedImageWithSoftwareLabelsType OsImage { get; set; }
     }
 }

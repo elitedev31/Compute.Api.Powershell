@@ -109,14 +109,10 @@
     <Compile Include="Directory\IRole.cs" />
     <Compile Include="Directory\Role.cs" />
     <Compile Include="General\ApiStatus.cs" />
-    <Compile Include="Server\CustomImageDetail.cs" />
-    <Compile Include="Server\DeployedImagesWithSoftwareLabels.cs" />
     <Compile Include="Server\DeployedServerWithDisk.cs" />
     <Compile Include="Server\ICustomImageDetail.cs" />
     <Compile Include="Server\IImageDetail.cs" />
     <Compile Include="Server\IMachineSpecification.cs" />
-    <Compile Include="Server\ImagesWithSoftwareLabels.cs" />
-    <Compile Include="Server\ImageDetail.cs" />
     <Compile Include="Server\IOperatingSystem.cs" />
     <Compile Include="Server\MachineSpecification.cs" />
     <Compile Include="Server\NetworkWithLocations.cs" />

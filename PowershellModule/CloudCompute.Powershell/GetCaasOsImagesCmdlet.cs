@@ -12,7 +12,7 @@
     /// The get CaaS OS Images cmdlet.
     /// </summary>
     [Cmdlet(VerbsCommon.Get, "CaasOsImages")]
-    [OutputType(typeof(DeployedImageWithSoftwareLabels[]))]
+    [OutputType(typeof(DeployedImageWithSoftwareLabelsType[]))]
     public class GetCaasOsImagesCmdlet : PSCmdletCaasBase
     {
         /// <summary>
@@ -58,9 +58,9 @@
         /// Gets the network servers from the CaaS
         /// </summary>
         /// <returns>The images</returns>
-        private async Task<IEnumerable<DeployedImageWithSoftwareLabels>> GetOsImagesTask()
+        private async Task<IEnumerable<DeployedImageWithSoftwareLabelsType>> GetOsImagesTask()
         {
-            return await CaaS.ApiClient.GetOsServerImagesTask(NetworkWithLocations.location);
+            return await CaaS.ApiClient.GetImages(NetworkWithLocations.location);
         }
     }
 }

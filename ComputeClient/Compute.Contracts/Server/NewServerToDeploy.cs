@@ -33,6 +33,6 @@ namespace DD.CBU.Compute.Api.Contracts.Server
         public string administratorPassword;
 
         /// <remarks/>
-        public string isStarted;
+        public bool isStarted;
     }
 }
