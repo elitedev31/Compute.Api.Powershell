@@ -6,19 +6,20 @@
     using System.Management.Automation;
 
     using DD.CBU.Compute.Api.Client;
+    using DD.CBU.Compute.Api.Client.Network;
 
     /// <summary>
-    /// The get CaaS Customer Images cmdlet.
+    /// The get CaaS NAT Rules cmdlet.
     /// </summary>
-    [Cmdlet(VerbsCommon.Get, "CaasCustomerImages")]
-    [OutputType(typeof(DeployedImageWithSoftwareLabelsType[]))]
-    public class GetCaasCustomerImagesCmdlet : PSCmdletCaasBase
+    [Cmdlet(VerbsCommon.Get, "CaasNatRules")]
+    [OutputType(typeof(NatRuleType[]))]
+    public class GetCaasNatRulesCmdlet : PSCmdletCaasBase
     {
         /// <summary>
-        /// The network to show the images from
+        /// The network to show the NAT rules from
         /// </summary>
-        [Parameter(Mandatory = true, HelpMessage = "The network to show the images from")]
-        public NetworkWithLocationsNetwork NetworkWithLocations { get; set; }
+        [Parameter(Mandatory = true, HelpMessage = "The network to show the images from", ValueFromPipeline = true)]
+        public NetworkWithLocationsNetwork Network { get; set; }
 
         /// <summary>
         /// The process record method.
@@ -29,10 +30,10 @@
 
             try
             {
-                var images = GetCustomerImages();
-                if (images != null && images.Any())
+                var rules = GetNatRules();
+                if (rules != null && rules.Any())
                 {
-                    WriteObject(images, true);
+                    WriteObject(rules, true);
                 }
             }
             catch (AggregateException ae)
@@ -54,12 +55,12 @@
         }
 
         /// <summary>
-        /// Gets the customer images in the network
+        /// Gets the NAT rules
         /// </summary>
-        /// <returns>The images</returns>
-        private IEnumerable<DeployedImageWithSoftwareLabelsType> GetCustomerImages()
+        /// <returns>The NAT rules</returns>
+        private IEnumerable<NatRuleType> GetNatRules()
         {
-            return CaaS.ApiClient.GetCustomerServerImages(NetworkWithLocations.location).Result;
+            return CaaS.ApiClient.GetNatRules(Network.id).Result;
         }
     }
 }

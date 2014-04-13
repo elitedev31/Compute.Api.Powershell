@@ -91,6 +91,12 @@
     <Compile Include="ComputeCmdletProvider.cs" />
     <Compile Include="ComputeServiceConnection.cs" />
     <Compile Include="AddCaasBackupClientCmdlet.cs" />
+    <Compile Include="AddCaasAclRuleCmdlet.cs" />
+    <Compile Include="AddCaasNatRuleCmdlet.cs" />
+    <Compile Include="RemoveCaasNatRuleCmdlet.cs" />
+    <Compile Include="GetCaasNatRulesCmdlet.cs" />
+    <Compile Include="RemoveCaasAclRuleCmdlet.cs" />
+    <Compile Include="GetCaasAclRulesCmdlet.cs" />
     <Compile Include="GetCaasCustomerImageImportsCmdlet.cs" />
     <Compile Include="NewCaasImportCustomerImageCmdlet.cs" />
     <Compile Include="GetCaasOvfPackagesCmdlet.cs" />

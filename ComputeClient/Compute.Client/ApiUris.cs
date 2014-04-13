@@ -94,16 +94,6 @@ namespace DD.CBU.Compute.Api.Client
         }
 
         /// <summary>
-        /// Lists the Networks deployed across all data center locations for the supplied organization.
-        /// </summary>
-        /// <param name="orgId">The organization id</param>
-        /// <returns>Returns the relative URI of the REST request for a list of networks</returns>
-        internal static Uri NetworkWithLocations(Guid orgId)
-        {
-            return new Uri(string.Format("{0}/networkWithLocation", orgId), UriKind.Relative);
-        }
-
-        /// <summary>
         /// The relative URI for the CaaS API action that allows a server to be deployed
         /// </summary>
         /// <param name="orgId"></param>
@@ -169,6 +159,18 @@ namespace DD.CBU.Compute.Api.Client
             return new Uri(string.Format("{0}/server/{1}?reboot", orgId, serverId), UriKind.Relative);
         }
 
+        #region Network API
+
+        /// <summary>
+        /// Lists the Networks deployed across all data center locations for the supplied organization.
+        /// </summary>
+        /// <param name="orgId">The organization id</param>
+        /// <returns>Returns the relative URI of the REST request for a list of networks</returns>
+        internal static Uri NetworkWithLocations(Guid orgId)
+        {
+            return new Uri(string.Format("{0}/networkWithLocation", orgId), UriKind.Relative);
+        }
+
         /// <summary>
         /// Create an ACL rule
         /// </summary>
@@ -187,9 +189,9 @@ namespace DD.CBU.Compute.Api.Client
         /// <param name="networkId">The network id</param>
         /// <param name="aclId">The ACL rule id</param>
         /// <returns>Returns the relative URI of the REST request for removing an ACL rule</returns>
-        internal static Uri RemoveAclRule(Guid orgId, string networkId, string aclId)
+        internal static Uri DeleteAclRule(Guid orgId, string networkId, string aclId)
         {
-            return new Uri(string.Format("{0}/network/{1}/aclrule/{2}?delete", orgId, networkId), UriKind.Relative);
+            return new Uri(string.Format("{0}/network/{1}/aclrule/{2}?delete", orgId, networkId, aclId), UriKind.Relative);
         }
 
         /// <summary>
@@ -202,6 +204,44 @@ namespace DD.CBU.Compute.Api.Client
         {
             return new Uri(string.Format("{0}/network/{1}/aclrule", orgId, networkId), UriKind.Relative);
         }
+
+        /// <summary>
+        /// Gets all the NAT rules for a specified network.
+        /// </summary>
+        /// <param name="orgId">The organization id.</param>
+        /// <param name="networkId">The network id.</param>
+        /// <returns>Returns the relative URI of the REST request for getting the NAT rules</returns>
+        internal static Uri GetNatRules(Guid orgId, string networkId)
+        {
+            return new Uri(string.Format("{0}/network/{1}/natrule", orgId, networkId), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// Creates a new NAT rule.
+        /// </summary>
+        /// <param name="orgId">The organization id.</param>
+        /// <param name="networkId">The network id.</param>
+        /// <returns>Returns the relative URI of the REST request for creating a new NAT rule</returns>
+        internal static Uri CreateNatRule(Guid orgId, string networkId)
+        {
+            return new Uri(string.Format("{0}/network/{1}/natrule", orgId, networkId), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// Deletes a specified NAT rule
+        /// </summary>
+        /// <param name="orgId">The organization id.</param>
+        /// <param name="networkId">The network id.</param>
+        /// <param name="natRuleId">The NAT rule id to delete</param>
+        /// <returns>Returns the relative URI of the REST request for deleting an existing NAT rule</returns>
+        internal static Uri DeleteNatRule(Guid orgId, string networkId, string natRuleId)
+        {
+            return new Uri(
+                string.Format("{0}/network/{1}/natrule/{2}?delete", orgId, networkId, natRuleId),
+                UriKind.Relative);
+        }
+
+        #endregion // Network API
 
         #region Backup URIs
 

@@ -6,18 +6,19 @@
     using System.Management.Automation;
 
     using DD.CBU.Compute.Api.Client;
+    using DD.CBU.Compute.Api.Client.Network;
 
     /// <summary>
-    /// The get CaaS Customer Images cmdlet.
+    /// The get CaaS ACL Rules cmdlet.
     /// </summary>
-    [Cmdlet(VerbsCommon.Get, "CaasCustomerImages")]
-    [OutputType(typeof(DeployedImageWithSoftwareLabelsType[]))]
-    public class GetCaasCustomerImagesCmdlet : PSCmdletCaasBase
+    [Cmdlet(VerbsCommon.Get, "CaasAclRules")]
+    [OutputType(typeof(AclRuleType[]))]
+    public class GetCaasAclRulesCmdlet : PSCmdletCaasBase
     {
         /// <summary>
         /// The network to show the images from
         /// </summary>
-        [Parameter(Mandatory = true, HelpMessage = "The network to show the images from")]
+        [Parameter(Mandatory = true, HelpMessage = "The network to show the ACL rules from", ValueFromPipeline = true)]
         public NetworkWithLocationsNetwork NetworkWithLocations { get; set; }
 
         /// <summary>
@@ -29,10 +30,10 @@
 
             try
             {
-                var images = GetCustomerImages();
-                if (images != null && images.Any())
+                var rules = GetAclRules();
+                if (rules != null && rules.Any())
                 {
-                    WriteObject(images, true);
+                    WriteObject(rules, true);
                 }
             }
             catch (AggregateException ae)
@@ -54,12 +55,12 @@
         }
 
         /// <summary>
-        /// Gets the customer images in the network
+        /// Gets the ACL rules from the specified network
         /// </summary>
-        /// <returns>The images</returns>
-        private IEnumerable<DeployedImageWithSoftwareLabelsType> GetCustomerImages()
+        /// <returns>The ACL Rules</returns>
+        private IEnumerable<AclRuleType> GetAclRules()
         {
-            return CaaS.ApiClient.GetCustomerServerImages(NetworkWithLocations.location).Result;
+            return CaaS.ApiClient.GetAclRules(NetworkWithLocations.id).Result;
         }
     }
 }
