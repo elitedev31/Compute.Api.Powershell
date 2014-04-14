@@ -165,18 +165,6 @@ namespace DD.CBU.Compute.Api.Client
             _clientMessageHandler.PreAuthenticate = false;
         }
 
-        /// <summary>
-        ///		Invoke a CaaS API operation using a HTTP GET request.
-        /// </summary>
-        /// <typeparam name="TResult">
-        ///		The XML-serialisable data contract type into which the response will be deserialised.
-        /// </typeparam>
-        /// <param name="relativeOperationUri">
-        ///		The operation URI (relative to the CaaS API's base URI).
-        /// </param>
-        /// <returns>
-        ///		The operation result.
-        /// </returns>
         public async Task<TResult> ApiGetAsync<TResult>(Uri relativeOperationUri)
         {
             if (relativeOperationUri == null) throw new ArgumentNullException("relativeOperationUri");

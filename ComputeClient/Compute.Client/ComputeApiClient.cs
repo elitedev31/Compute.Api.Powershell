@@ -21,7 +21,7 @@ namespace DD.CBU.Compute.Api.Client
     ///		A client for the Dimension Data Compute-as-a-Service (CaaS) API.
     /// </summary>
     public sealed class ComputeApiClient
-        : DisposableObject
+        : DisposableObject, IComputeApiClient
     {  
         #region Instance data
 
@@ -128,9 +128,9 @@ namespace DD.CBU.Compute.Api.Client
             WebApi.Logout();
         }
 
-        public async Task<IEnumerable<SoftwareLabel>> GetListOfSoftwareLabels(Guid orgId)
+        public async Task<IEnumerable<SoftwareLabel>> GetListOfSoftwareLabels()
         {
-            var relativeUrl = string.Format("{0}/softwarelabel", orgId);
+            var relativeUrl = string.Format("{0}/softwarelabel", Account.OrganizationId);
             var uri = new Uri(relativeUrl, UriKind.Relative);
 
             var labels = await WebApi.ApiGetAsync<SoftwareLabels>(uri);
@@ -142,11 +142,10 @@ namespace DD.CBU.Compute.Api.Client
         /// Returns a list of the Multi-Geography Regions available for the supplied {org-id
         /// An element is returned for each available Geographic Region.
         /// </summary>
-        /// <param name="orgId">The org ID.</param>
         /// <returns>A list of regions associated with the org ID.</returns>
-        public async Task<IEnumerable<Region>> GetListOfMultiGeographyRegions(Guid orgId)
+        public async Task<IEnumerable<Region>> GetListOfMultiGeographyRegions()
         {
-            var relativeUrl = string.Format("{0}/multigeo", orgId);
+            var relativeUrl = string.Format("{0}/multigeo", Account.OrganizationId);
             var uri = new Uri(relativeUrl, UriKind.Relative);
 
             var regions = await WebApi.ApiGetAsync<Geos>(uri);
@@ -156,28 +155,26 @@ namespace DD.CBU.Compute.Api.Client
 
         /// <summary>
         /// Allows the current Primary Administrator user to designate a Sub-Administrator user belonging to the 
-        /// same organization <paramref name="orgId"/> to become the Primary Administrator for the organization.
+        /// same organization to become the Primary Administrator for the organization.
         /// The Sub-Administrator is identified by their <paramref name="username"/>.
         /// </summary>
-        /// <param name="orgId">The org ID of the account.</param>
         /// <param name="username">The Sub-Administrator account.</param>
         /// <returns>A <see cref="ApiStatus"/> result that describes whether or not the operation was successful.</returns>
-        public Task<ApiStatus> DeleteSubAdministratorAccount(Guid orgId, string username)
+        public Task<ApiStatus> DeleteSubAdministratorAccount(string username)
         {
-            return ExecuteAccountCommand(orgId, username, "{0}/account/{1}?delete");
+            return ExecuteAccountCommand(username, "{0}/account/{1}?delete");
         }
 
         /// <summary>
         /// Allows the current Primary Administrator user to designate a Sub-Administrator user belonging to the 
-        /// same organization <paramref name="orgId"/> to become the Primary Administrator for the organization.
+        /// same organization to become the Primary Administrator for the organization.
         /// The Sub-Administrator is identified by their <paramref name="username"/>.
         /// </summary>
-        /// <param name="orgId">The org ID of the account.</param>
         /// <param name="username">The Sub-Administrator account.</param>
         /// <returns>A <see cref="ApiStatus"/> result that describes whether or not the operation was successful.</returns>
-        public Task<ApiStatus> DesignatePrimaryAdministratorAccount(Guid orgId, string username)
+        public Task<ApiStatus> DesignatePrimaryAdministratorAccount(string username)
         {
-            return ExecuteAccountCommand(orgId, username, "{0}/account/{1}?primary");
+            return ExecuteAccountCommand(username, "{0}/account/{1}?primary");
         }
 
 
@@ -192,15 +189,14 @@ namespace DD.CBU.Compute.Api.Client
         }
 
         /// <summary>
-        /// Lists the Accounts belonging to the Organization identified by <paramref name="orgId"/>. The list will include all 
+        /// Lists the Accounts belonging to the Organization identified by the organisation. The list will include all 
         /// SubAdministrator accounts and the Primary Administrator account. The Primary Administrator is unique and is 
         /// identified by the “primary administrator” role.
         /// </summary>
-        /// <param name="orgId">The org ID of the accounts.</param>
-        /// <returns>A list of accounts associated with the <paramref name="orgId"/>.</returns>
-        public async Task<IEnumerable<Account>> GetAccounts(Guid orgId)
+        /// <returns>A list of accounts associated with the organisation.</returns>
+        public async Task<IEnumerable<Account>> GetAccounts()
         {
-            var relativeUrl = string.Format("{0}/account", orgId);
+            var relativeUrl = string.Format("{0}/account", Account.OrganizationId);
             var accounts = await WebApi.ApiGetAsync<Accounts>(new Uri(relativeUrl, UriKind.Relative));
             return accounts.Items;
         }
@@ -211,12 +207,11 @@ namespace DD.CBU.Compute.Api.Client
         /// resources or the account can be created as “read only”, restricted to just viewing Cloud resources and 
         /// unable to generate Cloud Reports.
         /// </summary>
-        /// <param name="orgId">The org ID that will be associated with the account.</param>
         /// <param name="account">The account that will be added to the org.</param>
         /// <returns>A <see cref="Status"/> object instance that shows the results of the operation.</returns>
-        public async Task<Status> AddSubAdministratorAccount(Guid orgId, Account account)
+        public async Task<Status> AddSubAdministratorAccount(Account account)
         {
-            var relativeUrl = string.Format("{0}/account", orgId);
+            var relativeUrl = string.Format("{0}/account", Account.OrganizationId);
 
             return await WebApi.ApiPostAsync<Account, Status>(new Uri(relativeUrl, UriKind.Relative), new Account());
         }
@@ -224,10 +219,9 @@ namespace DD.CBU.Compute.Api.Client
         /// <summary>
         /// This function updates an existing Administrator Account.
         /// </summary>
-        /// <param name="orgId">The org ID that is associated with the account.</param>
         /// <param name="account">The account to be updated.</param>
         /// <returns>A <see cref="Status"/> object instance that shows the results of the operation.</returns>
-        public async Task<Status> UpdateAdministratorAccount(Guid orgId, Account account)
+        public async Task<Status> UpdateAdministratorAccount(Account account)
         {
             var parameters = new Dictionary<string, string>();
             parameters["username"] = account.UserName;
@@ -248,14 +242,14 @@ namespace DD.CBU.Compute.Api.Client
 
             var postBody = string.Join("&", parameterText, roleParameters);
 
-            var relativeUrl = string.Format("{0}/account/{1}", orgId, account.UserName);
+            var relativeUrl = string.Format("{0}/account/{1}", Account.OrganizationId, account.UserName);
             
 			return await WebApi.ApiPostAsync<string, Status>(new Uri(relativeUrl, UriKind.Relative), postBody);
         }
 
-        private async Task<ApiStatus> ExecuteAccountCommand(Guid orgId, string username, string uriFormat)
+        private async Task<ApiStatus> ExecuteAccountCommand(string username, string uriFormat)
         {
-            var uriText = string.Format(uriFormat, orgId, username);
+            var uriText = string.Format(uriFormat, Account.OrganizationId, username);
             var uri = new Uri(uriText, UriKind.Relative);
 
             return await WebApi.ApiGetAsync<ApiStatus>(uri);
@@ -314,20 +308,10 @@ namespace DD.CBU.Compute.Api.Client
         /// <returns>A list of deployed customer images with software labels in location</returns>
         public async Task<IEnumerable<DeployedImageWithSoftwareLabelsType>> GetCustomerServerImages(string networkLocation)
         {
-            Contract.Requires(!string.IsNullOrWhiteSpace(networkLocation), "Network location must not be empty or null");
+            //Contract.Requires(!string.IsNullOrWhiteSpace(networkLocation), "Network location must not be empty or null");
 
             var images = await WebApi.ApiGetAsync<DeployedImagesWithSoftwareLabels>(ApiUris.CustomerImagesWithSoftwareLabels(Account.OrganizationId, networkLocation));
             return images.DeployedImageWithSoftwareLabels;
-        }
-
-        /// <summary>
-        /// Gets the networks with locations
-        /// </summary>
-        /// <returns>The networks</returns>
-        public async Task<IEnumerable<NetworkWithLocationsNetwork>> GetNetworksTask()
-        {
-            var networks = await this.WebApi.ApiGetAsync<NetworkWithLocations>(ApiUris.NetworkWithLocations(Account.OrganizationId));
-            return networks.Items;
         }
 
         /// <summary>
@@ -342,10 +326,10 @@ namespace DD.CBU.Compute.Api.Client
         /// <returns></returns>
 	    public async Task<Status> DeployServerImageTask(string name, string description, string networkId, string imageId, string adminPassword, bool isStarted)
 	    {
-            Contract.Requires<ArgumentException>(!string.IsNullOrEmpty(name), "name argument must not be empty");
-            Contract.Requires<ArgumentException>(!string.IsNullOrWhiteSpace(networkId), "network id must not be empty");
-            Contract.Requires<ArgumentException>(!string.IsNullOrWhiteSpace(imageId), "Image id must not be empty");
-            Contract.Requires<ArgumentException>(!string.IsNullOrWhiteSpace(adminPassword), "administrator password cannot be null or empty");
+            //Contract.Requires<ArgumentException>(!string.IsNullOrEmpty(name), "name argument must not be empty");
+            //Contract.Requires<ArgumentException>(!string.IsNullOrWhiteSpace(networkId), "network id must not be empty");
+            //Contract.Requires<ArgumentException>(!string.IsNullOrWhiteSpace(imageId), "Image id must not be empty");
+            //Contract.Requires<ArgumentException>(!string.IsNullOrWhiteSpace(adminPassword), "administrator password cannot be null or empty");
 
             return
                 await

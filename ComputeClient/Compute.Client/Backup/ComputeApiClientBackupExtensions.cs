@@ -4,6 +4,7 @@
     using System.Diagnostics.Contracts;
     using System.Threading.Tasks;
 
+    using DD.CBU.Compute.Api.Client.Interfaces;
     using DD.CBU.Compute.Api.Contracts.Backup;
 
     /// <summary>
@@ -18,7 +19,7 @@
         /// <param name="serverId">The server id</param>
         /// <param name="plan">The enumerated service plan</param>
         /// <returns>The status of the request</returns>
-        public static async Task<Status> EnableBackup(this ComputeApiClient client, string serverId, ServicePlan plan)
+        public static async Task<Status> EnableBackup(this IComputeApiClient client, string serverId, ServicePlan plan)
         {
             return
                 await
@@ -34,7 +35,7 @@
         /// <param name="client">The <see cref="ComputeApiClient"/> object</param>
         /// <param name="serverId">The server id</param>
         /// <returns>The status of the request</returns>
-        public static async Task<Status> DisableBackup(this ComputeApiClient client, string serverId)
+        public static async Task<Status> DisableBackup(this IComputeApiClient client, string serverId)
         {
             return await client.WebApi.ApiGetAsync<Status>(ApiUris.DisableBackup(client.Account.OrganizationId, serverId));
         }
@@ -46,7 +47,7 @@
         /// <param name="serverId">The server id</param>
         /// <param name="plan">The plan to change to</param>
         /// <returns>The status of the request</returns>
-        public static async Task<Status> ChangeBackupPlan(this ComputeApiClient client, string serverId, ServicePlan plan)
+        public static async Task<Status> ChangeBackupPlan(this IComputeApiClient client, string serverId, ServicePlan plan)
         {
             return
                 await
@@ -61,7 +62,7 @@
         /// <param name="client">The <see cref="ComputeApiClient"/> object</param>
         /// <param name="serverId">The server id</param>
         /// <returns>The status of the request</returns>
-        public static async Task<IEnumerable<BackupClientType>> GetBackupClientTypes(this ComputeApiClient client, string serverId)
+        public static async Task<IEnumerable<BackupClientType>> GetBackupClientTypes(this IComputeApiClient client, string serverId)
         {
             var types = await client.WebApi.ApiGetAsync<BackupClientTypes>(ApiUris.BackupClientTypes(client.Account.OrganizationId, serverId));
             return types.Items;
@@ -73,7 +74,7 @@
         /// <param name="client">The <see cref="ComputeApiClient"/> object</param>
         /// <param name="serverId">The server id</param>
         /// <returns>The status of the request</returns>
-        public static async Task<IEnumerable<BackupStoragePolicy>> GetBackupStoragePolicies(this ComputeApiClient client, string serverId)
+        public static async Task<IEnumerable<BackupStoragePolicy>> GetBackupStoragePolicies(this IComputeApiClient client, string serverId)
         {
             var types = await client.WebApi.ApiGetAsync<BackupStoragePolicies>(ApiUris.BackupStoragePolicies(client.Account.OrganizationId, serverId));
             return types.Items;
@@ -85,7 +86,7 @@
         /// <param name="client">The <see cref="ComputeApiClient"/> object</param>
         /// <param name="serverId">The server id</param>
         /// <returns>The status of the request</returns>
-        public static async Task<IEnumerable<BackupSchedulePolicy>> GetBackupSchedulePolicies(this ComputeApiClient client, string serverId)
+        public static async Task<IEnumerable<BackupSchedulePolicy>> GetBackupSchedulePolicies(this IComputeApiClient client, string serverId)
         {
             var types = await client.WebApi.ApiGetAsync<BackupSchedulePolicies>(ApiUris.BackupSchedulePolicies(client.Account.OrganizationId, serverId));
             return types.Items;
@@ -98,7 +99,7 @@
         /// <param name="serverId">The server id</param>
         /// <returns>A list of backup clients</returns>
         public static async Task<IEnumerable<BackupClientDetailsType>> GetBackupClients(
-            this ComputeApiClient client,
+            this IComputeApiClient client,
             string serverId)
         {
             Contract.Requires(!string.IsNullOrWhiteSpace(serverId), "Server id must not be null or empty");
@@ -120,7 +121,7 @@
         /// <param name="alertingType">The alerting type</param>
         /// <returns>The status of the request</returns>
         public static async Task<Status> AddBackupClient(
-            this ComputeApiClient client,
+            this IComputeApiClient client,
             string serverId,
             BackupClientType clientType,
             BackupStoragePolicy storagePolicy,
@@ -153,7 +154,7 @@
         /// <param name="backupClient">The backup client to remove</param>
         /// <returns>The status of the request</returns>
         public static async Task<Status> RemoveBackupClient(
-            this ComputeApiClient client,
+            this IComputeApiClient client,
             string serverId,
             BackupClientDetailsType backupClient)
         {
@@ -177,7 +178,7 @@
         /// <param name="alertingType">The alerting type to modify</param>
         /// <returns>The status of the request</returns>
         public static async Task<Status> ModifyBackupClient(
-            this ComputeApiClient client,
+            this IComputeApiClient client,
             string serverId,
             BackupClientDetailsType backupClient,
             BackupStoragePolicy storagePolicy,

@@ -1,12 +1,11 @@
 ﻿namespace DD.CBU.Compute.Powershell
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Management.Automation;
-    using System.Threading.Tasks;
 
     using DD.CBU.Compute.Api.Client;
+    using DD.CBU.Compute.Api.Client.Network;
 
     /// <summary>
     /// The get networks cmdlet.
@@ -24,7 +23,7 @@
 
             try
             {
-                var networks = GetNetworksTask().Result;
+                var networks = CaaS.ApiClient.GetNetworksTask().Result;
 
                 if (networks.Any())
                 {
@@ -47,15 +46,6 @@
                         return true;
                     });
             }
-        }
-
-        /// <summary>
-        /// Gets the network servers from the CaaS
-        /// </summary>
-        /// <returns>The images</returns>
-        private async Task<IEnumerable<NetworkWithLocationsNetwork>> GetNetworksTask()
-        {
-            return await CaaS.ApiClient.GetNetworksTask();
         }
     }
 }

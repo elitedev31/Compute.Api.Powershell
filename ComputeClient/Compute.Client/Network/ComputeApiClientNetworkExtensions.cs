@@ -6,6 +6,8 @@
     using System.Net;
     using System.Threading.Tasks;
 
+    using DD.CBU.Compute.Api.Client.Interfaces;
+
     /// <summary>
     /// Extension methods for the Network section of the CaaS API.
     /// </summary>
@@ -23,7 +25,7 @@
         /// <param name="description">Optional. A decription for the network.</param>
         /// <returns>A status of the response.</returns>
         public static async Task<Status> CreateNetwork(
-            this ComputeApiClient client,
+            this IComputeApiClient client,
             string networkName,
             string dataCentreLocation,
             string description = null)
@@ -41,13 +43,24 @@
         }
 
         /// <summary>
+        /// Gets the networks with locations
+        /// </summary>
+        /// <param name="client">The <see cref="IComputeApiClient"/> object.</param>
+        /// <returns>The networks</returns>
+        public static async Task<IEnumerable<NetworkWithLocationsNetwork>> GetNetworksTask(this IComputeApiClient client)
+        {
+            var networks = await client.WebApi.ApiGetAsync<NetworkWithLocations>(ApiUris.NetworkWithLocations(client.Account.OrganizationId));
+            return networks.Items;
+        }
+
+        /// <summary>
         /// Retrieves the details of a specific network owned by a customer.
         /// This API requires your organization ID and the ID of the target network.
         /// </summary>
         /// <param name="client">The <see cref="ComputeApiClient"/> object.</param>
         /// <param name="networkId">The network id to delete.</param>
         /// <returns>A status of the response.</returns>
-        public static async Task<Status> DeleteNetwork(this ComputeApiClient client, string networkId)
+        public static async Task<Status> DeleteNetwork(this IComputeApiClient client, string networkId)
         {
             return
                 await client.WebApi.ApiGetAsync<Status>(ApiUris.DeleteNetwork(client.Account.OrganizationId, networkId));
@@ -60,7 +73,7 @@
         /// <param name="client">The <see cref="ComputeApiClient"/> object.</param>
         /// <param name="networkId">The target network id.</param>
         /// <returns>The status of the operation.</returns>
-        public static async Task<IEnumerable<NatRuleType>> GetNatRules(this ComputeApiClient client, string networkId)
+        public static async Task<IEnumerable<NatRuleType>> GetNatRules(this IComputeApiClient client, string networkId)
         {
             var natRules =
                 await client.WebApi.ApiGetAsync<NatRules>(ApiUris.GetNatRules(client.Account.OrganizationId, networkId));
@@ -76,7 +89,7 @@
         /// <param name="networkId">The target network id.</param>
         /// <param name="natRuleId">The NAT rule id to delete.</param>
         /// <returns>The status of the operation.</returns>
-        public static async Task<Status> DeleteNatRule(this ComputeApiClient client, string networkId, string natRuleId)
+        public static async Task<Status> DeleteNatRule(this IComputeApiClient client, string networkId, string natRuleId)
         {
             return
                 await
@@ -98,7 +111,7 @@
         /// <param name="natRuleName"></param>
         /// <param name="sourceIp"></param>
         /// <returns></returns>
-        public static async Task<NatRuleType> CreateNatRule(this ComputeApiClient client, string networkId, string natRuleName, IPAddress sourceIp)
+        public static async Task<NatRuleType> CreateNatRule(this IComputeApiClient client, string networkId, string natRuleName, IPAddress sourceIp)
         {
             Contract.Requires(!string.IsNullOrEmpty(networkId), "Network id cannot be null or empty");
             Contract.Requires(!string.IsNullOrEmpty(natRuleName), "NAT rule name cannot be null or empty");
@@ -118,7 +131,7 @@
         /// <param name="client">The <see cref="ComputeApiClient"/> object</param>
         /// <param name="networkId">The target network id</param>
         /// <returns>The ACL rules.</returns>
-        public static async Task<IEnumerable<AclRuleType>> GetAclRules(this ComputeApiClient client, string networkId)
+        public static async Task<IEnumerable<AclRuleType>> GetAclRules(this IComputeApiClient client, string networkId)
         {
             var aclRules =
                 await
@@ -139,7 +152,7 @@
         /// <param name="networkId">The target network id.</param>
         /// <param name="aclRuleId">The ACL rule to delete.</param>
         /// <returns>The status of the operation.</returns>
-        public static async Task<Status> DeleteAclRule(this ComputeApiClient client, string networkId, string aclRuleId)
+        public static async Task<Status> DeleteAclRule(this IComputeApiClient client, string networkId, string aclRuleId)
         {
             return
                 await
@@ -147,14 +160,29 @@
                     ApiUris.DeleteAclRule(client.Account.OrganizationId, networkId, aclRuleId));
         }
 
+        /// <summary>
+        /// All the ACL Protocol types.
+        /// </summary>
         public enum AclProtocolType
         {
+            /// <summary>
+            /// IP type
+            /// </summary>
             IP,
 
+            /// <summary>
+            /// ICMP type
+            /// </summary>
             ICMP,
 
+            /// <summary>
+            /// TCP type
+            /// </summary>
             TCP,
 
+            /// <summary>
+            /// UDP type
+            /// </summary>
             UDP
         }
 
@@ -188,7 +216,7 @@
         /// <param name="aclType">Optional. One of (OUTSIDE_ACL, INSIDE_ACL). Default if not specified is OUTSIDE_ACL.</param>
         /// <returns>The ACL rules.</returns>
         public static async Task<AclRuleType> CreateAclRule(
-            this ComputeApiClient client,
+            this IComputeApiClient client,
             string networkId,
             string aclRuleName,
             int position,

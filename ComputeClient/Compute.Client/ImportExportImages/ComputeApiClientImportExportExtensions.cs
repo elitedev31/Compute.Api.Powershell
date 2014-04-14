@@ -3,6 +3,8 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    using DD.CBU.Compute.Api.Client.Interfaces;
+
     /// <summary>
     /// Extension methods for the "import and export of customer images" section of the CaaS API.
     /// </summary>
@@ -15,7 +17,7 @@
         /// <param name="client">The <see cref="ComputeApiClient"/> object</param>
         /// <returns>The OVF Packages</returns>
         public static async Task<OvfPackages> GetOvfPackages(
-            this ComputeApiClient client)
+            this IComputeApiClient client)
         {
             return
                 await
@@ -29,7 +31,7 @@
         /// <param name="client">The <see cref="ComputeApiClient"/> object</param>
         /// <returns>The customer image imports currently in progress</returns>
         public static async Task<IEnumerable<ServerImageWithStateType>> GetCustomerImagesImports(
-            this ComputeApiClient client)
+            this IComputeApiClient client)
         {
             var imports =
                 await
@@ -55,7 +57,7 @@
         /// <param name="description">0-255 characters in length.</param>
         /// <returns>Returns the ServerImageWithState object</returns>
         public static async Task<ServerImageWithStateType> ImportCustomerImage(
-            this ComputeApiClient client,
+            this IComputeApiClient client,
             string customerImageName,
             string ovfPackageName,
             string networkLocation,

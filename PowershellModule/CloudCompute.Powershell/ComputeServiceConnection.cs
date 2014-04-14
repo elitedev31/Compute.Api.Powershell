@@ -5,7 +5,9 @@
     using Api.Client;
 	using Api.Contracts.Directory;
 
-	/// <summary>
+    using DD.CBU.Compute.Api.Client.Interfaces;
+
+    /// <summary>
 	///		Represents a connection to the CaaS API.
 	/// </summary>
 	public sealed class ComputeServiceConnection
@@ -17,7 +19,7 @@
 		/// <param name="apiClient">
 		///		The CaaS API client represented by the connection.
 		/// </param>
-		public ComputeServiceConnection(ComputeApiClient apiClient)
+		public ComputeServiceConnection(IComputeApiClient apiClient)
 		{
 			if (apiClient == null)
 				throw new ArgumentNullException("apiClient");
@@ -39,7 +41,7 @@
 	    /// <summary>
 	    ///		The CaaS API client represented by the connection.
 	    /// </summary>
-	    internal ComputeApiClient ApiClient { get; private set; }
+	    internal IComputeApiClient ApiClient { get; private set; }
 
 	    /// <summary>
 		///		Dispose of resources being used by the CaaS API connection.
