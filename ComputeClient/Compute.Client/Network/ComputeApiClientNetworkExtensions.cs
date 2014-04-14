@@ -12,6 +12,48 @@
     public static class ComputeApiClientNetworkExtensions
     {
         /// <summary>
+        /// Deploys a new network in a designated data center location.
+        /// The designated data center must be chosen from your available data centers list (See "List Data Centers (With Parameters)").
+        /// The "location" property of the data center is used to identify it for network creation.
+        /// The "name" property must be unique within your organization. 
+        /// </summary>
+        /// <param name="client">The <see cref="ComputeApiClient"/> object.</param>
+        /// <param name="networkName">A unique network name for the new network.</param>
+        /// <param name="dataCentreLocation">The data centre location.</param>
+        /// <param name="description">Optional. A decription for the network.</param>
+        /// <returns>A status of the response.</returns>
+        public static async Task<Status> CreateNetwork(
+            this ComputeApiClient client,
+            string networkName,
+            string dataCentreLocation,
+            string description = null)
+        {
+            return
+                await
+                client.WebApi.ApiPostAsync<NewNetworkWithLocationType, Status>(
+                    ApiUris.CreateNetwork(client.Account.OrganizationId),
+                    new NewNetworkWithLocationType
+                        {
+                            name = networkName,
+                            location = dataCentreLocation,
+                            description = description
+                        });
+        }
+
+        /// <summary>
+        /// Retrieves the details of a specific network owned by a customer.
+        /// This API requires your organization ID and the ID of the target network.
+        /// </summary>
+        /// <param name="client">The <see cref="ComputeApiClient"/> object.</param>
+        /// <param name="networkId">The network id to delete.</param>
+        /// <returns>A status of the response.</returns>
+        public static async Task<Status> DeleteNetwork(this ComputeApiClient client, string networkId)
+        {
+            return
+                await client.WebApi.ApiGetAsync<Status>(ApiUris.DeleteNetwork(client.Account.OrganizationId, networkId));
+        }
+
+        /// <summary>
         /// Retrieves a list of NAT rules for a specified network.
         /// This API requires your organization ID and the ID of the target network.
         /// </summary>

@@ -50,6 +50,18 @@ namespace DD.CBU.Compute.Api.Client
         }
 
         /// <summary>
+        /// Get the relative URI for the CaaS API action that retrieves a list of all data centres available for use by the specified organisation.
+        /// </summary>
+        /// <param name="orgId">The organisation Id</param>
+        /// <returns>The relative action Uri.</returns>
+        public static Uri DatacentresWithMaintanence(Guid orgId)
+        {
+            Contract.Requires(orgId != Guid.Empty, "Organization id cannot be empty!");
+
+            return new Uri(string.Format("{0}/datacenterWithMaintenanceStatus", orgId), UriKind.Relative);
+        }
+
+        /// <summary>
         ///		Get the relative URI for the CaaS API action that retrieves a list of all system-defined images deployed in the specified data centre.
         /// </summary>
         /// <param name="locationName">
@@ -239,6 +251,27 @@ namespace DD.CBU.Compute.Api.Client
             return new Uri(
                 string.Format("{0}/network/{1}/natrule/{2}?delete", orgId, networkId, natRuleId),
                 UriKind.Relative);
+        }
+
+        /// <summary>
+        /// Gets the relative URI for the CaaS API action that creates a network in a specified data centre location.
+        /// </summary>
+        /// <param name="orgId">The organization id</param>
+        /// <returns>Returns the relative URI of the REST request for creating a network.</returns>
+        internal static Uri CreateNetwork(Guid orgId)
+        {
+            return new Uri(string.Format("{0}/networkWithLocation", orgId), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="orgId"></param>
+        /// <param name="networkId"></param>
+        /// <returns></returns>
+        internal static Uri DeleteNetwork(Guid orgId, string networkId)
+        {
+            return new Uri(string.Format("{0}/network/{1}?delete", orgId, networkId), UriKind.Relative);
         }
 
         #endregion // Network API

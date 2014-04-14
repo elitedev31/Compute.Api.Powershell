@@ -184,13 +184,11 @@ namespace DD.CBU.Compute.Api.Client
         /// <summary>
         /// This function identifies the list of data centers available to the organization of the authenticating user. 
         /// </summary>
-        /// <param name="orgId">The organization that is associated with the data centers.</param>
         /// <returns>The list of data centers associated with the organization.</returns>
-        public async Task<IEnumerable<DataCenterWithMaintenanceStatus>> GetListOfDataCentersWithMaintenanceStatuses(Guid orgId)
+        public async Task<IEnumerable<DatacenterWithMaintenanceStatusType>> GetDataCentersWithMaintenanceStatuses()
         {
-            var url = string.Format("{0}/datacenterWithMaintenanceStatus?", orgId);
-            var dataCenters = await WebApi.ApiGetAsync<DatacentersWithMaintenanceStatus>(new Uri(url, UriKind.Relative));
-            return dataCenters.Items;
+            var dataCenters = await WebApi.ApiGetAsync<DatacentersWithMaintenanceStatus>(ApiUris.DatacentresWithMaintanence(Account.OrganizationId));
+            return dataCenters.datacenter;
         }
 
         /// <summary>
@@ -266,20 +264,18 @@ namespace DD.CBU.Compute.Api.Client
         /// <summary>
         ///		Asynchronously get a list of all CaaS data centres that are available for use by the specified organisation.
         /// </summary>
-        /// <param name="organizationId">
-        ///		The organisation Id.
-        /// </param>
         /// <returns>
         ///		A read-only list of <see cref="IDatacenterDetail"/>s representing the data centre information.
         /// </returns>
-        public async Task<IReadOnlyList<IDatacenterDetail>> GetAvailableDataCenters(Guid organizationId)
+        [Obsolete("This method was replaced by GetListOfDataCentersWithMaintenanceStatuses based on CaaS API!")]
+        public async Task<IReadOnlyList<IDatacenterDetail>> GetAvailableDataCenters()
         {
             CheckDisposed();
 
             DatacentersWithDiskSpeedDetails datacentersWithDiskSpeedDetails =
                 await WebApi.ApiGetAsync<DatacentersWithDiskSpeedDetails>(
                     ApiUris.DatacentersWithDiskSpeedDetails(
-                        organizationId
+                        Account.OrganizationId
                     )
                 );
 

@@ -93,6 +93,9 @@
     <Compile Include="AddCaasBackupClientCmdlet.cs" />
     <Compile Include="AddCaasAclRuleCmdlet.cs" />
     <Compile Include="AddCaasNatRuleCmdlet.cs" />
+    <Compile Include="GetCaasDataCentreCmdlet.cs" />
+    <Compile Include="RemoveCaasNetworkCmdlet.cs" />
+    <Compile Include="NewCaasNetworkCmdlet.cs" />
     <Compile Include="RemoveCaasNatRuleCmdlet.cs" />
     <Compile Include="GetCaasNatRulesCmdlet.cs" />
     <Compile Include="RemoveCaasAclRuleCmdlet.cs" />

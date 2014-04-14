@@ -19,7 +19,7 @@ namespace DD.CBU.Compute.Powershell
     [OutputType(typeof(AclRuleType))]
     public class AddCaasAclRuleCmdlet : PSCmdletCaasBase
     {
-        [Parameter(Mandatory = true, HelpMessage = "The target network to add the ACL rule into.")]
+        [Parameter(Mandatory = true, HelpMessage = "The target network to add the ACL rule into.", ValueFromPipeline = true)]
         public NetworkWithLocationsNetwork Network { get; set; }
 
         [Parameter(Mandatory = true, HelpMessage = "The ACL Rule name")]
