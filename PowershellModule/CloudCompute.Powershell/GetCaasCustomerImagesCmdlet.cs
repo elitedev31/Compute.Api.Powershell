@@ -12,7 +12,7 @@
     /// </summary>
     [Cmdlet(VerbsCommon.Get, "CaasCustomerImages")]
     [OutputType(typeof(DeployedImageWithSoftwareLabelsType[]))]
-    public class GetCaasCustomerImagesCmdlet : PSCmdletCaasBase
+    public class GetCaasCustomerImagesCmdlet : PsCmdletCaasBase
     {
         /// <summary>
         /// The network to show the images from

@@ -10,7 +10,7 @@
     /// The Remove backup client cmdlet.
     /// </summary>
     [Cmdlet(VerbsCommon.Remove, "CaasBackupClient")]
-    public class RemoveCaasBackupClientCmdlet : PSCmdletCaasBase
+    public class RemoveCaasBackupClientCmdlet : PsCmdletCaasBase
     {
         [Parameter(Mandatory = true, HelpMessage = "The server to remove the backup client from",
             ValueFromPipeline = true)]

@@ -1,6 +1,7 @@
 ﻿namespace DD.CBU.Compute.Powershell
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Management.Automation;
 
@@ -13,7 +14,7 @@
     /// </summary>
     [Cmdlet(VerbsCommon.Add, "CaasBackupClient")]
     [OutputType(typeof(string))]
-    public class AddCaasBackupClientCmdlet : PSCmdletCaasBase
+    public class AddCaasBackupClientCmdlet : PsCmdletCaasBase
     {
         [Parameter(Mandatory = true, HelpMessage = "The server to add the backup client",
             ValueFromPipeline = true)]
@@ -32,7 +33,7 @@
         public TriggerType? Trigger { get; set; }
 
         [Parameter(HelpMessage = "The email addresses for alerting purposes. At least one must be added when using alerting")]
-        public string[] EmailAddresses { get; set; }
+        public IReadOnlyList<string> EmailAddresses { get; set; }
 
         /// <summary>
         /// The process record method.
@@ -75,13 +76,13 @@
 
             if (Trigger.HasValue)
             {
-                if (EmailAddresses == null || EmailAddresses.Length == 0)
+                if (EmailAddresses == null || EmailAddresses.Count == 0)
                 {
                     ThrowTerminatingError(new ErrorRecord(new ArgumentException("At least one email address must be supploed when setting a trigger type"), "-1", ErrorCategory.NotSpecified, this));
                     return string.Empty;
                 }
 
-                alerting = new AlertingType { emailAddress = EmailAddresses, trigger = Trigger.Value };
+                alerting = new AlertingType { emailAddress = EmailAddresses.ToArray(), trigger = Trigger.Value };
             }
 
             var status = CaaS.ApiClient.AddBackupClient(Server.id, ClientType, StoragePolicy, SchedulePolicy, alerting).Result;

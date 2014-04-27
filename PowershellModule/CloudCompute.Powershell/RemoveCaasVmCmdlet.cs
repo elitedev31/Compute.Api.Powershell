@@ -1,21 +1,23 @@
 ﻿namespace DD.CBU.Compute.Powershell
 {
     using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Management.Automation;
-    using System.Threading.Tasks;
 
     using DD.CBU.Compute.Api.Client;
 
     /// <summary>
-    /// The get deployed server/s cmdlet.
+    /// The Re,pve CaaS Virtual Machine cmdlet.
     /// </summary>
-    [Cmdlet(VerbsCommon.Get, "CaasDeployedServer")]
-    [OutputType(typeof(ServerWithBackupType[]))]
-    public class GetCaasDeployedServerCmdlet : PsCmdletCaasBase
+    [Cmdlet(VerbsCommon.Remove, "CaasVM")]
+    [OutputType(typeof(CaasServerDetails))]
+    public class RemoveCaasVmCmdlet : PsCmdletCaasBase
     {
+        /// <summary>
+        /// The Server Details that will be used to remove the VM
+        /// </summary>
+        [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The server to be removed.")]
+        public ServerWithBackupType Server { get; set; }
+
         /// <summary>
         /// The process record method.
         /// </summary>
@@ -25,11 +27,16 @@
 
             try
             {
-                var servers = this.GetDeployedServers().Result;
-                if (servers.Any())
-                {
-                    WriteObject(servers, true);
-                }
+                var status = CaaS.ApiClient.ServerDelete(Server.id).Result;
+
+                if (status != null)
+                    WriteDebug(
+                        string.Format(
+                            "{0} resulted in {1} ({2}): {3}",
+                            status.operation,
+                            status.result,
+                            status.resultCode,
+                            status.resultDetail));
             }
             catch (AggregateException ae)
             {
@@ -47,15 +54,6 @@
                             return true;
                         });
             }
-        }
-
-        /// <summary>
-        /// Gets the deployed servers from the CaaS
-        /// </summary>
-        /// <returns>The images</returns>
-        private async Task<IEnumerable<ServerWithBackupType>> GetDeployedServers()
-        {
-            return await CaaS.ApiClient.GetDeployedServers();
         }
     }
 }

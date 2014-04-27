@@ -13,7 +13,7 @@
     /// </summary>
     [Cmdlet(VerbsCommon.Get, "CaasBackupClients")]
     [OutputType(typeof(BackupClientDetailsType[]))]
-    public class GetCaasBackupClientsCmdlet : PSCmdletCaasBase
+    public class GetCaasBackupClientsCmdlet : PsCmdletCaasBase
     {
         [Parameter(Mandatory = true, HelpMessage = "The server associated with the backup client types",
             ValueFromPipeline = true)]

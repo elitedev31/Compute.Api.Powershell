@@ -11,7 +11,7 @@
     /// </summary>
     [Cmdlet(VerbsCommon.Get, "CaasDataCentre")]
     [OutputType(typeof(DatacenterWithMaintenanceStatusType[]))]
-    public class GetCaasDataCentreCmdlet : PSCmdletCaasBase
+    public class GetCaasDataCentreCmdlet : PsCmdletCaasBase
     {
         /// <summary>
         /// The process record method.

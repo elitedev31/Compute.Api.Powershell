@@ -13,7 +13,7 @@
     /// </summary>
     [Cmdlet(VerbsCommon.Get, "CaasAclRules")]
     [OutputType(typeof(AclRuleType[]))]
-    public class GetCaasAclRulesCmdlet : PSCmdletCaasBase
+    public class GetCaasAclRulesCmdlet : PsCmdletCaasBase
     {
         /// <summary>
         /// The network to show the images from

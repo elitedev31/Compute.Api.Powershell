@@ -1,6 +1,7 @@
 ﻿namespace DD.CBU.Compute.Powershell
 {
     using System;
+    using System.Globalization;
     using System.Management.Automation;
 
     using DD.CBU.Compute.Api.Client;
@@ -12,7 +13,7 @@
     /// </summary>
     [Cmdlet(VerbsCommon.Set, "CaasBackupClient")]
     [OutputType(typeof(ServerWithBackupType))]
-    public class SetCaasBackupClientCmdlet : PSCmdletCaasBase
+    public class SetCaasBackupClientCmdlet : PsCmdletCaasBase
     {
         [Parameter(Mandatory = true, HelpMessage = "The server to modify the backup client",
             ValueFromPipeline = true)]
@@ -69,7 +70,7 @@
             if (status != null)
             {
                 WriteDebug(
-                    string.Format(
+                    string.Format(CultureInfo.CurrentCulture,
                         "{0} resulted in {1} ({2}): {3}",
                         status.operation,
                         status.result,

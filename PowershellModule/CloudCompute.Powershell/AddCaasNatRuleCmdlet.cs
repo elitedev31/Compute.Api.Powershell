@@ -1,8 +1,8 @@
-﻿    using System;
-    using System.Management.Automation;
-
+﻿
 namespace DD.CBU.Compute.Powershell
 {
+    using System;
+    using System.Management.Automation;
     using System.Net;
 
     using Api.Client;
@@ -14,7 +14,7 @@ namespace DD.CBU.Compute.Powershell
     /// </summary>
     [Cmdlet(VerbsCommon.Add, "CaasNatRule", SupportsShouldProcess = true)]
     [OutputType(typeof(NatRuleType))]
-    public class AddCaasNatRuleCmdlet : PSCmdletCaasBase
+    public class AddCaasNatRuleCmdlet : PsCmdletCaasBase
     {
         [Parameter(Mandatory = true, HelpMessage = "The target network to add the NAT rule into.", ValueFromPipeline = true)]
         public NetworkWithLocationsNetwork Network { get; set; }

@@ -10,7 +10,7 @@
     /// The Remove ACL Rule cmdlet.
     /// </summary>
     [Cmdlet(VerbsCommon.Remove, "CaasAclRule")]
-    public class RemoveCaasAclRuleCmdlet : PSCmdletCaasBase
+    public class RemoveCaasAclRuleCmdlet : PsCmdletCaasBase
     {
         [Parameter(Mandatory = true, HelpMessage = "The network that the ACL Rule exists")]
         public NetworkWithLocationsNetwork Network { get; set; }

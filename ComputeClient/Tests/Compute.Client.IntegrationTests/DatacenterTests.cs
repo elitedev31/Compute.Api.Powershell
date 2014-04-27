@@ -55,7 +55,7 @@ namespace DD.CBU.Compute.Client.IntegrationTests
 
 				IReadOnlyList<IDatacenterDetail> dataCenters =
 					await computeApiClient
-						.GetAvailableDataCenters(organizationId);
+						.GetAvailableDataCenters();
 
 				Assert.AreNotEqual(0, dataCenters.Count);
 				foreach (IDatacenterDetail dataCenter in dataCenters)

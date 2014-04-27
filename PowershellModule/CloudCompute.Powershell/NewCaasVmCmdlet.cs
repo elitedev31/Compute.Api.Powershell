@@ -10,7 +10,7 @@
     /// </summary>
     [Cmdlet(VerbsCommon.New, "CaasVM")]
     [OutputType(typeof(CaasServerDetails))]
-    public class NewCaasVmCmdlet : PSCmdletCaasBase
+    public class NewCaasVmCmdlet : PsCmdletCaasBase
     {
         /// <summary>
         /// The Server Details that will be used to deploy the VM

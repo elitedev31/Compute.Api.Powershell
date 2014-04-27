@@ -14,7 +14,7 @@
     ///	Removes a network from a data centre using the network id.
     /// </remarks>
     [Cmdlet(VerbsCommon.Remove, "CaasNetwork", SupportsShouldProcess = true)]
-    public class RemoveCaasNetworkCmdlet : PSCmdletCaasBase
+    public class RemoveCaasNetworkCmdlet : PsCmdletCaasBase
     {
         [Parameter(Mandatory = true, HelpMessage = "The target data centre location for the customer image.", ValueFromPipeline = true)]
         public NetworkWithLocationsNetwork Network { get; set; }

@@ -10,7 +10,7 @@
     /// The Remove NAT Rule cmdlet.
     /// </summary>
     [Cmdlet(VerbsCommon.Remove, "CaasNatRule")]
-    public class RemoveCaasNatRuleCmdlet : PSCmdletCaasBase
+    public class RemoveCaasNatRuleCmdlet : PsCmdletCaasBase
     {
         [Parameter(Mandatory = true, HelpMessage = "The network that the ACL Rule exists")]
         public NetworkWithLocationsNetwork Network { get; set; }

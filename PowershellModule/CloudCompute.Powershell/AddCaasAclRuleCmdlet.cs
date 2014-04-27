@@ -17,7 +17,7 @@ namespace DD.CBU.Compute.Powershell
     /// </remarks>
     [Cmdlet(VerbsCommon.Add, "CaasAclRule", SupportsShouldProcess = true)]
     [OutputType(typeof(AclRuleType))]
-    public class AddCaasAclRuleCmdlet : PSCmdletCaasBase
+    public class AddCaasAclRuleCmdlet : PsCmdletCaasBase
     {
         [Parameter(Mandatory = true, HelpMessage = "The target network to add the ACL rule into.", ValueFromPipeline = true)]
         public NetworkWithLocationsNetwork Network { get; set; }
@@ -60,7 +60,7 @@ namespace DD.CBU.Compute.Powershell
 
         [Parameter(HelpMessage = "The type of the ACL. One of OUTSIDE_ACL or INSIDE_ACL. Default is OUTSIDE_ACL.")]
         [PSDefaultValue(Value = AclType.OUTSIDE_ACL)]
-        public AclType Type { get; set; }
+        public AclType AclType { get; set; }
         
         /// <summary>
         /// Process the record
@@ -112,7 +112,7 @@ namespace DD.CBU.Compute.Powershell
                     DestinationNetmask,
                     Port1,
                     Port2,
-                    Type).Result;
+                    AclType).Result;
         }
     }
 }

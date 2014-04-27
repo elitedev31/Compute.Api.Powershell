@@ -16,7 +16,7 @@ namespace DD.CBU.Compute.Powershell
     /// </remarks>
     [Cmdlet(VerbsCommon.New, "CaasImportCustomerImage", SupportsShouldProcess = true)]
     [OutputType(typeof(ServerImageWithStateType))]
-    public class NewCaasImportCustomerImageCmdlet : PSCmdletCaasBase
+    public class NewCaasImportCustomerImageCmdlet : PsCmdletCaasBase
     {
         [Parameter(Mandatory = true, HelpMessage = "The Customer Image name.")]
         public string CustomerImageName { get; set; }

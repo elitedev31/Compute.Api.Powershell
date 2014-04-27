@@ -13,7 +13,7 @@
     /// </summary>
     [Cmdlet(VerbsCommon.Get, "CaasNatRules")]
     [OutputType(typeof(NatRuleType[]))]
-    public class GetCaasNatRulesCmdlet : PSCmdletCaasBase
+    public class GetCaasNatRulesCmdlet : PsCmdletCaasBase
     {
         /// <summary>
         /// The network to show the NAT rules from

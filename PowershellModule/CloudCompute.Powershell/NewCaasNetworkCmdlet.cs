@@ -15,7 +15,7 @@ namespace DD.CBU.Compute.Powershell
     ///	Deploys a new network in a specified data centre location.
     /// </remarks>
     [Cmdlet(VerbsCommon.New, "CaasNetwork", SupportsShouldProcess = true)]
-    public class NewCaasNetworkCmdlet : PSCmdletCaasBase
+    public class NewCaasNetworkCmdlet : PsCmdletCaasBase
     {
         [Parameter(Mandatory = true, HelpMessage = "A unique name for the new network to deploy")]
         public string Name { get; set; }

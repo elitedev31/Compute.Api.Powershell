@@ -10,15 +10,15 @@
     /// </summary>
     [Cmdlet(VerbsCommon.Set, "CaasServerState")]
     [OutputType(typeof(ServerWithBackupType))]
-    public class SetCaasServerActionCmdlet : PSCmdletCaasBase
+    public class SetCaasServerActionCmdlet : PsCmdletCaasBase
     {
-        public enum ServerActions
+        public enum ServerAction
         {
             PowerOff, PowerOn, Restart, Shutdown
         }
 
         [Parameter(Mandatory = true, HelpMessage = "The server action to take")]
-        public ServerActions ServerAction { get; set; }
+        public ServerAction Action { get; set; }
 
         [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The server to action on")]
         public ServerWithBackupType Server { get; set; }
@@ -42,18 +42,18 @@
             try
             {
                 Status status = null;
-                switch (ServerAction)
+                switch (Action)
                 {
-                    case ServerActions.PowerOff:
+                    case ServerAction.PowerOff:
                         status = CaaS.ApiClient.ServerPowerOff(Server.id).Result;
                         break;
-                    case ServerActions.PowerOn:
+                    case ServerAction.PowerOn:
                         status = CaaS.ApiClient.ServerPowerOn(Server.id).Result;
                         break;
-                    case ServerActions.Restart:
+                    case ServerAction.Restart:
                         status = CaaS.ApiClient.ServerRestart(Server.id).Result;
                         break;
-                    case ServerActions.Shutdown:
+                    case ServerAction.Shutdown:
                         status = CaaS.ApiClient.ServerShutdown(Server.id).Result;
                         break;
                     default:
@@ -62,7 +62,7 @@
                                 new NotImplementedException(),
                                 "-1",
                                 ErrorCategory.InvalidOperation,
-                                ServerAction));
+                                Action));
                         break;
                 }
                 if (status != null)

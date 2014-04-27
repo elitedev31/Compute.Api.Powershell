@@ -11,7 +11,7 @@
     /// </summary>
     [Cmdlet(VerbsCommon.Set, "CaasBackupPlan")]
     [OutputType(typeof(ServerWithBackupType))]
-    public class SetCaasBackupPlanCmdlet : PSCmdletCaasBase
+    public class SetCaasBackupPlanCmdlet : PsCmdletCaasBase
     {
         [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The server to action on")]
         public ServerWithBackupType Server { get; set; }

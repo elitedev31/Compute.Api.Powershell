@@ -13,7 +13,7 @@
     /// </summary>
     [Cmdlet(VerbsCommon.Get, "CaasOvfPackages")]
     [OutputType(typeof(OvfPackageType[]))]
-    public class GetCaasOvfPackagesCmdlet : PSCmdletCaasBase
+    public class GetCaasOvfPackagesCmdlet : PsCmdletCaasBase
     {
         /// <summary>
         /// The process record method.

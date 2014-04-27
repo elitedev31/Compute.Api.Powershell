@@ -1,16 +1,9 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
-using DD.CBU.Compute.Api.Client;
-using DD.CBU.Compute.Api.Client.Interfaces;
-using DD.CBU.Compute.Api.Contracts.Datacenter;
-using DD.CBU.Compute.Api.Contracts.Directory;
+
 using DD.CBU.Compute.Api.Contracts.General;
-using FakeItEasy;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Compute.Client.UnitTests
@@ -36,7 +29,7 @@ namespace Compute.Client.UnitTests
             var someOrgId = Guid.NewGuid();
             var expectedRelativeUrl = string.Format("{0}/account/{1}?delete", someOrgId, username);
             var client = GetApiClient("DeleteSubAdministratorAccount.xml", expectedRelativeUrl);
-            ApiStatus result = client.DeleteSubAdministratorAccount(someOrgId, username).Result;
+            ApiStatus result = client.DeleteSubAdministratorAccount(username).Result;
 
             Assert.AreEqual("SUCCESS", result.Result);
             Assert.AreEqual("Delete Account", result.Operation);
@@ -52,7 +45,7 @@ namespace Compute.Client.UnitTests
             var expectedRelativeUrl = string.Format("{0}/account/{1}?primary", someOrgId, username);
             var client = GetApiClient("DesignatePrimaryAdministratorAccount.xml", expectedRelativeUrl);
 
-            ApiStatus result = client.DesignatePrimaryAdministratorAccount(someOrgId, username).Result;
+            ApiStatus result = client.DesignatePrimaryAdministratorAccount(username).Result;
             Assert.AreEqual("SUCCESS", result.Result);
             Assert.AreEqual("Designate Primary Admin Account", result.Operation);
         }
@@ -64,7 +57,7 @@ namespace Compute.Client.UnitTests
             var expectedRelativeUrl = string.Format("{0}/datacenterWithMaintenanceStatus?", someOrgId);
             var client = GetApiClient("ListDataCentersWithMaintenanceStatus.xml", expectedRelativeUrl);
             
-            var dataCenters = client.GetListOfDataCentersWithMaintenanceStatuses(someOrgId).Result.ToArray();
+            var dataCenters = client.GetDataCentersWithMaintenanceStatuses().Result.ToArray();
 
             Assert.AreEqual(1, dataCenters.Count());
 
@@ -92,7 +85,7 @@ namespace Compute.Client.UnitTests
             var expectedUrl = string.Format("{0}/account", someOrgid);
             var client = GetApiClient("ListAccounts.xml", expectedUrl);
 
-            var accounts = client.GetAccounts(someOrgid).Result;
+            var accounts = client.GetAccounts().Result;
             Assert.AreEqual(2, accounts.Count());
         }
     }

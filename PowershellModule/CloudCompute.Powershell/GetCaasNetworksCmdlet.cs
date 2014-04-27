@@ -12,7 +12,7 @@
     /// </summary>
     [Cmdlet(VerbsCommon.Get, "CaasNetworks")]
     [OutputType(typeof(NetworkWithLocationsNetwork[]))]
-    public class GetCaasNetworksCmdlet : PSCmdletCaasBase
+    public class GetCaasNetworksCmdlet : PsCmdletCaasBase
     {
         /// <summary>
         /// The process record method.

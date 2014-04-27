@@ -14,7 +14,7 @@
     /// </summary>
     [Cmdlet(VerbsCommon.Get, "CaasBackupSchedulePolicies")]
     [OutputType(typeof(BackupSchedulePolicy[]))]
-    public class GetCaasBackupSchedulePoliciesCmdlet : PSCmdletCaasBase
+    public class GetCaasBackupSchedulePoliciesCmdlet : PsCmdletCaasBase
     {
         [Parameter(Mandatory = true, HelpMessage = "The server associated with the backup schedule policies",
             ValueFromPipeline = true)]

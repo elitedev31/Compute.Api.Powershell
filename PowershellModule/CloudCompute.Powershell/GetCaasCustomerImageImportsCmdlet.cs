@@ -13,7 +13,7 @@
     /// </summary>
     [Cmdlet(VerbsCommon.Get, "CaasCustomerImageImports")]
     [OutputType(typeof(ServerImageWithStateType[]))]
-    public class GetCaasCustomerImageImportsCmdlet : PSCmdletCaasBase
+    public class GetCaasCustomerImageImportsCmdlet : PsCmdletCaasBase
     {
         /// <summary>
         /// The process record method.

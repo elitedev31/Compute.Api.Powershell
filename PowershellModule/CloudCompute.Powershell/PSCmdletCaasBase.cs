@@ -7,7 +7,7 @@
     /// <summary>
     /// This base Cmdlet is used for authenticating cmdlets that requires an active CaaS Connection.
     /// </summary>
-    public abstract class PSCmdletCaasBase : PSCmdlet
+    public abstract class PsCmdletCaasBase : PSCmdlet
     {
         /// <summary>
         /// The CaaS connection created by <see cref="NewCaasConnectionCmdlet"/> 
