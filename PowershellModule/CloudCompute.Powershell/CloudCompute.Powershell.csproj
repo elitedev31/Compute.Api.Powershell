@@ -129,16 +129,6 @@
       <Link>Properties\CustomDictionary.xml</Link>
     </CodeAnalysisDictionary>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\ComputeClient\Compute.Client\Compute.Client.csproj">
-      <Project>{C1F76663-78B7-4C29-B73B-206986567562}</Project>
-      <Name>Compute.Client</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\ComputeClient\Compute.Contracts\Compute.Contracts.csproj">
-      <Project>{4ACBF469-17A8-407B-8C84-0FA112D5CFCF}</Project>
-      <Name>Compute.Contracts</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

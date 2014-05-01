@@ -75,12 +75,10 @@ Function BuildPackageFromProject([string]$packageProjectFile)
 
 	Write-Host '================================================================================'
 	Write-Host "Building version '$packageVersion' of '$packageProjectFile'..."
-    ..\Common\BuildSupport\NuGet\NuGet.exe pack "$packageProjectFile" -Build -Prop Configuration=Release -Prop Platform=AnyCPU -NonInteractive -Version "$packageVersion" -Verbosity Detailed -NoPackageAnalysis
+    ..\Common\BuildSupport\NuGet\NuGet.exe pack "$packageProjectFile" -Build -Prop Configuration=Release -Prop Platform=AnyCPU -NonInteractive -Version "$packageVersion" -Verbosity Detailed -NoPackageAnalysis -IncludeReferencedProjects
 }
 
 BuildPackageFromProject('..\ComputeClient\Compute.Client\Compute.Client.csproj')
-BuildPackageFromProject('..\ComputeClient\Compute.Client.UnitTests\Compute.Client.UnitTests.csproj')
-BuildPackageFromProject('..\ComputeClient\Compute.Contracts\Compute.Contracts.csproj')
 
 cd ..
 
