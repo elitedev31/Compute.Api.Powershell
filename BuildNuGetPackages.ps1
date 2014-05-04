@@ -79,7 +79,7 @@ Function BuildPackageFromProject([string]$packageProjectFile)
 }
 
 BuildPackageFromProject('..\ComputeClient\Compute.Client\Compute.Client.csproj')
-BuildPackageFromProject('..\ComputeClient\Compute.Client\Compute.Contracts.csproj')
+BuildPackageFromProject('..\ComputeClient\Compute.Contracts\Compute.Contracts.csproj')
 
 cd ..
 
