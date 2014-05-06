@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DD.CBU.Compute.Api.Client.Interfaces
@@ -21,9 +17,31 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 			get;
 		}
 
+        /// <summary>
+        /// Get asynchronously
+        /// </summary>
+        /// <param name="uri">The URI</param>
+        /// <returns></returns>
         Task<HttpResponseMessage> GetAsync(Uri uri);
+        /// <summary>
+        /// Delete asynchronously
+        /// </summary>
+        /// <param name="uri">The URI</param>
+        /// <returns></returns>
         Task<HttpResponseMessage> DeleteAsync(Uri uri);
+        /// <summary>
+        /// Put asynchronously
+        /// </summary>
+        /// <param name="uri">The URI</param>
+        /// <param name="content"></param>
+        /// <returns></returns>
         Task<HttpResponseMessage> PutAsync(Uri uri, HttpContent content);
+        /// <summary>
+        /// Post asynchronously
+        /// </summary>
+        /// <param name="uri">The URI</param>
+        /// <param name="content">The content to post</param>
+        /// <returns></returns>
         Task<HttpResponseMessage> PostAsync(Uri uri, HttpContent content);
     }
 }

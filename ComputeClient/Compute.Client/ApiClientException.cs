@@ -1,10 +1,11 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Runtime.Serialization;
 
 namespace DD.CBU.Compute.Api.Client
 {
-	/// <summary>
+    using System.Diagnostics.Contracts;
+
+    /// <summary>
 	///		The base class for API client exceptions.
 	/// </summary>
 	[Serializable]
@@ -23,7 +24,8 @@ namespace DD.CBU.Compute.Api.Client
 		protected ApiClientException(string messageOrFormat, params object[] formatArguments)
 			: base(String.Format(messageOrFormat, formatArguments))
 		{
-			Debug.Assert(!String.IsNullOrWhiteSpace(messageOrFormat), "Exception message should not be empty.");
+            Contract.Requires(!string.IsNullOrWhiteSpace(messageOrFormat), "Exception message should not be empty.");
+			//Debug.Assert(!String.IsNullOrWhiteSpace(messageOrFormat), "Exception message should not be empty.");
 		}
 
 		/// <summary>
@@ -41,7 +43,8 @@ namespace DD.CBU.Compute.Api.Client
 		protected ApiClientException(string messageOrFormat, Exception innerException, params object[] formatArguments)
 			: base(String.Format(messageOrFormat, formatArguments), innerException)
 		{
-			Debug.Assert(!String.IsNullOrWhiteSpace(messageOrFormat), "Exception message should not be empty.");
+            Contract.Requires(!string.IsNullOrWhiteSpace(messageOrFormat), "Exception message should not be empty.");
+            //Debug.Assert(!String.IsNullOrWhiteSpace(messageOrFormat), "Exception message should not be empty.");
 		}
 
 		/// <summary>

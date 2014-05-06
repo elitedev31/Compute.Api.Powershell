@@ -35,10 +35,16 @@ public class Status {
     /// <remarks/>
     public string resultCode { get; set; }
 
+    /// <summary>
+    /// The additional information
+    /// </summary>
     [XmlElement("additionalInformation")]
     public AdditionalInformation[] additionalInformation { get; set; }
 }
 
+/// <summary>
+/// The additional information
+/// </summary>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.18020")]
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -47,8 +53,14 @@ public class Status {
 [System.Xml.Serialization.XmlRootAttribute(Namespace = XmlNamespaceConstants.General, IsNullable = false)]
 public class AdditionalInformation
 {
+    /// <summary>
+    /// The name
+    /// </summary>
     [XmlAttribute]
     public string name { get; set; }
 
+    /// <summary>
+    /// The value
+    /// </summary>
     public string value { get; set; }
 }

@@ -5781,7 +5781,7 @@ public partial class DeployedImagesWithDisks {
     }
 }
 
-/// <remarks/>
+// <remarks/>
 //[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.18020")]
 //[System.SerializableAttribute()]
 //[System.Diagnostics.DebuggerStepThroughAttribute()]

@@ -6,7 +6,6 @@ namespace DD.CBU.Compute.Api.Client
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.Contracts;
     using System.Net;
     using System.Threading.Tasks;
 
@@ -128,6 +127,10 @@ namespace DD.CBU.Compute.Api.Client
             WebApi.Logout();
         }
 
+        /// <summary>
+        /// Gets a list of software labels
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<SoftwareLabel>> GetListOfSoftwareLabels()
         {
             var relativeUrl = string.Format("{0}/softwarelabel", Account.OrganizationId);

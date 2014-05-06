@@ -38,10 +38,24 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
         /// <returns></returns>
         Task<IEnumerable<SoftwareLabel>> GetListOfSoftwareLabels();
 
+        /// <summary>
+        /// Gets a list of multi geography regions
+        /// </summary>
+        /// <returns></returns>
         Task<IEnumerable<Region>> GetListOfMultiGeographyRegions();
 
+        /// <summary>
+        /// Deletes a sub administrator account
+        /// </summary>
+        /// <param name="username">The username</param>
+        /// <returns></returns>
         Task<ApiStatus> DeleteSubAdministratorAccount(string username);
 
+        /// <summary>
+        /// Designate a primary administrator account
+        /// </summary>
+        /// <param name="username">The username</param>
+        /// <returns></returns>
         Task<ApiStatus> DesignatePrimaryAdministratorAccount(string username);
 
         /// <summary>
@@ -56,10 +70,24 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
         /// <returns></returns>
         Task<IEnumerable<Account>> GetAccounts();
 
+        /// <summary>
+        /// Adds a sub administrator account
+        /// </summary>
+        /// <param name="account">The account</param>
+        /// <returns></returns>
         Task<Status> AddSubAdministratorAccount(Account account);
-
+        
+        /// <summary>
+        /// Updates an administrator account
+        /// </summary>
+        /// <param name="account">The account</param>
+        /// <returns></returns>
         Task<Status> UpdateAdministratorAccount(Account account);
 
+        /// <summary>
+        /// Gets available data centres
+        /// </summary>
+        /// <returns></returns>
         [Obsolete("Use GetDataCentersWithMaintenanceStatuses instead!")]
         Task<IReadOnlyList<IDatacenterDetail>> GetAvailableDataCenters();
 

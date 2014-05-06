@@ -31,7 +31,7 @@
         /// <typeparam name="TObject">The XML-Serialisable data contract type that the request will be sent.</typeparam>
         /// <typeparam name="TResult">The XML-serialisable data contract type into which the response will be deserialised.</typeparam>
         /// <param name="relativeOperationUri">The operation URI (relative to the CaaS API's base URI).</param>
-        /// <param name="content">The content of type <see cref="TObject"/> that will be deserialised and passed in the body of the POST request.</param>
+        /// <param name="content">The content that will be deserialised and passed in the body of the POST request.</param>
         /// <returns>The operation result.</returns>
         Task<TResult> ApiPostAsync<TObject, TResult>(Uri relativeOperationUri, TObject content);
 

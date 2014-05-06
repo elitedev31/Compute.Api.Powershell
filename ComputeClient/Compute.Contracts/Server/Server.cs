@@ -15,7 +15,7 @@ using System.Xml.Serialization;
 // 
 
 
-/// <remarks/>
+// <remarks/>
 //[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
 //[System.SerializableAttribute()]
 //[System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -44,7 +44,7 @@ using System.Xml.Serialization;
 //    public string pageSize { get; set; }
 //}
 
-/// <remarks/>
+// <remarks/>
 //[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
 //[System.SerializableAttribute()]
 //[System.Diagnostics.DebuggerStepThroughAttribute()]

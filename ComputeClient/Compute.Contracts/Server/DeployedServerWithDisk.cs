@@ -85,7 +85,7 @@ public partial class Server {
     /// <remarks/>
     public string state;
     
-    /// <remarks/>
+    // <remarks/>
 //    public string softwareLabel;
     
     /// <remarks/>
