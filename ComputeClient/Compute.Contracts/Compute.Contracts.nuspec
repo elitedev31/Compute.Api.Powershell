@@ -2,12 +2,12 @@
 <package >
   <metadata>
     <id>DD.CBU.Compute.API.Contracts</id>
-    <version>$version$</version>
+    <version>1.0</version>
     <title>Compute Contracts for Compute Client API</title>
-    <authors>$author$</authors>
-    <owners>$author$</owners>
+    <authors>Dimension Data</authors>
+    <owners>shai.saar@didata.com.au</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>$description$</description>
+    <description>Contracts for the Compute Client API. This is provided by the CaaS team and may change from time to time.</description>
     <releaseNotes/>
     <copyright>Copyright 2014</copyright>
     <tags/>
