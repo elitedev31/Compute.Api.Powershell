@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>DD.CBU.Compute.API.Client</id>
+    <id>DD.CBU.Compute.Api.Client</id>
     <version>1.0.1</version>
     <title>Compute Client API</title>
     <authors>Dimension Data</authors>
