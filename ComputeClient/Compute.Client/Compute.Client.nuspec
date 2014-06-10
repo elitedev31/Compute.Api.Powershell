@@ -7,7 +7,7 @@
     <authors>Dimension Data</authors>
     <owners>shai.saar@didata.com.au</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>$description$</description>
+    <description>Compute as a Service client API. Provides a client to fully manage the CaaS including deploying machines, managing backups etc.</description>
     <releaseNotes/>
     <copyright>Copyright 2014</copyright>
     <tags/>
