@@ -3,8 +3,8 @@
   <metadata>
     <id>DD.CBU.Compute.API.Client</id>
     <version>$version$</version>
-    <title>$title$</title>
-    <authors>$author$</authors>
+    <title>Compute Client API</title>
+    <authors>Dimension Data</authors>
     <owners>$author$</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
@@ -12,7 +12,9 @@
     <copyright>Copyright 2014</copyright>
     <tags/>
     <dependencies>
-        <dependency id="DD.CBU.Compute.API.Contracts" version="1.0" />
+        <group targetFramework=".NETFramework4.5">
+            <dependency id="DD.CBU.Compute.API.Contracts" version="1.0" />
+        </group>
     </dependencies>
   </metadata>
 </package>

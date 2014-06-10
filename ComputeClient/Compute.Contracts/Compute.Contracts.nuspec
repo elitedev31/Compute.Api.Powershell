@@ -3,7 +3,7 @@
   <metadata>
     <id>DD.CBU.Compute.API.Contracts</id>
     <version>$version$</version>
-    <title>$title$</title>
+    <title>Compute Contracts for Compute Client API</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
