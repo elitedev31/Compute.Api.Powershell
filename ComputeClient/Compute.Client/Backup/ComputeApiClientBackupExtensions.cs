@@ -199,5 +199,47 @@
                             alerting = alertingType
                         });
         }
+
+        /// <summary>
+        /// Requests an immediate Backup for a Backup Client
+        /// </summary>
+        /// <param name="client">The <see cref="ComputeApiClient"/> object</param>
+        /// <param name="serverId">The server id</param>
+        /// <param name="backupClient">The backup client to modify</param>
+        /// <returns>The status of the request</returns>
+        public static async Task<Status> InitiateBackup(
+            this IComputeApiClient client,
+            string serverId,
+            BackupClientDetailsType backupClient)
+        {
+            Contract.Requires(!string.IsNullOrWhiteSpace(serverId), "Server cannot be null or empty");
+            Contract.Requires(backupClient != null, "Backup client cannot be null");
+
+            return
+                await
+                client.WebApi.ApiGetAsync<Status>(
+                    ApiUris.InitiateBackup(client.Account.OrganizationId, serverId, backupClient.id));
+        }
+
+        /// <summary>
+        /// Requests a cancellation for any running job for a backup client
+        /// </summary>
+        /// <param name="client">The <see cref="ComputeApiClient"/> object</param>
+        /// <param name="serverId">The server id</param>
+        /// <param name="backupClient">The backup client to modify</param>
+        /// <returns>The status of the request</returns>
+        public static async Task<Status> CancelBackupJob(
+            this IComputeApiClient client,
+            string serverId,
+            BackupClientDetailsType backupClient)
+        {
+            Contract.Requires(!string.IsNullOrWhiteSpace(serverId), "Server cannot be null or empty");
+            Contract.Requires(backupClient != null, "Backup client cannot be null");
+
+            return
+                await
+                client.WebApi.ApiGetAsync<Status>(
+                    ApiUris.CancelBackupJobs(client.Account.OrganizationId, serverId, backupClient.id));
+        }
     }
 }

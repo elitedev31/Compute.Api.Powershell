@@ -408,6 +408,35 @@ namespace DD.CBU.Compute.Api.Client
                 UriKind.Relative);
         }
 
+        /// <summary>
+        /// Requests an immediate Backup for a Backup Client
+        /// </summary>
+        /// <param name="organizationId">The organization id</param>
+        /// <param name="serverId">The server id</param>
+        /// <param name="backupClientId">The backup client id</param>
+        /// <returns>Returns the relative URI of the REST request for initiating a backup on the client</returns>
+        public static Uri InitiateBackup(Guid organizationId, string serverId, string backupClientId)
+        {
+            return new Uri(
+                string.Format("{0}/server/{1}/backup/client/{2}?backupNow", organizationId, serverId, backupClientId),
+                UriKind.Relative);
+        }
+
+        /// <summary>
+        /// Requests a cancellation of all running jobs for a backup client
+        /// </summary>
+        /// <param name="organizationId">The organization id</param>
+        /// <param name="serverId">The server id</param>
+        /// <param name="backupClientId">The backup client id</param>
+        /// <returns>Returns the relative URI of the REST request for cancelling backup jobs on the client</returns>
+        public static Uri CancelBackupJobs(Guid organizationId, string serverId, string backupClientId)
+        {
+            return new Uri(
+                string.Format("{0}/server/{1}/backup/client/{2}?cancelJob", organizationId, serverId, backupClientId),
+                UriKind.Relative);
+        }
+
+ 
         #endregion // Backup URIs
 
         #region Import and Export Customer Image API

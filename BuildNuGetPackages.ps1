@@ -78,8 +78,8 @@ Function BuildPackageFromProject([string]$packageProjectFile)
     ..\Common\BuildSupport\NuGet\NuGet.exe pack "$packageProjectFile" -Build -Prop Configuration=Release -Prop Platform=AnyCPU -NonInteractive -Version "$packageVersion" -Verbosity Detailed -NoPackageAnalysis
 }
 
-BuildPackageFromProject('..\ComputeClient\Compute.Client\Compute.Client.csproj')
-BuildPackageFromProject('..\ComputeClient\Compute.Contracts\Compute.Contracts.csproj')
+BuildPackageFromNuSpec('..\ComputeClient\Compute.Contracts\Compute.Contracts.nuspec')
+BuildPackageFromNuSpec('..\ComputeClient\Compute.Client\Compute.Client.nuspec')
 
 cd ..
 

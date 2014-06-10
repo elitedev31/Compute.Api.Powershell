@@ -31,7 +31,7 @@
             {
                 var clientTypes = GetBackupClientTypes();
 
-                if (clientTypes.Any())
+                if (clientTypes != null && clientTypes.Any())
                 {
                     WriteObject(clientTypes, true);
                 }
