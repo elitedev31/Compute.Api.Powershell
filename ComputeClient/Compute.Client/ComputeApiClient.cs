@@ -13,6 +13,7 @@ namespace DD.CBU.Compute.Api.Client
     using DD.CBU.Compute.Api.Client.Utilities;
     using DD.CBU.Compute.Api.Contracts.Datacenter;
     using DD.CBU.Compute.Api.Contracts.Directory;
+    using DD.CBU.Compute.Api.Contracts.Provisioning;
     using DD.CBU.Compute.Api.Contracts.Server;
     using DD.CBU.Compute.Api.Contracts.General;
 
@@ -408,6 +409,50 @@ namespace DD.CBU.Compute.Api.Client
         {
             var servers = await this.WebApi.ApiGetAsync<ServersWithBackup>(ApiUris.DeployedServers(Account.OrganizationId));
             return servers.server;
+        }
+
+        /// <summary>
+        /// Provision Net Terms Customer
+        /// </summary>
+        /// <param name="organizationId">
+        /// Organization Id
+        /// </param>
+        /// <param name="customerProvisioning">
+        /// The custom Provisioning.
+        /// </param>
+        /// <returns>
+        /// Provision Status
+        /// </returns>
+        public async Task<Status> Provision(Guid organizationId, CustomerProvisioning customerProvisioning)
+        {
+            return
+                await
+                this.WebApi.ApiPostAsync<CustomerProvisioning, Status>(
+                    ApiUris.GetUriForProvisioning(organizationId),
+                    customerProvisioning);
+        }
+
+        /// <summary>
+        /// Provision Customer on a multi-geography data center
+        /// </summary>
+        /// <param name="organizationId">
+        /// The customer Id.
+        /// </param>
+        /// <param name="geographyId">
+        /// The geography Id.
+        /// </param>
+        /// <param name="customerPricingPlanKey">
+        /// The pricing Plan Key.
+        /// </param>
+        /// <returns>
+        /// Statuc
+        /// </returns>
+        public async Task<Status> ProvisionOnGeo(Guid organizationId, Guid geographyId, string customerPricingPlanKey)
+        {
+            return await
+                    this.WebApi.ApiPostAsync<CustomerGeoSignUp, Status>(
+                        ApiUris.GetUriForProvisionOnGeo(organizationId),
+                        new CustomerGeoSignUp { geoId = geographyId, pricingPlanKey = customerPricingPlanKey });
         }
 
         #endregion // Public methods

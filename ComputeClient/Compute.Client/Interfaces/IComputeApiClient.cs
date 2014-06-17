@@ -8,6 +8,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
     using DD.CBU.Compute.Api.Contracts.Datacenter;
     using DD.CBU.Compute.Api.Contracts.Directory;
     using DD.CBU.Compute.Api.Contracts.General;
+    using DD.CBU.Compute.Api.Contracts.Provisioning;
     using DD.CBU.Compute.Api.Contracts.Software;
 
     /// <summary>
@@ -163,5 +164,36 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
         /// </summary>
         /// <returns></returns>
         Task<IEnumerable<ServerWithBackupType>> GetDeployedServers();
+
+        /// <summary>
+        /// Provision Net Terms Customer
+        /// </summary>
+        /// <param name="organizationId">
+        /// Organization Id
+        /// </param>
+        /// <param name="customerProvisioning">
+        /// The custom Provisioning.
+        /// </param>
+        /// <returns>
+        /// Provision Status
+        /// </returns>
+        Task<Status> Provision(Guid organizationId, CustomerProvisioning customerProvisioning);
+
+        /// <summary>
+        /// Provision Customer on a multi-geography data center
+        /// </summary>
+        /// <param name="organizationId">
+        /// The customer Id.
+        /// </param>
+        /// <param name="geographyId">
+        /// The geography Id.
+        /// </param>
+        /// <param name="customerPricingPlanKey">
+        /// The pricing Plan Key.
+        /// </param>
+        /// <returns>
+        /// Statuc
+        /// </returns>
+        Task<Status> ProvisionOnGeo(Guid organizationId, Guid geographyId, string customerPricingPlanKey);
     }
 }

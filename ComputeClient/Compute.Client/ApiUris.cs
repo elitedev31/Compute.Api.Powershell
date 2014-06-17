@@ -471,6 +471,25 @@ namespace DD.CBU.Compute.Api.Client
             return new Uri(string.Format("{0}/imageImport", orgId), UriKind.Relative);
         }
 
+        /// <summary>
+        /// Get Uri for Provision On Geo
+        /// </summary>
+        /// <param name="organizationId">Organization Id</param>
+        /// <returns>Uri</returns>
+        internal static Uri GetUriForProvisionOnGeo(Guid organizationId)
+        {
+            return new Uri(string.Format("{0}/provisionOnGeo", organizationId), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// Get Uri for Provisioning
+        /// </summary>
+        /// <param name="organizationId">Organization Id</param>
+        /// <returns>Uri</returns>
+        internal static Uri GetUriForProvisioning(Guid organizationId)
+        {
+            return new Uri(string.Format("{0}/provision", organizationId), UriKind.Relative);
+        }
         #endregion // Import and Export Customer Image API
     }
 }

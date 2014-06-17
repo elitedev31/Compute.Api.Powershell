@@ -107,6 +107,8 @@
     <Compile Include="Directory\IRole.cs" />
     <Compile Include="Directory\Role.cs" />
     <Compile Include="General\ApiStatus.cs" />
+    <Compile Include="Provisioning\CustomerGeoSignUp.cs" />
+    <Compile Include="Provisioning\CustomerProvisioning.cs" />
     <Compile Include="Server\DeployedServerWithDisk.cs" />
     <Compile Include="Server\ICustomImageDetail.cs" />
     <Compile Include="Server\IImageDetail.cs" />
