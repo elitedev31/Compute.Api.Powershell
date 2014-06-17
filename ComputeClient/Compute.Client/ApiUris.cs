@@ -490,6 +490,17 @@ namespace DD.CBU.Compute.Api.Client
         {
             return new Uri(string.Format("{0}/provision", organizationId), UriKind.Relative);
         }
+
+        /// <summary>
+        /// Get Uri For Listing Pricing Plans
+        /// </summary>
+        /// <param name="organizationId">Organization Id</param>
+        /// <param name="geoId">Geo Id</param>
+        /// <returns>Uri</returns>
+        internal static Uri GetUriForListingPricingPlans(Guid organizationId, Guid geoId)
+        {
+            return new Uri(string.Format("{0}/geo/{1}/pricingplan", organizationId, geoId), UriKind.Relative);
+        }
         #endregion // Import and Export Customer Image API
     }
 }

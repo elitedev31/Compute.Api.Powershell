@@ -90,5 +90,10 @@ namespace DD.CBU.Compute.Api.Contracts
         ///		The CaaS provision XML namespace.
         /// </summary>
         public const string Provision = "http://oec.api.opsource.net/schemas/provision";
+
+        /// <summary>
+        ///		The CaaS billing XML namespace.
+        /// </summary>
+        public const string Billing = "http://oec.api.opsource.net/schemas/billing";
 	}
 }

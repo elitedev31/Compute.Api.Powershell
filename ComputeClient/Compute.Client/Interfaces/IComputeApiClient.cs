@@ -5,6 +5,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
     using System.Net;
     using System.Threading.Tasks;
 
+    using DD.CBU.Compute.Api.Contracts.Billing;
     using DD.CBU.Compute.Api.Contracts.Datacenter;
     using DD.CBU.Compute.Api.Contracts.Directory;
     using DD.CBU.Compute.Api.Contracts.General;
@@ -195,5 +196,13 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
         /// Statuc
         /// </returns>
         Task<Status> ProvisionOnGeo(Guid organizationId, Guid geographyId, string customerPricingPlanKey);
+
+        /// <summary>
+        /// List pricing plans for a organization
+        /// </summary>
+        /// <param name="organizationId">Organization Id</param>
+        /// <param name="geoId">Geo Id</param>
+        /// <returns>Pricing Plans</returns>
+        Task<PricingPlans> ListPricingPlans(Guid organizationId, Guid geoId);
     }
 }

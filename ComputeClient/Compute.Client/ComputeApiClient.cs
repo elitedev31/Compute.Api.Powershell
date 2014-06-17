@@ -11,11 +11,12 @@ namespace DD.CBU.Compute.Api.Client
 
     using DD.CBU.Compute.Api.Client.Interfaces;
     using DD.CBU.Compute.Api.Client.Utilities;
+    using DD.CBU.Compute.Api.Contracts.Billing;
     using DD.CBU.Compute.Api.Contracts.Datacenter;
     using DD.CBU.Compute.Api.Contracts.Directory;
+    using DD.CBU.Compute.Api.Contracts.General;
     using DD.CBU.Compute.Api.Contracts.Provisioning;
     using DD.CBU.Compute.Api.Contracts.Server;
-    using DD.CBU.Compute.Api.Contracts.General;
 
     /// <summary>
     ///		A client for the Dimension Data Compute-as-a-Service (CaaS) API.
@@ -453,6 +454,18 @@ namespace DD.CBU.Compute.Api.Client
                     this.WebApi.ApiPostAsync<CustomerGeoSignUp, Status>(
                         ApiUris.GetUriForProvisionOnGeo(organizationId),
                         new CustomerGeoSignUp { geoId = geographyId, pricingPlanKey = customerPricingPlanKey });
+        }
+
+        /// <summary>
+        /// List pricing plans for a organization
+        /// </summary>
+        /// <param name="organizationId">Organization Id</param>
+        /// <param name="geoId">Geo Id</param>
+        /// <returns>Pricing Plans</returns>
+        public async Task<PricingPlans> ListPricingPlans(Guid organizationId, Guid geoId)
+        {
+            return
+                await this.WebApi.ApiGetAsync<PricingPlans>(ApiUris.GetUriForListingPricingPlans(organizationId, geoId));
         }
 
         #endregion // Public methods
