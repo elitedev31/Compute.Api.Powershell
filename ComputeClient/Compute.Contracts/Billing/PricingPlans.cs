@@ -13,8 +13,8 @@
     [Serializable]
     [DebuggerStepThrough]
     [DesignerCategory("code")]
-    [XmlType(AnonymousType = true, Namespace = XmlNamespaceConstants.Billing)]
-    [XmlRoot(Namespace = XmlNamespaceConstants.Billing, IsNullable = false)]
+    [XmlType(AnonymousType = true, Namespace = XmlNamespaceConstants.WhiteLabel)]
+    [XmlRoot(Namespace = XmlNamespaceConstants.WhiteLabel, IsNullable = false)]
     public class PricingPlans
     {
         /// <remarks/>
@@ -29,7 +29,7 @@
     [Serializable]
     [DebuggerStepThrough]
     [DesignerCategory("code")]
-    [XmlType(AnonymousType = true, Namespace = XmlNamespaceConstants.Billing)]
+    [XmlType(AnonymousType = true, Namespace = XmlNamespaceConstants.WhiteLabel)]
     public class PricingPlan
     {
         public string key;
@@ -51,7 +51,7 @@
     [Serializable]
     [DebuggerStepThrough]
     [DesignerCategory("code")]
-    [XmlType(AnonymousType = true, Namespace = XmlNamespaceConstants.Billing)]
+    [XmlType(AnonymousType = true, Namespace = XmlNamespaceConstants.WhiteLabel)]
     public class PricingPlanItem
     {
         public string description;

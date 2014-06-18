@@ -13,9 +13,9 @@
     [Serializable]
     [DebuggerStepThrough]
     [DesignerCategory("code")]
-    [XmlType(AnonymousType = true, Namespace = XmlNamespaceConstants.Provision)]
-    [XmlRoot(Namespace = XmlNamespaceConstants.Provision, IsNullable = false)]
-    public class CustomerProvisioning
+    [XmlType(AnonymousType = true, Namespace = XmlNamespaceConstants.Organization)]
+    [XmlRoot(Namespace = XmlNamespaceConstants.Organization, IsNullable = false)]
+    public class CustomerProvision
     {
         /// <remarks/>
         public string companyName;
@@ -24,8 +24,8 @@
         public int trustLevel;
 
         /// <remarks/>
-        [XmlElementAttribute("BillingDetailses")]
-        public BillingDetails BillingDetailses;
+        [XmlElementAttribute("billingDetails")]
+        public BillingDetails billingDetails;
 
         /// <remarks/>
         [XmlElementAttribute("primaryAdministrator")]
@@ -43,7 +43,7 @@
     [Serializable]
     [DebuggerStepThrough]
     [DesignerCategory("code")]
-    [XmlType(AnonymousType = true, Namespace = XmlNamespaceConstants.Provision)]
+    [XmlType(AnonymousType = true, Namespace = XmlNamespaceConstants.Organization)]
     public class BillingDetails
     {
         /// <remarks>
@@ -64,7 +64,7 @@
         /// <remarks>
         /// optional
         /// </remarks>
-        public string whereDidiYouFirstHearAbout;
+        public string whereDidYouFirstHearAbout;
 
         /// <remarks>
         /// optional
@@ -82,7 +82,7 @@
     [Serializable]
     [DebuggerStepThrough]
     [DesignerCategory("code")]
-    [XmlType(AnonymousType = true, Namespace = XmlNamespaceConstants.Provision)]
+    [XmlType(AnonymousType = true, Namespace = XmlNamespaceConstants.Organization)]
     public class Contact
     {
         /// <remarks/>
@@ -127,7 +127,7 @@
     [Serializable]
     [DebuggerStepThrough]
     [DesignerCategory("code")]
-    [XmlType(AnonymousType = true, Namespace = XmlNamespaceConstants.Provision)]
+    [XmlType(AnonymousType = true, Namespace = XmlNamespaceConstants.Organization)]
     public class PrimaryAdministrator
     {
         /// <remarks/>

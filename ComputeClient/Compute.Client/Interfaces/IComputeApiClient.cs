@@ -172,13 +172,13 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
         /// <param name="organizationId">
         /// Organization Id
         /// </param>
-        /// <param name="customerProvisioning">
+        /// <param name="customerProvision">
         /// The custom Provisioning.
         /// </param>
         /// <returns>
         /// Provision Status
         /// </returns>
-        Task<Status> Provision(Guid organizationId, CustomerProvisioning customerProvisioning);
+        Task<Status> Provision(Guid organizationId, CustomerProvision customerProvision);
 
         /// <summary>
         /// Provision Customer on a multi-geography data center

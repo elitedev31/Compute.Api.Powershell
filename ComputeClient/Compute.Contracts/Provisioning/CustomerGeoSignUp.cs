@@ -13,8 +13,8 @@
     [Serializable]
     [DebuggerStepThrough]
     [DesignerCategory("code")]
-    [XmlType(AnonymousType = true, Namespace = XmlNamespaceConstants.Provision)]
-    [XmlRoot(Namespace = XmlNamespaceConstants.Provision, IsNullable = false)]
+    [XmlType(AnonymousType = true, Namespace = XmlNamespaceConstants.Organization)]
+    [XmlRoot(Namespace = XmlNamespaceConstants.Organization, IsNullable = false)]
     public class CustomerGeoSignUp
     {
         /// <remarks/>

@@ -418,19 +418,19 @@ namespace DD.CBU.Compute.Api.Client
         /// <param name="organizationId">
         /// Organization Id
         /// </param>
-        /// <param name="customerProvisioning">
+        /// <param name="customerProvision">
         /// The custom Provisioning.
         /// </param>
         /// <returns>
         /// Provision Status
         /// </returns>
-        public async Task<Status> Provision(Guid organizationId, CustomerProvisioning customerProvisioning)
+        public async Task<Status> Provision(Guid organizationId, CustomerProvision customerProvision)
         {
             return
                 await
-                this.WebApi.ApiPostAsync<CustomerProvisioning, Status>(
+                this.WebApi.ApiPostAsync<CustomerProvision, Status>(
                     ApiUris.GetUriForProvisioning(organizationId),
-                    customerProvisioning);
+                    customerProvision);
         }
 
         /// <summary>
