@@ -18,7 +18,7 @@
     public class PricingPlans
     {
         /// <remarks/>
-        [XmlElementAttribute("PricingPlans")]
+        [XmlElementAttribute("PricingPlan")]
         public PricingPlan[] pricingPlans;
     }
 
@@ -32,14 +32,25 @@
     [XmlType(AnonymousType = true, Namespace = XmlNamespaceConstants.WhiteLabel)]
     public class PricingPlan
     {
+        /// <remarks/>
         public string key;
 
+        /// <remarks/>
         public string name;
 
+        /// <remarks/>
         public string description;
 
+        /// <remarks/>
         public string currency;
 
+        /// <remarks/>
+        public bool hasPromotionCodes;
+
+        /// <remarks/>
+        public double subscriptionPrice;
+
+        /// <remarks/>
         [XmlElementAttribute("pricingPlanItems")]
         public PricingPlanItem[] pricingPlanItems;
     }
@@ -54,7 +65,27 @@
     [XmlType(AnonymousType = true, Namespace = XmlNamespaceConstants.WhiteLabel)]
     public class PricingPlanItem
     {
+        /// <remarks/>
+        public string key;
+
+        /// <remarks/>
+        public string name;
+
+        /// <remarks/>
         public string description;
+
+        /// <remarks/>
+        public bool unlimited;
+
+        /// <remarks>
+        /// Optional
+        /// </remarks>
+        public int quantity;
+
+        /// <remarks>
+        /// Optional
+        /// </remarks>
+        public double pricePerAdditional;
     }
 
 }
