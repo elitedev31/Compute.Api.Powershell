@@ -14,6 +14,7 @@ namespace DD.CBU.Compute.Api.Client
     using DD.CBU.Compute.Api.Contracts.Datacenter;
     using DD.CBU.Compute.Api.Contracts.Directory;
     using DD.CBU.Compute.Api.Contracts.General;
+    using DD.CBU.Compute.Api.Contracts.Provisioning;
     using DD.CBU.Compute.Api.Contracts.Server;
 
     /// <summary>
@@ -409,6 +410,30 @@ namespace DD.CBU.Compute.Api.Client
             var servers = await this.WebApi.ApiGetAsync<ServersWithBackup>(ApiUris.DeployedServers(Account.OrganizationId));
             return servers.server;
         }
+
+        /// <summary>
+        /// Provision customer in home geo
+        /// </summary>
+        /// <param name="organizationId">Organization Id</param>
+        /// <param name="customerProvision">Customer Provision</param>
+        /// <returns>Status</returns>
+        public async Task<Status> Provision(Guid organizationId, CustomerProvision customerProvision)
+        {
+            return await this.Provision(organizationId, customerProvision);
+        }
+
+        /// <summary>
+        /// Provision customers on Geo
+        /// </summary>
+        /// <param name="organizationId">Organization Id</param>
+        /// <param name="geographyId">Geography Id</param>
+        /// <param name="customerPricingPlanKey">Pricing Plan Key</param>
+        /// <returns>Status</returns>
+        public async Task<Status> ProvisionOnGeo(Guid organizationId, Guid geographyId, string customerPricingPlanKey)
+        {
+            return await this.ProvisionOnGeo(organizationId, geographyId, customerPricingPlanKey);
+        }
+
         #endregion // Public methods
     }
 }

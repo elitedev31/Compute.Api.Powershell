@@ -165,5 +165,22 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
         /// </summary>
         /// <returns></returns>
         Task<IEnumerable<ServerWithBackupType>> GetDeployedServers();
+
+        /// <summary>
+        /// Provision customer in home geo
+        /// </summary>
+        /// <param name="organizationId">Organization Id</param>
+        /// <param name="customerProvision">Customer Provision</param>
+        /// <returns>Status</returns>
+        Task<Status> Provision(Guid organizationId, CustomerProvision customerProvision);
+
+        /// <summary>
+        /// Provision customers on Geo
+        /// </summary>
+        /// <param name="organizationId">Organization Id</param>
+        /// <param name="geographyId">Geography Id</param>
+        /// <param name="customerPricingPlanKey">Pricing Plan Key</param>
+        /// <returns>Status</returns>
+        Task<Status> ProvisionOnGeo(Guid organizationId, Guid geographyId, string customerPricingPlanKey);
     }
 }
