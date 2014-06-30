@@ -24,7 +24,7 @@
         /// <returns>
         /// Provision Status
         /// </returns>
-        public async static Task<Status> Provision(this IComputeApiClient computeApiClient, Guid organizationId, CustomerProvision customerProvision)
+        public async static Task<Status> ProvisionCustomerInHomeGeo(this IComputeApiClient computeApiClient, Guid organizationId, CustomerProvision customerProvision)
         {
             return
                 await
@@ -51,7 +51,7 @@
         /// <returns>
         /// Statuc
         /// </returns>
-        public static async Task<Status> ProvisionOnGeo(this IComputeApiClient computeApiClient, Guid organizationId, Guid geographyId, string customerPricingPlanKey)
+        public static async Task<Status> ProvisionCustomerInGeo(this IComputeApiClient computeApiClient, Guid organizationId, Guid geographyId, string customerPricingPlanKey)
         {
             return await
                     computeApiClient.WebApi.ApiPostAsync<CustomerGeoSignUp, Status>(

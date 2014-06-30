@@ -9,6 +9,7 @@ namespace DD.CBU.Compute.Api.Client
     using System.Net;
     using System.Threading.Tasks;
 
+    using DD.CBU.Compute.Api.Client.Customers;
     using DD.CBU.Compute.Api.Client.Interfaces;
     using DD.CBU.Compute.Api.Client.Utilities;
     using DD.CBU.Compute.Api.Contracts.Datacenter;
@@ -419,7 +420,7 @@ namespace DD.CBU.Compute.Api.Client
         /// <returns>Status</returns>
         public async Task<Status> Provision(Guid organizationId, CustomerProvision customerProvision)
         {
-            return await this.Provision(organizationId, customerProvision);
+            return await this.ProvisionCustomerInHomeGeo(organizationId, customerProvision);
         }
 
         /// <summary>
@@ -431,7 +432,7 @@ namespace DD.CBU.Compute.Api.Client
         /// <returns>Status</returns>
         public async Task<Status> ProvisionOnGeo(Guid organizationId, Guid geographyId, string customerPricingPlanKey)
         {
-            return await this.ProvisionOnGeo(organizationId, geographyId, customerPricingPlanKey);
+            return await this.ProvisionCustomerInGeo(organizationId, geographyId, customerPricingPlanKey);
         }
 
         #endregion // Public methods
