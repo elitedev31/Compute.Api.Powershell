@@ -10,9 +10,9 @@ namespace Compute.Client.UnitTests
 {
     using System.Threading.Tasks;
 
-    using DD.CBU.Compute.Api.Contracts.Directory;
-
+    //// TODO: Recreate proper unit tests
     [TestClass]
+    [Ignore]
     public class AccountAPITests : BaseApiClientTestFixture
     {
         [TestMethod]

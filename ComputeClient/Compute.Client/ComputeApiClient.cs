@@ -165,9 +165,9 @@ namespace DD.CBU.Compute.Api.Client
         /// </summary>
         /// <param name="username">The Sub-Administrator account.</param>
         /// <returns>A <see cref="ApiStatus"/> result that describes whether or not the operation was successful.</returns>
-        public Task<ApiStatus> DeleteSubAdministratorAccountAsync(string username)
+        public async Task<ApiStatus> DeleteSubAdministratorAccountAsync(string username)
         {
-            return ExecuteAccountCommand(username, "{0}/account/{1}?delete");
+            return await ExecuteAccountCommand(username, "{0}/account/{1}?delete");
         }
 
         /// <summary>
@@ -177,9 +177,9 @@ namespace DD.CBU.Compute.Api.Client
         /// </summary>
         /// <param name="username">The Sub-Administrator account.</param>
         /// <returns>A <see cref="ApiStatus"/> result that describes whether or not the operation was successful.</returns>
-        public Task<ApiStatus> DesignatePrimaryAdministratorAccountAsync(string username)
+        public async Task<ApiStatus> DesignatePrimaryAdministratorAccountAsync(string username)
         {
-            return ExecuteAccountCommand(username, "{0}/account/{1}?primary");
+            return await ExecuteAccountCommand(username, "{0}/account/{1}?primary");
         }
 
 
