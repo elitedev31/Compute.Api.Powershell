@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>DD.CBU.Compute.API.Contracts</id>
-    <version>1.0.0.15122</version>
+    <version>1.0.15122</version>
     <title>Compute Contracts for Compute Client API</title>
     <authors>Dimension Data</authors>
     <owners>shai.saar@didata.com.au</owners>
