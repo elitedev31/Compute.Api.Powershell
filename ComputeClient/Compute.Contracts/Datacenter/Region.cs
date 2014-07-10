@@ -11,6 +11,8 @@ namespace DD.CBU.Compute.Api.Contracts.Datacenter
 
         private string idField;
 
+        private string geoKeyField;
+
         private string nameField;
 
         private string cloudUiUrlField;
@@ -35,6 +37,19 @@ namespace DD.CBU.Compute.Api.Contracts.Datacenter
             set
             {
                 this.idField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string geoKey
+        {
+            get
+            {
+                return this.geoKeyField;
+            }
+            set
+            {
+                this.geoKeyField = value;
             }
         }
 

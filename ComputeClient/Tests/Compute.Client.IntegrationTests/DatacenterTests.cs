@@ -61,7 +61,24 @@ namespace DD.CBU.Compute.Client.IntegrationTests
 				foreach (IDatacenterDetail dataCenter in dataCenters)
 					TestContext.WriteLine("{0}:{1} ({2})", dataCenter.LocationCode, dataCenter.DisplayName, dataCenter.Country);
 			}
-		}		
-		
+		}
+
+	    [TestMethod]
+	    public async Task TestListMultiGeoDataCentersWithKey()
+	    {
+            ICredentials credentials = GetIntegrationTestCredentials();
+            using (ComputeApiClient computeApiClient = new ComputeApiClient("au"))
+            {
+                IAccount account = await
+                    computeApiClient
+                        .LoginAsync(credentials);
+                Assert.IsNotNull(account);
+
+                Guid organizationId = account.OrganizationId;
+                Assert.AreNotEqual(Guid.Empty, organizationId);
+
+                await computeApiClient.ListMultiGeoDataCentersWithKey(organizationId);
+            }
+        }
 	}
 }

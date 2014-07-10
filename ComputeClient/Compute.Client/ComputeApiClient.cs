@@ -435,6 +435,15 @@ namespace DD.CBU.Compute.Api.Client
             return await this.ProvisionCustomerInGeo(organizationId, geographyId, customerPricingPlanKey);
         }
 
+        /// <summary>
+        /// List Multi-Geography Data Centers With Key
+        /// </summary>
+        /// <param name="organizationId">Organization Id</param>
+        public async Task<Geos> ListMultiGeoDataCentersWithKey(Guid organizationId)
+        {
+            return await WebApi.ApiGetAsync<Geos>(ApiUris.GetUriForListMultiGeoDataCentersWithKey(organizationId));
+        }
+
         #endregion // Public methods
     }
 }

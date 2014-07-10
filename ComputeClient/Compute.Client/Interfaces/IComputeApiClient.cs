@@ -182,5 +182,11 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
         /// <param name="customerPricingPlanKey">Pricing Plan Key</param>
         /// <returns>Status</returns>
         Task<Status> ProvisionOnGeo(Guid organizationId, Guid geographyId, string customerPricingPlanKey);
+
+        /// <summary>
+        /// List Multi-Geography Data Centers With Key
+        /// </summary>
+        /// <param name="organizationId">Organization Id</param>
+        Task<Geos> ListMultiGeoDataCentersWithKey(Guid organizationId);
     }
 }

@@ -501,6 +501,17 @@ namespace DD.CBU.Compute.Api.Client
         {
             return new Uri(string.Format("{0}/geo/{1}/pricingplan", organizationId, geoId), UriKind.Relative);
         }
+
+        /// <summary>
+        /// Get Uri For List Multi-Geography Data Centers With Key
+        /// </summary>
+        /// <param name="organizationId">Organization Id</param>
+        /// <returns>Uri</returns>
+        internal static Uri GetUriForListMultiGeoDataCentersWithKey(Guid organizationId)
+        {
+            return new Uri(string.Format("{0}/multigeo", organizationId), UriKind.Relative);
+        }
+
         #endregion // Import and Export Customer Image API
     }
 }
