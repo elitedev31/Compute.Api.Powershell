@@ -24,7 +24,17 @@ namespace DD.CBU.Compute.Api.Client
 		/// <summary>
 		///		Additional error detail (if any) provided by the CaaS API.
 		/// </summary>
-		readonly string				_additionalDetail;
+		readonly string	_additionalDetail;
+
+        /// <summary>
+        /// The error status of the exception
+        /// </summary>
+        public  Status Status { get; set; }
+
+	    /// <summary>
+	    /// The uri which caused the exception
+	    /// </summary>
+	    public Uri Uri { get; set; }
 
 		/// <summary>
 		///		Create a new <see cref="ComputeApiException"/>.
@@ -48,12 +58,47 @@ namespace DD.CBU.Compute.Api.Client
 			Debug.Assert(!String.IsNullOrWhiteSpace(messageOrFormat), "Exception message should not be empty.");
 
 			_error = error;
+            
 			_additionalDetail =
 				!String.IsNullOrWhiteSpace(additionalDetail) ?
 					additionalDetail
 					:
 					DefaultAdditionalErrorDetailMessage;
 		}
+
+	    ///  <summary>
+	    /// 		Create a new <see cref="ComputeApiException"/>.
+	    ///  </summary>
+	    ///  <param name="error">
+	    /// 		The reason that the exception is being raised.
+	    ///  </param>
+	    ///  <param name="additionalDetail">
+	    /// 		Additional error detail (if any) provided by the CaaS API.
+	    ///  </param>
+	    ///  <param name="messageOrFormat">
+	    /// 		The exception message or message format.
+	    ///  </param>
+	    /// <param name="uri"></param>
+	    /// <param name="formatArguments">
+	    /// 		Optional message format arguments.
+	    ///  </param>
+	    /// <param name="status"></param>
+	    public ComputeApiException(ComputeApiError error, string additionalDetail, string messageOrFormat, Status status, Uri uri, params object[] formatArguments)
+            : base(messageOrFormat, formatArguments)
+        {
+            Debug.Assert(error != ComputeApiError.Unknown, "Reason.Unknown should not be used here.");
+            Debug.Assert(!String.IsNullOrWhiteSpace(messageOrFormat), "Exception message should not be empty.");
+
+            _error = error;
+	        Status = status;
+	        Uri = uri;
+
+            _additionalDetail =
+                !String.IsNullOrWhiteSpace(additionalDetail) ?
+                    additionalDetail
+                    :
+                    DefaultAdditionalErrorDetailMessage;
+        }
 
 		/// <summary>
 		///		Create a new <see cref="ComputeApiException"/>.
@@ -204,6 +249,24 @@ namespace DD.CBU.Compute.Api.Client
 	            details,
 	            string.Format("The operation {0} failed with an error: {1}", operation, details));
 	    }
+
+	    /// <summary>
+	    /// Creates a <see cref="ComputeApiException" /> to be raised because the CaaS API indicates a bad HTTP request
+	    /// </summary>
+	    /// <param name="operation">The operation that was attempted</param>
+	    /// <param name="details">Further error details</param>
+	    /// <param name="status"></param>
+	    /// <param name="uri"></param>
+	    /// <returns>The configured <see cref="ComputeApiException"/></returns>
+	    public static ComputeApiException InvalidRequest(string operation, string details, Status status, Uri uri)
+        {
+            return new ComputeApiException(
+                ComputeApiError.BadRequest,
+                details,
+                string.Format("The operation {0} failed with an error: {1}", operation, details),
+                status,
+                uri);
+        }
 
 	    #endregion // Factory methods
 	}

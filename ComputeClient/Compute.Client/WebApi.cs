@@ -229,7 +229,7 @@ namespace DD.CBU.Compute.Api.Client
                         {
                             // Handle specific CaaS Status response when posting a bad request
                             var status = response.Content.ReadAsAsync<Status>(_mediaTypeFormatters).Result;
-                            throw ComputeApiException.InvalidRequest(status.operation, status.resultDetail);
+                            throw ComputeApiException.InvalidRequest(status.operation, status.resultDetail, status, relativeOperationUri);
                         }
                     default:
                         {
