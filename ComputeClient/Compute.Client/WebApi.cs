@@ -184,8 +184,8 @@ namespace DD.CBU.Compute.Api.Client
                     case HttpStatusCode.BadRequest:
                         {
                             // Handle specific CaaS Status response when getting a bad request
-                            var status = response.Content.ReadAsAsync<Status>(_mediaTypeFormatters).Result;
-                            throw ComputeApiException.InvalidRequest(status.operation, status.resultDetail);
+                            var status = await response.Content.ReadAsAsync<Status>(_mediaTypeFormatters);
+                            throw ComputeApiException.InvalidRequest(status.operation, status.resultDetail, status, relativeOperationUri);
                         }
                     default:
                         {
@@ -228,7 +228,7 @@ namespace DD.CBU.Compute.Api.Client
                     case HttpStatusCode.BadRequest:
                         {
                             // Handle specific CaaS Status response when posting a bad request
-                            var status = response.Content.ReadAsAsync<Status>(_mediaTypeFormatters).Result;
+                            var status = await response.Content.ReadAsAsync<Status>(_mediaTypeFormatters);
                             throw ComputeApiException.InvalidRequest(status.operation, status.resultDetail, status, relativeOperationUri);
                         }
                     default:

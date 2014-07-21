@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>DD.CBU.Compute.Api.Client</id>
-    <version>1.0.15151</version>
+    <version>1.0.15153</version>
     <title>Compute Client API</title>
     <authors>Dimension Data</authors>
     <owners>shai.saar@didata.com.au</owners>
