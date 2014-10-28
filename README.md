@@ -7,7 +7,13 @@ This is the source code from the team that have put together the client librarie
 
 Downloads
 -----------
-This is the source code for both the .NET client and PowerShell cmdlets, compiled assemblies are not currently published online.
+This is the source code for both the .NET client and PowerShell cmdlets, compiled assemblies are listed on the blog
+
+http://caas-automation.blogspot.com.au/
+
+Usage 
+---------
+Usage examples are shown on the automation blog for the PowerShell. http://caas-automation.blogspot.com.au/ 
 
 
 Terms
