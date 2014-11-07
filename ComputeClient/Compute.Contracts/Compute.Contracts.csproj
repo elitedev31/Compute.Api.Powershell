@@ -117,6 +117,7 @@
     <Compile Include="Server\IOperatingSystem.cs" />
     <Compile Include="Server\MachineSpecification.cs" />
     <Compile Include="Server\NetworkWithLocations.cs" />
+    <Compile Include="Server\NewServerToDeployWithDiskSpeed.cs" />
     <Compile Include="Server\NewServerToDeploy.cs" />
     <Compile Include="Server\OperatingSystem.cs" />
     <Compile Include="Server\OperatingSystemType.cs" />

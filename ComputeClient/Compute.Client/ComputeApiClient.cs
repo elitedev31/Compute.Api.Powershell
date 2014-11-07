@@ -329,6 +329,7 @@ namespace DD.CBU.Compute.Api.Client
         /// <param name="adminPassword"></param>
         /// <param name="isStarted"></param>
         /// <returns></returns>
+        [Obsolete("This method is deprecated, please use DeployServerWithDiskSpeedImageTask instead.")]
 	    public async Task<Status> DeployServerImageTask(string name, string description, string networkId, string imageId, string adminPassword, bool isStarted)
 	    {
             //Contract.Requires<ArgumentException>(!string.IsNullOrEmpty(name), "name argument must not be empty");
@@ -351,6 +352,62 @@ namespace DD.CBU.Compute.Api.Client
                             isStarted = isStarted
                         });
 	    }
+
+
+        /// <summary>
+        /// Deploys a server using an image into a specified network.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="description"></param>
+        /// <param name="networkId"></param>
+        /// <param name="imageId"></param>
+        /// <param name="adminPassword"></param>
+        /// <param name="start"></param>
+        /// <returns></returns>
+        public async Task<Status> DeployServerWithDiskSpeedImageTask(string name, string description, string networkId, string privateIp, string imageId, string adminPassword, bool start)
+        {
+          
+                return
+             await
+             this.WebApi.ApiPostAsync<NewServerToDeployWithDiskSpeed, Status>(
+                 ApiUris.DeployServerWithDiskSpeed(Account.OrganizationId),
+                 new NewServerToDeployWithDiskSpeed
+                 {
+                     name = name,
+                     description = description,
+                     imageId = imageId,
+                     networkId = networkId,
+                     privateIp = privateIp,
+                     administratorPassword = adminPassword,
+                     start = start
+                 });
+            
+          
+         
+        }
+
+        public async Task<Status> DeployServerWithDiskSpeedImageTask(string name, string description, string networkId, string privateIp, string imageId, string adminPassword, bool start, Disk[] disk)
+        {
+
+            return
+         await
+         this.WebApi.ApiPostAsync<NewServerToDeployWithDiskSpeed, Status>(
+             ApiUris.DeployServerWithDiskSpeed(Account.OrganizationId),
+             new NewServerToDeployWithDiskSpeed
+             {
+                 name = name,
+                 description = description,
+                 imageId = imageId,
+                 networkId = networkId,
+                 privateIp = privateIp,
+                 administratorPassword = adminPassword,
+                 start = start,
+                 disk = disk
+             });
+
+
+
+        }
 
         /// <summary>
         /// Powers on the server.

@@ -11,27 +11,27 @@
     public class NewCaasServerDetailsCmdlet : Cmdlet
     {
         /// <summary>
-        /// The machine name
+        /// The VM name
         /// </summary>
-        [Parameter(Mandatory = true, HelpMessage = "The machine name")]
+        [Parameter(Mandatory = true, HelpMessage = "The VM name")]
         public string Name { get; set; }
 
         /// <summary>
         /// The description of the machine (optional)
         /// </summary>
-        [Parameter(Mandatory = false, HelpMessage = "The description of the machine")]
+        [Parameter(Mandatory = false, HelpMessage = "The description of the VM")]
         public string Description { get; set; }
 
         /// <summary>
         /// The administrator password of the machine
         /// </summary>
-        [Parameter(Mandatory = true, HelpMessage = "The administrator password")]
+        [Parameter(Mandatory = true, HelpMessage = "The VM administrator password")]
         public string AdminPassword { get; set; }
 
         /// <summary>
-        /// The state of the machine after deployment (powered on or off)
+        /// The state of the VM after deployment (powered on or off)
         /// </summary>
-        [Parameter(Mandatory = true, HelpMessage = "Will the machine be started after deployment (true|false)")]
+        [Parameter(Mandatory = true, HelpMessage = "Will the VM be started after deployment (true|false)")]
         public bool IsStarted { get; set; }
 
         /// <summary>
@@ -43,8 +43,14 @@
         /// <summary>
         /// The network to deploy the machine to
         /// </summary>
-        [Parameter(Mandatory = true, HelpMessage = "The network to deploy the machine to")]
+        [Parameter(Mandatory = false, HelpMessage = "The network to deploy the machine to")]
         public NetworkWithLocationsNetwork Network { get; set; }
+        
+        /// <summary>
+        /// The privateIp address of the machine
+        /// </summary>
+        [Parameter(Mandatory = false, HelpMessage = "The network private IP address that will be assigned to the machine.")]
+        public string PrivateIp { get; set; }
 
         /// <summary>
         /// The process record method.
@@ -52,6 +58,13 @@
         protected override void ProcessRecord()
         {
             base.ProcessRecord();
+
+            if(!string.IsNullOrEmpty(PrivateIp) 
+                && Network!=null )
+                      ThrowTerminatingError(new ErrorRecord(new PSArgumentException("Please use Network or PrivateIP paramenter not both"), "-1", ErrorCategory.InvalidArgument, null));
+            if (string.IsNullOrEmpty(PrivateIp)
+             && Network == null)
+                     ThrowTerminatingError(new ErrorRecord(new PSArgumentException("You must specify either a Network or PrivateIP paramenter"), "-1", ErrorCategory.InvalidArgument, null));
 
             WriteObject(
                 new CaasServerDetails
@@ -61,7 +74,8 @@
                         Description = Description,
                         IsStarted = IsStarted,
                         Network = Network,
-                        OsImage = OsServerImage
+                        OsImage = OsServerImage,
+                        PrivateIp = PrivateIp
                     });
         }
     }

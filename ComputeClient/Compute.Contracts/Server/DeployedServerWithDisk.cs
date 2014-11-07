@@ -161,17 +161,22 @@ public partial class DeployedServersWithDisksDeployedServerWithDisksMachineStatu
 public partial class Disk {
     
     /// <remarks/>
+     [XmlAttributeAttribute()]
     public string id;
     
     /// <remarks/>
+     [XmlAttributeAttribute()]
     public string scsiId;
     
     /// <remarks/>
+     [XmlAttributeAttribute()]
     public string sizeGb;
 
     /// <summary/>
+     [XmlAttributeAttribute()]
     public string speed;
 
     /// <remarks/>
+     [XmlAttributeAttribute()]
     public string state;
 }

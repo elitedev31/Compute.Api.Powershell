@@ -15,6 +15,12 @@
     public class GetCaasNetworksCmdlet : PsCmdletCaasBase
     {
         /// <summary>
+        /// Get a CaaS network by name
+        /// </summary>
+        [Parameter(Mandatory = false, Position=1, HelpMessage = "Network name to filter")]
+        public string Name { get; set; }
+
+        /// <summary>
         /// The process record method.
         /// </summary>
         protected override void ProcessRecord()
@@ -23,11 +29,16 @@
 
             try
             {
+                
                 var networks = CaaS.ApiClient.GetNetworksTask().Result;
+              
 
                 if (networks.Any())
                 {
-                    WriteObject(networks, true);
+                    if (string.IsNullOrEmpty(Name))
+                        WriteObject(networks, true);
+                    else
+                        WriteObject(networks.Single(net => net.name.ToLower()==Name.ToLower()));
                 }
             }
             catch (AggregateException ae)

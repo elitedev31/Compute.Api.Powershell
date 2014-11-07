@@ -94,12 +94,14 @@
     <Compile Include="..\SolutionAssemblyInfo.cs">
       <Link>Properties\SolutionAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="CaasServerDiskDetails.cs" />
     <Compile Include="CaasServerDetails.cs" />
     <Compile Include="ComputeCmdletProvider.cs" />
     <Compile Include="ComputeServiceConnection.cs" />
     <Compile Include="AddCaasBackupClientCmdlet.cs" />
     <Compile Include="AddCaasAclRuleCmdlet.cs" />
     <Compile Include="AddCaasNatRuleCmdlet.cs" />
+    <Compile Include="NewCaasServerDiskDetailsCmdlet.cs" />
     <Compile Include="RemoveCaasBackupJobCmdlet.cs" />
     <Compile Include="NewCaasBackupJobCmdlet.cs" />
     <Compile Include="RemoveCaasVmCmdlet.cs" />

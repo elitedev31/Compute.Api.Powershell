@@ -110,10 +110,22 @@ namespace DD.CBU.Compute.Api.Client
         /// </summary>
         /// <param name="orgId"></param>
         /// <returns></returns>
+        [Obsolete("This Uri is deprecated, please use DeployServerWithDiskSpeed instead.")]
         internal static Uri DeployServer(Guid orgId)
         {
             return new Uri(string.Format("{0}/server", orgId), UriKind.Relative);
         }
+
+        /// <summary>
+        /// The relative URI for the CaaS API action that allows a server to be deployed
+        /// </summary>
+        /// <param name="orgId"></param>
+        /// <returns></returns>
+        internal static Uri DeployServerWithDiskSpeed(Guid orgId)
+        {
+            return new Uri(string.Format("{0}/deployServer", orgId), UriKind.Relative);
+        }
+
 
         /// <summary>
         /// Deletes the server.

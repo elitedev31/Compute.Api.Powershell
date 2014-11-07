@@ -4,6 +4,7 @@
     using System.Management.Automation;
 
     using DD.CBU.Compute.Api.Client;
+    using System.Collections.Generic;
 
     /// <summary>
     /// The new CaaS Virtual Machine cmdlet.
@@ -23,7 +24,6 @@
         protected override void ProcessRecord()
         {
             base.ProcessRecord();
-
             try
             {
                 DeployServerTask();
@@ -50,14 +50,39 @@
 
         private void DeployServerTask()
         {
+
+            var networkid = this.ServerDetails.Network != null ? this.ServerDetails.Network.id : null;
+
+            // convert CaasServerDiskDetails to Disk[]
+            Disk[] diskarray = null;
+            if(ServerDetails.InternalDiskDetails!=null &&
+                ServerDetails.InternalDiskDetails.Count>0)
+            {
+                List<Disk> disks = new List<Disk>();
+                foreach (CaasServerDiskDetails item in ServerDetails.InternalDiskDetails)
+	                    {
+		                       var disk = 
+                                   new Disk {
+                                         scsiId = item.ScsiId,
+                                           speed = item.SpeedId
+                                   };
+                                disks.Add(disk);
+	                    }
+                
+            diskarray = disks.ToArray();
+            }
+
             var status =
-                CaaS.ApiClient.DeployServerImageTask(
+                CaaS.ApiClient.DeployServerWithDiskSpeedImageTask(
                     ServerDetails.Name,
                     ServerDetails.Description,
-                    ServerDetails.Network.id,
+                    networkid,  
+                    ServerDetails.PrivateIp,
                     ServerDetails.OsImage.id,
                     ServerDetails.AdministratorPassword,
-                    ServerDetails.IsStarted).Result;
+                    ServerDetails.IsStarted,
+                    diskarray
+                  ).Result;
 
             if (status != null)
                 WriteDebug(

@@ -22,6 +22,12 @@
         public NetworkWithLocationsNetwork NetworkWithLocations { get; set; }
 
         /// <summary>
+        /// Get a image OS by name
+        /// </summary>
+        [Parameter(Mandatory = false, Position = 1, HelpMessage = "OS name to filter")]
+        public string Name { get; set; }
+
+        /// <summary>
         /// The process record method.
         /// </summary>
         protected override void ProcessRecord()
@@ -33,7 +39,10 @@
                 var servers = GetOsImagesTask().Result;
                 if (servers.Any())
                 {
-                    WriteObject(servers, true);
+                    if(string.IsNullOrEmpty(Name))
+                        WriteObject(servers, true);
+                    else
+                        WriteObject(servers.Single(os => os.name.ToLower() == Name.ToLower()));
                 }
             }
             catch (AggregateException ae)

@@ -126,6 +126,51 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
             bool isStarted);
 
         /// <summary>
+        /// Deploy a server using an image in a specified network.
+        /// </summary>
+        /// <param name="name">The name of the new server.</param>
+        /// <param name="description">The description of the new server.</param>
+        /// <param name="privateIp">The network id or privateIp address to deploy the server.</param>
+        /// <param name="imageId">The image id to deploy the server.</param>
+        /// <param name="adminPassword">The administrator password.</param>
+        /// <param name="start">Will the server powers on after deployment?</param>
+        /// <param name="disk">Array od disk configurations</param>
+        /// <returns>The status of the deployment.</returns>
+        Task<Status> DeployServerWithDiskSpeedImageTask(
+            string name,
+            string description,
+            string networkId,
+            string privateIp,
+            string imageId,
+            string adminPassword,
+            bool start,
+            Disk[] disk
+            );
+
+
+        /// <summary>
+        /// Deploy a server using an image in a specified network.
+        /// </summary>
+        /// <param name="name">The name of the new server.</param>
+        /// <param name="description">The description of the new server.</param>
+        /// <param name="privateIp">The network id or privateIp address to deploy the server.</param>
+        /// <param name="imageId">The image id to deploy the server.</param>
+        /// <param name="adminPassword">The administrator password.</param>
+        /// <param name="start">Will the server powers on after deployment?</param>
+        /// <returns>The status of the deployment.</returns>
+        Task<Status> DeployServerWithDiskSpeedImageTask(
+            string name,
+            string description,
+            string networkId,
+            string privateIp,
+            string imageId,
+            string adminPassword,
+            bool start
+       
+            );
+
+
+        /// <summary>
         /// Powers on the server.
         /// </summary>
         /// <param name="serverId">The server id.</param>
