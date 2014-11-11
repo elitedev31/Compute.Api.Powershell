@@ -130,7 +130,8 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
         /// </summary>
         /// <param name="name">The name of the new server.</param>
         /// <param name="description">The description of the new server.</param>
-        /// <param name="privateIp">The network id or privateIp address to deploy the server.</param>
+        /// <param name="privateIp">The privateIp address to deploy the server.</param>
+        /// <param name="networkId">The network id to deploy the server.</param>
         /// <param name="imageId">The image id to deploy the server.</param>
         /// <param name="adminPassword">The administrator password.</param>
         /// <param name="start">Will the server powers on after deployment?</param>
@@ -154,6 +155,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
         /// <param name="name">The name of the new server.</param>
         /// <param name="description">The description of the new server.</param>
         /// <param name="privateIp">The network id or privateIp address to deploy the server.</param>
+        /// <param name="networkId">The network id to deploy the server.</param>
         /// <param name="imageId">The image id to deploy the server.</param>
         /// <param name="adminPassword">The administrator password.</param>
         /// <param name="start">Will the server powers on after deployment?</param>
@@ -168,6 +170,19 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
             bool start
        
             );
+
+
+        /// <summary>
+        /// Modify server server settings.
+        /// </summary>
+        /// <param name="serverId">The server id.</param>
+        /// <param name="name">The server new name on CaaS. This paramenter does not change the machine/host name.</param>
+        /// <param name="description">The new description for the server.</param>
+        /// <param name="memory">Memory (in MB). Value must be represent a GB integer (e.g. 1024,. 2048, 3072, 4096, etc.)<param>
+        /// <param name="cpuCount">Number of virtual CPU’s (e.g. 1, 2, 4 etc.)<param>        
+        /// <param name="privateIp">The new privateIp of the server.</param>
+        /// <returns></returns>
+        Task<Status> ModifyServer(string serverId, string name, string description, int memory, int cpucount,string privateIp);
 
 
         /// <summary>
@@ -210,6 +225,13 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
         /// </summary>
         /// <returns></returns>
         Task<IEnumerable<ServerWithBackupType>> GetDeployedServers();
+
+
+        /// <summary>
+        /// Gets a filtered list of deployed servers.
+        /// </summary>
+        /// <returns></returns>
+        Task<IEnumerable<ServerWithBackupType>> GetDeployedServers(string serverid, string name,string networkId, string location);
 
         /// <summary>
         /// Provision customer in home geo

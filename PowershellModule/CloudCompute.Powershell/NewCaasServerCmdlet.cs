@@ -2,16 +2,17 @@
 {
     using System;
     using System.Management.Automation;
-
+    using System.Linq;
     using DD.CBU.Compute.Api.Client;
     using System.Collections.Generic;
 
     /// <summary>
     /// The new CaaS Virtual Machine cmdlet.
     /// </summary>
-    [Cmdlet(VerbsCommon.New, "CaasVM")]
-    [OutputType(typeof(CaasServerDetails))]
-    public class NewCaasVmCmdlet : PsCmdletCaasBase
+    [Cmdlet(VerbsCommon.New, "CaasServer")]
+    
+    [OutputType(typeof(ServerWithBackupType))]
+    public class NewCaasServerCmdlet : PsCmdletCaasBase
     {
         /// <summary>
         /// The Server Details that will be used to deploy the VM
@@ -23,10 +24,11 @@
         /// </summary>
         protected override void ProcessRecord()
         {
+            ServerWithBackupType server = null;
             base.ProcessRecord();
             try
             {
-                DeployServerTask();
+                server = DeployServerTask();
             }
             catch (AggregateException ae)
             {
@@ -44,13 +46,13 @@
                         return true;
                     });
             }
-            
-            WriteObject(ServerDetails);
+
+            WriteObject(server);
         }
 
-        private void DeployServerTask()
+        private ServerWithBackupType DeployServerTask()
         {
-
+            ServerWithBackupType server = null;
             var networkid = this.ServerDetails.Network != null ? this.ServerDetails.Network.id : null;
 
             // convert CaasServerDiskDetails to Disk[]
@@ -83,6 +85,19 @@
                     ServerDetails.IsStarted,
                     diskarray
                   ).Result;
+            //get the server id from status message
+        
+		    var statusadditionalInfo = status.additionalInformation.Single(info => info.name == "serverId");
+            if (statusadditionalInfo != null)
+            {
+                var servers = CaaS.ApiClient.GetDeployedServers(statusadditionalInfo.value,null,null,null).Result;
+                   if (servers.Any())
+                   {
+                       server = servers.First();
+                   
+                   } 
+            
+            }
 
             if (status != null)
                 WriteDebug(
@@ -92,6 +107,8 @@
                         status.result,
                         status.resultCode,
                         status.resultDetail));
+            return server;
+
         }
     }
 }

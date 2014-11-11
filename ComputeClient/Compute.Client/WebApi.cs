@@ -57,6 +57,7 @@ namespace DD.CBU.Compute.Api.Client
         public WebApi()
         {
             _mediaTypeFormatters.XmlFormatter.UseXmlSerializer = true;
+            _mediaTypeFormatters.Add(new TextMediaTypeFormatter());
         }
 
         /// <summary>
@@ -243,6 +244,52 @@ namespace DD.CBU.Compute.Api.Client
                 }
             }
         }
+
+
+        /// <summary>
+        /// Invoke a CaaS API operation using a HTTP POST request.
+        /// </summary>
+        /// <typeparam name="TResult">The XML-serialisable data contract type into which the response will be deserialised.</typeparam>
+        /// <param name="relativeOperationUri">The operation URI (relative to the CaaS API's base URI).</param>
+        /// <param name="content">The content that will be deserialised and passed in the body of the POST request.</param>
+        /// <returns>The operation result.</returns>
+        public async Task<TResult> ApiPostAsync<TResult>(Uri relativeOperationUri, string content)
+        {
+            var textformatter = new TextMediaTypeFormatter();
+            var objectContent = new ObjectContent<string>(content, textformatter as MediaTypeFormatter,"application/x-www-form-urlencoded");
+            using (
+                var response =
+                    await
+                    _httpClient.PostAsync(relativeOperationUri, objectContent))
+            {
+                if (response.IsSuccessStatusCode) return await response.Content.ReadAsAsync<TResult>(_mediaTypeFormatters);
+
+                switch (response.StatusCode)
+                {
+                    case HttpStatusCode.Unauthorized:
+                        {
+                            throw ComputeApiException.InvalidCredentials(
+                                ((NetworkCredential)_clientMessageHandler.Credentials).UserName);
+                        }
+                    case HttpStatusCode.BadRequest:
+                        {
+                            // Handle specific CaaS Status response when posting a bad request
+                            var status = await response.Content.ReadAsAsync<Status>(_mediaTypeFormatters);
+                            throw ComputeApiException.InvalidRequest(status.operation, status.resultDetail, status, relativeOperationUri);
+                        }
+                    default:
+                        {
+                            throw new HttpRequestException(
+                                String.Format(
+                                    "CaaS API returned HTTP status code {0} ({1}) when performing HTTP POST on '{2}'.",
+                                    (int)response.StatusCode,
+                                    response.StatusCode,
+                                    response.RequestMessage.RequestUri));
+                        }
+                }
+            }
+        }
+
 
         /// <summary>
         ///		Dispose of resources being used by the CaaS API client.

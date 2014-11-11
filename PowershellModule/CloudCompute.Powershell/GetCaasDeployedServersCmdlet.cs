@@ -16,6 +16,32 @@
     [OutputType(typeof(ServerWithBackupType[]))]
     public class GetCaasDeployedServerCmdlet : PsCmdletCaasBase
     {
+
+        /// <summary>
+        /// Get a CaaS server by name
+        /// </summary>
+        [Parameter(Mandatory = false, Position = 1, HelpMessage = "Name of the server to filter")]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// Get a CaaS server by ServerId
+        /// </summary>
+        [Parameter(Mandatory = false,  HelpMessage = "Server id  to filter")]
+        public string ServerId { get; set; }
+
+        /// <summary>
+        /// Get a CaaS server by network
+        /// </summary>
+        [Parameter(Mandatory = false, HelpMessage = "The network to show the servers from")]
+        public NetworkWithLocationsNetwork NetworkWithLocations { get; set; }
+
+        /// <summary>
+        /// Get a CaaS server by location
+        /// </summary>
+        [Parameter(Mandatory = false, HelpMessage = "Location of the server to filter")]
+        public string Location { get; set; }
+
+
         /// <summary>
         /// The process record method.
         /// </summary>
@@ -25,27 +51,32 @@
 
             try
             {
-                var servers = this.GetDeployedServers().Result;
+                string networkid = NetworkWithLocations == null ? null : NetworkWithLocations.id;
+                var servers = this.GetDeployedServers(ServerId, Name, networkid, Location).Result;
                 if (servers.Any())
                 {
-                    WriteObject(servers, true);
+                    if (servers.Count() == 1)
+                        WriteObject(servers.First(), false);
+                    else
+                        WriteObject(servers, true);
+
                 }
             }
             catch (AggregateException ae)
             {
                 ae.Handle(
                     e =>
+                    {
+                        if (e is ComputeApiException)
                         {
-                            if (e is ComputeApiException)
-                            {
-                                WriteError(new ErrorRecord(e, "-2", ErrorCategory.InvalidOperation, CaaS));
-                            }
-                            else //if (e is HttpRequestException)
-                            {
-                                ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, CaaS));
-                            }
-                            return true;
-                        });
+                            WriteError(new ErrorRecord(e, "-2", ErrorCategory.InvalidOperation, CaaS));
+                        }
+                        else //if (e is HttpRequestException)
+                        {
+                            ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, CaaS));
+                        }
+                        return true;
+                    });
             }
         }
 
@@ -53,9 +84,9 @@
         /// Gets the deployed servers from the CaaS
         /// </summary>
         /// <returns>The images</returns>
-        private async Task<IEnumerable<ServerWithBackupType>> GetDeployedServers()
+        private async Task<IEnumerable<ServerWithBackupType>> GetDeployedServers(string serverId, string name, string networkId,string location)
         {
-            return await CaaS.ApiClient.GetDeployedServers();
+            return await CaaS.ApiClient.GetDeployedServers(serverId, name, networkId, location);
         }
     }
 }

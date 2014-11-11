@@ -1,22 +1,36 @@
 ﻿namespace DD.CBU.Compute.Powershell
 {
     using System;
+    using System.Linq;
     using System.Management.Automation;
 
     using DD.CBU.Compute.Api.Client;
 
     /// <summary>
-    /// The Re,pve CaaS Virtual Machine cmdlet.
+    /// The set server state cmdlet.
     /// </summary>
-    [Cmdlet(VerbsCommon.Remove, "CaasVM")]
-    [OutputType(typeof(CaasServerDetails))]
-    public class RemoveCaasVmCmdlet : PsCmdletCaasBase
+    [Cmdlet(VerbsCommon.Set, "CaasServer")]
+    public class SetCaasServerCmdlet : PsCmdletCaasBase
     {
-        /// <summary>
-        /// The Server Details that will be used to remove the VM
-        /// </summary>
-        [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The server to be removed.")]
+        
+        [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The server to action on")]
         public ServerWithBackupType Server { get; set; }
+
+         [Parameter(Mandatory = false, HelpMessage = "Set the server name on CaaS")]
+        public string Name { get; set; }
+
+         [Parameter(Mandatory = false, HelpMessage = "Set the server description")]
+         public string Description { get; set; }
+
+
+         [Parameter(Mandatory = false, HelpMessage = "Set the server RAM memory. Value must be represent a GB integer (e.g. 1024, 2048, 3072, 4096, etc.)")]
+         public int MemoryInMB { get; set; }
+
+         [Parameter(Mandatory = false, HelpMessage = "Set the number of virtual CPUs.")]
+         public int CPUCount { get; set; }
+
+         [Parameter(Mandatory = false, HelpMessage = "Set the privateIp of the server")]
+         public string PrivateIp { get; set; }
 
         /// <summary>
         /// The process record method.
@@ -25,11 +39,20 @@
         {
             base.ProcessRecord();
 
+            SetServerTask();
+        }
+
+        /// <summary>
+        /// Edit the server details the state of the server
+        /// </summary>
+        private void SetServerTask()
+        {
             try
             {
-                var status = CaaS.ApiClient.ServerDelete(Server.id).Result;
+                Status status = null;
 
-                if (status != null)
+                 status = CaaS.ApiClient.ModifyServer(Server.id,Name,Description,MemoryInMB,CPUCount,PrivateIp).Result;
+                 if (status != null)
                     WriteDebug(
                         string.Format(
                             "{0} resulted in {1} ({2}): {3}",

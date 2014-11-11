@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Collections;
+using System.Linq;
 
 namespace DD.CBU.Compute.Api.Client
 {
+    using System.Collections.Specialized;
     using System.Diagnostics.Contracts;
+    using System.Net;
 
     /// <summary>
     ///		Constants and formatters for API URLs.
@@ -12,7 +16,7 @@ namespace DD.CBU.Compute.Api.Client
         /// <summary>
         ///		The path (relative to the base API URL) of the My Account action.
         /// </summary>
-        public static readonly Uri MyAccount = new Uri("myaccount", UriKind.Relative);
+        internal static readonly Uri MyAccount = new Uri("myaccount", UriKind.Relative);
 
         /// <summary>
         ///		Get the base URI for the CaaS REST API.
@@ -23,7 +27,7 @@ namespace DD.CBU.Compute.Api.Client
         /// <returns>
         ///		The base URI for the CaaS REST API.
         /// </returns>
-        public static Uri ComputeBase(string targetRegionName)
+        internal static Uri ComputeBase(string targetRegionName)
         {
             if (String.IsNullOrWhiteSpace(targetRegionName))
                 throw new ArgumentException(
@@ -42,7 +46,7 @@ namespace DD.CBU.Compute.Api.Client
         /// <returns>
         ///		The relative action Uri.
         /// </returns>
-        public static Uri DatacentersWithDiskSpeedDetails(Guid organizationId)
+        internal static Uri DatacentersWithDiskSpeedDetails(Guid organizationId)
         {
             if (organizationId == Guid.Empty) throw new ArgumentException("GUID cannot be empty: 'organizationId'.", "organizationId");
 
@@ -54,7 +58,7 @@ namespace DD.CBU.Compute.Api.Client
         /// </summary>
         /// <param name="orgId">The organisation Id</param>
         /// <returns>The relative action Uri.</returns>
-        public static Uri DatacentresWithMaintanence(Guid orgId)
+        internal static Uri DatacentresWithMaintanence(Guid orgId)
         {
             Contract.Requires(orgId != Guid.Empty, "Organization id cannot be empty!");
 
@@ -70,7 +74,7 @@ namespace DD.CBU.Compute.Api.Client
         /// <returns>
         ///		The relative action Uri.
         /// </returns>
-        public static Uri ImagesWithSoftwareLabels(string locationName)
+        internal static Uri ImagesWithSoftwareLabels(string locationName)
         {
             if (String.IsNullOrWhiteSpace(locationName))
                 throw new ArgumentException(
@@ -80,16 +84,39 @@ namespace DD.CBU.Compute.Api.Client
             return new Uri(String.Format("base/image/deployedWithSoftwareLabels/{0}", locationName), UriKind.Relative);
         }
 
+      
         /// <summary>
-        /// Gets the relative URI for the CaaS API action that retrieves a list of all deployed servers.
+        /// Gets the relative URI for the CaaS API action that retrieves a filtered list of deployed servers.
         /// </summary>
         /// <param name="orgId">The organization id</param>
+        /// <param name="name">The server name</param>
+        /// <param name="networkId">The server networkid</param>
+        /// <param name="location">The server location</param>
         /// <returns>A list of deployed servers</returns>
-        public static Uri DeployedServers(Guid orgId)
+        internal static Uri DeployedServers(Guid orgId, string serverId, string name, string networkId, string location)
         {
-            Contract.Requires(orgId != Guid.Empty, "Organization Id cannot be empty");
+           Contract.Requires(orgId != Guid.Empty, "Organization Id cannot be empty");
+            string uri= "{0}/serverWithBackup";
+           //build que query string paramenters
+            var querystringcollection = new NameValueCollection();
+            if (!string.IsNullOrEmpty(name))
+                querystringcollection.Add("name", name);
+            if (!string.IsNullOrEmpty(serverId))
+                  querystringcollection.Add("id", serverId);
+            if (!string.IsNullOrEmpty(networkId))
+                querystringcollection.Add("networkid", networkId);
+            if (!string.IsNullOrEmpty(location))
+                querystringcollection.Add("location", location);
 
-            return new Uri(string.Format("{0}/serverWithBackup", orgId), UriKind.Relative);
+            if (querystringcollection.AllKeys.Any())
+                uri = string.Concat(uri, "?");
+            // build the query string
+            string querystring = string.Join("&", querystringcollection.AllKeys.Where(key => !string.IsNullOrWhiteSpace(querystringcollection[key])).Select(key => string.Format("{0}={1}", WebUtility.UrlEncode(key), WebUtility.UrlEncode(querystringcollection[key]))));
+           
+            if(!string.IsNullOrEmpty(querystring))
+                uri = string.Concat(uri, querystring);
+
+            return new Uri(string.Format(uri, orgId), UriKind.Relative);
         }
 
         /// <summary>
@@ -124,6 +151,18 @@ namespace DD.CBU.Compute.Api.Client
         internal static Uri DeployServerWithDiskSpeed(Guid orgId)
         {
             return new Uri(string.Format("{0}/deployServer", orgId), UriKind.Relative);
+        }
+
+
+        /// <summary>
+        /// Modify the server.
+        /// </summary>
+        /// <param name="orgId">The organization id</param>
+        /// <param name="serverId">The server id</param>
+        /// <returns>Returns the relative URI of the REST request for a modify servers</returns>
+        internal static Uri ModifyServer(Guid orgId, string serverId)
+        {
+            return new Uri(string.Format("{0}/server/{1}", orgId, serverId), UriKind.Relative);
         }
 
 
@@ -363,7 +402,8 @@ namespace DD.CBU.Compute.Api.Client
         /// <summary>
         /// Retrieves complete details of how the Backup service is configured for a specific deployed Server.
         /// Requires the Organization ID and Server ID for the Server and that the Server already has the Backup service enabled.
-        /// The user must be the Primary Administrator or a Sub-Administrator with the “backup” role.         /// </summary>
+        /// The user must be the Primary Administrator or a Sub-Administrator with the “backup” role. 
+        /// </summary>
         /// <param name="orgId">The organization id</param>
         /// <param name="serverId">The server id</param>
         /// <returns>Returns the relative URI of the REST request for getting the backup details of the server</returns>

@@ -35,6 +35,16 @@
         /// <returns>The operation result.</returns>
         Task<TResult> ApiPostAsync<TObject, TResult>(Uri relativeOperationUri, TObject content);
 
+
+        /// <summary>
+        /// Invoke a CaaS API operation using a HTTP POST request with string content
+        /// </summary>
+        /// <typeparam name="TResult">The XML-serialisable data contract type into which the response will be deserialised.</typeparam>
+        /// <param name="relativeOperationUri">The operation URI (relative to the CaaS API's base URI).</param>
+        /// <param name="content">The content that will be passed as string in the body of the POST request.</param>
+        /// <returns>The operation result.</returns>
+        Task<TResult> ApiPostAsync<TResult>(Uri relativeOperationUri, string content);
+
         /// <summary>
         ///		Asynchronously log into the CaaS API.
         /// </summary>

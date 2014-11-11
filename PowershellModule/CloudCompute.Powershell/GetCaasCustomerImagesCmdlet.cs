@@ -21,6 +21,12 @@
         public NetworkWithLocationsNetwork NetworkWithLocations { get; set; }
 
         /// <summary>
+        /// Get a CaaS network by name
+        /// </summary>
+        [Parameter(Mandatory = false, Position = 1, HelpMessage = "Image name to filter")]
+        public string Name { get; set; }
+
+        /// <summary>
         /// The process record method.
         /// </summary>
         protected override void ProcessRecord()
@@ -32,7 +38,11 @@
                 var images = GetCustomerImages();
                 if (images != null && images.Any())
                 {
-                    WriteObject(images, true);
+                    if (string.IsNullOrEmpty(Name))
+                        WriteObject(images, true);
+                    else
+                        WriteObject(images.Single(img => img.name.ToLower() == Name.ToLower()));
+
                 }
             }
             catch (AggregateException ae)

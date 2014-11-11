@@ -104,7 +104,7 @@
     <Compile Include="NewCaasServerDiskDetailsCmdlet.cs" />
     <Compile Include="RemoveCaasBackupJobCmdlet.cs" />
     <Compile Include="NewCaasBackupJobCmdlet.cs" />
-    <Compile Include="RemoveCaasVmCmdlet.cs" />
+    <Compile Include="RemoveCaasServerCmdlet.cs" />
     <Compile Include="GetCaasDataCentreCmdlet.cs" />
     <Compile Include="RemoveCaasNetworkCmdlet.cs" />
     <Compile Include="NewCaasNetworkCmdlet.cs" />
@@ -127,10 +127,11 @@
     <Compile Include="PSCmdletCaasBase.cs" />
     <Compile Include="SessionStateExtensions.cs" />
     <Compile Include="NewCaasServerDetailsCmdlet.cs" />
+    <Compile Include="SetCaasServerCmdlet.cs" />
     <Compile Include="SetCaasServerActionCmdlet.cs" />
     <Compile Include="GetCaasDeployedServersCmdlet.cs" />
     <Compile Include="GetCaasNetworksCmdlet.cs" />
-    <Compile Include="NewCaasVmCmdlet.cs" />
+    <Compile Include="NewCaasServerCmdlet.cs" />
     <Compile Include="GetCaasOsImagesCmdlet.cs" />
     <Compile Include="NewCaasConnectionCmdlet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -141,6 +142,12 @@
     </CodeAnalysisDictionary>
   </ItemGroup>
   <ItemGroup>
+    <None Include="CaaS.psd1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="DeprecatedAlias.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

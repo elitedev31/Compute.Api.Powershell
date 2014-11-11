@@ -17,6 +17,7 @@ namespace DD.CBU.Compute.Api.Client
     using DD.CBU.Compute.Api.Contracts.General;
     using DD.CBU.Compute.Api.Contracts.Provisioning;
     using DD.CBU.Compute.Api.Contracts.Server;
+    using System.Collections.Specialized;
 
     /// <summary>
     ///		A client for the Dimension Data Compute-as-a-Service (CaaS) API.
@@ -389,24 +390,60 @@ namespace DD.CBU.Compute.Api.Client
         public async Task<Status> DeployServerWithDiskSpeedImageTask(string name, string description, string networkId, string privateIp, string imageId, string adminPassword, bool start, Disk[] disk)
         {
 
-            return
-         await
-         this.WebApi.ApiPostAsync<NewServerToDeployWithDiskSpeed, Status>(
-             ApiUris.DeployServerWithDiskSpeed(Account.OrganizationId),
-             new NewServerToDeployWithDiskSpeed
-             {
-                 name = name,
-                 description = description,
-                 imageId = imageId,
-                 networkId = networkId,
-                 privateIp = privateIp,
-                 administratorPassword = adminPassword,
-                 start = start,
-                 disk = disk
-             });
+            return 
+                await
+                    this.WebApi.ApiPostAsync<NewServerToDeployWithDiskSpeed, Status>(
+                        ApiUris.DeployServerWithDiskSpeed(Account.OrganizationId),
+                        new NewServerToDeployWithDiskSpeed
+                        {
+                            name = name,
+                            description = description,
+                            imageId = imageId,
+                            networkId = networkId,
+                            privateIp = privateIp,
+                            administratorPassword = adminPassword,
+                            start = start,
+                            disk = disk
+                        });
 
 
 
+        }
+
+
+
+        // <summary>
+        /// Modify server server settings.
+        /// </summary>
+        /// <param name="serverId">The server id.</param>
+        /// <param name="name">The server new name on CaaS. This paramenter does not change the machine/host name.</param>
+        /// <param name="description">The new description for the server.</param>
+        /// <param name="memory">Memory (in MB). Value must be represent a GB integer (e.g. 1024,. 2048, 3072, 4096, etc.)<param>
+        /// <param name="cpuCount">Number of virtual CPU’s (e.g. 1, 2, 4 etc.)<param>        
+        /// <param name="privateIp">The new privateIp of the server.</param>
+        /// <returns></returns>
+        public async Task<Status> ModifyServer(string serverId, string name, string description, int memory, int cpucount, string privateIp)
+        {
+                                  
+            //build que query string paramenters
+            var parameters = new NameValueCollection();
+            if (!string.IsNullOrEmpty(name))
+                parameters.Add("name", name);
+            if (!string.IsNullOrEmpty(description))
+                parameters.Add("description", description);
+            if (memory>0)
+                parameters.Add("memory", memory.ToString());
+            if (cpucount > 0)
+                parameters.Add("cpuCount", cpucount.ToString());
+            if (!string.IsNullOrEmpty(privateIp))
+                parameters.Add("privateIp", privateIp);
+           
+            // build the query string
+            string poststring = string.Join("&", parameters.AllKeys.Where(key => !string.IsNullOrWhiteSpace(parameters[key])).Select(key => string.Format("{0}={1}", WebUtility.UrlEncode(key), WebUtility.UrlEncode(parameters[key]))));
+                        
+
+            return await WebApi.ApiPostAsync<Status>(ApiUris.ModifyServer(Account.OrganizationId,serverId),poststring);
+        
         }
 
         /// <summary>
@@ -465,7 +502,17 @@ namespace DD.CBU.Compute.Api.Client
         /// <returns>A list of deployed servers</returns>
         public async Task<IEnumerable<ServerWithBackupType>> GetDeployedServers()
         {
-            var servers = await this.WebApi.ApiGetAsync<ServersWithBackup>(ApiUris.DeployedServers(Account.OrganizationId));
+            var servers = await this.WebApi.ApiGetAsync<ServersWithBackup>(ApiUris.DeployedServers(Account.OrganizationId,null,null,null,null));
+            return servers.server;
+        }
+
+        /// <summary>
+        /// Gets filtered list of the deployed servers.
+        /// </summary>
+        /// <returns>A list of deployed servers</returns>
+        public async Task<IEnumerable<ServerWithBackupType>> GetDeployedServers(string serverId, string name,string networkId, string location)
+        {
+            var servers = await this.WebApi.ApiGetAsync<ServersWithBackup>(ApiUris.DeployedServers(Account.OrganizationId,serverId,name,networkId,location));
             return servers.server;
         }
 
