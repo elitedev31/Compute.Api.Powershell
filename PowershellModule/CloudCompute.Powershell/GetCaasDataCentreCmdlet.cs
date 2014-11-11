@@ -22,11 +22,22 @@
 
             try
             {
-                var dcs = CaaS.ApiClient.GetDataCentersWithMaintenanceStatuses().Result;
+                var resultlist = CaaS.ApiClient.GetDataCentersWithMaintenanceStatuses().Result;
 
-                if (dcs.Any())
+                if (resultlist.Any())
                 {
-                    WriteObject(dcs, true);
+                    switch (resultlist.Count())
+                    {
+                        case 0:
+                            WriteDebug("Object(s) not found");
+                            break;
+                        case 1:
+                            WriteObject(resultlist.First());
+                            break;
+                        default:
+                            WriteObject(resultlist, true);
+                            break;
+                    }
                 }
             }
             catch (AggregateException ae)

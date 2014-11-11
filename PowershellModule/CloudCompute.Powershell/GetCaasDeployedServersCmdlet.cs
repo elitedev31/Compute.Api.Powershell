@@ -33,7 +33,7 @@
         /// Get a CaaS server by network
         /// </summary>
         [Parameter(Mandatory = false, HelpMessage = "The network to show the servers from")]
-        public NetworkWithLocationsNetwork NetworkWithLocations { get; set; }
+        public NetworkWithLocationsNetwork Network { get; set; }
 
         /// <summary>
         /// Get a CaaS server by location
@@ -51,7 +51,7 @@
 
             try
             {
-                string networkid = NetworkWithLocations == null ? null : NetworkWithLocations.id;
+                string networkid = Network == null ? null : Network.id;
                 var servers = this.GetDeployedServers(ServerId, Name, networkid, Location).Result;
                 if (servers!=null)
                 {
@@ -62,7 +62,7 @@
 
                 }
                 else
-                    WriteError(new ErrorRecord(new PSArgumentException("No servers have been found."), "-1", ErrorCategory.InvalidArgument, null));
+                    WriteDebug("Object(s) not found");
             }
             catch (AggregateException ae)
             {

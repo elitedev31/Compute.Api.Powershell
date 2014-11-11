@@ -19,7 +19,14 @@
         /// The network to show the images from
         /// </summary>
         [Parameter(Mandatory = true, HelpMessage = "The network to show the ACL rules from", ValueFromPipeline = true)]
-        public NetworkWithLocationsNetwork NetworkWithLocations { get; set; }
+        public NetworkWithLocationsNetwork Network { get; set; }
+
+        /// <summary>
+        /// Get a CaaS ACL by name
+        /// </summary>
+        [Parameter(Mandatory = false, Position = 1, HelpMessage = "ACL name to filter")]
+        public string Name { get; set; }
+
 
         /// <summary>
         /// The process record method.
@@ -30,10 +37,26 @@
 
             try
             {
-                var rules = GetAclRules();
-                if (rules != null && rules.Any())
+                var resultlist = GetAclRules();
+                if (resultlist.Any())
                 {
-                    WriteObject(rules, true);
+                 
+                    if (!string.IsNullOrEmpty(Name))
+                        resultlist = resultlist.Where(net => net.name.ToLower() == Name.ToLower());
+
+                    switch (resultlist.Count())
+                    {
+                        case 0:
+                            WriteDebug("Object(s) not found");
+                            break;
+                        case 1:
+                            WriteObject(resultlist.First());
+                            break;
+                        default:
+                            WriteObject(resultlist, true);
+                            break;
+                    }
+
                 }
             }
             catch (AggregateException ae)
@@ -60,7 +83,7 @@
         /// <returns>The ACL Rules</returns>
         private IEnumerable<AclRuleType> GetAclRules()
         {
-            return CaaS.ApiClient.GetAclRules(NetworkWithLocations.id).Result;
+            return CaaS.ApiClient.GetAclRules(Network.id).Result;
         }
     }
 }

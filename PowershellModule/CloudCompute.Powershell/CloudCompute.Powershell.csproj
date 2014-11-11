@@ -118,6 +118,7 @@
     <Compile Include="GetCaasOvfPackagesCmdlet.cs" />
     <Compile Include="GetCaasCustomerImagesCmdlet.cs" />
     <Compile Include="RemoveCaasServerDiskCmdlet.cs" />
+    <Compile Include="SetCaasServerDiskSpeedCmdlet.cs" />
     <Compile Include="SetCaasBackupClientCmdlet.cs" />
     <Compile Include="RemoveCaasBackupClientCmdlet.cs" />
     <Compile Include="GetCaasBackupClientsCmdlet.cs" />

@@ -19,7 +19,7 @@
         /// The network to show the images from
         /// </summary>
         [Parameter(Mandatory = true, HelpMessage = "The network to show the images from")]
-        public NetworkWithLocationsNetwork NetworkWithLocations { get; set; }
+        public NetworkWithLocationsNetwork Network { get; set; }
 
         /// <summary>
         /// Get a image OS by name
@@ -36,13 +36,25 @@
 
             try
             {
-                var servers = GetOsImagesTask().Result;
-                if (servers.Any())
+                var resultlist = GetOsImagesTask().Result;
+                if (resultlist.Any())
                 {
-                    if(string.IsNullOrEmpty(Name))
-                        WriteObject(servers, true);
-                    else
-                        WriteObject(servers.Single(os => os.name.ToLower() == Name.ToLower()));
+                   if (!string.IsNullOrEmpty(Name))
+                        resultlist = resultlist.Where(net => net.name.ToLower() == Name.ToLower());
+
+                    switch (resultlist.Count())
+                    {
+                        case 0:
+                            WriteDebug("Object(s) not found");
+                            break;
+                        case 1:
+                            WriteObject(resultlist.First());
+                            break;
+                        default:
+                            WriteObject(resultlist, true);
+                            break;
+                    }
+
                 }
             }
             catch (AggregateException ae)
@@ -69,7 +81,7 @@
         /// <returns>The images</returns>
         private async Task<IEnumerable<DeployedImageWithSoftwareLabelsType>> GetOsImagesTask()
         {
-            return await CaaS.ApiClient.GetImages(NetworkWithLocations.location);
+            return await CaaS.ApiClient.GetImages(Network.location);
         }
     }
 }

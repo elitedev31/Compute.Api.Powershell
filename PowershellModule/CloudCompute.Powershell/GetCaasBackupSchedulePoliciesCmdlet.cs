@@ -29,11 +29,22 @@
 
             try
             {
-                var schedulePolicies = GetBackupSchedulePolicies();
+                var resultlist = GetBackupSchedulePolicies();
 
-                if (schedulePolicies.Any())
+                if (resultlist.Any())
                 {
-                    WriteObject(schedulePolicies, true);
+                    switch (resultlist.Count())
+                    {
+                        case 0:
+                            WriteDebug("Object(s) not found");
+                            break;
+                        case 1:
+                            WriteObject(resultlist.First());
+                            break;
+                        default:
+                            WriteObject(resultlist, true);
+                            break;
+                    }
                 }
             }
             catch (AggregateException ae)

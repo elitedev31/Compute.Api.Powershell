@@ -20,6 +20,13 @@
         [Parameter(Mandatory = false, Position=1, HelpMessage = "Network name to filter")]
         public string Name { get; set; }
 
+
+        /// <summary>
+        /// Get a CaaS network by name
+        /// </summary>
+        [Parameter(Mandatory = false, Position = 1, HelpMessage = "Location to filter")]
+        public string Location { get; set; }
+
         /// <summary>
         /// The process record method.
         /// </summary>
@@ -30,16 +37,31 @@
             try
             {
                 
-                var networks = CaaS.ApiClient.GetNetworksTask().Result;
-              
+                var resultlist = CaaS.ApiClient.GetNetworksTask().Result;
 
-                if (networks.Any())
+                if (resultlist.Any())
                 {
-                    if (string.IsNullOrEmpty(Name))
-                        WriteObject(networks, true);
-                    else
-                        WriteObject(networks.Single(net => net.name.ToLower()==Name.ToLower()));
+                     if (!string.IsNullOrEmpty(Location))
+                         resultlist = resultlist.Where(item => item.location.ToLower() == Location.ToLower());
+                    
+                     if (!string.IsNullOrEmpty(Name))
+                             resultlist = resultlist.Where(net => net.name.ToLower()==Name.ToLower());
+
+                     switch (resultlist.Count())
+                   {
+                       case 0:
+                           WriteDebug("Object(s) not found");
+                           break;
+                       case 1:
+                           WriteObject(resultlist.First());
+                           break;
+                       default:
+                           WriteObject(resultlist, true);
+                           break;
+                   }
+                      
                 }
+                
             }
             catch (AggregateException ae)
             {

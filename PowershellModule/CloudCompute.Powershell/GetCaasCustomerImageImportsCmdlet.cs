@@ -24,11 +24,22 @@
 
             try
             {
-                var imports = GetCustomerImageImports();
+                var resultlist = GetCustomerImageImports();
 
-                if (imports != null && imports.Any())
+                if (resultlist != null && resultlist.Any())
                 {
-                    WriteObject(imports, true);
+                    switch (resultlist.Count())
+                    {
+                        case 0:
+                            WriteDebug("Object(s) not found");
+                            break;
+                        case 1:
+                            WriteObject(resultlist.First());
+                            break;
+                        default:
+                            WriteObject(resultlist, true);
+                            break;
+                    }
                 }
             }
             catch (AggregateException ae)

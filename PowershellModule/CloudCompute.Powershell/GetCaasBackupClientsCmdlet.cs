@@ -19,6 +19,14 @@
             ValueFromPipeline = true)]
         public ServerWithBackupType Server { get; set; }
 
+
+        /// <summary>
+        /// Name to filter
+        /// </summary>
+        [Parameter(Mandatory = false, Position = 1, HelpMessage = "Name to filter")]
+        public string Name { get; set; }
+
+
         /// <summary>
         /// The process record method.
         /// </summary>
@@ -28,11 +36,24 @@
 
             try
             {
-                var clients = GetBackupClients();
+                var resultlist = GetBackupClients();
 
-                if (clients != null && clients.Any())
+                if (resultlist.Any())
                 {
-                    WriteObject(clients, true);
+
+                    switch (resultlist.Count())
+                    {
+                        case 0:
+                            WriteDebug("Object(s) not found");
+                            break;
+                        case 1:
+                            WriteObject(resultlist.First());
+                            break;
+                        default:
+                            WriteObject(resultlist, true);
+                            break;
+                    }
+
                 }
             }
             catch (AggregateException ae)

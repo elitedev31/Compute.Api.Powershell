@@ -29,11 +29,22 @@
 
             try
             {
-                var clientTypes = GetBackupClientTypes();
+                var resultlist = GetBackupClientTypes();
 
-                if (clientTypes != null && clientTypes.Any())
+                if (resultlist != null && resultlist.Any())
                 {
-                    WriteObject(clientTypes, true);
+                    switch (resultlist.Count())
+                    {
+                        case 0:
+                            WriteDebug("Object(s) not found");
+                            break;
+                        case 1:
+                            WriteObject(resultlist.First());
+                            break;
+                        default:
+                            WriteObject(resultlist, true);
+                            break;
+                    }
                 }
             }
             catch (AggregateException ae)
