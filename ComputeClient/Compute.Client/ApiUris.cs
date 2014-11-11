@@ -111,8 +111,8 @@ namespace DD.CBU.Compute.Api.Client
             if (querystringcollection.AllKeys.Any())
                 uri = string.Concat(uri, "?");
             // build the query string
-            string querystring = string.Join("&", querystringcollection.AllKeys.Where(key => !string.IsNullOrWhiteSpace(querystringcollection[key])).Select(key => string.Format("{0}={1}", WebUtility.UrlEncode(key), WebUtility.UrlEncode(querystringcollection[key]))));
-           
+            string querystring = querystringcollection.ToQueryString();
+
             if(!string.IsNullOrEmpty(querystring))
                 uri = string.Concat(uri, querystring);
 
@@ -220,6 +220,51 @@ namespace DD.CBU.Compute.Api.Client
         internal static Uri RebootServer(Guid orgId, string serverId)
         {
             return new Uri(string.Format("{0}/server/{1}?reboot", orgId, serverId), UriKind.Relative);
+        }
+
+
+        /// <summary>
+        /// Change server disk size
+        /// </summary>
+        /// <param name="orgId">The organization id</param>
+        /// <param name="serverId">The server id</param>
+        /// <param name="diskId">The disk id</param>
+        /// <returns>Returns the relative URI of the REST request for change server disk size the server</returns>
+        internal static Uri ChangeServerDiskSize(Guid orgId, string serverId,string diskId)
+        {
+            return new Uri(string.Format("{0}/server/{1}/disk/{2}/changeSize", orgId, serverId,diskId), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// Adds a additional disk to a CaaS server
+        /// </summary>
+        /// <param name="orgId">The organization id</param>
+        /// <param name="serverId">The server id</param>
+        /// <param name="size">the size of the new disk</param>
+        /// <param name="speed">the speed of the new disk</param>
+        /// <returns></returns>
+        internal static Uri AddServerDisk(Guid orgId, string serverId,string size,string speedId)
+        {
+            string uri = "{0}/server/{1}?addLocalStorage&";
+            var querystringcollection = new NameValueCollection();
+            if (!string.IsNullOrEmpty(size))
+                querystringcollection.Add("amount", size);
+            if (!string.IsNullOrEmpty(speedId))
+                querystringcollection.Add("speed", speedId);
+
+            // build the query string with parameters
+            string querystring = querystringcollection.ToQueryString();
+
+            if (!string.IsNullOrEmpty(querystring))
+                uri = string.Concat(uri, querystring);
+
+            return new Uri(string.Format(uri, orgId,serverId), UriKind.Relative);
+        }
+
+
+        internal static Uri RemoveServerDisk(Guid orgId, string serverId, string diskId)
+        {
+            return new Uri(string.Format("{0}/server/{1}/disk/{2}?delete", orgId, serverId, diskId), UriKind.Relative);
         }
 
         #region Network API
@@ -565,5 +610,7 @@ namespace DD.CBU.Compute.Api.Client
         }
 
         #endregion // Import and Export Customer Image API
+
+      
     }
 }

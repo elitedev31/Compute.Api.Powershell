@@ -181,10 +181,11 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
         /// <param name="memory">Memory (in MB). Value must be represent a GB integer (e.g. 1024,. 2048, 3072, 4096, etc.)<param>
         /// <param name="cpuCount">Number of virtual CPU’s (e.g. 1, 2, 4 etc.)<param>        
         /// <param name="privateIp">The new privateIp of the server.</param>
-        /// <returns></returns>
+        /// <returns>The status of the deployment.</returns>
         Task<Status> ModifyServer(string serverId, string name, string description, int memory, int cpucount,string privateIp);
 
 
+        
         /// <summary>
         /// Powers on the server.
         /// </summary>
@@ -212,6 +213,41 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
         /// <param name="serverId">The server id.</param>
         /// <returns></returns>
         Task<Status> ServerShutdown(string serverId);
+
+
+
+        /// <summary>
+        /// Modify server server settings.
+        /// </summary>
+        /// <param name="serverId">The server id.</param>
+        /// <param name="diskId">The scsi disk Id.</param>
+        /// <param name="sizeInGb">sizeInGb.</param>
+        /// <returns>The status of the deployment.</returns>
+        Task<Status> ChangeServerDiskSize(string serverId, string diskId, string sizeInGb);
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="serverId">The server id</param>
+        /// <param name="size">the size of the new disk</param>
+        /// <param name="speed">the speed of the new disk</param>
+        /// <returns></returns>
+        Task<Status> AddServerDisk(string serverId, string size, string speedId);
+
+
+
+        /// <summary>
+        /// Modify server server settings.
+        /// </summary>
+        /// <param name="serverId">The server id.</param>
+        /// <param name="diskId">The scsi disk Id.</param>
+        /// <param name="sizeInGb">sizeInGb.</param>
+        /// <returns>The status of the deployment.</returns>
+        Task<Status> RemoveServerDisk(string serverId, string diskId);
+
+
 
         /// <summary>
         /// Delete the server.

@@ -439,8 +439,7 @@ namespace DD.CBU.Compute.Api.Client
                 parameters.Add("privateIp", privateIp);
            
             // build the query string
-            string poststring = string.Join("&", parameters.AllKeys.Where(key => !string.IsNullOrWhiteSpace(parameters[key])).Select(key => string.Format("{0}={1}", WebUtility.UrlEncode(key), WebUtility.UrlEncode(parameters[key]))));
-                        
+            string poststring = parameters.ToQueryString();
 
             return await WebApi.ApiPostAsync<Status>(ApiUris.ModifyServer(Account.OrganizationId,serverId),poststring);
         
@@ -485,6 +484,49 @@ namespace DD.CBU.Compute.Api.Client
         {
             return await this.WebApi.ApiGetAsync<Status>(ApiUris.ShutdownServer(Account.OrganizationId, serverId));
         }
+
+
+        /// <summary>
+        /// Change server disk size
+        /// </summary>
+        /// <param name="serverId">the server id</param>
+        /// <param name="diskId">ths disk id</param>
+        /// <param name="sizeInGb">new size of the disk</param>
+        /// <returns></returns>
+        public async Task<Status> ChangeServerDiskSize(string serverId, string diskId, string sizeInGb)
+        {
+            return await 
+                this.WebApi.ApiPostAsync<ChangeDiskSize,Status>(
+                ApiUris.ChangeServerDiskSize(Account.OrganizationId, serverId,diskId),
+                new ChangeDiskSize 
+                { 
+                 newSizeGb=sizeInGb
+                }
+                );
+        }
+
+        /// <summary>
+        /// Add disk to existing server
+        /// </summary>
+        /// <param name="serverId">the server id</param>
+        /// <param name="size">size in GB</param>
+        /// <param name="speedId">the speed id</param>
+        /// <returns>Returns a status of the HTTP request</returns>
+        public async Task<Status> AddServerDisk(string serverId, string size, string speedId)
+        {
+            return await
+                this.WebApi.ApiGetAsync<Status>(
+                ApiUris.AddServerDisk(Account.OrganizationId, serverId, size, speedId));
+        }
+
+
+        public async Task<Status> RemoveServerDisk(string serverId, string diskId)
+        {
+            return await
+                this.WebApi.ApiGetAsync<Status>(
+                ApiUris.RemoveServerDisk(Account.OrganizationId, serverId, diskId));
+        }
+
 
         /// <summary>
         /// Deletes the server. <remarks>The server must be turned off and with backup disabled</remarks>

@@ -53,7 +53,7 @@
             {
                 string networkid = NetworkWithLocations == null ? null : NetworkWithLocations.id;
                 var servers = this.GetDeployedServers(ServerId, Name, networkid, Location).Result;
-                if (servers.Any())
+                if (servers!=null)
                 {
                     if (servers.Count() == 1)
                         WriteObject(servers.First(), false);
@@ -61,6 +61,8 @@
                         WriteObject(servers, true);
 
                 }
+                else
+                    WriteError(new ErrorRecord(new PSArgumentException("No servers have been found."), "-1", ErrorCategory.InvalidArgument, null));
             }
             catch (AggregateException ae)
             {

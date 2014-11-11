@@ -101,6 +101,7 @@
     <Compile Include="AddCaasBackupClientCmdlet.cs" />
     <Compile Include="AddCaasAclRuleCmdlet.cs" />
     <Compile Include="AddCaasNatRuleCmdlet.cs" />
+    <Compile Include="AddCaasServerDiskCmdlet.cs" />
     <Compile Include="NewCaasServerDiskDetailsCmdlet.cs" />
     <Compile Include="RemoveCaasBackupJobCmdlet.cs" />
     <Compile Include="NewCaasBackupJobCmdlet.cs" />
@@ -116,6 +117,7 @@
     <Compile Include="NewCaasImportCustomerImageCmdlet.cs" />
     <Compile Include="GetCaasOvfPackagesCmdlet.cs" />
     <Compile Include="GetCaasCustomerImagesCmdlet.cs" />
+    <Compile Include="RemoveCaasServerDiskCmdlet.cs" />
     <Compile Include="SetCaasBackupClientCmdlet.cs" />
     <Compile Include="RemoveCaasBackupClientCmdlet.cs" />
     <Compile Include="GetCaasBackupClientsCmdlet.cs" />
@@ -127,6 +129,7 @@
     <Compile Include="PSCmdletCaasBase.cs" />
     <Compile Include="SessionStateExtensions.cs" />
     <Compile Include="NewCaasServerDetailsCmdlet.cs" />
+    <Compile Include="ResizeCaasServerDiskCmdlet.cs" />
     <Compile Include="SetCaasServerCmdlet.cs" />
     <Compile Include="SetCaasServerActionCmdlet.cs" />
     <Compile Include="GetCaasDeployedServersCmdlet.cs" />
