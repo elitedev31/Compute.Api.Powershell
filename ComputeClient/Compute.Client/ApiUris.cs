@@ -223,6 +223,20 @@ namespace DD.CBU.Compute.Api.Client
         }
 
 
+
+        /// <summary>
+        /// Change server disk speed
+        /// </summary>
+        /// <param name="orgId">The organization id</param>
+        /// <param name="serverId">The server id</param>
+        /// <param name="diskId">The disk id</param>
+        /// <returns>Returns the relative URI of the REST request for change server disk size the server</returns>
+        internal static Uri ChangeServerDiskSpeed(Guid orgId, string serverId, string diskId)
+        {
+            return new Uri(string.Format("{0}/server/{1}/disk/{2}/changeSpeed", orgId, serverId, diskId), UriKind.Relative);
+        }
+
+
         /// <summary>
         /// Change server disk size
         /// </summary>

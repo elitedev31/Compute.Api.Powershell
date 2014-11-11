@@ -505,6 +505,27 @@ namespace DD.CBU.Compute.Api.Client
                 );
         }
 
+
+
+        /// <summary>
+        /// Change server disk speed
+        /// </summary>
+        /// <param name="serverId">the server id</param>
+        /// <param name="diskId">ths disk id</param>
+        /// <param name="speedId">new size of the disk</param>
+        /// <returns></returns>
+        public async Task<Status> ChangeServerDiskSpeed(string serverId, string diskId, string speedId)
+        {
+            return await
+                this.WebApi.ApiPostAsync<ChangeDiskSpeed, Status>(
+                ApiUris.ChangeServerDiskSpeed(Account.OrganizationId, serverId, diskId),
+                new ChangeDiskSpeed
+                {
+                    speed = speedId
+                }
+                );
+        }
+
         /// <summary>
         /// Add disk to existing server
         /// </summary>

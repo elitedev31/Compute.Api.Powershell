@@ -110,6 +110,7 @@
     <Compile Include="Provisioning\CustomerGeoSignUp.cs" />
     <Compile Include="Provisioning\CustomerProvision.cs" />
     <Compile Include="Billing\PricingPlans.cs" />
+    <Compile Include="Server\ChangeDiskSpeed.cs" />
     <Compile Include="Server\ChangeDiskSize.cs" />
     <Compile Include="Server\DeployedServerWithDisk.cs" />
     <Compile Include="Server\ICustomImageDetail.cs" />

@@ -45,7 +45,11 @@ namespace DD.CBU.Compute.Powershell
                 if (newCloudComputeConnection != null)
                 {
                     WriteDebug(String.Format("CaaS connection created successfully: {0}", newCloudComputeConnection));
-
+                    var existing = SessionState.GetComputeServiceConnections();
+                    for (int i = 0; i < existing.Count; i++)
+                    {
+                        SessionState.RemoveComputeServiceConnection(existing[i]);
+                    }
                     SessionState.AddComputeServiceConnection(newCloudComputeConnection);
                     WriteObject(newCloudComputeConnection);
                 }

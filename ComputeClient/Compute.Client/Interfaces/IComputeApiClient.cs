@@ -217,7 +217,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 
 
         /// <summary>
-        /// Modify server server settings.
+        /// Modify server disk size.
         /// </summary>
         /// <param name="serverId">The server id.</param>
         /// <param name="diskId">The scsi disk Id.</param>
@@ -225,6 +225,15 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
         /// <returns>The status of the deployment.</returns>
         Task<Status> ChangeServerDiskSize(string serverId, string diskId, string sizeInGb);
 
+
+        /// <summary>
+        /// Modify server disk speed.
+        /// </summary>
+        /// <param name="serverId">The server id.</param>
+        /// <param name="diskId">The scsi disk Id.</param>
+        /// <param name="speedId">sizeInGb.</param>
+        /// <returns>The status of the deployment.</returns>
+        Task<Status> ChangeServerDiskSpeed(string serverId, string diskId, string speedId);
 
 
         /// <summary>
