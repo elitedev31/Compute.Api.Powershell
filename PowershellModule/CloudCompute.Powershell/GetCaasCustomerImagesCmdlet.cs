@@ -18,7 +18,7 @@
         /// The network to show the images from
         /// </summary>
         [Parameter(Mandatory = true, HelpMessage = "The network to show the images from")]
-        public NetworkWithLocationsNetwork NetworkWithLocations { get; set; }
+        public NetworkWithLocationsNetwork Network { get; set; }
 
         /// <summary>
         /// Get a CaaS network by name
@@ -93,7 +93,7 @@
         /// <returns>The images</returns>
         private IEnumerable<DeployedImageWithSoftwareLabelsType> GetCustomerImages()
         {
-            return CaaS.ApiClient.GetCustomerServerImages(NetworkWithLocations.location).Result;
+            return CaaS.ApiClient.GetCustomerServerImages(Network.location).Result;
         }
     }
 }
