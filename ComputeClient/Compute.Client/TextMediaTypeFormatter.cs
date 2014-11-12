@@ -21,11 +21,12 @@ namespace DD.CBU.Compute.Api.Client
 
         public override Task<object> ReadFromStreamAsync(Type type, Stream readStream, HttpContent content, IFormatterLogger formatterLogger)
         {
-            var taskCompletionSource = new TaskCompletionSource<object>();
+           var taskCompletionSource = new TaskCompletionSource<object>();
             try
             {
                 var memoryStream = new MemoryStream();
-                readStream.CopyTo(memoryStream);
+                if (readStream != null)
+                    readStream.CopyTo(memoryStream);
                 var s = System.Text.Encoding.UTF8.GetString(memoryStream.ToArray());
                 taskCompletionSource.SetResult(s);
             }
@@ -41,8 +42,11 @@ namespace DD.CBU.Compute.Api.Client
             var taskCompletionSource = new TaskCompletionSource<object>();
             try
             {
+
                 var bytes = System.Text.Encoding.UTF8.GetBytes(value as string);
-                writeStream.Write(bytes, 0, bytes.Length);
+
+                if (writeStream != null)
+                     writeStream.Write(bytes, 0, bytes.Length);
 
                 taskCompletionSource.SetResult(null);
             }

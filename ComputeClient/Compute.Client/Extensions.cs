@@ -14,15 +14,19 @@ namespace DD.CBU.Compute.Api.Client
 
         public static string ToQueryString(this NameValueCollection collection)
         {
-            return string.Join("&", collection.AllKeys.Where(key => !string.IsNullOrWhiteSpace(collection[key])).Select(key => string.Format("{0}={1}", WebUtility.UrlEncode(key), WebUtility.UrlEncode(collection[key]))));
-
-
+            if (collection != null)
+            {
+                return string.Join("&", collection.AllKeys.Where(key => !string.IsNullOrWhiteSpace(collection[key])).Select(key => string.Format("{0}={1}", WebUtility.UrlEncode(key), WebUtility.UrlEncode(collection[key]))));
+            }
+            return string.Empty;
         }
 
         private static CultureInfo ci = new CultureInfo("en-US");
         //Convert all first latter
         public static string ToTitleCase(this string str)
         {
+            if (string.IsNullOrEmpty(str))
+                return str;
             str = str.ToLower();
             var strArray = str.Split(' ');
             if (strArray.Length > 1)
@@ -34,6 +38,8 @@ namespace DD.CBU.Compute.Api.Client
         }
         public static string ToTitleCase(this string str, TitleCase tcase)
         {
+            if (string.IsNullOrEmpty(str))
+                return str;
             str = str.ToLower();
             switch (tcase)
             {

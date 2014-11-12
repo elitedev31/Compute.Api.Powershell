@@ -6,9 +6,9 @@ $login= New-Object System.Management.Automation.PSCredential ("MyUsername", $sec
 
 New-CaasConnection -ApiCredentials $login -ApiBaseUri "https://api-au.dimensiondata.com/oec/0.9/"
 
-$devNetwork = Get-CaasNetworks | Where name -like "Ant Dev"
+$devNetwork = Get-CaasNetworks -Name "Ant Dev"
 # Now, get all the servers in that network by searching for servers in that network Id.
-$devServers = Get-CaasDeployedServer | Where networkId -eq $devNetwork.Id
+$devServers = Get-CaasDeployedServer -Network $devNetwork 
  foreach ( $server in $devServers ) {
   Write-Host Shutting down $server.name 
   Set-CaasServerState -Action Shutdown -Server $server
