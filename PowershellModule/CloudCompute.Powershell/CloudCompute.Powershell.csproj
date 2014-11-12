@@ -102,7 +102,9 @@
     <Compile Include="AddCaasAclRuleCmdlet.cs" />
     <Compile Include="AddCaasNatRuleCmdlet.cs" />
     <Compile Include="AddCaasServerDiskCmdlet.cs" />
-    <Compile Include="NewCaasServerDiskDetailsCmdlet.cs" />
+    <Compile Include="OutCaasWaitForOperationCmdlet.cs" />
+    <Compile Include="SetCaasServerDiskDetailsCmdlet.cs" />
+    <Compile Include="PSCmdletCaasServerBase.cs" />
     <Compile Include="RemoveCaasBackupJobCmdlet.cs" />
     <Compile Include="NewCaasBackupJobCmdlet.cs" />
     <Compile Include="RemoveCaasServerCmdlet.cs" />

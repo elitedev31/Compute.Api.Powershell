@@ -7,9 +7,9 @@
     /// The new CaaS Server Details cmdlet.
     /// This will be used to deploy a new VM.
     /// </summary>
-    [Cmdlet(VerbsCommon.New, "CaasServerDiskDetails")]
+    [Cmdlet(VerbsCommon.Set, "CaasServerDiskDetails")]
     [OutputType(typeof(CaasServerDetails))]
-    public class NewCaasServerDiskDetailsCmdlet : Cmdlet
+    public class SetCaasServerDiskDetailsCmdlet : Cmdlet
     {
         /// <summary>
         /// The VM name

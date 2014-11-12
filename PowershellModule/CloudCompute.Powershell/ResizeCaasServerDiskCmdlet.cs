@@ -10,13 +10,11 @@
     /// The set server state cmdlet.
     /// </summary>
     [Cmdlet(VerbsCommon.Resize, "CaasServerDisk")]
-    public class ResizeCaasServerDiskCmdlet : PsCmdletCaasBase
+    [OutputType(typeof(ServerWithBackupType))]
+    public class ResizeCaasServerDiskCmdlet : PsCmdletCaasServerBase
     {
         
-        [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The server to action on")]
-        public ServerWithBackupType Server { get; set; }
-
-         [Parameter(Mandatory = true, HelpMessage = "SCSI Id of the disk to be resized")]
+        [Parameter(Mandatory = true, HelpMessage = "SCSI Id of the disk to be resized")]
         public int ScsiId { get; set; }
 
          [Parameter(Mandatory = true, HelpMessage = "New disk size in GB")]
@@ -30,9 +28,10 @@
         /// </summary>
         protected override void ProcessRecord()
         {
-            base.ProcessRecord();
+
 
             SetServerTask();
+            base.ProcessRecord();
         }
 
         /// <summary>

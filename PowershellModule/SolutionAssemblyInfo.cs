@@ -5,5 +5,5 @@
 [assembly: AssemblyCopyright("Copyright © Adam Friedman / Dimension Data 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-[assembly: AssemblyVersion("1.0.5000.8888")]
-[assembly: AssemblyFileVersion("1.0.5000.8888")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.1.0.0")]

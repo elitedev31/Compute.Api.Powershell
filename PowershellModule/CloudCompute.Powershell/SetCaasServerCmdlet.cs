@@ -10,12 +10,10 @@
     /// The set server state cmdlet.
     /// </summary>
     [Cmdlet(VerbsCommon.Set, "CaasServer")]
-    public class SetCaasServerCmdlet : PsCmdletCaasBase
+    [OutputType(typeof(ServerWithBackupType))]
+    public class SetCaasServerCmdlet : PsCmdletCaasServerBase
     {
         
-        [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The server to action on")]
-        public ServerWithBackupType Server { get; set; }
-
          [Parameter(Mandatory = false, HelpMessage = "Set the server name on CaaS")]
         public string Name { get; set; }
 
@@ -37,9 +35,8 @@
         /// </summary>
         protected override void ProcessRecord()
         {
-            base.ProcessRecord();
-
             SetServerTask();
+            base.ProcessRecord();
         }
 
         /// <summary>

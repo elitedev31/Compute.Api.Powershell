@@ -9,21 +9,18 @@
     /// The Re,pve CaaS Virtual Machine cmdlet.
     /// </summary>
     [Cmdlet(VerbsCommon.Remove, "CaasServer")]
-    [OutputType(typeof(CaasServerDetails))]
-    public class RemoveCaasServerCmdlet : PsCmdletCaasBase
+    public class RemoveCaasServerCmdlet : PsCmdletCaasServerBase
     {
-        /// <summary>
-        /// The Server Details that will be used to remove the VM
-        /// </summary>
-        [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The server to be removed.")]
-        public ServerWithBackupType Server { get; set; }
+      
 
+
+     
         /// <summary>
         /// The process record method.
         /// </summary>
         protected override void ProcessRecord()
         {
-            base.ProcessRecord();
+
 
             try
             {
@@ -37,6 +34,10 @@
                             status.result,
                             status.resultCode,
                             status.resultDetail));
+
+   
+               
+
             }
             catch (AggregateException ae)
             {
@@ -54,6 +55,7 @@
                             return true;
                         });
             }
+            base.ProcessRecord();
         }
     }
 }

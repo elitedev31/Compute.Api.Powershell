@@ -19,6 +19,15 @@
         /// </summary>
         [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The server details created by New-CaasServerDetails")]
         public CaasServerDetails ServerDetails { get; set; }
+
+        /// <summary>
+        /// Switch to return the server object after execution
+        /// </summary>
+        [Parameter(Mandatory = false, HelpMessage = "Return the Server object after execution")]
+        public SwitchParameter PassThru { get; set; }
+
+
+
         /// <summary>
         /// The process record method.
         /// </summary>
@@ -46,8 +55,8 @@
                         return true;
                     });
             }
-
-            WriteObject(server);
+            if(PassThru.IsPresent)
+                WriteObject(server);
         }
 
         private ServerWithBackupType DeployServerTask()

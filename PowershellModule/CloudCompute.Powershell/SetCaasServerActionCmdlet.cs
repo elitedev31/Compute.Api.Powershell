@@ -9,8 +9,7 @@
     /// The set server state cmdlet.
     /// </summary>
     [Cmdlet(VerbsCommon.Set, "CaasServerState")]
-    [OutputType(typeof(ServerWithBackupType))]
-    public class SetCaasServerActionCmdlet : PsCmdletCaasBase
+    public class SetCaasServerActionCmdlet : PsCmdletCaasServerBase
     {
         public enum ServerAction
         {
@@ -20,18 +19,15 @@
         [Parameter(Mandatory = true, HelpMessage = "The server action to take")]
         public ServerAction Action { get; set; }
 
-        [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The server to action on")]
-        public ServerWithBackupType Server { get; set; }
-
+       
         /// <summary>
         /// The process record method.
         /// </summary>
         protected override void ProcessRecord()
         {
+            SetServerActionTask();
             base.ProcessRecord();
 
-            SetServerActionTask();
-            WriteObject(Server);
         }
 
         /// <summary>
