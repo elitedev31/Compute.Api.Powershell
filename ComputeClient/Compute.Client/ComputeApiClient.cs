@@ -315,13 +315,16 @@ namespace DD.CBU.Compute.Api.Client
         /// <param name="operatingSystemId">the OS id</param>
         /// <param name="operatingSystemFamily">The OS family</param>
         /// <returns></returns>
-        public async Task<IReadOnlyList<ImagesWithDiskSpeedImage>> GetImages(string imageid, string name, string location, string operatingSystemId, string operatingSystemFamily)
+        public async Task<IReadOnlyList<ImagesWithDiskSpeedImage>> GetImages(string imageId, string name, string location, string operatingSystemId, string operatingSystemFamily)
         {
 
             var imagesWithDiskSpeed =
               await
-              WebApi.ApiGetAsync<ImagesWithDiskSpeed>(ApiUris.ImagesWithDiskSpeed(Account.OrganizationId,ServerImageType.OS,imageid,name,location,operatingSystemId,operatingSystemFamily));
+              WebApi.ApiGetAsync<ImagesWithDiskSpeed>(ApiUris.ImagesWithDiskSpeed(Account.OrganizationId,ServerImageType.OS,imageId,name,location,operatingSystemId,operatingSystemFamily));
 
+            if (imagesWithDiskSpeed.image == null)
+                return null;
+            
             return imagesWithDiskSpeed.image;
         }
 
@@ -354,16 +357,30 @@ namespace DD.CBU.Compute.Api.Client
         /// <param name="operatingSystemId">the OS id</param>
         /// <param name="operatingSystemFamily">The OS family</param>
         /// <returns></returns>
-        public async Task<IReadOnlyList<ImagesWithDiskSpeedImage>> GetCustomerServerImages(string imageid, string name, string location, string operatingSystemId, string operatingSystemFamily)
+        public async Task<IReadOnlyList<ImagesWithDiskSpeedImage>> GetCustomerServerImages(string imageId, string name, string location, string operatingSystemId, string operatingSystemFamily)
         {
 
             var imagesWithDiskSpeed =
               await
-              WebApi.ApiGetAsync<ImagesWithDiskSpeed>(ApiUris.ImagesWithDiskSpeed(Account.OrganizationId, ServerImageType.CUSTOMER, imageid, name, location, operatingSystemId, operatingSystemFamily));
+              WebApi.ApiGetAsync<ImagesWithDiskSpeed>(ApiUris.ImagesWithDiskSpeed(Account.OrganizationId, ServerImageType.CUSTOMER, imageId, name, location, operatingSystemId, operatingSystemFamily));
+
+            if (imagesWithDiskSpeed.image == null)
+                return null;
 
             return imagesWithDiskSpeed.image;
         }
 
+
+        /// <summary>
+        ///  Remove customer server images
+        /// </summary>
+        /// <param name="imageId">The ImageId</param>
+        /// <returns></returns>
+        public async Task<Status> RemoveCustomerServerImage(string imageId)
+        {
+            return await WebApi.ApiGetAsync<Status>(ApiUris.RemoveCustomerServerImage(Account.OrganizationId, imageId));
+        
+        }
 
         /// <summary>
         /// Deploys a server using an image into a specified network.

@@ -126,6 +126,17 @@ namespace DD.CBU.Compute.Api.Client
 
             return new Uri(uri, UriKind.Relative);
         }
+        /// <summary>
+        /// Gets the relative URI for the CaaS API action that delete a customer image.
+        /// </summary>
+        /// <param name="orgId">The organization id</param>
+        /// <param name="imageId">The customer image id</param>
+        /// <returns></returns>
+        internal static Uri RemoveCustomerServerImage(Guid orgId, string imageId)
+        {
+            return new Uri(
+                string.Format("{0}/image/{1}?delete", orgId,imageId),UriKind.Relative);
+        }
 
         /// <summary>
         /// Gets the relative URI for the CaaS API action that retrieves a filtered list of deployed servers.

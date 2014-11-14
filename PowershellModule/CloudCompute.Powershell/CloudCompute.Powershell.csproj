@@ -105,6 +105,7 @@
     <Compile Include="AddCaasServerDiskCmdlet.cs" />
     <Compile Include="OutCaasWaitForOperationCmdlet.cs" />
     <Compile Include="NewCaasServerCloneToCustomerImageCmdlet.cs" />
+    <Compile Include="RemoveCaasCustomerImage.cs" />
     <Compile Include="UpdateCaasServerVMwareToolsCmdlet.cs" />
     <Compile Include="SetCaasServerDiskDetailsCmdlet.cs" />
     <Compile Include="PSCmdletCaasServerBase.cs" />

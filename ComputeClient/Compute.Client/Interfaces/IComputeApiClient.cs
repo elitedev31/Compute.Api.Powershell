@@ -112,7 +112,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
         /// <param name="operatingSystemId">the OS id</param>
         /// <param name="operatingSystemFamily">The OS family</param>
         /// <returns></returns>
-        Task<IReadOnlyList<ImagesWithDiskSpeedImage>> GetImages(string imageid, string name, string location, string operatingSystemId, string operatingSystemFamily);
+        Task<IReadOnlyList<ImagesWithDiskSpeedImage>> GetImages(string imageId, string name, string location, string operatingSystemId, string operatingSystemFamily);
 
         /// <summary>
         /// Gets the deployed customer server images.
@@ -132,9 +132,14 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
         /// <param name="operatingSystemId">the OS id</param>
         /// <param name="operatingSystemFamily">The OS family</param>
         /// <returns></returns>
-        Task<IReadOnlyList<ImagesWithDiskSpeedImage>> GetCustomerServerImages(string imageid, string name, string location, string operatingSystemId, string operatingSystemFamily);
+        Task<IReadOnlyList<ImagesWithDiskSpeedImage>> GetCustomerServerImages(string imageId, string name, string location, string operatingSystemId, string operatingSystemFamily);
 
-
+        /// <summary>
+        /// Remove customer images
+        /// </summary>
+        /// <param name="imageid">the image id</param>
+        /// <returns></returns>
+        Task<Status> RemoveCustomerServerImage(string imageid);
 
 
         /// <summary>
