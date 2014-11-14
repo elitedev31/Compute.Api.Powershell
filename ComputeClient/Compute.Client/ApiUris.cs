@@ -212,7 +212,7 @@ namespace DD.CBU.Compute.Api.Client
         }
 
         /// <summary>
-        /// Triggers an update of the VMware Tools software running on the guest OS of a virtual server
+        ///  A "graceful" reboot of the server.
         /// </summary>
         /// <param name="orgId">The organization id</param>
         /// <param name="serverId">The server id</param>
@@ -224,7 +224,7 @@ namespace DD.CBU.Compute.Api.Client
 
 
         /// <summary>
-        /// A "graceful" reboot of the server.
+        /// Triggers an update of the VMware Tools software running on the guest OS of a virtual server
         /// </summary>
         /// <param name="orgId">The organization id</param>
         /// <param name="serverId">The server id</param>
@@ -234,6 +234,22 @@ namespace DD.CBU.Compute.Api.Client
             return new Uri(string.Format("{0}/server/{1}?updateVMwareTools", orgId, serverId), UriKind.Relative);
         }
 
+
+        /// <summary>
+        /// Initiates a clone of a server to create a Customer Image
+        /// </summary>
+        /// <param name="orgId">The organization id</param>
+        /// <param name="serverId">The server id</param>
+        /// <returns>Returns the relative URI of the REST request for rebooting the server</returns>
+        internal static Uri CloneServerToCustomerImage(Guid orgId, string serverId,string imageName, string imageDesc)
+        {
+            Uri uri = null;
+            if (string.IsNullOrEmpty(imageDesc))
+                uri = new Uri(string.Format("{0}/server/{1}?clone={2}", orgId, serverId,imageName), UriKind.Relative);
+            else
+                uri = new Uri(string.Format("{0}/server/{1}?clone={2}&desc={3}", orgId, serverId,imageName,imageDesc), UriKind.Relative);
+            return uri;
+        }
 
         /// <summary>
         /// Change server disk speed
@@ -266,7 +282,7 @@ namespace DD.CBU.Compute.Api.Client
         /// <param name="orgId">The organization id</param>
         /// <param name="serverId">The server id</param>
         /// <param name="size">the size of the new disk</param>
-        /// <param name="speed">the speed of the new disk</param>
+        /// <param name="speedId">the speed of the new disk</param>
         /// <returns></returns>
         internal static Uri AddServerDisk(Guid orgId, string serverId,string size,string speedId)
         {

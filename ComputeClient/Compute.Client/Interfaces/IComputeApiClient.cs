@@ -272,6 +272,16 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
         /// <returns></returns>
         Task<Status> ServerDelete(string serverId);
 
+
+        /// <summary>
+        /// Initiates a clone of a server to create a Customer Image
+        /// </summary>
+        /// <param name="serverId">The server id.</param>
+        /// <param name="imageName">the customer image name.</param>
+        /// <param name="imageDesc">the customer image description.</param>
+        /// <returns></returns>
+        Task<Status> ServerCloneToCustomerImage(string serverId,string imageName, string imageDesc);
+
         /// <summary>
         /// Gets the deployed servers.
         /// </summary>

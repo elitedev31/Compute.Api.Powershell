@@ -487,13 +487,28 @@ namespace DD.CBU.Compute.Api.Client
 
 
         /// <summary>
-        /// "Graceful" shutdown of the server.
+        /// Triggers an update of the VMware Tools software running on the guest OS of a virtual server
         /// </summary>
         /// <param name="serverId">The server id</param>
         /// <returns>Returns a status of the HTTP request</returns>
         public async Task<Status> ServerUpdateVMwareTools(string serverId)
         {
             return await this.WebApi.ApiGetAsync<Status>(ApiUris.UpdateServerVMwareTools(Account.OrganizationId, serverId));
+        }
+
+
+        /// <summary>
+        /// Initiates a clone of a server to create a Customer Image
+        /// </summary>
+        /// <param name="serverId">The server id.</param>
+        /// <param name="imageName">the customer image name.</param>
+        /// <param name="imageDesc">the customer image description.</param>
+        /// <returns></returns>
+        public async Task<Status> ServerCloneToCustomerImage(string serverId, string imageName, string imageDesc)
+        {
+
+            return await this.WebApi.ApiGetAsync<Status>(ApiUris.CloneServerToCustomerImage(Account.OrganizationId, serverId,imageName,imageDesc));
+        
         }
 
         /// <summary>
