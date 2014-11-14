@@ -212,7 +212,7 @@ namespace DD.CBU.Compute.Api.Client
         }
 
         /// <summary>
-        /// A "graceful" reboot of the server.
+        /// Triggers an update of the VMware Tools software running on the guest OS of a virtual server
         /// </summary>
         /// <param name="orgId">The organization id</param>
         /// <param name="serverId">The server id</param>
@@ -222,6 +222,17 @@ namespace DD.CBU.Compute.Api.Client
             return new Uri(string.Format("{0}/server/{1}?reboot", orgId, serverId), UriKind.Relative);
         }
 
+
+        /// <summary>
+        /// A "graceful" reboot of the server.
+        /// </summary>
+        /// <param name="orgId">The organization id</param>
+        /// <param name="serverId">The server id</param>
+        /// <returns>Returns the relative URI of the REST request for rebooting the server</returns>
+        internal static Uri UpdateServerVMwareTools(Guid orgId, string serverId)
+        {
+            return new Uri(string.Format("{0}/server/{1}?updateVMwareTools", orgId, serverId), UriKind.Relative);
+        }
 
 
         /// <summary>

@@ -257,6 +257,13 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
         Task<Status> RemoveServerDisk(string serverId, string diskId);
 
 
+        /// <summary>
+        /// Triggers an update of the VMware Tools software running on the guest OS of a virtual server
+        /// </summary>
+        /// <param name="serverId">The server id.</param>
+        /// <returns></returns>
+        Task<Status> ServerUpdateVMwareTools(string serverId);
+
 
         /// <summary>
         /// Delete the server.

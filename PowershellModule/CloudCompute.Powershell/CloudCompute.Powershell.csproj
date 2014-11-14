@@ -104,6 +104,7 @@
     <Compile Include="AddCaasNatRuleCmdlet.cs" />
     <Compile Include="AddCaasServerDiskCmdlet.cs" />
     <Compile Include="OutCaasWaitForOperationCmdlet.cs" />
+    <Compile Include="UpdateCaasServerVMwareToolsCmdlet.cs" />
     <Compile Include="SetCaasServerDiskDetailsCmdlet.cs" />
     <Compile Include="PSCmdletCaasServerBase.cs" />
     <Compile Include="RemoveCaasBackupJobCmdlet.cs" />

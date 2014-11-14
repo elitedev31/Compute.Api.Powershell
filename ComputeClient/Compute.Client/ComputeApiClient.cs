@@ -487,6 +487,16 @@ namespace DD.CBU.Compute.Api.Client
 
 
         /// <summary>
+        /// "Graceful" shutdown of the server.
+        /// </summary>
+        /// <param name="serverId">The server id</param>
+        /// <returns>Returns a status of the HTTP request</returns>
+        public async Task<Status> ServerUpdateVMwareTools(string serverId)
+        {
+            return await this.WebApi.ApiGetAsync<Status>(ApiUris.UpdateServerVMwareTools(Account.OrganizationId, serverId));
+        }
+
+        /// <summary>
         /// Change server disk size
         /// </summary>
         /// <param name="serverId">the server id</param>
