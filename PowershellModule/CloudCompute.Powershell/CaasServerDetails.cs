@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DD.CBU.Compute.Api.Contracts.Server;
+using System;
 using System.Collections.Generic;
 
 namespace DD.CBU.Compute.Powershell
@@ -15,7 +16,7 @@ namespace DD.CBU.Compute.Powershell
 
         public NetworkWithLocationsNetwork Network { get; set; }
 
-        public DeployedImageWithSoftwareLabelsType OsImage { get; set; }
+        public ImagesWithDiskSpeedImage Image { get; set; }
 
         public string PrivateIp { get; set; }
 

@@ -6,33 +6,51 @@
     using System.Management.Automation;
 
     using DD.CBU.Compute.Api.Client;
+    using DD.CBU.Compute.Api.Contracts.Server;
 
     /// <summary>
     /// The get CaaS Customer Images cmdlet.
     /// </summary>
     [Cmdlet(VerbsCommon.Get, "CaasCustomerImages")]
-    [OutputType(typeof(DeployedImageWithSoftwareLabelsType[]))]
+    [OutputType(typeof(ImagesWithDiskSpeedImage[]))]
     public class GetCaasCustomerImagesCmdlet : PsCmdletCaasBase
     {
         /// <summary>
         /// The network to show the images from
         /// </summary>
-        [Parameter(Mandatory = true, HelpMessage = "The network to show the images from")]
+        [Parameter(Mandatory = false, HelpMessage = "The network to show the images from")]
         public NetworkWithLocationsNetwork Network { get; set; }
 
         /// <summary>
-        /// Get a CaaS network by name
+        /// Get a customer image by name
         /// </summary>
         [Parameter(Mandatory = false, Position = 1, HelpMessage = "Name to filter")]
         public string Name { get; set; }
 
-
+        /// <summary>
+        /// Get a customer image by location
+        /// </summary>
+        [Parameter(Mandatory = false, HelpMessage = "Location to filter")]
+        public string Location { get; set; }
 
         /// <summary>
-        /// Get a CaaS network by name
+        /// Get a customer image by imageId
         /// </summary>
-        [Parameter(Mandatory = false, Position = 1, HelpMessage = "Location to filter")]
-        public string Location { get; set; }
+        [Parameter(Mandatory = false, HelpMessage = "ImageId to filter")]
+        public string ImageId { get; set; }
+
+        /// <summary>
+        /// Get a customer image by OS Id
+        /// </summary>
+        [Parameter(Mandatory = false, HelpMessage = "Operating System Id to filter")]
+        public string OperatingSystemId { get; set; }
+
+        /// <summary>
+        /// Get a customer image by OS family
+        /// </summary>
+        [Parameter(Mandatory = false, HelpMessage = "Operating System family to filter")]
+        public string OperatingSystemFamily { get; set; }
+
 
 
         /// <summary>
@@ -44,16 +62,16 @@
 
             try
             {
+                if (Network != null && string.IsNullOrEmpty(Location))
+                {
+                    Location = Network.location;
+                }
+
                 var resultlist = GetCustomerImages();
 
                 if (resultlist.Any())
                 {
-                    if (!string.IsNullOrEmpty(Location))
-                        resultlist = resultlist.Where(item => item.location.ToLower() == Location.ToLower());
-
-                    if (!string.IsNullOrEmpty(Name))
-                        resultlist = resultlist.Where(net => net.name.ToLower() == Name.ToLower());
-
+                  
                     switch (resultlist.Count())
                     {
                         case 0:
@@ -91,9 +109,9 @@
         /// Gets the customer images in the network
         /// </summary>
         /// <returns>The images</returns>
-        private IEnumerable<DeployedImageWithSoftwareLabelsType> GetCustomerImages()
+        private IEnumerable<ImagesWithDiskSpeedImage> GetCustomerImages()
         {
-            return CaaS.ApiClient.GetCustomerServerImages(Network.location).Result;
+            return CaaS.ApiClient.GetCustomerServerImages(ImageId, Name, Location, OperatingSystemId,OperatingSystemFamily).Result;
         }
     }
 }

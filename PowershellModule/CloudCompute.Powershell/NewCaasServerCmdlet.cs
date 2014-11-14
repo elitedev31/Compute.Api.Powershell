@@ -89,7 +89,7 @@
                     ServerDetails.Description,
                     networkid,  
                     ServerDetails.PrivateIp,
-                    ServerDetails.OsImage.id,
+                    ServerDetails.Image.id,
                     ServerDetails.AdministratorPassword,
                     ServerDetails.IsStarted,
                     diskarray

@@ -116,6 +116,7 @@
     <Compile Include="Server\ICustomImageDetail.cs" />
     <Compile Include="Server\IImageDetail.cs" />
     <Compile Include="Server\IMachineSpecification.cs" />
+    <Compile Include="Server\ImageWithDiskSpeed.cs" />
     <Compile Include="Server\IOperatingSystem.cs" />
     <Compile Include="Server\MachineSpecification.cs" />
     <Compile Include="Server\NetworkWithLocations.cs" />

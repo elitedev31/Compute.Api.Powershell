@@ -11,6 +11,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
     using DD.CBU.Compute.Api.Contracts.General;
     using DD.CBU.Compute.Api.Contracts.Provisioning;
     using DD.CBU.Compute.Api.Contracts.Software;
+    using DD.CBU.Compute.Api.Contracts.Server;
 
     /// <summary>
     /// The interface of the CaaS API Client
@@ -98,14 +99,43 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
         /// </summary>
         /// <param name="locationName">The location.</param>
         /// <returns></returns>
+        [Obsolete]
         Task<IReadOnlyList<DeployedImageWithSoftwareLabelsType>> GetImages(string locationName);
+
+
+        /// <summary>
+        /// Get OS server images
+        /// </summary>
+        /// <param name="imageid">the imageId filter</param>
+        /// <param name="name">the name filter</param>
+        /// <param name="location">the location filter</param>
+        /// <param name="operatingSystemId">the OS id</param>
+        /// <param name="operatingSystemFamily">The OS family</param>
+        /// <returns></returns>
+        Task<IReadOnlyList<ImagesWithDiskSpeedImage>> GetImages(string imageid, string name, string location, string operatingSystemId, string operatingSystemFamily);
 
         /// <summary>
         /// Gets the deployed customer server images.
         /// </summary>
         /// <param name="networkLocation">The location.</param>
         /// <returns></returns>
+        [Obsolete]
         Task<IEnumerable<DeployedImageWithSoftwareLabelsType>> GetCustomerServerImages(string networkLocation);
+
+
+        /// <summary>
+        /// Get customer server images
+        /// </summary>
+        /// <param name="imageid">the imageId filter</param>
+        /// <param name="name">the name filter</param>
+        /// <param name="location">the location filter</param>
+        /// <param name="operatingSystemId">the OS id</param>
+        /// <param name="operatingSystemFamily">The OS family</param>
+        /// <returns></returns>
+        Task<IReadOnlyList<ImagesWithDiskSpeedImage>> GetCustomerServerImages(string imageid, string name, string location, string operatingSystemId, string operatingSystemFamily);
+
+
+
 
         /// <summary>
         /// Deploy a server using an image in a specified network.
@@ -184,8 +214,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
         /// <returns>The status of the deployment.</returns>
         Task<Status> ModifyServer(string serverId, string name, string description, int memory, int cpucount,string privateIp);
 
-
-        
+               
         /// <summary>
         /// Powers on the server.
         /// </summary>
@@ -252,7 +281,6 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
         /// </summary>
         /// <param name="serverId">The server id.</param>
         /// <param name="diskId">The scsi disk Id.</param>
-        /// <param name="sizeInGb">sizeInGb.</param>
         /// <returns>The status of the deployment.</returns>
         Task<Status> RemoveServerDisk(string serverId, string diskId);
 
@@ -294,6 +322,9 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
         /// </summary>
         /// <returns></returns>
         Task<IEnumerable<ServerWithBackupType>> GetDeployedServers(string serverid, string name,string networkId, string location);
+
+
+       
 
         /// <summary>
         /// Provision customer in home geo

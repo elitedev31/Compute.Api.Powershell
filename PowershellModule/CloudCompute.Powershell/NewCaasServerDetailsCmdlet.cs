@@ -1,5 +1,6 @@
 ﻿namespace DD.CBU.Compute.Powershell
 {
+    using DD.CBU.Compute.Api.Contracts.Server;
     using System.Management.Automation;
 
     /// <summary>
@@ -37,8 +38,9 @@
         /// <summary>
         /// The OS image to use for deployment
         /// </summary>
-        [Parameter(Mandatory = true, HelpMessage = "The OS Server Image to use for deployment")]
-        public DeployedImageWithSoftwareLabelsType OsServerImage { get; set; }
+        [Alias ("OsServerImage")]
+        [Parameter(Mandatory = true, HelpMessage = "The OS or Customer Server Image to use for deployment")]
+        public ImagesWithDiskSpeedImage ServerImage { get; set; }
 
         /// <summary>
         /// The network to deploy the machine to
@@ -74,7 +76,7 @@
                         Description = Description,
                         IsStarted = IsStarted,
                         Network = Network,
-                        OsImage = OsServerImage,
+                        Image = ServerImage,
                         PrivateIp = PrivateIp
                     });
         }

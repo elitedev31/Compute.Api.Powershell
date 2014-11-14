@@ -84,7 +84,49 @@ namespace DD.CBU.Compute.Api.Client
             return new Uri(String.Format("base/image/deployedWithSoftwareLabels/{0}", locationName), UriKind.Relative);
         }
 
-      
+
+
+
+        /// <summary>
+        /// Gets the relative URI for the CaaS API action that retrieves a filtered list of server images or servers.
+        /// </summary>
+        /// <param name="orgId">The organization id</param>
+        /// <param name="name">The server name</param>
+        /// <param name="networkId">The server networkid</param>
+        /// <param name="location">The server location</param>
+        /// <returns>A list of deployed servers</returns>
+        internal static Uri ImagesWithDiskSpeed(Guid orgId, ServerImageType imagetype, string imageId, string name,  string location, string operatingSystemId, string operatingSystemFamily)
+        {
+           string uri = "base/imageWithDiskSpeed";
+            if (imagetype == ServerImageType.CUSTOMER)
+            {
+                Contract.Requires(orgId != Guid.Empty, "Organization Id cannot be empty");
+                uri = string.Format("{0}/imageWithDiskSpeed", orgId);
+            }
+            //build que query string paramenters
+            var querystringcollection = new NameValueCollection();
+            if (!string.IsNullOrEmpty(name))
+                querystringcollection.Add("name", name);
+            if (!string.IsNullOrEmpty(imageId))
+                querystringcollection.Add("id", imageId);
+            if (!string.IsNullOrEmpty(location))
+               querystringcollection.Add("location", location);
+            if (!string.IsNullOrEmpty(operatingSystemId))
+                querystringcollection.Add("operatingSystemId", operatingSystemId);
+            if (!string.IsNullOrEmpty(operatingSystemFamily))
+                querystringcollection.Add("operatingSystemFamily", operatingSystemFamily);
+
+            if (querystringcollection.AllKeys.Any())
+                uri = string.Concat(uri, "?");
+            // build the query string
+            string querystring = querystringcollection.ToQueryString();
+
+            if (!string.IsNullOrEmpty(querystring))
+                uri = string.Concat(uri, querystring);
+
+            return new Uri(uri, UriKind.Relative);
+        }
+
         /// <summary>
         /// Gets the relative URI for the CaaS API action that retrieves a filtered list of deployed servers.
         /// </summary>

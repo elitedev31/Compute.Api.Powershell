@@ -7,18 +7,19 @@
     using System.Threading.Tasks;
 
     using DD.CBU.Compute.Api.Client;
+    using DD.CBU.Compute.Api.Contracts.Server;
 
     /// <summary>
     /// The get CaaS OS Images cmdlet.
     /// </summary>
     [Cmdlet(VerbsCommon.Get, "CaasOsImages")]
-    [OutputType(typeof(DeployedImageWithSoftwareLabelsType[]))]
+    [OutputType(typeof(ImagesWithDiskSpeedImage[]))]
     public class GetCaasOsImagesCmdlet : PsCmdletCaasBase
     {
         /// <summary>
         /// The network to show the images from
         /// </summary>
-        [Parameter(Mandatory = true, HelpMessage = "The network to show the images from")]
+        [Parameter(Mandatory = false, HelpMessage = "The network to show the images from")]
         public NetworkWithLocationsNetwork Network { get; set; }
 
         /// <summary>
@@ -26,6 +27,31 @@
         /// </summary>
         [Parameter(Mandatory = false, Position = 1, HelpMessage = "OS name to filter")]
         public string Name { get; set; }
+
+
+        /// <summary>
+        /// Get a customer image by location
+        /// </summary>
+        [Parameter(Mandatory = false, HelpMessage = "Location to filter")]
+        public string Location { get; set; }
+
+        /// <summary>
+        /// Get a customer image by imageId
+        /// </summary>
+        [Parameter(Mandatory = false, HelpMessage = "ImageId to filter")]
+        public string ImageId { get; set; }
+
+        /// <summary>
+        /// Get a customer image by OS Id
+        /// </summary>
+        [Parameter(Mandatory = false, HelpMessage = "Operating System Id to filter")]
+        public string OperatingSystemId { get; set; }
+
+        /// <summary>
+        /// Get a customer image by OS family
+        /// </summary>
+        [Parameter(Mandatory = false, HelpMessage = "Operating System family to filter")]
+        public string OperatingSystemFamily { get; set; }
 
         /// <summary>
         /// The process record method.
@@ -36,12 +62,15 @@
 
             try
             {
-                var resultlist = GetOsImagesTask().Result;
+                if (Network != null && string.IsNullOrEmpty(Location))
+                {
+                    Location = Network.location;
+                }
+
+                var resultlist = GetOsImagesTask();
                 if (resultlist.Any())
                 {
-                   if (!string.IsNullOrEmpty(Name))
-                        resultlist = resultlist.Where(net => net.name.ToLower() == Name.ToLower());
-
+                
                     switch (resultlist.Count())
                     {
                         case 0:
@@ -79,9 +108,9 @@
         /// Gets the network servers from the CaaS
         /// </summary>
         /// <returns>The images</returns>
-        private async Task<IEnumerable<DeployedImageWithSoftwareLabelsType>> GetOsImagesTask()
+        private IEnumerable<ImagesWithDiskSpeedImage> GetOsImagesTask()
         {
-            return await CaaS.ApiClient.GetImages(Network.location);
+            return CaaS.ApiClient.GetImages(ImageId,Name,Location,OperatingSystemId,OperatingSystemFamily).Result;
         }
     }
 }

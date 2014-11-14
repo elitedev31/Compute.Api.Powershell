@@ -291,6 +291,7 @@ namespace DD.CBU.Compute.Api.Client
         /// <returns>
         ///		A read-only list <see cref="DeployedImageWithSoftwareLabelsType"/>, sorted by UTC creation date / time, representing the images.
         /// </returns>
+        [Obsolete]
         public async Task<IReadOnlyList<DeployedImageWithSoftwareLabelsType>> GetImages(string locationName)
         {
             if (String.IsNullOrWhiteSpace(locationName))
@@ -306,12 +307,35 @@ namespace DD.CBU.Compute.Api.Client
         }
 
         /// <summary>
+        /// Get OS server images
+        /// </summary>
+        /// <param name="imageid">the imageId filter</param>
+        /// <param name="name">the name filter</param>
+        /// <param name="location">the location filter</param>
+        /// <param name="operatingSystemId">the OS id</param>
+        /// <param name="operatingSystemFamily">The OS family</param>
+        /// <returns></returns>
+        public async Task<IReadOnlyList<ImagesWithDiskSpeedImage>> GetImages(string imageid, string name, string location, string operatingSystemId, string operatingSystemFamily)
+        {
+
+            var imagesWithDiskSpeed =
+              await
+              WebApi.ApiGetAsync<ImagesWithDiskSpeed>(ApiUris.ImagesWithDiskSpeed(Account.OrganizationId,ServerImageType.OS,imageid,name,location,operatingSystemId,operatingSystemFamily));
+
+            return imagesWithDiskSpeed.image;
+        }
+
+
+
+
+        /// <summary>
         /// This function lists the available Customer Images at a particular Location for the provided org-id.
         /// The response adds to the deprecated List Deployed Customer Images in Location function with 
         /// the addition of zero to many, optional softwareLabel elements, listing the Priced Software packages installed on the Customer Image.
         /// </summary>
         /// <param name="networkLocation">The network location</param>
         /// <returns>A list of deployed customer images with software labels in location</returns>
+        [Obsolete]
         public async Task<IEnumerable<DeployedImageWithSoftwareLabelsType>> GetCustomerServerImages(string networkLocation)
         {
             //Contract.Requires(!string.IsNullOrWhiteSpace(networkLocation), "Network location must not be empty or null");
@@ -319,6 +343,27 @@ namespace DD.CBU.Compute.Api.Client
             var images = await WebApi.ApiGetAsync<DeployedImagesWithSoftwareLabels>(ApiUris.CustomerImagesWithSoftwareLabels(Account.OrganizationId, networkLocation));
             return images.DeployedImageWithSoftwareLabels;
         }
+
+
+        /// <summary>
+        /// Get customer server images
+        /// </summary>
+        /// <param name="imageid">the imageId filter</param>
+        /// <param name="name">the name filter</param>
+        /// <param name="location">the location filter</param>
+        /// <param name="operatingSystemId">the OS id</param>
+        /// <param name="operatingSystemFamily">The OS family</param>
+        /// <returns></returns>
+        public async Task<IReadOnlyList<ImagesWithDiskSpeedImage>> GetCustomerServerImages(string imageid, string name, string location, string operatingSystemId, string operatingSystemFamily)
+        {
+
+            var imagesWithDiskSpeed =
+              await
+              WebApi.ApiGetAsync<ImagesWithDiskSpeed>(ApiUris.ImagesWithDiskSpeed(Account.OrganizationId, ServerImageType.CUSTOMER, imageid, name, location, operatingSystemId, operatingSystemFamily));
+
+            return imagesWithDiskSpeed.image;
+        }
+
 
         /// <summary>
         /// Deploys a server using an image into a specified network.
