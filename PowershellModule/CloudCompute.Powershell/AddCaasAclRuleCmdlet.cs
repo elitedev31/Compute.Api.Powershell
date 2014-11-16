@@ -1,5 +1,6 @@
 ﻿    using System;
     using System.Management.Automation;
+    using DD.CBU.Compute.Api.Contracts.Network;
 
 namespace DD.CBU.Compute.Powershell
 {

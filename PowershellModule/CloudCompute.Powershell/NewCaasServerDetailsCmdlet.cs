@@ -1,4 +1,6 @@
-﻿namespace DD.CBU.Compute.Powershell
+﻿using DD.CBU.Compute.Api.Contracts.Image;
+
+namespace DD.CBU.Compute.Powershell
 {
     using DD.CBU.Compute.Api.Contracts.Server;
     using System.Management.Automation;

@@ -1,4 +1,6 @@
 ﻿
+using DD.CBU.Compute.Api.Contracts.Datacenter;
+
 namespace DD.CBU.Compute.Powershell
 {
     using System;

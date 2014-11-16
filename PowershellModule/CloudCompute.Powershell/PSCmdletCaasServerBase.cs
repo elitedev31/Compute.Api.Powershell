@@ -1,4 +1,6 @@
-﻿namespace DD.CBU.Compute.Powershell
+﻿using DD.CBU.Compute.Api.Contracts.Server;
+
+namespace DD.CBU.Compute.Powershell
 {
     using System.Linq;
     using System.Management.Automation;

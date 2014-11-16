@@ -1,4 +1,5 @@
-﻿using DD.CBU.Compute.Api.Contracts.Server;
+﻿using DD.CBU.Compute.Api.Contracts.Image;
+using DD.CBU.Compute.Api.Contracts.Server;
 using System;
 using System.Collections.Generic;
 

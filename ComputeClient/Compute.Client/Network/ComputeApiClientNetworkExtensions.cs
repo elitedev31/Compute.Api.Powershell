@@ -1,4 +1,6 @@
-﻿namespace DD.CBU.Compute.Api.Client.Network
+﻿using DD.CBU.Compute.Api.Contracts.Network;
+
+namespace DD.CBU.Compute.Api.Client.Network
 {
     using System;
     using System.Collections.Generic;

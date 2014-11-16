@@ -19,7 +19,7 @@ namespace DD.CBU.Compute.Api.Contracts.Server
 		///		The operating system type.
 		/// </summary>
 		[XmlElement("type", Namespace = XmlNamespaceConstants.Server)]
-		public OperatingSystemType OperatingSystemType
+		public OperatingSystemTypeEnum OperatingSystemType
 		{
 			get;
 			set;

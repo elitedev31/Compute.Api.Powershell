@@ -21,32 +21,5 @@
         public BackupClientType[] Items { get; set; }
     }
 
-    /// <summary>
-    /// The backup client type
-    /// </summary>
-    [Serializable]
-    [System.Diagnostics.DebuggerStepThrough]
-    [System.ComponentModel.DesignerCategory("code")]
-    [XmlType(AnonymousType = true, Namespace = XmlNamespaceConstants.Backup)]
-    [XmlRoot(Namespace = XmlNamespaceConstants.Backup, IsNullable = false)]
-    public class BackupClientType
-    {
-        /// <summary>
-        /// the type
-        /// </summary>
-        [XmlAttribute]
-        public string type { get; set; }
 
-        /// <summary>
-        /// Is file system
-        /// </summary>
-        [XmlAttribute]
-        public string isFileSystem { get; set; }
-
-        /// <summary>
-        /// The description
-        /// </summary>
-        [XmlAttribute]
-        public string description { get; set; }
-    }
 }

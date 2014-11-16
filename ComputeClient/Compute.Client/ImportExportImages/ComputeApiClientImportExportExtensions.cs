@@ -1,9 +1,12 @@
-﻿namespace DD.CBU.Compute.Api.Client.ImportExportImages
+﻿using DD.CBU.Compute.Api.Contracts.Image;
+
+namespace DD.CBU.Compute.Api.Client.ImportExportImages
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using DD.CBU.Compute.Api.Client.Interfaces;
+    using DD.CBU.Compute.Api.Contracts.Server;
 
     /// <summary>
     /// Extension methods for the "import and export of customer images" section of the CaaS API.

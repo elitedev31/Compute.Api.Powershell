@@ -1,4 +1,7 @@
-﻿namespace DD.CBU.Compute.Powershell
+﻿using DD.CBU.Compute.Api.Contracts.Backup;
+using DD.CBU.Compute.Api.Contracts.Server;
+
+namespace DD.CBU.Compute.Powershell
 {
     using System;
     using System.Collections.Generic;

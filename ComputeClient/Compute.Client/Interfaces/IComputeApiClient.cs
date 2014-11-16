@@ -1,3 +1,5 @@
+using DD.CBU.Compute.Api.Contracts.Image;
+
 namespace DD.CBU.Compute.Api.Client.Interfaces
 {
     using System;
@@ -92,7 +94,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
         /// </summary>
         /// <returns></returns>
         [Obsolete("Use GetDataCentersWithMaintenanceStatuses instead!")]
-        Task<IReadOnlyList<IDatacenterDetail>> GetAvailableDataCenters();
+        Task<IReadOnlyList<DatacenterWithDiskSpeedDetails>> GetAvailableDataCenters();
 
         /// <summary>
         /// Gets the OS images at a particular location.

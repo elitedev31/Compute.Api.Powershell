@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-using DD.CBU.Compute.Api.Contracts.Software;
+﻿
 
 namespace DD.CBU.Compute.Api.Client
 {
@@ -8,6 +6,7 @@ namespace DD.CBU.Compute.Api.Client
     using System.Collections.Generic;
     using System.Net;
     using System.Threading.Tasks;
+    using System.Linq;
 
     using DD.CBU.Compute.Api.Client.Customers;
     using DD.CBU.Compute.Api.Client.Interfaces;
@@ -17,6 +16,8 @@ namespace DD.CBU.Compute.Api.Client
     using DD.CBU.Compute.Api.Contracts.General;
     using DD.CBU.Compute.Api.Contracts.Provisioning;
     using DD.CBU.Compute.Api.Contracts.Server;
+    using DD.CBU.Compute.Api.Contracts.Image;
+    using DD.CBU.Compute.Api.Contracts.Software;
     using System.Collections.Specialized;
 
     /// <summary>
@@ -268,7 +269,7 @@ namespace DD.CBU.Compute.Api.Client
         ///		A read-only list of <see cref="IDatacenterDetail"/>s representing the data centre information.
         /// </returns>
         [Obsolete("This method was replaced by GetListOfDataCentersWithMaintenanceStatuses based on CaaS API!")]
-        public async Task<IReadOnlyList<IDatacenterDetail>> GetAvailableDataCenters()
+        public async Task<IReadOnlyList<DatacenterWithDiskSpeedDetails>> GetAvailableDataCenters()
         {
             CheckDisposed();
 
@@ -279,7 +280,7 @@ namespace DD.CBU.Compute.Api.Client
                     )
                 );
 
-            return datacentersWithDiskSpeedDetails.Datacenters;
+            return datacentersWithDiskSpeedDetails.datacenter;
         }
 
         /// <summary>

@@ -1,31 +1,35 @@
-﻿using System.Xml.Serialization;
-
 namespace DD.CBU.Compute.Api.Contracts.Server
 {
-	/// <summary>
-	///		Well-known operating system types.
-	/// </summary>
-	[XmlRoot("OperatingSystemType", Namespace = XmlNamespaceConstants.Server)]
-	public enum OperatingSystemType
-	{
-		/// <summary>
-		///		An unknown type of operating system.
-		/// </summary>
-		/// <remarks>
-		///		Used to detect uninitialised values; do not use directly.
-		/// </remarks>
-		Unknown	= 0,
-
-		/// <summary>
-		///		A windows operating system.
-		/// </summary>
-		[XmlEnum("WINDOWS")]
-		Windows	= 1,
-
-		/// <summary>
-		///		A UNIX-style operating system.
-		/// </summary>
-		[XmlEnum("UNIX")]
-		Unix	= 2
-	}
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.18020")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://oec.api.opsource.net/schemas/server")]
+    public partial class OperatingSystemType {
+    
+        private string typeField;
+    
+        private string displayNameField;
+    
+        /// <remarks/>
+        public string type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
+            }
+        }
+    
+        /// <remarks/>
+        public string displayName {
+            get {
+                return this.displayNameField;
+            }
+            set {
+                this.displayNameField = value;
+            }
+        }
+    }
 }

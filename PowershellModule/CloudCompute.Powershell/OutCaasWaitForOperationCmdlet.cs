@@ -6,6 +6,7 @@ using System.Management.Automation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using DD.CBU.Compute.Api.Contracts.Server;
 
 namespace DD.CBU.Compute.Powershell
 {

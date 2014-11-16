@@ -8,7 +8,7 @@
 		/// <summary>
 		///		The operating system type.
 		/// </summary>
-		OperatingSystemType OperatingSystemType
+		OperatingSystemTypeEnum OperatingSystemType
 		{
 			get;
 		}

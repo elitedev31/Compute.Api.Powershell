@@ -355,11 +355,71 @@ namespace DD.CBU.Compute.Api.Client
             return new Uri(string.Format(uri, orgId,serverId), UriKind.Relative);
         }
 
-
+        /// <summary>
+        ///  The relative URI for the CaaS API action that deletes a server disk
+        /// </summary>
+        /// <param name="orgId">The organisation id</param>
+        /// <param name="serverId">the server id</param>
+        /// <param name="diskId">the disk id</param>
+        /// <returns></returns>
         internal static Uri RemoveServerDisk(Guid orgId, string serverId, string diskId)
         {
             return new Uri(string.Format("{0}/server/{1}/disk/{2}?delete", orgId, serverId, diskId), UriKind.Relative);
         }
+
+
+        /// <summary>
+        /// The relative URI for the CaaS API action that creates a anti affinity rule
+        /// </summary>
+        /// <param name="orgId">The organisation id</param>
+        /// <returns></returns>
+        internal static Uri CreateAntiAffinityRule(Guid orgId)
+        {
+            return new Uri(string.Format("{0}/antiAffinityRule", orgId), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// The relative URI for the CaaS API action that deletes a anti affinity rule
+        /// </summary>
+        /// <param name="orgId"></param>
+        /// <param name="ruleId"></param>
+        /// <returns></returns>
+        internal static Uri GetAntiAffinityRule(Guid orgId, string ruleId, string location, string networkId )
+        {
+            string uri = "{0}/antiAffinityRule";
+           //build que query string paramenters
+            var querystringcollection = new NameValueCollection();
+           
+            if (!string.IsNullOrEmpty(ruleId))
+                querystringcollection.Add("id", ruleId);
+            if (!string.IsNullOrEmpty(networkId))
+                querystringcollection.Add("networkid", networkId);
+            if (!string.IsNullOrEmpty(location))
+                querystringcollection.Add("location", location);
+
+            if (querystringcollection.AllKeys.Any())
+                uri = string.Concat(uri, "?");
+            // build the query string
+            string querystring = querystringcollection.ToQueryString();
+
+            if(!string.IsNullOrEmpty(querystring))
+                uri = string.Concat(uri, querystring);
+
+            return new Uri(string.Format(uri, orgId), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// The relative URI for the CaaS API action that deletes a anti affinity rule
+        /// </summary>
+        /// <param name="orgId"></param>
+        /// <param name="ruleId"></param>
+        /// <returns></returns>
+        internal static Uri RemoveAntiAffinityRule(Guid orgId, string ruleId)
+        {
+            return new Uri(string.Format("{0}/antiAffinityRule/{1}?delete", orgId, ruleId), UriKind.Relative);
+        }
+
+
 
         #region Network API
 

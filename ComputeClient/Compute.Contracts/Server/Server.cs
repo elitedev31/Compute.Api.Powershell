@@ -107,6 +107,7 @@ using System.Xml.Serialization;
 //    [XmlAttribute()]
 //    public string location { get; set; }
 //}
+using DD.CBU.Compute.Api.Contracts.Server;
 
 /// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
