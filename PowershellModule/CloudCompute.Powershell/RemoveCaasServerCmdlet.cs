@@ -8,7 +8,7 @@
     /// <summary>
     /// The Re,pve CaaS Virtual Machine cmdlet.
     /// </summary>
-    [Cmdlet(VerbsCommon.Remove, "CaasServer")]
+    [Cmdlet(VerbsCommon.Remove, "CaasServer",SupportsShouldProcess = true)]
     public class RemoveCaasServerCmdlet : PsCmdletCaasServerBase
     {
       

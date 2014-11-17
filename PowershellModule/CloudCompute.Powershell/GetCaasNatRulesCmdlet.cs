@@ -27,7 +27,7 @@ namespace DD.CBU.Compute.Powershell
         /// <summary>
         /// Get a CaaS network by name
         /// </summary>
-        [Parameter(Mandatory = false, Position = 1, HelpMessage = "Name to filter")]
+        [Parameter(Mandatory = false, Position = 0, HelpMessage = "Name to filter")]
         public string Name { get; set; }
 
 

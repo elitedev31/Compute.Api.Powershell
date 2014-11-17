@@ -22,7 +22,7 @@ namespace DD.CBU.Compute.Powershell
         /// <summary>
         /// Get a CaaS server by name
         /// </summary>
-        [Parameter(Mandatory = false, Position = 1, HelpMessage = "Name of the server to filter")]
+        [Parameter(Mandatory = false, Position = 0, HelpMessage = "Name of the server to filter")]
         public string Name { get; set; }
 
         /// <summary>

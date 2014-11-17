@@ -667,6 +667,61 @@ namespace DD.CBU.Compute.Api.Client
             return servers.server;
         }
 
+
+        /// <summary>
+        /// Creates a new Server Anti-Affinity Rule between two servers on the same Cloud network. 
+        /// </summary>
+        /// <param name="serverId1">the serverId for the 1st server</param>
+        /// <param name="serverId2">the serverId for the 2nd server</param>
+        /// <returns></returns>
+        public async Task<Status> CreateServerAntiAffinityRule(string serverId1, string serverId2)
+        {
+
+            return await
+               this.WebApi.ApiPostAsync<NewAntiAffinityRule, Status>(
+               ApiUris.CreateAntiAffinityRule(Account.OrganizationId),
+               new NewAntiAffinityRule
+               {
+                   serverId = new string[2] { serverId1,serverId2}
+               }
+               );
+
+        }
+
+
+        /// <summary>
+        /// List all Server Anti-Affinity Rules 
+        /// </summary>
+        /// <param name="ruleId">filter by ruleId</param>
+        /// <param name="location">filter by location</param>
+        /// <param name="networkId">filter by networkid</param>
+        /// <returns></returns>
+        public async Task<IEnumerable<AntiAffinityRuleType>> GetServerAntiAffinityRules(string ruleId, string location,
+            string networkId)
+        {
+
+            var rules = await 
+                this.WebApi.ApiGetAsync<AntiAffinityRules>(ApiUris.GetAntiAffinityRule(Account.OrganizationId, ruleId,
+                    location, networkId));
+            return rules.antiAffinityRule;
+
+
+
+        }
+
+        /// <summary>
+        /// Remove a server Anti-Affinity Rule between two servers on the same Cloud network. 
+        /// </summary>
+        /// <param name="ruleId">the ruleId</param>
+        /// <returns></returns>
+        public async Task<Status> RemoveServerAntiAffinityRule(string ruleId)
+        {
+
+            return await this.WebApi.ApiGetAsync<Status>(ApiUris.RemoveAntiAffinityRule(Account.OrganizationId, ruleId));
+
+        }
+
+
         /// <summary>
         /// Provision customer in home geo
         /// </summary>

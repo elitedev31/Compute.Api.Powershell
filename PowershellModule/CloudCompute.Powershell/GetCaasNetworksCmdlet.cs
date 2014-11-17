@@ -24,7 +24,7 @@
         /// <summary>
         /// Get a CaaS network by name
         /// </summary>
-        [Parameter(Mandatory = false, Position = 1, HelpMessage = "Location to filter")]
+        [Parameter(Mandatory = false, Position = 0, HelpMessage = "Location to filter")]
         public string Location { get; set; }
 
         /// <summary>

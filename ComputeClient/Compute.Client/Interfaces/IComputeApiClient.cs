@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using DD.CBU.Compute.Api.Contracts.Image;
 
 namespace DD.CBU.Compute.Api.Client.Interfaces
@@ -108,7 +109,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
         /// <summary>
         /// Get OS server images
         /// </summary>
-        /// <param name="imageid">the imageId filter</param>
+        /// <param name="imageId">the imageId filter</param>
         /// <param name="name">the name filter</param>
         /// <param name="location">the location filter</param>
         /// <param name="operatingSystemId">the OS id</param>
@@ -128,7 +129,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
         /// <summary>
         /// Get customer server images
         /// </summary>
-        /// <param name="imageid">the imageId filter</param>
+        /// <param name="imageId">the imageId filter</param>
         /// <param name="name">the name filter</param>
         /// <param name="location">the location filter</param>
         /// <param name="operatingSystemId">the OS id</param>
@@ -330,8 +331,32 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
         /// <returns></returns>
         Task<IEnumerable<ServerWithBackupType>> GetDeployedServers(string serverid, string name,string networkId, string location);
 
+       /// <summary>
+       /// Creates a new Server Anti-Affinity Rule between two servers on the same Cloud network. 
+       /// </summary>
+       /// <param name="serverId1">the serverId for the 1st server</param>
+        /// <param name="serverId2">the serverId for the 2nd server</param>
+       /// <returns></returns>
+        Task<Status> CreateServerAntiAffinityRule(string serverId1, string serverId2);
 
-       
+        /// <summary>
+        /// List all Server Anti-Affinity Rules 
+        /// </summary>
+        /// <param name="ruleId">filter by ruleId</param>
+        /// <param name="location">filter by location</param>
+        /// <param name="networkId">filter by networkid</param>
+        /// <returns></returns>
+        Task<IEnumerable<AntiAffinityRuleType>> GetServerAntiAffinityRules(string ruleId, string location,
+            string networkId);
+
+
+
+        /// <summary>
+        /// Remove a server Anti-Affinity Rule between two servers on the same Cloud network. 
+        /// </summary>
+        /// <param name="ruleId">the ruleId</param>
+        /// <returns></returns>
+        Task<Status> RemoveServerAntiAffinityRule(string ruleId);
 
         /// <summary>
         /// Provision customer in home geo

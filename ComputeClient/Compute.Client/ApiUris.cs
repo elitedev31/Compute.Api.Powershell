@@ -381,10 +381,12 @@ namespace DD.CBU.Compute.Api.Client
         /// <summary>
         /// The relative URI for the CaaS API action that deletes a anti affinity rule
         /// </summary>
-        /// <param name="orgId"></param>
-        /// <param name="ruleId"></param>
-        /// <returns></returns>
-        internal static Uri GetAntiAffinityRule(Guid orgId, string ruleId, string location, string networkId )
+        /// <param name="orgId">the org id</param>
+        /// <param name="ruleId">the anti affinity rule id</param>
+        /// <param name="location">the location</param>
+        /// <param name="networkId">the network id</param>
+        ///  <returns></returns>
+        internal static Uri GetAntiAffinityRule(Guid orgId, string ruleId, string location, string networkId)
         {
             string uri = "{0}/antiAffinityRule";
            //build que query string paramenters

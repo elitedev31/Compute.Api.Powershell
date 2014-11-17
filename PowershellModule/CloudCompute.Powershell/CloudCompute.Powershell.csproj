@@ -103,9 +103,12 @@
     <Compile Include="AddCaasAclRuleCmdlet.cs" />
     <Compile Include="AddCaasNatRuleCmdlet.cs" />
     <Compile Include="AddCaasServerDiskCmdlet.cs" />
+    <Compile Include="GetCaasServerAntiAffinityRuleCmdlet.cs" />
+    <Compile Include="NewCaasServerAntiAffinityRuleCmdlet.cs" />
     <Compile Include="OutCaasWaitForOperationCmdlet.cs" />
     <Compile Include="NewCaasServerCloneToCustomerImageCmdlet.cs" />
     <Compile Include="RemoveCaasCustomerImage.cs" />
+    <Compile Include="RemoveCaasServerAntiAffinityRuleCmdlet.cs" />
     <Compile Include="UpdateCaasServerVMwareToolsCmdlet.cs" />
     <Compile Include="SetCaasServerDiskDetailsCmdlet.cs" />
     <Compile Include="PSCmdletCaasServerBase.cs" />

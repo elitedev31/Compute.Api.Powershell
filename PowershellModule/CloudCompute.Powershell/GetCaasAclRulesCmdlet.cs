@@ -26,7 +26,7 @@ namespace DD.CBU.Compute.Powershell
         /// <summary>
         /// Get a CaaS ACL by name
         /// </summary>
-        [Parameter(Mandatory = false, Position = 1, HelpMessage = "ACL name to filter")]
+        [Parameter(Mandatory = false, Position = 0, HelpMessage = "ACL name to filter")]
         public string Name { get; set; }
 
 

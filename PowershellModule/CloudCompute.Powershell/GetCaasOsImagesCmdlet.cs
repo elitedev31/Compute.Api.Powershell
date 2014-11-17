@@ -27,7 +27,7 @@ namespace DD.CBU.Compute.Powershell
         /// <summary>
         /// Get a image OS by name
         /// </summary>
-        [Parameter(Mandatory = false, Position = 1, HelpMessage = "OS name to filter")]
+        [Parameter(Mandatory = false, Position = 0, HelpMessage = "OS name to filter")]
         public string Name { get; set; }
 
 
