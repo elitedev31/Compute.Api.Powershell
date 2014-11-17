@@ -168,6 +168,7 @@
     <Compile Include="Network\NetworkingType.cs" />
     <Compile Include="Network\Networks.cs" />
     <Compile Include="Network\NetworkType.cs" />
+    <Compile Include="Network\NetworkWithLocations.cs" />
     <Compile Include="Network\NetworkWithLocationType.cs" />
     <Compile Include="Network\NewNetworkWithLocationType.cs" />
     <Compile Include="Network\PortRangeType.cs" />
@@ -219,7 +220,6 @@
     <Compile Include="Server\IMachineSpecification.cs" />
     <Compile Include="Server\IOperatingSystem.cs" />
     <Compile Include="Server\MachineSpecification.cs" />
-    <Compile Include="Server\NetworkWithLocations.cs" />
     <Compile Include="Server\NewServerToDeployWithDiskSpeed.cs" />
     <Compile Include="Server\NewServerToDeploy.cs" />
     <Compile Include="Server\OperatingSystem.cs" />

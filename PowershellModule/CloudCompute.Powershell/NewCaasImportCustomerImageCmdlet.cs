@@ -2,6 +2,7 @@
     using System.Management.Automation;
     using System.Threading.Tasks;
     using DD.CBU.Compute.Api.Contracts.Image;
+    using DD.CBU.Compute.Api.Contracts.Network;
     using DD.CBU.Compute.Api.Contracts.Server;
 
 namespace DD.CBU.Compute.Powershell

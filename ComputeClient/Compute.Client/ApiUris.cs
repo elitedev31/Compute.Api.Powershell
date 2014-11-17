@@ -526,6 +526,17 @@ namespace DD.CBU.Compute.Api.Client
             return new Uri(string.Format("{0}/network/{1}?delete", orgId, networkId), UriKind.Relative);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="orgId"></param>
+        /// <param name="networkId"></param>
+        /// <returns></returns>
+        internal static Uri ModifyNetwork(Guid orgId, string networkId)
+        {
+            return new Uri(string.Format("{0}/network/{1}", orgId, networkId), UriKind.Relative);
+        }
+
         #endregion // Network API
 
         #region Backup URIs

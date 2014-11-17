@@ -109,6 +109,7 @@
     <Compile Include="NewCaasServerCloneToCustomerImageCmdlet.cs" />
     <Compile Include="RemoveCaasCustomerImage.cs" />
     <Compile Include="RemoveCaasServerAntiAffinityRuleCmdlet.cs" />
+    <Compile Include="SetCaasNetworkCmdlet.cs" />
     <Compile Include="UpdateCaasServerVMwareToolsCmdlet.cs" />
     <Compile Include="SetCaasServerDiskDetailsCmdlet.cs" />
     <Compile Include="PSCmdletCaasServerBase.cs" />

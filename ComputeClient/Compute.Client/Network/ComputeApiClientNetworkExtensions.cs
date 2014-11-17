@@ -9,6 +9,7 @@ namespace DD.CBU.Compute.Api.Client.Network
     using System.Threading.Tasks;
 
     using DD.CBU.Compute.Api.Client.Interfaces;
+    using System.Collections.Specialized;
 
     /// <summary>
     /// Extension methods for the Network section of the CaaS API.
@@ -66,6 +67,32 @@ namespace DD.CBU.Compute.Api.Client.Network
         {
             return
                 await client.WebApi.ApiGetAsync<Status>(ApiUris.DeleteNetwork(client.Account.OrganizationId, networkId));
+        }
+
+
+        /// <summary>
+        /// Modify the details of a specific network owned by a customer.
+        /// This API requires your organization ID and the ID of the target network.
+        /// </summary>
+        /// <param name="client">The <see cref="ComputeApiClient"/> object.</param>
+        /// <param name="networkId">The network id to modify.</param>
+        /// <param name="name">The new network name.</param>     
+        /// <param name="description">The new network description.</param>
+        /// 
+        /// <returns>A status of the response.</returns>
+        public static async Task<Status> ModifyNetwork(this IComputeApiClient client, string networkId,string name, string description)
+        {
+            var parameters = new NameValueCollection();
+            if (!string.IsNullOrEmpty(name))
+                parameters.Add("name", name);
+            if (!string.IsNullOrEmpty(description))
+                parameters.Add("description", description);
+
+            // build the query string
+            string poststring = parameters.ToQueryString();
+
+            return
+                await client.WebApi.ApiPostAsync<Status>(ApiUris.ModifyNetwork(client.Account.OrganizationId, networkId),poststring);
         }
 
         /// <summary>

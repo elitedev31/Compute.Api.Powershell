@@ -628,7 +628,12 @@ namespace DD.CBU.Compute.Api.Client
                 ApiUris.AddServerDisk(Account.OrganizationId, serverId, size, speedId));
         }
 
-
+        /// <summary>
+        /// Remove disk from existing server
+        /// </summary>
+        /// <param name="serverId">the server id</param>
+        /// <param name="diskId">the disk id</param>
+        /// <returns></returns>
         public async Task<Status> RemoveServerDisk(string serverId, string diskId)
         {
             return await
