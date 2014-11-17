@@ -250,6 +250,26 @@
     <Compile Include="Server\SoftwareLabelType.cs" />
     <Compile Include="Server\Status.cs" />
     <Compile Include="Software\SoftwareLabels.cs" />
+    <Compile Include="Vip\NewPersistenceProfile.cs" />
+    <Compile Include="Vip\NewProbe.cs" />
+    <Compile Include="Vip\NewProbeStatusCodeRange.cs" />
+    <Compile Include="Vip\NewRealServer.cs" />
+    <Compile Include="Vip\NewServerFarm.cs" />
+    <Compile Include="Vip\NewVip.cs" />
+    <Compile Include="Vip\PersistenceProfiles.cs" />
+    <Compile Include="Vip\PersistenceProfilesPersistenceProfile.cs" />
+    <Compile Include="Vip\Probes.cs" />
+    <Compile Include="Vip\ProbesProbe.cs" />
+    <Compile Include="Vip\RealServers.cs" />
+    <Compile Include="Vip\RealServersRealServer.cs" />
+    <Compile Include="Vip\ServerFarm.cs" />
+    <Compile Include="Vip\ServerFarmPredictorType.cs" />
+    <Compile Include="Vip\ServerFarmProbe.cs" />
+    <Compile Include="Vip\ServerFarmRealServer.cs" />
+    <Compile Include="Vip\ServerFarms.cs" />
+    <Compile Include="Vip\ServerFarmsServerFarm.cs" />
+    <Compile Include="Vip\Vips.cs" />
+    <Compile Include="Vip\VipsVip.cs" />
     <Compile Include="XmlNamespaceConstants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

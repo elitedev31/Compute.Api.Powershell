@@ -537,6 +537,62 @@ namespace DD.CBU.Compute.Api.Client
             return new Uri(string.Format("{0}/network/{1}", orgId, networkId), UriKind.Relative);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="orgId"></param>
+        /// <param name="networkId"></param>
+        /// <returns></returns>
+        internal static Uri GetNetworkConfig(Guid orgId, string networkId)
+        {
+            return new Uri(string.Format("{0}/network/{1}/config", orgId, networkId), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// Reseve public ip address block
+        /// </summary>
+        /// <param name="orgId">the org id</param>
+        /// <param name="networkId">the network id</param>
+        /// <returns>Uri</returns>
+        internal static Uri ReserveNetworkPublicIpAddressBlock(Guid orgId, string networkId)
+        {
+            return new Uri(string.Format("{0}/network/{1}/publicip?reserveNewWithSize", orgId, networkId), UriKind.Relative);
+        }
+        /// <summary>
+        /// Release public ip address block
+        /// </summary>
+        /// <param name="orgId">the org id</param>
+        /// <param name="networkId">the network id</param>
+        /// <param name="ipBlockId">the block id</param>
+        /// <returns></returns>
+        internal static Uri ReleaseNetworkPublicIpAddressBlock(Guid orgId, string networkId, string ipBlockId)
+        {
+            return new Uri(string.Format("{0}/network/{1}/publicip/{2}?release ", orgId, networkId,ipBlockId), UriKind.Relative);
+        }
+        /// <summary>
+        /// Set server to vip ip address block setting
+        /// </summary>
+        /// <param name="orgId">the org id</param>
+        /// <param name="networkId">the network id</param>
+        /// <param name="ipBlockId">the block id</param>
+        /// <returns></returns>
+        internal static Uri SetServerToVipNetworkPublicIpAddressBlock(Guid orgId, string networkId, string ipBlockId)
+        {
+            return new Uri(string.Format("{0}/network/{1}/publicip/{2} ", orgId, networkId, ipBlockId), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// Set multicast on network setting
+        /// </summary>
+        /// <param name="orgId">the org id</param>
+        /// <param name="networkId">the network id</param>
+       /// <returns></returns>
+        internal static Uri SetNetworkMulticast(Guid orgId, string networkId)
+        {
+            return new Uri(string.Format("{0}/network/{1}/multicast ", orgId, networkId), UriKind.Relative);
+        }
+        
+
         #endregion // Network API
 
         #region Backup URIs

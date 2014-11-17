@@ -1,4 +1,5 @@
-﻿using DD.CBU.Compute.Api.Contracts.Network;
+﻿using System.Runtime.CompilerServices;
+using DD.CBU.Compute.Api.Contracts.Network;
 
 namespace DD.CBU.Compute.Api.Client.Network
 {
@@ -93,6 +94,19 @@ namespace DD.CBU.Compute.Api.Client.Network
 
             return
                 await client.WebApi.ApiPostAsync<Status>(ApiUris.ModifyNetwork(client.Account.OrganizationId, networkId),poststring);
+        }
+
+        /// <summary>
+        /// Retrieves the details of a specific network owned by a customer.
+        /// This API requires your organization ID and the ID of the target network.
+        /// </summary>
+        /// <param name="client">The <see cref="ComputeApiClient"/> object.</param>
+        /// <param name="networkId">The network id to delete.</param>
+        /// <returns>A NetworkConfigurationType of the response.</returns>
+        public static async Task<NetworkConfigurationType> GetNetworkConfig(this IComputeApiClient client, string networkId)
+        {
+            return
+                await client.WebApi.ApiGetAsync<NetworkConfigurationType>(ApiUris.GetNetworkConfig(client.Account.OrganizationId, networkId));
         }
 
         /// <summary>
@@ -334,5 +348,85 @@ namespace DD.CBU.Compute.Api.Client.Network
                     ApiUris.CreateAclRule(client.Account.OrganizationId, networkId),
                     rule);
         }
+
+        /// <summary>
+        /// Reserves a public Ip address block for the network
+        /// This API requires your organization ID and the ID of the target network.
+        /// </summary>
+        /// <param name="client">The <see cref="ComputeApiClient"/> object.</param>
+        /// <param name="networkId">The network id to delete.</param>
+        /// <returns>A Status of the response.</returns>
+        public static async Task<Status> ReserveNetworkPublicIpAddressBlock(this IComputeApiClient client, string networkId)
+        {
+            return
+                await client.WebApi.ApiGetAsync<Status>(ApiUris.ReserveNetworkPublicIpAddressBlock(client.Account.OrganizationId, networkId));
+        }
+
+        /// <summary>
+        /// Releases a public Ip address block for the network
+        /// This API requires your organization ID and the ID of the target network.
+        /// </summary>
+        /// <param name="client">The <see cref="ComputeApiClient"/> object.</param>
+        /// <param name="networkId">The network id to add the block.</param>
+        /// <param name="ipBlockId">The public ip address block id </param>
+        /// <returns>A Status of the response.</returns>
+        public static async Task<Status> ReleaseNetworkPublicIpAddressBlock(this IComputeApiClient client, string networkId,string ipBlockId)
+        {
+            return
+                await client.WebApi.ApiGetAsync<Status>(ApiUris.ReleaseNetworkPublicIpAddressBlock(client.Account.OrganizationId, networkId,ipBlockId));
+        }
+
+
+        /// <summary>
+        /// List the public Ip address blocks from a network
+        /// This API requires your organization ID and the ID of the target network.
+        /// </summary>
+        /// <param name="client">The <see cref="ComputeApiClient"/> object.</param>
+        /// <param name="networkId">The network id to add the block.</param>
+        /// <returns>A Status of the response.</returns>
+        public static async Task<IEnumerable<IpBlockType>> GetNetworkPublicIpAddressBlock(this IComputeApiClient client, string networkId)
+        {
+            var ipblockp = await client.GetNetworkConfig(networkId);
+
+            return ipblockp.publicIps;
+
+        }
+
+        /// <summary>
+        /// Set the server to VIP connectivity on a public Ip address block for the network
+        /// This API requires your organization ID and the ID of the target network.
+        /// </summary>
+        /// <param name="client">The <see cref="ComputeApiClient"/> object.</param>
+        /// <param name="networkId">The network id to add the block.</param>
+        /// <param name="ipBlockId">The public ip address block id </param>
+        /// <param name="enable">The setting of the Server to VIP on ip address block</param>
+        /// <returns>A Status of the response.</returns>
+        public static async Task<Status> SetServertoVipNetworkPublicIpAddressBlock(this IComputeApiClient client, string networkId, string ipBlockId,bool enable)
+        {
+            string poststring = "serverToVipConnectivity={0}";
+            
+            return
+                await client.WebApi.ApiPostAsync<Status>(ApiUris.SetServerToVipNetworkPublicIpAddressBlock(client.Account.OrganizationId, networkId, ipBlockId), string.Format(poststring, enable.ToString()));
+            ;
+        }
+
+
+        /// <summary>
+        /// Set Multicast for the network
+        /// This API requires your organization ID and the ID of the target network.
+        /// </summary>
+        /// <param name="client">The <see cref="ComputeApiClient"/> object.</param>
+        /// <param name="networkId">The network id </param>
+     /// <param name="enable">The setting for multicast on network</param>
+        /// <returns>A Status of the response.</returns>
+        public static async Task<Status> SetNetworkMulticast(this IComputeApiClient client, string networkId, bool enable)
+        {
+            string poststring = "enabled={0}";
+
+            return
+                await client.WebApi.ApiPostAsync<Status>(ApiUris.SetNetworkMulticast(client.Account.OrganizationId, networkId), string.Format(poststring, enable.ToString()));
+            
+        }
+
     }
 }
