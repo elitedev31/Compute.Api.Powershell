@@ -87,24 +87,6 @@
     <Compile Include="..\SolutionAssemblyInfo.cs">
       <Link>Properties\SolutionAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Backup\AlertingType.cs" />
-    <Compile Include="Backup\BackupClientDetailsType.cs" />
-    <Compile Include="Backup\BackupClientType.cs" />
-    <Compile Include="Backup\BackupDetails.cs" />
-    <Compile Include="Backup\BackupTimesType.cs" />
-    <Compile Include="Backup\BackupType.cs" />
-    <Compile Include="Backup\ModifyBackup.cs" />
-    <Compile Include="Backup\ModifyBackupClient.cs" />
-    <Compile Include="Backup\NewBackup.cs" />
-    <Compile Include="Backup\RestoreBackup.cs" />
-    <Compile Include="Backup\RestoreTargetServers.cs" />
-    <Compile Include="Backup\RestoreTargetServerType.cs" />
-    <Compile Include="Backup\RestoreTargetServerTypeBackup.cs" />
-    <Compile Include="Backup\RunningJobType.cs" />
-    <Compile Include="Backup\SchedulePolicy.cs" />
-    <Compile Include="Backup\ServicePlan.cs" />
-    <Compile Include="Backup\StoragePolicy.cs" />
-    <Compile Include="Backup\TriggerType.cs" />
     <Compile Include="Datacenter\Datacenters.cs" />
     <Compile Include="Datacenter\DatacentersWithDiskSpeedDetails.cs" />
     <Compile Include="Datacenter\DatacentersWithLimits.cs" />
@@ -191,10 +173,6 @@
     <Compile Include="Server\MachineSpecificationType.cs" />
     <Compile Include="Server\MachineStatusType.cs" />
     <Compile Include="Server\NewAntiAffinityRule.cs" />
-    <Compile Include="Backup\BackupClientTypes.cs" />
-    <Compile Include="Backup\BackupStoragePolicies.cs" />
-    <Compile Include="Backup\BackupSchedulePolicies.cs" />
-    <Compile Include="Backup\NewBackupClient.cs" />
     <Compile Include="Datacenter\DatacenterDetail.cs" />
     <Compile Include="Datacenter\DatacenterSummary.cs" />
     <Compile Include="Datacenter\DiskSpeedDetail.cs" />
@@ -278,7 +256,9 @@
       <Link>Properties\CustomDictionary.xml</Link>
     </CodeAnalysisDictionary>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Backup\" />
+  </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
