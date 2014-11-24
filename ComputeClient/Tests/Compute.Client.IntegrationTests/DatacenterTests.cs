@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -53,13 +54,13 @@ namespace DD.CBU.Compute.Client.IntegrationTests
 				Guid organizationId = account.OrganizationId;
 				Assert.AreNotEqual(Guid.Empty, organizationId);
 
-				IReadOnlyList<IDatacenterDetail> dataCenters =
-					await computeApiClient
-						.GetAvailableDataCenters();
+			    IEnumerable<DatacenterWithMaintenanceStatusType> dataCenters =
+			        await computeApiClient
+			            .GetDataCentersWithMaintenanceStatuses();
 
-				Assert.AreNotEqual(0, dataCenters.Count);
-				foreach (IDatacenterDetail dataCenter in dataCenters)
-					TestContext.WriteLine("{0}:{1} ({2})", dataCenter.LocationCode, dataCenter.DisplayName, dataCenter.Country);
+				Assert.AreNotEqual(0, dataCenters.Count());
+                foreach (DatacenterWithMaintenanceStatusType dataCenter in dataCenters)
+					TestContext.WriteLine("{0}:{1} ({2})", dataCenter.location, dataCenter.displayName, dataCenter.country);
 			}
 		}
 

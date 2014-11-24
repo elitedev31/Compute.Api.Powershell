@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using DD.CBU.Compute.Api.Contracts.Image;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -82,24 +83,20 @@ namespace DD.CBU.Compute.Client.IntegrationTests
 					accountCredentials: GetIntegrationTestCredentials()
 				);
 
-				foreach (DatacenterSummary datacenter in await apiClient.GetAvailableDataCenters())
+				foreach (DatacenterWithMaintenanceStatusType datacenter in await apiClient.GetDataCentersWithMaintenanceStatuses())
 				{
-					TestContext.WriteLine("DataCenter '{0}' ({1}):", datacenter.LocationCode, datacenter.DisplayName);
+					TestContext.WriteLine("DataCenter '{0}' ({1}):", datacenter.location, datacenter.displayName);
 
-					foreach (var image in await apiClient.GetImages(datacenter.LocationCode))
+					foreach (var image in await apiClient.GetImages(null,null,datacenter.location,null,null))
 					{
 						TestContext.WriteLine(
 							"\tImage '{0}' (Id = '{1}') - '{2}' ({3})",
 							image.name,
 							image.id,
-							image
-								.machineSpecification
-								.operatingSystem
-								.displayName,
-							image
-								.machineSpecification
-								.operatingSystem
-								.type
+							image.operatingSystem[0].type,
+                            image.operatingSystem[0].displayName
+                            
+															
 						);
 					}
 				}

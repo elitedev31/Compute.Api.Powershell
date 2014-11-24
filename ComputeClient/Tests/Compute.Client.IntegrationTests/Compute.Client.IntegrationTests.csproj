@@ -69,6 +69,7 @@
     <Compile Include="BaseTestFixture.cs" />
     <Compile Include="DatacenterTests.cs" />
     <Compile Include="AccountTests.cs" />
+    <Compile Include="DatacentreWithSpeed.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServerTests.cs" />
   </ItemGroup>
