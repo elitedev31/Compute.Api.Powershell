@@ -12,7 +12,7 @@ namespace DD.CBU.Compute.Powershell
     /// <summary>
     /// The Remove backup client cmdlet.
     /// </summary>
-    [Cmdlet(VerbsCommon.Remove, "CaasBackupClient")]
+    [Cmdlet(VerbsCommon.Remove, "CaasBackupClient",SupportsShouldProcess = true)]
     public class RemoveCaasBackupClientCmdlet : PsCmdletCaasBase
     {
         [Parameter(Mandatory = true, HelpMessage = "The server to remove the backup client from",
@@ -31,6 +31,7 @@ namespace DD.CBU.Compute.Powershell
 
             try
             {
+                if (!ShouldProcess(BackupClient.id)) return;
                 RemoveBackupClient();
             }
             catch (AggregateException ae)

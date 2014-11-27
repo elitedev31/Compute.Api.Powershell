@@ -10,6 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{5F5803
 		..\CaaS_PS (unit-test).ruleset = ..\CaaS_PS (unit-test).ruleset
 		..\CaaS_PS (web).ruleset = ..\CaaS_PS (web).ruleset
 		..\CaaS_PS.ruleset = ..\CaaS_PS.ruleset
+		ReleaseNotes.txt = ReleaseNotes.txt
 		..\Settings.StyleCop = ..\Settings.StyleCop
 		SolutionAssemblyInfo.cs = SolutionAssemblyInfo.cs
 	EndProjectSection

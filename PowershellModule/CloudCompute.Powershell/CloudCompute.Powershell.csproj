@@ -105,16 +105,24 @@
     <Compile Include="AddCaasServerDiskCmdlet.cs" />
     <Compile Include="GetCaasNetworkConfigurationCmdlet.cs" />
     <Compile Include="GetCaasNetworkPublicIpBlocksCmdlet.cs" />
+    <Compile Include="GetCaasProbeCmdletcs.cs" />
+    <Compile Include="GetCaasRealServerCmdlet.cs" />
     <Compile Include="GetCaasServerAntiAffinityRuleCmdlet.cs" />
     <Compile Include="NewCaasNetworkPublicIpBlockCmdlet.cs" />
+    <Compile Include="NewCaasProbeCmdlet.cs" />
     <Compile Include="NewCaasServerAntiAffinityRuleCmdlet.cs" />
+    <Compile Include="NewCaasRealServerCmdlet.cs" />
     <Compile Include="OutCaasWaitForOperationCmdlet.cs" />
     <Compile Include="NewCaasServerCloneToCustomerImageCmdlet.cs" />
     <Compile Include="RemoveCaasCustomerImage.cs" />
     <Compile Include="RemoveCaasNetworkPublicIpBlockCmdlet.cs" />
+    <Compile Include="RemoveCaasProbeCmdlet.cs" />
+    <Compile Include="RemoveCaasRealServerCmdlet.cs" />
     <Compile Include="RemoveCaasServerAntiAffinityRuleCmdlet.cs" />
     <Compile Include="SetCaasNetworkCmdlet.cs" />
     <Compile Include="SetCaasNetworkPublicIpBlockCmdlet.cs" />
+    <Compile Include="SetCaasProbeCmdlet.cs" />
+    <Compile Include="SetCaasRealServerCmdlet.cs" />
     <Compile Include="UpdateCaasServerVMwareToolsCmdlet.cs" />
     <Compile Include="SetCaasServerDiskDetailsCmdlet.cs" />
     <Compile Include="PSCmdletCaasServerBase.cs" />
@@ -165,7 +173,7 @@
     <None Include="CaaS.psd1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="DeprecatedAlias.ps1">
+    <None Include="CaasDeprecatedAlias.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />

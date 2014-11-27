@@ -17,7 +17,7 @@ namespace DD.CBU.Compute.Powershell
     /// <remarks>
     ///	Imports a new customer image.
     /// </remarks>
-    [Cmdlet(VerbsCommon.New, "CaasImportCustomerImage", SupportsShouldProcess = true)]
+    [Cmdlet(VerbsCommon.New, "CaasImportCustomerImage")]
     [OutputType(typeof(ServerImageWithStateType))]
     public class NewCaasImportCustomerImageCmdlet : PsCmdletCaasBase
     {

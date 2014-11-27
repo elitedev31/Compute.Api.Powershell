@@ -16,14 +16,17 @@ namespace DD.CBU.Compute.Powershell
     /// <remarks>
     ///	Deploys a new network in a specified data centre location.
     /// </remarks>
-    [Cmdlet(VerbsCommon.New, "CaasNetwork", SupportsShouldProcess = true)]
+    [Cmdlet(VerbsCommon.New, "CaasNetwork")]
     public class NewCaasNetworkCmdlet : PsCmdletCaasBase
     {
         [Parameter(Mandatory = true, HelpMessage = "A unique name for the new network to deploy")]
         public string Name { get; set; }
 
-        [Parameter(Mandatory = true, HelpMessage = "The data centre location where the network will be deployed.", ValueFromPipeline = true)]
+        [Parameter(Mandatory = false, ParameterSetName = "DataCentre", HelpMessage = "The data centre location where the network will be deployed.", ValueFromPipeline = true)]
         public DatacenterWithMaintenanceStatusType Datacentre { get; set; }
+
+        [Parameter(Mandatory = false,ParameterSetName = "Location", HelpMessage = "The data centre location where the network will be deployed.", ValueFromPipeline = true)]
+        public string Location { get; set; }
 
         [Parameter(HelpMessage = "The description of the network")]
         public string Description { get; set; }
@@ -37,7 +40,10 @@ namespace DD.CBU.Compute.Powershell
 
             try
             {
-                var status = CaaS.ApiClient.CreateNetwork(Name, Datacentre.location, Description).Result;
+                string location = Location;
+                if (ParameterSetName == "DataCentre")
+                    location = Datacentre.location;
+                var status = CaaS.ApiClient.CreateNetwork(Name, location, Description).Result;
                 if (status != null)
                     WriteDebug(
                         string.Format(

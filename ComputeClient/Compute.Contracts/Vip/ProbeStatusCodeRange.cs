@@ -6,15 +6,15 @@
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://oec.api.opsource.net/schemas/vip")]
-    public partial class NewProbeStatusCodeRange
+    public partial class ProbeStatusCodeRange
     {
 
-        private string lowerBoundField;
+        private int lowerBoundField;
 
-        private string upperBoundField;
+        private int upperBoundField;
 
         /// <remarks/>
-        public string lowerBound
+        public int lowerBound
         {
             get
             {
@@ -27,7 +27,7 @@
         }
 
         /// <remarks/>
-        public string upperBound
+        public int upperBound
         {
             get
             {

@@ -39,27 +39,34 @@ namespace DD.CBU.Compute.Powershell
 
             try
             {
-                var resultlist = GetAclRules();
-                if (resultlist.Any())
-                {
-                 
-                    if (!string.IsNullOrEmpty(Name))
-                        resultlist = resultlist.Where(net => net.name.ToLower() == Name.ToLower());
+                 var resultlist = GetAclRules();
+                 if (resultlist.Any())
+                 {
 
-                    switch (resultlist.Count())
-                    {
-                        case 0:
-                            WriteDebug("Object(s) not found");
-                            break;
-                        case 1:
-                            WriteObject(resultlist.First());
-                            break;
-                        default:
-                            WriteObject(resultlist, true);
-                            break;
-                    }
+                     if (!string.IsNullOrEmpty(Name))
+                         resultlist = resultlist.Where(net => net != null && String.Equals(net.name, Name, StringComparison.CurrentCultureIgnoreCase));
 
-                }
+                     switch (resultlist.Count())
+                     {
+                         case 0:
+                             WriteError(
+                                 new ErrorRecord(
+                                     new ItemNotFoundException(
+                                         "This command cannot find a matching object with the given parameters."
+                                         ), "ItemNotFoundException", ErrorCategory.ObjectNotFound, resultlist));
+
+
+                             break;
+                         case 1:
+                             WriteObject(resultlist.First());
+                             break;
+                         default:
+                             WriteObject(resultlist, true);
+                             break;
+                     }
+
+                 }
+              
             }
             catch (AggregateException ae)
             {
@@ -77,6 +84,8 @@ namespace DD.CBU.Compute.Powershell
                         return true;
                     });
             }
+          
+
         }
 
         /// <summary>

@@ -97,6 +97,7 @@
     </Compile>
     <Compile Include="ApiClientException.cs" />
     <Compile Include="ApiUris.cs" />
+    <Compile Include="KnownApiUri.cs" />
     <Compile Include="ServerImageType.cs" />
     <Compile Include="Backup\ComputeApiClientBackupExtensions.cs" />
     <Compile Include="ClientError.cs" />
@@ -119,6 +120,7 @@
     <Compile Include="TextMediaTypeFormatter.cs" />
     <Compile Include="Utilities\DisposableObject.cs" />
     <Compile Include="Vendor\ComputeApiClientVendorExtensions.cs" />
+    <Compile Include="VIP\ComputeApiVipExtensions.cs" />
     <Compile Include="WebApi.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -135,8 +137,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="VIP\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

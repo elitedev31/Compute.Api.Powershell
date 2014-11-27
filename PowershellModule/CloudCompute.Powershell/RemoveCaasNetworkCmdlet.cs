@@ -30,6 +30,7 @@ namespace DD.CBU.Compute.Powershell
 
             try
             {
+                if (!ShouldProcess(Network.name)) return;
                 var status = CaaS.ApiClient.DeleteNetwork(Network.id).Result;
                 if (status != null)
                     WriteDebug(

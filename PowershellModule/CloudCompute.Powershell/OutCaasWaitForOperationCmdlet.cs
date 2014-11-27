@@ -48,7 +48,7 @@ namespace DD.CBU.Compute.Powershell
                     if (servers != null)
                     {
                         server = servers.First();
-                        waitingToStart = server.state.ToLower().Equals("normal");
+                        waitingToStart = server.state.Equals("normal",StringComparison.InvariantCultureIgnoreCase);
                         OperationProgressRecord.Activity = "Waiting CaaS to start the operation...CaaS server state still NORMAL";
                         OperationProgressRecord.StatusDescription =  String.Format("If your operation does not change the server state do not use this cmdlet. Waiting another {0} minutes", (starttime.AddMinutes(5) - DateTime.Now).Minutes.ToString());
                         OperationProgressRecord.RecordType = ProgressRecordType.Processing;

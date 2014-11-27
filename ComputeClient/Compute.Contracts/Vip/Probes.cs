@@ -33,11 +33,11 @@ namespace DD.CBU.Compute.Api.Contracts.Vip
     public partial class Probes
     {
 
-        private ProbesProbe[] itemsField;
+        private Probe[] itemsField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("Probe")]
-        public ProbesProbe[] Items
+        public Probe[] Items
         {
             get
             {

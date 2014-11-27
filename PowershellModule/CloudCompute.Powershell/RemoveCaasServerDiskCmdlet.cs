@@ -1,4 +1,6 @@
-﻿namespace DD.CBU.Compute.Powershell
+﻿using System.Globalization;
+
+namespace DD.CBU.Compute.Powershell
 {
     using System;
     using System.Linq;
@@ -9,7 +11,7 @@
     /// <summary>
     /// The set server state cmdlet.
     /// </summary>
-    [Cmdlet(VerbsCommon.Remove, "CaasServerDisk")]
+    [Cmdlet(VerbsCommon.Remove, "CaasServerDisk",SupportsShouldProcess = true)]
     public class RemoveCaasServerDiskCmdlet : PsCmdletCaasServerBase
     {
         
@@ -26,7 +28,7 @@
         protected override void ProcessRecord()
         {
 
-
+            if(!ShouldProcess(string.Concat("Disk Id",ScsiId.ToString(CultureInfo.InvariantCulture)))) return;
             SetServerTask();
             base.ProcessRecord();
         }

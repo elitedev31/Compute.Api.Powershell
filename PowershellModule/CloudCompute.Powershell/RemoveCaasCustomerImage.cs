@@ -12,7 +12,7 @@ namespace DD.CBU.Compute.Powershell
     /// <summary>
     /// The Remove NAT Rule cmdlet.
     /// </summary>
-    [Cmdlet(VerbsCommon.Remove, "CaasCustomerImage")]
+    [Cmdlet(VerbsCommon.Remove, "CaasCustomerImage",SupportsShouldProcess = true)]
     public class RemoveCaasCustomerImageCmdlet : PsCmdletCaasBase
     {
         [Parameter(Mandatory = true, ValueFromPipeline=true, HelpMessage = "The server image retrieved by Get-CaasCustomerImages")]
@@ -28,6 +28,7 @@ namespace DD.CBU.Compute.Powershell
 
             try
             {
+                if (!ShouldProcess(ServerImage.name)) return;
                 var status = CaaS.ApiClient.RemoveCustomerServerImage(ServerImage.id).Result;
 
                 if (status != null)

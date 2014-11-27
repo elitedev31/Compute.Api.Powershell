@@ -14,7 +14,7 @@ namespace DD.CBU.Compute.Powershell
     /// <summary>
     ///	The Add CaaS NAT Rule Cmdlet.
     /// </summary>
-    [Cmdlet(VerbsCommon.Add, "CaasNatRule", SupportsShouldProcess = true)]
+    [Cmdlet(VerbsCommon.Add, "CaasNatRule")]
     [OutputType(typeof(NatRuleType))]
     public class AddCaasNatRuleCmdlet : PsCmdletCaasBase
     {

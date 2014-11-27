@@ -13,8 +13,7 @@ namespace DD.CBU.Compute.Powershell
     /// <summary>
     /// The Remove-Backup now job cmdlet.
     /// </summary>
-    [Cmdlet(VerbsCommon.Remove, "CaasBackupJob")]
-    [OutputType(typeof(ServerWithBackupType))]
+    [Cmdlet(VerbsCommon.Remove, "CaasBackupJob",SupportsShouldProcess = true)]
     public class RemoveCaasBackupJobCmdlet : PsCmdletCaasBase
     {
         [Parameter(Mandatory = true, HelpMessage = "The server to modify the backup client",
@@ -33,8 +32,8 @@ namespace DD.CBU.Compute.Powershell
 
             try
             {
+                if (!ShouldProcess(BackupClient.id)) return;
                 RemoveBackupJob();
-                WriteObject(Server);
             }
             catch (AggregateException ae)
             {

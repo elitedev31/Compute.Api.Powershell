@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Linq;
+using DD.CBU.Compute.Api.Contracts.Datacenter;
 
 namespace DD.CBU.Compute.Api.Client
 {
@@ -790,7 +791,85 @@ namespace DD.CBU.Compute.Api.Client
         {
             return new Uri(string.Format("{0}/imageImport", orgId), UriKind.Relative);
         }
+        #endregion
 
+        #region VIP
+        /// <summary>
+        ///  The relative URI for the CaaS API action that list or creates VIP real servers
+        /// </summary>
+        /// <param name="orgId">the org id</param>
+        /// <param name="networkId">the network id</param>
+        /// <returns></returns>
+        internal static Uri CreateOrGetVipRealServers(Guid orgId, string networkId)
+        {
+            return new Uri(string.Format("{0}/network/{1}/realServer", orgId, networkId), UriKind.Relative);
+        }
+
+      
+        /// <summary>
+        ///  The relative URI for the CaaS API action that deletes VIP real servers
+        /// </summary>
+        /// <param name="orgId">the org id</param>
+        /// <param name="networkId">the network id</param>
+        /// <param name="rServerId">the real server id</param>
+        /// <returns></returns>
+        internal static Uri DeleteVipRealServers(Guid orgId, string networkId, string rServerId)
+        {
+            return new Uri(string.Format("{0}/network/{1}/realServer/{2}?delete", orgId, networkId,rServerId), UriKind.Relative);
+        }
+
+        /// <summary>
+        ///  The relative URI for the CaaS API action that deletes VIP real servers
+        /// </summary>
+        /// <param name="orgId">the org id</param>
+        /// <param name="networkId">the network id</param>
+        /// <param name="rServerId">the real server id</param>
+        /// <returns></returns>
+        internal static Uri ModifyVipRealServers(Guid orgId, string networkId, string rServerId)
+        {
+            return new Uri(string.Format("{0}/network/{1}/realServer/{2}", orgId, networkId, rServerId), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// The relative URI for the CaaS API action that creates or lists VIP probes
+        /// </summary>
+        /// <param name="orgId">the org id</param>
+        /// <param name="networkId">the network id</param>
+        /// <returns>Uri</returns>
+        internal static Uri CreateOrGetVipProbes(Guid orgId, string networkId)
+        {
+            return new Uri(string.Format("{0}/network/{1}/probe", orgId, networkId), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// The relative URI for the CaaS API action that deletes VIP probes
+        /// </summary>
+        /// <param name="orgId">the org id</param>
+        /// <param name="networkId">the network id</param>
+        /// <param name="probeId">the probe id</param>
+        /// <returns>Uri</returns>
+        internal static Uri DeleteVipProbes(Guid orgId, string networkId, string probeId)
+        {
+            return new Uri(string.Format("{0}/network/{1}/probe/{2}?delete", orgId, networkId, probeId), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// The relative URI for the CaaS API action that modify VIP probes
+        /// </summary>
+        /// <param name="orgId">the org id</param>
+        /// <param name="networkId">the network id</param>
+        /// <param name="probeId">the probe id</param>
+        /// <returns>Uri</returns>
+        internal static Uri ModifyVipProbes(Guid orgId, string networkId, string probeId)
+        {
+            return new Uri(string.Format("{0}/network/{1}/probe/{2}", orgId, networkId, probeId), UriKind.Relative);
+        }
+        #endregion
+
+
+
+
+        #region Vendor
         /// <summary>
         /// Get Uri for Provision On Geo
         /// </summary>

@@ -67,7 +67,11 @@ namespace DD.CBU.Compute.Powershell
                     switch (resultlist.Count())
                     {
                         case 0:
-                            WriteDebug("Object(s) not found");
+                            WriteError(
+                                  new ErrorRecord(
+                                      new ItemNotFoundException(
+                                          "This command cannot find a matching object with the given parameters."
+                                          ), "ItemNotFoundException", ErrorCategory.ObjectNotFound, resultlist));
                             break;
                         case 1:
                             WriteObject(resultlist.First());

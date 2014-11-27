@@ -45,12 +45,16 @@ namespace DD.CBU.Compute.Powershell
                 {
 
                     if (!string.IsNullOrEmpty(Name))
-                        resultlist = resultlist.Where(net => net.name.ToLower() == Name.ToLower());
+                        resultlist = resultlist.Where(net => String.Equals(net.name, Name, StringComparison.CurrentCultureIgnoreCase));
 
                     switch (resultlist.Count())
                     {
                         case 0:
-                            WriteDebug("Object(s) not found");
+                            WriteError(
+                                  new ErrorRecord(
+                                      new ItemNotFoundException(
+                                          "This command cannot find a matching object with the given parameters."
+                                          ), "ItemNotFoundException", ErrorCategory.ObjectNotFound, resultlist));
                             break;
                         case 1:
                             WriteObject(resultlist.First());

@@ -16,7 +16,7 @@ namespace DD.CBU.Compute.Powershell
     /// <remarks>
     ///	Imports a new customer image.
     /// </remarks>
-    [Cmdlet(VerbsCommon.Add, "CaasAclRule", SupportsShouldProcess = true)]
+    [Cmdlet(VerbsCommon.Add, "CaasAclRule")]
     [OutputType(typeof(AclRuleType))]
     public class AddCaasAclRuleCmdlet : PsCmdletCaasBase
     {

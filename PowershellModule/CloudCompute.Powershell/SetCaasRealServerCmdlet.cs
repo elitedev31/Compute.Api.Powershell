@@ -5,28 +5,42 @@ using System.Management.Automation;
 using System.Text;
 using System.Threading.Tasks;
 using DD.CBU.Compute.Api.Client;
-using DD.CBU.Compute.Api.Client.Network;
-using DD.CBU.Compute.Api.Contracts.Server;
+using DD.CBU.Compute.Api.Client.VIP;
+using DD.CBU.Compute.Api.Contracts.Network;
+using DD.CBU.Compute.Api.Contracts.Vip;
 
 namespace DD.CBU.Compute.Powershell
 {
-    [Cmdlet(VerbsCommon.Remove, "CaasServerAntiAffinityRule",SupportsShouldProcess = true)]
-    public class RemoveCaasServerAntiAffinityRuleCmdlet:PsCmdletCaasBase
+    [Cmdlet(VerbsCommon.Set, "CaasRealServer")]
+    public class SetCaasRealServerCmdlet:PsCmdletCaasBase
     {
-        [Parameter(Mandatory = true, HelpMessage = "The Anti affinity rule, retrived by Get-CaasServerAntiAffinityRule.", ValueFromPipeline = true)]
-        public AntiAffinityRuleType Rule { get; set; }
+        /// <summary>
+        /// The network to manage the VIP settings
+        /// </summary>
+        [Parameter(Mandatory = true, HelpMessage = "The network to manage the VIP settings")]
+        public NetworkWithLocationsNetwork Network { get; set; }
 
         /// <summary>
-        /// Process the record
+        /// The server to be added as real server
         /// </summary>
+        [Parameter(Mandatory = true, HelpMessage = "The real server to be modified", ValueFromPipeline = true)]
+        public RealServer RealServer { get; set; }
+
+
+        /// <summary>
+        /// The real server status
+        /// </summary>
+        [Parameter(Mandatory = true, HelpMessage = "The real server status")]
+        public bool InService { get; set; }
+
         protected override void ProcessRecord()
         {
             base.ProcessRecord();
-
             try
             {
-                if (!ShouldProcess(Rule.id)) return;
-                var status = CaaS.ApiClient.RemoveServerAntiAffinityRule(Rule.id).Result;
+
+                var status = CaaS.ApiClient.ModifyRealServer(Network.id, RealServer.id,InService).Result;
+
                 if (status != null)
                     WriteDebug(
                         string.Format(
@@ -35,6 +49,10 @@ namespace DD.CBU.Compute.Powershell
                             status.result,
                             status.resultCode,
                             status.resultDetail));
+
+
+
+
             }
             catch (AggregateException ae)
             {

@@ -10,7 +10,7 @@ using DD.CBU.Compute.Api.Contracts.Network;
 
 namespace DD.CBU.Compute.Powershell
 {
-   [Cmdlet(VerbsCommon.Remove, "CaasNetworkPublicIpBlock")]
+   [Cmdlet(VerbsCommon.Remove, "CaasNetworkPublicIpBlock",SupportsShouldProcess = true)]
    public class RemoveCaasNetworkPublicIpBlockCmdlet:PsCmdletCaasBase
     {
         /// <summary>
@@ -30,6 +30,7 @@ namespace DD.CBU.Compute.Powershell
             base.ProcessRecord();
             try
             {
+                if (!ShouldProcess(PublicIpBlock.baseIp)) return;
 
                 var status = CaaS.ApiClient.ReleaseNetworkPublicIpAddressBlock(Network.id,PublicIpBlock.id).Result;
                 if (status != null)

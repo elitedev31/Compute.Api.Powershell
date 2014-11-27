@@ -39,25 +39,31 @@ namespace DD.CBU.Compute.Powershell
 
             try
             {
-                var resultlist = GetBackupClients();
+                 var resultlist = GetBackupClients();
 
-                if (resultlist.Any())
-                {
+                 if (resultlist.Any())
+                 {
 
-                    switch (resultlist.Count())
-                    {
-                        case 0:
-                            WriteDebug("Object(s) not found");
-                            break;
-                        case 1:
-                            WriteObject(resultlist.First());
-                            break;
-                        default:
-                            WriteObject(resultlist, true);
-                            break;
-                    }
+                     switch (resultlist.Count())
+                     {
+                         case 0:
+                             WriteError(
+                                new ErrorRecord(
+                                    new ItemNotFoundException(
+                                        "This command cannot find a matching object with the given parameters."
+                                        ), "ItemNotFoundException", ErrorCategory.ObjectNotFound, resultlist));
+                             break;
+                         case 1:
+                             WriteObject(resultlist.First());
+                             break;
+                         default:
+                             WriteObject(resultlist, true);
+                             break;
+                     }
 
-                }
+                 }
+
+              
             }
             catch (AggregateException ae)
             {
@@ -75,6 +81,7 @@ namespace DD.CBU.Compute.Powershell
                         return true;
                     });
             }
+        
         }
 
         /// <summary>

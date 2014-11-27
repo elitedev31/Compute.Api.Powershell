@@ -5,28 +5,37 @@ using System.Management.Automation;
 using System.Text;
 using System.Threading.Tasks;
 using DD.CBU.Compute.Api.Client;
-using DD.CBU.Compute.Api.Client.Network;
-using DD.CBU.Compute.Api.Contracts.Server;
+using DD.CBU.Compute.Api.Client.VIP;
+using DD.CBU.Compute.Api.Contracts.Network;
+using DD.CBU.Compute.Api.Contracts.Vip;
 
 namespace DD.CBU.Compute.Powershell
 {
-    [Cmdlet(VerbsCommon.Remove, "CaasServerAntiAffinityRule",SupportsShouldProcess = true)]
-    public class RemoveCaasServerAntiAffinityRuleCmdlet:PsCmdletCaasBase
+
+    [Cmdlet(VerbsCommon.Remove, "CaasProbe", SupportsShouldProcess = true)]
+    public class RemoveCaasProbeCmdlet : PsCmdletCaasBase
     {
-        [Parameter(Mandatory = true, HelpMessage = "The Anti affinity rule, retrived by Get-CaasServerAntiAffinityRule.", ValueFromPipeline = true)]
-        public AntiAffinityRuleType Rule { get; set; }
 
         /// <summary>
-        /// Process the record
+        /// The network to manage the VIP settings
         /// </summary>
+        [Parameter(Mandatory = true, HelpMessage = "The network to manage the VIP settings")]
+        public NetworkWithLocationsNetwork Network { get; set; }
+
+        /// <summary>
+        /// The real server to be deleted
+        /// </summary>
+        [Parameter(Mandatory = true, HelpMessage = "The real server to be deleted", ValueFromPipeline = true)]
+        public Probe Probe { get; set; }
+
+
         protected override void ProcessRecord()
         {
-            base.ProcessRecord();
-
             try
             {
-                if (!ShouldProcess(Rule.id)) return;
-                var status = CaaS.ApiClient.RemoveServerAntiAffinityRule(Rule.id).Result;
+                if (!ShouldProcess(Probe.name)) return;
+                var status = CaaS.ApiClient.RemoveProbe(Network.id, Probe.id).Result;
+
                 if (status != null)
                     WriteDebug(
                         string.Format(
@@ -35,6 +44,10 @@ namespace DD.CBU.Compute.Powershell
                             status.result,
                             status.resultCode,
                             status.resultDetail));
+
+
+
+
             }
             catch (AggregateException ae)
             {
@@ -52,6 +65,8 @@ namespace DD.CBU.Compute.Powershell
                         return true;
                     });
             }
+
+
         }
     }
 }

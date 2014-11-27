@@ -11,7 +11,7 @@ namespace DD.CBU.Compute.Powershell
     /// <summary>
     /// The Remove ACL Rule cmdlet.
     /// </summary>
-    [Cmdlet(VerbsCommon.Remove, "CaasAclRule")]
+    [Cmdlet(VerbsCommon.Remove, "CaasAclRule",SupportsShouldProcess = true)]
     public class RemoveCaasAclRuleCmdlet : PsCmdletCaasBase
     {
         [Parameter(Mandatory = true, HelpMessage = "The network that the ACL Rule exists")]
@@ -29,6 +29,7 @@ namespace DD.CBU.Compute.Powershell
 
             try
             {
+                if (!ShouldProcess(AclRule.name)) return;
                 DeleteAclRule();
             }
             catch (AggregateException ae)

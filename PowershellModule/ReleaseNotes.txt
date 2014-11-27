@@ -1,0 +1,41 @@
+PowerShell for CaaS 
+
+
+
+
+1.2
+
+Changes:
+
+All Get Cmdlet throw an error if not matching objects are found
+New-CaasConnection now supports passing -Vendor and -Region parameters for known public API Urls
+
+
+
+New:
+
+Server Operations:
+Update-CaasServerVMwareTools
+New-CaasServerCloneToCustomerImage
+Remove-CaasCustomerImage
+
+Network Operations:
+New-CaasServerAntiAffinityRule
+Get-CaasServerAntiAffinityRule
+Remove-CaasServerAntiAffinityRule
+Set-CaasNetwork
+New-CaasNetworkPublicIpBlock
+Get-CaasNetworkPublicIpBlock
+Set-CaasNetworkPublicIpBlock
+Remove-CaasNetworkPublicIpBlock
+
+VIP Operations:
+New-CaasRealServer
+Get-CaasRealServer
+Set-CaasRealServer
+Remove-CaasRealServer
+
+New-CaasProbe
+Get-CaasProbe
+Set-CaasProbe
+Remove-CaasProbe

@@ -29,6 +29,7 @@ namespace DD.CBU.Compute.Powershell
 
             try
             {
+                if (!ShouldProcess(NatRule.name)) return;
                 DeleteNatRule();
             }
             catch (AggregateException ae)

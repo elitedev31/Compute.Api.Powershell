@@ -34,6 +34,7 @@ namespace DD.CBU.Compute.Api.Client
         /// <param name="targetRegionName">
         ///		The name of the region whose CaaS API end-point is targeted by the client.
         /// </param>
+        [Obsolete("Please use the KnownApiUri implementation")]
         public ComputeApiClient(string targetRegionName) 
         {
             if (String.IsNullOrWhiteSpace(targetRegionName))
@@ -53,6 +54,21 @@ namespace DD.CBU.Compute.Api.Client
 
             if (!baseUri.IsAbsoluteUri)
                 throw new ArgumentException("Base URI supplied is not an absolute URI", "baseUri");
+
+            WebApi = new WebApi(baseUri);
+        }
+
+      /// <summary>
+        /// Creates a new CaaS API client using a known vendor and region.
+      /// </summary>
+      /// <param name="vendor">the vendor</param>
+      /// <param name="region">the region</param>
+        public ComputeApiClient(KnownApiVendor vendor, KnownApiRegion region)
+        {
+            var baseUri = KnownApiUri.Instance.GetBaseUri(vendor, region);
+
+            if (!baseUri.IsAbsoluteUri)
+                throw new ArgumentException("Base URI supplied is not an absolute URI", "vendor");
 
             WebApi = new WebApi(baseUri);
         }
@@ -475,14 +491,14 @@ namespace DD.CBU.Compute.Api.Client
 
 
 
-        // <summary>
+        /// <summary>
         /// Modify server server settings.
         /// </summary>
         /// <param name="serverId">The server id.</param>
         /// <param name="name">The server new name on CaaS. This paramenter does not change the machine/host name.</param>
         /// <param name="description">The new description for the server.</param>
-        /// <param name="memory">Memory (in MB). Value must be represent a GB integer (e.g. 1024,. 2048, 3072, 4096, etc.)<param>
-        /// <param name="cpuCount">Number of virtual CPU’s (e.g. 1, 2, 4 etc.)<param>        
+        /// <param name="memory">Memory (in MB). Value must be represent a GB integer (e.g. 1024,. 2048, 3072, 4096, etc.)</param>
+        /// <param name="cpucount">Number of virtual CPU’s (e.g. 1, 2, 4 etc.)</param>        
         /// <param name="privateIp">The new privateIp of the server.</param>
         /// <returns></returns>
         public async Task<Status> ModifyServer(string serverId, string name, string description, int memory, int cpucount, string privateIp)

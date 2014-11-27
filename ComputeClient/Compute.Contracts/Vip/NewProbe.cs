@@ -35,7 +35,7 @@ namespace DD.CBU.Compute.Api.Contracts.Vip
 
         private string nameField;
 
-        private string typeField;
+        private ProbeType typeField;
 
         private string probeIntervalSecondsField;
 
@@ -47,7 +47,7 @@ namespace DD.CBU.Compute.Api.Contracts.Vip
 
         private string maxReplyWaitSecondsField;
 
-        private string requestMethodField;
+        private ProbeRequestMethod requestMethodField;
 
         private string portField;
 
@@ -55,7 +55,7 @@ namespace DD.CBU.Compute.Api.Contracts.Vip
 
         private string matchContentField;
 
-        private NewProbeStatusCodeRange[] statusCodeRangeField;
+        private ProbeStatusCodeRange[] statusCodeRangeField;
 
         /// <remarks/>
         public string name
@@ -71,7 +71,7 @@ namespace DD.CBU.Compute.Api.Contracts.Vip
         }
 
         /// <remarks/>
-        public string type
+        public ProbeType type
         {
             get
             {
@@ -149,7 +149,7 @@ namespace DD.CBU.Compute.Api.Contracts.Vip
         }
 
         /// <remarks/>
-        public string requestMethod
+        public ProbeRequestMethod requestMethod
         {
             get
             {
@@ -202,7 +202,7 @@ namespace DD.CBU.Compute.Api.Contracts.Vip
 
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("statusCodeRange")]
-        public NewProbeStatusCodeRange[] statusCodeRange
+        public ProbeStatusCodeRange[] statusCodeRange
         {
             get
             {

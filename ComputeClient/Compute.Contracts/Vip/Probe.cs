@@ -1,29 +1,38 @@
 ﻿namespace DD.CBU.Compute.Api.Contracts.Vip
 {
-    /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://oec.api.opsource.net/schemas/vip")]
-    public partial class ProbesProbe
+    public partial class Probe
     {
 
         private string idField;
 
         private string nameField;
 
-        private string typeField;
+        private ProbeType typeField;
 
-        private string probeIntervalSecondsField;
+        private int probeIntervalSecondsField;
 
-        private string errorCountBeforeServerFailField;
+        private int errorCountBeforeServerFailField;
 
-        private string successCountBeforeServerEnableField;
+        private int successCountBeforeServerEnableField;
 
-        private string failedProbeIntervalSecondsField;
+        private int failedProbeIntervalSecondsField;
 
-        private string maxReplyWaitSecondsField;
+        private int maxReplyWaitSecondsField;
+
+        private ProbeRequestMethod requestMethodField;
+
+        private int portField;
+
+        private string requestUrlField;
+
+        private string matchContentField;
+
+        private ProbeStatusCodeRange[] statusCodeRangeField;
 
         /// <remarks/>
         public string id
@@ -52,7 +61,7 @@
         }
 
         /// <remarks/>
-        public string type
+        public ProbeType type
         {
             get
             {
@@ -65,7 +74,7 @@
         }
 
         /// <remarks/>
-        public string probeIntervalSeconds
+        public int probeIntervalSeconds
         {
             get
             {
@@ -78,7 +87,7 @@
         }
 
         /// <remarks/>
-        public string errorCountBeforeServerFail
+        public int errorCountBeforeServerFail
         {
             get
             {
@@ -91,7 +100,7 @@
         }
 
         /// <remarks/>
-        public string successCountBeforeServerEnable
+        public int successCountBeforeServerEnable
         {
             get
             {
@@ -104,7 +113,7 @@
         }
 
         /// <remarks/>
-        public string failedProbeIntervalSeconds
+        public int failedProbeIntervalSeconds
         {
             get
             {
@@ -117,7 +126,7 @@
         }
 
         /// <remarks/>
-        public string maxReplyWaitSeconds
+        public int maxReplyWaitSeconds
         {
             get
             {
@@ -128,5 +137,74 @@
                 this.maxReplyWaitSecondsField = value;
             }
         }
+
+        /// <remarks/>
+        public ProbeRequestMethod requestMethod
+        {
+            get
+            {
+                return this.requestMethodField;
+            }
+            set
+            {
+                this.requestMethodField = value;
+            }
+        }
+
+        /// <remarks/>
+        public int port
+        {
+            get
+            {
+                return this.portField;
+            }
+            set
+            {
+                this.portField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string requestUrl
+        {
+            get
+            {
+                return this.requestUrlField;
+            }
+            set
+            {
+                this.requestUrlField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string matchContent
+        {
+            get
+            {
+                return this.matchContentField;
+            }
+            set
+            {
+                this.matchContentField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("statusCodeRange")]
+        public ProbeStatusCodeRange[] statusCodeRange
+        {
+            get
+            {
+                return this.statusCodeRangeField;
+            }
+            set
+            {
+                this.statusCodeRangeField = value;
+            }
+        }
+
+
+
     }
 }

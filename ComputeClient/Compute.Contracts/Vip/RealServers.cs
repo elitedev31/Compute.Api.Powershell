@@ -33,11 +33,11 @@ namespace DD.CBU.Compute.Api.Contracts.Vip
     public partial class RealServers
     {
 
-        private RealServersRealServer[] itemsField;
+        private RealServer[] itemsField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("realServer")]
-        public RealServersRealServer[] Items
+        public RealServer[] Items
         {
             get
             {

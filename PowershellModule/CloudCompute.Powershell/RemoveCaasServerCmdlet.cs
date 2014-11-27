@@ -24,6 +24,7 @@
 
             try
             {
+                if (!ShouldProcess(Server.name)) return;
                 var status = CaaS.ApiClient.ServerDelete(Server.id).Result;
 
                 if (status != null)
