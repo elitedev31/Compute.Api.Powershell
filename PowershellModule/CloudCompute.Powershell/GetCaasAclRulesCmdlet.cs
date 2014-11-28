@@ -40,7 +40,7 @@ namespace DD.CBU.Compute.Powershell
             try
             {
                  var resultlist = GetAclRules();
-                 if (resultlist.Any())
+                 if (resultlist!=null && resultlist.Any())
                  {
 
                      if (!string.IsNullOrEmpty(Name))

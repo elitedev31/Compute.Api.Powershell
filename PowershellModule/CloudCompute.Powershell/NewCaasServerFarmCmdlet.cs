@@ -8,47 +8,59 @@ using System.Threading.Tasks;
 using DD.CBU.Compute.Api.Client;
 using DD.CBU.Compute.Api.Client.VIP;
 using DD.CBU.Compute.Api.Contracts.Network;
-using DD.CBU.Compute.Api.Contracts.Server;
 using DD.CBU.Compute.Api.Contracts.Vip;
 
 namespace DD.CBU.Compute.Powershell
 {
-    /// <summary>
-    /// The new CaaS VIP Real cmdlet.
-    /// </summary>
-    [Cmdlet(VerbsCommon.New, "CaasRealServer")]
-    [OutputType(typeof(RealServer))]
-    public class NewCaasRealServerCmdlet:PsCmdletCaasBase
+    [Cmdlet(VerbsCommon.New, "CaasServerFarm")]
+    [OutputType(typeof(ServerFarm))]
+    public class NewCaasServerFarmCmdlet:PsCmdletCaasBase
     {
+
         /// <summary>
         /// The network to manage the VIP settings
         /// </summary>
-        [Parameter(Mandatory = true, HelpMessage = "The network to manage the VIP settings", ValueFromPipelineByPropertyName = true)]
+        [Parameter(Mandatory = true, HelpMessage = "The network to manage the VIP settings", ValueFromPipeline = true)]
         public NetworkWithLocationsNetwork Network { get; set; }
 
         /// <summary>
-        /// The server to be added as real server
+        /// The name for the server farm
         /// </summary>
-        [Parameter(Mandatory = true, HelpMessage = "The server to be added as real server", ValueFromPipeline = true)]
-        public ServerWithBackupType Server { get; set; }
-
-        /// <summary>
-        /// The name for the real server
-        /// </summary>
-        [Parameter(Mandatory = true, HelpMessage = "The name for the real server")]
+        [Parameter(Mandatory = true, HelpMessage = "The name for the server farm")]
         public string Name { get; set; }
 
+
         /// <summary>
-        /// The real server status
+        /// The server farm predictor
         /// </summary>
-        [Parameter(Mandatory = true, HelpMessage = "The real server status")]
-        public bool InService { get; set; }
+        [Parameter(Mandatory = true, HelpMessage = "The server farm predictor ")]
+        public ServerFarmPredictorType Predictor { get; set; }
+
+        /// <summary>
+        /// The first real server to be added to the server farm
+        /// </summary>
+        [Parameter(Mandatory = true, HelpMessage = "The first real server to be added to the server farm")]
+        public RealServer RealServer { get; set; }
+
+
+        /// <summary>
+        /// The first real server port to be added to the server farm
+        /// </summary>
+        [Parameter(Mandatory = false, HelpMessage = "The first real server port to be added to the server farm")]
+        [ValidateRange(1,65535)]
+        public int RealServerPort { get; set; }
+
+        /// <summary>
+        /// The probe to be added to the server farm
+        /// </summary>
+        [Parameter(Mandatory = false, HelpMessage = "The probe to be added to the server farm")]
+        public Probe Probe { get; set; }
 
 
         /// <summary>
         /// The network to add the public ip addresses
         /// </summary>
-        [Parameter(Mandatory = false, HelpMessage = "Return the RealServer object")]
+        [Parameter(Mandatory = false, HelpMessage = "Return the ServerFarm object")]
         public SwitchParameter PassThru { get; set; }
 
         protected override void ProcessRecord()
@@ -56,30 +68,34 @@ namespace DD.CBU.Compute.Powershell
             base.ProcessRecord();
             try
             {
-                var status = CaaS.ApiClient.CreateRealServer(Network.id, Name, Server.id, InService).Result;
+
+
+                string probeId = null;
+                if (Probe != null)
+                    probeId = Probe.id;
+
+                var status = CaaS.ApiClient.CreateServerFarm(Network.id, Name, Predictor, RealServer.id, RealServerPort, probeId).Result;
                 if (status != null && PassThru.IsPresent)
                 {
 
                    
-                    //Regex to extract the Id from the status result detail: Real-Server (id:b1a3aea6-37) created
+         
                     var regexObj = new Regex(@"\x28id\x3A([-\w]*)\x29");
                     var match = regexObj.Match(status.resultDetail);
                     if (match.Success && match.Groups.Count > 1)
                     {
-                        var rserver = new RealServer
+                        var serverfarm = new ServerFarm()
                         {
                             id = match.Groups[1].Value,
                             name = Name,
-                            inService = InService.ToString().ToLower(),
-                            serverName = Server.name,
-                            serverId = Server.id,
-                            serverIp = Server.privateIp
-                        };
-                        WriteObject(rserver);
+                            predictor = Predictor
+                       };
+
+                        WriteObject(serverfarm);
                     }
                     else
                     {
-                        WriteError(new ErrorRecord(new Exception("Real server Id not returned from API"),"-1",ErrorCategory.InvalidData, status));
+                        WriteError(new ErrorRecord(new Exception("Server Farm Id not returned from API"),"-1",ErrorCategory.InvalidData, status));
                     }
             
                 }
@@ -113,5 +129,6 @@ namespace DD.CBU.Compute.Powershell
            
 
         }
+        
     }
 }

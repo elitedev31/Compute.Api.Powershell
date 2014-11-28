@@ -14,9 +14,9 @@ namespace DD.CBU.Compute.Powershell
     /// <summary>
     ///	The Add CaaS NAT Rule Cmdlet.
     /// </summary>
-    [Cmdlet(VerbsCommon.Add, "CaasNatRule")]
+    [Cmdlet(VerbsCommon.New, "CaasNatRule")]
     [OutputType(typeof(NatRuleType))]
-    public class AddCaasNatRuleCmdlet : PsCmdletCaasBase
+    public class NewCaasNatRuleCmdlet : PsCmdletCaasBase
     {
         [Parameter(Mandatory = true, HelpMessage = "The target network to add the NAT rule into.", ValueFromPipeline = true)]
         public NetworkWithLocationsNetwork Network { get; set; }

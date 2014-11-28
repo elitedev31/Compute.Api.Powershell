@@ -864,9 +864,118 @@ namespace DD.CBU.Compute.Api.Client
         {
             return new Uri(string.Format("{0}/network/{1}/probe/{2}", orgId, networkId, probeId), UriKind.Relative);
         }
+
+
+         /// <summary>
+        /// The relative URI for the CaaS API action that creates or lists VIP server farms
+        /// </summary>
+        /// <param name="orgId">the org id</param>
+        /// <param name="networkId">the network id</param>
+        /// <returns>Uri</returns>
+        internal static Uri CreateOrGetVipServerFarm(Guid orgId, string networkId)
+        {
+            return new Uri(string.Format("{0}/network/{1}/serverFarm", orgId, networkId), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// The relative URI for the CaaS API action that deletes VIP server farms
+        /// </summary>
+        /// <param name="orgId">the org id</param>
+        /// <param name="networkId">the network id</param>
+        /// <param name="serverFarmId">the probe id</param>
+        /// <returns>Uri</returns>
+        internal static Uri DeleteVipServerFarm(Guid orgId, string networkId, string serverFarmId)
+        {
+            return new Uri(string.Format("{0}/network/{1}/serverFarm/{2}?delete", orgId, networkId, serverFarmId), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// The relative URI for the CaaS API action that get VIP server farm details
+        /// </summary>
+        /// <param name="orgId">the org id</param>
+        /// <param name="networkId">the network id</param>
+        /// <param name="serverFarmId">the probe id</param>
+        /// <returns>Uri</returns>
+        internal static Uri GetVipServerFarm(Guid orgId, string networkId, string serverFarmId)
+        {
+            return new Uri(string.Format("{0}/network/{1}/serverFarm/{2}", orgId, networkId, serverFarmId), UriKind.Relative);
+        }
+
+         /// <summary>
+        /// The relative URI for the CaaS API action that add real server to server farm
+        /// </summary>
+        /// <param name="orgId">the org id</param>
+        /// <param name="networkId">the network id</param>
+        /// <param name="serverFarmId">the probe id</param>
+        /// <returns>Uri</returns>
+        internal static Uri AddVipRealServerToServerFarm(Guid orgId, string networkId, string serverFarmId)
+        {
+            return new Uri(string.Format("{0}/network/{1}/serverFarm/{2}/addRealServer", orgId, networkId, serverFarmId), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// The relative URI for the CaaS API action that remove real server to server farm
+        /// </summary>
+        /// <param name="orgId">the org id</param>
+        /// <param name="networkId">the network id</param>
+        /// <param name="serverFarmId">the probe id</param>
+        /// <returns>Uri</returns>
+        internal static Uri RemoveVipRealServerFromServerFarm(Guid orgId, string networkId, string serverFarmId)
+        {
+            return new Uri(string.Format("{0}/network/{1}/serverFarm/{2}/removeRealServer", orgId, networkId, serverFarmId), UriKind.Relative);
+        }
+
+
+          /// <summary>
+        /// The relative URI for the CaaS API action that add Probe to server farm
+        /// </summary>
+        /// <param name="orgId">the org id</param>
+        /// <param name="networkId">the network id</param>
+        /// <param name="serverFarmId">the probe id</param>
+        /// <returns>Uri</returns>
+        internal static Uri AddVipProbeToServerFarm(Guid orgId, string networkId, string serverFarmId)
+        {
+            return new Uri(string.Format("{0}/network/{1}/serverFarm/{2}/addProbe", orgId, networkId, serverFarmId), UriKind.Relative);
+        }
+
+          /// <summary>
+        /// The relative URI for the CaaS API action that remove Probe to server farm
+        /// </summary>
+        /// <param name="orgId">the org id</param>
+        /// <param name="networkId">the network id</param>
+        /// <param name="serverFarmId">the probe id</param>
+        /// <returns>Uri</returns>
+        internal static Uri RemoveVipProbeFromServerFarm(Guid orgId, string networkId, string serverFarmId)
+        {
+            return new Uri(string.Format("{0}/network/{1}/serverFarm/{2}/removeProbe", orgId, networkId, serverFarmId), UriKind.Relative);
+        }
+
+
+        /// <summary>
+        /// The relative URI for the CaaS API action that list persistence profile
+        /// </summary>
+        /// <param name="orgId">the org id</param>
+        /// <param name="networkId">the network id</param>
+       /// <returns>Uri</returns>
+        internal static Uri CreateOrGetVipPersistenceProfile(Guid orgId, string networkId)
+        {
+            return new Uri(string.Format("{0}/network/{1}/persistenceProfile", orgId, networkId), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// The relative URI for the CaaS API action that deletes VIP server farms
+        /// </summary>
+        /// <param name="orgId">the org id</param>
+        /// <param name="networkId">the network id</param>
+        /// <param name="persProfileId">the probe id</param>
+        /// <returns>Uri</returns>
+        internal static Uri DeleteVipPersistenceProfile(Guid orgId, string networkId, string persProfileId)
+        {
+            return new Uri(string.Format("{0}/network/{1}/persistenceProfile/{2}?delete", orgId, networkId, persProfileId), UriKind.Relative);
+        }
+
+
         #endregion
-
-
 
 
         #region Vendor

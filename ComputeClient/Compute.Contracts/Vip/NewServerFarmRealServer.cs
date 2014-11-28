@@ -6,14 +6,12 @@
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://oec.api.opsource.net/schemas/vip")]
-    public partial class ServerFarmsServerFarm
+    public partial class NewServerFarmRealServer
     {
 
         private string idField;
 
-        private string nameField;
-
-        private ServerFarmPredictorType predictorField;
+        private string portField;
 
         /// <remarks/>
         public string id
@@ -29,28 +27,15 @@
         }
 
         /// <remarks/>
-        public string name
+        public string port
         {
             get
             {
-                return this.nameField;
+                return this.portField;
             }
             set
             {
-                this.nameField = value;
-            }
-        }
-
-        /// <remarks/>
-        public ServerFarmPredictorType predictor
-        {
-            get
-            {
-                return this.predictorField;
-            }
-            set
-            {
-                this.predictorField = value;
+                this.portField = value;
             }
         }
     }

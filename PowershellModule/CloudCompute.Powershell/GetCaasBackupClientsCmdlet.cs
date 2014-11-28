@@ -41,7 +41,7 @@ namespace DD.CBU.Compute.Powershell
             {
                  var resultlist = GetBackupClients();
 
-                 if (resultlist.Any())
+                 if (resultlist!=null && resultlist.Any())
                  {
 
                      switch (resultlist.Count())

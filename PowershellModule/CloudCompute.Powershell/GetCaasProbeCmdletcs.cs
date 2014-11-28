@@ -18,7 +18,7 @@ namespace DD.CBU.Compute.Powershell
         /// <summary>
         /// The network to manage the VIP settings
         /// </summary>
-        [Parameter(Mandatory = true, HelpMessage = "The network to manage the VIP settings")]
+        [Parameter(Mandatory = true, HelpMessage = "The network to manage the VIP settings", ValueFromPipeline = true)]
         public NetworkWithLocationsNetwork Network { get; set; }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace DD.CBU.Compute.Powershell
             try
             {
                 var resultlist = CaaS.ApiClient.GetProbes(Network.id).Result;
-                if (resultlist.Any())
+                if (resultlist!=null && resultlist.Any())
                 {
 
 

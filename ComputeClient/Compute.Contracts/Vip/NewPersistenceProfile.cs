@@ -22,7 +22,7 @@ namespace DD.CBU.Compute.Api.Contracts.Vip
 
         private string timeoutMinutesField;
 
-        private string typeField;
+        private PersistenceProfileType typeField;
 
         private string directionField;
 
@@ -72,7 +72,7 @@ namespace DD.CBU.Compute.Api.Contracts.Vip
         }
 
         /// <remarks/>
-        public string type
+        public PersistenceProfileType type
         {
             get
             {

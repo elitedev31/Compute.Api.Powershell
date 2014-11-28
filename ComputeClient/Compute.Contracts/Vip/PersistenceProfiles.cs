@@ -18,11 +18,11 @@ namespace DD.CBU.Compute.Api.Contracts.Vip
     public partial class PersistenceProfiles
     {
 
-        private PersistenceProfilesPersistenceProfile[] itemsField;
+        private PersistenceProfile[] itemsField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("PersistenceProfile")]
-        public PersistenceProfilesPersistenceProfile[] Items
+        public PersistenceProfile[] Items
         {
             get { return this.itemsField; }
             set { this.itemsField = value; }

@@ -6,14 +6,14 @@ using System.Text;
 using System.Threading.Tasks;
 using DD.CBU.Compute.Api.Client;
 using DD.CBU.Compute.Api.Client.VIP;
-using DD.CBU.Compute.Api.Contracts.Vip;
 using DD.CBU.Compute.Api.Contracts.Network;
+using DD.CBU.Compute.Api.Contracts.Vip;
 
 namespace DD.CBU.Compute.Powershell
 {
-    [Cmdlet(VerbsCommon.Get, "CaasRealServer")]
-    [OutputType(typeof(RealServer[]))]
-    public class GetCaasRealServerCmdlet:PsCmdletCaasBase
+    [Cmdlet(VerbsCommon.Get, "CaasPersistenceProfile")]
+    [OutputType(typeof(PersistenceProfile[]))]
+    public class GetCaasPersistenceProfileCmdlet : PsCmdletCaasBase
     {
         /// <summary>
         /// The network to manage the VIP settings
@@ -24,7 +24,7 @@ namespace DD.CBU.Compute.Powershell
         /// <summary>
         /// The name for the real server
         /// </summary>
-        [Parameter(Mandatory = false, HelpMessage = "The name for the real server")]
+        [Parameter(Mandatory = false, HelpMessage = "The name for the persistence profile")]
         public string Name { get; set; }
 
 
@@ -35,13 +35,13 @@ namespace DD.CBU.Compute.Powershell
 
             try
             {
-                var resultlist = CaaS.ApiClient.GetRealServers(Network.id).Result;
-                if (resultlist!=null && resultlist.Any())
+                var resultlist = CaaS.ApiClient.GetPersistenceProfile(Network.id).Result;
+                if (resultlist != null && resultlist.Any())
                 {
 
 
                     if (!string.IsNullOrEmpty(Name))
-                        resultlist = resultlist.Where(rserver => String.Equals(rserver.name, Name, StringComparison.CurrentCultureIgnoreCase));
+                        resultlist = resultlist.Where(profile => String.Equals(profile.name, Name, StringComparison.CurrentCultureIgnoreCase));
 
 
                     switch (resultlist.Count())

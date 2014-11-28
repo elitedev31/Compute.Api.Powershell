@@ -72,7 +72,7 @@ namespace DD.CBU.Compute.Powershell
 
                 var resultlist = GetCustomerImages();
 
-                if (resultlist.Any())
+                if (resultlist!=null && resultlist.Any())
                 {
                   
                     switch (resultlist.Count())

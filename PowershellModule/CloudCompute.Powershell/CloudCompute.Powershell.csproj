@@ -95,30 +95,39 @@
     <Compile Include="..\SolutionAssemblyInfo.cs">
       <Link>Properties\SolutionAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="AddCaasToServerFarmCmdlet.cs" />
     <Compile Include="CaasServerDiskDetails.cs" />
     <Compile Include="CaasServerDetails.cs" />
     <Compile Include="ComputeCmdletProvider.cs" />
     <Compile Include="ComputeServiceConnection.cs" />
     <Compile Include="AddCaasBackupClientCmdlet.cs" />
-    <Compile Include="AddCaasAclRuleCmdlet.cs" />
-    <Compile Include="AddCaasNatRuleCmdlet.cs" />
+    <Compile Include="GetCaasPersistenceProfileCmdlet.cs" />
+    <Compile Include="NewCaasAclRuleCmdlet.cs" />
+    <Compile Include="NewCaasNatRuleCmdlet.cs" />
     <Compile Include="AddCaasServerDiskCmdlet.cs" />
     <Compile Include="GetCaasNetworkConfigurationCmdlet.cs" />
     <Compile Include="GetCaasNetworkPublicIpBlocksCmdlet.cs" />
     <Compile Include="GetCaasProbeCmdletcs.cs" />
     <Compile Include="GetCaasRealServerCmdlet.cs" />
     <Compile Include="GetCaasServerAntiAffinityRuleCmdlet.cs" />
+    <Compile Include="GetCaasServerFarmDetailsCmdlet.cs" />
+    <Compile Include="GetCaasServerFarmCmdlet.cs" />
     <Compile Include="NewCaasNetworkPublicIpBlockCmdlet.cs" />
+    <Compile Include="NewCaasPersistenceProfileCmdlet.cs" />
     <Compile Include="NewCaasProbeCmdlet.cs" />
     <Compile Include="NewCaasServerAntiAffinityRuleCmdlet.cs" />
     <Compile Include="NewCaasRealServerCmdlet.cs" />
+    <Compile Include="NewCaasServerFarmCmdlet.cs" />
     <Compile Include="OutCaasWaitForOperationCmdlet.cs" />
     <Compile Include="NewCaasServerCloneToCustomerImageCmdlet.cs" />
     <Compile Include="RemoveCaasCustomerImage.cs" />
+    <Compile Include="RemoveCaasFromSeverFarmCmdlet.cs" />
     <Compile Include="RemoveCaasNetworkPublicIpBlockCmdlet.cs" />
     <Compile Include="RemoveCaasProbeCmdlet.cs" />
     <Compile Include="RemoveCaasRealServerCmdlet.cs" />
     <Compile Include="RemoveCaasServerAntiAffinityRuleCmdlet.cs" />
+    <Compile Include="RemoveCaasServerFarmCmdlet.cs" />
+    <Compile Include="SetCaasServerFarmCmdlet.cs" />
     <Compile Include="SetCaasNetworkCmdlet.cs" />
     <Compile Include="SetCaasNetworkPublicIpBlockCmdlet.cs" />
     <Compile Include="SetCaasProbeCmdlet.cs" />
@@ -173,7 +182,7 @@
     <None Include="CaaS.psd1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="CaasDeprecatedAlias.ps1">
+    <None Include="CaasCmdAlias.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />

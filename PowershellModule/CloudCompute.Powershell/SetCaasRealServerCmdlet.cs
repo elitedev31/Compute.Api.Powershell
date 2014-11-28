@@ -17,7 +17,7 @@ namespace DD.CBU.Compute.Powershell
         /// <summary>
         /// The network to manage the VIP settings
         /// </summary>
-        [Parameter(Mandatory = true, HelpMessage = "The network to manage the VIP settings")]
+        [Parameter(Mandatory = true, HelpMessage = "The network to manage the VIP settings", ValueFromPipelineByPropertyName = true)]
         public NetworkWithLocationsNetwork Network { get; set; }
 
         /// <summary>

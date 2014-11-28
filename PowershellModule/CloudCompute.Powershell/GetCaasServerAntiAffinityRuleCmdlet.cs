@@ -61,7 +61,7 @@ namespace DD.CBU.Compute.Powershell
                 }
 
 
-                if (resultlist.Any())
+                if (resultlist!=null && resultlist.Any())
                 {
 
                     switch (resultlist.Count())

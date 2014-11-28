@@ -11,29 +11,28 @@ using DD.CBU.Compute.Api.Contracts.Vip;
 
 namespace DD.CBU.Compute.Powershell
 {
-     [Cmdlet(VerbsCommon.Remove, "CaasRealServer",SupportsShouldProcess = true)]
-    public class RemoveCaasRealServerCmdlet:PsCmdletCaasBase
+    [Cmdlet(VerbsCommon.Remove, "CaasServerFarm", SupportsShouldProcess = true)]
+    public class RemoveCaasServerFarmCmdlet:PsCmdletCaasBase
     {
-
-        /// <summary>
+          /// <summary>
         /// The network to manage the VIP settings
         /// </summary>
         [Parameter(Mandatory = true, HelpMessage = "The network to manage the VIP settings", ValueFromPipelineByPropertyName = true)]
         public NetworkWithLocationsNetwork Network { get; set; }
 
         /// <summary>
-        /// The real server to be deleted
+        /// The server farm to be deleted
         /// </summary>
-        [Parameter(Mandatory = true, HelpMessage = "The real server to be deleted",ValueFromPipeline = true)]
-        public RealServer RealServer { get; set; }
+        [Parameter(Mandatory = true, HelpMessage = "The server farm to be deleted",ValueFromPipeline = true)]
+        public ServerFarm ServerFarm { get; set; }
 
 
          protected override void ProcessRecord()
          {
              try
              {
-                 if (!ShouldProcess(RealServer.name)) return;
-                 var status = CaaS.ApiClient.RemoveRealServer(Network.id,RealServer.id).Result;
+                 if (!ShouldProcess(ServerFarm.name)) return;
+                 var status = CaaS.ApiClient.RemoveServerFarm(Network.id,ServerFarm.id).Result;
 
                  if (status != null)
                      WriteDebug(
@@ -67,5 +66,6 @@ namespace DD.CBU.Compute.Powershell
 
 
          }
+    
     }
 }

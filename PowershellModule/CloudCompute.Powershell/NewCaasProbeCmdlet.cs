@@ -23,7 +23,7 @@ namespace DD.CBU.Compute.Powershell
         /// <summary>
         /// The network to manage the VIP settings
         /// </summary>
-        [Parameter(Mandatory = true, HelpMessage = "The network to manage the VIP settings")]
+        [Parameter(Mandatory = true, HelpMessage = "The network to manage the VIP settings", ValueFromPipeline = true)]
         public NetworkWithLocationsNetwork Network { get; set; }
 
         /// <summary>
@@ -116,7 +116,7 @@ namespace DD.CBU.Compute.Powershell
                 if (status != null && PassThru.IsPresent)
                 {
 
-                    //Regex to extract the real server Id from the status result detail: Real-Server (id:b1a3aea6-37) created
+                    //Regex to extract the Id from the status result detail: Real-Server (id:b1a3aea6-37) created
                     var regexObj = new Regex(@"\x28id\x3A([-\w]*)\x29");
                     var match = regexObj.Match(status.resultDetail);
                     if (match.Success && match.Groups.Count > 1)

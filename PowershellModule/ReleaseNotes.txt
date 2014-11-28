@@ -5,37 +5,50 @@ PowerShell for CaaS
 
 1.2
 
+
+Fixes:
+All Get Cmdlet throw an error if not matching objects are found
+
+
 Changes:
 
-All Get Cmdlet throw an error if not matching objects are found
 New-CaasConnection now supports passing -Vendor and -Region parameters for known public API Urls
-
+Add-CaasNatRule was renamed to New-CaasNatRule to maintain cosistency with other cmdlets, an alias was added to maintain backwards compatibility
+Add-CaasAclRule was renamed to New-CaasAclRule to maintain cosistency with other cmdlets, an alias was added to maintain backwards compatibility
 
 
 New:
 
 Server Operations:
-Update-CaasServerVMwareTools
-New-CaasServerCloneToCustomerImage
-Remove-CaasCustomerImage
 
-Network Operations:
-New-CaasServerAntiAffinityRule
-Get-CaasServerAntiAffinityRule
-Remove-CaasServerAntiAffinityRule
-Set-CaasNetwork
-New-CaasNetworkPublicIpBlock
-Get-CaasNetworkPublicIpBlock
-Set-CaasNetworkPublicIpBlock
-Remove-CaasNetworkPublicIpBlock
+	Update-CaasServerVMwareTools
+	New-CaasServerCloneToCustomerImage
+	Remove-CaasCustomerImage
+
+	Network Operations:
+	New-CaasServerAntiAffinityRule
+	Get-CaasServerAntiAffinityRule
+	Remove-CaasServerAntiAffinityRule
+	Set-CaasNetwork
+	New-CaasNetworkPublicIpBlock
+	Get-CaasNetworkPublicIpBlock
+	Set-CaasNetworkPublicIpBlock
+	Remove-CaasNetworkPublicIpBlock
 
 VIP Operations:
-New-CaasRealServer
-Get-CaasRealServer
-Set-CaasRealServer
-Remove-CaasRealServer
+	New-CaasRealServer
+	Get-CaasRealServer
+	Set-CaasRealServer
+	Remove-CaasRealServer
 
-New-CaasProbe
-Get-CaasProbe
-Set-CaasProbe
-Remove-CaasProbe
+	New-CaasProbe
+	Get-CaasProbe
+	Set-CaasProbe
+	Remove-CaasProbe
+
+	New-CaasServerFarm
+	Get-CaasServerFarm
+	Set-CaasServerFarm
+	Remove-CaasServerFarm
+	Add-CaasToServerFarm
+	Remove-CaasFromServerFarm

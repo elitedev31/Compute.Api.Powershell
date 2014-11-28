@@ -16,9 +16,9 @@ namespace DD.CBU.Compute.Powershell
     /// <remarks>
     ///	Imports a new customer image.
     /// </remarks>
-    [Cmdlet(VerbsCommon.Add, "CaasAclRule")]
+    [Cmdlet(VerbsCommon.New, "CaasAclRule")]
     [OutputType(typeof(AclRuleType))]
-    public class AddCaasAclRuleCmdlet : PsCmdletCaasBase
+    public class NewCaasAclRuleCmdlet : PsCmdletCaasBase
     {
         [Parameter(Mandatory = true, HelpMessage = "The target network to add the ACL rule into.", ValueFromPipeline = true)]
         public NetworkWithLocationsNetwork Network { get; set; }

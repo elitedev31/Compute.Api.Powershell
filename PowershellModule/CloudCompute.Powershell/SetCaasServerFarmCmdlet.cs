@@ -5,43 +5,42 @@ using System.Management.Automation;
 using System.Text;
 using System.Threading.Tasks;
 using DD.CBU.Compute.Api.Client;
-using DD.CBU.Compute.Api.Client.Network;
+using DD.CBU.Compute.Api.Client.VIP;
 using DD.CBU.Compute.Api.Contracts.Network;
+using DD.CBU.Compute.Api.Contracts.Vip;
 
 namespace DD.CBU.Compute.Powershell
 {
-    [Cmdlet(VerbsCommon.Set, "CaasNetworkPublicIpBlock")]
-   public class SetCaasNetworkPublicIpBlockCmdlet:PsCmdletCaasBase
+     [Cmdlet(VerbsCommon.Set, "CaasServerFarm")]
+    public class SetCaasServerFarmCmdlet:PsCmdletCaasBase
     {
-
         /// <summary>
-        /// The network to add the public ip addresses
+        /// The network to manage the VIP settings
         /// </summary>
-        [Parameter(Mandatory = true, HelpMessage = "The network to set the server to Vip", ValueFromPipelineByPropertyName = true)]
+        [Parameter(Mandatory = true, HelpMessage = "The network to manage the VIP settings", ValueFromPipelineByPropertyName = true)]
         public NetworkWithLocationsNetwork Network { get; set; }
 
         /// <summary>
-        /// The public ip block to be released
+        /// The real server to be deleted
         /// </summary>
-        [Parameter(Mandatory = true, HelpMessage = "The public ip block to be released", ValueFromPipeline = true)]
-        public IpBlockType PublicIpBlock { get; set; }
+        [Parameter(Mandatory = true, HelpMessage = "The server farm to be modified", ValueFromPipeline = true)]
+        public ServerFarm ServerFarm { get; set; }
+
 
         /// <summary>
-        /// Enable/Disable the server to vip connectivity on the Ip address block
+        /// The server farm predictor
         /// </summary>
-        [Parameter(Mandatory = true, HelpMessage = "Enable/Disable the server to vip connectivity on the Ip address block")]
-        public bool ServerToVipConnectivity { get; set; }
-
+        [Parameter(Mandatory = true, HelpMessage = "The server farm predictor ")]
+        public ServerFarmPredictorType Predictor { get; set; }
 
         protected override void ProcessRecord()
         {
-            base.ProcessRecord();
             try
             {
+                if (!ShouldProcess(ServerFarm.name)) return;
+                var status = CaaS.ApiClient.ModifyServerFarm(Network.id, ServerFarm.id,Predictor).Result;
 
-                var status = CaaS.ApiClient.SetServertoVipNetworkPublicIpAddressBlock(Network.id, PublicIpBlock.id,ServerToVipConnectivity).Result;
                 if (status != null)
-                {
                     WriteDebug(
                         string.Format(
                             "{0} resulted in {1} ({2}): {3}",
@@ -51,7 +50,7 @@ namespace DD.CBU.Compute.Powershell
                             status.resultDetail));
 
 
-                }
+
 
             }
             catch (AggregateException ae)
@@ -70,6 +69,8 @@ namespace DD.CBU.Compute.Powershell
                         return true;
                     });
             }
+
+
         }
 
     }

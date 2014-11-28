@@ -41,7 +41,7 @@ namespace DD.CBU.Compute.Powershell
                 
                 var resultlist = CaaS.ApiClient.GetNetworksTask().Result;
 
-                if (resultlist.Any())
+                if (resultlist!=null && resultlist.Any())
                 {
                      if (!string.IsNullOrEmpty(Location))
                          resultlist = resultlist.Where(item => String.Equals(item.location, Location, StringComparison.CurrentCultureIgnoreCase));

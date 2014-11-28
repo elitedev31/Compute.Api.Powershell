@@ -11,43 +11,36 @@ using DD.CBU.Compute.Api.Contracts.Vip;
 
 namespace DD.CBU.Compute.Powershell
 {
-
-    [Cmdlet(VerbsCommon.Remove, "CaasProbe", SupportsShouldProcess = true)]
-    public class RemoveCaasProbeCmdlet : PsCmdletCaasBase
+    [Cmdlet(VerbsCommon.Get,"CaasServerFarmDetails")]
+    [OutputType(typeof(ServerFarmDetails))]
+    public class GetCaasServerFarmDetailsCmdlet:PsCmdletCaasBase
     {
-
         /// <summary>
         /// The network to manage the VIP settings
         /// </summary>
         [Parameter(Mandatory = true, HelpMessage = "The network to manage the VIP settings", ValueFromPipelineByPropertyName = true)]
         public NetworkWithLocationsNetwork Network { get; set; }
 
+
         /// <summary>
-        /// The real server to be deleted
+        /// The network to manage the VIP settings
         /// </summary>
-        [Parameter(Mandatory = true, HelpMessage = "The real server to be deleted", ValueFromPipeline = true)]
-        public Probe Probe { get; set; }
+        [Parameter(Mandatory = true, HelpMessage = "The network to manage the VIP settings", ValueFromPipeline = true)]
+        public ServerFarm ServerFarm { get; set; }
+
+
 
 
         protected override void ProcessRecord()
         {
+            base.ProcessRecord();
+
             try
             {
-                if (!ShouldProcess(Probe.name)) return;
-                var status = CaaS.ApiClient.RemoveProbe(Network.id, Probe.id).Result;
-
-                if (status != null)
-                    WriteDebug(
-                        string.Format(
-                            "{0} resulted in {1} ({2}): {3}",
-                            status.operation,
-                            status.result,
-                            status.resultCode,
-                            status.resultDetail));
-
-
-
-
+                var serverfarmdetails = CaaS.ApiClient.GetServerFarmDetails(Network.id,ServerFarm.id).Result;
+                if(serverfarmdetails!=null)
+                    WriteObject(serverfarmdetails);
+             
             }
             catch (AggregateException ae)
             {
@@ -65,7 +58,6 @@ namespace DD.CBU.Compute.Powershell
                         return true;
                     });
             }
-
 
         }
     }

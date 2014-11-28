@@ -16,11 +16,11 @@ namespace DD.CBU.Compute.Api.Contracts.Vip
     public partial class ServerFarms
     {
 
-        private ServerFarmsServerFarm[] itemsField;
+        private ServerFarm[] itemsField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("serverFarm")]
-        public ServerFarmsServerFarm[] Items
+        public ServerFarm[] Items
         {
             get
             {

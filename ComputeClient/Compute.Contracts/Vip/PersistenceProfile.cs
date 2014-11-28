@@ -7,7 +7,7 @@
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true,
         Namespace = "http://oec.api.opsource.net/schemas/vip")]
-    public partial class PersistenceProfilesPersistenceProfile
+    public partial class PersistenceProfile
     {
 
         private string idField;
@@ -22,11 +22,15 @@
 
         private string timeoutField;
 
-        private string typeField;
+        private PersistenceProfileType typeField;
 
         private string cookieNameField;
 
         private string cookieTypeField;
+
+        private string directionField;
+
+        private string netmaskField;
 
         /// <remarks/>
         public string id
@@ -71,7 +75,7 @@
         }
 
         /// <remarks/>
-        public string type
+        public PersistenceProfileType type
         {
             get { return this.typeField; }
             set { this.typeField = value; }
@@ -89,6 +93,32 @@
         {
             get { return this.cookieTypeField; }
             set { this.cookieTypeField = value; }
+        }
+
+        /// <remarks/>
+        public string direction
+        {
+            get
+            {
+                return this.directionField;
+            }
+            set
+            {
+                this.directionField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string netmask
+        {
+            get
+            {
+                return this.netmaskField;
+            }
+            set
+            {
+                this.netmaskField = value;
+            }
         }
     }
 }

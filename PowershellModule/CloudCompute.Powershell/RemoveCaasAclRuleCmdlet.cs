@@ -14,7 +14,7 @@ namespace DD.CBU.Compute.Powershell
     [Cmdlet(VerbsCommon.Remove, "CaasAclRule",SupportsShouldProcess = true)]
     public class RemoveCaasAclRuleCmdlet : PsCmdletCaasBase
     {
-        [Parameter(Mandatory = true, HelpMessage = "The network that the ACL Rule exists")]
+        [Parameter(Mandatory = true, HelpMessage = "The network that the ACL Rule exists", ValueFromPipelineByPropertyName = true)]
         public NetworkWithLocationsNetwork Network { get; set; }
 
         [Parameter(Mandatory = true, HelpMessage = "The ACL rule to delete", ValueFromPipeline = true)]

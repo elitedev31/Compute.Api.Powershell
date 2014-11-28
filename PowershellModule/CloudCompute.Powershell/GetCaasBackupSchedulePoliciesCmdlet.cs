@@ -33,7 +33,7 @@ namespace DD.CBU.Compute.Powershell
             {
                 var resultlist = GetBackupSchedulePolicies();
 
-                if (resultlist.Any())
+                if (resultlist!=null && resultlist.Any())
                 {
                     switch (resultlist.Count())
                     {

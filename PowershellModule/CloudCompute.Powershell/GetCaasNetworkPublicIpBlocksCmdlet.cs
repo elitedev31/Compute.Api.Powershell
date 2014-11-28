@@ -24,7 +24,7 @@ namespace DD.CBU.Compute.Powershell
         /// <summary>
         /// Filter the list based on the based public Ip block
         /// </summary>
-        [Parameter(Mandatory = false, HelpMessage = "Filter the list based on the based public Ip block", ValueFromPipeline = true)]
+        [Parameter(Mandatory = false, HelpMessage = "Filter the list based on the based public Ip block")]
         public string BaseIp { get; set; }
 
         protected override void ProcessRecord()

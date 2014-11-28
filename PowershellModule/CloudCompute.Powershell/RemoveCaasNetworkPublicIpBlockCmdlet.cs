@@ -16,13 +16,13 @@ namespace DD.CBU.Compute.Powershell
         /// <summary>
         /// The network to add the public ip addresses
         /// </summary>
-        [Parameter(Mandatory = true, HelpMessage = "The network to release the public ip addresses", ValueFromPipeline = true)]
+        [Parameter(Mandatory = true, HelpMessage = "The network to release the public ip addresses", ValueFromPipelineByPropertyName = true)]
         public NetworkWithLocationsNetwork Network { get; set; }
 
        /// <summary>
         /// The public ip block to be released
        /// </summary>
-        [Parameter(Mandatory = true, HelpMessage = "The public ip block to be released")]
+        [Parameter(Mandatory = true, HelpMessage = "The public ip block to be released", ValueFromPipeline = true)]
         public IpBlockType PublicIpBlock { get; set; }
 
         protected override void ProcessRecord()

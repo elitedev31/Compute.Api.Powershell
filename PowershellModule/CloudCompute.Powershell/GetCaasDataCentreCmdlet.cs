@@ -26,7 +26,7 @@ namespace DD.CBU.Compute.Powershell
             {
                 var resultlist = CaaS.ApiClient.GetDataCentersWithMaintenanceStatuses().Result;
 
-                if (resultlist.Any())
+                if (resultlist!=null && resultlist.Any())
                 {
                     switch (resultlist.Count())
                     {

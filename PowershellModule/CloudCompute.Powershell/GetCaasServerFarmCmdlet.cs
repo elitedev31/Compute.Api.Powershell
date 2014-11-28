@@ -6,14 +6,14 @@ using System.Text;
 using System.Threading.Tasks;
 using DD.CBU.Compute.Api.Client;
 using DD.CBU.Compute.Api.Client.VIP;
-using DD.CBU.Compute.Api.Contracts.Vip;
 using DD.CBU.Compute.Api.Contracts.Network;
+using DD.CBU.Compute.Api.Contracts.Vip;
 
 namespace DD.CBU.Compute.Powershell
 {
-    [Cmdlet(VerbsCommon.Get, "CaasRealServer")]
-    [OutputType(typeof(RealServer[]))]
-    public class GetCaasRealServerCmdlet:PsCmdletCaasBase
+    [Cmdlet(VerbsCommon.Get,"CaasServerFarm")]
+    [OutputType(typeof(ServerFarm[]))]
+    public class GetCaasServerFarmCmdlet:PsCmdletCaasBase
     {
         /// <summary>
         /// The network to manage the VIP settings
@@ -24,9 +24,8 @@ namespace DD.CBU.Compute.Powershell
         /// <summary>
         /// The name for the real server
         /// </summary>
-        [Parameter(Mandatory = false, HelpMessage = "The name for the real server")]
+        [Parameter(Mandatory = false, HelpMessage = "The name for the server farm")]
         public string Name { get; set; }
-
 
 
         protected override void ProcessRecord()
@@ -35,13 +34,13 @@ namespace DD.CBU.Compute.Powershell
 
             try
             {
-                var resultlist = CaaS.ApiClient.GetRealServers(Network.id).Result;
+                var resultlist = CaaS.ApiClient.GetServerFarms(Network.id).Result;
                 if (resultlist!=null && resultlist.Any())
                 {
 
 
                     if (!string.IsNullOrEmpty(Name))
-                        resultlist = resultlist.Where(rserver => String.Equals(rserver.name, Name, StringComparison.CurrentCultureIgnoreCase));
+                        resultlist = resultlist.Where(farm => String.Equals(farm.name, Name, StringComparison.CurrentCultureIgnoreCase));
 
 
                     switch (resultlist.Count())
