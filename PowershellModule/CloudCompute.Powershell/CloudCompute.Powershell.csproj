@@ -98,6 +98,7 @@
     <Compile Include="AddCaasToServerFarmCmdlet.cs" />
     <Compile Include="CaasServerDiskDetails.cs" />
     <Compile Include="CaasServerDetails.cs" />
+    <Compile Include="CloudComputePsException.cs" />
     <Compile Include="ComputeCmdletProvider.cs" />
     <Compile Include="ComputeServiceConnection.cs" />
     <Compile Include="AddCaasBackupClientCmdlet.cs" />

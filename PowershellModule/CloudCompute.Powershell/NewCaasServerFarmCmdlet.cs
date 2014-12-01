@@ -95,7 +95,7 @@ namespace DD.CBU.Compute.Powershell
                     }
                     else
                     {
-                        WriteError(new ErrorRecord(new Exception("Server Farm Id not returned from API"),"-1",ErrorCategory.InvalidData, status));
+                        WriteError(new ErrorRecord(new CloudComputePsException("object Id not returned from API"), "-1", ErrorCategory.InvalidData, status));
                     }
             
                 }

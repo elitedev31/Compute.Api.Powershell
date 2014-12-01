@@ -79,7 +79,8 @@ namespace DD.CBU.Compute.Api.Client
             const string urltemplate = "https://{0}/oec/0.9/";
             string key = string.Concat(vendor.ToString(), '-', region.ToString());
             if(!KnownApiHostNames.ContainsKey(key))
-                throw new IndexOutOfRangeException("Known Cloud API hostname not found with this vendor and region combination. You may pass a not known Cloud API URL directly to this API.");
+                throw new ComputeApiException(ComputeApiError.BadRequest,"Known Cloud API hostname not found with this vendor and region combination.","",null,"");
+
 
             string apiurl = string.Format(urltemplate, KnownApiHostNames[key]);
             return new Uri(apiurl);

@@ -139,7 +139,7 @@ namespace DD.CBU.Compute.Powershell
                     }
                     else
                     {
-                        WriteError(new ErrorRecord(new Exception("Real server Id not returned from API"),"-1",ErrorCategory.InvalidData, status));
+                        WriteError(new ErrorRecord(new CloudComputePsException("object Id not returned from API"), "-1", ErrorCategory.InvalidData, status));
                     }
             
                 }
