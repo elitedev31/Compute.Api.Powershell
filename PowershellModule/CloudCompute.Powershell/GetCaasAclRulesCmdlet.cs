@@ -20,13 +20,13 @@ namespace DD.CBU.Compute.Powershell
         /// <summary>
         /// The network to show the images from
         /// </summary>
-        [Parameter(Mandatory = true, HelpMessage = "The network to show the ACL rules from", ValueFromPipeline = true)]
+        [Parameter(Mandatory = true, HelpMessage = "The network to show the ACL rules from", ValueFromPipelineByPropertyName = true)]
         public NetworkWithLocationsNetwork Network { get; set; }
 
         /// <summary>
         /// Get a CaaS ACL by name
         /// </summary>
-        [Parameter(Mandatory = false, Position = 0, HelpMessage = "ACL name to filter")]
+        [Parameter(Mandatory = false, Position = 0, HelpMessage = "ACL name to filter", ValueFromPipeline = true)]
         public string Name { get; set; }
 
 

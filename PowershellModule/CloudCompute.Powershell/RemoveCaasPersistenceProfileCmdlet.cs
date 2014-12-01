@@ -11,7 +11,7 @@ using DD.CBU.Compute.Api.Contracts.Vip;
 
 namespace DD.CBU.Compute.Powershell
 {
-     [Cmdlet(VerbsCommon.Remove, "CaasPersistenceProfileCmdlet", SupportsShouldProcess = true)]
+     [Cmdlet(VerbsCommon.Remove, "CaasPersistenceProfile", SupportsShouldProcess = true)]
     public class RemoveCaasPersistenceProfileCmdlet : PsCmdletCaasBase
     {
 

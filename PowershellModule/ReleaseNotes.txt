@@ -1,14 +1,8 @@
 PowerShell for CaaS 
 
-
-
-
 1.2
-
-
 Fixes:
 All Get Cmdlet throw an error if not matching objects are found
-
 
 Changes:
 
@@ -16,8 +10,10 @@ New-CaasConnection now supports passing -Vendor and -Region parameters for known
 Add-CaasNatRule was renamed to New-CaasNatRule to maintain cosistency with other cmdlets, an alias was added to maintain backwards compatibility
 Add-CaasAclRule was renamed to New-CaasAclRule to maintain cosistency with other cmdlets, an alias was added to maintain backwards compatibility
 
-
 New:
+
+Account operations
+	Reset-CaasAccountPassword
 
 Server Operations:
 
@@ -48,7 +44,16 @@ VIP Operations:
 
 	New-CaasServerFarm
 	Get-CaasServerFarm
+	Get-CaasServerFarmDetails
 	Set-CaasServerFarm
 	Remove-CaasServerFarm
 	Add-CaasToServerFarm
 	Remove-CaasFromServerFarm
+
+	New-CaasPersistenceProfile
+	Get-CaasPersistenceProfile
+	Remove-CaasPersistenceProfile
+
+	New-CaasVip
+	Get-CaasVip
+	Remove-CaasVip

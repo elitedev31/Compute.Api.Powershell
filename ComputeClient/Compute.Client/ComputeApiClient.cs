@@ -279,7 +279,7 @@ namespace DD.CBU.Compute.Api.Client
         {
             var parameters = new Dictionary<string, string>();
 
-            parameters["password"] = account.Password;
+            parameters["password"] = password;
 
             var parameterStrings = parameters.Where(kvp => kvp.Value != null).Select(kvp => string.Format("{0}={1}", kvp.Key, kvp.Value));
             var parameterText = string.Join("&", parameterStrings);

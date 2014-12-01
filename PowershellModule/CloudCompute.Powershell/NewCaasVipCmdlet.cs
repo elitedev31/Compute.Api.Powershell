@@ -46,7 +46,7 @@ namespace DD.CBU.Compute.Powershell
         /// The persistence profile for the VIP
         /// </summary>
         [Parameter(Mandatory = true, HelpMessage = "The persistence profile for the VIP", ValueFromPipeline = true,ParameterSetName = "PersistenceProfile")]
-        public ServerFarm PersistenceProfile { get; set; }
+        public PersistenceProfile PersistenceProfile { get; set; }
 
        
 

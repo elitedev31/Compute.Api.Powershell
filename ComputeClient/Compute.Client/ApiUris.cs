@@ -27,7 +27,7 @@ namespace DD.CBU.Compute.Api.Client
         {
             Contract.Requires(orgId != Guid.Empty, "Organization id cannot be empty!");
 
-            return new Uri(string.Format("{0}/myaccount/{1}", orgId,username), UriKind.Relative);
+            return new Uri(string.Format("{0}/account/{1}", orgId,username), UriKind.Relative);
         }
           
 
