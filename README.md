@@ -3,13 +3,12 @@ DimensionData.ComputeClient
 
 A C# client library and PowerShell cmdlets for the Dimension Data CaaS API.
 
-This is the source code from the team that have put together the client libraries based on the REST API spec published online - 
+This is the source code from the team that have put together the client libraries based on the REST API spec published online 
 
 Downloads
 -----------
-This is the source code for both the .NET client and PowerShell cmdlets, compiled assemblies are listed on the blog
-
-http://caas-automation.blogspot.com.au/
+This is the source code for both the .NET client and PowerShell cmdlets, MSI are available on the latest release
+https://github.com/DimensionDataCBUSydney/DimensionData.ComputeClient/releases/latest
 
 Usage 
 ---------
