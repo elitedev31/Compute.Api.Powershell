@@ -90,6 +90,15 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
         /// <returns></returns>
         Task<Status> UpdateAdministratorAccount(Account account);
 
+
+        /// <summary>
+        /// Updates an sub-administrator password
+        /// </summary>
+        /// <param name="account">The account</param>
+        /// <param name="password">the new password</param>
+        /// <returns></returns>
+        Task<Status> UpdateSubAdministratorPassword(Account account,string password);
+
         /// <summary>
         /// Gets available data centres
         /// </summary>

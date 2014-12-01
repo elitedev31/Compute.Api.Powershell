@@ -19,6 +19,21 @@ namespace DD.CBU.Compute.Api.Client
         /// </summary>
         internal static readonly Uri MyAccount = new Uri("myaccount", UriKind.Relative);
 
+
+        /// <summary>
+        ///		The path (relative to the base API URL) to update My Account action.
+        /// </summary>
+        internal static Uri UpdateAdministrator(Guid orgId,string username)
+        {
+            Contract.Requires(orgId != Guid.Empty, "Organization id cannot be empty!");
+
+            return new Uri(string.Format("{0}/myaccount/{1}", orgId,username), UriKind.Relative);
+        }
+          
+
+      
+
+
         /// <summary>
         ///		Get the base URI for the CaaS REST API.
         /// </summary>
@@ -974,6 +989,42 @@ namespace DD.CBU.Compute.Api.Client
             return new Uri(string.Format("{0}/network/{1}/persistenceProfile/{2}?delete", orgId, networkId, persProfileId), UriKind.Relative);
         }
 
+
+        /// <summary>
+        /// The relative URI for the CaaS API action that list VIPs
+        /// </summary>
+        /// <param name="orgId">the org id</param>
+        /// <param name="networkId">the network id</param>
+        /// <returns>Uri</returns>
+        internal static Uri CreateOrGetVip(Guid orgId, string networkId)
+        {
+            return new Uri(string.Format("{0}/network/{1}/vip", orgId, networkId), UriKind.Relative);
+        }
+
+
+        /// <summary>
+        /// The relative URI for the CaaS API action that deletes VIPs 
+        /// </summary>
+        /// <param name="orgId">the org id</param>
+        /// <param name="networkId">the network id</param>
+        /// <param name="vipId">the vip id</param>
+        /// <returns>Uri</returns>
+        internal static Uri DeleteVip(Guid orgId, string networkId, string vipId)
+        {
+            return new Uri(string.Format("{0}/network/{1}/vip/{2}?delete", orgId, networkId, vipId), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// The relative URI for the CaaS API action that modifies VIPs 
+        /// </summary>
+        /// <param name="orgId">the org id</param>
+        /// <param name="networkId">the network id</param>
+        /// <param name="vipId">the vip id</param>
+        /// <returns>Uri</returns>
+        internal static Uri ModifyVip(Guid orgId, string networkId, string vipId)
+        {
+            return new Uri(string.Format("{0}/network/{1}/vip/{2}", orgId, networkId, vipId), UriKind.Relative);
+        }
 
         #endregion
 

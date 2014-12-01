@@ -16,11 +16,11 @@ namespace DD.CBU.Compute.Api.Contracts.Vip
     public partial class Vips
     {
 
-        private VipsVip[] itemsField;
+        private Vip[] itemsField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("vip")]
-        public VipsVip[] Items
+        public Vip[] Items
         {
             get
             {

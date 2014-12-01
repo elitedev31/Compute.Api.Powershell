@@ -6,7 +6,7 @@
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://oec.api.opsource.net/schemas/vip")]
-    public partial class VipsVip
+    public partial class Vip
     {
 
         private string idField;
@@ -15,19 +15,19 @@
 
         private string ipAddressField;
 
-        private string portField;
+        private int portField;
 
-        private string protocolField;
+        private VipProtocol protocolField;
 
-        private string vipTargetTypeField;
+        private VipTargetType vipTargetTypeField;
 
         private string vipTargetIdField;
 
         private string vipTargetNameField;
 
-        private string replyToIcmpField;
+        private bool replyToIcmpField;
 
-        private string inServiceField;
+        private bool inServiceField;
 
         /// <remarks/>
         public string id
@@ -69,7 +69,7 @@
         }
 
         /// <remarks/>
-        public string port
+        public int port
         {
             get
             {
@@ -82,7 +82,7 @@
         }
 
         /// <remarks/>
-        public string protocol
+        public VipProtocol protocol
         {
             get
             {
@@ -95,7 +95,7 @@
         }
 
         /// <remarks/>
-        public string vipTargetType
+        public VipTargetType vipTargetType
         {
             get
             {
@@ -134,7 +134,7 @@
         }
 
         /// <remarks/>
-        public string replyToIcmp
+        public bool replyToIcmp
         {
             get
             {
@@ -147,7 +147,7 @@
         }
 
         /// <remarks/>
-        public string inService
+        public bool inService
         {
             get
             {

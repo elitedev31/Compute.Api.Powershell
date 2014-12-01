@@ -585,5 +585,102 @@ namespace DD.CBU.Compute.Api.Client.VIP
         }
 
 
+        /// <summary>
+        /// Get VIPs from network VIP
+        /// </summary>
+        /// <param name="client">The <see cref="IComputeApiClient"/> object.</param>
+        /// <param name="networkId">the network id</param>
+        /// <returns></returns>
+        public static async Task<IEnumerable<Vip>> GetVips(this IComputeApiClient client, string networkId)
+        {
+            var vips =
+               await
+                   client.WebApi.ApiGetAsync<Vips>(
+                       ApiUris.CreateOrGetVip(client.Account.OrganizationId, networkId));
+            return vips.Items ?? null;
+        }
+
+        /// <summary>
+        /// Create a VIPs from network VIP
+        /// </summary>
+        /// <param name="client">The <see cref="IComputeApiClient"/> object.</param>
+        /// <param name="networkId">the network id</param>
+        /// <param name="name">the name</param>
+        /// <param name="port">the vip port</param>
+        /// <param name="protocol">the vip protocol</param>
+        /// <param name="targetType">the tartget type</param>
+        /// <param name="targetId">the target id</param>
+        /// <param name="replyToIcmp">reply to icmp</param>
+        /// <param name="inService">in service</param>
+        /// <param name="ipAddress">optional ip address</param>
+        /// <returns></returns>
+        public static async Task<Status> CreateVip(this IComputeApiClient client, string networkId, string name, int port, VipProtocol protocol, VipTargetType targetType,string targetId, bool replyToIcmp, bool inService, string ipAddress="")
+        {
+            var vip = new NewVip()
+            {
+                name = name,
+                port = port.ToString(CultureInfo.InvariantCulture),
+                protocol = protocol.ToString(),
+                vipTargetType = targetType.ToString(),
+                vipTargetId = targetId,
+                replyToIcmp = replyToIcmp.ToString(CultureInfo.InvariantCulture).ToLower(),
+                inService = inService.ToString(CultureInfo.InvariantCulture).ToLower(),
+                
+
+            };
+            if (!string.IsNullOrEmpty(ipAddress))
+                vip.ipAddress = ipAddress;
+
+            var status =
+               await
+                   client.WebApi.ApiPostAsync<NewVip, Status>(
+                       ApiUris.CreateOrGetVip(client.Account.OrganizationId, networkId), vip);
+            return status;
+        }
+
+
+        /// <summary>
+        /// Delete VIP  from network VIP
+        /// </summary>
+        /// <param name="client">The <see cref="IComputeApiClient"/> object.</param>
+        /// <param name="networkId">the network id</param>
+        /// <param name="vipId">the vip id</param>
+        /// <returns></returns>
+        public static async Task<Status> RemoveVip(this IComputeApiClient client, string networkId, string vipId)
+        {
+            var status =
+               await
+                   client.WebApi.ApiGetAsync<Status>(
+                       ApiUris.DeleteVip(client.Account.OrganizationId, networkId, vipId));
+            return status;
+        }
+
+        /// <summary>
+        /// Set VIP from network VIP
+        /// </summary>
+        /// <param name="client">The <see cref="IComputeApiClient"/> object.</param>
+        /// <param name="networkId">the network id</param>
+        /// <param name="vipId">the vip id</param>
+        /// <param name="replyToIcmp"></param>
+        /// <param name="inService"></param>
+        /// <returns></returns>
+        public static async Task<Status> ModifyVip(this IComputeApiClient client, string networkId, string vipId,bool replyToIcmp, bool inService)
+        {
+
+            var parameters = new NameValueCollection
+            {
+                {"inService", inService.ToString(CultureInfo.InvariantCulture).ToLower()},
+                {"replyToIcmp", replyToIcmp.ToString(CultureInfo.InvariantCulture).ToLower()}
+            };
+            var poststring = parameters.ToQueryString();
+
+
+            var status =
+               await
+                   client.WebApi.ApiPostAsync<Status>(
+                       ApiUris.ModifyVip(client.Account.OrganizationId, networkId, vipId), poststring);
+            return status;
+        }
+
     }
 }

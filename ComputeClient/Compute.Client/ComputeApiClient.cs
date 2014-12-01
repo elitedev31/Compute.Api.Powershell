@@ -265,9 +265,32 @@ namespace DD.CBU.Compute.Api.Client
 
             var postBody = string.Join("&", parameterText, roleParameters);
 
-            var relativeUrl = string.Format("{0}/account/{1}", Account.OrganizationId, account.UserName);
-            
-			return await WebApi.ApiPostAsync<string, Status>(new Uri(relativeUrl, UriKind.Relative), postBody);
+
+            return await WebApi.ApiPostAsync<Status>(ApiUris.UpdateAdministrator(Account.OrganizationId, account.UserName), postBody);
+        }
+
+
+        /// <summary>
+        /// This function updates an existing Administrator Account.
+        /// </summary>
+        /// <param name="account">The account to be updated.</param>
+        /// <returns>A <see cref="Status"/> object instance that shows the results of the operation.</returns>
+        public async Task<Status> UpdateSubAdministratorPassword(Account account, string password)
+        {
+            var parameters = new Dictionary<string, string>();
+
+            parameters["password"] = account.Password;
+
+            var parameterStrings = parameters.Where(kvp => kvp.Value != null).Select(kvp => string.Format("{0}={1}", kvp.Key, kvp.Value));
+            var parameterText = string.Join("&", parameterStrings);
+
+            var roles = account.MemberOfRoles.Select(role => string.Format("role={0}", role.Name));
+            var roleParameters = string.Join("&", roles);
+
+            var postBody = string.Join("&", parameterText, roleParameters);
+
+    
+            return await WebApi.ApiPostAsync<Status>(ApiUris.UpdateAdministrator(Account.OrganizationId,account.UserName), postBody);
         }
 
         private async Task<ApiStatus> ExecuteAccountCommand(string username, string uriFormat)

@@ -16,7 +16,7 @@ namespace DD.CBU.Compute.Powershell
     /// <summary>
     /// The new CaaS VIP Real cmdlet.
     /// </summary>
-    [Cmdlet(VerbsCommon.New, "CaasProbe")]
+    [Cmdlet(VerbsCommon.New, "CaasPersistenceProfile")]
     [OutputType(typeof (PersistenceProfile))]
     public class NewCaasPersistenceProfileCmdlet : PsCmdletCaasBase
     {

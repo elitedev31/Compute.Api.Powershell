@@ -275,7 +275,9 @@
     <Compile Include="Vip\ServerFarms.cs" />
     <Compile Include="Vip\ServerFarm.cs" />
     <Compile Include="Vip\Vips.cs" />
-    <Compile Include="Vip\VipsVip.cs" />
+    <Compile Include="Vip\Vip.cs" />
+    <Compile Include="Vip\VipProtocol.cs" />
+    <Compile Include="Vip\VipTargetType.cs" />
     <Compile Include="XmlNamespaceConstants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

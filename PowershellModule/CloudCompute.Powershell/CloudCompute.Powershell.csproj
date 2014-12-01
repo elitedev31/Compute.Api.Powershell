@@ -102,6 +102,7 @@
     <Compile Include="ComputeServiceConnection.cs" />
     <Compile Include="AddCaasBackupClientCmdlet.cs" />
     <Compile Include="GetCaasPersistenceProfileCmdlet.cs" />
+    <Compile Include="GetCaasVipCmdlet.cs" />
     <Compile Include="NewCaasAclRuleCmdlet.cs" />
     <Compile Include="NewCaasNatRuleCmdlet.cs" />
     <Compile Include="AddCaasServerDiskCmdlet.cs" />
@@ -115,6 +116,7 @@
     <Compile Include="NewCaasNetworkPublicIpBlockCmdlet.cs" />
     <Compile Include="NewCaasPersistenceProfileCmdlet.cs" />
     <Compile Include="NewCaasProbeCmdlet.cs" />
+    <Compile Include="NewCaasVipCmdlet.cs" />
     <Compile Include="NewCaasServerAntiAffinityRuleCmdlet.cs" />
     <Compile Include="NewCaasRealServerCmdlet.cs" />
     <Compile Include="NewCaasServerFarmCmdlet.cs" />
@@ -124,9 +126,13 @@
     <Compile Include="RemoveCaasFromSeverFarmCmdlet.cs" />
     <Compile Include="RemoveCaasNetworkPublicIpBlockCmdlet.cs" />
     <Compile Include="RemoveCaasProbeCmdlet.cs" />
+    <Compile Include="RemoveCaasPersistenceProfileCmdlet.cs" />
+    <Compile Include="RemoveCaasVipCmdlet.cs" />
     <Compile Include="RemoveCaasRealServerCmdlet.cs" />
     <Compile Include="RemoveCaasServerAntiAffinityRuleCmdlet.cs" />
     <Compile Include="RemoveCaasServerFarmCmdlet.cs" />
+    <Compile Include="ResetCaasAccountPasswordCmdlet.cs" />
+    <Compile Include="SetCaasVipCmdlet.cs" />
     <Compile Include="SetCaasServerFarmCmdlet.cs" />
     <Compile Include="SetCaasNetworkCmdlet.cs" />
     <Compile Include="SetCaasNetworkPublicIpBlockCmdlet.cs" />
