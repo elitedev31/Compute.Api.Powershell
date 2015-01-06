@@ -14,19 +14,21 @@ namespace DD.CBU.Compute.Powershell
      [Cmdlet(VerbsCommon.Set, "CaasAccount")]
     public class SetCaasAccountCmdlet:PsCmdletCaasBase
     {
+         [Parameter(Mandatory = true, HelpMessage = "The account username to be updated",ValueFromPipeline = true)]
+        public string Username { get; set; }
 
-        [Parameter(Mandatory = true, HelpMessage = "The account full name")]
+        [Parameter(Mandatory = false, HelpMessage = "The account full name")]
         public string FullName { get; set; }
 
 
-        [Parameter(Mandatory = true, HelpMessage = "The account first name")]
+        [Parameter(Mandatory = false, HelpMessage = "The account first name")]
         public string FirstName { get; set; }
 
 
-        [Parameter(Mandatory = true, HelpMessage = "The account last name")]
+        [Parameter(Mandatory = false, HelpMessage = "The account last name")]
         public string LastName { get; set; }
 
-        [Parameter(Mandatory = true, HelpMessage = "The account password")]
+        [Parameter(Mandatory = false, HelpMessage = "The account password")]
         public SecureString Password { get; set; }
 
         [Parameter(Mandatory = false, HelpMessage = "The account email address")]
@@ -64,11 +66,12 @@ namespace DD.CBU.Compute.Powershell
             try
             {
                 var roles = new List<Role>();
-                roles.AddRange(Roles);
+                if(Roles !=null)
+                    roles.AddRange(Roles);
 
                 var account = new AccountWithPhoneNumber
                 {
-                    password = Password.ToPlainString(),
+                    userName = Username,
                     fullName = FullName,
                     firstName = FirstName,
                     lastName = LastName,
@@ -81,6 +84,8 @@ namespace DD.CBU.Compute.Powershell
                     MemberOfRoles = roles
 
                 };
+                if (Password != null)
+                    account.password = Password.ToPlainString();
 
                 var status = CaaS.ApiClient.UpdateAdministratorAccount(account).Result;
                 if (status != null)

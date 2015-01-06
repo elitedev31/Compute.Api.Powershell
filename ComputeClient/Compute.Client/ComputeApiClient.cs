@@ -278,7 +278,7 @@ namespace DD.CBU.Compute.Api.Client
             if (!string.IsNullOrEmpty(account.emailAddress))
                 parameters["emailAddress"] = account.emailAddress;
             if (!string.IsNullOrEmpty(account.fullName))
-                parameters["fullname"] = account.fullName;
+                parameters["fullName"] = account.fullName;
             if (!string.IsNullOrEmpty(account.firstName))
                 parameters["firstName"] = account.firstName;
             if (!string.IsNullOrEmpty(account.lastName))
@@ -294,14 +294,16 @@ namespace DD.CBU.Compute.Api.Client
             if (!string.IsNullOrEmpty(account.phoneNumber))
                 parameters["phoneNumber"] = account.phoneNumber;
 
-            var parameterText = parameters.ToQueryString();
-           
+            var postBody = parameters.ToQueryString();
 
-            var roles = account.MemberOfRoles.Select(role => string.Format("role={0}", role.Name));
-            var roleParameters = string.Join("&", roles);
+            if (account.MemberOfRoles.Any())
+            {
 
-            var postBody = string.Join("&", parameterText, roleParameters);
+                var roles = account.MemberOfRoles.Select(role => string.Format("role={0}", role.Name));
+                var roleParameters = string.Join("&", roles);
 
+                postBody = string.Join("&", postBody, roleParameters);
+            }
 
             return
                 await
