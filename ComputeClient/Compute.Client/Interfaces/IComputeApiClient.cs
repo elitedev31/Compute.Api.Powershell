@@ -55,14 +55,22 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
         /// </summary>
         /// <param name="username">The username</param>
         /// <returns></returns>
-        Task<ApiStatus> DeleteSubAdministratorAccountAsync(string username);
+        Task<Status> DeleteSubAdministratorAccount(string username);
+
+
+        /// <summary>
+        /// Get a (sub) administrator account
+        /// </summary>
+        /// <param name="username">The username</param>
+        /// <returns></returns>
+        Task<AccountWithPhoneNumber> GetAdministratorAccount(string username);
 
         /// <summary>
         /// Designate a primary administrator account
         /// </summary>
         /// <param name="username">The username</param>
         /// <returns></returns>
-        Task<ApiStatus> DesignatePrimaryAdministratorAccountAsync(string username);
+        Task<Status> DesignatePrimaryAdministratorAccount(string username);
 
         /// <summary>
         /// Gets all the data centres for the organisation.
@@ -81,24 +89,17 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
         /// </summary>
         /// <param name="account">The account</param>
         /// <returns></returns>
-        Task<Status> AddSubAdministratorAccount(Account account);
+        Task<Status> AddSubAdministratorAccount(AccountWithPhoneNumber account);
         
         /// <summary>
         /// Updates an administrator account
         /// </summary>
         /// <param name="account">The account</param>
         /// <returns></returns>
-        Task<Status> UpdateAdministratorAccount(Account account);
+        Task<Status> UpdateAdministratorAccount(AccountWithPhoneNumber account);
 
 
-        /// <summary>
-        /// Updates an sub-administrator password
-        /// </summary>
-        /// <param name="account">The account</param>
-        /// <param name="password">the new password</param>
-        /// <returns></returns>
-        Task<Status> UpdateSubAdministratorPassword(Account account,string password);
-
+      
         /// <summary>
         /// Gets available data centres
         /// </summary>

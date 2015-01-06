@@ -1,4 +1,6 @@
-﻿namespace DD.CBU.Compute.Api.Client.Customers
+﻿using DD.CBU.Compute.Api.Contracts.General;
+
+namespace DD.CBU.Compute.Api.Client.Customers
 {
     using System;
     using System.Threading.Tasks;

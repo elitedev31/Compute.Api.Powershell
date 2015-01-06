@@ -1,5 +1,7 @@
 ﻿
 
+using System.Security;
+
 namespace DD.CBU.Compute.Api.Client
 {
     using System;
@@ -183,10 +185,31 @@ namespace DD.CBU.Compute.Api.Client
         /// </summary>
         /// <param name="username">The Sub-Administrator account.</param>
         /// <returns>A <see cref="ApiStatus"/> result that describes whether or not the operation was successful.</returns>
-        public async Task<ApiStatus> DeleteSubAdministratorAccountAsync(string username)
+        public async Task<Status> DeleteSubAdministratorAccount(string username)
         {
             return await ExecuteAccountCommand(username, "{0}/account/{1}?delete");
         }
+
+        /// <summary>
+        /// Used to retrieve full details of an Administrator account associated with the Organization identified by {orgid}.
+        //If Primary Administrator credentials are used this function returns details of any Administrator
+        //({username}) associated with the Organization ({ord-id}).
+        //However, the function can also be used with Sub-Administrator credentials to retrieve details of their own
+        //user account, in which case {username} must match the Sub-Administrator credentials supplied.
+        /// The Sub-Administrator is identified by their <paramref name="username"/>.
+        /// </summary>
+        /// <param name="username">The Administrator or sub-administrator account.</param>
+        /// <returns>A <see cref="ApiStatus"/> result that describes whether or not the operation was successful.</returns>
+        public async Task<AccountWithPhoneNumber> GetAdministratorAccount(string username)
+        {
+            var relativeUrl = string.Format("{0}/accountWithPhoneNumber/{1}", Account.OrganizationId,username);
+            var uri = new Uri(relativeUrl, UriKind.Relative);
+
+            var account = await WebApi.ApiGetAsync<AccountWithPhoneNumber>(uri);
+            return account;
+
+        }
+
 
         /// <summary>
         /// Allows the current Primary Administrator user to designate a Sub-Administrator user belonging to the 
@@ -195,10 +218,11 @@ namespace DD.CBU.Compute.Api.Client
         /// </summary>
         /// <param name="username">The Sub-Administrator account.</param>
         /// <returns>A <see cref="ApiStatus"/> result that describes whether or not the operation was successful.</returns>
-        public async Task<ApiStatus> DesignatePrimaryAdministratorAccountAsync(string username)
+        public async Task<Status> DesignatePrimaryAdministratorAccount(string username)
         {
             return await ExecuteAccountCommand(username, "{0}/account/{1}?primary");
         }
+
 
 
         /// <summary>
@@ -232,11 +256,12 @@ namespace DD.CBU.Compute.Api.Client
         /// </summary>
         /// <param name="account">The account that will be added to the org.</param>
         /// <returns>A <see cref="Status"/> object instance that shows the results of the operation.</returns>
-        public async Task<Status> AddSubAdministratorAccount(Account account)
+        public async Task<Status> AddSubAdministratorAccount(AccountWithPhoneNumber account)
         {
-            var relativeUrl = string.Format("{0}/account", Account.OrganizationId);
 
-            return await WebApi.ApiPostAsync<Account, Status>(new Uri(relativeUrl, UriKind.Relative), new Account());
+            var relativeUrl = string.Format("{0}/accountWithPhoneNumber", Account.OrganizationId);
+
+            return await WebApi.ApiPostAsync<AccountWithPhoneNumber, Status>(new Uri(relativeUrl, UriKind.Relative), account);
         }
 
         /// <summary>
@@ -244,21 +269,33 @@ namespace DD.CBU.Compute.Api.Client
         /// </summary>
         /// <param name="account">The account to be updated.</param>
         /// <returns>A <see cref="Status"/> object instance that shows the results of the operation.</returns>
-        public async Task<Status> UpdateAdministratorAccount(Account account)
+        public async Task<Status> UpdateAdministratorAccount(AccountWithPhoneNumber account)
         {
-            var parameters = new Dictionary<string, string>();
-            parameters["username"] = account.UserName;
-            parameters["password"] = account.Password;
-            parameters["email"] = account.EmailAddress;
-            parameters["fullname"] = account.FullName;
-            parameters["firstName"] = account.FirstName;
-            parameters["lastName"] = account.LastName;
-            parameters["department"] = account.Department;
-            parameters["customDefined1"] = account.CustomDefined1;
-            parameters["customDefined2"] = account.CustomDefined2;
 
-            var parameterStrings = parameters.Where(kvp=>kvp.Value != null).Select(kvp => string.Format("{0}={1}", kvp.Key, kvp.Value));
-            var parameterText = string.Join("&", parameterStrings);
+            var parameters = new Dictionary<string, string>();
+            if (!string.IsNullOrEmpty(account.password))
+                parameters["password"] = account.password;
+            if (!string.IsNullOrEmpty(account.emailAddress))
+                parameters["emailAddress"] = account.emailAddress;
+            if (!string.IsNullOrEmpty(account.fullName))
+                parameters["fullname"] = account.fullName;
+            if (!string.IsNullOrEmpty(account.firstName))
+                parameters["firstName"] = account.firstName;
+            if (!string.IsNullOrEmpty(account.lastName))
+                parameters["lastName"] = account.lastName;
+            if (!string.IsNullOrEmpty(account.department))
+                parameters["department"] = account.department;
+            if (!string.IsNullOrEmpty(account.customDefined1))
+                parameters["customDefined1"] = account.customDefined1;
+            if (!string.IsNullOrEmpty(account.customDefined2))
+                parameters["customDefined2"] = account.customDefined2;
+            if (!string.IsNullOrEmpty(account.phoneCountryCode))
+                parameters["phoneCountryCode"] = account.phoneCountryCode;
+            if (!string.IsNullOrEmpty(account.phoneNumber))
+                parameters["phoneNumber"] = account.phoneNumber;
+
+            var parameterText = parameters.ToQueryString();
+           
 
             var roles = account.MemberOfRoles.Select(role => string.Format("role={0}", role.Name));
             var roleParameters = string.Join("&", roles);
@@ -266,39 +303,21 @@ namespace DD.CBU.Compute.Api.Client
             var postBody = string.Join("&", parameterText, roleParameters);
 
 
-            return await WebApi.ApiPostAsync<Status>(ApiUris.UpdateAdministrator(Account.OrganizationId, account.UserName), postBody);
+            return
+                await
+                    WebApi.ApiPostAsync<Status>(ApiUris.UpdateAdministrator(Account.OrganizationId, account.userName),
+                        postBody);
         }
 
 
-        /// <summary>
-        /// This function updates an existing Administrator Account.
-        /// </summary>
-        /// <param name="account">The account to be updated.</param>
-        /// <returns>A <see cref="Status"/> object instance that shows the results of the operation.</returns>
-        public async Task<Status> UpdateSubAdministratorPassword(Account account, string password)
-        {
-            var parameters = new Dictionary<string, string>();
+       
 
-            parameters["password"] = password;
-
-            var parameterStrings = parameters.Where(kvp => kvp.Value != null).Select(kvp => string.Format("{0}={1}", kvp.Key, kvp.Value));
-            var parameterText = string.Join("&", parameterStrings);
-
-            var roles = account.MemberOfRoles.Select(role => string.Format("role={0}", role.Name));
-            var roleParameters = string.Join("&", roles);
-
-            var postBody = string.Join("&", parameterText, roleParameters);
-
-    
-            return await WebApi.ApiPostAsync<Status>(ApiUris.UpdateAdministrator(Account.OrganizationId,account.UserName), postBody);
-        }
-
-        private async Task<ApiStatus> ExecuteAccountCommand(string username, string uriFormat)
+        private async Task<Status> ExecuteAccountCommand(string username, string uriFormat)
         {
             var uriText = string.Format(uriFormat, Account.OrganizationId, username);
             var uri = new Uri(uriText, UriKind.Relative);
 
-            return await WebApi.ApiGetAsync<ApiStatus>(uri);
+            return await WebApi.ApiGetAsync<Status>(uri);
         }
 
         /// <summary>
@@ -528,7 +547,7 @@ namespace DD.CBU.Compute.Api.Client
         {
                                   
             //build que query string paramenters
-            var parameters = new NameValueCollection();
+            var parameters = new Dictionary<string, string>();
             if (!string.IsNullOrEmpty(name))
                 parameters.Add("name", name);
             if (!string.IsNullOrEmpty(description))

@@ -1,4 +1,7 @@
-﻿namespace DD.CBU.Compute.Powershell
+﻿using DD.CBU.Compute.Api.Contracts.General;
+using DD.CBU.Compute.Api.Contracts.Server;
+
+namespace DD.CBU.Compute.Powershell
 {
     using System;
     using System.Linq;
@@ -17,8 +20,12 @@
          [Parameter(Mandatory = true, HelpMessage = "SCSI Id of the disk to be resized")]
         public int ScsiId { get; set; }
 
-         [Parameter(Mandatory = true, HelpMessage = "The speedId of the new disk. The available speed Id can be retrieved using (Get-CaasDataCentre).hypervisor.diskSpeed")]
+         [Parameter(Mandatory = false, ParameterSetName = "SpeedId", HelpMessage = "The speedId of the new disk. The available speed Id can be retrieved using (Get-CaasDataCentre).hypervisor.diskSpeed")]
          public string SpeedId { get; set; }
+
+
+         [Parameter(Mandatory = false, ParameterSetName = "DiskSpeedType", HelpMessage = "The disk speed")]
+         public DiskSpeedType Speed { get; set; }
 
 
         
@@ -39,6 +46,9 @@
         {
             try
             {
+                if (ParameterSetName.Equals("DiskSpeedType"))
+                    SpeedId = Speed.ToString();
+
                 Status status = null;
 
                 var disk = Server.disk.Where(d => d.scsiId == ScsiId);

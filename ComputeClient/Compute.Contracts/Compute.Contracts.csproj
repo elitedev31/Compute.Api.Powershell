@@ -119,12 +119,13 @@
     <Compile Include="Datacenter\DatacenterWithMaintenanceStatusType.cs" />
     <Compile Include="Datacenter\DiskSpeedAvailabilityType.cs" />
     <Compile Include="Datacenter\HypervisorType.cs" />
-    <Compile Include="Directory\AccountType.cs" />
+    <Compile Include="Directory\AccountsWithPhoneNumber.cs" />
+    <Compile Include="Directory\AccountWithPhoneNumber.cs" />
     <Compile Include="Directory\RoleType.cs" />
     <Compile Include="General\AdditionalInformationType.cs" />
     <Compile Include="General\PropertyType.cs" />
     <Compile Include="General\ResultType.cs" />
-    <Compile Include="General\StatusType.cs" />
+    <Compile Include="General\Status.cs" />
     <Compile Include="Image\CopyRemoteOvfPackageHistory.cs" />
     <Compile Include="Image\CopyRemoteOvfPackageRecordType.cs" />
     <Compile Include="Image\DeployedImages.cs" />
@@ -190,6 +191,7 @@
     <Compile Include="Server\DeployedServerWithDisksType.cs" />
     <Compile Include="Server\DeployedServerWithSoftwareLabelsType.cs" />
     <Compile Include="Server\DeployedServerWithStatusType.cs" />
+    <Compile Include="Server\DiskSpeedType.cs" />
     <Compile Include="Server\DiskType.cs" />
     <Compile Include="Server\DiskWithSpeedType.cs" />
     <Compile Include="Server\MachineSpecificationType.cs" />
@@ -208,7 +210,6 @@
     <Compile Include="Directory\IAccount.cs" />
     <Compile Include="Directory\IRole.cs" />
     <Compile Include="Directory\Role.cs" />
-    <Compile Include="General\ApiStatus.cs" />
     <Compile Include="Provisioning\CustomerGeoSignUp.cs" />
     <Compile Include="Provisioning\CustomerProvision.cs" />
     <Compile Include="Billing\PricingPlans.cs" />
@@ -248,7 +249,6 @@
     <Compile Include="Server\ServerWithBackupType.cs" />
     <Compile Include="Server\ServerWithStateType.cs" />
     <Compile Include="Server\SoftwareLabelType.cs" />
-    <Compile Include="Server\Status.cs" />
     <Compile Include="Software\SoftwareLabels.cs" />
     <Compile Include="Vip\NewPersistenceProfile.cs" />
     <Compile Include="Vip\NewProbe.cs" />

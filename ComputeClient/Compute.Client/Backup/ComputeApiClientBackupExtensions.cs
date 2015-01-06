@@ -1,4 +1,6 @@
-﻿namespace DD.CBU.Compute.Api.Client.Backup
+﻿using DD.CBU.Compute.Api.Contracts.General;
+
+namespace DD.CBU.Compute.Api.Client.Backup
 {
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;

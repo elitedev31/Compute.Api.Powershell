@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DD.CBU.Compute.Api.Client;
 using DD.CBU.Compute.Api.Contracts.Directory;
+using DD.CBU.Compute.Api.Contracts.General;
 
 
 namespace DD.CBU.Compute.Powershell
@@ -89,19 +90,7 @@ namespace DD.CBU.Compute.Powershell
          }
 
 
-         private String SecureStringToString(SecureString value)
-         {
-             var valuePtr = IntPtr.Zero;
-             try
-             {
-                 valuePtr = Marshal.SecureStringToGlobalAllocUnicode(value);
-                 return Marshal.PtrToStringUni(valuePtr);
-             }
-             finally
-             {
-                 Marshal.ZeroFreeGlobalAllocUnicode(valuePtr);
-             }
-         }
+        
 
          /// <summary>
          /// Try to login into the account using the credentials.
@@ -132,10 +121,14 @@ namespace DD.CBU.Compute.Powershell
          /// <returns>The CaaS connection</returns>
          private async Task<Status> ResetPasswordTask(ComputeServiceConnection connection)
          {
-           
 
+             var account = new AccountWithPhoneNumber
+             {
+                 userName = connection.Account.UserName,
+                 password = NewPassword.ToPlainString()
+             };
 
-             return await connection.ApiClient.UpdateSubAdministratorPassword(connection.Account as Account, SecureStringToString(NewPassword));
+             return await connection.ApiClient.UpdateAdministratorAccount(account);
               
           }
     }

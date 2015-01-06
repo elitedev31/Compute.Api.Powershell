@@ -1,5 +1,23 @@
 PowerShell for CaaS 
 
+1.3 
+Fixes:
+- Fixes status on account operations
+
+Changes:
+- Add Speed paramenter to disk operation cmdlets to avoid wrong speedid.
+
+New:
+
+Account operations
+	New-CaasAccount
+	Get-CaasAccount
+	Remove-CaasAccount
+	Set-CaasAccount
+	Set-CaasAccountPrimaryAdministrator
+	
+
+
 1.2
 Fixes:
 All Get Cmdlet throw an error if not matching objects are found

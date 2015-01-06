@@ -1,4 +1,5 @@
-﻿using DD.CBU.Compute.Api.Contracts.Server;
+﻿using DD.CBU.Compute.Api.Contracts.General;
+using DD.CBU.Compute.Api.Contracts.Server;
 
 namespace DD.CBU.Compute.Powershell
 {

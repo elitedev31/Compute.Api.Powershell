@@ -8,6 +8,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using DD.CBU.Compute.Api.Client;
 using DD.CBU.Compute.Api.Client.VIP;
+using DD.CBU.Compute.Api.Contracts.General;
 using DD.CBU.Compute.Api.Contracts.Network;
 using DD.CBU.Compute.Api.Contracts.Vip;
 

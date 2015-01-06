@@ -12,11 +12,11 @@ namespace DD.CBU.Compute.Api.Client
     public static class Extensions
     {
 
-        public static string ToQueryString(this NameValueCollection collection)
+        public static string ToQueryString(this Dictionary<string,string> collection)
         {
             if (collection != null)
             {
-                return string.Join("&", collection.AllKeys.Where(key => !string.IsNullOrWhiteSpace(collection[key])).Select(key => string.Format("{0}={1}", WebUtility.UrlEncode(key), WebUtility.UrlEncode(collection[key]))));
+                return string.Join("&", collection.Keys.Where(key => !string.IsNullOrWhiteSpace(collection[key])).Select(key => string.Format("{0}={1}", WebUtility.UrlEncode(key), WebUtility.UrlEncode(collection[key]))));
             }
             return string.Empty;
         }

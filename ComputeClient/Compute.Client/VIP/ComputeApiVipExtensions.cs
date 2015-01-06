@@ -8,6 +8,7 @@ using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using DD.CBU.Compute.Api.Client.Interfaces;
+using DD.CBU.Compute.Api.Contracts.General;
 using DD.CBU.Compute.Api.Contracts.Network;
 using DD.CBU.Compute.Api.Contracts.Vip;
 
@@ -207,7 +208,7 @@ namespace DD.CBU.Compute.Api.Client.VIP
             int maxReplyWaitSeconds
             )
         {
-            var parameters = new NameValueCollection();
+            var parameters = new Dictionary<string, string>();
             if (probeIntervalSeconds>0)
                 parameters.Add("probeIntervalSeconds", probeIntervalSeconds.ToString(CultureInfo.InvariantCulture));
             if (errorCountBeforeServerFail > 0)
@@ -348,7 +349,7 @@ namespace DD.CBU.Compute.Api.Client.VIP
            ServerFarmPredictorType predictor
           )
         {
-            var parameters = new NameValueCollection {{"predictor", predictor.ToString()}};
+            var parameters = new Dictionary<string,string> {{"predictor", predictor.ToString()}};
 
 
             // build the query string
@@ -377,7 +378,7 @@ namespace DD.CBU.Compute.Api.Client.VIP
           int realServerPort=0
           )
         {
-            var parameters = new NameValueCollection();
+            var parameters = new Dictionary<string, string>();
             if (!string.IsNullOrEmpty(realServerId))
                 parameters.Add("realServerId", realServerId);
             if (realServerPort > 0)
@@ -410,7 +411,7 @@ namespace DD.CBU.Compute.Api.Client.VIP
           int realServerPort = 0
           )
         {
-            var parameters = new NameValueCollection();
+            var parameters = new Dictionary<string, string>();
             if (!string.IsNullOrEmpty(realServerId))
                 parameters.Add("realServerId", realServerId);
             if (realServerPort > 0)
@@ -441,7 +442,7 @@ namespace DD.CBU.Compute.Api.Client.VIP
           string probeId
           )
         {
-            var parameters = new NameValueCollection();
+            var parameters = new Dictionary<string, string>();
             if (!string.IsNullOrEmpty(probeId))
                 parameters.Add("probeId", probeId);
 
@@ -470,7 +471,7 @@ namespace DD.CBU.Compute.Api.Client.VIP
          string probeId
           )
         {
-            var parameters = new NameValueCollection();
+            var parameters = new Dictionary<string, string>();
             if (!string.IsNullOrEmpty(probeId))
                 parameters.Add("probeId", probeId);
 
@@ -667,7 +668,7 @@ namespace DD.CBU.Compute.Api.Client.VIP
         public static async Task<Status> ModifyVip(this IComputeApiClient client, string networkId, string vipId,bool replyToIcmp, bool inService)
         {
 
-            var parameters = new NameValueCollection
+            var parameters = new Dictionary<string,string>
             {
                 {"inService", inService.ToString(CultureInfo.InvariantCulture).ToLower()},
                 {"replyToIcmp", replyToIcmp.ToString(CultureInfo.InvariantCulture).ToLower()}

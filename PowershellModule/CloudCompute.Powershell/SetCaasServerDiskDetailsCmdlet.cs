@@ -1,7 +1,10 @@
-﻿namespace DD.CBU.Compute.Powershell
+﻿using DD.CBU.Compute.Api.Contracts.Server;
+using System.Management.Automation;
+using System.Collections.Generic;
+
+namespace DD.CBU.Compute.Powershell
 {
-    using System.Management.Automation;
-    using System.Collections.Generic;
+
 
     /// <summary>
     /// The new CaaS Server Details cmdlet.
@@ -9,7 +12,7 @@
     /// </summary>
     [Cmdlet(VerbsCommon.Set, "CaasServerDiskDetails")]
     [OutputType(typeof(CaasServerDetails))]
-    public class SetCaasServerDiskDetailsCmdlet : Cmdlet
+    public class SetCaasServerDiskDetailsCmdlet : PSCmdlet
     {
         /// <summary>
         /// The VM name
@@ -23,11 +26,13 @@
         [Parameter(Mandatory = true, HelpMessage = "SCSI ID from the OS or customer image")]
         public string ScsiId { get; set; }
 
-        /// <summary>
-        /// The speed of the disk 
-        /// </summary>
-        [Parameter(Mandatory = true, HelpMessage = "The available speed Id can be retrieved using (Get-CaasDataCentre).hypervisor.diskSpeed")]
+
+        [Parameter(Mandatory = false, ParameterSetName = "SpeedId", HelpMessage = "The speedId of the new disk. The available speed Id can be retrieved using (Get-CaasDataCentre).hypervisor.diskSpeed")]
         public string SpeedId { get; set; }
+
+
+        [Parameter(Mandatory = false, ParameterSetName = "DiskSpeedType", HelpMessage = "The disk speed")]
+        public DiskSpeedType Speed { get; set; }
 
 
         /// <summary>
@@ -36,6 +41,9 @@
         protected override void ProcessRecord()
         {
             base.ProcessRecord();
+
+            if (ParameterSetName.Equals("DiskSpeedType"))
+                SpeedId = Speed.ToString();
 
             if (ServerDetails == null)
             {

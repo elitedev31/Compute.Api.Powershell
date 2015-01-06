@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Runtime.Serialization;
+using DD.CBU.Compute.Api.Contracts.General;
 
 namespace DD.CBU.Compute.Api.Client
 {

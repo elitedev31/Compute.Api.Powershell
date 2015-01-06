@@ -1,4 +1,6 @@
-﻿namespace DD.CBU.Compute.Powershell
+﻿using DD.CBU.Compute.Api.Contracts.General;
+
+namespace DD.CBU.Compute.Powershell
 {
     using System;
     using System.Management.Automation;

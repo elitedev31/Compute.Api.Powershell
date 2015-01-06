@@ -16,6 +16,14 @@ namespace DD.CBU.Compute.Api.Contracts.Directory
 		{
 		}
 
+        /// <summary>
+        ///		Create a new CaaS role data-contract using the helper enum
+        /// </summary>
+        public Role(RoleType name)
+        {
+            this.Name = name.ToString().ToLower().Replace("_", " ");
+        }
+
 		/// <summary>
 		///		The name of the CaaS role.
 		/// </summary>

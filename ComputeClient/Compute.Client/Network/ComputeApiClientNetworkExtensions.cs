@@ -1,4 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
+using DD.CBU.Compute.Api.Contracts.General;
 using DD.CBU.Compute.Api.Contracts.Network;
 
 namespace DD.CBU.Compute.Api.Client.Network
@@ -83,7 +84,7 @@ namespace DD.CBU.Compute.Api.Client.Network
         /// <returns>A status of the response.</returns>
         public static async Task<Status> ModifyNetwork(this IComputeApiClient client, string networkId,string name, string description)
         {
-            var parameters = new NameValueCollection();
+            var parameters = new Dictionary<string, string>();
             if (!string.IsNullOrEmpty(name))
                 parameters.Add("name", name);
             if (!string.IsNullOrEmpty(description))

@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using DD.CBU.Compute.Api.Contracts.General;
 
 namespace DD.CBU.Compute.Powershell
 {

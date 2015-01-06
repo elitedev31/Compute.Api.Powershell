@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using DD.CBU.Compute.Api.Contracts.Datacenter;
 
@@ -120,7 +121,7 @@ namespace DD.CBU.Compute.Api.Client
                 uri = string.Format("{0}/imageWithDiskSpeed", orgId);
             }
             //build que query string paramenters
-            var querystringcollection = new NameValueCollection();
+            var querystringcollection = new Dictionary<string, string>();
             if (!string.IsNullOrEmpty(name))
                 querystringcollection.Add("name", name);
             if (!string.IsNullOrEmpty(imageId))
@@ -132,7 +133,7 @@ namespace DD.CBU.Compute.Api.Client
             if (!string.IsNullOrEmpty(operatingSystemFamily))
                 querystringcollection.Add("operatingSystemFamily", operatingSystemFamily);
 
-            if (querystringcollection.AllKeys.Any())
+            if (querystringcollection.Keys.Any())
                 uri = string.Concat(uri, "?");
             // build the query string
             string querystring = querystringcollection.ToQueryString();
@@ -167,7 +168,7 @@ namespace DD.CBU.Compute.Api.Client
            Contract.Requires(orgId != Guid.Empty, "Organization Id cannot be empty");
             string uri= "{0}/serverWithBackup";
            //build que query string paramenters
-            var querystringcollection = new NameValueCollection();
+            var querystringcollection = new Dictionary<string, string>();
             if (!string.IsNullOrEmpty(name))
                 querystringcollection.Add("name", name);
             if (!string.IsNullOrEmpty(serverId))
@@ -177,7 +178,7 @@ namespace DD.CBU.Compute.Api.Client
             if (!string.IsNullOrEmpty(location))
                 querystringcollection.Add("location", location);
 
-            if (querystringcollection.AllKeys.Any())
+            if (querystringcollection.Keys.Any())
                 uri = string.Concat(uri, "?");
             // build the query string
             string querystring = querystringcollection.ToQueryString();
@@ -356,7 +357,7 @@ namespace DD.CBU.Compute.Api.Client
         internal static Uri AddServerDisk(Guid orgId, string serverId,string size,string speedId)
         {
             string uri = "{0}/server/{1}?addLocalStorage&";
-            var querystringcollection = new NameValueCollection();
+            var querystringcollection = new Dictionary<string, string>();
             if (!string.IsNullOrEmpty(size))
                 querystringcollection.Add("amount", size);
             if (!string.IsNullOrEmpty(speedId))
@@ -406,7 +407,7 @@ namespace DD.CBU.Compute.Api.Client
         {
             string uri = "{0}/antiAffinityRule";
            //build que query string paramenters
-            var querystringcollection = new NameValueCollection();
+            var querystringcollection = new Dictionary<string, string>();
            
             if (!string.IsNullOrEmpty(ruleId))
                 querystringcollection.Add("id", ruleId);
@@ -415,7 +416,7 @@ namespace DD.CBU.Compute.Api.Client
             if (!string.IsNullOrEmpty(location))
                 querystringcollection.Add("location", location);
 
-            if (querystringcollection.AllKeys.Any())
+            if (querystringcollection.Keys.Any())
                 uri = string.Concat(uri, "?");
             // build the query string
             string querystring = querystringcollection.ToQueryString();

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using DD.CBU.Compute.Api.Contracts.General;
 
 namespace DD.CBU.Compute.Api.Client
 {

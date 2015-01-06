@@ -1,4 +1,7 @@
-﻿namespace DD.CBU.Compute.Powershell
+﻿using System.Globalization;
+using DD.CBU.Compute.Api.Contracts.Server;
+
+namespace DD.CBU.Compute.Powershell
 {
     using System;
     using System.Management.Automation;
@@ -18,8 +21,12 @@
         public int SizeInGB { get; set; }
 
 
-        [Parameter(Mandatory = false, HelpMessage = "The speedId of the new disk. The available speed Id can be retrieved using (Get-CaasDataCentre).hypervisor.diskSpeed")]
+        [Parameter(Mandatory = false, ParameterSetName = "SpeedId", HelpMessage = "The speedId of the new disk. The available speed Id can be retrieved using (Get-CaasDataCentre).hypervisor.diskSpeed")]
         public string SpeedId { get; set; }
+
+
+        [Parameter(Mandatory = false, ParameterSetName = "DiskSpeedType", HelpMessage = "The disk speed to be created")]
+        public DiskSpeedType Speed { get; set; }
 
      
         /// <summary>
@@ -31,7 +38,9 @@
 
             try
             {
-                var status = CaaS.ApiClient.AddServerDisk(Server.id, SizeInGB.ToString(),SpeedId).Result;
+                if (ParameterSetName.Equals("DiskSpeedType"))
+                    SpeedId = Speed.ToString();
+                var status = CaaS.ApiClient.AddServerDisk(Server.id, SizeInGB.ToString(CultureInfo.InvariantCulture),SpeedId).Result;
                 if (status != null)
                     WriteDebug(
                         string.Format(
