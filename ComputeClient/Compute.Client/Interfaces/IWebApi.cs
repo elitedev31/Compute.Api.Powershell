@@ -26,6 +26,18 @@
         Task<TResult> ApiGetAsync<TResult>(Uri relativeOperationUri);
 
         /// <summary>
+        ///		Invoke a CaaS API operation using a HTTP GET request and return the RAW response as string
+        /// </summary>
+        /// <param name="relativeOperationUri">
+        ///		The operation URI (relative to the CaaS API's base URI).
+        /// </param>
+        /// <returns>
+        ///		The operation result.
+        /// </returns>
+      
+        Task<string> ApiGetAsync(Uri relativeOperationUri);
+
+        /// <summary>
         /// Invoke a CaaS API operation using a HTTP POST request.
         /// </summary>
         /// <typeparam name="TObject">The XML-Serialisable data contract type that the request will be sent.</typeparam>

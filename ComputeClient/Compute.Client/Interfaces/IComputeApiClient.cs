@@ -8,11 +8,10 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
     using System.Net;
     using System.Threading.Tasks;
 
-    using DD.CBU.Compute.Api.Contracts.Billing;
+    using DD.CBU.Compute.Api.Contracts.Vendor;
     using DD.CBU.Compute.Api.Contracts.Datacenter;
     using DD.CBU.Compute.Api.Contracts.Directory;
     using DD.CBU.Compute.Api.Contracts.General;
-    using DD.CBU.Compute.Api.Contracts.Provisioning;
     using DD.CBU.Compute.Api.Contracts.Software;
     using DD.CBU.Compute.Api.Contracts.Server;
 
@@ -48,7 +47,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
         /// Gets a list of multi geography regions
         /// </summary>
         /// <returns></returns>
-        Task<IEnumerable<Region>> GetListOfMultiGeographyRegions();
+        Task<IEnumerable<Geo>> GetListOfMultiGeographyRegions();
 
         /// <summary>
         /// Deletes a sub administrator account
@@ -368,27 +367,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
         /// <returns></returns>
         Task<Status> RemoveServerAntiAffinityRule(string ruleId);
 
-        /// <summary>
-        /// Provision customer in home geo
-        /// </summary>
-        /// <param name="organizationId">Organization Id</param>
-        /// <param name="customerProvision">Customer Provision</param>
-        /// <returns>Status</returns>
-        Task<Status> Provision(Guid organizationId, CustomerProvision customerProvision);
-
-        /// <summary>
-        /// Provision customers on Geo
-        /// </summary>
-        /// <param name="organizationId">Organization Id</param>
-        /// <param name="geographyId">Geography Id</param>
-        /// <param name="customerPricingPlanKey">Pricing Plan Key</param>
-        /// <returns>Status</returns>
-        Task<Status> ProvisionOnGeo(Guid organizationId, Guid geographyId, string customerPricingPlanKey);
-
-        /// <summary>
-        /// List Multi-Geography Data Centers With Key
-        /// </summary>
-        /// <param name="organizationId">Organization Id</param>
-        Task<Geos> ListMultiGeoDataCentersWithKey(Guid organizationId);
+      
+     
     }
 }

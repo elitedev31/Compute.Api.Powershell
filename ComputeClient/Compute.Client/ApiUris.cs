@@ -1031,14 +1031,47 @@ namespace DD.CBU.Compute.Api.Client
 
 
         #region Vendor
+
+
         /// <summary>
-        /// Get Uri for Provision On Geo
+        /// Get Uri For List Multi-Geography Data Centers With Key
         /// </summary>
         /// <param name="organizationId">Organization Id</param>
         /// <returns>Uri</returns>
-        internal static Uri GetUriForProvisionOnGeo(Guid organizationId)
+        internal static Uri GetListMultiGeoDataCentersWithKey(Guid organizationId)
         {
-            return new Uri(string.Format("{0}/provisionOnGeo", organizationId), UriKind.Relative);
+            return new Uri(string.Format("{0}/multigeo", organizationId), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// Get Uri for check username exists
+        /// </summary>
+        /// <param name="username">Organization Id</param>
+        /// <returns>Uri</returns>
+        internal static Uri ExistAccount(string username)
+        {
+            return new Uri(string.Format("account/{0}?exists", username), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// Get Uri for search customer 
+        /// </summary>
+        /// <param name="organizationId">Organization Id</param>
+        /// <param name="filter">filter paramenter</param>
+        /// <returns>Uri</returns>
+        internal static Uri SearchCustomers(Guid organizationId, string filter)
+        {
+            return new Uri(string.Format("{0}/customers?filter={1}", organizationId, filter), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// Get Uri for Provision On Geo
+        /// </summary>
+        /// <param name="customerId">Organization Id</param>
+        /// <returns>Uri</returns>
+        internal static Uri ProvisionCustomerOnGeo(Guid customerId)
+        {
+            return new Uri(string.Format("{0}/provisionOnGeo", customerId), UriKind.Relative);
         }
 
         /// <summary>
@@ -1046,10 +1079,59 @@ namespace DD.CBU.Compute.Api.Client
         /// </summary>
         /// <param name="organizationId">Organization Id</param>
         /// <returns>Uri</returns>
-        internal static Uri GetUriForProvisioning(Guid organizationId)
+        internal static Uri ProvisionCustomer(Guid organizationId)
         {
             return new Uri(string.Format("{0}/provision", organizationId), UriKind.Relative);
         }
+
+        /// <summary>
+        /// Get Uri for Suspending Customer
+        /// </summary>
+        /// <param name="customerId">Organization Id</param>
+        /// <param name="newPassword"></param>
+        /// <param name="cascadePassword"></param>
+        /// <param name="shutAce"></param>
+        /// <returns>Uri</returns>
+        internal static Uri SuspendCustomer(Guid customerId,string newPassword,bool cascadePassword, bool shutAce=true)
+        {
+            return new Uri(string.Format("admin/suspend_org?orgId={0}&newPassword={1}&cascadePassword={2}&shutAce={3}", customerId,newPassword,cascadePassword.ToString().ToLower(),shutAce.ToString().ToLower()), UriKind.Relative);
+        }
+
+         /// <summary>
+        /// Get Uri for Unsuspending Customer
+        /// </summary>
+        /// <param name="customerId">Organization Id</param>
+        /// <param name="newPassword"></param>
+        /// <param name="cascadePassword"></param>
+        /// <param name="shutAce"></param>
+        /// <returns>Uri</returns>
+        internal static Uri UnsuspendCustomer(Guid customerId,string newPassword,bool cascadePassword, bool shutAce=true)
+        {
+            return new Uri(string.Format("admin/unsuspend_org?orgId={0}&newPassword={1}&cascadePassword={2}&shutAce={3}", customerId,newPassword,cascadePassword.ToString().ToLower(),shutAce.ToString().ToLower()), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// Get Uri for Cancel Customer
+        /// </summary>
+        /// <param name="customerId">Customer Id</param>
+        /// <returns>Uri</returns>
+        internal static Uri CancelCustomer(Guid customerId)
+        {
+            return new Uri(string.Format("admin/cancel_org?orgId={0}", customerId), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// Get Uri for Set trust levelr
+        /// </summary>
+        /// <param name="customerId">Organization Id</param>
+        /// <param name="trustLevel">The customer trust level</param>
+     
+        /// <returns>Uri</returns>
+        internal static Uri SetTrustLevelCustomer(Guid customerId, int trustLevel)
+        {
+            return new Uri(string.Format("admin/set_trust_level?orgId={0}&trust_level={1}", customerId,trustLevel), UriKind.Relative);
+        }
+
 
         /// <summary>
         /// Get Uri For Listing Pricing Plans
@@ -1057,23 +1139,14 @@ namespace DD.CBU.Compute.Api.Client
         /// <param name="organizationId">Organization Id</param>
         /// <param name="geoId">Geo Id</param>
         /// <returns>Uri</returns>
+        [Obsolete]
         internal static Uri GetUriForListingPricingPlans(Guid organizationId, Guid geoId)
         {
             return new Uri(string.Format("{0}/geo/{1}/pricingplan", organizationId, geoId), UriKind.Relative);
         }
 
-        /// <summary>
-        /// Get Uri For List Multi-Geography Data Centers With Key
-        /// </summary>
-        /// <param name="organizationId">Organization Id</param>
-        /// <returns>Uri</returns>
-        internal static Uri GetUriForListMultiGeoDataCentersWithKey(Guid organizationId)
-        {
-            return new Uri(string.Format("{0}/multigeo", organizationId), UriKind.Relative);
-        }
+        #endregion
 
-        #endregion // Import and Export Customer Image API
 
-      
     }
 }

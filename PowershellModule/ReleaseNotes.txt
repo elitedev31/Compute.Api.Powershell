@@ -9,13 +9,25 @@ Changes:
 
 New:
 
+Datacentre:
+	Get-CaasMultiGeoRegions
+
 Account operations
 	New-CaasAccount
 	Get-CaasAccount
 	Remove-CaasAccount
 	Set-CaasAccount
 	Set-CaasAccountPrimaryAdministrator
-	
+
+
+Vendor:
+	New-CaasVendorCustomer
+	Search-CaasVendorCustomer
+	Enable-CaasVendorMultiGeoCustomer
+	Suspend-CaasVendorCustomer
+	Unsuspend-CaasVendorCustomer
+	Cancel-CaasVendorCustomer
+	Exist-CaasVendorAccount
 
 
 1.2

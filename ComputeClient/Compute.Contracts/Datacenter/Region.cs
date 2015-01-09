@@ -6,7 +6,7 @@ namespace DD.CBU.Compute.Api.Contracts.Datacenter
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = XmlNamespaceConstants.MultiGeo)]
-    public partial class Region
+    public partial class Geo
     {
 
         private string idField;

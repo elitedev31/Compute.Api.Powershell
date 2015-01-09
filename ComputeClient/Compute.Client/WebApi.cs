@@ -202,6 +202,35 @@ namespace DD.CBU.Compute.Api.Client
             }
         }
 
+        public async Task<string> ApiGetAsync(Uri relativeOperationUri)
+        {
+            if (relativeOperationUri == null) throw new ArgumentNullException("relativeOperationUri");
+
+            if (relativeOperationUri.IsAbsoluteUri) throw new ArgumentException("The supplied URI is not a relative URI.", "relativeOperationUri");
+
+            using (var response = await _httpClient.GetAsync(relativeOperationUri))
+            {
+                if (response.IsSuccessStatusCode) return await response.Content.ReadAsStringAsync();
+                switch (response.StatusCode)
+                {
+                    case HttpStatusCode.Unauthorized:
+                        {
+                            throw ComputeApiException.InvalidCredentials(
+                                ((NetworkCredential)_clientMessageHandler.Credentials).UserName);
+                        }
+                    default:
+                        {
+                            throw new HttpRequestException(
+                                String.Format(
+                                    "CaaS API returned HTTP status code {0} ({1}) when performing HTTP GET on '{2}'.",
+                                    (int)response.StatusCode,
+                                    response.StatusCode,
+                                    response.RequestMessage.RequestUri));
+                        }
+                }
+            }
+        }
+
         /// <summary>
         /// Invoke a CaaS API operation using a HTTP POST request.
         /// </summary>

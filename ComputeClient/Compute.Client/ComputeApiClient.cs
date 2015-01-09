@@ -1,6 +1,7 @@
 ﻿
 
 using System.Security;
+using DD.CBU.Compute.Api.Contracts.Vendor;
 
 namespace DD.CBU.Compute.Api.Client
 {
@@ -10,13 +11,12 @@ namespace DD.CBU.Compute.Api.Client
     using System.Threading.Tasks;
     using System.Linq;
 
-    using DD.CBU.Compute.Api.Client.Customers;
+    using DD.CBU.Compute.Api.Client.Vendor;
     using DD.CBU.Compute.Api.Client.Interfaces;
     using DD.CBU.Compute.Api.Client.Utilities;
     using DD.CBU.Compute.Api.Contracts.Datacenter;
     using DD.CBU.Compute.Api.Contracts.Directory;
     using DD.CBU.Compute.Api.Contracts.General;
-    using DD.CBU.Compute.Api.Contracts.Provisioning;
     using DD.CBU.Compute.Api.Contracts.Server;
     using DD.CBU.Compute.Api.Contracts.Image;
     using DD.CBU.Compute.Api.Contracts.Software;
@@ -168,7 +168,7 @@ namespace DD.CBU.Compute.Api.Client
         /// An element is returned for each available Geographic Region.
         /// </summary>
         /// <returns>A list of regions associated with the org ID.</returns>
-        public async Task<IEnumerable<Region>> GetListOfMultiGeographyRegions()
+        public async Task<IEnumerable<Geo>> GetListOfMultiGeographyRegions()
         {
             var relativeUrl = string.Format("{0}/multigeo", Account.OrganizationId);
             var uri = new Uri(relativeUrl, UriKind.Relative);
@@ -311,8 +311,7 @@ namespace DD.CBU.Compute.Api.Client
                         postBody);
         }
 
-
-       
+     
 
         private async Task<Status> ExecuteAccountCommand(string username, string uriFormat)
         {
@@ -787,38 +786,7 @@ namespace DD.CBU.Compute.Api.Client
         }
 
 
-        /// <summary>
-        /// Provision customer in home geo
-        /// </summary>
-        /// <param name="organizationId">Organization Id</param>
-        /// <param name="customerProvision">Customer Provision</param>
-        /// <returns>Status</returns>
-        public async Task<Status> Provision(Guid organizationId, CustomerProvision customerProvision)
-        {
-            return await this.ProvisionCustomerInHomeGeo(organizationId, customerProvision);
-        }
-
-        /// <summary>
-        /// Provision customers on Geo
-        /// </summary>
-        /// <param name="organizationId">Organization Id</param>
-        /// <param name="geographyId">Geography Id</param>
-        /// <param name="customerPricingPlanKey">Pricing Plan Key</param>
-        /// <returns>Status</returns>
-        public async Task<Status> ProvisionOnGeo(Guid organizationId, Guid geographyId, string customerPricingPlanKey)
-        {
-            return await this.ProvisionCustomerInGeo(organizationId, geographyId, customerPricingPlanKey);
-        }
-
-        /// <summary>
-        /// List Multi-Geography Data Centers With Key
-        /// </summary>
-        /// <param name="organizationId">Organization Id</param>
-        public async Task<Geos> ListMultiGeoDataCentersWithKey(Guid organizationId)
-        {
-            return await WebApi.ApiGetAsync<Geos>(ApiUris.GetUriForListMultiGeoDataCentersWithKey(organizationId));
-        }
-
+      
         #endregion // Public methods
     }
 }

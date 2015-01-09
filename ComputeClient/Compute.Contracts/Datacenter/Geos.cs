@@ -27,6 +27,6 @@ namespace DD.CBU.Compute.Api.Contracts.Datacenter
     {
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("geo")] 
-        public Region[] Items;
+        public Geo[] Items;
     }
 }
