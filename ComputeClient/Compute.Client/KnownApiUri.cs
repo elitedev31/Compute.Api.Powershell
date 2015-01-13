@@ -58,6 +58,7 @@ namespace DD.CBU.Compute.Api.Client
         private KnownApiUri()
         {
             KnownApiHostNames = new Dictionary<string, string>();
+            KnownVendorEndPointPairs = new List<KeyValuePair<KnownApiVendor, KnownApiRegion>>();
             CreateKnownApiHostNames();
         }
 
@@ -66,7 +67,10 @@ namespace DD.CBU.Compute.Api.Client
         /// </summary>
         private Dictionary<string,string> KnownApiHostNames { get; set; }
 
-       
+        /// <summary>
+        /// Mapping between Vendor and applicable regions
+        /// </summary>
+        private List<KeyValuePair<KnownApiVendor, KnownApiRegion>> KnownVendorEndPointPairs { get; set; }   
         
         /// <summary>
         /// Return an known CaaS URI based on vendor and region
@@ -83,9 +87,19 @@ namespace DD.CBU.Compute.Api.Client
 
 
             string apiurl = string.Format(urltemplate, KnownApiHostNames[key]);
-            return new Uri(apiurl);
-            
+            return new Uri(apiurl);      
         }
+
+        /// <summary>
+        /// List of Known Regions that are valid for the particular Vendor.
+        /// </summary>
+        /// <param name="vendor"></param>
+        /// <returns></returns>
+        public IEnumerable<KnownApiRegion> GetKnownRegionList(KnownApiVendor vendor)
+        {
+            return KnownVendorEndPointPairs.Where(pair => pair.Key == vendor).Select(pair => pair.Value);
+        } 
+
         /// <summary>
         /// Creates the collection of known URLs per vendor according to Cloud API Documentation
         /// </summary>
@@ -96,7 +110,7 @@ namespace DD.CBU.Compute.Api.Client
             AddHostName(KnownApiVendor.DimensionData, KnownApiRegion.NorthAmerica_NA, "api-na.dimensiondata.com");
             AddHostName(KnownApiVendor.DimensionData, KnownApiRegion.Europe_EU, "api-eu.dimensiondata.com");
             AddHostName(KnownApiVendor.DimensionData, KnownApiRegion.Australia_AU, "api-au.dimensiondata.com");
-            AddHostName(KnownApiVendor.DimensionData, KnownApiRegion.Africa_AF, "api-af.dimensiondata.com");
+            AddHostName(KnownApiVendor.DimensionData, KnownApiRegion.Africa_AF, "api-mea.dimensiondata.com");
             AddHostName(KnownApiVendor.DimensionData, KnownApiRegion.AsiaPacific_AP, "api-ap.dimensiondata.com");
             AddHostName(KnownApiVendor.DimensionData, KnownApiRegion.SouthAmerica_SA, "api-latam.dimensiondata.com");
             AddHostName(KnownApiVendor.DimensionData, KnownApiRegion.Canada_CA, "api-canada.dimensiondata.com");
@@ -146,7 +160,7 @@ namespace DD.CBU.Compute.Api.Client
         {
             string key = string.Concat(vendor.ToString(), '-', region.ToString());
             KnownApiHostNames.Add(key, apiUrl);
-
+            KnownVendorEndPointPairs.Add(new KeyValuePair<KnownApiVendor, KnownApiRegion>(vendor, region));
         }
 
     }
