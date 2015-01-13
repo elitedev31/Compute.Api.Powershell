@@ -96,8 +96,8 @@ namespace Compute.Client.UnitTests
         [TestMethod]
         public void HomeGeoDiscoveryTest()
         {
-            var username = "yudi.goh.backup";
-            var password = "them00n321";
+            var username = "joesmith";
+            var password = "password";
             var vendor = KnownApiVendor.DimensionData;
 
             var result = ComputeApiClient.DiscoverHomeMultiGeo(vendor, username, password);
