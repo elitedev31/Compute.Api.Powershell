@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Net;
-
+using DD.CBU.Compute.Api.Client;
 using DD.CBU.Compute.Api.Contracts.General;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -91,6 +91,18 @@ namespace Compute.Client.UnitTests
 
             var accounts = client.GetAccounts().Result;
             Assert.AreEqual(2, accounts.Count());
+        }
+
+        [TestMethod]
+        public void HomeGeoDiscoveryTest()
+        {
+            var username = "joesmith";
+            var password = "password";
+            var vendor = KnownApiVendor.DimensionData;
+
+            var result = ComputeApiClient.DiscoverHomeMultiGeo(vendor, username, password);
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.SingleOrDefault(geo => geo.isHome == "true") != null);
         }
     }
 }
