@@ -48,11 +48,11 @@ namespace DD.CBU.Compute.Powershell
                     {
                         if (e is ComputeApiException)
                         {
-                            WriteError(new ErrorRecord(e, "-2", ErrorCategory.InvalidOperation, CaaS));
+                            WriteError(new ErrorRecord(e, "-2", ErrorCategory.InvalidOperation, Connection));
                         }
                         else //if (e is HttpRequestException)
                         {
-                            ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, CaaS));
+                            ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, Connection));
                         }
                         return true;
                     });
@@ -86,7 +86,7 @@ namespace DD.CBU.Compute.Powershell
             }
 
             var status =
-                CaaS.ApiClient.DeployServerWithDiskSpeedImageTask(
+                Connection.ApiClient.DeployServerWithDiskSpeedImageTask(
                     ServerDetails.Name,
                     ServerDetails.Description,
                     networkid,  
@@ -101,7 +101,7 @@ namespace DD.CBU.Compute.Powershell
 		    var statusadditionalInfo = status.additionalInformation.Single(info => info.name == "serverId");
             if (statusadditionalInfo != null)
             {
-                var servers = CaaS.ApiClient.GetDeployedServers(statusadditionalInfo.value,null,null,null).Result;
+                var servers = Connection.ApiClient.GetDeployedServers(statusadditionalInfo.value,null,null,null).Result;
                    if (servers.Any())
                    {
                        server = servers.First();

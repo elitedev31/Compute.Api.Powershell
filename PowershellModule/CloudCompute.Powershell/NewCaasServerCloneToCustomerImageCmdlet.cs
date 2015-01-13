@@ -26,7 +26,7 @@
         {
             try
             {
-                var status = CaaS.ApiClient.ServerCloneToCustomerImage(Server.id,Name,Description).Result;
+                var status = Connection.ApiClient.ServerCloneToCustomerImage(Server.id,Name,Description).Result;
                 if (status != null)
                     WriteDebug(
                         string.Format(
@@ -43,11 +43,11 @@
                     {
                         if (e is ComputeApiException)
                         {
-                            WriteError(new ErrorRecord(e, "-2", ErrorCategory.InvalidOperation, CaaS));
+                            WriteError(new ErrorRecord(e, "-2", ErrorCategory.InvalidOperation, Connection));
                         }
                         else //if (e is HttpRequestException)
                         {
-                            ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, CaaS));
+                            ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, Connection));
                         }
                         return true;
                     });

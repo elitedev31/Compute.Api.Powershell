@@ -24,7 +24,7 @@ namespace DD.CBU.Compute.Powershell
 
             try
             {
-                var resultlist = CaaS.ApiClient.GetDataCentersWithMaintenanceStatuses().Result;
+                var resultlist = Connection.ApiClient.GetDataCentersWithMaintenanceStatuses().Result;
 
                 if (resultlist!=null && resultlist.Any())
                 {
@@ -53,11 +53,11 @@ namespace DD.CBU.Compute.Powershell
                     {
                         if (e is ComputeApiException)
                         {
-                            WriteError(new ErrorRecord(e, "-2", ErrorCategory.InvalidOperation, CaaS));
+                            WriteError(new ErrorRecord(e, "-2", ErrorCategory.InvalidOperation, Connection));
                         }
                         else //if (e is HttpRequestException)
                         {
-                            ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, CaaS));
+                            ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, Connection));
                         }
                         return true;
                     });

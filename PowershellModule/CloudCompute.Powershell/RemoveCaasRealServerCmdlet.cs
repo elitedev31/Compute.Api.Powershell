@@ -33,7 +33,7 @@ namespace DD.CBU.Compute.Powershell
              try
              {
                  if (!ShouldProcess(RealServer.name)) return;
-                 var status = CaaS.ApiClient.RemoveRealServer(Network.id,RealServer.id).Result;
+                 var status = Connection.ApiClient.RemoveRealServer(Network.id,RealServer.id).Result;
 
                  if (status != null)
                      WriteDebug(
@@ -55,11 +55,11 @@ namespace DD.CBU.Compute.Powershell
                      {
                          if (e is ComputeApiException)
                          {
-                             WriteError(new ErrorRecord(e, "-2", ErrorCategory.InvalidOperation, CaaS));
+                             WriteError(new ErrorRecord(e, "-2", ErrorCategory.InvalidOperation, Connection));
                          }
                          else //if (e is HttpRequestException)
                          {
-                             ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, CaaS));
+                             ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, Connection));
                          }
                          return true;
                      });

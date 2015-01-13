@@ -34,7 +34,7 @@ namespace DD.CBU.Compute.Powershell
             try
             {
               
-                var status = CaaS.ApiClient.ReserveNetworkPublicIpAddressBlock(Network.id).Result;
+                var status = Connection.ApiClient.ReserveNetworkPublicIpAddressBlock(Network.id).Result;
                 if (status != null)
                 {
                     if (status.additionalInformation != null && PassThru.IsPresent)
@@ -80,11 +80,11 @@ namespace DD.CBU.Compute.Powershell
                     {
                         if (e is ComputeApiException)
                         {
-                            WriteError(new ErrorRecord(e, "-2", ErrorCategory.InvalidOperation, CaaS));
+                            WriteError(new ErrorRecord(e, "-2", ErrorCategory.InvalidOperation, Connection));
                         }
                         else //if (e is HttpRequestException)
                         {
-                            ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, CaaS));
+                            ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, Connection));
                         }
                         return true;
                     });

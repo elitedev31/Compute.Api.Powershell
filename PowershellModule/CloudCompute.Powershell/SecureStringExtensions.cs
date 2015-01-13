@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DD.CBU.Compute.Powershell
 {
-    public static class Extensions
+    public static class SecureStringExtensions
     {
 
         internal static string ToPlainString(this SecureString value)

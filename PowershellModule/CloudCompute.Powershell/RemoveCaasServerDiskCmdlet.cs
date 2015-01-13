@@ -47,7 +47,7 @@ namespace DD.CBU.Compute.Powershell
                 if (disk.Any())
                 {
 
-                    status = CaaS.ApiClient.RemoveServerDisk(Server.id, disk.ElementAt(0).id).Result;
+                    status = Connection.ApiClient.RemoveServerDisk(Server.id, disk.ElementAt(0).id).Result;
 
                 }
                 else
@@ -70,11 +70,11 @@ namespace DD.CBU.Compute.Powershell
                         {
                             if (e is ComputeApiException)
                             {
-                                WriteError(new ErrorRecord(e, "-2", ErrorCategory.InvalidOperation, CaaS));
+                                WriteError(new ErrorRecord(e, "-2", ErrorCategory.InvalidOperation, Connection));
                             }
                             else //if (e is HttpRequestException)
                             {
-                                ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, CaaS));
+                                ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, Connection));
                             }
                             return true;
                         });

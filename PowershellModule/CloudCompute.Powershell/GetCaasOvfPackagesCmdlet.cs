@@ -40,11 +40,11 @@ namespace DD.CBU.Compute.Powershell
                     {
                         if (e is ComputeApiException)
                         {
-                            WriteError(new ErrorRecord(e, "-2", ErrorCategory.InvalidOperation, CaaS));
+                            WriteError(new ErrorRecord(e, "-2", ErrorCategory.InvalidOperation, Connection));
                         }
                         else //if (e is HttpRequestException)
                         {
-                            ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, CaaS));
+                            ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, Connection));
                         }
                         return true;
                     });
@@ -57,7 +57,7 @@ namespace DD.CBU.Compute.Powershell
         /// <returns>The packages</returns>
         private IEnumerable<OvfPackageType> GetOvfPackages()
         {
-            var packages = CaaS.ApiClient.GetOvfPackages().Result;
+            var packages = Connection.ApiClient.GetOvfPackages().Result;
             return packages.ovfPackage;
         }
     }

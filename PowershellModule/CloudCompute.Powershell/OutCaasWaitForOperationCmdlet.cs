@@ -58,7 +58,7 @@ namespace DD.CBU.Compute.Powershell
                     if (waitingToStart)
                         Thread.Sleep(3000);
                     if(starttime.AddMinutes(5)<=DateTime.Now)
-                        WriteError(new ErrorRecord(new TimeoutException("The wait operation timeout, as CaaS did not change not start in 5 minutes"), "-1", ErrorCategory.OperationTimeout, CaaS));
+                        WriteError(new ErrorRecord(new TimeoutException("The wait operation timeout, as CaaS did not change not start in 5 minutes"), "-1", ErrorCategory.OperationTimeout, Connection));
                     
 
                 } while (waitingToStart);
@@ -115,11 +115,11 @@ namespace DD.CBU.Compute.Powershell
                     {
                         if (e is ComputeApiException)
                         {
-                            WriteError(new ErrorRecord(e, "-2", ErrorCategory.InvalidOperation, CaaS));
+                            WriteError(new ErrorRecord(e, "-2", ErrorCategory.InvalidOperation, Connection));
                         }
                         else //if (e is HttpRequestException)
                         {
-                            ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, CaaS));
+                            ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, Connection));
                         }
                         return true;
                     });
@@ -134,7 +134,7 @@ namespace DD.CBU.Compute.Powershell
 
         private async Task<IEnumerable<ServerWithBackupType>> GetDeployeServers(string serverId)
         {
-            return await CaaS.ApiClient.GetDeployedServers(serverId, null, null, null);
+            return await Connection.ApiClient.GetDeployedServers(serverId, null, null, null);
         }
 
     }

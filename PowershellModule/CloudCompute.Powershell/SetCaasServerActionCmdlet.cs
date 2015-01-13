@@ -43,16 +43,16 @@ namespace DD.CBU.Compute.Powershell
                 switch (Action)
                 {
                     case ServerAction.PowerOff:
-                        status = CaaS.ApiClient.ServerPowerOff(Server.id).Result;
+                        status = Connection.ApiClient.ServerPowerOff(Server.id).Result;
                         break;
                     case ServerAction.PowerOn:
-                        status = CaaS.ApiClient.ServerPowerOn(Server.id).Result;
+                        status = Connection.ApiClient.ServerPowerOn(Server.id).Result;
                         break;
                     case ServerAction.Restart:
-                        status = CaaS.ApiClient.ServerRestart(Server.id).Result;
+                        status = Connection.ApiClient.ServerRestart(Server.id).Result;
                         break;
                     case ServerAction.Shutdown:
-                        status = CaaS.ApiClient.ServerShutdown(Server.id).Result;
+                        status = Connection.ApiClient.ServerShutdown(Server.id).Result;
                         break;
                     default:
                         ThrowTerminatingError(
@@ -79,11 +79,11 @@ namespace DD.CBU.Compute.Powershell
                         {
                             if (e is ComputeApiException)
                             {
-                                WriteError(new ErrorRecord(e, "-2", ErrorCategory.InvalidOperation, CaaS));
+                                WriteError(new ErrorRecord(e, "-2", ErrorCategory.InvalidOperation, Connection));
                             }
                             else //if (e is HttpRequestException)
                             {
-                                ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, CaaS));
+                                ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, Connection));
                             }
                             return true;
                         });

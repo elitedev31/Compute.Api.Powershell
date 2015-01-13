@@ -43,7 +43,7 @@ namespace DD.CBU.Compute.Powershell
                 string location = Location;
                 if (ParameterSetName == "DataCentre")
                     location = Datacentre.location;
-                var status = CaaS.ApiClient.CreateNetwork(Name, location, Description).Result;
+                var status = Connection.ApiClient.CreateNetwork(Name, location, Description).Result;
                 if (status != null)
                     WriteDebug(
                         string.Format(
@@ -60,11 +60,11 @@ namespace DD.CBU.Compute.Powershell
                         {
                             if (e is ComputeApiException)
                             {
-                                WriteError(new ErrorRecord(e, "-2", ErrorCategory.InvalidOperation, CaaS));
+                                WriteError(new ErrorRecord(e, "-2", ErrorCategory.InvalidOperation, Connection));
                             }
                             else //if (e is HttpRequestException)
                             {
-                                ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, CaaS));
+                                ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, Connection));
                             }
                             return true;
                         });

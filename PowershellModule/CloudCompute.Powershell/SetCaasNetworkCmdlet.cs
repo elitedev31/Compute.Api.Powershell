@@ -36,13 +36,13 @@ namespace DD.CBU.Compute.Powershell
                     switch (this.ParameterSetName)
                     {
                         case "Multicast":
-                            status = CaaS.ApiClient.SetNetworkMulticast(Network.id, Multicast).Result;
+                            status = Connection.ApiClient.SetNetworkMulticast(Network.id, Multicast).Result;
                             break;
                         default:
-                            status = CaaS.ApiClient.ModifyNetwork(Network.id, Name, Description).Result;
+                            status = Connection.ApiClient.ModifyNetwork(Network.id, Name, Description).Result;
                             break;
                     }
-                    status = CaaS.ApiClient.ModifyNetwork(Network.id, Name, Description).Result;
+                    status = Connection.ApiClient.ModifyNetwork(Network.id, Name, Description).Result;
                     if (status != null)
                         WriteDebug(
                             string.Format(
@@ -59,11 +59,11 @@ namespace DD.CBU.Compute.Powershell
                         {
                             if (e is ComputeApiException)
                             {
-                                WriteError(new ErrorRecord(e, "-2", ErrorCategory.InvalidOperation, CaaS));
+                                WriteError(new ErrorRecord(e, "-2", ErrorCategory.InvalidOperation, Connection));
                             }
                             else //if (e is HttpRequestException)
                             {
-                                ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, CaaS));
+                                ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, Connection));
                             }
                             return true;
                         });

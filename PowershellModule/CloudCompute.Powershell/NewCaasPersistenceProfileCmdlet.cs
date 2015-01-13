@@ -82,11 +82,11 @@ namespace DD.CBU.Compute.Powershell
                 Status status = null;
                 if (ParameterSetName.Equals("HttpCookie"))
                     status =
-                        CaaS.ApiClient.CreatePersistenceProfileHttpCookie(Network.id, Name, ServerFarm.id,
+                        Connection.ApiClient.CreatePersistenceProfileHttpCookie(Network.id, Name, ServerFarm.id,
                             TimeoutMinutes, CookieName, CookieType).Result;
                 else
                     status =
-                        CaaS.ApiClient.CreatePersistenceProfileIpNetmask(Network.id, Name, ServerFarm.id, TimeoutMinutes,
+                        Connection.ApiClient.CreatePersistenceProfileIpNetmask(Network.id, Name, ServerFarm.id, TimeoutMinutes,
                             Direction, Netmask).Result;
                 if (status != null && PassThru.IsPresent)
                 {
@@ -144,11 +144,11 @@ namespace DD.CBU.Compute.Powershell
                     {
                         if (e is ComputeApiException)
                         {
-                            WriteError(new ErrorRecord(e, "-2", ErrorCategory.InvalidOperation, CaaS));
+                            WriteError(new ErrorRecord(e, "-2", ErrorCategory.InvalidOperation, Connection));
                         }
                         else //if (e is HttpRequestException)
                         {
-                            ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, CaaS));
+                            ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, Connection));
                         }
                         return true;
                     });

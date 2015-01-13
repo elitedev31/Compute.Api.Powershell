@@ -1,4 +1,5 @@
 ﻿    using System;
+    using System.Linq;
     using System.Management.Automation;
     using System.Threading.Tasks;
 
@@ -58,17 +59,26 @@ namespace DD.CBU.Compute.Powershell
             base.ProcessRecord();
             
             ComputeServiceConnection newCloudComputeConnection = null;
-            
+          
+
             WriteDebug("Trying to login to the REST API");
             try
             {
+
                 newCloudComputeConnection = LoginTask().Result;
                 if (newCloudComputeConnection != null)
                 {
-                    newCloudComputeConnection.Name = Name;
-                    WriteDebug(String.Format("CaaS connection created successfully: {0}", newCloudComputeConnection));
-                   
-                    SessionState.AddComputeServiceConnection(newCloudComputeConnection);
+                   WriteDebug(String.Format("CaaS connection created successfully: {0}", newCloudComputeConnection));
+                   if (string.IsNullOrEmpty(Name))
+                   {
+                       Name = Guid.NewGuid().ToString();
+                       WriteWarning(string.Format("Connection name not specified. Therefore this connection name will be a random GUID: {0}", Name));
+                   }
+                    if(!SessionState.GetComputeServiceConnections().Any())
+                         WriteDebug("This is the first connection and will be the default connection.");
+                    else
+                        WriteWarning("You have created more than one connection on this session, please use the cmdlet Set-CaasActiveConnection -Name <name> to change the active/default connection");
+                    SessionState.AddComputeServiceConnection(Name,newCloudComputeConnection);
                     WriteObject(newCloudComputeConnection);
                 }
             }

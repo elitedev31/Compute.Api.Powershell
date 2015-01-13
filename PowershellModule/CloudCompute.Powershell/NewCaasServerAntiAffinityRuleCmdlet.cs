@@ -29,13 +29,13 @@ namespace DD.CBU.Compute.Powershell
             base.ProcessRecord();
             try
             {
-                var status = CaaS.ApiClient.CreateServerAntiAffinityRule(Server1.id, Server2.id).Result;
+                var status = Connection.ApiClient.CreateServerAntiAffinityRule(Server1.id, Server2.id).Result;
                 if (status.result == "SUCCESS")
                 {
                     var statusadditionalInfo = status.additionalInformation.Single(info => info.name == "antiaffinityrule.id");
                     if (statusadditionalInfo != null && PassThru.IsPresent)
                     {
-                        var rules = CaaS.ApiClient.GetServerAntiAffinityRules(statusadditionalInfo.value,null,null).Result;
+                        var rules = Connection.ApiClient.GetServerAntiAffinityRules(statusadditionalInfo.value,null,null).Result;
                         if (rules.Any())
                         {
                             rule = rules.First();
@@ -53,11 +53,11 @@ namespace DD.CBU.Compute.Powershell
                     {
                         if (e is ComputeApiException)
                         {
-                            WriteError(new ErrorRecord(e, "-2", ErrorCategory.InvalidOperation, CaaS));
+                            WriteError(new ErrorRecord(e, "-2", ErrorCategory.InvalidOperation, Connection));
                         }
                         else //if (e is HttpRequestException)
                         {
-                            ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, CaaS));
+                            ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, Connection));
                         }
                         return true;
                     });

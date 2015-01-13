@@ -112,7 +112,7 @@ namespace DD.CBU.Compute.Powershell
                 var ipAddress = IpAddress != null ? IpAddress.ToString() : string.Empty;
 
 
-                var status = CaaS.ApiClient.CreateVip(Network.id, Name, Port, Protocol, targetType, targetid, ReplyToIcmp, InService, ipAddress).Result;
+                var status = Connection.ApiClient.CreateVip(Network.id, Name, Port, Protocol, targetType, targetid, ReplyToIcmp, InService, ipAddress).Result;
                 if (status != null && PassThru.IsPresent)
                 {
 
@@ -161,11 +161,11 @@ namespace DD.CBU.Compute.Powershell
                     {
                         if (e is ComputeApiException)
                         {
-                            WriteError(new ErrorRecord(e, "-2", ErrorCategory.InvalidOperation, CaaS));
+                            WriteError(new ErrorRecord(e, "-2", ErrorCategory.InvalidOperation, Connection));
                         }
                         else //if (e is HttpRequestException)
                         {
-                            ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, CaaS));
+                            ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, Connection));
                         }
                         return true;
                     });

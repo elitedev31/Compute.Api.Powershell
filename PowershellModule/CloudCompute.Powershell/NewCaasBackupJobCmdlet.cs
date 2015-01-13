@@ -43,11 +43,11 @@ namespace DD.CBU.Compute.Powershell
                         {
                             if (e is ComputeApiException)
                             {
-                                WriteError(new ErrorRecord(e, "-2", ErrorCategory.InvalidOperation, CaaS));
+                                WriteError(new ErrorRecord(e, "-2", ErrorCategory.InvalidOperation, Connection));
                             }
                             else //if (e is HttpRequestException)
                             {
-                                ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, CaaS));
+                                ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, Connection));
                             }
                             return true;
                         });
@@ -59,7 +59,7 @@ namespace DD.CBU.Compute.Powershell
         /// </summary>
         private void RunBackupNow()
         {
-            var status = CaaS.ApiClient.InitiateBackup(Server.id, BackupClient).Result;
+            var status = Connection.ApiClient.InitiateBackup(Server.id, BackupClient).Result;
             if (status != null)
             {
                 WriteDebug(

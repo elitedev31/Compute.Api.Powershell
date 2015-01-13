@@ -54,7 +54,7 @@ namespace DD.CBU.Compute.Powershell
                     networkid = Network.id;
                 }
 
-                var resultlist =  CaaS.ApiClient.GetServerAntiAffinityRules(RuleId,Location,networkid).Result;
+                var resultlist =  Connection.ApiClient.GetServerAntiAffinityRules(RuleId,Location,networkid).Result;
                 if (Server != null)
                 {
                     resultlist = resultlist.Where(rule => rule.serverSummary.Any(server => server.id == Server.id));
@@ -90,11 +90,11 @@ namespace DD.CBU.Compute.Powershell
                     {
                         if (e is ComputeApiException)
                         {
-                            WriteError(new ErrorRecord(e, "-2", ErrorCategory.InvalidOperation, CaaS));
+                            WriteError(new ErrorRecord(e, "-2", ErrorCategory.InvalidOperation, Connection));
                         }
                         else //if (e is HttpRequestException)
                         {
-                            ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, CaaS));
+                            ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, Connection));
                         }
                         return true;
                     });

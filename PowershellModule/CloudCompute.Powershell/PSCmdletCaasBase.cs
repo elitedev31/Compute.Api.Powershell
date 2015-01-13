@@ -12,19 +12,18 @@
         /// <summary>
         /// The CaaS connection created by <see cref="NewCaasConnectionCmdlet"/> 
         /// </summary>
-        [Parameter(Mandatory = false, HelpMessage = "The CaaS Connection created by New-ComputeServiceConnection")]
-        public ComputeServiceConnection CaaS { get; set; }
+        [Parameter(Mandatory = false,ValueFromPipelineByPropertyName = true, HelpMessage = "The CaaS Connection created by New-ComputeServiceConnection")]
+        public ComputeServiceConnection Connection { get; set; }
 
         protected override void BeginProcessing()
         {
             base.BeginProcessing();
 
             // If CaaS connection is NOT set via parameter, get it from the PS session
-            if (CaaS == null)
+            if (Connection == null)
             {
-                // TODO: Choose the correct connection in case of more than one connections in one session
-                CaaS = SessionState.GetComputeServiceConnections().FirstOrDefault();
-                if (CaaS == null)
+                Connection = SessionState.GetDefaultComputeServiceConnection();
+                if (Connection == null)
                     this.ThrowTerminatingError(
                         new ErrorRecord(
                             new AuthenticationException("Cannot find a valid CaaS connection"),

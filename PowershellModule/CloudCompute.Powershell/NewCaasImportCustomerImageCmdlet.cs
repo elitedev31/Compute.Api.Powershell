@@ -56,11 +56,11 @@ namespace DD.CBU.Compute.Powershell
                     {
                         if (e is ComputeApiException)
                         {
-                            WriteError(new ErrorRecord(e, "-2", ErrorCategory.InvalidOperation, CaaS));
+                            WriteError(new ErrorRecord(e, "-2", ErrorCategory.InvalidOperation, Connection));
                         }
                         else //if (e is HttpRequestException)
                         {
-                            ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, CaaS));
+                            ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, Connection));
                         }
                         return true;
                     });
@@ -69,7 +69,7 @@ namespace DD.CBU.Compute.Powershell
 
         ServerImageWithStateType ImportCustomerImage()
         {
-            return CaaS.ApiClient.ImportCustomerImage(CustomerImageName, OvfPackage.name, Network.location, Description).Result;
+            return Connection.ApiClient.ImportCustomerImage(CustomerImageName, OvfPackage.name, Network.location, Description).Result;
         }
     }
 }

@@ -53,9 +53,9 @@ namespace DD.CBU.Compute.Powershell
             {
                 Status status = null;
                 if(ParameterSetName.Equals("RealServer"))
-                    status = CaaS.ApiClient.AddRealServerToServerFarm(Network.id,ServerFarm.id, RealServer.id, RealServerPort).Result;
+                    status = Connection.ApiClient.AddRealServerToServerFarm(Network.id,ServerFarm.id, RealServer.id, RealServerPort).Result;
                 else
-                    status = CaaS.ApiClient.AddProbeToServerFarm(Network.id, ServerFarm.id,Probe.id).Result;
+                    status = Connection.ApiClient.AddProbeToServerFarm(Network.id, ServerFarm.id,Probe.id).Result;
 
 
                 if (status != null)
@@ -78,11 +78,11 @@ namespace DD.CBU.Compute.Powershell
                     {
                         if (e is ComputeApiException)
                         {
-                            WriteError(new ErrorRecord(e, "-2", ErrorCategory.InvalidOperation, CaaS));
+                            WriteError(new ErrorRecord(e, "-2", ErrorCategory.InvalidOperation, Connection));
                         }
                         else //if (e is HttpRequestException)
                         {
-                            ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, CaaS));
+                            ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, Connection));
                         }
                         return true;
                     });

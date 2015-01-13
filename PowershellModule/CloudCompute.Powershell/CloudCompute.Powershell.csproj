@@ -104,7 +104,8 @@
     <Compile Include="AddCaasBackupClientCmdlet.cs" />
     <Compile Include="EnableCaasVendorMultiGeoCustomerCmdlet.cs" />
     <Compile Include="ExistCaasVendorAccountCmdlet.cs" />
-    <Compile Include="Extensions.cs" />
+    <Compile Include="GetCaasConnectionCmdlet.cs" />
+    <Compile Include="SecureStringExtensions.cs" />
     <Compile Include="GetCaasAccountsCmdlet.cs" />
     <Compile Include="GetCaasMultiGeoRegionsCmdlet.cs" />
     <Compile Include="SearchCaasVendorCustomerCmdlet.cs" />
@@ -147,6 +148,7 @@
     <Compile Include="SetCaasAccountCmdlet.cs" />
     <Compile Include="SetCaasAccountPrimaryAdministratorCmdlet.cs" />
     <Compile Include="CancelCaasVendorCustomerCmdlet.cs" />
+    <Compile Include="SetCaasActiveConnectionCmdlet.cs" />
     <Compile Include="UnsuspendCaasVendorCustomerCmdlet.cs" />
     <Compile Include="SuspendCaasVendorCustomerCmdlet.cs" />
     <Compile Include="SetCaasVipCmdlet.cs" />
