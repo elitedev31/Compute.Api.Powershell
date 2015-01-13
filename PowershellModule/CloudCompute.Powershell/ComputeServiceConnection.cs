@@ -38,6 +38,11 @@
 			}
 		}
 
+        /// <summary>
+        /// Compute connection name only for reference
+        /// </summary>
+        public string Name { get; set; }
+
 	    /// <summary>
 	    ///		The CaaS API client represented by the connection.
 	    /// </summary>

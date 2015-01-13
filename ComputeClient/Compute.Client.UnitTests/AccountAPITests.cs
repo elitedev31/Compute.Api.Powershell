@@ -33,7 +33,7 @@ namespace Compute.Client.UnitTests
             var someOrgId = Guid.NewGuid();
             var expectedRelativeUrl = string.Format("{0}/account/{1}?delete", someOrgId, username);
             var client = GetApiClient("DeleteSubAdministratorAccount.xml", expectedRelativeUrl);
-            var result = client.DeleteSubAdministratorAccountAsync(username).Result;
+            var result = client.DeleteSubAdministratorAccount(username).Result;
 
             // Assert.AreEqual("SUCCESS", result.Result);
             // Assert.AreEqual("Delete Account", result.Operation);
@@ -49,9 +49,9 @@ namespace Compute.Client.UnitTests
             var expectedRelativeUrl = string.Format("{0}/account/{1}?primary", someOrgId, username);
             var client = GetApiClient("DesignatePrimaryAdministratorAccount.xml", expectedRelativeUrl);
 
-            ApiStatus result = client.DesignatePrimaryAdministratorAccountAsync(username).Result;
-            Assert.AreEqual("SUCCESS", result.Result);
-            Assert.AreEqual("Designate Primary Admin Account", result.Operation);
+            Status result = client.DesignatePrimaryAdministratorAccount(username).Result;
+            Assert.AreEqual("SUCCESS", result.result);
+            Assert.AreEqual("Designate Primary Admin Account", result.operation);
         }
 
         [TestMethod]

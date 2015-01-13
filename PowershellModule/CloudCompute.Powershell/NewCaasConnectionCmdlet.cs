@@ -24,6 +24,13 @@ namespace DD.CBU.Compute.Powershell
         public PSCredential ApiCredentials { get; set; }
 
         /// <summary>
+        /// Name for this connection
+        /// </summary>
+        [Parameter(Mandatory = false,HelpMessage = "Name to identify this connection")]
+        public string Name { get; set; }
+
+
+        /// <summary>
         /// The base uri of the REST API
         /// </summary>
         [Parameter(Mandatory = true,ParameterSetName = "ApiBaseUri", HelpMessage = "The base URI of the REST API")]
@@ -58,12 +65,9 @@ namespace DD.CBU.Compute.Powershell
                 newCloudComputeConnection = LoginTask().Result;
                 if (newCloudComputeConnection != null)
                 {
+                    newCloudComputeConnection.Name = Name;
                     WriteDebug(String.Format("CaaS connection created successfully: {0}", newCloudComputeConnection));
-                    var existing = SessionState.GetComputeServiceConnections();
-                    for (int i = 0; i < existing.Count; i++)
-                    {
-                        SessionState.RemoveComputeServiceConnection(existing[i]);
-                    }
+                   
                     SessionState.AddComputeServiceConnection(newCloudComputeConnection);
                     WriteObject(newCloudComputeConnection);
                 }

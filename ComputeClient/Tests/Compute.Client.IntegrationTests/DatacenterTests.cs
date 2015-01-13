@@ -78,7 +78,7 @@ namespace DD.CBU.Compute.Client.IntegrationTests
                 Guid organizationId = account.OrganizationId;
                 Assert.AreNotEqual(Guid.Empty, organizationId);
 
-                await computeApiClient.ListMultiGeoDataCentersWithKey(organizationId);
+                await computeApiClient.GetListOfMultiGeographyRegions();
             }
         }
 	}
