@@ -105,6 +105,7 @@
     <Compile Include="EnableCaasVendorMultiGeoCustomerCmdlet.cs" />
     <Compile Include="FindCaasVendorAccountCmdlet.cs" />
     <Compile Include="GetCaasConnectionCmdlet.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="RemoveCaasConnectionCmdlet.cs" />
     <Compile Include="SecureStringExtensions.cs" />
     <Compile Include="GetCaasAccountsCmdlet.cs" />

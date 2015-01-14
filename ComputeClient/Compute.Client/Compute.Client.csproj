@@ -97,6 +97,7 @@
     </Compile>
     <Compile Include="ApiClientException.cs" />
     <Compile Include="ApiUris.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="KnownApiUri.cs" />
     <Compile Include="ServerImageType.cs" />
     <Compile Include="Backup\ComputeApiClientBackupExtensions.cs" />
