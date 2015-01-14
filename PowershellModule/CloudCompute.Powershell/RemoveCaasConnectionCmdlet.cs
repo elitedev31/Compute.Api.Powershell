@@ -7,25 +7,24 @@ using System.Threading.Tasks;
 
 namespace DD.CBU.Compute.Powershell
 {
-     [Cmdlet(VerbsCommon.Set, "CaasActiveConnection")]
-     [OutputType(typeof(ComputeServiceConnection))]
-    public class SetCaasActiveConnectionCmdlet : PSCmdlet
+     [Cmdlet(VerbsCommon.Remove, "CaasActiveConnection")]
+     public class RemoveCaasConnectionCmdlet:PSCmdlet
     {
         /// <summary>
         /// Name for this connection
         /// </summary>
-        [Parameter(Mandatory = true,Position = 0, HelpMessage = "Connection name to be set as active.")]
+        [Parameter(Mandatory = true, Position = 0, HelpMessage = "Connection name to be removed from session.")]
         public string Name { get; set; }
-
 
          protected override void ProcessRecord()
          {
              base.ProcessRecord();
+             base.ProcessRecord();
 
              try
              {
-                 SessionState.SetDefaultComputeServiceConnection(Name);
-                 WriteObject(SessionState.GetDefaultComputeServiceConnection(),false);
+                 SessionState.RemoveComputeServiceConnection(Name);
+
 
              }
              catch (AggregateException ae)
@@ -33,12 +32,10 @@ namespace DD.CBU.Compute.Powershell
                  ae.Handle(
                      e =>
                      {
-                         ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError,Name));
+                         ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, Name));
                          return true;
                      });
              }
-      
-
          }
     }
 }

@@ -6,8 +6,14 @@ Fixes:
 
 Changes:
 - Add Speed paramenter to disk operation cmdlets to avoid wrong speedid.
+- Support to multiple connections
 
 New:
+
+Connection
+	Get-CaasConnection
+	Set-CaasActiveConnection
+	Remove-CaasConnection
 
 Datacentre:
 	Get-CaasMultiGeoRegions
@@ -25,9 +31,9 @@ Vendor:
 	Search-CaasVendorCustomer
 	Enable-CaasVendorMultiGeoCustomer
 	Suspend-CaasVendorCustomer
-	Unsuspend-CaasVendorCustomer
-	Cancel-CaasVendorCustomer
-	Exist-CaasVendorAccount
+	Resume-CaasVendorCustomer
+	Remove-CaasVendorCustomer
+	Search-CaasVendorAccount
 
 
 1.2

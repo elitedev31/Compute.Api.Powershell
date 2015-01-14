@@ -107,7 +107,7 @@
     <Compile Include="ComputeApiClientException.cs" />
     <Compile Include="ComputeApiException.cs" />
     <Compile Include="ComputeApiError.cs" />
-    <Compile Include="Extensions.cs" />
+    <Compile Include="StringExtensions.cs" />
     <Compile Include="HttpContentExtensions.cs" />
     <Compile Include="Interfaces\IComputeApiClient.cs" />
     <Compile Include="ImportExportImages\ComputeApiClientImportExportExtensions.cs" />

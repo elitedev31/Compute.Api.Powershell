@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DD.CBU.Compute.Api.Client
 {
-    public static class Extensions
+    public static class StringExtensions
     {
 
         public static string ToQueryString(this Dictionary<string,string> collection)
