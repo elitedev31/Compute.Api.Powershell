@@ -3,25 +3,25 @@ $connectionDev=New-CaasConnection -Name "AustraliaConnection" -ApiCredentials (G
 
 $connectionDev2=New-CaasConnection -Name "APACConnection" -ApiCredentials (Get-Credential -Message "Dev2 Connection") -Vendor DimensionData -Region AsiaPacific_AP
 
-
-Write-Host "Get Deployed Servers from connection AustraliaConnection"
-
 #list deployed servers on the active connection (AustraliaConnection)
+Write-Host "Get Deployed Servers from connection AustraliaConnection"
 Get-CaasDeployedServer
 
 #set the active connection to APACConnection
 Set-CaasActiveConnection -Name "APACConnection"
 
 
-
-Write-Host "Get Deployed Servers from connection APACConnection"
 #list deployed servers on the active connection (APACConnection)
+Write-Host "Get Deployed Servers from connection APACConnection"
 Get-CaasDeployedServer
 
 
-#use the connection parameter to execute the cmdlet agains the AustraliaConnection 
+#use the connection parameter to force the cmdlet to use the AustraliaConnection 
 Get-CaasDeployedServer -Connection $connectionDev
 
 
 #list all connections stored on the PS session 
 Get-CaasConnection
+
+#Remove the APACConnection from PS Session
+Remove-CaasConnection -Name "APACConnection"
