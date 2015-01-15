@@ -159,6 +159,7 @@
     <Compile Include="Image\PendingDeployImageWithSoftwareLabelsType.cs" />
     <Compile Include="Image\ServerImage.cs" />
     <Compile Include="Network\AclActionType.cs" />
+    <Compile Include="Network\AclProtocolType.cs" />
     <Compile Include="Network\AclRuleListType.cs" />
     <Compile Include="Network\AclRuleType.cs" />
     <Compile Include="Network\AclType.cs" />

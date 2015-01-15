@@ -204,31 +204,7 @@ namespace DD.CBU.Compute.Api.Client.Network
                     ApiUris.DeleteAclRule(client.Account.OrganizationId, networkId, aclRuleId));
         }
 
-        /// <summary>
-        /// All the ACL Protocol types.
-        /// </summary>
-        public enum AclProtocolType
-        {
-            /// <summary>
-            /// IP type
-            /// </summary>
-            IP,
-
-            /// <summary>
-            /// ICMP type
-            /// </summary>
-            ICMP,
-
-            /// <summary>
-            /// TCP type
-            /// </summary>
-            TCP,
-
-            /// <summary>
-            /// UDP type
-            /// </summary>
-            UDP
-        }
+      
 
         /// <summary>
         /// Creates a new ACL rule at a specified line using your organization ID and the ID of the target network.

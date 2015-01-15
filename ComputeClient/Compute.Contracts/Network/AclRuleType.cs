@@ -29,8 +29,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network
     
         private AclType typeField;
     
-        private bool typeFieldSpecified;
-    
+ 
         /// <remarks/>
         public string id {
             get {
@@ -131,15 +130,6 @@ namespace DD.CBU.Compute.Api.Contracts.Network
             }
         }
     
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool typeSpecified {
-            get {
-                return this.typeFieldSpecified;
-            }
-            set {
-                this.typeFieldSpecified = value;
-            }
-        }
+     
     }
 }

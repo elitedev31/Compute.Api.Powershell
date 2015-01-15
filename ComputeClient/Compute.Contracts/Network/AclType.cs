@@ -7,15 +7,10 @@ namespace DD.CBU.Compute.Api.Contracts.Network
     public enum AclType {
     
         /// <remarks/>
-        OPSOURCE_ACL,
-    
-        /// <remarks/>
         OUTSIDE_ACL,
     
         /// <remarks/>
         INSIDE_ACL,
     
-        /// <remarks/>
-        ALL_ACL,
-    }
+      }
 }

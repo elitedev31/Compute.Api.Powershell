@@ -34,7 +34,7 @@ namespace DD.CBU.Compute.Powershell
         public AclActionType Action { get; set; }
 
         [Parameter(Mandatory = true, HelpMessage = "The protocol")]
-        public ComputeApiClientNetworkExtensions.AclProtocolType Protocol { get; set; }
+        public AclProtocolType Protocol { get; set; }
 
         [Parameter(HelpMessage = "The source IP Address. If not supplied, ANY IP address is assumed.")]
         public IPAddress SourceIpAddress { get; set; }
@@ -48,7 +48,7 @@ namespace DD.CBU.Compute.Powershell
         [Parameter(HelpMessage = "The destination Netmask. If supplied with the DestinationIpAddress, represents CIDR boundary for the network.")]
         public IPAddress DestinationNetmask { get; set; }
 
-        [Parameter(Mandatory = true, HelpMessage = "The port range type")]
+        [Parameter(Mandatory = false, HelpMessage = "The port range type")]
         public PortRangeTypeType PortRangeType { get; set; }
 
         [Parameter(HelpMessage = "Depending on the port range type - will define the port criteria")]
