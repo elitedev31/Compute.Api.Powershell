@@ -367,7 +367,18 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
         /// <returns></returns>
         Task<Status> RemoveServerAntiAffinityRule(string ruleId);
 
-      
-     
+        /// <summary>
+        /// Since MultiGeo call is only valid for the home geo, use this method to discover what is your home geo and the applicable regions for this user.
+        /// This is a multithreaded call that uses the underlying ComputeApiClient.GetListOfMultiGeographyRegions() 
+        /// to discover the home geo and multi geo for this user to all API endpoints known for vendor.
+        /// Note: Most of the user vendor is DimensionData. Use this if you have to guess which vendor the user is under.
+        /// </summary>
+        /// <param name="vendor">The vendor of the user</param>
+        /// <param name="credential">credential of the user</param>
+        /// <returns></returns>
+        Task<IEnumerable<Geo>> DiscoverHomeMultiGeo(KnownApiVendor vendor, ICredentials credential);
+
+
+
     }
 }

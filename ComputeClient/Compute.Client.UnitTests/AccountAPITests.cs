@@ -12,7 +12,6 @@ namespace Compute.Client.UnitTests
 
     //// TODO: Recreate proper unit tests
     [TestClass]
-    [Ignore]
     public class AccountAPITests : BaseApiClientTestFixture
     {
         [TestMethod]
@@ -94,13 +93,13 @@ namespace Compute.Client.UnitTests
         }
 
         [TestMethod]
-        public void HomeGeoDiscoveryTest()
+        public async Task HomeGeoDiscoveryTest()
         {
-            var username = "joesmith";
+            var username = "joe.smith";
             var password = "password";
             var vendor = KnownApiVendor.DimensionData;
 
-            var result = ComputeApiClient.DiscoverHomeMultiGeo(vendor, username, password);
+            var result = await new ComputeApiClient(new Uri("http://google.com")).DiscoverHomeMultiGeo(vendor, new NetworkCredential(username, password));
             Assert.IsNotNull(result);
             Assert.IsTrue(result.SingleOrDefault(geo => geo.isHome == "true") != null);
         }

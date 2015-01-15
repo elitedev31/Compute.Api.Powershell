@@ -785,9 +785,6 @@ namespace DD.CBU.Compute.Api.Client
 
         }
 
-
-      
-        #endregion // Public methods
         /// <summary>
         /// Since MultiGeo call is only valid for the home geo, use this method to discover what is your home geo and the applicable regions for this user.
         /// This is a multithreaded call that uses the underlying ComputeApiClient.GetListOfMultiGeographyRegions() 
@@ -795,22 +792,11 @@ namespace DD.CBU.Compute.Api.Client
         /// Note: Most of the user vendor is DimensionData. Use this if you have to guess which vendor the user is under.
         /// </summary>
         /// <param name="vendor">The vendor of the user</param>
-        /// <param name="username">username of the user</param>
-        /// <param name="password">password of the user</param>
+        /// <param name="credential">credential of the user</param>
         /// <returns></returns>
-        public static IEnumerable<Geo> DiscoverHomeMultiGeo(KnownApiVendor vendor, string username, string password)
+        public async Task<IEnumerable<Geo>> DiscoverHomeMultiGeo(KnownApiVendor vendor, ICredentials credential)
         {
             var regionList = KnownApiUri.Instance.GetKnownRegionList(vendor);
-            var credential = new NetworkCredential(username, password);
-
-            if (string.IsNullOrWhiteSpace(username))
-            {
-                throw new ArgumentNullException("username");
-            }
-            if (string.IsNullOrWhiteSpace(password))
-            {
-                throw new ArgumentNullException("password");
-            }
 
             var computeClients = regionList.Select(region => new ComputeApiClient(vendor, region)).ToArray();
             if (computeClients.Length == 0)
@@ -823,9 +809,9 @@ namespace DD.CBU.Compute.Api.Client
             // try login to all known regions simultaneoulsy. Note, not all regions may be enabled for this particular client.
             try
             {
-                Task.WaitAll(loginTasks);
+                await Task.WhenAll(loginTasks);
             }
-            catch (AggregateException aex)
+            catch (Exception aex)
             {
                 //ignore (there might be region that this user is not enabled)
             }
@@ -841,15 +827,17 @@ namespace DD.CBU.Compute.Api.Client
             // multiGeo only works in the home geo.
             try
             {
-                Task.WaitAll(multiGeoTasks);
+                await Task.WhenAll(multiGeoTasks);
             }
-            catch (AggregateException aex)
+            catch (Exception aex)
             {
                 //ignore (only one task will return with valid result)
             }
 
             var validMultiGeo = multiGeoTasks.Single(task => task.Status == TaskStatus.RanToCompletion && task.Result != null).Result;
-            return validMultiGeo;
+            return  validMultiGeo;
         }
+
+        #endregion // Public methods
     }
 }
