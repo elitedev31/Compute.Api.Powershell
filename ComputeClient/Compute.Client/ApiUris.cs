@@ -827,6 +827,17 @@ namespace DD.CBU.Compute.Api.Client
 		{
 			return new Uri(string.Format("{0}/imageExport", orgId), UriKind.Relative);
 		}
+
+		/// <summary>
+		/// Gets the customer image export history.
+		/// </summary>
+		/// <param name="organizationId">The organization identifier.</param>
+		/// <param name="count">The number of results to return.</param>
+		/// <returns>The URI for the API.</returns>
+		internal static Uri GetCustomerImageExportHistory(Guid organizationId, int count = 20)
+		{
+			return new Uri(string.Format("{0}/imageExportHistory?count=", organizationId, count), UriKind.Relative);
+		}
         #endregion
 
         #region VIP
@@ -1166,7 +1177,5 @@ namespace DD.CBU.Compute.Api.Client
         }
 
         #endregion
-
-
     }
 }

@@ -44,10 +44,10 @@ namespace DD.CBU.Compute.Api.Client.ImportExportImages
         }
 
 		/// <summary>
-		/// This function identifies the Customer Image Imports that are in progress for the supplied organization ID.
+		/// This function identifies the Customer Image Exports that are in progress for the supplied organization ID.
 		/// </summary>
 		/// <param name="client">The <see cref="ComputeApiClient"/> object</param>
-		/// <returns>The customer image imports currently in progress</returns>
+		/// <returns>The customer image exports currently in progress</returns>
 		public static async Task<IEnumerable<ImageExportType>> GetCustomerImagesExports(
 			this IComputeApiClient client)
 		{
@@ -56,6 +56,22 @@ namespace DD.CBU.Compute.Api.Client.ImportExportImages
 				client.WebApi.ApiGetAsync<ImageExports>(
 					ApiUris.GetCustomerImageExports(client.Account.OrganizationId));
 			return result.imageExport;
+		}
+
+		/// <summary>
+		/// This function identifies the Customer Image Export history for the supplied organization ID.
+		/// </summary>
+		/// <param name="client">The <see cref="ComputeApiClient"/> object</param>
+		/// <returns>The customer image exports</returns>
+		public static async Task<IEnumerable<ImageExportRecord>> GetCustomerImagesExportHistory(
+			this IComputeApiClient client,
+			int count = 20)
+		{
+			var result =
+				await
+				client.WebApi.ApiGetAsync<ImageExportHistory>(
+					ApiUris.GetCustomerImageExportHistory(client.Account.OrganizationId, count));
+			return result.imageExportRecord;
 		}
 
         /// <summary>

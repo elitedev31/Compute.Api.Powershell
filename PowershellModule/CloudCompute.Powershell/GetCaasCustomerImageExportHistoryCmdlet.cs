@@ -13,10 +13,13 @@ namespace DD.CBU.Compute.Powershell
     /// <summary>
     /// The Get Customer Image Imports cmdlet.
     /// </summary>
-    [Cmdlet(VerbsCommon.Get, "CaasCustomerImageExports")]
-	[OutputType(typeof(ImageExportType[]))]
-    public class GetCaasCustomerImageExportsCmdlet : PsCmdletCaasBase
+    [Cmdlet(VerbsCommon.Get, "CaasCustomerImageExportHistory")]
+	[OutputType(typeof(ImageExportRecord[]))]
+    public class GetCaasCustomerImageExportHistoryCmdlet : PsCmdletCaasBase
     {
+		[Parameter(Mandatory = false, HelpMessage = "Number of records to return, max 100.")]
+		public int RecordsToReturn { get; set; }
+
         /// <summary>
         /// The process record method.
         /// </summary>
@@ -26,7 +29,7 @@ namespace DD.CBU.Compute.Powershell
 
             try
             {
-                var resultlist = GetCustomerImageExports();
+                var resultlist = GetCustomerImageExportHistory();
 				if (resultlist != null && resultlist.Any())
 				{
 
@@ -71,9 +74,9 @@ namespace DD.CBU.Compute.Powershell
         /// Gets the customer image imports
         /// </summary>
         /// <returns>The customer image imports in progress</returns>
-		private IEnumerable<ImageExportType> GetCustomerImageExports()
+		private IEnumerable<ImageExportRecord> GetCustomerImageExportHistory()
         {
-            return Connection.ApiClient.GetCustomerImagesExports().Result;
+            return Connection.ApiClient.GetCustomerImagesExportHistory(RecordsToReturn).Result;
         }
     }
 }
