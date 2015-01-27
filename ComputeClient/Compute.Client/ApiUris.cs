@@ -798,6 +798,16 @@ namespace DD.CBU.Compute.Api.Client
             return new Uri(string.Format("{0}/imageImport", orgId), UriKind.Relative);
         }
 
+		/// <summary>
+		/// Gets the relative URI for the CaaS API action that POST a request to export a customer image
+		/// </summary>
+		/// <param name="orgId">The organization id</param>
+		/// <returns>Returns the relative URI of the REST request for exporting a customer image</returns>
+		internal static Uri ExportCustomerImage(Guid orgId)
+		{
+			return new Uri(string.Format("{0}/imageExport", orgId), UriKind.Relative);
+		}
+
         /// <summary>
         /// Gets the relative URI for the CaaS API action that retrieves a list of customer image imports in progress.
         /// </summary>
@@ -807,6 +817,16 @@ namespace DD.CBU.Compute.Api.Client
         {
             return new Uri(string.Format("{0}/imageImport", orgId), UriKind.Relative);
         }
+
+		/// <summary>
+		/// Gets the relative URI for the CaaS API action that retrieves a list of customer image exports in progress.
+		/// </summary>
+		/// <param name="orgId">The organization id</param>
+		/// <returns>a list of customer image exports in progress</returns>
+		internal static Uri GetCustomerImageExports(Guid orgId)
+		{
+			return new Uri(string.Format("{0}/imageExport", orgId), UriKind.Relative);
+		}
         #endregion
 
         #region VIP

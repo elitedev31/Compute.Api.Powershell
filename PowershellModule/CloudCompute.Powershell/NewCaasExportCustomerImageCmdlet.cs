@@ -1,7 +1,6 @@
-﻿    using System;
-    using System.Management.Automation;
-    using DD.CBU.Compute.Api.Contracts.Image;
-    using DD.CBU.Compute.Api.Contracts.Server;
+﻿using System;
+using System.Management.Automation;
+using DD.CBU.Compute.Api.Contracts.Image;
 
 namespace DD.CBU.Compute.Powershell
 {
@@ -16,11 +15,11 @@ namespace DD.CBU.Compute.Powershell
     ///	Imports a new customer image.
     /// </remarks>
     [Cmdlet(VerbsCommon.New, "CaasExportCustomerImage")]
-    [OutputType(typeof(ImageExportRecord))]
+	[OutputType(typeof(ImageExportType))]
     public class NewCaasExportCustomerImageCmdlet : PsCmdletCaasBase
     {
         [Parameter(Mandatory = true, HelpMessage = "The Customer Image.")]
-        public ServerImageWithStateType CustomerImage { get; set; }
+        public ImagesWithDiskSpeedImage CustomerImage { get; set; }
 
         [Parameter(Mandatory = true, HelpMessage = "A prefix for this export. Must not contain spaces.")]
         public string OvfPrefix { get; set; }
@@ -59,7 +58,11 @@ namespace DD.CBU.Compute.Powershell
             }
         }
 
-        ImageExportRecord ExportCustomerImage()
+		/// <summary>
+		/// Exports the customer image to the FTP store.
+		/// </summary>
+		/// <returns>The export details.</returns>
+		ImageExportType ExportCustomerImage()
         {
 			return Connection.ApiClient.ExportCustomerImage(CustomerImage, OvfPrefix).Result;
         }

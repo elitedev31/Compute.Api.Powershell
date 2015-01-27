@@ -108,6 +108,7 @@
     <Compile Include="EnableCaasVendorMultiGeoCustomerCmdlet.cs" />
     <Compile Include="FindCaasVendorAccountCmdlet.cs" />
     <Compile Include="GetCaasConnectionCmdlet.cs" />
+    <Compile Include="GetCaasCustomerImageExportsCmdlet.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="NewCaasExportCustomerImageCmdlet.cs" />
     <Compile Include="NewCaasUploadCustomerImageCmdlet.cs" />

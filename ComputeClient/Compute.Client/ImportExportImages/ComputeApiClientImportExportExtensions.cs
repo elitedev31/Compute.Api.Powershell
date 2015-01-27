@@ -43,6 +43,21 @@ namespace DD.CBU.Compute.Api.Client.ImportExportImages
             return imports.serverImageWithState;
         }
 
+		/// <summary>
+		/// This function identifies the Customer Image Imports that are in progress for the supplied organization ID.
+		/// </summary>
+		/// <param name="client">The <see cref="ComputeApiClient"/> object</param>
+		/// <returns>The customer image imports currently in progress</returns>
+		public static async Task<IEnumerable<ImageExportType>> GetCustomerImagesExports(
+			this IComputeApiClient client)
+		{
+			var result =  
+				await
+				client.WebApi.ApiGetAsync<ImageExports>(
+					ApiUris.GetCustomerImageExports(client.Account.OrganizationId));
+			return result.imageExport;
+		}
+
         /// <summary>
         /// Starts the process of importing an OVF Package to become a new Customer Image for the supplied organization ID.
         /// This function takes the full name (including the “.mf” file suffix) of the manifest file identifying the OVF Package to import as a new Customer Image.
@@ -90,15 +105,15 @@ namespace DD.CBU.Compute.Api.Client.ImportExportImages
 		/// <returns>
 		/// The image export record, with the target names.
 		/// </returns>
-		public static async Task<ImageExportRecord> ExportCustomerImage(
+		public static async Task<ImageExportType> ExportCustomerImage(
 			this IComputeApiClient client,
-			ServerImageWithStateType image,
+			ImagesWithDiskSpeedImage image,
 			string ovfPrefix)
 	    {
 		    return
 			    await
-				    client.WebApi.ApiPostAsync<NewImageExport, ImageExportRecord>(
-					    ApiUris.ImportCustomerImage(client.Account.OrganizationId),
+				    client.WebApi.ApiPostAsync<NewImageExport, ImageExportType>(
+					    ApiUris.ExportCustomerImage(client.Account.OrganizationId),
 					    new NewImageExport
 					    {
 							ovfPackagePrefix = ovfPrefix,
