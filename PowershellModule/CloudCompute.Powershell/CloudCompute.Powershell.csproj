@@ -80,6 +80,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Windows\Microsoft.NET\assembly\GAC_MSIL\System.Management.Automation\v4.0_3.0.0.0__31bf3856ad364e35\System.Management.Automation.dll</HintPath>
     </Reference>
+    <Reference Include="System.Net.FtpClient">
+      <HintPath>..\packages\System.Net.FtpClient.1.0.5281.14359\lib\net40\System.Net.FtpClient.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -106,6 +109,8 @@
     <Compile Include="FindCaasVendorAccountCmdlet.cs" />
     <Compile Include="GetCaasConnectionCmdlet.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="NewCaasExportCustomerImageCmdlet.cs" />
+    <Compile Include="NewCaasUploadCustomerImageCmdlet.cs" />
     <Compile Include="RemoveCaasConnectionCmdlet.cs" />
     <Compile Include="SecureStringExtensions.cs" />
     <Compile Include="GetCaasAccountsCmdlet.cs" />

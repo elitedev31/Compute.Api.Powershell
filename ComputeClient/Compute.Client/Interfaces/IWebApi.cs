@@ -86,5 +86,15 @@
         /// </remarks>
         /// <seealso cref="LoginAsync"/>
         IAccount Account { get; }
+
+		/// <summary>
+		/// Gets the credentials.
+		/// </summary>
+		ICredentials Credentials { get; }
+
+		/// <summary>
+		/// Gets the region.
+		/// </summary>
+		string Region { get; }
     }
 }

@@ -20,6 +20,17 @@ namespace DD.CBU.Compute.Api.Client
         /// </summary>
         IAccount _account;
 
+		/// <summary>
+		/// The credentials to connect to the endpoint.
+		/// </summary>
+	    private ICredentials _credentials;
+
+
+		/// <summary>
+		/// The region connected to.
+		/// </summary>
+	    private string _region;
+
         /// <summary>
         ///		The <see cref="HttpClient"/> used to communicate with the CaaS API.
         /// </summary>
@@ -92,6 +103,7 @@ namespace DD.CBU.Compute.Api.Client
             _httpClient =
                 new HttpClientAdapter(
                     new HttpClient(_clientMessageHandler) { BaseAddress = ApiUris.ComputeBase(targetRegionName) });
+	        _region = targetRegionName;
         }
 
         /// <summary>
@@ -137,6 +149,7 @@ namespace DD.CBU.Compute.Api.Client
 
             _clientMessageHandler.Credentials = accountCredentials;
             _clientMessageHandler.PreAuthenticate = true;
+	        _credentials = accountCredentials;
 
             try
             {
@@ -151,6 +164,26 @@ namespace DD.CBU.Compute.Api.Client
 
             return Account;
         }
+
+		/// <summary>
+		/// Gets the credentials of the connection.
+		/// </summary>
+	    public ICredentials Credentials
+	    {
+		    get { return _credentials; }
+	    }
+
+		/// <summary>
+		/// Gets the target region.
+		/// </summary>
+	    public string Region
+	    {
+		    get
+		    {
+			    return _region;
+			    
+		    }
+	    }
 
         /// <summary>
         ///		Log out of the CaaS API.

@@ -78,5 +78,33 @@ namespace DD.CBU.Compute.Api.Client.ImportExportImages
                             description = description
                         });
         }
+
+		/// <summary>
+		/// Exports the customer image to the FTPS store
+		/// </summary>
+		/// <param name="client">The <see cref="ComputeApiClient" /> object</param>
+		/// <param name="image">The image to export.</param>
+		/// <param name="ovfPrefix">Required; 1-90 characters in length. Used to name each of the constituent files of the
+		/// resulting OVF Package. The permitted character set is (within and excluding the
+		/// quotes): “a-zA-Z0-9_+=#.,:;()-“. Note that the “space” character is not permitted.</param>
+		/// <returns>
+		/// The image export record, with the target names.
+		/// </returns>
+		public static async Task<ImageExportRecord> ExportCustomerImage(
+			this IComputeApiClient client,
+			ServerImageWithStateType image,
+			string ovfPrefix)
+	    {
+		    return
+			    await
+				    client.WebApi.ApiPostAsync<NewImageExport, ImageExportRecord>(
+					    ApiUris.ImportCustomerImage(client.Account.OrganizationId),
+					    new NewImageExport
+					    {
+							ovfPackagePrefix = ovfPrefix,
+							imageId = image.id
+					    }
+					    );
+	    }
     }
 }
