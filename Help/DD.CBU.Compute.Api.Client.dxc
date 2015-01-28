@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentFile Version="2010" Moniker="..\ComputeClient\Compute.Client\bin\Debug\DD.CBU.Compute.Api.Client.dll" DocType="DX.NET" IsLocalizationDisabled="false">
+  <RelatedProject>DimensionData.ComputeClient.dxp</RelatedProject>
+  <State>
+    <Attributes />
+  </State>
+  <LastSelectedItem />
+  <Filters />
+</ContentFile>

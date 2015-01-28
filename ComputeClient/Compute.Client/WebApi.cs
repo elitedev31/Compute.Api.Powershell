@@ -102,7 +102,10 @@ namespace DD.CBU.Compute.Api.Client
 
             _httpClient =
                 new HttpClientAdapter(
-                    new HttpClient(_clientMessageHandler) { BaseAddress = ApiUris.ComputeBase(targetRegionName) });
+                    new HttpClient(_clientMessageHandler)
+                    {
+	                    BaseAddress = ApiUris.ComputeBase(targetRegionName)
+                    });
 	        _region = targetRegionName;
         }
 
@@ -185,7 +188,7 @@ namespace DD.CBU.Compute.Api.Client
 		    }
 	    }
 
-        /// <summary>
+	    /// <summary>
         ///		Log out of the CaaS API.
         /// </summary>
         public void Logout()

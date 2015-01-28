@@ -30,6 +30,8 @@ namespace DD.CBU.Compute.Api.Client
     {  
         #region Instance data
 
+	    protected string _ftpHost;
+
         /// <summary>
         ///		Create a new Compute-as-a-Service API client.
         /// </summary>
@@ -68,6 +70,7 @@ namespace DD.CBU.Compute.Api.Client
         public ComputeApiClient(KnownApiVendor vendor, KnownApiRegion region)
         {
             var baseUri = KnownApiUri.Instance.GetBaseUri(vendor, region);
+	      _ftpHost = KnownApiUri.Instance.GetFtpHost(vendor, region);
 
             if (!baseUri.IsAbsoluteUri)
                 throw new ArgumentException("Base URI supplied is not an absolute URI", "vendor");
@@ -108,7 +111,15 @@ namespace DD.CBU.Compute.Api.Client
 
         #region Public properties
 
-        /// <summary>
+		/// <summary>
+		/// The FTP Host.
+		/// </summary>
+	    public string FtpHost
+	    {
+		    get { return _ftpHost; }
+	    }
+
+	    /// <summary>
         ///		Read-only information about the CaaS account targeted by the CaaS API client.
         /// </summary>
         /// <remarks>

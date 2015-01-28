@@ -1,0 +1,176 @@
+<h1 style="text-align: center;"><strong>Add-CaasServerDisk</strong></h1>
+<h2><strong>Synopsis</strong></h2>
+<p style="margin-left: 40px;">Add a disk to a deployed server.</p>
+<h2><strong>Syntax</strong></h2>
+<pre style="margin-left: 40px;">Add-CaasServerDisk -SizeInGB &lt;Int32&gt; [-SpeedId &lt;String&gt;] -Server &lt;ServerWithBackupType&gt; [-PassThru] [-Connection &lt;ComputeServiceConnection&gt;] [&lt;CommonParameters&gt;]
+
+Add-CaasServerDisk -SizeInGB &lt;Int32&gt; [-Speed &lt;DiskSpeedType&gt;] -Server &lt;ServerWithBackupType&gt; [-PassThru] [-Connection &lt;ComputeServiceConnection&gt;] [&lt;CommonParameters&gt;]
+
+</pre>
+<h2><strong>Description</strong></h2>
+<h2><strong>Parameters</strong></h2>
+<h3><strong>-SizeInGB</strong> <em style="font-weight: 100;">&lt;Int32&gt;</em></h3>
+<table border="1" style="margin-left: 40px;">
+	<tbody>
+		<tr>
+			<td>Required?</td>
+			<td>True</td>
+		</tr>
+		<tr>
+			<td>Position?</td>
+			<td>named</td>
+		</tr>
+		<tr>
+			<td>Default value</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>Accept pipeline input?</td>
+			<td>false</td>
+		</tr>
+		<tr>
+			<td>Accept wildcard characters?</td>
+			<td>False</td>
+		</tr>
+	</tbody>
+</table>
+<h3><strong>-SpeedId</strong> <em style="font-weight: 100;">&lt;String&gt;</em></h3>
+<table border="1" style="margin-left: 40px;">
+	<tbody>
+		<tr>
+			<td>Required?</td>
+			<td>False</td>
+		</tr>
+		<tr>
+			<td>Position?</td>
+			<td>named</td>
+		</tr>
+		<tr>
+			<td>Default value</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>Accept pipeline input?</td>
+			<td>false</td>
+		</tr>
+		<tr>
+			<td>Accept wildcard characters?</td>
+			<td>False</td>
+		</tr>
+	</tbody>
+</table>
+<h3><strong>-Server</strong> <em style="font-weight: 100;">&lt;ServerWithBackupType&gt;</em></h3>
+<table border="1" style="margin-left: 40px;">
+	<tbody>
+		<tr>
+			<td>Required?</td>
+			<td>True</td>
+		</tr>
+		<tr>
+			<td>Position?</td>
+			<td>named</td>
+		</tr>
+		<tr>
+			<td>Default value</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>Accept pipeline input?</td>
+			<td>true (ByValue)</td>
+		</tr>
+		<tr>
+			<td>Accept wildcard characters?</td>
+			<td>False</td>
+		</tr>
+	</tbody>
+</table>
+<h3><strong>-PassThru</strong> <em style="font-weight: 100;">&lt;SwitchParameter&gt;</em></h3>
+<table border="1" style="margin-left: 40px;">
+	<tbody>
+		<tr>
+			<td>Required?</td>
+			<td>False</td>
+		</tr>
+		<tr>
+			<td>Position?</td>
+			<td>named</td>
+		</tr>
+		<tr>
+			<td>Default value</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>Accept pipeline input?</td>
+			<td>false</td>
+		</tr>
+		<tr>
+			<td>Accept wildcard characters?</td>
+			<td>False</td>
+		</tr>
+	</tbody>
+</table>
+<h3><strong>-Connection</strong> <em style="font-weight: 100;">&lt;ComputeServiceConnection&gt;</em></h3>
+<table border="1" style="margin-left: 40px;">
+	<tbody>
+		<tr>
+			<td>Required?</td>
+			<td>False</td>
+		</tr>
+		<tr>
+			<td>Position?</td>
+			<td>named</td>
+		</tr>
+		<tr>
+			<td>Default value</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>Accept pipeline input?</td>
+			<td>true (ByPropertyName)</td>
+		</tr>
+		<tr>
+			<td>Accept wildcard characters?</td>
+			<td>False</td>
+		</tr>
+	</tbody>
+</table>
+<h3><strong>-Speed</strong> <em style="font-weight: 100;">&lt;DiskSpeedType&gt;</em></h3>
+<table border="1" style="margin-left: 40px;">
+	<tbody>
+		<tr>
+			<td>Required?</td>
+			<td>False</td>
+		</tr>
+		<tr>
+			<td>Position?</td>
+			<td>named</td>
+		</tr>
+		<tr>
+			<td>Default value</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>Accept pipeline input?</td>
+			<td>false</td>
+		</tr>
+		<tr>
+			<td>Accept wildcard characters?</td>
+			<td>False</td>
+		</tr>
+	</tbody>
+</table>
+<h3>&lt;CommonParameters&gt;</h3>
+<p style="margin-left: 40px;">This cmdlet supports the common parameters: Verbose, Debug,<br />
+ErrorAction, ErrorVariable, WarningAction, WarningVariable,<br />
+OutBuffer, PipelineVariable, and OutVariable. For more information, see<br />
+about_CommonParameters (<a href="http://go.microsoft.com/fwlink/?LinkID=113216">http://go.microsoft.com/fwlink/?LinkID=113216</a>).</p>
+<h2><strong>Inputs</strong></h2>
+<p style="margin-left: 40px;"></p>
+<p style="margin-left: 80px;"></p>
+<h2><strong>Outputs</strong></h2>
+<p style="margin-left: 40px;"></p>
+<p style="margin-left: 80px;"></p>
+<h2><strong>Notes</strong></h2>
+<h2><strong>Examples</strong></h2>
+<h2><strong>Related links</strong></h2>
+

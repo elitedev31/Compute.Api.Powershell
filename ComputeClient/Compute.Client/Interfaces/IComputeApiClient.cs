@@ -29,7 +29,12 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
         /// The web API that requests directly from the REST API.
         /// </summary>
         IWebApi WebApi { get; }
-        
+
+		/// <summary>
+		/// The FTP host for this connection.
+		/// </summary>
+		string FtpHost { get; }
+
         /// <summary>
         /// Login into the organisation account using credentials.
         /// </summary>

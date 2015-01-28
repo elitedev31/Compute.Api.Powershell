@@ -1,0 +1,199 @@
+<h1 style="text-align: center;"><strong>Add-CaasBackupClient</strong></h1>
+<h2><strong>Synopsis</strong></h2>
+<p style="margin-left: 40px;">Add a backup client to a server with backup enabled.</p>
+<h2><strong>Syntax</strong></h2>
+<pre style="margin-left: 40px;">Add-CaasBackupClient -Server &lt;ServerWithBackupType&gt; -StoragePolicy &lt;BackupStoragePolicy&gt; -SchedulePolicy &lt;BackupSchedulePolicy&gt; -ClientType &lt;BackupClientType&gt; [-Trigger &lt;Nullable`1[TriggerType]&gt;] [-EmailAddresses &lt;IReadOnlyList`1[String]&gt;] [-Connection &lt;ComputeServiceConnection&gt;] [&lt;CommonParameters&gt;]
+
+</pre>
+<h2><strong>Description</strong></h2>
+<h2><strong>Parameters</strong></h2>
+<h3><strong>-Server</strong> <em style="font-weight: 100;">&lt;ServerWithBackupType&gt;</em></h3>
+<table border="1" style="margin-left: 40px;">
+	<tbody>
+		<tr>
+			<td>Required?</td>
+			<td>True</td>
+		</tr>
+		<tr>
+			<td>Position?</td>
+			<td>named</td>
+		</tr>
+		<tr>
+			<td>Default value</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>Accept pipeline input?</td>
+			<td>true (ByValue)</td>
+		</tr>
+		<tr>
+			<td>Accept wildcard characters?</td>
+			<td>False</td>
+		</tr>
+	</tbody>
+</table>
+<h3><strong>-StoragePolicy</strong> <em style="font-weight: 100;">&lt;BackupStoragePolicy&gt;</em></h3>
+<table border="1" style="margin-left: 40px;">
+	<tbody>
+		<tr>
+			<td>Required?</td>
+			<td>True</td>
+		</tr>
+		<tr>
+			<td>Position?</td>
+			<td>named</td>
+		</tr>
+		<tr>
+			<td>Default value</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>Accept pipeline input?</td>
+			<td>false</td>
+		</tr>
+		<tr>
+			<td>Accept wildcard characters?</td>
+			<td>False</td>
+		</tr>
+	</tbody>
+</table>
+<h3><strong>-SchedulePolicy</strong> <em style="font-weight: 100;">&lt;BackupSchedulePolicy&gt;</em></h3>
+<table border="1" style="margin-left: 40px;">
+	<tbody>
+		<tr>
+			<td>Required?</td>
+			<td>True</td>
+		</tr>
+		<tr>
+			<td>Position?</td>
+			<td>named</td>
+		</tr>
+		<tr>
+			<td>Default value</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>Accept pipeline input?</td>
+			<td>false</td>
+		</tr>
+		<tr>
+			<td>Accept wildcard characters?</td>
+			<td>False</td>
+		</tr>
+	</tbody>
+</table>
+<h3><strong>-ClientType</strong> <em style="font-weight: 100;">&lt;BackupClientType&gt;</em></h3>
+<table border="1" style="margin-left: 40px;">
+	<tbody>
+		<tr>
+			<td>Required?</td>
+			<td>True</td>
+		</tr>
+		<tr>
+			<td>Position?</td>
+			<td>named</td>
+		</tr>
+		<tr>
+			<td>Default value</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>Accept pipeline input?</td>
+			<td>false</td>
+		</tr>
+		<tr>
+			<td>Accept wildcard characters?</td>
+			<td>False</td>
+		</tr>
+	</tbody>
+</table>
+<h3><strong>-Trigger</strong> <em style="font-weight: 100;">&lt;Nullable`1[TriggerType]&gt;</em></h3>
+<table border="1" style="margin-left: 40px;">
+	<tbody>
+		<tr>
+			<td>Required?</td>
+			<td>False</td>
+		</tr>
+		<tr>
+			<td>Position?</td>
+			<td>named</td>
+		</tr>
+		<tr>
+			<td>Default value</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>Accept pipeline input?</td>
+			<td>false</td>
+		</tr>
+		<tr>
+			<td>Accept wildcard characters?</td>
+			<td>False</td>
+		</tr>
+	</tbody>
+</table>
+<h3><strong>-EmailAddresses</strong> <em style="font-weight: 100;">&lt;IReadOnlyList`1[String]&gt;</em></h3>
+<table border="1" style="margin-left: 40px;">
+	<tbody>
+		<tr>
+			<td>Required?</td>
+			<td>False</td>
+		</tr>
+		<tr>
+			<td>Position?</td>
+			<td>named</td>
+		</tr>
+		<tr>
+			<td>Default value</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>Accept pipeline input?</td>
+			<td>false</td>
+		</tr>
+		<tr>
+			<td>Accept wildcard characters?</td>
+			<td>False</td>
+		</tr>
+	</tbody>
+</table>
+<h3><strong>-Connection</strong> <em style="font-weight: 100;">&lt;ComputeServiceConnection&gt;</em></h3>
+<table border="1" style="margin-left: 40px;">
+	<tbody>
+		<tr>
+			<td>Required?</td>
+			<td>False</td>
+		</tr>
+		<tr>
+			<td>Position?</td>
+			<td>named</td>
+		</tr>
+		<tr>
+			<td>Default value</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>Accept pipeline input?</td>
+			<td>true (ByPropertyName)</td>
+		</tr>
+		<tr>
+			<td>Accept wildcard characters?</td>
+			<td>False</td>
+		</tr>
+	</tbody>
+</table>
+<h3>&lt;CommonParameters&gt;</h3>
+<p style="margin-left: 40px;">This cmdlet supports the common parameters: Verbose, Debug,<br />
+ErrorAction, ErrorVariable, WarningAction, WarningVariable,<br />
+OutBuffer, PipelineVariable, and OutVariable. For more information, see<br />
+about_CommonParameters (<a href="http://go.microsoft.com/fwlink/?LinkID=113216">http://go.microsoft.com/fwlink/?LinkID=113216</a>).</p>
+<h2><strong>Inputs</strong></h2>
+<p style="margin-left: 40px;"></p>
+<p style="margin-left: 80px;"></p>
+<h2><strong>Outputs</strong></h2>
+<p style="margin-left: 40px;"></p>
+<p style="margin-left: 80px;"></p>
+<h2><strong>Notes</strong></h2>
+<h2><strong>Examples</strong></h2>
+<h2><strong>Related links</strong></h2>
+
