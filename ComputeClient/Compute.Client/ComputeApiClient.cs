@@ -30,7 +30,7 @@ namespace DD.CBU.Compute.Api.Client
     {  
         #region Instance data
 
-	    protected string _ftpHost;
+	    private string _ftpHost;
 
         /// <summary>
         ///		Create a new Compute-as-a-Service API client.
