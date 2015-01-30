@@ -2247,7 +2247,14 @@
           <DefaultValue />
         </ParameterDescription>
       </Parameters>
-      <Examples />
+      <Examples>
+        <Example>
+          <Name>Example 1</Name>
+          <Cmd>$connection = New-CaaSConnection -Vendor DimensionData -Region Australia_AU -ApiCredentials (Get-Credential)</Cmd>
+          <Description />
+          <Output />
+        </Example>
+      </Examples>
       <RelatedLinks />
       <SupportInformation ad="false" rsat="false" ps2="false" ps3="false" ps4="false" ps5="false" wxp="false" wv="false" w7="false" w8="false" w81="false" w2k3s="false" w2k3e="false" w2k3d="false" w2k8s="false" w2k8e="false" w2k8d="false" w2k8r2s="false" w2k8r2e="false" w2k8r2d="false" w2k12s="false" w2k12d="false" w2k12r2s="false" w2k12r2d="false" />
       <Publish>false</Publish>
