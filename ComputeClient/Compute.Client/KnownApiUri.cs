@@ -152,6 +152,9 @@ namespace DD.CBU.Compute.Api.Client
 			AddFtpHostName(KnownApiVendor.Cisco, KnownApiRegion.Africa_AF, "ftps-af.cloud-vpn.net");
             AddHostName(KnownApiVendor.Cisco, KnownApiRegion.AsiaPacific_AP, "iaas-api-ap.cisco-ccs.com");
 			AddFtpHostName(KnownApiVendor.Cisco, KnownApiRegion.AsiaPacific_AP, "ftps-ap.cloud-vpn.net");
+            AddHostName(KnownApiVendor.Cisco, KnownApiRegion.Canada_CA, "iaas-api-ca.cisco-ccs.com");
+            AddFtpHostName(KnownApiVendor.Cisco, KnownApiRegion.Canada_CA, "ftps-canada.cloud-vpn.net");
+
 
             AddHostName(KnownApiVendor.InternetSolutions, KnownApiRegion.NorthAmerica_NA, "usapi.cloud.is.co.za");
 			AddFtpHostName(KnownApiVendor.InternetSolutions, KnownApiRegion.NorthAmerica_NA, "ftps-na.cloud-vpn.net");
