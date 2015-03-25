@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>DD.CBU.Compute.API.Contracts</id>
-    <version>1.0.15153</version>
+    <version>1.3.0.2</version>
     <title>Compute Contracts for Compute Client API</title>
     <authors>Dimension Data</authors>
     <owners>shai.saar@didata.com.au</owners>
@@ -12,4 +12,8 @@
     <copyright>Copyright 2014</copyright>
     <tags/>
   </metadata>
+	<files>
+		<file src="bin\Debug\DD.CBU.Compute.Api.Contracts.dll" target="lib\net451" />
+		<file src="bin\Debug\DD.CBU.Compute.Api.Contracts.pdb" target="lib\net451" />
+	</files>
 </package>
