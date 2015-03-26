@@ -378,7 +378,7 @@ namespace DD.CBU.Compute.Api.Client
         }
 
         /// <summary>
-        /// Get OS server images
+        /// Get OS server images, paramenters are just for filtering. Use String.Empty on the parameter where filtering is not required.
         /// </summary>
         /// <param name="imageid">the imageId filter</param>
         /// <param name="name">the name filter</param>
