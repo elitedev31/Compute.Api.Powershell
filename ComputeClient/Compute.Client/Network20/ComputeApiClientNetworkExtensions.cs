@@ -7,6 +7,7 @@
     using DD.CBU.Compute.Api.Contracts;
     using DD.CBU.Compute.Api.Contracts.Directory;
     using DD.CBU.Compute.Api.Contracts.Network;
+    using DD.CBU.Compute.Api.Contracts.Network2._0;
 
     /// <summary>
     /// Extension methods for the Network section of the CaaS API.
@@ -33,6 +34,23 @@
             return vlans.vlan;
         }
 
+
+        /// <summary>
+        /// Deploys Virtual Lan on a network domain
+        /// </summary>
+        /// <param name="client"> The compute client</param>
+        /// <param name="vlan">Virtual Lan</param>
+        /// <returns>Operation status</returns>
+        public static async Task<response> DeployVlan(this IComputeApiClient client, DeployVlanType vlan)
+        {
+            var response =
+                await
+                client.Mcp2WebApi.ApiPostAsync<DeployVlanType, response>(
+                    ApiUris.DeployVlan(client.Account.OrganizationId),
+                    vlan);
+
+            return response;
+        }
         /// <summary>
         /// This function gets list of network domains from Cloud
         /// </summary>

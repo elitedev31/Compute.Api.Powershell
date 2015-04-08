@@ -460,6 +460,16 @@ namespace DD.CBU.Compute.Api.Client
             return new Uri(string.Format("{0}/network/vlan", orgId), UriKind.Relative);
         }
 
+        /// <summary>
+        /// The relative URI for the CaaS API for deploying the VLan
+        /// </summary>
+        /// <param name="orgId"></param>
+        /// <returns></returns>
+        internal static Uri DeployVlan(Guid orgId)
+        {
+            return new Uri(string.Format("{0}/network/deployVlan", orgId), UriKind.Relative);
+        }
+
         #endregion
 
         #region Network API
