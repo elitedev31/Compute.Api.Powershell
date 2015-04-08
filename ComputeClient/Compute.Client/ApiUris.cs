@@ -80,6 +80,20 @@ namespace DD.CBU.Compute.Api.Client
 			return new Uri(string.Format("{0}/network/networkDomain", orgId), UriKind.Relative);
 		}
 
+		/// <summary>
+		/// The network domains.
+		/// </summary>
+		/// <param name="orgId">
+		/// The org id.
+		/// </param>
+		/// <returns>
+		/// The <see cref="Uri"/>.
+		/// </returns>
+		internal static Uri CreateNetworkDomain(Guid orgId)
+		{
+			return new Uri(string.Format("{0}/network/deployNetworkDomain", orgId), UriKind.Relative);
+		}
+		
         /// <summary>
         /// Get the relative URI for the CaaS API action that retrieves a list of all data centres available for use by the specified organisation.
         /// </summary>

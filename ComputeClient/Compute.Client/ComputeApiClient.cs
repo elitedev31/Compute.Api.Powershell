@@ -280,6 +280,21 @@ namespace DD.CBU.Compute.Api.Client
 			return networkDomains;
 		}
 
+		/// <summary>
+		/// This function gets list of network domains from Cloud
+		/// </summary>
+		/// <param name="organizationId">
+		/// The organization Id.
+		/// </param>
+		/// <returns>
+		/// The list of network domains associated with the organization.
+		/// </returns>
+		public async Task<Response> CreateNetworkDomain(Guid organizationId, DeployNetworkDomain networkDomain)
+		{
+			var response = await Mcp2WebApi.ApiPostAsync<DeployNetworkDomain, Response>(ApiUris.CreateNetworkDomain(Account.OrganizationId), networkDomain);
+			return response;
+		}
+
         /// <summary>
         /// Adds a new Sub-Administrator Account to the organization. 
         /// The account is created with a set of roles defining the level of access to the organization’s Cloud 
