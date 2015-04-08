@@ -6,8 +6,8 @@ namespace DD.CBU.Compute.Api.Contracts.Directory
 {
 	/// <summary>
 	///		Represents a CaaS user account.
-	/// </summary>
-	[XmlRoot("Account", Namespace = XmlNamespaceConstants.Directory)]
+	/// </summary>	
+	[XmlRoot("Account", Namespace = XmlNamespaceConstants.Directory)]  
 	public class Account
 		: IAccount
 	{

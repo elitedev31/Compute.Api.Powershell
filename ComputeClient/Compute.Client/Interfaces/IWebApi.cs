@@ -90,7 +90,7 @@
 		/// <summary>
 		/// Gets the credentials.
 		/// </summary>
-		ICredentials Credentials { get; }
+		ICredentials Credentials { get; set; }
 
 		/// <summary>
 		/// Gets the region.

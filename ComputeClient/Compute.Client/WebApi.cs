@@ -173,7 +173,16 @@ namespace DD.CBU.Compute.Api.Client
 		/// </summary>
 	    public ICredentials Credentials
 	    {
-		    get { return _credentials; }
+		    get
+		    {
+		        return _credentials;
+		    }
+		    set
+		    {
+		        _credentials = value;
+                _clientMessageHandler.Credentials = value;
+                _clientMessageHandler.PreAuthenticate = true;
+		    }
 	    }
 
 		/// <summary>

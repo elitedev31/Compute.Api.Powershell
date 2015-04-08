@@ -153,7 +153,8 @@ namespace DD.CBU.Compute.Api.Client
         /// </returns>
         public async Task<IAccount> LoginAsync(ICredentials accountCredentials)
         {
-            return await WebApi.LoginAsync(accountCredentials);
+            Mcp2WebApi.Credentials = accountCredentials;
+            return await WebApi.LoginAsync(accountCredentials);            
         }
 
         /// <summary>
