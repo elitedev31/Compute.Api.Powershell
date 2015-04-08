@@ -51,6 +51,7 @@
 
             return response;
         }
+
         /// <summary>
         /// This function gets list of network domains from Cloud
         /// </summary>
@@ -62,8 +63,8 @@
         /// </returns>
         public static async Task<IEnumerable<NetworkDomain>> GetNetworkDomains(this IComputeApiClient client)
         {
-            var networks = await client.Mcp2WebApi.ApiGetAsync<NetworkDomains>(ApiUris.NetworkDomains(client.Account.OrganizationId));
-            return networks.NetworkDomain;
+            var networks = await client.Mcp2WebApi.ApiGetAsync<networkDomains>(ApiUris.NetworkDomains(client.Account.OrganizationId));
+            return networks.networkDomain;
         }
     }
 }

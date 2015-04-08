@@ -72,5 +72,34 @@ namespace DD.CBU.Compute.Client.IntegrationTests
 				}
 			}
 		}
+
+		/// <summary>
+		///		Create network domain.
+		/// </summary>
+		/// <returns>
+		///		A <see cref="Task"/> representing the asynchronous unit-test execution.
+		/// </returns>
+		[TestMethod]
+		public async Task CreateNetworkDomain()
+		{
+			ICredentials credentials = GetIntegrationTestCredentials();
+
+			using (ComputeApiClient computeApiClient = new ComputeApiClient("apinashpcs01.opsourcecloud.net"))
+			{
+				IAccount account = await computeApiClient.LoginAsync(credentials);
+				Assert.IsNotNull(account);
+
+				Guid organizationId = account.OrganizationId;
+				Assert.AreNotEqual(Guid.Empty, organizationId);
+
+				var newDomain = new DeployNetworkDomain { location = "NASH_PCS01_N2_VMWARE_1", name = "Test Network Domain", description = "This is test Network Domain created using Network 2.0 API", type = "ESSENTIALS" };
+
+				var result = await computeApiClient.CreateNetworkDomain(account.OrganizationId, newDomain);
+
+				Assert.AreEqual("OK", result.responseCode);
+				Assert.IsTrue(result.info.Length > 0);
+				Assert.IsNotNull(result.info[0].ToString());
+			}
+		}
 	}
 }

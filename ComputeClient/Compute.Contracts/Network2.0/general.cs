@@ -56,7 +56,7 @@ namespace DD.CBU.Compute.Api.Contracts {
 	[System.ComponentModel.DesignerCategoryAttribute("code")]
 	[System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
 	[System.Xml.Serialization.XmlRootAttribute("response", Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
-	public partial class ResponseType
+	public partial class Response
 	{
 
 		private string operationField;

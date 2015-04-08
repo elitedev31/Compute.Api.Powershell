@@ -138,8 +138,8 @@ namespace DD.CBU.Compute.Api.Contracts {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:didata.com:api:cloud:types")]
-    [System.Xml.Serialization.XmlRootAttribute(ElementName = "networkDomains", Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
-    public partial class NetworkDomains {
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="urn:didata.com:api:cloud:types", IsNullable=false)]
+    public partial class networkDomains {
         
         private NetworkDomain[] networkDomainField;
         
@@ -161,7 +161,7 @@ namespace DD.CBU.Compute.Api.Contracts {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("networkDomain")]
-        public NetworkDomain[] NetworkDomain {
+        public NetworkDomain[] networkDomain {
             get {
                 return this.networkDomainField;
             }
