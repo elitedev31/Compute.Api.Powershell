@@ -13,6 +13,7 @@ namespace DD.CBU.Compute.Client.IntegrationTests
 	using Api.Contracts.Directory;
 
 	using DD.CBU.Compute.Api.Client.Network;
+	using DD.CBU.Compute.Api.Client.Network20;
 	using DD.CBU.Compute.Api.Contracts;
 
 	/// <summary>
@@ -58,12 +59,13 @@ namespace DD.CBU.Compute.Client.IntegrationTests
 				Guid organizationId = account.OrganizationId;
 				Assert.AreNotEqual(Guid.Empty, organizationId);
 
-				var networkDomains = await computeApiClient.GetNetworkDomains();
+				var networkDomains = (await computeApiClient.GetNetworkDomains()).ToList();
 
-				Assert.AreNotEqual(0, networkDomains.totalCount);
+				Assert.AreNotEqual(0, networkDomains.Count);
 
 				TestContext.WriteLine("Domains List \n");
-				foreach (NetworkDomain domain in networkDomains.NetworkDomain)
+
+				foreach (NetworkDomain domain in networkDomains)
 				{
 					TestContext.WriteLine("Name & Type : {0} - {1}", domain.name, domain.type);
 					TestContext.WriteLine("Description: {0}", domain.description);

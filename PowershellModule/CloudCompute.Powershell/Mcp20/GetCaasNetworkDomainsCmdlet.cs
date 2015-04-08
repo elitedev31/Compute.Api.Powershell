@@ -5,27 +5,28 @@
     using System.Management.Automation;
 
     using DD.CBU.Compute.Api.Client;
+    using DD.CBU.Compute.Api.Client.Network;
     using DD.CBU.Compute.Api.Client.Network20;
     using DD.CBU.Compute.Api.Contracts;
 
     /// <summary>
     /// The new CaaS Virtual Machine cmdlet.
     /// </summary>
-    [Cmdlet(VerbsCommon.Get, "CaasVlan")]
-    
-    [OutputType(typeof(VlanType[]))]
-    public class GetCaasVlanCmdlet : PsCmdletCaasBase
+    [Cmdlet(VerbsCommon.Get, "CaasNetworkDomains")]
+
+    [OutputType(typeof(NetworkDomain[]))]
+    public class GetCaasNetworkDomainsCmdlet : PsCmdletCaasBase
     {
         /// <summary>
         /// The process record method.
         /// </summary>
         protected override void ProcessRecord()
         {
-            IEnumerable<VlanType> vlans = new List<VlanType>();
+            IEnumerable<NetworkDomain> networks = new List<NetworkDomain>();
             base.ProcessRecord();
             try
             {
-                vlans = (this.Connection.ApiClient.GetVlans()).Result;
+                networks = (this.Connection.ApiClient.GetNetworkDomains()).Result;
             }
             catch (AggregateException ae)
             {
@@ -46,7 +47,7 @@
                         });
             }
 
-            this.WriteObject(vlans);
+            this.WriteObject(networks);
         }
     }
 }

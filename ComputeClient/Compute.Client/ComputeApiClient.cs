@@ -154,6 +154,7 @@ namespace DD.CBU.Compute.Api.Client
         /// </returns>
         public async Task<IAccount> LoginAsync(ICredentials accountCredentials)
         {
+            Mcp2WebApi.Credentials = accountCredentials;
             return await WebApi.LoginAsync(accountCredentials);
         }
 
@@ -263,21 +264,6 @@ namespace DD.CBU.Compute.Api.Client
             var accounts = await WebApi.ApiGetAsync<Accounts>(new Uri(relativeUrl, UriKind.Relative));
             return accounts.Items;
         }
-
-        /// <summary>
-		/// This function gets list of network domains from Cloud
-		/// </summary>
-		/// <param name="organizationId">
-		/// The organization Id.
-		/// </param>
-		/// <returns>
-		/// The list of network domains associated with the organization.
-		/// </returns>
-		public async Task<NetworkDomains> GetNetworkDomains()
-		{
-			var networkDomains = await Mcp2WebApi.ApiGetAsync<NetworkDomains>(ApiUris.NetworkDomains(Account.OrganizationId));
-			return networkDomains;
-		}
 
         /// <summary>
         /// Adds a new Sub-Administrator Account to the organization. 

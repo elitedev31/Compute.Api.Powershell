@@ -30,7 +30,7 @@ namespace DD.CBU.Compute.Api.Contracts {
         
         private string snatIpv4AddressField;
         
-        private long createTimeField;
+        private string createTimeField;
         
         private string stateField;
         
@@ -81,7 +81,7 @@ namespace DD.CBU.Compute.Api.Contracts {
         }
         
         /// <remarks/>
-        public long createTime {
+        public string createTime {
             get {
                 return this.createTimeField;
             }
@@ -138,7 +138,7 @@ namespace DD.CBU.Compute.Api.Contracts {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:didata.com:api:cloud:types")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="urn:didata.com:api:cloud:types", IsNullable=false)]
+    [System.Xml.Serialization.XmlRootAttribute(ElementName = "networkDomains", Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
     public partial class NetworkDomains {
         
         private NetworkDomain[] networkDomainField;
