@@ -438,7 +438,19 @@ namespace DD.CBU.Compute.Api.Client
             return new Uri(string.Format("{0}/antiAffinityRule/{1}?delete", orgId, ruleId), UriKind.Relative);
         }
 
+        #region Network2.0
 
+        /// <summary>
+        /// The relative URI for the CaaS API for getting the VLan
+        /// </summary>
+        /// <param name="orgId"></param>
+        /// <returns></returns>
+        internal static Uri GetVlan(Guid orgId)
+        {
+            return new Uri(string.Format("{0}/network/vlan", orgId), UriKind.Relative);
+        }
+
+        #endregion
 
         #region Network API
 
@@ -1059,7 +1071,6 @@ namespace DD.CBU.Compute.Api.Client
         }
 
         #endregion
-
 
         #region Vendor
 
