@@ -32,30 +32,6 @@ namespace DD.CBU.Compute.Api.Client
 
 	    private string _ftpHost;
 
-        /// <summary>
-		/// 		Create a new Compute-as-a-Service API client.
-		/// </summary>
-		/// <param name="url">
-		/// The url.
-		/// </param>
-		/// <param name="targetRegionName">
-		/// 		The name of the region whose CaaS API end-point is targeted by the client.
-		/// </param>
-		/// <param name="credentials">
-		/// The credentials.
-		/// </param>
-		[Obsolete("Please use the KnownApiUri implementation")]
-		public ComputeApiClient(string url, string targetRegionName, ICredentials credentials)
-		{
-			if (String.IsNullOrWhiteSpace(targetRegionName))
-				throw new ArgumentException("Argument cannot be null, empty, or composed entirely of whitespace: 'targetRegionName'.", "targetRegionName");
-
-			if(credentials == null)
-				throw new ArgumentException("Credentials cannot be null: 'credentials'.", "credentials");
-
-			WebApi = new WebApi(url, targetRegionName, credentials);
-		}
-
 
         /// <summary>
         /// Creates a new CaaS API client using a base URI.
