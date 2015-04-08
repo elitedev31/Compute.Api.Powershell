@@ -25,6 +25,12 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
         /// </summary>
         IAccount Account { get; }
 
+
+        /// <summary>
+        /// The web API that requests directly from the REST API for .
+        /// </summary>
+        IWebApi Mcp2WebApi { get; }
+
         /// <summary>
         /// The web API that requests directly from the REST API.
         /// </summary>

@@ -33,19 +33,29 @@ namespace DD.CBU.Compute.Api.Client
 	    private string _ftpHost;
 
         /// <summary>
-        ///		Create a new Compute-as-a-Service API client.
-        /// </summary>
-        /// <param name="targetRegionName">
-        ///		The name of the region whose CaaS API end-point is targeted by the client.
-        /// </param>
-        [Obsolete("Please use the KnownApiUri implementation")]
-        public ComputeApiClient(string targetRegionName) 
-        {
-            if (String.IsNullOrWhiteSpace(targetRegionName))
-                throw new ArgumentException("Argument cannot be null, empty, or composed entirely of whitespace: 'targetRegionName'.", "targetRegionName");
+		/// 		Create a new Compute-as-a-Service API client.
+		/// </summary>
+		/// <param name="url">
+		/// The url.
+		/// </param>
+		/// <param name="targetRegionName">
+		/// 		The name of the region whose CaaS API end-point is targeted by the client.
+		/// </param>
+		/// <param name="credentials">
+		/// The credentials.
+		/// </param>
+		[Obsolete("Please use the KnownApiUri implementation")]
+		public ComputeApiClient(string url, string targetRegionName, ICredentials credentials)
+		{
+			if (String.IsNullOrWhiteSpace(targetRegionName))
+				throw new ArgumentException("Argument cannot be null, empty, or composed entirely of whitespace: 'targetRegionName'.", "targetRegionName");
 
-            WebApi = new WebApi(targetRegionName);
-        }
+			if(credentials == null)
+				throw new ArgumentException("Credentials cannot be null: 'credentials'.", "credentials");
+
+			WebApi = new WebApi(url, targetRegionName, credentials);
+		}
+
 
         /// <summary>
         /// Creates a new CaaS API client using a base URI.
@@ -62,18 +72,31 @@ namespace DD.CBU.Compute.Api.Client
             WebApi = new WebApi(baseUri);
         }
 
-      /// <summary>
+        /// <summary>
+        /// Creates a new CaaS API client using a base URI.
+        /// </summary>
+        /// <param name="apiHostUri">
+        /// The api Host Uri.
+        /// </param>
+        public ComputeApiClient(string apiHostUri)
+        {
+            if (String.IsNullOrWhiteSpace(apiHostUri))
+                throw new ArgumentNullException("apiHostUri", "Argument cannot be null or empty");
+            WebApi = new WebApi(KnownApiUri.Instance.GetMcp1BaseUri(apiHostUri));
+            Mcp2WebApi = new WebApi(KnownApiUri.Instance.GetMcp2BaseUri(apiHostUri));
+        }
+
+        /// <summary>
         /// Creates a new CaaS API client using a known vendor and region.
-      /// </summary>
-      /// <param name="vendor">the vendor</param>
-      /// <param name="region">the region</param>
+        /// </summary>
+        /// <param name="vendor">the vendor</param>
+        /// <param name="region">the region</param>
         public ComputeApiClient(KnownApiVendor vendor, KnownApiRegion region)
         {
             var baseUri = KnownApiUri.Instance.GetBaseUri(vendor, region);
-	      _ftpHost = KnownApiUri.Instance.GetFtpHost(vendor, region);
+            _ftpHost = KnownApiUri.Instance.GetFtpHost(vendor, region);
 
-            if (!baseUri.IsAbsoluteUri)
-                throw new ArgumentException("Base URI supplied is not an absolute URI", "vendor");
+            if (!baseUri.IsAbsoluteUri) throw new ArgumentException("Base URI supplied is not an absolute URI", "vendor");
 
             WebApi = new WebApi(baseUri);
         }
@@ -137,6 +160,11 @@ namespace DD.CBU.Compute.Api.Client
         /// Access to the web API for login/logout and account info
         /// </summary>
         public IWebApi WebApi { get; private set; }
+
+        /// <summary>
+        /// Access to the web API for login/logout and account info
+        /// </summary>
+        public IWebApi Mcp2WebApi { get; private set; }
 
         /// <summary>
         ///	Asynchronously log into the CaaS API.

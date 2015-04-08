@@ -26,7 +26,7 @@
         {
             var vlans =
                 await
-                client.WebApi.ApiGetAsync<vlans>(
+                client.Mcp2WebApi.ApiGetAsync<vlans>(
                     ApiUris.GetVlan(client.Account.OrganizationId));
 
             return vlans.vlan;

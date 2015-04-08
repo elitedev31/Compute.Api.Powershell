@@ -32,8 +32,7 @@
             IEnumerable<VlanType> vlans = new List<VlanType>();
             base.ProcessRecord();
             try
-            {
-                
+            {                
                 vlans = (this.Connection.ApiClient.GetVlans()).Result;
             }
             catch (AggregateException ae)

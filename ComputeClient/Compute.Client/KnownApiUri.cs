@@ -101,6 +101,28 @@ namespace DD.CBU.Compute.Api.Client
 	    }
 
         /// <summary>
+        /// Return an known CaaS URI based on vendor and region
+        /// </summary>
+        /// <returns></returns>
+        public Uri GetMcp2BaseUri(string apiHostUri)
+        {
+            const string Urltemplate = "https://{0}/caas/2.0/";
+            string apiurl = string.Format(Urltemplate, apiHostUri);
+            return new Uri(apiurl);
+        }
+
+        /// <summary>
+        /// Return an known CaaS URI based on vendor and region
+        /// </summary>
+        /// <returns></returns>
+        public Uri GetMcp1BaseUri(string apiHostUri)
+        {
+            const string Urltemplate = "https://{0}/oec/0.9/";
+            string apiurl = string.Format(Urltemplate, apiHostUri);
+            return new Uri(apiurl);
+        }
+
+        /// <summary>
         /// List of Known Regions that are valid for the particular Vendor.
         /// </summary>
         /// <param name="vendor"></param>
