@@ -30,10 +30,6 @@ namespace DD.CBU.Compute.Api.Client
 
             return new Uri(string.Format("{0}/account/{1}", orgId,username), UriKind.Relative);
         }
-          
-
-      
-
 
         /// <summary>
         ///		Get the base URI for the CaaS REST API.
@@ -69,6 +65,20 @@ namespace DD.CBU.Compute.Api.Client
 
             return new Uri(String.Format("{0}/datacenterWithDiskSpeed", organizationId), UriKind.Relative);
         }
+
+		/// <summary>
+		/// The network domains.
+		/// </summary>
+		/// <param name="orgId">
+		/// The org id.
+		/// </param>
+		/// <returns>
+		/// The <see cref="Uri"/>.
+		/// </returns>
+		internal static Uri NetworkDomains(Guid orgId)
+		{
+			return new Uri(string.Format("{0}/network/networkDomain", orgId), UriKind.Relative);
+		}
 
         /// <summary>
         /// Get the relative URI for the CaaS API action that retrieves a list of all data centres available for use by the specified organisation.

@@ -14,6 +14,7 @@ namespace DD.CBU.Compute.Api.Client
     using DD.CBU.Compute.Api.Client.Vendor;
     using DD.CBU.Compute.Api.Client.Interfaces;
     using DD.CBU.Compute.Api.Client.Utilities;
+    using DD.CBU.Compute.Api.Contracts;
     using DD.CBU.Compute.Api.Contracts.Datacenter;
     using DD.CBU.Compute.Api.Contracts.Directory;
     using DD.CBU.Compute.Api.Contracts.General;
@@ -53,7 +54,7 @@ namespace DD.CBU.Compute.Api.Client
 			if(credentials == null)
 				throw new ArgumentException("Credentials cannot be null: 'credentials'.", "credentials");
 
-			WebApi = new WebApi(url, targetRegionName, credentials);
+			WebApi = new WebApi(url);
 		}
 
 
@@ -286,6 +287,22 @@ namespace DD.CBU.Compute.Api.Client
             var accounts = await WebApi.ApiGetAsync<Accounts>(new Uri(relativeUrl, UriKind.Relative));
             return accounts.Items;
         }
+
+		/// <summary>
+		/// This function gets list of network domains from Cloud
+		/// </summary>
+		/// <param name="organizationId">
+		/// The organization Id.
+		/// </param>
+		/// <returns>
+		/// The list of network domains associated with the organization.
+		/// </returns>
+		public async Task<NetworkDomains> GetNetworkDomains()
+		{
+			Mcp2WebApi.Credentials = WebApi.Credentials;
+			var networkDomains = await Mcp2WebApi.ApiGetAsync<NetworkDomains>(ApiUris.NetworkDomains(Account.OrganizationId));
+			return networkDomains;
+		}
 
         /// <summary>
         /// Adds a new Sub-Administrator Account to the organization. 

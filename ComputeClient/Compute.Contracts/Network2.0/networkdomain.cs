@@ -16,12 +16,11 @@ namespace DD.CBU.Compute.Api.Contracts {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-    [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:didata.com:api:cloud:types")]
     [System.Xml.Serialization.XmlRootAttribute("networkDomain", Namespace="urn:didata.com:api:cloud:types", IsNullable=false)]
-    public partial class NetworkDomainType {
+    public partial class NetworkDomain {
         
         private string nameField;
         
@@ -31,7 +30,7 @@ namespace DD.CBU.Compute.Api.Contracts {
         
         private string snatIpv4AddressField;
         
-        private System.DateTime createTimeField;
+        private long createTimeField;
         
         private string stateField;
         
@@ -82,7 +81,7 @@ namespace DD.CBU.Compute.Api.Contracts {
         }
         
         /// <remarks/>
-        public System.DateTime createTime {
+        public long createTime {
             get {
                 return this.createTimeField;
             }
@@ -136,14 +135,13 @@ namespace DD.CBU.Compute.Api.Contracts {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-    [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:didata.com:api:cloud:types")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="urn:didata.com:api:cloud:types", IsNullable=false)]
-    public partial class networkDomains {
+    public partial class NetworkDomains {
         
-        private NetworkDomainType[] networkDomainField;
+        private NetworkDomain[] networkDomainField;
         
         private int pageNumberField;
         
@@ -163,7 +161,7 @@ namespace DD.CBU.Compute.Api.Contracts {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("networkDomain")]
-        public NetworkDomainType[] networkDomain {
+        public NetworkDomain[] NetworkDomain {
             get {
                 return this.networkDomainField;
             }

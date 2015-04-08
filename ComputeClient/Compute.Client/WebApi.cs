@@ -174,6 +174,10 @@ namespace DD.CBU.Compute.Api.Client
 	    public ICredentials Credentials
 	    {
 		    get { return _credentials; }
+			set
+			{
+				_credentials = value;
+			}
 	    }
 
 		/// <summary>
@@ -209,7 +213,7 @@ namespace DD.CBU.Compute.Api.Client
 
             if (relativeOperationUri.IsAbsoluteUri) throw new ArgumentException("The supplied URI is not a relative URI.", "relativeOperationUri");
 
-            using (var response = await _httpClient.GetAsync(relativeOperationUri))
+			using (var response = await _httpClient.GetAsync(relativeOperationUri))
             {
                 if (response.IsSuccessStatusCode) return await response.Content.ReadAsAsync<TResult>(_mediaTypeFormatters);
                 switch (response.StatusCode)
