@@ -63,7 +63,7 @@ namespace DD.CBU.Compute.Client.IntegrationTests
 				Assert.AreNotEqual(0, networkDomains.totalCount);
 
 				TestContext.WriteLine("Domains List \n");
-				foreach (NetworkDomain domain in networkDomains.NetworkDomain)
+				foreach (NetworkDomain domain in networkDomains.networkDomain)
 				{
 					TestContext.WriteLine("Name & Type : {0} - {1}", domain.name, domain.type);
 					TestContext.WriteLine("Description: {0}", domain.description);

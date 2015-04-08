@@ -154,6 +154,7 @@ namespace DD.CBU.Compute.Api.Client
         /// </returns>
         public async Task<IAccount> LoginAsync(ICredentials accountCredentials)
         {
+			Mcp2WebApi.Credentials = accountCredentials;
             return await WebApi.LoginAsync(accountCredentials);
         }
 
@@ -273,9 +274,9 @@ namespace DD.CBU.Compute.Api.Client
 		/// <returns>
 		/// The list of network domains associated with the organization.
 		/// </returns>
-		public async Task<NetworkDomains> GetNetworkDomains()
+		public async Task<networkDomains> GetNetworkDomains()
 		{
-			var networkDomains = await Mcp2WebApi.ApiGetAsync<NetworkDomains>(ApiUris.NetworkDomains(Account.OrganizationId));
+			var networkDomains = await Mcp2WebApi.ApiGetAsync<networkDomains>(ApiUris.NetworkDomains(Account.OrganizationId));
 			return networkDomains;
 		}
 
