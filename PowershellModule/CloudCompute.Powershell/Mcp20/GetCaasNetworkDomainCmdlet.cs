@@ -12,11 +12,18 @@
     /// <summary>
     /// The new CaaS Virtual Machine cmdlet.
     /// </summary>
-    [Cmdlet(VerbsCommon.Get, "CaasNetworkDomains")]
+    [Cmdlet(VerbsCommon.Get, "CaasNetworkDomain")]
 
     [OutputType(typeof(NetworkDomain[]))]
-    public class GetCaasNetworkDomainsCmdlet : PsCmdletCaasBase
+    public class GetCaasNetworkDomainCmdlet : PsCmdletCaasBase
     {
+        /// <summary>
+        /// Get a CaaS server by ServerId
+        /// </summary>
+        [Parameter(Mandatory = false, ParameterSetName = "SingleNetworkDomain", HelpMessage = "NetworkDomain id")]
+        public Guid NetworkDomainId { get; set; }
+
+
         /// <summary>
         /// The process record method.
         /// </summary>
@@ -26,7 +33,7 @@
             base.ProcessRecord();
             try
             {
-                networks = (this.Connection.ApiClient.GetNetworkDomains()).Result;
+                networks = this.ParameterSetName.Equals("SingleNetworkDomain") ? (this.Connection.ApiClient.GetNetworkDomain(this.NetworkDomainId)).Result : (this.Connection.ApiClient.GetNetworkDomains()).Result;                
             }
             catch (AggregateException ae)
             {

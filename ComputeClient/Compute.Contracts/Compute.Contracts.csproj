@@ -164,7 +164,6 @@
     <Compile Include="Network2.0\ipaddress.cs" />
     <Compile Include="Network2.0\natrule.cs" />
     <Compile Include="Network2.0\networkdomain.cs" />
-    <Compile Include="Network2.0\response.cs" />
     <Compile Include="Network2.0\DeployNetworkDomain.cs" />
     <Compile Include="Network\AclActionType.cs" />
     <Compile Include="Network\AclProtocolType.cs" />

@@ -2,43 +2,42 @@
 {
     using System;
     using System.Management.Automation;
-    using System.Net;
 
     using DD.CBU.Compute.Api.Client;
     using DD.CBU.Compute.Api.Client.Network20;
     using DD.CBU.Compute.Api.Contracts;
 
     /// <summary>
-    /// The new CaaS Virtual Machine cmdlet.
+    /// The new CaaS Network Domain cmdlet.
     /// </summary>
-    [Cmdlet(VerbsCommon.New, "CaasVlan")]
-
+    [Cmdlet(VerbsCommon.New, "CaasNetworkDomain")]
+    
     [OutputType(typeof(Response))]
-    public class DeployCaasVlanCmdlet : PsCmdletCaasBase
+    public class DeployCaasNetworkDomainCmdlet : PsCmdletCaasBase
     {
         /// <summary>
-        /// Gets or sets the network domain id.
+        /// Gets or sets the network domain location.
         /// </summary>
-        [Parameter(Mandatory = true, HelpMessage = "The network domain Id")]
-        public Guid NetworkDomainId { get; set; }
+        [Parameter(Mandatory = true, HelpMessage = "The network domain location")]
+        public string Location { get; set; }
 
         /// <summary>
         /// Gets or sets the name.
         /// </summary>
-        [Parameter(Mandatory = true, HelpMessage = "The vlan name")]
+        [Parameter(Mandatory = true, HelpMessage = "The  Network Domain name")]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or sets the description.
         /// </summary>
-        [Parameter(Mandatory = false, HelpMessage = "The vlan description")]
+        [Parameter(Mandatory = false, HelpMessage = "The  Network Domain description")]
         public string Description { get; set; }
 
         /// <summary>
-        /// Gets or sets the private ip v4 base address.
+        /// Gets or sets the NetworkDomainType.
         /// </summary>
-        [Parameter(Mandatory = true, HelpMessage = "The vlan Private Ipv4BaseAddress")]
-        public IPAddress PrivateIpv4BaseAddress { get; set; }
+        [Parameter(Mandatory = true, HelpMessage = "The Network Domain Type")]
+        public NetworkDomainType Type { get; set; }
 
         /// <summary>
         /// The process record method.
@@ -49,13 +48,13 @@
             try
             {
                 response =
-                    Connection.ApiClient.DeployVlan(
-                        new DeployVlanType
+                    Connection.ApiClient.DeployNetworkDomain(
+                        new DeployNetworkDomain
                             {
                                 name = this.Name,
                                 description = this.Description,
-                                networkDomainId = this.NetworkDomainId.ToString(),
-                                privateIpv4BaseAddress = this.PrivateIpv4BaseAddress.MapToIPv4().ToString()
+                                location = this.Location,
+                                type = this.Type.ToString().ToUpperInvariant()
                             }).Result;
                 if (response != null)
                     WriteDebug(

@@ -41,7 +41,7 @@ namespace DD.CBU.Compute.Powershell
         /// The base uri of the REST API
         /// </summary>
         [Parameter(Mandatory = true, ParameterSetName = "ApiDomainName", HelpMessage = "The domain name for the REST API")]
-        public Uri ApiDomainName { get; set; }
+        public string ApiDomainName { get; set; }
 
         /// <summary>
         /// The known vendor for the connection
@@ -112,7 +112,7 @@ namespace DD.CBU.Compute.Powershell
             if(ParameterSetName=="KnownApiUri")
                 apiClient = new ComputeApiClient(Vendor,Region);
             if (ParameterSetName == "ApiDomainName")
-                apiClient = new ComputeApiClient(ApiDomainName.Authority);
+                apiClient = new ComputeApiClient(ApiDomainName);
          
             var newCloudComputeConnection = new ComputeServiceConnection(apiClient);
 

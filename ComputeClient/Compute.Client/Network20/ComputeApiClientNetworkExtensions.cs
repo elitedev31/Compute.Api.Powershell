@@ -1,13 +1,11 @@
 ﻿namespace DD.CBU.Compute.Api.Client.Network20
 {
+    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using DD.CBU.Compute.Api.Client.Interfaces;
     using DD.CBU.Compute.Api.Contracts;
-    using DD.CBU.Compute.Api.Contracts.Directory;
-    using DD.CBU.Compute.Api.Contracts.Network;
-    using DD.CBU.Compute.Api.Contracts.Network2._0;
 
     /// <summary>
     /// Extension methods for the Network section of the CaaS API.
@@ -41,11 +39,11 @@
         /// <param name="client"> The compute client</param>
         /// <param name="vlan">Virtual Lan</param>
         /// <returns>Operation status</returns>
-        public static async Task<response> DeployVlan(this IComputeApiClient client, DeployVlanType vlan)
+        public static async Task<Response> DeployVlan(this IComputeApiClient client, DeployVlanType vlan)
         {
             var response =
                 await
-                client.Mcp2WebApi.ApiPostAsync<DeployVlanType, response>(
+                client.Mcp2WebApi.ApiPostAsync<DeployVlanType, Response>(
                     ApiUris.DeployVlan(client.Account.OrganizationId),
                     vlan);
 
@@ -65,6 +63,42 @@
         {
             var networks = await client.Mcp2WebApi.ApiGetAsync<networkDomains>(ApiUris.NetworkDomains(client.Account.OrganizationId));
             return networks.networkDomain;
+        }
+
+        /// <summary>
+        /// This function gets list of network domains from Cloud
+        /// </summary>
+        /// <param name="client">
+        /// The client.
+        /// </param>
+        /// <param name="networkDomainId">
+        /// Network domain id
+        /// </param>
+        /// <returns>
+        /// The list of network domains associated with the organization.
+        /// </returns>
+        public static async Task<IEnumerable<NetworkDomain>> GetNetworkDomain(this IComputeApiClient client, Guid networkDomainId)
+        {
+            var networks = await client.Mcp2WebApi.ApiGetAsync<networkDomains>(ApiUris.NetworkDomain(client.Account.OrganizationId, networkDomainId));
+            return networks.networkDomain;
+        }
+
+        /// <summary>
+        /// This function deploys a new network domains to Cloud
+        /// </summary>
+        /// <param name="client">
+        /// The client.
+        /// </param>
+        /// <param name="networkDomain">
+        /// The network Domain.
+        /// </param>
+        /// <returns>
+        /// The list of network domains associated with the organization.
+        /// </returns>
+        public static async Task<Response> DeployNetworkDomain(this IComputeApiClient client, DeployNetworkDomain networkDomain)
+        {
+            var response = await client.Mcp2WebApi.ApiPostAsync<DeployNetworkDomain, Response>(ApiUris.CreateNetworkDomain(client.Account.OrganizationId), networkDomain);
+            return response;
         }
     }
 }

@@ -49,7 +49,7 @@ namespace DD.CBU.Compute.Client.IntegrationTests
 		{
 			ICredentials credentials = GetIntegrationTestCredentials();
 
-			using (ComputeApiClient computeApiClient = new ComputeApiClient("apinashpcs01.opsourcecloud.net"))
+			using (var computeApiClient = new ComputeApiClient("apinashpcs01.opsourcecloud.net"))
 			{
 				IAccount account = await
 					computeApiClient
@@ -84,7 +84,7 @@ namespace DD.CBU.Compute.Client.IntegrationTests
 		{
 			ICredentials credentials = GetIntegrationTestCredentials();
 
-			using (ComputeApiClient computeApiClient = new ComputeApiClient("apinashpcs01.opsourcecloud.net"))
+			using (var computeApiClient = new ComputeApiClient("apinashpcs01.opsourcecloud.net"))
 			{
 				IAccount account = await computeApiClient.LoginAsync(credentials);
 				Assert.IsNotNull(account);
@@ -94,7 +94,7 @@ namespace DD.CBU.Compute.Client.IntegrationTests
 
 				var newDomain = new DeployNetworkDomain { location = "NASH_PCS01_N2_VMWARE_1", name = "Test Network Domain", description = "This is test Network Domain created using Network 2.0 API", type = "ESSENTIALS" };
 
-				var result = await computeApiClient.CreateNetworkDomain(account.OrganizationId, newDomain);
+				var result = await computeApiClient.DeployNetworkDomain(newDomain);
 
 				Assert.AreEqual("OK", result.responseCode);
 				Assert.IsTrue(result.info.Length > 0);

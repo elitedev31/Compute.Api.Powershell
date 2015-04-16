@@ -80,6 +80,23 @@ namespace DD.CBU.Compute.Api.Client
 			return new Uri(string.Format("{0}/network/networkDomain", orgId), UriKind.Relative);
 		}
 
+        /// <summary>
+        /// The network domains.
+        /// </summary>
+        /// <param name="orgId">
+        /// The org id.
+        /// </param>
+        /// <param name="networkDomainId">
+        /// The network Domain Id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Uri"/>.
+        /// </returns>
+        internal static Uri NetworkDomain(Guid orgId, Guid networkDomainId)
+        {
+            return new Uri(string.Format("{0}/network/networkDomain?Id={1}", orgId, networkDomainId), UriKind.Relative);
+        }
+
 		/// <summary>
 		/// The network domains.
 		/// </summary>
