@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Management.Automation;
 
     using DD.CBU.Compute.Api.Client;
@@ -20,9 +21,14 @@
         /// <summary>
         /// Get a CaaS server by ServerId
         /// </summary>
-        [Parameter(Mandatory = false, ParameterSetName = "SingleNetworkDomain", HelpMessage = "NetworkDomain id")]
+        [Parameter(Mandatory = false, ParameterSetName = "FilterNetworkDomains", HelpMessage = "NetworkDomain id")]
         public Guid NetworkDomainId { get; set; }
 
+        /// <summary>
+        /// Get a CaaS server by ServerId
+        /// </summary>
+        [Parameter(Mandatory = false, ParameterSetName = "FilterNetworkDomains", HelpMessage = "NetworkDomain name")]
+        public string NetworkDomainName { get; set; }
 
         /// <summary>
         /// The process record method.
@@ -33,7 +39,7 @@
             base.ProcessRecord();
             try
             {
-                networks = this.ParameterSetName.Equals("SingleNetworkDomain") ? (this.Connection.ApiClient.GetNetworkDomain(this.NetworkDomainId)).Result : (this.Connection.ApiClient.GetNetworkDomains()).Result;                
+                networks = this.ParameterSetName.Equals("FilterNetworkDomains") ? (this.Connection.ApiClient.GetNetworkDomain(this.NetworkDomainId, this.NetworkDomainName)).Result : (this.Connection.ApiClient.GetNetworkDomains()).Result;                
             }
             catch (AggregateException ae)
             {
@@ -54,7 +60,14 @@
                         });
             }
 
-            this.WriteObject(networks);
+            if (networks != null && networks.Count() == 1)
+            {
+                this.WriteObject(networks.First());
+            }
+            else
+            {
+                this.WriteObject(networks);
+            }          
         }
     }
 }

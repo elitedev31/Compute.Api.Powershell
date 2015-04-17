@@ -32,6 +32,33 @@
             return vlans.vlan;
         }
 
+        /// <summary>
+        /// The get vlans.
+        /// </summary>
+        /// <param name="client">
+        /// The client.
+        /// </param>
+        /// <param name="id">
+        /// The id.
+        /// </param>
+        /// <param name="vlanName">
+        /// The vlan name.
+        /// </param>
+        /// <param name="networkDomainId">
+        /// The network domain id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        public static async Task<IEnumerable<VlanType>> GetVlans(this IComputeApiClient client, Guid id, string vlanName, Guid networkDomainId)
+        {
+            var vlans =
+                await
+                client.Mcp2WebApi.ApiGetAsync<vlans>(
+                    ApiUris.GetVlan(client.Account.OrganizationId, id, vlanName, networkDomainId));
+
+            return vlans.vlan;
+        }
 
         /// <summary>
         /// Deploys Virtual Lan on a network domain
@@ -74,12 +101,15 @@
         /// <param name="networkDomainId">
         /// Network domain id
         /// </param>
+        /// <param name="networkName">
+        /// The network Name.
+        /// </param>
         /// <returns>
         /// The list of network domains associated with the organization.
         /// </returns>
-        public static async Task<IEnumerable<NetworkDomain>> GetNetworkDomain(this IComputeApiClient client, Guid networkDomainId)
+        public static async Task<IEnumerable<NetworkDomain>> GetNetworkDomain(this IComputeApiClient client, Guid networkDomainId, string networkName)
         {
-            var networks = await client.Mcp2WebApi.ApiGetAsync<networkDomains>(ApiUris.NetworkDomain(client.Account.OrganizationId, networkDomainId));
+            var networks = await client.Mcp2WebApi.ApiGetAsync<networkDomains>(ApiUris.NetworkDomain(client.Account.OrganizationId, networkDomainId, networkName));
             return networks.networkDomain;
         }
 
@@ -93,11 +123,29 @@
         /// The network Domain.
         /// </param>
         /// <returns>
-        /// The list of network domains associated with the organization.
+        /// Response containing status.
         /// </returns>
         public static async Task<Response> DeployNetworkDomain(this IComputeApiClient client, DeployNetworkDomain networkDomain)
         {
             var response = await client.Mcp2WebApi.ApiPostAsync<DeployNetworkDomain, Response>(ApiUris.CreateNetworkDomain(client.Account.OrganizationId), networkDomain);
+            return response;
+        }
+
+        /// <summary>
+        /// This function deploys a new network domains to Cloud
+        /// </summary>
+        /// <param name="client">
+        /// The client.
+        /// </param>
+        /// <param name="server">
+        /// The network Domain.
+        /// </param>
+        /// <returns>
+        /// Response containing status.
+        /// </returns>
+        public static async Task<Response> DeployServerOnNetworkDomain(this IComputeApiClient client, DeployServerType server)
+        {
+            var response = await client.Mcp2WebApi.ApiPostAsync<DeployServerType, Response>(ApiUris.DeployServerOnNetworkDomain(client.Account.OrganizationId), server);
             return response;
         }
     }

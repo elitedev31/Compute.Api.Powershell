@@ -9,6 +9,7 @@ namespace DD.CBU.Compute.Api.Client
     using System.Collections.Specialized;
     using System.Diagnostics.Contracts;
     using System.Net;
+    using System.Text;
 
     /// <summary>
     ///		Constants and formatters for API URLs.
@@ -89,12 +90,26 @@ namespace DD.CBU.Compute.Api.Client
         /// <param name="networkDomainId">
         /// The network Domain Id.
         /// </param>
+        /// <param name="networkName">
+        /// The network Name.
+        /// </param>
         /// <returns>
         /// The <see cref="Uri"/>.
         /// </returns>
-        internal static Uri NetworkDomain(Guid orgId, Guid networkDomainId)
+        internal static Uri NetworkDomain(Guid orgId, Guid networkDomainId, string networkName)
         {
-            return new Uri(string.Format("{0}/network/networkDomain?Id={1}", orgId, networkDomainId), UriKind.Relative);
+            var queryParameters = new List<string>();
+            if (networkDomainId != Guid.Empty)
+            {
+                queryParameters.Add(string.Format("Id={0}", networkDomainId));
+            }
+            if (!String.IsNullOrEmpty(networkName))
+            {
+                queryParameters.Add(string.Format("Name={0}", networkName));
+            }
+            return new Uri(
+                string.Format("{0}/network/networkDomain?{1}", orgId, String.Join("&", queryParameters)),
+                UriKind.Relative);
         }
 
 		/// <summary>
@@ -110,7 +125,21 @@ namespace DD.CBU.Compute.Api.Client
 		{
 			return new Uri(string.Format("{0}/network/deployNetworkDomain", orgId), UriKind.Relative);
 		}
-		
+
+        /// <summary>
+        /// Deploy server on network domains url.
+        /// </summary>
+        /// <param name="orgId">
+        /// The org id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Uri"/>.
+        /// </returns>
+        internal static Uri DeployServerOnNetworkDomain(Guid orgId)
+        {
+            return new Uri(string.Format("{0}/server/deployServer", orgId), UriKind.Relative);
+        }
+
         /// <summary>
         /// Get the relative URI for the CaaS API action that retrieves a list of all data centres available for use by the specified organisation.
         /// </summary>
@@ -484,11 +513,48 @@ namespace DD.CBU.Compute.Api.Client
         /// <summary>
         /// The relative URI for the CaaS API for getting the VLan
         /// </summary>
-        /// <param name="orgId"></param>
+        /// <param name="orgId">Organization ID</param>
         /// <returns></returns>
         internal static Uri GetVlan(Guid orgId)
         {
             return new Uri(string.Format("{0}/network/vlan", orgId), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// The get Virtual LAN.
+        /// </summary>
+        /// <param name="orgId">
+        /// The org id.
+        /// </param>
+        /// <param name="Id">
+        /// The id.
+        /// </param>
+        /// <param name="vlanName">
+        /// The  Virtual LAN name.
+        /// </param>
+        /// <param name="networkDomainId">
+        /// The network domain id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Uri"/>.
+        /// </returns>
+        internal static Uri GetVlan(Guid orgId, Guid id, string vlanName, Guid networkDomainId)
+        {
+            var queryParameters = new List<string>();
+            if (id != Guid.Empty)
+            {
+                queryParameters.Add(string.Format("Id={0}", id));
+            }
+            if (!String.IsNullOrEmpty(vlanName))
+            {
+                queryParameters.Add(string.Format("Name={0}", vlanName));
+            }
+            if (networkDomainId != Guid.Empty)
+            {
+                queryParameters.Add(string.Format("networkDomainId={0}", networkDomainId));
+            }
+
+            return new Uri(string.Format("{0}/network/vlan?{1}", orgId, String.Join("&", queryParameters)), UriKind.Relative);
         }
 
         /// <summary>

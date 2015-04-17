@@ -47,6 +47,7 @@ namespace DD.CBU.Compute.Api.Client
                 throw new ArgumentException("Base URI supplied is not an absolute URI", "baseUri");
 
             WebApi = new WebApi(baseUri);
+            Mcp2WebApi = new WebApi(KnownApiUri.Instance.GetMcp2BaseUri(baseUri.Authority));
         }
 
         /// <summary>
@@ -76,6 +77,7 @@ namespace DD.CBU.Compute.Api.Client
             if (!baseUri.IsAbsoluteUri) throw new ArgumentException("Base URI supplied is not an absolute URI", "vendor");
 
             WebApi = new WebApi(baseUri);
+            Mcp2WebApi = new WebApi(KnownApiUri.Instance.GetMcp2BaseUri(baseUri.Authority));
         }
 
         /// <summary>
@@ -87,6 +89,7 @@ namespace DD.CBU.Compute.Api.Client
                 throw new ArgumentNullException("client", "Argument cannot be null");
 
             WebApi = new WebApi(client);
+            Mcp2WebApi = new WebApi(client);
         }
 
         /// <summary>

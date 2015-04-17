@@ -24,8 +24,8 @@ namespace DD.CBU.Compute.Api.Contracts {
     public partial class VlanIdOrPrivateIpType {
         
         private string itemField;
-        
-        private ItemChoiceType1 itemElementNameField;
+
+        private ItemChoiceType2 itemElementNameField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("privateIpv4", typeof(string))]
@@ -42,7 +42,7 @@ namespace DD.CBU.Compute.Api.Contracts {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public ItemChoiceType1 ItemElementName {
+        public ItemChoiceType2 ItemElementName {
             get {
                 return this.itemElementNameField;
             }
@@ -51,7 +51,20 @@ namespace DD.CBU.Compute.Api.Contracts {
             }
         }
     }
-    
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types", IncludeInSchema = false)]
+    public enum ItemChoiceType2
+    {
+
+        /// <remarks/>
+        privateIpv4,
+
+        /// <remarks/>
+        vlanId,
+    }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
@@ -932,6 +945,8 @@ namespace DD.CBU.Compute.Api.Contracts {
         private string administratorPasswordField;
         
         private object itemField;
+
+        private ItemChoiceType3 itemElementNameField;
         
         private DeployServerTypeDisk[] diskField;
         
@@ -988,7 +1003,9 @@ namespace DD.CBU.Compute.Api.Contracts {
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("network", typeof(DeployServerTypeNetwork))]
         [System.Xml.Serialization.XmlElementAttribute("networkInfo", typeof(DeployServerTypeNetworkInfo))]
-        public object Item {
+        [System.Xml.Serialization.XmlChoiceIdentifierAttribute("ItemElementName")]
+        public object Item
+        {
             get {
                 return this.itemField;
             }
@@ -996,7 +1013,20 @@ namespace DD.CBU.Compute.Api.Contracts {
                 this.itemField = value;
             }
         }
-        
+
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public ItemChoiceType3 ItemElementName
+        {
+            get
+            {
+                return this.itemElementNameField;
+            }
+            set
+            {
+                this.itemElementNameField = value;
+            }
+        }
+
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("disk")]
         public DeployServerTypeDisk[] disk {
