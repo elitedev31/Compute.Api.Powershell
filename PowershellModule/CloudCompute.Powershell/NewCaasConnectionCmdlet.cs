@@ -76,9 +76,10 @@ namespace DD.CBU.Compute.Powershell
                    }
                     if(!SessionState.GetComputeServiceConnections().Any())
                          WriteDebug("This is the first connection and will be the default connection.");
-                    else
-                        WriteWarning("You have created more than one connection on this session, please use the cmdlet Set-CaasActiveConnection -Name <name> to change the active/default connection");
                     SessionState.AddComputeServiceConnection(Name,newCloudComputeConnection);
+                    if(SessionState.GetComputeServiceConnections().Count>1)
+                        WriteWarning("You have created more than one connection on this session, please use the cmdlet Set-CaasActiveConnection -Name <name> to change the active/default connection");
+
                     WriteObject(newCloudComputeConnection);
                 }
             }

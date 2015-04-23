@@ -12,7 +12,7 @@
         /// <summary>
         /// The CaaS connection created by <see cref="NewCaasConnectionCmdlet"/> 
         /// </summary>
-        [Parameter(Mandatory = false,ValueFromPipelineByPropertyName = true, HelpMessage = "The CaaS Connection created by New-ComputeServiceConnection")]
+        [Parameter(Mandatory = false,ValueFromPipelineByPropertyName = true, HelpMessage = "The CaaS Connection created by New-CaasConnection")]
         public ComputeServiceConnection Connection { get; set; }
 
         protected override void BeginProcessing()
@@ -26,7 +26,7 @@
                 if (Connection == null)
                     this.ThrowTerminatingError(
                         new ErrorRecord(
-                            new AuthenticationException("Cannot find a valid CaaS connection"),
+                            new AuthenticationException("Cannot find a valid connection. Use New-CaasConnection to create or Set-CaasActiveConnection to set a valid connection"),
                             "-1",
                             ErrorCategory.AuthenticationError,
                             this));

@@ -38,8 +38,8 @@ namespace DD.CBU.Compute.Powershell
 
 		#endregion // Constants
 
-        
-	    private static ComputeServiceConnection _defaultComputeServiceConnection = null;
+
+	    private static string _defaultComputeServiceConnectionName;
 
         /// <summary>
         /// Retrieve the dictonary with all connections from session
@@ -99,11 +99,15 @@ namespace DD.CBU.Compute.Powershell
 	    /// </summary>
 	    public static ComputeServiceConnection GetDefaultComputeServiceConnection(this SessionState sessionState)
         {
+            var connections = GetComputeServiceConnectionsFromSession(sessionState);
+            if (!connections.ContainsKey(_defaultComputeServiceConnectionName))
+                    return null;
+            return connections[_defaultComputeServiceConnectionName];
 
-            return _defaultComputeServiceConnection;
 
-            
         }
+
+       
 
 
         /// <summary>
@@ -116,8 +120,7 @@ namespace DD.CBU.Compute.Powershell
             var connections = GetComputeServiceConnectionsFromSession(sessionState);
             if(!connections.ContainsKey(connectionName))
                 throw new IndexOutOfRangeException("connectionName does not exisits");
-
-             _defaultComputeServiceConnection = connections[connectionName];
+            _defaultComputeServiceConnectionName = connectionName;
 
         }
 
@@ -174,10 +177,13 @@ namespace DD.CBU.Compute.Powershell
 				}
 			}
 
-            if (!connections.ContainsKey(connectionName))
-                connections.Add(connectionName, connection);
-	        if (_defaultComputeServiceConnection == null)
-	            _defaultComputeServiceConnection = connection;
+	        if (!connections.ContainsKey(connectionName))
+	            connections.Add(connectionName, connection);
+	        else
+	            connections[connectionName] = connection;
+
+             if (string.IsNullOrEmpty(_defaultComputeServiceConnectionName) || connections.Count().Equals(1))
+                 _defaultComputeServiceConnectionName = connectionName;
 
 			return connection;
 		}
@@ -212,7 +218,7 @@ namespace DD.CBU.Compute.Powershell
             Dictionary<string, ComputeServiceConnection> connections = (Dictionary<string, ComputeServiceConnection>)connectionsVariable.Value;
 			if (connections == null)
 				return false;
-
+            
             return connections.Remove(connectionName);
 		}
 	}

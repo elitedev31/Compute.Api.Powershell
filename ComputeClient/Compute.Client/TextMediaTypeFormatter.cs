@@ -29,6 +29,7 @@ namespace DD.CBU.Compute.Api.Client
                     readStream.CopyTo(memoryStream);
                 var s = System.Text.Encoding.UTF8.GetString(memoryStream.ToArray());
                 taskCompletionSource.SetResult(s);
+                memoryStream.Dispose();
             }
             catch (Exception e)
             {

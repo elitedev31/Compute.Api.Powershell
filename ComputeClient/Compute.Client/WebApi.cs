@@ -84,6 +84,7 @@ namespace DD.CBU.Compute.Api.Client
             if (!baseUri.IsAbsoluteUri) throw new ArgumentException("Base URI supplied is not an absolute URI", "baseUri");
 
             _httpClient = new HttpClientAdapter(new HttpClient(_clientMessageHandler) { BaseAddress = baseUri });
+
         }
 
         /// <summary>

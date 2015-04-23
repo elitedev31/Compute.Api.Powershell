@@ -13,7 +13,7 @@ namespace DD.CBU.Compute.Powershell
     /// <summary>
     /// Monitor CaaS provisioning progress 
     /// </summary>
-    [Cmdlet("Out", "CaasWaitForOperation")]
+    [Cmdlet(VerbsLifecycle.Wait, "CaasServerOperation")]
     [OutputType(typeof(ServerWithBackupType))]
     public class OutCaasWaitForOperationCmdlet : PsCmdletCaasBase
     {
