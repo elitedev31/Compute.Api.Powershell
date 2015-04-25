@@ -133,5 +133,16 @@ namespace DD.CBU.Compute.Api.Client.Network20
 			var response = await client.WebApi.ApiPostAsync<DeployServerType, ResponseType>(ApiUris.DeployServerOnNetworkDomain(client.Account.OrganizationId), server);
             return response;
         }
+
+	    /// <summary> An IComputeApiClient extension method that adds a NIC to server to 'addNic'. </summary>
+	    /// <remarks>	Anthony, 4/24/2015. </remarks>
+	    /// <param name="client">	The compute client. </param>
+	    /// <param name="addNic">	The add NIC. </param>
+	    /// <returns>	A standard response. </returns>
+	    public static async Task<ResponseType> AddNicToServer(this IComputeApiClient client, AddNicType addNic)
+	    {
+		    return 
+			    await client.WebApi.ApiPostAsync<AddNicType, ResponseType>(ApiUris.AddNic(client.Account.OrganizationId), addNic);
+	    }
     }
 }

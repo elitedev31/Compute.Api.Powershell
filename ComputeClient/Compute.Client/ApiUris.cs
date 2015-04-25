@@ -135,6 +135,16 @@ namespace DD.CBU.Compute.Api.Client
                 UriKind.Relative);
         }
 
+	    /// <summary>	Adds a NIC to a server </summary>
+	    /// <remarks>	Anthony, 4/24/2015. </remarks>
+	    /// <param name="orgId">	The org Id. </param>
+	    /// <returns>	An URI. </returns>
+	    internal static Uri AddNic(Guid orgId)
+	    {
+		    return new Uri(
+				String.Format(MCP2_0_PREFIX + "/{0}//server/addNic", orgId), UriKind.Relative);
+	    }
+
 		/// <summary>
 		/// The network domains.
 		/// </summary>

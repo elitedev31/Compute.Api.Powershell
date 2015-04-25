@@ -15,38 +15,6 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 	/// <remarks/>
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
 	[System.SerializableAttribute()]
-	[System.Diagnostics.DebuggerStepThroughAttribute()]
-	[System.ComponentModel.DesignerCategoryAttribute("code")]
-	[System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
-	public partial class VlanIdOrPrivateIpType
-	{
-
-		private string itemField;
-
-		private ServerItemChoiceType1 itemElementNameField;
-
-		/// <remarks/>
-		[System.Xml.Serialization.XmlElementAttribute("privateIpv4", typeof (string))]
-		[System.Xml.Serialization.XmlElementAttribute("vlanId", typeof (string))]
-		[System.Xml.Serialization.XmlChoiceIdentifierAttribute("ItemElementName")]
-		public string Item
-		{
-			get { return this.itemField; }
-			set { this.itemField = value; }
-		}
-
-		/// <remarks/>
-		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		public ServerItemChoiceType1 ItemElementName
-		{
-			get { return this.itemElementNameField; }
-			set { this.itemElementNameField = value; }
-		}
-	}
-
-	/// <remarks/>
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-	[System.SerializableAttribute()]
 	[System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types", IncludeInSchema = false)]
 	public enum ServerItemChoiceType1
 	{
@@ -857,6 +825,51 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 		}
 	}
 
+
+	/// <remarks/>
+	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+	[System.SerializableAttribute()]
+	[System.Diagnostics.DebuggerStepThroughAttribute()]
+	[System.ComponentModel.DesignerCategoryAttribute("code")]
+	[System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
+	public partial class VlanIdOrPrivateIpType
+	{
+
+		private string itemField;
+
+		private ServerItemChoiceType1 itemElementNameField;
+
+		/// <remarks/>
+		[System.Xml.Serialization.XmlElementAttribute("privateIpv4", typeof(string))]
+		[System.Xml.Serialization.XmlElementAttribute("vlanId", typeof(string))]
+		[System.Xml.Serialization.XmlChoiceIdentifierAttribute("ItemElementName")]
+		public string Item
+		{
+			get
+			{
+				return this.itemField;
+			}
+			set
+			{
+				this.itemField = value;
+			}
+		}
+
+		/// <remarks/>
+		[System.Xml.Serialization.XmlIgnoreAttribute()]
+		public ServerItemChoiceType1 ItemElementName
+		{
+			get
+			{
+				return this.itemElementNameField;
+			}
+			set
+			{
+				this.itemElementNameField = value;
+			}
+		}
+	}
+
 	/// <remarks/>
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
 	[System.SerializableAttribute()]
@@ -989,23 +1002,23 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 	[System.Xml.Serialization.XmlRootAttribute("addNic", Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
 	public partial class AddNicType
 	{
-
-		private string serverIdField;
-
-		private VlanIdOrPrivateIpType nicField;
-
 		/// <remarks/>
-		public string serverId
+		public string serverId { get; set; }
+
+		/// <summary>	Gets or sets the private IPv4. </summary>
+		/// <value>	The private IPv4. </value>
+		[System.Xml.Serialization.XmlElementAttribute("privateIpv4", typeof (string))]
+		public string PrivateIPv4
 		{
-			get { return this.serverIdField; }
-			set { this.serverIdField = value; }
+			get; set;
 		}
 
-		/// <remarks/>
-		public VlanIdOrPrivateIpType nic
+		/// <summary>	Gets or sets the identifier of the vlan. </summary>
+		/// <value>	The identifier of the vlan. </value>
+		[System.Xml.Serialization.XmlElementAttribute("vlanId", typeof (string))]
+		public string VLANId
 		{
-			get { return this.nicField; }
-			set { this.nicField = value; }
+			get; set;
 		}
 	}
 }

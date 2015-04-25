@@ -122,6 +122,7 @@
     <Compile Include="Mcp20\GetCaasVlanCmdlet.cs" />
     <Compile Include="Mcp20\NetworkDomainType.cs" />
     <Compile Include="Mcp20\DeployCaasServerOnNetworkDomainCmdlet.cs" />
+    <Compile Include="Mcp20\NewCaasServerNic.cs" />
     <Compile Include="NewCaasExportCustomerImageCmdlet.cs" />
     <Compile Include="NewCaasUploadCustomerImageCmdlet.cs" />
     <Compile Include="RemoveCaasConnectionCmdlet.cs" />
