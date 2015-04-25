@@ -9,21 +9,21 @@
 
 
 
-using System;
-using System.Net;
-using System.Threading.Tasks;
-using DD.CBU.Compute.Api.Contracts.Directory;
+    using System;
+    using System.Net;
+    using System.Threading.Tasks;
+    using DD.CBU.Compute.Api.Contracts.Directory;
 
 namespace DD.CBU.Compute.Api.Client.Interfaces
 {
-	/// <summary>
-	/// The web API interface for communication with CaaS REST API.
-	/// </summary>
-	public interface IWebApi : IDisposable
-	{
-		/// <summary>
+    /// <summary>
+    /// The web API interface for communication with CaaS REST API.
+    /// </summary>
+    public interface IWebApi : IDisposable
+    {
+        /// <summary>
 		/// Is the API client currently logged in to the CaaS API?
-		/// </summary>
+        /// </summary>
 		bool IsLoggedIn { get; }
 
 		/// <summary>
@@ -48,31 +48,31 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 		/// <summary>
 		/// Invoke a CaaS API operation using a HTTP GET request.
 		/// </summary>
-		/// <typeparam name="TResult">
+        /// <typeparam name="TResult">
 		/// The XML-serialisable data contract type into which the response will be deserialised.
-		/// </typeparam>
-		/// <param name="relativeOperationUri">
+        /// </typeparam>
+        /// <param name="relativeOperationUri">
 		/// The operation URI (relative to the CaaS API's base URI).
-		/// </param>
-		/// <returns>
+        /// </param>
+        /// <returns>
 		/// The operation result.
-		/// </returns>
-		Task<TResult> ApiGetAsync<TResult>(Uri relativeOperationUri);
+        /// </returns>
+        Task<TResult> ApiGetAsync<TResult>(Uri relativeOperationUri);
 
-		/// <summary>
+        /// <summary>
 		/// Invoke a CaaS API operation using a HTTP GET request and return the RAW response as string
-		/// </summary>
-		/// <param name="relativeOperationUri">
+        /// </summary>
+        /// <param name="relativeOperationUri">
 		/// The operation URI (relative to the CaaS API's base URI).
-		/// </param>
-		/// <returns>
+        /// </param>
+        /// <returns>
 		/// The operation result.
-		/// </returns>
-		Task<string> ApiGetAsync(Uri relativeOperationUri);
+        /// </returns>
+        Task<string> ApiGetAsync(Uri relativeOperationUri);
 
-		/// <summary>
-		/// Invoke a CaaS API operation using a HTTP POST request.
-		/// </summary>
+        /// <summary>
+        /// Invoke a CaaS API operation using a HTTP POST request.
+        /// </summary>
 		/// <typeparam name="TObject">
 		/// The XML-Serialisable data contract type that the request will be sent.
 		/// </typeparam>
@@ -88,12 +88,12 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 		/// <returns>
 		/// The operation result.
 		/// </returns>
-		Task<TResult> ApiPostAsync<TObject, TResult>(Uri relativeOperationUri, TObject content);
+        Task<TResult> ApiPostAsync<TObject, TResult>(Uri relativeOperationUri, TObject content);
 
 
-		/// <summary>
-		/// Invoke a CaaS API operation using a HTTP POST request with string content
-		/// </summary>
+        /// <summary>
+        /// Invoke a CaaS API operation using a HTTP POST request with string content
+        /// </summary>
 		/// <typeparam name="TResult">
 		/// The XML-serialisable data contract type into which the response will be deserialised.
 		/// </typeparam>
@@ -106,22 +106,22 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 		/// <returns>
 		/// The operation result.
 		/// </returns>
-		Task<TResult> ApiPostAsync<TResult>(Uri relativeOperationUri, string content);
+        Task<TResult> ApiPostAsync<TResult>(Uri relativeOperationUri, string content);
 
-		/// <summary>
+        /// <summary>
 		/// Asynchronously log into the CaaS API.
-		/// </summary>
-		/// <param name="accountCredentials">
+        /// </summary>
+        /// <param name="accountCredentials">
 		/// The CaaS account credentials used to authenticate against the CaaS API.
-		/// </param>
-		/// <returns>
+        /// </param>
+        /// <returns>
 		/// An <see cref="IAccount"/> implementation representing the CaaS account that the client is logged into.
-		/// </returns>
-		Task<IAccount> LoginAsync(ICredentials accountCredentials);
+        /// </returns>
+        Task<IAccount> LoginAsync(ICredentials accountCredentials);
 
-		/// <summary>
+        /// <summary>
 		/// Log out of the CaaS API.
-		/// </summary>
-		void Logout();
-	}
+        /// </summary>
+        void Logout();
+    }
 }

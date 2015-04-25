@@ -7,8 +7,6 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -116,6 +114,7 @@ namespace DD.CBU.Compute.Powershell
 					ServerDetails.IsStarted, 
 					diskarray
 					).Result;
+
 
 // get the server id from status message
 			AdditionalInformation statusadditionalInfo = status.additionalInformation.Single(info => info.name == "serverId");

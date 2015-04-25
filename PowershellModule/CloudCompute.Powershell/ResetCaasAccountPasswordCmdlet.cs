@@ -7,8 +7,6 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-
-
 using System;
 using System.Collections.ObjectModel;
 using System.Management.Automation;
@@ -124,7 +122,7 @@ namespace DD.CBU.Compute.Powershell
 
 
 			var newCloudComputeConnection = new ComputeServiceConnection(apiClient);
-			
+
 
 			WriteDebug("Trying to login into the CaaS");
 			await newCloudComputeConnection.ApiClient.LoginAsync(ApiCredentials.GetNetworkCredential());

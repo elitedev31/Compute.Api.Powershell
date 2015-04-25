@@ -6,7 +6,6 @@
 //   The caas server disk details.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>

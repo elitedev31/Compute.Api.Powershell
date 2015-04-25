@@ -7,8 +7,6 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-
-
 using System;
 using System.IO;
 using System.Management.Automation;
@@ -113,6 +111,7 @@ namespace DD.CBU.Compute.Powershell
 				appliance.Close();
 			}
 
+
 // Get the extracted contents..
 			foreach (string file in Directory.GetFiles(temporaryFolder))
 			{
@@ -164,6 +163,7 @@ namespace DD.CBU.Compute.Powershell
 
 			// TODO : Support for building OVF on the fly.
 			UploadFile(client, Ovf, 1);
+
 
 // TODO : Support for building manifest on the fly.
 			UploadFile(client, Manifest, 2);

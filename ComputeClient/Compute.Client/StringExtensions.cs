@@ -21,6 +21,9 @@ namespace DD.CBU.Compute.Api.Client
 	/// </summary>
 	public static class StringExtensions
 	{
+		/// <summary>	The MCP 1.0 prefix. </summary>
+		private const string MCP1_0_PREFIX = "oec/0.9/";
+
 		/// <summary>
 		/// The ci.
 		/// </summary>

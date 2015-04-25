@@ -7,8 +7,6 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-
-
 using System;
 using System.Management.Automation;
 using System.Text.RegularExpressions;
@@ -196,8 +194,8 @@ namespace DD.CBU.Compute.Powershell
 						{
 							probe.statusCodeRange = new[]
 							{
-          new ProbeStatusCodeRange {lowerBound = StatusCodeLowerBound, upperBound = StatusCodeUpperBound}
-       };
+								new ProbeStatusCodeRange {lowerBound = StatusCodeLowerBound, upperBound = StatusCodeUpperBound}
+							};
 							probe.requestMethod = RequestMethod;
 							probe.requestUrl = RequestUrl;
 							probe.matchContent = MatchContent;

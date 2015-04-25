@@ -7,8 +7,6 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-
-
 using System.Management.Automation.Provider;
 
 namespace DD.CBU.Compute.Powershell

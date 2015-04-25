@@ -8,8 +8,6 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-
-
 using System.Collections.Generic;
 using System.Management.Automation;
 using DD.CBU.Compute.Api.Contracts.Server;

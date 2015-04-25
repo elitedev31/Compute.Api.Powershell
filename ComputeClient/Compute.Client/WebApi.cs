@@ -7,12 +7,11 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-
-
 using System;
 using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Formatting;
 using System.Threading.Tasks;
 using DD.CBU.Compute.Api.Client.Interfaces;
 using DD.CBU.Compute.Api.Client.Utilities;
@@ -22,7 +21,7 @@ using DD.CBU.Compute.Api.Contracts.General;
 namespace DD.CBU.Compute.Api.Client
 {
 	/// <summary>
-	/// The web api.
+	/// The web API.
 	/// </summary>
 	internal class WebApi : DisposableObject, IWebApi
 	{
@@ -67,8 +66,8 @@ namespace DD.CBU.Compute.Api.Client
 		}
 
 		/// <summary>
-		/// Initialises a new instance of the <see cref="WebApi"/> class. 
-		/// Creates a new CaaS API client using a base URI.
+		/// Initialises a new instance of the <see cref="WebApi"/> class.
+		///     Creates a new CaaS API client using a base URI.
 		/// </summary>
 		/// <param name="baseUri">
 		/// The base URI to use for the CaaS API.
@@ -84,8 +83,8 @@ namespace DD.CBU.Compute.Api.Client
 		}
 
 		/// <summary>
-		/// Initialises a new instance of the <see cref="WebApi"/> class. 
-		/// Create a new Compute-as-a-Service API client.
+		/// Initialises a new instance of the <see cref="WebApi"/> class.
+		///     Create a new Compute-as-a-Service API client.
 		/// </summary>
 		/// <param name="targetRegionName">
 		/// The name of the region whose CaaS API end-point is targeted by the client.
@@ -108,8 +107,8 @@ namespace DD.CBU.Compute.Api.Client
 		}
 
 		/// <summary>
-		/// Initialises a new instance of the <see cref="WebApi"/> class. 
-		/// Creates a new CaaS API client using a base URI.
+		/// Initialises a new instance of the <see cref="WebApi"/> class.
+		///     Creates a new CaaS API client using a base URI.
 		/// </summary>
 		/// <param name="client">
 		/// The client.
@@ -194,6 +193,12 @@ namespace DD.CBU.Compute.Api.Client
 		public ICredentials Credentials
 		{
 			get { return _credentials; }
+			set
+			{
+				_credentials = value;
+				_clientMessageHandler.Credentials = value;
+				_clientMessageHandler.PreAuthenticate = true;
+			}
 		}
 
 		/// <summary>
@@ -220,24 +225,30 @@ namespace DD.CBU.Compute.Api.Client
 		}
 
 		/// <summary>
-		/// The api get async.
+		/// 	The API get async. 
 		/// </summary>
-		/// <param name="relativeOperationUri">
-		/// The relative operation uri.
-		/// </param>
-		/// <typeparam name="TResult">
-		/// </typeparam>
-		/// <returns>
-		/// The <see cref="Task"/>.
-		/// </returns>
+		/// <remarks>
+		/// 	Anthony, 4/24/2015. 
+		/// </remarks>
 		/// <exception cref="ArgumentNullException">
+		/// 	. 
 		/// </exception>
 		/// <exception cref="ArgumentException">
-		/// </exception>
-		/// <exception cref="ComputeApiException">
+		/// 		. 
 		/// </exception>
 		/// <exception cref="HttpRequestException">
+		/// 	. 
 		/// </exception>
+		/// <typeparam name="TResult">
+		/// 	. 
+		/// </typeparam>
+		/// <param name="relativeOperationUri">
+		/// 	The relative operation uri. 
+		/// </param>
+		/// <returns>
+		/// 	The typed result from the API. 
+		/// </returns>
+		/// <seealso cref="M:DD.CBU.Compute.Api.Client.Interfaces.IWebApi.ApiGetAsync{TResult}(Uri)"/>
 		public async Task<TResult> ApiGetAsync<TResult>(Uri relativeOperationUri)
 		{
 			if (relativeOperationUri == null) throw new ArgumentNullException("relativeOperationUri");
@@ -259,7 +270,7 @@ namespace DD.CBU.Compute.Api.Client
 					case HttpStatusCode.BadRequest:
 					{
 						// Handle specific CaaS Status response when getting a bad request
-						var status = await response.Content.ReadAsAsync<Status>(_mediaTypeFormatters);
+						Status status = await response.Content.ReadAsAsync<Status>(_mediaTypeFormatters);
 						throw ComputeApiException.InvalidRequest(status.operation, status.resultDetail, status, relativeOperationUri);
 					}
 
@@ -277,22 +288,27 @@ namespace DD.CBU.Compute.Api.Client
 		}
 
 		/// <summary>
-		/// The api get async.
+		/// 	The api get async. 
 		/// </summary>
-		/// <param name="relativeOperationUri">
-		/// The relative operation uri.
-		/// </param>
-		/// <returns>
-		/// The <see cref="Task"/>.
-		/// </returns>
+		/// <remarks>
+		/// 	Anthony, 4/24/2015. 
+		/// </remarks>
 		/// <exception cref="ArgumentNullException">
+		/// 	. 
 		/// </exception>
 		/// <exception cref="ArgumentException">
-		/// </exception>
-		/// <exception cref="ComputeApiException">
+		/// 		. 
 		/// </exception>
 		/// <exception cref="HttpRequestException">
+		/// 	. 
 		/// </exception>
+		/// <param name="relativeOperationUri">
+		/// 	The relative operation uri. 
+		/// </param>
+		/// <returns>
+		/// 	The <see cref="Task"/>. 
+		/// </returns>
+		/// <seealso cref="M:DD.CBU.Compute.Api.Client.Interfaces.IWebApi.ApiGetAsync(Uri)"/>
 		public async Task<string> ApiGetAsync(Uri relativeOperationUri)
 		{
 			if (relativeOperationUri == null) throw new ArgumentNullException("relativeOperationUri");
@@ -363,7 +379,7 @@ namespace DD.CBU.Compute.Api.Client
 					case HttpStatusCode.BadRequest:
 					{
 						// Handle specific CaaS Status response when posting a bad request
-						var status = await response.Content.ReadAsAsync<Status>(_mediaTypeFormatters);
+						Status status = await response.Content.ReadAsAsync<Status>(_mediaTypeFormatters);
 						throw ComputeApiException.InvalidRequest(status.operation, status.resultDetail, status, relativeOperationUri);
 					}
 
@@ -399,7 +415,9 @@ namespace DD.CBU.Compute.Api.Client
 		public async Task<TResult> ApiPostAsync<TResult>(Uri relativeOperationUri, string content)
 		{
 			var textformatter = new TextMediaTypeFormatter();
-			var objectContent = new ObjectContent<string>(content, textformatter as MediaTypeFormatter, 
+			var objectContent = new ObjectContent<string>(
+				content, 
+				textformatter, 
 				"application/x-www-form-urlencoded");
 			using (
 				HttpResponseMessage response =
@@ -419,7 +437,7 @@ namespace DD.CBU.Compute.Api.Client
 					case HttpStatusCode.BadRequest:
 					{
 						// Handle specific CaaS Status response when posting a bad request
-						var status = await response.Content.ReadAsAsync<Status>(_mediaTypeFormatters);
+						Status status = await response.Content.ReadAsAsync<Status>(_mediaTypeFormatters);
 						throw ComputeApiException.InvalidRequest(status.operation, status.resultDetail, status, relativeOperationUri);
 					}
 

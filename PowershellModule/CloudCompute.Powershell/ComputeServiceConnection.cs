@@ -7,8 +7,6 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-
-
 using System;
 using DD.CBU.Compute.Api.Client.Interfaces;
 using DD.CBU.Compute.Api.Contracts.Directory;
@@ -22,8 +20,8 @@ namespace DD.CBU.Compute.Powershell
 		: IDisposable
 	{
 		/// <summary>
-		/// Initialises a new instance of the <see cref="ComputeServiceConnection"/> class. 
-		/// Create a new compute service connection.
+		/// Initialises a new instance of the <see cref="ComputeServiceConnection"/> class.
+		///     Create a new compute service connection.
 		/// </summary>
 		/// <param name="apiClient">
 		/// The CaaS API client represented by the connection.

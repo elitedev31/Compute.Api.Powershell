@@ -7,8 +7,6 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-
-
 using System;
 using System.Management.Automation;
 using DD.CBU.Compute.Api.Client;

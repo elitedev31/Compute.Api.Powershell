@@ -3,11 +3,9 @@
 //   
 // </copyright>
 // <summary>
-//   Extension methods for working with PowerShell <see cref="SessionState" />.
+//   Extension methods for working with PowerShell .
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
-
 
 using System;
 using System.Collections.Generic;
@@ -135,8 +133,12 @@ namespace DD.CBU.Compute.Powershell
 		public static ComputeServiceConnection GetDefaultComputeServiceConnection(this SessionState sessionState)
 		{
 			Dictionary<string, ComputeServiceConnection> connections = GetComputeServiceConnectionsFromSession(sessionState);
+			if (connections == null)
+				return null;
+
 			if (!connections.ContainsKey(_defaultComputeServiceConnectionName))
 				return null;
+
 			return connections[_defaultComputeServiceConnectionName];
 		}
 
@@ -200,7 +202,8 @@ namespace DD.CBU.Compute.Powershell
 					ScopedItemOptions.AllScope
 					);
 				sessionState.PSVariable.Set(connectionsVariable);
-					
+
+
 // AF: If this is getting serialised (can't remember), then you need to call Set() AFTER updating the collection.
 			}
 			else
@@ -210,7 +213,8 @@ namespace DD.CBU.Compute.Powershell
 				{
 					connectionsVariable.Value = connections = new Dictionary<string, ComputeServiceConnection>();
 					sessionState.PSVariable.Set(connectionsVariable);
-						
+
+
 // AF: If this is getting serialised (can't remember), then you need to call Set() AFTER updating the collection.
 				}
 			}

@@ -7,8 +7,6 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-
-
 using System.Collections.Generic;
 using DD.CBU.Compute.Api.Contracts.Image;
 using DD.CBU.Compute.Api.Contracts.Network;

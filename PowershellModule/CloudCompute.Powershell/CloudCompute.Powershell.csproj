@@ -14,6 +14,8 @@
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\..\CaaS_PS.snk</AssemblyOriginatorKeyFile>
     <CodeContractsAssemblyMode>1</CodeContractsAssemblyMode>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -114,6 +116,12 @@
     <Compile Include="GetCaasCustomerImageExportHistoryCmdlet.cs" />
     <Compile Include="GetCaasCustomerImageExportsCmdlet.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Mcp20\DeployCaasNetworkDomainCmdlet.cs" />
+    <Compile Include="Mcp20\GetCaasNetworkDomainCmdlet.cs" />
+    <Compile Include="Mcp20\DeployCaasVlanCmdlet.cs" />
+    <Compile Include="Mcp20\GetCaasVlanCmdlet.cs" />
+    <Compile Include="Mcp20\NetworkDomainType.cs" />
+    <Compile Include="Mcp20\DeployCaasServerOnNetworkDomainCmdlet.cs" />
     <Compile Include="NewCaasExportCustomerImageCmdlet.cs" />
     <Compile Include="NewCaasUploadCustomerImageCmdlet.cs" />
     <Compile Include="RemoveCaasConnectionCmdlet.cs" />
@@ -236,6 +244,13 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

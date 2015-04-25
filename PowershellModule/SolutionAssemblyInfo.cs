@@ -7,8 +7,6 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-
-
 using System.Reflection;
 
 [assembly: AssemblyCompany("Dimension Data")]

@@ -8,8 +8,6 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-
-
 using System.Management.Automation;
 using DD.CBU.Compute.Api.Contracts.Image;
 using DD.CBU.Compute.Api.Contracts.Network;

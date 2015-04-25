@@ -7,8 +7,6 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-
-
 using System;
 using System.Linq;
 using System.Management.Automation;
@@ -46,6 +44,12 @@ namespace DD.CBU.Compute.Powershell
 		/// </summary>
 		[Parameter(Mandatory = true, ParameterSetName = "ApiBaseUri", HelpMessage = "The base URI of the REST API")]
 		public Uri ApiBaseUri { get; set; }
+
+		/// <summary>
+		/// The base uri of the REST API
+		/// </summary>
+		[Parameter(Mandatory = true, ParameterSetName = "ApiDomainName", HelpMessage = "The domain name for the REST API")]
+		public string ApiDomainName { get; set; }
 
 		/// <summary>
 		/// The known vendor for the connection
@@ -93,7 +97,10 @@ namespace DD.CBU.Compute.Powershell
 					if (SessionState.GetComputeServiceConnections().Count > 1)
 						WriteWarning(
 							"You have created more than one connection on this session, please use the cmdlet Set-CaasActiveConnection -Name <name> to change the active/default connection");
-
+					else
+						WriteWarning(
+							"You have created more than one connection on this session, please use the cmdlet Set-CaasActiveConnection -Name <name> to change the active/default connection");
+					SessionState.AddComputeServiceConnection(Name, newCloudComputeConnection);
 					WriteObject(newCloudComputeConnection);
 				}
 			}
@@ -119,13 +126,20 @@ namespace DD.CBU.Compute.Powershell
 		{
 			ComputeApiClient apiClient = null;
 			if (ParameterSetName == "ApiBaseUri")
+			{
+				WriteWarning("This parameter is obselete and will not work for MCP2.0 commands");
 				apiClient = new ComputeApiClient(ApiBaseUri);
+			}
+
 			if (ParameterSetName == "KnownApiUri")
 				apiClient = new ComputeApiClient(Vendor, Region);
-
+			if (ParameterSetName == "ApiDomainName")
+			{
+				WriteWarning("This parameter is obselete and will not work for MCP2.0 commands");
+				apiClient = new ComputeApiClient(ApiDomainName);
+			}
 
 			var newCloudComputeConnection = new ComputeServiceConnection(apiClient);
-
 
 			WriteDebug("Trying to login into the CaaS");
 			await newCloudComputeConnection.ApiClient.LoginAsync(ApiCredentials.GetNetworkCredential());

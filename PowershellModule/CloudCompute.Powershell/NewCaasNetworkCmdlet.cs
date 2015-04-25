@@ -7,8 +7,6 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-
-
 using System;
 using System.Management.Automation;
 using DD.CBU.Compute.Api.Client;
@@ -64,7 +62,7 @@ namespace DD.CBU.Compute.Powershell
 			{
 				string location = Location;
 				if (ParameterSetName == "DataCentre")
-					location = Datacentre.location;
+					location = Datacentre.Datacenter.Location;
 				Status status = Connection.ApiClient.CreateNetwork(Name, location, Description).Result;
 				if (status != null)
 					WriteDebug(

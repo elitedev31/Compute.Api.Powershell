@@ -7,8 +7,6 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -93,6 +91,7 @@ namespace DD.CBU.Compute.Powershell
 				OperationProgressRecord.RecordType = ProgressRecordType.Completed;
 				OperationProgressRecord.PercentComplete = 100;
 				WriteProgress(OperationProgressRecord);
+
 
 // do while state of the server contains pending
 				operationInProgress = true;
