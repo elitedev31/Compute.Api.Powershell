@@ -392,7 +392,9 @@ namespace DD.CBU.Compute.Api.Client
             var imagesWithDiskSpeed =
               await
               WebApi.ApiGetAsync<ImagesWithDiskSpeed>(ApiUris.ImagesWithDiskSpeed(Account.OrganizationId,ServerImageType.OS,imageId,name,location,operatingSystemId,operatingSystemFamily));
-
+	        
+			if (imagesWithDiskSpeed == null)
+		        return null;
             if (imagesWithDiskSpeed.image == null)
                 return null;
             

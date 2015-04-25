@@ -1,44 +1,54 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="SetCaasActiveConnectionCmdlet.cs" company="">
+//   
+// </copyright>
+// <summary>
+//   The set caas active connection cmdlet.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+
+
+using System;
 using System.Management.Automation;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DD.CBU.Compute.Powershell
 {
-     [Cmdlet(VerbsCommon.Set, "CaasActiveConnection")]
-     [OutputType(typeof(ComputeServiceConnection))]
-    public class SetCaasActiveConnectionCmdlet : PSCmdlet
-    {
-        /// <summary>
-        /// Name for this connection
-        /// </summary>
-        [Parameter(Mandatory = true,Position = 0, HelpMessage = "Connection name to be set as active.")]
-        public string Name { get; set; }
+	/// <summary>
+	/// The set caas active connection cmdlet.
+	/// </summary>
+	[Cmdlet(VerbsCommon.Set, "CaasActiveConnection")]
+	[OutputType(typeof (ComputeServiceConnection))]
+	public class SetCaasActiveConnectionCmdlet : PSCmdlet
+	{
+		/// <summary>
+		/// Name for this connection
+		/// </summary>
+		[Parameter(Mandatory = true, Position = 0, HelpMessage = "Connection name to be set as active.")]
+		public string Name { get; set; }
 
 
-         protected override void ProcessRecord()
-         {
-             base.ProcessRecord();
+		/// <summary>
+		/// The process record.
+		/// </summary>
+		protected override void ProcessRecord()
+		{
+			base.ProcessRecord();
 
-             try
-             {
-                 SessionState.SetDefaultComputeServiceConnection(Name);
-                 WriteObject(SessionState.GetDefaultComputeServiceConnection(),false);
-
-             }
-             catch (AggregateException ae)
-             {
-                 ae.Handle(
-                     e =>
-                     {
-                         ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError,Name));
-                         return true;
-                     });
-             }
-      
-
-         }
-    }
+			try
+			{
+				SessionState.SetDefaultComputeServiceConnection(Name);
+				WriteObject(SessionState.GetDefaultComputeServiceConnection(), false);
+			}
+			catch (AggregateException ae)
+			{
+				ae.Handle(
+					e =>
+					{
+						ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, Name));
+						return true;
+					});
+			}
+		}
+	}
 }

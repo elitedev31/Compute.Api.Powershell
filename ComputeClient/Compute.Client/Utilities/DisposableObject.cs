@@ -1,35 +1,39 @@
-﻿using System;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="DisposableObject.cs" company="">
+//   
+// </copyright>
+// <summary>
+//   Base class for disposable objects.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+
+
+using System;
 
 namespace DD.CBU.Compute.Api.Client.Utilities
 {
 	/// <summary>
-	///		Base class for disposable objects.
+	/// Base class for disposable objects.
 	/// </summary>
 	public abstract class DisposableObject
 		: IDisposable
 	{
 		/// <summary>
-		///		Has the object been disposed?
+		/// Has the object been disposed?
 		/// </summary>
-		bool _isDisposed;
+		private bool _isDisposed;
 
 		/// <summary>
-		///		Create a new disposable object.
+		/// Has the object been disposed?
 		/// </summary>
-		protected DisposableObject()
+		protected bool IsDisposed
 		{
+			get { return _isDisposed; }
 		}
 
 		/// <summary>
-		///		Finaliser for <see cref="DisposableObject"/>.
-		/// </summary>
-		~DisposableObject()
-		{
-			Dispose(false);
-		}
-
-		/// <summary>
-		///		Dispose of resources being used by the disposable object.
+		/// Dispose of resources being used by the disposable object.
 		/// </summary>
 		public void Dispose()
 		{
@@ -40,38 +44,36 @@ namespace DD.CBU.Compute.Api.Client.Utilities
 		}
 
 		/// <summary>
-		///		Dispose of resources being used by the disposable object.
+		/// Finalises an instance of the <see cref="DisposableObject"/> class. 
+		/// Finaliser for <see cref="DisposableObject"/>.
+		/// </summary>
+		~DisposableObject()
+		{
+			Dispose(false);
+		}
+
+		/// <summary>
+		/// Dispose of resources being used by the disposable object.
 		/// </summary>
 		/// <param name="disposing">
-		///		Explicit disposal?
+		/// Explicit disposal?
 		/// </param>
 		protected abstract void Dispose(bool disposing);
 
 		/// <summary>
-		///		Has the object been disposed?
-		/// </summary>
-		protected bool IsDisposed
-		{
-			get
-			{
-				return _isDisposed;
-			}
-		}
-
-		/// <summary>
-		///		Check if the object has been disposed.
+		/// Check if the object has been disposed.
 		/// </summary>
 		/// <exception cref="ObjectDisposedException">
-		///		The object has been disposed.
+		/// The object has been disposed.
 		/// </exception>
 		protected void CheckDisposed()
 		{
 			if (!_isDisposed)
 				return;
-			
+
 			throw new ObjectDisposedException(
 				GetType().Name
-			);
+				);
 		}
 	}
 }

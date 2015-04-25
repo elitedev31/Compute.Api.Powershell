@@ -1,14 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ServerImageType.cs" company="">
+//   
+// </copyright>
+// <summary>
+//   The server image type.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace DD.CBU.Compute.Api.Client
 {
-    public enum ServerImageType
-    {
-        OS,
-        CUSTOMER
-    }
+	/// <summary>
+	/// The server image type.
+	/// </summary>
+	public enum ServerImageType
+	{
+		/// <summary>
+		/// The os.
+		/// </summary>
+		OS, 
+
+		/// <summary>
+		/// The customer.
+		/// </summary>
+		CUSTOMER
+	}
 }

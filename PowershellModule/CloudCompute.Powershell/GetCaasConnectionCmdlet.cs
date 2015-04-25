@@ -1,23 +1,33 @@
-﻿using System;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="GetCaasConnectionCmdlet.cs" company="">
+//   
+// </copyright>
+// <summary>
+//   The get caas connection cmdlet.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+
+
 using System.Collections.Generic;
-using System.Linq;
 using System.Management.Automation;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DD.CBU.Compute.Powershell
 {
-    [Cmdlet(VerbsCommon.Get,"CaasConnection")]
-    [OutputType(typeof(KeyValuePair<string,ComputeServiceConnection>[]))]
-    public class GetCaasConnectionCmdlet:PSCmdlet
-    {
-        protected override void ProcessRecord()
-        {
-            base.ProcessRecord();
-            WriteObject(SessionState.GetComputeServiceConnections(),true);
-
-
-
-        }
-    }
+	/// <summary>
+	/// The get caas connection cmdlet.
+	/// </summary>
+	[Cmdlet(VerbsCommon.Get, "CaasConnection")]
+	[OutputType(typeof (KeyValuePair<string, ComputeServiceConnection>[]))]
+	public class GetCaasConnectionCmdlet : PSCmdlet
+	{
+		/// <summary>
+		/// The process record.
+		/// </summary>
+		protected override void ProcessRecord()
+		{
+			base.ProcessRecord();
+			WriteObject(SessionState.GetComputeServiceConnections(), true);
+		}
+	}
 }

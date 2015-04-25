@@ -1,4 +1,15 @@
-﻿using System.Reflection;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="SolutionAssemblyInfo.cs" company="">
+//   
+// </copyright>
+// <summary>
+//   SolutionAssemblyInfo.cs
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+
+
+using System.Reflection;
 
 [assembly: AssemblyCompany("Dimension Data")]
 [assembly: AssemblyProduct("Compute as a Service (CaaS) module for Windows Powershell.")]

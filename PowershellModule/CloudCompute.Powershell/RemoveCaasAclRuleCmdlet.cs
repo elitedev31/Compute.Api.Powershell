@@ -1,71 +1,90 @@
-﻿using DD.CBU.Compute.Api.Contracts.Network;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="RemoveCaasAclRuleCmdlet.cs" company="">
+//   
+// </copyright>
+// <summary>
+//   The Remove ACL Rule cmdlet.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+
+
+using System;
+using System.Management.Automation;
+using DD.CBU.Compute.Api.Client;
+using DD.CBU.Compute.Api.Client.Network;
+using DD.CBU.Compute.Api.Contracts.General;
+using DD.CBU.Compute.Api.Contracts.Network;
 
 namespace DD.CBU.Compute.Powershell
 {
-    using System;
-    using System.Management.Automation;
+	/// <summary>
+	/// The Remove ACL Rule cmdlet.
+	/// </summary>
+	[Cmdlet(VerbsCommon.Remove, "CaasAclRule", SupportsShouldProcess = true)]
+	public class RemoveCaasAclRuleCmdlet : PsCmdletCaasBase
+	{
+		/// <summary>
+		/// Gets or sets the network.
+		/// </summary>
+		[Parameter(Mandatory = true, HelpMessage = "The network that the ACL Rule exists", 
+			ValueFromPipelineByPropertyName = true)]
+		public NetworkWithLocationsNetwork Network { get; set; }
 
-    using DD.CBU.Compute.Api.Client;
-    using DD.CBU.Compute.Api.Client.Network;
+		/// <summary>
+		/// Gets or sets the acl rule.
+		/// </summary>
+		[Parameter(Mandatory = true, HelpMessage = "The ACL rule to delete", ValueFromPipeline = true)]
+		public AclRuleType AclRule { get; set; }
 
-    /// <summary>
-    /// The Remove ACL Rule cmdlet.
-    /// </summary>
-    [Cmdlet(VerbsCommon.Remove, "CaasAclRule",SupportsShouldProcess = true)]
-    public class RemoveCaasAclRuleCmdlet : PsCmdletCaasBase
-    {
-        [Parameter(Mandatory = true, HelpMessage = "The network that the ACL Rule exists", ValueFromPipelineByPropertyName = true)]
-        public NetworkWithLocationsNetwork Network { get; set; }
+		/// <summary>
+		/// The process record method.
+		/// </summary>
+		protected override void ProcessRecord()
+		{
+			base.ProcessRecord();
 
-        [Parameter(Mandatory = true, HelpMessage = "The ACL rule to delete", ValueFromPipeline = true)]
-        public AclRuleType AclRule { get; set; }
+			try
+			{
+				if (!ShouldProcess(AclRule.name)) return;
+				DeleteAclRule();
+			}
+			catch (AggregateException ae)
+			{
+				ae.Handle(
+					e =>
+					{
+						if (e is ComputeApiException)
+						{
+							WriteError(new ErrorRecord(e, "-2", ErrorCategory.InvalidOperation, Connection));
+						}
+						else
+						{
+// if (e is HttpRequestException)
+							ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, Connection));
+						}
 
-        /// <summary>
-        /// The process record method.
-        /// </summary>
-        protected override void ProcessRecord()
-        {
-            base.ProcessRecord();
+						return true;
+					});
+			}
+		}
 
-            try
-            {
-                if (!ShouldProcess(AclRule.name)) return;
-                DeleteAclRule();
-            }
-            catch (AggregateException ae)
-            {
-                ae.Handle(
-                    e =>
-                        {
-                            if (e is ComputeApiException)
-                            {
-                                WriteError(new ErrorRecord(e, "-2", ErrorCategory.InvalidOperation, Connection));
-                            }
-                            else //if (e is HttpRequestException)
-                            {
-                                ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, Connection));
-                            }
-                            return true;
-                        });
-            }
-        }
-
-        /// <summary>
-        /// Removes an ACL Rule
-        /// </summary>
-        private void DeleteAclRule()
-        {
-            var status = Connection.ApiClient.DeleteAclRule(Network.id, AclRule.id).Result;
-            if (status != null)
-            {
-                WriteDebug(
-                    string.Format(
-                        "{0} resulted in {1} ({2}): {3}",
-                        status.operation,
-                        status.result,
-                        status.resultCode,
-                        status.resultDetail));
-            }
-        }
-    }
+		/// <summary>
+		/// Removes an ACL Rule
+		/// </summary>
+		private void DeleteAclRule()
+		{
+			Status status = Connection.ApiClient.DeleteAclRule(Network.id, AclRule.id).Result;
+			if (status != null)
+			{
+				WriteDebug(
+					string.Format(
+						"{0} resulted in {1} ({2}): {3}", 
+						status.operation, 
+						status.result, 
+						status.resultCode, 
+						status.resultDetail));
+			}
+		}
+	}
 }
