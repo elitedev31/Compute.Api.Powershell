@@ -46,7 +46,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 		/// Gets or sets the NetworkDomainType.
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The Network Domain Type")]
-		public NetworkDomainType Type { get; set; }
+		public NetworkDomainServiceType Type { get; set; }
 
 		/// <summary>
 		/// The process record method.
@@ -58,11 +58,11 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 			{
 				response =
 					Connection.ApiClient.DeployNetworkDomain(
-						new DeployNetworkDomain
+						new DeployNetworkDomainType
 						{
 							name = Name, 
 							description = Description, 
-							location = Location, 
+							datacenterId = Location, 
 							type = Type.ToString().ToUpperInvariant()
 						}).Result;
 				if (response != null)

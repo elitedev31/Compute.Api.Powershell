@@ -31,7 +31,7 @@ namespace DD.CBU.Compute.Api.Client
         /// <summary>
 		/// The path (relative to the base API URL) of the My Account action.
         /// </summary>
-        internal static readonly Uri MyAccount = new Uri("myaccount", UriKind.Relative);
+        internal static readonly Uri MyAccount = new Uri(MCP1_0_PREFIX + "myaccount", UriKind.Relative);
 
 
         /// <summary>

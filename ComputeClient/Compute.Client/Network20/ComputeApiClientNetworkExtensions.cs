@@ -6,23 +6,18 @@ namespace DD.CBU.Compute.Api.Client.Network20
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using DD.CBU.Compute.Api.Client.Interfaces;
+    using Interfaces;
 
     /// <summary>
     /// Extension methods for the Network section of the CaaS API.
     /// </summary>
     public static class ComputeApiClientNetworkExtensions
     {
-        /// <summary>
-        /// Retrieves the list of ACL rules associated with a network.
-        /// This API requires your organization ID and the ID of the target network.
-        /// </summary>
-        /// <param name="client">
-        /// The <see cref="ComputeApiClient"/> object
-        /// </param>
-        /// <returns>
-        /// The Vlans.
-        /// </returns>
+        /// <summary> Retrieves the list of ACL rules associated with a network. This API requires your
+        /// 	organization ID and the ID of the target network. </summary>
+        /// <remarks>	Anthony, 4/24/2015. </remarks>
+        /// <param name="client">	The <see cref="ComputeApiClient"/> object. </param>
+        /// <returns>	The VLAN collection. </returns>
         public static async Task<IEnumerable<VlanType>> GetVlans(this IComputeApiClient client)
         {
             var vlans =
@@ -33,24 +28,13 @@ namespace DD.CBU.Compute.Api.Client.Network20
             return vlans.vlan;
         }
 
-        /// <summary>
-        /// The get vlans.
-        /// </summary>
-        /// <param name="client">
-        /// The client.
-        /// </param>
-        /// <param name="id">
-        /// The id.
-        /// </param>
-        /// <param name="vlanName">
-        /// The vlan name.
-        /// </param>
-        /// <param name="networkDomainId">
-        /// The network domain id.
-        /// </param>
-        /// <returns>
-        /// The <see cref="Task"/>.
-        /// </returns>
+        /// <summary>	The get VLAN list. </summary>
+        /// <remarks>	Anthony, 4/24/2015. </remarks>
+        /// <param name="client">		  	The client. </param>
+        /// <param name="id">			  	The id. </param>
+        /// <param name="vlanName">		  	The VLAN name. </param>
+        /// <param name="networkDomainId">	The network domain id. </param>
+        /// <returns>	The <see cref="Task"/>. </returns>
         public static async Task<IEnumerable<VlanType>> GetVlans(this IComputeApiClient client, Guid id, string vlanName, Guid networkDomainId)
         {
             var vlans =
@@ -62,10 +46,10 @@ namespace DD.CBU.Compute.Api.Client.Network20
         }
 
         /// <summary>
-        /// Deploys Virtual Lan on a network domain
+        /// Deploys Virtual LAN on a network domain
         /// </summary>
         /// <param name="client"> The compute client</param>
-        /// <param name="vlan">Virtual Lan</param>
+        /// <param name="vlan">Virtual LAN</param>
         /// <returns>Operation status</returns>
         public static async Task<ResponseType> DeployVlan(this IComputeApiClient client, DeployVlanType vlan)
         {
@@ -126,9 +110,9 @@ namespace DD.CBU.Compute.Api.Client.Network20
         /// <returns>
         /// Response containing status.
         /// </returns>
-		public static async Task<ResponseType> DeployNetworkDomain(this IComputeApiClient client, DeployNetworkDomain networkDomain)
+		public static async Task<ResponseType> DeployNetworkDomain(this IComputeApiClient client, DeployNetworkDomainType networkDomain)
         {
-			var response = await client.WebApi.ApiPostAsync<DeployNetworkDomain, ResponseType>(ApiUris.CreateNetworkDomain(client.Account.OrganizationId), networkDomain);
+			var response = await client.WebApi.ApiPostAsync<DeployNetworkDomainType, ResponseType>(ApiUris.CreateNetworkDomain(client.Account.OrganizationId), networkDomain);
             return response;
         }
 
