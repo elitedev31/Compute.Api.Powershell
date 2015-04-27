@@ -206,7 +206,7 @@ namespace DD.CBU.Compute.Api.Client
                     "Argument cannot be null, empty, or composed entirely of whitespace: 'locationName'.",
                     "locationName");
 
-			return new Uri(string.Format("base/image/deployedWithSoftwareLabels/{0}", locationName), UriKind.Relative);
+			return new Uri(string.Format(MCP1_0_PREFIX + "base/image/deployedWithSoftwareLabels/{0}", locationName), UriKind.Relative);
         }
 
 
@@ -240,7 +240,7 @@ namespace DD.CBU.Compute.Api.Client
 		internal static Uri ImagesWithDiskSpeed(Guid orgId, ServerImageType imagetype, string imageId, string name, 
 			string location, string operatingSystemId, string operatingSystemFamily)
         {
-           string uri = "base/imageWithDiskSpeed";
+           string uri = MCP1_0_PREFIX + "base/imageWithDiskSpeed";
             if (imagetype == ServerImageType.CUSTOMER)
             {
                 Contract.Requires(orgId != Guid.Empty, "Organization Id cannot be empty");
@@ -314,7 +314,7 @@ namespace DD.CBU.Compute.Api.Client
         internal static Uri DeployedServers(Guid orgId, string serverId, string name, string networkId, string location)
         {
            Contract.Requires(orgId != Guid.Empty, "Organization Id cannot be empty");
-			string uri = "{0}/serverWithBackup";
+			string uri = MCP1_0_PREFIX + "{0}/serverWithBackup";
 
 // build que query string paramenters
             var querystringcollection = new Dictionary<string, string>();
@@ -601,7 +601,7 @@ namespace DD.CBU.Compute.Api.Client
 		/// </returns>
 		internal static Uri AddServerDisk(Guid orgId, string serverId, string size, string speedId)
         {
-            string uri = "{0}/server/{1}?addLocalStorage&";
+            string uri = MCP1_0_PREFIX + "{0}/server/{1}?addLocalStorage&";
             var querystringcollection = new Dictionary<string, string>();
             if (!string.IsNullOrEmpty(size))
                 querystringcollection.Add("amount", size);
@@ -672,7 +672,7 @@ namespace DD.CBU.Compute.Api.Client
 		/// </returns>
         internal static Uri GetAntiAffinityRule(Guid orgId, string ruleId, string location, string networkId)
         {
-            string uri = "{0}/antiAffinityRule";
+            string uri = MCP1_0_PREFIX + "{0}/antiAffinityRule";
 
 // build que query string paramenters
             var querystringcollection = new Dictionary<string, string>();
@@ -1756,7 +1756,7 @@ namespace DD.CBU.Compute.Api.Client
 		/// </returns>
         internal static Uri ExistAccount(string username)
         {
-            return new Uri(string.Format("account/{0}?exists", username), UriKind.Relative);
+            return new Uri(string.Format(MCP1_0_PREFIX + "account/{0}?exists", username), UriKind.Relative);
         }
 
         /// <summary>
@@ -1823,7 +1823,7 @@ namespace DD.CBU.Compute.Api.Client
         {
 			return
 				new Uri(
-					string.Format("admin/suspend_org?orgId={0}&newPassword={1}&cascadePassword={2}&shutAce={3}", customerId, 
+					string.Format(MCP1_0_PREFIX + "admin/suspend_org?orgId={0}&newPassword={1}&cascadePassword={2}&shutAce={3}", customerId, 
 						newPassword, cascadePassword.ToString().ToLower(), shutAce.ToString().ToLower()), UriKind.Relative);
         }
 
@@ -1846,7 +1846,7 @@ namespace DD.CBU.Compute.Api.Client
         {
 			return
 				new Uri(
-					string.Format("admin/unsuspend_org?orgId={0}&newPassword={1}&cascadePassword={2}&shutAce={3}", customerId, 
+					string.Format(MCP1_0_PREFIX + "admin/unsuspend_org?orgId={0}&newPassword={1}&cascadePassword={2}&shutAce={3}", customerId, 
 						newPassword, cascadePassword.ToString().ToLower(), shutAce.ToString().ToLower()), UriKind.Relative);
         }
 
@@ -1861,7 +1861,7 @@ namespace DD.CBU.Compute.Api.Client
 		/// </returns>
         internal static Uri CancelCustomer(Guid customerId)
         {
-            return new Uri(string.Format("admin/cancel_org?orgId={0}", customerId), UriKind.Relative);
+            return new Uri(string.Format(MCP1_0_PREFIX + "admin/cancel_org?orgId={0}", customerId), UriKind.Relative);
         }
 
         /// <summary>
@@ -1878,7 +1878,7 @@ namespace DD.CBU.Compute.Api.Client
 		/// </returns>
         internal static Uri SetTrustLevelCustomer(Guid customerId, int trustLevel)
         {
-			return new Uri(string.Format("admin/set_trust_level?orgId={0}&trust_level={1}", customerId, trustLevel), 
+			return new Uri(string.Format(MCP1_0_PREFIX + "admin/set_trust_level?orgId={0}&trust_level={1}", customerId, trustLevel), 
 				UriKind.Relative);
         }
 
