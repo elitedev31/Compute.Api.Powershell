@@ -152,7 +152,7 @@
     <Compile Include="NewCaasServerAntiAffinityRuleCmdlet.cs" />
     <Compile Include="NewCaasRealServerCmdlet.cs" />
     <Compile Include="NewCaasServerFarmCmdlet.cs" />
-    <Compile Include="OutCaasWaitForOperationCmdlet.cs" />
+    <Compile Include="WaitCaasServerOperationCmdlet.cs" />
     <Compile Include="NewCaasServerCloneToCustomerImageCmdlet.cs" />
     <Compile Include="PSCmdletCaasVendorBase.cs" />
     <Compile Include="RemoveCaasAccountCmdlet.cs" />
