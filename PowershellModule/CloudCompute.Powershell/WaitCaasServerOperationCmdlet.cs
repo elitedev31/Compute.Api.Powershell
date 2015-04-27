@@ -23,7 +23,7 @@ namespace DD.CBU.Compute.Powershell
 	/// </summary>
 	[Cmdlet(VerbsLifecycle.Wait, "CaasServerOperation")]
 	[OutputType(typeof (ServerWithBackupType))]
-	public class OutCaasWaitForOperationCmdlet : PsCmdletCaasBase
+	public class WaitCaasServerOperationCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
 		/// The _operationprogress record.
