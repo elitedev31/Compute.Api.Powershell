@@ -1,20 +1,28 @@
-<?xml version="1.0"?>
-<package >
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>DD.CBU.Compute.Api.Client</id>
-    <version>1.0.15153</version>
-    <title>Compute Client API</title>
+    <version>2.0.0.1</version>
+    <title>Dimension Data Compute Client API</title>
     <authors>Dimension Data</authors>
-    <owners>shai.saar@didata.com.au</owners>
+    <projectUrl>https://github.com/DimensionDataCBUSydney/DimensionData.ComputeClient</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Compute as a Service client API. Provides a client to fully manage the CaaS including deploying machines, managing backups etc.</description>
-    <releaseNotes/>
-    <copyright>Copyright 2014</copyright>
-    <tags/>
+    <description>Provides a client to fully manage the CaaS including deploying machines, managing backups etc.</description>
+    <summary>Dimension Data Compute as a Service client API.</summary>
+    <releaseNotes>-Network 2.0 support
+</releaseNotes>
+    <copyright>Copyright Dimension Data 2015</copyright>
     <dependencies>
-        <group targetFramework=".NETFramework4.5">
-            <dependency id="DD.CBU.Compute.API.Contracts" version="[1.0,]" />
-        </group>
+      <group targetFramework=".NETFramework4.5">
+        <dependency id="Newtonsoft.Json" version="6.0.6" />
+        <dependency id="Microsoft.AspNet.WebApi" version="5.2.2" />
+      </group>
     </dependencies>
   </metadata>
+  <files>
+    <file src="bin\Release\DD.CBU.Compute.Api.Client.dll" target="lib\net45\DD.CBU.Compute.Api.Client.dll" />
+    <file src="bin\Release\DD.CBU.Compute.Api.Client.xml" target="lib\net45\DD.CBU.Compute.Api.Client.xml" />
+    <file src="bin\Release\DD.CBU.Compute.Api.Contracts.dll" target="lib\net45\DD.CBU.Compute.Api.Contracts.dll" />
+    <file src="bin\Release\DD.CBU.Compute.Api.Contracts.xml" target="lib\net45\DD.CBU.Compute.Api.Contracts.xml" />
+  </files>
 </package>
