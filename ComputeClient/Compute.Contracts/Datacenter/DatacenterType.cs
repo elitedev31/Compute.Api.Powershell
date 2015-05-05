@@ -1,66 +1,117 @@
-using System;
-using System.Xml.Serialization;
-
 namespace DD.CBU.Compute.Api.Contracts.Datacenter
 {
-		/// <summary>	A datacenter type. </summary>
-		/// <remarks>	Anthony, 4/24/2015. </remarks>
- 		[XmlRoot(ElementName = "datacenter")]
-		public class DatacenterType
-		{
-			/// <summary>	Gets or sets the name of the display. </summary>
-			/// <value>	The name of the display. </value>
-			[XmlElement(ElementName = "displayName")]
-			public string DisplayName { get; set; }
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.18020")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://oec.api.opsource.net/schemas/datacenter")]
+    public partial class DatacenterType
+    {
 
-			/// <summary>	Gets or sets the city. </summary>
-			/// <value>	The city. </value>
-			[XmlElement(ElementName = "city")]
-			public string City { get; set; }
+        private string locationField;
 
-			/// <summary>	Gets or sets the state. </summary>
-			/// <value>	The state. </value>
-			[XmlElement(ElementName = "state")]
-			public string State { get; set; }
+        private string displayNameField;
 
-			/// <summary>	Gets or sets the country. </summary>
-			/// <value>	The country. </value>
-			[XmlElement(ElementName = "country")]
-			public string Country { get; set; }
+        private string cityField;
 
-			/// <summary>	Gets or sets URL of the VPN. </summary>
-			/// <value>	The VPN URL. </value>
-			[XmlElement(ElementName = "vpnUrl")]
-			public string VpnUrl { get; set; }
+        private string stateField;
 
-			/// <summary>	Gets or sets the networking. </summary>
-			/// <value>	The networking. </value>
-			[XmlElement(ElementName = "networking")]
-			public DatacenterWithMaintenanceStatusType.DatacenterNetworkingType Networking { get; set; }
+        private string countryField;
 
- 			/// <summary>	Gets the type of the networking. </summary>
- 			/// <value>	The type of the networking. </value>
- 			public int NetworkingType
- 			{
- 				get
- 				{
- 					return Int32.Parse(Networking.Type);
- 				}
- 			}
+        private string vpnUrlField;
 
-			/// <summary>	Gets or sets the hypervisor. </summary>
-			/// <value>	The hypervisor. </value>
-			[XmlElement(ElementName = "hypervisor")]
-			public Hypervisor Hypervisor { get; set; }
+        private bool defaultField;
 
-			/// <summary>	Gets or sets the location. </summary>
-			/// <value>	The location. </value>
-			[XmlAttribute(AttributeName = "location")]
-			public string Location { get; set; }
+        /// <remarks/>
+        public string location
+        {
+            get
+            {
+                return this.locationField;
+            }
+            set
+            {
+                this.locationField = value;
+            }
+        }
 
-			/// <summary>	Gets or sets the default. </summary>
-			/// <value>	The default. </value>
-			[XmlAttribute(AttributeName = "default")]
-			public string Default { get; set; }
-		}
+        /// <remarks/>
+        public string displayName
+        {
+            get
+            {
+                return this.displayNameField;
+            }
+            set
+            {
+                this.displayNameField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string city
+        {
+            get
+            {
+                return this.cityField;
+            }
+            set
+            {
+                this.cityField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string state
+        {
+            get
+            {
+                return this.stateField;
+            }
+            set
+            {
+                this.stateField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string country
+        {
+            get
+            {
+                return this.countryField;
+            }
+            set
+            {
+                this.countryField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string vpnUrl
+        {
+            get
+            {
+                return this.vpnUrlField;
+            }
+            set
+            {
+                this.vpnUrlField = value;
+            }
+        }
+
+        /// <remarks/>
+        public bool @default
+        {
+            get
+            {
+                return this.defaultField;
+            }
+            set
+            {
+                this.defaultField = value;
+            }
+        }
+    }
 }

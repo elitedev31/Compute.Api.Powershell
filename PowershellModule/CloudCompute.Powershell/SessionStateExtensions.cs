@@ -203,8 +203,6 @@ namespace DD.CBU.Compute.Powershell
 					);
 				sessionState.PSVariable.Set(connectionsVariable);
 
-
-// AF: If this is getting serialised (can't remember), then you need to call Set() AFTER updating the collection.
 			}
 			else
 			{
@@ -215,7 +213,7 @@ namespace DD.CBU.Compute.Powershell
 					sessionState.PSVariable.Set(connectionsVariable);
 
 
-// AF: If this is getting serialised (can't remember), then you need to call Set() AFTER updating the collection.
+
 				}
 			}
 

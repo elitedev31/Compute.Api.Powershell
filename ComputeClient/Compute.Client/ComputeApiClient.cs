@@ -179,10 +179,9 @@ namespace DD.CBU.Compute.Api.Client
 		/// </returns>
 		public async Task<IEnumerable<SoftwareLabel>> GetListOfSoftwareLabels()
 		{
-			string relativeUrl = string.Format("oec/0.9/{0}/softwarelabel", Account.OrganizationId);
-			var uri = new Uri(relativeUrl, UriKind.Relative);
+		
 
-			SoftwareLabels labels = await WebApi.ApiGetAsync<SoftwareLabels>(uri);
+			SoftwareLabels labels = await WebApi.ApiGetAsync<SoftwareLabels>(ApiUris.SoftwareLabels(Account.OrganizationId));
 
 			return labels.Items;
 		}
@@ -196,10 +195,9 @@ namespace DD.CBU.Compute.Api.Client
 		/// </returns>
 		public async Task<IEnumerable<Geo>> GetListOfMultiGeographyRegions()
 		{
-			string relativeUrl = string.Format("oec/0.9/{0}/multigeo", Account.OrganizationId);
-			var uri = new Uri(relativeUrl, UriKind.Relative);
 
-			Geos regions = await WebApi.ApiGetAsync<Geos>(uri);
+
+            Geos regions = await WebApi.ApiGetAsync<Geos>(ApiUris.MultiGeographyRegions(Account.OrganizationId));
 
 			return regions.Items;
 		}
@@ -213,11 +211,11 @@ namespace DD.CBU.Compute.Api.Client
 		/// The Sub-Administrator account.
 		/// </param>
 		/// <returns>
-		/// A <see cref="ApiStatus"/> result that describes whether or not the operation was successful.
+		/// A <see cref="Status"/> result that describes whether or not the operation was successful.
 		/// </returns>
 		public async Task<Status> DeleteSubAdministratorAccount(string username)
 		{
-			return await ExecuteAccountCommand(username, "oec/0.9/{0}/account/{1}?delete");
+            return await WebApi.ApiGetAsync<Status>(ApiUris.DeleteSubAdministrator(Account.OrganizationId, username));
 		}
 
 		/// <summary>
@@ -228,14 +226,11 @@ namespace DD.CBU.Compute.Api.Client
 		/// The Administrator or sub-administrator account.
 		/// </param>
 		/// <returns>
-		/// A <see cref="ApiStatus"/> result that describes whether or not the operation was successful.
+		/// A <see cref="Status"/> result that describes whether or not the operation was successful.
 		/// </returns>
 		public async Task<AccountWithPhoneNumber> GetAdministratorAccount(string username)
 		{
-			string relativeUrl = string.Format("oec/0.9/{0}/accountWithPhoneNumber/{1}", Account.OrganizationId, username);
-			var uri = new Uri(relativeUrl, UriKind.Relative);
-
-			AccountWithPhoneNumber account = await WebApi.ApiGetAsync<AccountWithPhoneNumber>(uri);
+			AccountWithPhoneNumber account = await WebApi.ApiGetAsync<AccountWithPhoneNumber>(ApiUris.AccountWithPhoneNumber(Account.OrganizationId,username));
 			return account;
 		}
 
@@ -249,11 +244,12 @@ namespace DD.CBU.Compute.Api.Client
 		/// The Sub-Administrator account.
 		/// </param>
 		/// <returns>
-		/// A <see cref="ApiStatus"/> result that describes whether or not the operation was successful.
+		/// A <see cref="Status"/> result that describes whether or not the operation was successful.
 		/// </returns>
 		public async Task<Status> DesignatePrimaryAdministratorAccount(string username)
 		{
-			return await ExecuteAccountCommand(username, "oec/0.9/{0}/account/{1}?primary");
+
+            return await WebApi.ApiGetAsync<Status>(ApiUris.SetPrimaryAdministrator(Account.OrganizationId,username));
 		}
 
 
@@ -281,8 +277,7 @@ namespace DD.CBU.Compute.Api.Client
 		/// </returns>
 		public async Task<IEnumerable<Account>> GetAccounts()
 		{
-			string relativeUrl = string.Format("oec/0.9/{0}/account", Account.OrganizationId);
-			Accounts accounts = await WebApi.ApiGetAsync<Accounts>(new Uri(relativeUrl, UriKind.Relative));
+			Accounts accounts = await WebApi.ApiGetAsync<Accounts>(ApiUris.Account(Account.OrganizationId));
 			return accounts.Items;
 		}
 
@@ -300,9 +295,8 @@ namespace DD.CBU.Compute.Api.Client
 		/// </returns>
 		public async Task<Status> AddSubAdministratorAccount(AccountWithPhoneNumber account)
 		{
-			string relativeUrl = string.Format("oec/0.9/{0}/accountWithPhoneNumber", Account.OrganizationId);
 
-			return await WebApi.ApiPostAsync<AccountWithPhoneNumber, Status>(new Uri(relativeUrl, UriKind.Relative), account);
+			return await WebApi.ApiPostAsync<AccountWithPhoneNumber, Status>(ApiUris.AccountWithPhoneNumber(Account.OrganizationId), account);
 		}
 
 		/// <summary>
@@ -943,9 +937,56 @@ namespace DD.CBU.Compute.Api.Client
 						location));
 			return servers.server;
 		}
+        /// <summary>
+        /// Gets a deployed server by Id.
+        /// </summary>
+        /// <param name="serverId">The server Id.</param>
+        /// <returns>A list of deployed servers</returns>
+	    public async Task<ServerWithBackupType> GetDeployedServerById(string serverId)
+	    {
+            var servers = await GetDeployedServers(serverId, string.Empty, string.Empty, string.Empty);
+            if (servers.Any())
+                return servers.SingleOrDefault();
+            else
+                return null;
+	    }
 
 
-		/// <summary>
+        /// <summary>
+        /// Gets filtered list of the deployed servers by name
+        /// </summary>
+        /// <param name="name">The server name.</param>
+        /// <returns>A list of deployed servers</returns>
+        public async Task<IEnumerable<ServerWithBackupType>> GetDeployedServersByName(string name)
+        {
+            return await GetDeployedServers(string.Empty, name, string.Empty, string.Empty);
+       
+        }
+
+        /// <summary>
+        /// Gets filtered list of the deployed servers by network id
+        /// </summary>
+        /// <param name="networkid">The network id.</param>
+        /// <returns>A list of deployed servers</returns>
+        public async Task<IEnumerable<ServerWithBackupType>> GetDeployedServersByNetworkId(string networkid)
+        {
+            return await GetDeployedServers(string.Empty, string.Empty, networkid, string.Empty);
+
+        }
+
+        /// <summary>
+        /// Gets filtered list of the deployed servers by location
+        /// </summary>
+        /// <param name="location">The location code</param>
+        /// <returns>A list of deployed servers</returns>
+        public async Task<IEnumerable<ServerWithBackupType>> GetDeployedServersByLocation(string location)
+        {
+            return await GetDeployedServers(string.Empty, string.Empty, string.Empty, location);
+
+        }
+
+
+	    /// <summary>
 		/// Creates a new Server Anti-Affinity Rule between two servers on the same Cloud network.
 		/// </summary>
 		/// <param name="serverId1">
@@ -1078,25 +1119,7 @@ namespace DD.CBU.Compute.Api.Client
 			WebApi.Logout();
 		}
 
-		/// <summary>
-		/// The execute account command.
-		/// </summary>
-		/// <param name="username">
-		/// The username.
-		/// </param>
-		/// <param name="uriFormat">
-		/// The uri format.
-		/// </param>
-		/// <returns>
-		/// The <see cref="Task"/>.
-		/// </returns>
-		private async Task<Status> ExecuteAccountCommand(string username, string uriFormat)
-		{
-			string uriText = string.Format(uriFormat, Account.OrganizationId, username);
-			var uri = new Uri(uriText, UriKind.Relative);
-
-			return await WebApi.ApiGetAsync<Status>(uri);
-		}
+		
 
 		#endregion // Public methods
 	}
