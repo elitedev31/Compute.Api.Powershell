@@ -2,14 +2,14 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>DD.CBU.Compute.Api.Client</id>
-    <version>2.0.1</version>
+    <version>2.0.0.1</version>
     <title>Dimension Data Compute Client API</title>
     <authors>Dimension Data</authors>
     <projectUrl>https://github.com/DimensionDataCBUSydney/DimensionData.ComputeClient</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Provides a client to fully manage the CaaS including deploying machines, managing backups etc.</description>
     <summary>Dimension Data Compute as a Service client API.</summary>
-    <releaseNotes>-minor fixes
+    <releaseNotes>-Network 2.0 support
 </releaseNotes>
     <copyright>Copyright Dimension Data 2015</copyright>
     <dependencies>
