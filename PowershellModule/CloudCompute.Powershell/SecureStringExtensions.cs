@@ -27,7 +27,7 @@ namespace DD.CBU.Compute.Powershell
 		/// <returns>
 		/// The <see cref="string"/>.
 		/// </returns>
-		internal static string ToPlainString(this SecureString value)
+		public static string ToPlainString(this SecureString value)
 		{
 			IntPtr valuePtr = IntPtr.Zero;
 			string unsecurestring;

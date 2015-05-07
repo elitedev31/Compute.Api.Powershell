@@ -45,7 +45,7 @@ namespace DD.CBU.Compute.Powershell
 		/// <summary>
 		/// The CaaS API client represented by the connection.
 		/// </summary>
-		internal IComputeApiClient ApiClient { get; private set; }
+		public IComputeApiClient ApiClient { get; private set; }
 
 		/// <summary>
 		/// Dispose of resources being used by the CaaS API connection.
