@@ -120,7 +120,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TextMediaTypeFormatter.cs" />
     <Compile Include="Utilities\DisposableObject.cs" />
-    <Compile Include="Vendor\ComputeApiClientVendorExtensions.cs" />
     <Compile Include="VIP\ComputeApiVipExtensions.cs" />
     <Compile Include="WebApi.cs" />
   </ItemGroup>
