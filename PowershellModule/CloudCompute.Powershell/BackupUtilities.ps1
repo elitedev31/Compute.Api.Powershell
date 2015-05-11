@@ -88,9 +88,10 @@ function Install-BackupClientOnWindowsMachine($dLink, $bForceRedownload = $false
 function Install-BackupClient {
 	param (
 		[string] $publicIp,
-		[string] $adminPassword
+		[string] $adminPassword,
+		[string] $windowLocalAdminUser = "administrator"
 		)
-$Global:cred = New-Object System.Management.Automation.PSCredential -ArgumentList @($windowLocalAdminUser,(ConvertTo-SecureString -String $config.configuration.adminPassword -AsPlainText -Force))
+		$Global:cred = New-Object System.Management.Automation.PSCredential -ArgumentList @($windowLocalAdminUser,(ConvertTo-SecureString -String $adminPassword -AsPlainText -Force))
         $s = New-PSSession -Computername $publicIp -Credential $Global:cred -Authentication Default -ErrorAction SilentlyContinue
 
         #If starting PS session fails - Enable PS PSRemoting and rety
@@ -108,7 +109,7 @@ $Global:cred = New-Object System.Management.Automation.PSCredential -ArgumentLis
 
         #TODO: This could be modified to run parallel on all windows machines at once
 
-        $result = Invoke-Command -Session $s -ScriptBlock ${function:Enable-AutoAdminLogon} -ArgumentList $windowLocalAdminUser, $config.configuration.adminPassword
+        $result = Invoke-Command -Session $s -ScriptBlock ${function:Enable-AutoAdminLogon} -ArgumentList $windowLocalAdminUser, $adminPassword
 
         if($result -eq $true) {
             Restart-Computer -ComputerName $publicIp -Wait -Credential $Global:cred -Force
