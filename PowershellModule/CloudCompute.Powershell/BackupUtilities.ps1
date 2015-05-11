@@ -90,17 +90,15 @@ function Install-BackupClient {
 		[string] $publicIp,
 		[string] $adminPassword,
 		[string] $windowLocalAdminUser = "administrator"
+		[string] $dLink #Download link 
 		)
 		$Global:cred = New-Object System.Management.Automation.PSCredential -ArgumentList @($windowLocalAdminUser,(ConvertTo-SecureString -String $adminPassword -AsPlainText -Force))
         $s = New-PSSession -Computername $publicIp -Credential $Global:cred -Authentication Default -ErrorAction SilentlyContinue
 
         #If starting PS session fails - Enable PS PSRemoting and rety
         if($s -eq $null) {
-            Write-Host "Enabling Powershell Remoting - Does not work in 2003/8" -ForegroundColor Yellow
-            $argString = "\\$publicIp -u $windowLocalAdminUser -p " + $adminPassword + " -c -f -h $suportFilesFolder\enablePSRemoting.cmd"
-            Start-Process -PassThru -Wait $psexec $argString
-            $s = New-PSSession -Computername $publicIp -Credential $Global:cred -Authentication Default -ErrorAction SilentlyContinue
-
+            & PsExec.exe -u $windowLocalAdminUser -p $adminPassword \\$publicIp cmd /c 'echo . | powershell.exe -command "Enable-PSRemoting -Force ;Set-Item wsman:\localhost\client\trustedhosts * ;Restart-Service WinRM; exit 100"'
+			$s = New-PSSession -Computername $publicIp -Credential $Global:cred -Authentication Default -ErrorAction SilentlyContinue
             if($s -eq $null) {
                 Write-Host "Cannot enable PSRemoting on machine ... Skipping config on machine " -ForegroundColor Red
                 break
