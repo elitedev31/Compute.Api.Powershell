@@ -1,5 +1,5 @@
 
-function ImportImageToAWS {
+function Import-ImageToAWS {
 	param (
 		[string] $imageFile , # Path to the disk image (VMDK)
 		[string] $bucketName, # Name of the S3 bucket to temporarily store in.
@@ -12,7 +12,7 @@ function ImportImageToAWS {
 	$task = Get-EC2ConversionTask -ConversionTaskId $importJob.ConversionTaskId -ProfileName "export" 
 }
 
-function DownloadAWSExport {
+function Download-AWSExport {
 	param (
 		[string] $bucketName,
 		[string] $exportId,
@@ -21,7 +21,7 @@ function DownloadAWSExport {
 	Read-S3Object -BucketName $bucketName -File "$exportId.ova" -Key "$exportId.ova" -ProfileName "export" -Region $region
 }
 
-function ExportImageFromAWS {
+function Export-ImageFromAWS {
 	param (
 		[string] $instanceId,
 		[string] $bucketName,
@@ -47,7 +47,7 @@ function ExportImageFromAWS {
 	return $exportTask.ExportTaskId
 }
 
-function SetupAWSBucket {
+function Setup-AWSBucket {
 	param (
 		[string] $bucketName,
 		[string] $region
