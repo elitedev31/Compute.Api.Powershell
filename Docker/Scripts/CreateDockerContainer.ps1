@@ -1,6 +1,5 @@
 ﻿#import Caas Module
-Import-Module "C:\Sources\DD\DimensionData.ComputeClient\PowershellModule\CloudCompute.Powershell\bin\Debug\CaaS.psd1"
-#Import-Module CaaS
+Import-Module CaaS
 Set-Location $PSScriptRoot
 Import-Module (Join-Path $PSScriptRoot "Docker.psm1") -DisableNameChecking
 
