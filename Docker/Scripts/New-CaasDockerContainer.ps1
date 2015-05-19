@@ -1,4 +1,4 @@
-﻿$servername = "DockerHost17"
+﻿$servername = "DockerHost18"
 $networkname = "Innovation Lab"
 # picking 14.04 makes installing docker much easier
 $osimagename = "Ubuntu 14.04 2 CPU" 
@@ -27,11 +27,7 @@ $serverdetails = Set-CaasServerDiskDetails -ServerDetails $serverdetails -ScsiId
 
 
 
-New-CaasServer -ServerDetails $serverdetails -PassThru | Out-CaasWaitForOperation
-
-
-#Add a nat rule so the server
-$server = Get-CaasDeployedServer -Name $servername
+$server = New-CaasServer -ServerDetails $serverdetails -PassThru | Out-CaasWaitForOperation
 
 #Add firewall/ACL rule to permit TCP traffic on port 22 from any network(SSH)
 New-CaasAclRule -AclRuleName "AllowSSHPort22" -Network $network -Position 120 -DestinationIpAddress $server.privateIp -Action PERMIT -Protocol TCP -PortRangeType EQUAL_TO -Port1 22 -AclType OUTSIDE_ACL  -ErrorAction SilentlyContinue
@@ -40,6 +36,8 @@ New-CaasAclRule -AclRuleName "AllowSSHPort22" -Network $network -Position 120 -D
 $sshusername = "root"
 $sshpassword = convertto-securestring $administratorPassword -asplaintext -force
 $cred = new-object -typename System.Management.Automation.PSCredential -argumentlist $sshusername, $sshpassword
-Write-Host "SSHing into .." $server.privateIp
+Write-Host "SSHing into ..." $server.privateIp
 New-SSHSession -ComputerName $server.privateIp -Credential $cred -AcceptKey 
 Invoke-SSHCommand -Command "wget -qO- https://get.docker.com/ | sh" -SessionId 0 -TimeOut 3600
+Remove-SSHSession -SessionId 0
+
