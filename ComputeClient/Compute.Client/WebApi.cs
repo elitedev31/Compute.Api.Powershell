@@ -190,7 +190,7 @@ namespace DD.CBU.Compute.Api.Client
 		/// <summary>
 		/// Gets the credentials of the connection.
 		/// </summary>
-		public ICredentials Credentials
+        public ICredentials Credentials
 		{
 			get { return _credentials; }
 			set

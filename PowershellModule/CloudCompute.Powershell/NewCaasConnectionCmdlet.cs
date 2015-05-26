@@ -54,8 +54,9 @@ namespace DD.CBU.Compute.Powershell
 		/// <summary>
 		/// The known vendor for the connection
 		/// </summary>
-		[Parameter(Mandatory = true, ParameterSetName = "KnownApiUri", 
+		[Parameter(Mandatory = false, ParameterSetName = "KnownApiUri", 
 			HelpMessage = "A known cloud vendor for the Cloud API Uri. Not all vendor and region combinations are valid.")]
+        [PSDefaultValue(Help = "Dimension Data is the default value", Value = KnownApiVendor.DimensionData)]
 		public KnownApiVendor Vendor { get; set; }
 
 
@@ -97,9 +98,7 @@ namespace DD.CBU.Compute.Powershell
 					if (SessionState.GetComputeServiceConnections().Count > 1)
 						WriteWarning(
 							"You have created more than one connection on this session, please use the cmdlet Set-CaasActiveConnection -Name <name> to change the active/default connection");
-					else
-						WriteWarning(
-							"You have created more than one connection on this session, please use the cmdlet Set-CaasActiveConnection -Name <name> to change the active/default connection");
+					
 					SessionState.AddComputeServiceConnection(Name, newCloudComputeConnection);
 					WriteObject(newCloudComputeConnection);
 				}

@@ -109,6 +109,7 @@
     <Compile Include="Backup\ServicePlan.cs" />
     <Compile Include="Backup\StoragePolicy.cs" />
     <Compile Include="Backup\TriggerType.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Network2.0\datacenter.cs" />
     <Compile Include="Datacenter\Datacenters.cs" />
     <Compile Include="Datacenter\DatacentersWithDiskSpeedDetails.cs" />
