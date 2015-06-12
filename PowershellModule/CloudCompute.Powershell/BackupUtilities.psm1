@@ -89,7 +89,7 @@ function Install-BackupClient {
 	param (
 		[string] $publicIp,
 		[string] $adminPassword,
-		[string] $windowLocalAdminUser = "administrator"
+		[string] $windowLocalAdminUser = "administrator",
 		[string] $dLink #Download link 
 		)
 		$Global:cred = New-Object System.Management.Automation.PSCredential -ArgumentList @($windowLocalAdminUser,(ConvertTo-SecureString -String $adminPassword -AsPlainText -Force))

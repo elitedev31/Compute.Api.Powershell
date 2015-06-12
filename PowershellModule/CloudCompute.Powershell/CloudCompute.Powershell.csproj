@@ -219,6 +219,9 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="AWS_Utilities.ps1" />
+    <None Include="BackupUtilities.psm1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="CaaS.psd1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
