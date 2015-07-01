@@ -114,6 +114,7 @@
     <Compile Include="GetCaasConnectionCmdlet.cs" />
     <Compile Include="GetCaasCustomerImageExportHistoryCmdlet.cs" />
     <Compile Include="GetCaasCustomerImageExportsCmdlet.cs" />
+    <Compile Include="GetCaasServerCmdlet.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Mcp20\DeployCaasNetworkDomainCmdlet.cs" />
     <Compile Include="Mcp20\GetCaasNetworkDomainCmdlet.cs" />
