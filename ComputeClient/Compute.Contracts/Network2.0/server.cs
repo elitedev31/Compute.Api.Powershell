@@ -194,6 +194,8 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 
 		private string datacenterIdField;
 
+		private ServerTypeNic nicField;
+
 		/// <remarks/>
 		public string name
 		{
@@ -239,11 +241,9 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 
 		/// <remarks/>
 		[System.Xml.Serialization.XmlElementAttribute("networkInfo", typeof (ServerTypeNetworkInfo))]
-		[System.Xml.Serialization.XmlElementAttribute("nic", typeof (ServerTypeNic))]
-		public object Item
-		{
-			get { return this.itemField; }
-			set { this.itemField = value; }
+		public ServerTypeNetworkInfo networkInfo {
+			get { return this.networkInfo; }
+			set { this.networkInfo = value; }
 		}
 
 		/// <remarks/>
@@ -777,12 +777,10 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 
 		/// <remarks/>
 		[System.Xml.Serialization.XmlElementAttribute("network", typeof (DeployServerTypeNetwork))]
+		public DeployServerTypeNetwork network { get; set; }
+
 		[System.Xml.Serialization.XmlElementAttribute("networkInfo", typeof (DeployServerTypeNetworkInfo))]
-		public object Item
-		{
-			get { return this.itemField; }
-			set { this.itemField = value; }
-		}
+		public DeployServerTypeNetworkInfo networkInfo { get; set; }
 
 		/// <remarks/>
 		[System.Xml.Serialization.XmlElementAttribute("disk")]
@@ -801,28 +799,12 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 	[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "urn:didata.com:api:cloud:types")]
 	public partial class DeployServerTypeNetwork
 	{
-
-		private string itemField;
-
-		private ServerItemChoiceType itemElementNameField;
-
 		/// <remarks/>
 		[System.Xml.Serialization.XmlElementAttribute("networkId", typeof (string))]
-		[System.Xml.Serialization.XmlElementAttribute("privateIpv4", typeof (string))]
-		[System.Xml.Serialization.XmlChoiceIdentifierAttribute("ItemElementName")]
-		public string Item
-		{
-			get { return this.itemField; }
-			set { this.itemField = value; }
-		}
+		public string networkId { get; set; }
 
-		/// <remarks/>
-		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		public ServerItemChoiceType ItemElementName
-		{
-			get { return this.itemElementNameField; }
-			set { this.itemElementNameField = value; }
-		}
+		[System.Xml.Serialization.XmlElementAttribute("privateIpv4", typeof (string))]
+		public string privateIpv4 { get; set; }
 	}
 
 
@@ -834,40 +816,12 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 	[System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
 	public partial class VlanIdOrPrivateIpType
 	{
-
-		private string itemField;
-
-		private ServerItemChoiceType1 itemElementNameField;
-
 		/// <remarks/>
 		[System.Xml.Serialization.XmlElementAttribute("privateIpv4", typeof(string))]
-		[System.Xml.Serialization.XmlElementAttribute("vlanId", typeof(string))]
-		[System.Xml.Serialization.XmlChoiceIdentifierAttribute("ItemElementName")]
-		public string Item
-		{
-			get
-			{
-				return this.itemField;
-			}
-			set
-			{
-				this.itemField = value;
-			}
-		}
+		public string privateIpv4 { get; set; }
 
-		/// <remarks/>
-		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		public ServerItemChoiceType1 ItemElementName
-		{
-			get
-			{
-				return this.itemElementNameField;
-			}
-			set
-			{
-				this.itemElementNameField = value;
-			}
-		}
+		[System.Xml.Serialization.XmlElementAttribute("vlanId", typeof(string))]
+		public string vlanId { get; set; }
 	}
 
 	/// <remarks/>
