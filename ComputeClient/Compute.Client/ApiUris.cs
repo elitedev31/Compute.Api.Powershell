@@ -892,6 +892,15 @@ namespace DD.CBU.Compute.Api.Client
 			return new Uri(string.Format(MCP2_0_PREFIX + "{0}/network/deployVlan", orgId), UriKind.Relative);
         }
 
+		/// <summary>	Gets MCP 2 servers. </summary>
+		/// <remarks>	Anthony, 6/17/2015. </remarks>
+		/// <param name="orgId">	The organization Id. </param>
+		/// <returns>	The MCP 2 servers. </returns>
+		internal static Uri GetMcp2Servers(Guid orgId)
+		{
+			return new Uri(string.Format(MCP2_0_PREFIX + "{0}/server/server", orgId), UriKind.Relative);
+		}
+
         #region Network API
 
         /// <summary>

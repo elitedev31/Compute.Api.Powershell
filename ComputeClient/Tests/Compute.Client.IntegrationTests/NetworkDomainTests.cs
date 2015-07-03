@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using DD.CBU.Compute.Api.Contracts.Network20;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.Win32;
 using System;
@@ -65,7 +66,7 @@ namespace DD.CBU.Compute.Client.IntegrationTests
 
 				TestContext.WriteLine("Domains List \n");
 
-				foreach (NetworkDomain domain in networkDomains)
+				foreach (NetworkDomainType domain in networkDomains)
 				{
 					TestContext.WriteLine("Name & Type : {0} - {1}", domain.name, domain.type);
 					TestContext.WriteLine("Description: {0}", domain.description);
@@ -92,7 +93,7 @@ namespace DD.CBU.Compute.Client.IntegrationTests
 				Guid organizationId = account.OrganizationId;
 				Assert.AreNotEqual(Guid.Empty, organizationId);
 
-				var newDomain = new DeployNetworkDomain { location = "NASH_PCS01_N2_VMWARE_1", name = "Test Network Domain", description = "This is test Network Domain created using Network 2.0 API", type = "ESSENTIALS" };
+				var newDomain = new DeployNetworkDomainType { datacenterId = "NASH_PCS01_N2_VMWARE_1", name = "Test Network Domain", description = "This is test Network Domain created using Network 2.0 API", type = "ESSENTIALS" };
 
 				var result = await computeApiClient.DeployNetworkDomain(newDomain);
 

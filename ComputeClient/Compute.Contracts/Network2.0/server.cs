@@ -621,7 +621,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 	[System.ComponentModel.DesignerCategoryAttribute("code")]
 	[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "urn:didata.com:api:cloud:types")]
 	[System.Xml.Serialization.XmlRootAttribute(Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
-	public partial class servers
+	public partial class ServersResponseCollection
 	{
 
 		private ServerType[] serverField;

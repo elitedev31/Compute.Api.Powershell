@@ -20,6 +20,7 @@ using DD.CBU.Compute.Api.Contracts.Datacenter;
 using DD.CBU.Compute.Api.Contracts.Directory;
 using DD.CBU.Compute.Api.Contracts.General;
 using DD.CBU.Compute.Api.Contracts.Image;
+using DD.CBU.Compute.Api.Contracts.Network20;
 using DD.CBU.Compute.Api.Contracts.Server;
 using DD.CBU.Compute.Api.Contracts.Software;
 

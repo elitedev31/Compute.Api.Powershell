@@ -17,6 +17,7 @@
     using DD.CBU.Compute.Api.Contracts.Directory;
     using DD.CBU.Compute.Api.Contracts.General;
 using DD.CBU.Compute.Api.Contracts.Image;
+    using DD.CBU.Compute.Api.Contracts.Network20;
     using DD.CBU.Compute.Api.Contracts.Server;
 using DD.CBU.Compute.Api.Contracts.Software;
 
@@ -536,7 +537,6 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 		/// The <see cref="Task"/>.
 		/// </returns>
         Task<IEnumerable<ServerWithBackupType>> GetDeployedServers();
-
 
         /// <summary>
         /// Gets a filtered list of deployed servers.
