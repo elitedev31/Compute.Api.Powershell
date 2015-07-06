@@ -146,17 +146,5 @@ namespace DD.CBU.Compute.Api.Client.Network20
 		    return 
 			    await client.WebApi.ApiPostAsync<AddNicType, ResponseType>(ApiUris.AddNic(client.Account.OrganizationId), addNic);
 	    }
-
-		/// <summary>	Gets MCP 2 deployed servers. </summary>
-		/// <remarks>	Anthony, 6/17/2015. </remarks>
-		/// <param name="client">	The <see cref="ComputeApiClient"/> object. </param>
-		/// <returns>	The MCP 2 deployed servers. </returns>
-		/// <seealso cref="M:DD.CBU.Compute.Api.Client.Interfaces.IComputeApiClient.GetMCP2DeployedServers()"/>
-		public static async Task<ServersResponseCollection> GetMcp2DeployedServers(this IComputeApiClient client)
-		{
-			ServersResponseCollection servers =
-				await client.WebApi.ApiGetAsync<ServersResponseCollection>(ApiUris.GetMcp2Servers(client.Account.OrganizationId));
-			return servers;
-		}
     }
 }

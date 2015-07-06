@@ -180,8 +180,6 @@ namespace DD.CBU.Compute.Api.Client
 		/// </returns>
 		public async Task<IEnumerable<SoftwareLabel>> GetListOfSoftwareLabels()
 		{
-		
-
 			SoftwareLabels labels = await WebApi.ApiGetAsync<SoftwareLabels>(ApiUris.SoftwareLabels(Account.OrganizationId));
 
 			return labels.Items;

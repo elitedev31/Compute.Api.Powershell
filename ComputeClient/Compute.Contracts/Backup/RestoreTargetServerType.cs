@@ -1,3 +1,4 @@
+using System;
 using DD.CBU.Compute.Api.Contracts.Server;
 
 namespace DD.CBU.Compute.Api.Contracts.Backup
@@ -179,7 +180,7 @@ namespace DD.CBU.Compute.Api.Contracts.Backup
                 return this.idField;
             }
             set {
-                this.idField = value;
+				this.idField = value.Replace(" ", String.Empty);
             }
         }
     

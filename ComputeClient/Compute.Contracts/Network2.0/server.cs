@@ -8,6 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System;
 using System.Xml.Serialization;
 
 namespace DD.CBU.Compute.Api.Contracts.Network20
@@ -54,7 +55,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 		public string id
 		{
 			get { return this.idField; }
-			set { this.idField = value; }
+			set { this.idField = value.Replace(" ", String.Empty); }
 		}
 
 		/// <remarks/>
@@ -126,7 +127,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 		public string id
 		{
 			get { return this.idField; }
-			set { this.idField = value; }
+			set { this.idField = value.Replace(" ", String.Empty); }
 		}
 
 		/// <remarks/>
@@ -241,10 +242,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 
 		/// <remarks/>
 		[System.Xml.Serialization.XmlElementAttribute("networkInfo", typeof (ServerTypeNetworkInfo))]
-		public ServerTypeNetworkInfo networkInfo {
-			get { return this.networkInfo; }
-			set { this.networkInfo = value; }
-		}
+		public ServerTypeNetworkInfo networkInfo { get; set; }
 
 		/// <remarks/>
 		public ServerTypeBackup backup
@@ -323,7 +321,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 		public string id
 		{
 			get { return this.idField; }
-			set { this.idField = value; }
+			set { this.idField = value.Replace(" ", String.Empty); }
 		}
 
 		/// <remarks/>
@@ -359,7 +357,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 		public string id
 		{
 			get { return this.idField; }
-			set { this.idField = value; }
+			set { this.idField = value.Replace(" ", String.Empty); }
 		}
 
 		/// <remarks/>
@@ -460,7 +458,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 		public string id
 		{
 			get { return this.idField; }
-			set { this.idField = value; }
+			set { this.idField = value.Replace(" ", String.Empty); }
 		}
 
 		/// <remarks/>
@@ -615,12 +613,9 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 	}
 
 	/// <remarks/>
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
 	[System.SerializableAttribute()]
-	[System.Diagnostics.DebuggerStepThroughAttribute()]
-	[System.ComponentModel.DesignerCategoryAttribute("code")]
 	[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "urn:didata.com:api:cloud:types")]
-	[System.Xml.Serialization.XmlRootAttribute(Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
+	[System.Xml.Serialization.XmlRootAttribute(Namespace = "urn:didata.com:api:cloud:types", IsNullable = false, ElementName = "servers")]
 	public partial class ServersResponseCollection
 	{
 

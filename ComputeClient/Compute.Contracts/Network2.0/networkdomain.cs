@@ -8,6 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System;
 using System.Xml.Serialization;
 
 namespace DD.CBU.Compute.Api.Contracts.Network20
@@ -235,7 +236,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 		public string id
 		{
 			get { return this.idField; }
-			set { this.idField = value; }
+			set { this.idField = value.Replace(" ", String.Empty); }
 		}
 
 		/// <remarks/>
@@ -441,7 +442,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 		public string id
 		{
 			get { return this.idField; }
-			set { this.idField = value; }
+			set { this.idField = value.Replace(" ", String.Empty); }
 		}
 	}
 }

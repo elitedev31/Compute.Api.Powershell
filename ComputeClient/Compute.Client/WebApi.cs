@@ -258,7 +258,10 @@ namespace DD.CBU.Compute.Api.Client
 
 			using (HttpResponseMessage response = await _httpClient.GetAsync(relativeOperationUri))
 			{
-				if (response.IsSuccessStatusCode) return await response.Content.ReadAsAsync<TResult>(_mediaTypeFormatters);
+				if (response.IsSuccessStatusCode)
+				{
+					return await response.Content.ReadAsAsync<TResult>(_mediaTypeFormatters);
+				}
 				switch (response.StatusCode)
 				{
 					case HttpStatusCode.Unauthorized:

@@ -36,10 +36,17 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\CaaS_PS (unit-test).ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>CaaS_PS.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FakeItEasy">
-      <HintPath>..\packages\FakeItEasy.1.18.0\lib\net40\FakeItEasy.dll</HintPath>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.2.1507.0118\lib\net40\Moq.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -65,9 +72,10 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="AccountAPITests.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="BaseApiClientTestFixture.cs" />
+    <Compile Include="MCP2\ServerTests.cs" />
+    <Compile Include="MCP2\VlanTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Compute.Client\Compute.Client.csproj">
@@ -85,15 +93,19 @@
   <ItemGroup>
     <Content Include="SampleOutputs\DeleteSubAdministratorAccount.xml" />
     <Content Include="SampleOutputs\DesignatePrimaryAdministratorAccount.xml" />
+    <Content Include="SampleOutputs\GetMcp2ServerResponse.xml" />
+    <Content Include="SampleOutputs\GetMcp2ServersResponse.xml" />
     <Content Include="SampleOutputs\GetMyAccountDetails.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="SampleOutputs\GetVlansResponse.xml" />
     <Content Include="SampleOutputs\ListAccounts.xml" />
     <Content Include="SampleOutputs\ListDataCentersWithMaintenanceStatus.xml" />
     <Content Include="SampleOutputs\ListMultiGeographyRegionsWithKey.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="CaaS_PS.snk" />
     <None Include="packages.config" />
   </ItemGroup>
   <Choose>

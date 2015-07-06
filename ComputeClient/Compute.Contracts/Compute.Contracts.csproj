@@ -110,7 +110,7 @@
     <Compile Include="Backup\StoragePolicy.cs" />
     <Compile Include="Backup\TriggerType.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Network2.0\datacenter.cs" />
+    <Compile Include="Network2.0\Datacenter.cs" />
     <Compile Include="Datacenter\Datacenters.cs" />
     <Compile Include="Datacenter\DatacentersWithDiskSpeedDetails.cs" />
     <Compile Include="Datacenter\DatacentersWithLimits.cs" />
@@ -124,8 +124,8 @@
     <Compile Include="Directory\AccountsWithPhoneNumber.cs" />
     <Compile Include="Directory\AccountWithPhoneNumber.cs" />
     <Compile Include="Directory\RoleType.cs" />
-    <Compile Include="Network2.0\firewall.cs" />
-    <Compile Include="Network2.0\general.cs" />
+    <Compile Include="Network2.0\Firewall.cs" />
+    <Compile Include="Network2.0\General.cs" />
     <Compile Include="General\AdditionalInformationType.cs" />
     <Compile Include="General\PropertyType.cs" />
     <Compile Include="General\ResultType.cs" />
@@ -162,9 +162,9 @@
     <Compile Include="Image\PendingDeployImageType.cs" />
     <Compile Include="Image\PendingDeployImageWithSoftwareLabelsType.cs" />
     <Compile Include="Image\ServerImage.cs" />
-    <Compile Include="Network2.0\ipaddress.cs" />
-    <Compile Include="Network2.0\natrule.cs" />
-    <Compile Include="Network2.0\networkdomain.cs" />
+    <Compile Include="Network2.0\IPAddress.cs" />
+    <Compile Include="Network2.0\NATRule.cs" />
+    <Compile Include="Network2.0\NetworkDomain.cs" />
     <Compile Include="Network\AclActionType.cs" />
     <Compile Include="Network\AclProtocolType.cs" />
     <Compile Include="Network\AclRuleListType.cs" />
@@ -186,8 +186,8 @@
     <Compile Include="Network\NewNetworkWithLocationType.cs" />
     <Compile Include="Network\PortRangeType.cs" />
     <Compile Include="Network\PortRangeTypeType.cs" />
-    <Compile Include="Network2.0\publicipblock.cs" />
-    <Compile Include="Network2.0\server.cs" />
+    <Compile Include="Network2.0\PublicIPBlock.cs" />
+    <Compile Include="Network2.0\Server.cs" />
     <Compile Include="Server\AntiAffinityRules.cs" />
     <Compile Include="Server\AntiAffinityRuleType.cs" />
     <Compile Include="Server\AntiAffinityRuleTypeServerSummary.cs" />
@@ -285,7 +285,7 @@
     <Compile Include="Vip\Vip.cs" />
     <Compile Include="Vip\VipProtocol.cs" />
     <Compile Include="Vip\VipTargetType.cs" />
-    <Compile Include="Network2.0\vlan.cs" />
+    <Compile Include="Network2.0\Vlan.cs" />
     <Compile Include="XmlNamespaceConstants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

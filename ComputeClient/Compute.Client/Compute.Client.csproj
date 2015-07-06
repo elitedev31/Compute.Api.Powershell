@@ -100,6 +100,7 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="KnownApiUri.cs" />
     <Compile Include="Network20\ComputeApiClientNetworkExtensions.cs" />
+    <Compile Include="Server20\Server20Extensions.cs" />
     <Compile Include="ServerImageType.cs" />
     <Compile Include="Backup\ComputeApiClientBackupExtensions.cs" />
     <Compile Include="ClientError.cs" />

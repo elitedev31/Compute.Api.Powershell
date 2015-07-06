@@ -1,3 +1,5 @@
+using System;
+
 namespace DD.CBU.Compute.Api.Contracts.Backup
 {
     /// <remarks/>
@@ -23,7 +25,7 @@ namespace DD.CBU.Compute.Api.Contracts.Backup
                 return this.idField;
             }
             set {
-                this.idField = value;
+				this.idField = value;
             }
         }
     

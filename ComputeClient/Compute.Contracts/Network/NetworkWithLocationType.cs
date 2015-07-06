@@ -1,3 +1,5 @@
+using System;
+
 namespace DD.CBU.Compute.Api.Contracts.Network
 {
     /// <remarks/>
@@ -27,7 +29,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network
                 return this.idField;
             }
             set {
-                this.idField = value;
+				this.idField = value.Replace(" ", String.Empty);
             }
         }
     
