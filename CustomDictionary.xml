@@ -5,6 +5,7 @@
 		<Recognized>
 			<Word>Autofac</Word>
 			<Word>CBU</Word>
+			<Word>CaaS</Word>
 		</Recognized>
 		<Compound>
 			<Term PreferredAlternate="DiData">didata</Term>

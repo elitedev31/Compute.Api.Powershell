@@ -13,6 +13,7 @@
     using System.Net;
     using System.Threading.Tasks;
     using DD.CBU.Compute.Api.Contracts.Directory;
+    using DD.CBU.Compute.Api.Contracts.Requests;
 
 namespace DD.CBU.Compute.Api.Client.Interfaces
 {
@@ -57,18 +58,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
         /// <returns>
 		/// The operation result.
         /// </returns>
-        Task<TResult> ApiGetAsync<TResult>(Uri relativeOperationUri);
-
-        /// <summary>
-		/// Invoke a CaaS API operation using a HTTP GET request and return the RAW response as string
-        /// </summary>
-        /// <param name="relativeOperationUri">
-		/// The operation URI (relative to the CaaS API's base URI).
-        /// </param>
-        /// <returns>
-		/// The operation result.
-        /// </returns>
-        Task<string> ApiGetAsync(Uri relativeOperationUri);
+        Task<TResult> ApiGetAsync<TResult>(Uri relativeOperationUri, IPageableRequest pagingOptions = null);
 
         /// <summary>
         /// Invoke a CaaS API operation using a HTTP POST request.

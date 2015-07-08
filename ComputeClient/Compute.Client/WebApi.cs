@@ -17,6 +17,7 @@ using DD.CBU.Compute.Api.Client.Interfaces;
 using DD.CBU.Compute.Api.Client.Utilities;
 using DD.CBU.Compute.Api.Contracts.Directory;
 using DD.CBU.Compute.Api.Contracts.General;
+using DD.CBU.Compute.Api.Contracts.Requests;
 
 namespace DD.CBU.Compute.Api.Client
 {
@@ -249,7 +250,7 @@ namespace DD.CBU.Compute.Api.Client
 		/// 	The typed result from the API. 
 		/// </returns>
 		/// <seealso cref="M:DD.CBU.Compute.Api.Client.Interfaces.IWebApi.ApiGetAsync{TResult}(Uri)"/>
-		public async Task<TResult> ApiGetAsync<TResult>(Uri relativeOperationUri)
+		public async Task<TResult> ApiGetAsync<TResult>(Uri relativeOperationUri, IPageableRequest pagingOptions = null)
 		{
 			if (relativeOperationUri == null) throw new ArgumentNullException("relativeOperationUri");
 
@@ -275,59 +276,6 @@ namespace DD.CBU.Compute.Api.Client
 						// Handle specific CaaS Status response when getting a bad request
 						Status status = await response.Content.ReadAsAsync<Status>(_mediaTypeFormatters);
 						throw ComputeApiException.InvalidRequest(status.operation, status.resultDetail, status, relativeOperationUri);
-					}
-
-					default:
-					{
-						throw new HttpRequestException(
-							string.Format(
-								"CaaS API returned HTTP status code {0} ({1}) when performing HTTP GET on '{2}'.", 
-								(int) response.StatusCode, 
-								response.StatusCode, 
-								response.RequestMessage.RequestUri));
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// 	The api get async. 
-		/// </summary>
-		/// <remarks>
-		/// 	Anthony, 4/24/2015. 
-		/// </remarks>
-		/// <exception cref="ArgumentNullException">
-		/// 	. 
-		/// </exception>
-		/// <exception cref="ArgumentException">
-		/// 		. 
-		/// </exception>
-		/// <exception cref="HttpRequestException">
-		/// 	. 
-		/// </exception>
-		/// <param name="relativeOperationUri">
-		/// 	The relative operation uri. 
-		/// </param>
-		/// <returns>
-		/// 	The <see cref="Task"/>. 
-		/// </returns>
-		/// <seealso cref="M:DD.CBU.Compute.Api.Client.Interfaces.IWebApi.ApiGetAsync(Uri)"/>
-		public async Task<string> ApiGetAsync(Uri relativeOperationUri)
-		{
-			if (relativeOperationUri == null) throw new ArgumentNullException("relativeOperationUri");
-
-			if (relativeOperationUri.IsAbsoluteUri)
-				throw new ArgumentException("The supplied URI is not a relative URI.", "relativeOperationUri");
-
-			using (HttpResponseMessage response = await _httpClient.GetAsync(relativeOperationUri))
-			{
-				if (response.IsSuccessStatusCode) return await response.Content.ReadAsStringAsync();
-				switch (response.StatusCode)
-				{
-					case HttpStatusCode.Unauthorized:
-					{
-						throw ComputeApiException.InvalidCredentials(
-							((NetworkCredential) _clientMessageHandler.Credentials).UserName);
 					}
 
 					default:

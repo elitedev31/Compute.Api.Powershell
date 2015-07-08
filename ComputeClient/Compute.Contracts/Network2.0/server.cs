@@ -195,7 +195,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 
 		private string datacenterIdField;
 
-		private ServerTypeNic nicField;
+		private ServerTypeNic[] nicField;
 
 		/// <remarks/>
 		public string name
@@ -238,6 +238,15 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 		{
 			get { return this.diskField; }
 			set { this.diskField = value; }
+		}
+
+		/// <summary>	Gets or sets the NIC. </summary>
+		/// <value>	The NIC. </value>
+		[System.Xml.Serialization.XmlElementAttribute("nic")]
+		public ServerTypeNic[] nic
+		{
+			get { return this.nicField; }
+			set { this.nicField = value; }
 		}
 
 		/// <remarks/>
@@ -774,6 +783,8 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 		[System.Xml.Serialization.XmlElementAttribute("network", typeof (DeployServerTypeNetwork))]
 		public DeployServerTypeNetwork network { get; set; }
 
+		/// <summary>	Gets or sets information describing the network. </summary>
+		/// <value>	Information describing the network. </value>
 		[System.Xml.Serialization.XmlElementAttribute("networkInfo", typeof (DeployServerTypeNetworkInfo))]
 		public DeployServerTypeNetworkInfo networkInfo { get; set; }
 
@@ -798,6 +809,8 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 		[System.Xml.Serialization.XmlElementAttribute("networkId", typeof (string))]
 		public string networkId { get; set; }
 
+		/// <summary>	Gets or sets the private IPv4. </summary>
+		/// <value>	The private IPv4. </value>
 		[System.Xml.Serialization.XmlElementAttribute("privateIpv4", typeof (string))]
 		public string privateIpv4 { get; set; }
 	}
@@ -811,10 +824,13 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 	[System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
 	public partial class VlanIdOrPrivateIpType
 	{
-		/// <remarks/>
+		/// <summary>	Gets or sets the private IPv4. </summary>
+		/// <value>	The private IPv4. </value>
 		[System.Xml.Serialization.XmlElementAttribute("privateIpv4", typeof(string))]
 		public string privateIpv4 { get; set; }
 
+		/// <summary>	Gets or sets the identifier of the vlan. </summary>
+		/// <value>	The identifier of the vlan. </value>
 		[System.Xml.Serialization.XmlElementAttribute("vlanId", typeof(string))]
 		public string vlanId { get; set; }
 	}
@@ -825,7 +841,6 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 	[System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types", IncludeInSchema = false)]
 	public enum ServerItemChoiceType
 	{
-
 		/// <remarks/>
 		networkId,
 

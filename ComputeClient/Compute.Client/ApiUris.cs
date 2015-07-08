@@ -613,6 +613,14 @@ namespace DD.CBU.Compute.Api.Client
 			return new Uri(string.Format(MCP1_0_PREFIX + "/{0}/server/{1}?reboot", orgId, serverId), UriKind.Relative);
         }
 
+		/// <summary>	Resets the server (hard reset). </summary>
+		/// <param name="orgId">   	The org Id. </param>
+		/// <param name="serverId">	The server Id. </param>
+		/// <returns>	An URI. </returns>
+		public static Uri ResetServer(Guid orgId, string serverId)
+		{
+			return new Uri(string.Format(MCP1_0_PREFIX + "/{0}/server/{1}?reset", orgId, serverId), UriKind.Relative);
+		}
 
         /// <summary>
         /// Triggers an update of the VMware Tools software running on the guest OS of a virtual server
@@ -871,8 +879,16 @@ namespace DD.CBU.Compute.Api.Client
 			return new Uri(string.Format(MCP2_0_PREFIX + "{0}/network/vlan?{1}", orgId, String.Join("&", queryParameters)), UriKind.Relative);
         }
 
+	    /// <summary>	The get Virtual LAN. </summary>
+	    /// <param name="orgId"> 	The org id. </param>
+	    /// <param name="vlanId">	Identifier for the vlan. </param>
+	    /// <returns>	The <see cref="Uri"/>. </returns>
+	    public static Uri GetVlan(Guid orgId, Guid vlanId)
+	    {
+			return new Uri(string.Format(MCP2_0_PREFIX + "{0}/network/vlan/{1}", orgId, vlanId), UriKind.Relative);
+	    }
+
 		/// <summary>	Gets vlan by organisation identifier. </summary>
-		/// <remarks>	Anthony, 4/24/2015. </remarks>
 		/// <param name="orgId">	The org Id. </param>
 		/// <returns>	The vlan by organisation identifier. </returns>
 		public static Uri GetVlanByOrgId(Guid orgId)

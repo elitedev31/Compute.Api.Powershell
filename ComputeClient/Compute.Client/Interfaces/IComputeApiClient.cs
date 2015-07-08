@@ -409,6 +409,12 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 		/// </returns>
         Task<Status> ServerRestart(string serverId);
 
+		/// <summary>	Power cycles an existing deployed server. This is the equivalent of pulling and replacing the power cord for
+		/// a physical server. Requires your organization ID and the ID of the target server.. </summary>
+		/// <param name="serverId">	The server id. </param>
+		/// <returns>	Returns a status of the HTTP request </returns>
+	    Task<Status> ServerReset(string serverId);
+
         /// <summary>
         /// Shutdown the server.
         /// </summary>

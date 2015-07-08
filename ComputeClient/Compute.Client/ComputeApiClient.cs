@@ -194,8 +194,6 @@ namespace DD.CBU.Compute.Api.Client
 		/// </returns>
 		public async Task<IEnumerable<Geo>> GetListOfMultiGeographyRegions()
 		{
-
-
             Geos regions = await WebApi.ApiGetAsync<Geos>(ApiUris.MultiGeographyRegions(Account.OrganizationId));
 
 			return regions.Items;
@@ -716,7 +714,7 @@ namespace DD.CBU.Compute.Api.Client
 		}
 
 		/// <summary>
-		/// Hard boot of the server.
+		/// Graceful reset of a server
 		/// </summary>
 		/// <param name="serverId">
 		/// The server id
@@ -727,6 +725,15 @@ namespace DD.CBU.Compute.Api.Client
 		public async Task<Status> ServerRestart(string serverId)
 		{
 			return await WebApi.ApiGetAsync<Status>(ApiUris.RebootServer(Account.OrganizationId, serverId));
+		}
+
+		/// <summary>	Power cycles an existing deployed server. This is the equivalent of pulling and replacing the power cord for
+		/// a physical server. Requires your organization ID and the ID of the target server.. </summary>
+		/// <param name="serverId">	The server id. </param>
+		/// <returns>	Returns a status of the HTTP request </returns>
+		public async Task<Status> ServerReset(string serverId)
+		{
+			return await WebApi.ApiGetAsync<Status>(ApiUris.ResetServer(Account.OrganizationId, serverId));
 		}
 
 		/// <summary>

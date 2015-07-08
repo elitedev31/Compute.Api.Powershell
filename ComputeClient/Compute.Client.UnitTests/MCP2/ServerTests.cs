@@ -26,6 +26,7 @@ namespace Compute.Client.UnitTests.MCP2
 			Assert.AreEqual(servers.Server[0].id, "d577a691-e116-4913-a440-022d2729fc84");
 			Assert.AreEqual(servers.Server[0].datacenterId, "NA9");
 			Assert.AreEqual(servers.Server[0].name, "Production Web Server");
+			Assert.IsNotNull(servers.Server[0].networkInfo);
 		}
 
 		[TestMethod]
@@ -42,6 +43,7 @@ namespace Compute.Client.UnitTests.MCP2
 			Assert.AreEqual(server.id, "d577a691-e116-4913-a440-022d2729fc84");
 			Assert.AreEqual(server.datacenterId, "NA9");
 			Assert.AreEqual(server.name, "Production Web Server");
+			Assert.IsNotNull(server.networkInfo);
 		}
 	}
 }
