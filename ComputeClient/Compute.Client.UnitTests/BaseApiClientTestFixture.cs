@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Net;
 using System.Net.Http;
 using System.Text;
 
@@ -18,7 +17,7 @@ namespace Compute.Client.UnitTests
 		protected Guid accountId = new Guid("A3D9AACC-A273-45A5-919D-0F4C41C0763B");
 
 		/// <summary>	The requests and responses. </summary>
-		protected Dictionary<Uri, string> requestsAndResponses = new Dictionary<Uri, string>();
+		protected Dictionary<Uri, RequestFileResponseType> requestsAndResponses = new Dictionary<Uri, RequestFileResponseType>();
 
 		/// <summary>	Get a mocked API Client, using the call and response collection in <see cref="requestsAndResponses"/>. </summary>
 		/// <returns>	The API client. </returns>
@@ -47,9 +46,9 @@ namespace Compute.Client.UnitTests
 
 		    foreach (var item in requestsAndResponses)
 		    {
-			    var message = new HttpResponseMessage(HttpStatusCode.OK)
+			    var message = new HttpResponseMessage(item.Value.Status)
 			    {
-				    Content = new StringContent(GetContentsOfTestFile(item.Value), Encoding.UTF8, "text/xml")
+				    Content = new StringContent(GetContentsOfTestFile(item.Value.ResponseFile), Encoding.UTF8, "text/xml")
 			    };
 
 			    fakeClient.Setup(f => f.GetAsync(item.Key)).ReturnsAsync(message);

@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<response xmlns="urn:didata.com:api:cloud:types" requestId="au/2015-07-08T15:28:01.577+10:00/612d7302-9d01-4587-90d9-1d0fb09ff2d1">
+	<operation>GET_SERVER</operation>
+	<responseCode>RESOURCE_NOT_FOUND</responseCode>
+	<message>Server 0ab41d5f-4c0f-4804-a807-7015ee2adb61 not found.</message>
+</response>

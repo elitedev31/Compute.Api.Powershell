@@ -76,6 +76,7 @@
     <Compile Include="BaseApiClientTestFixture.cs" />
     <Compile Include="MCP2\ServerTests.cs" />
     <Compile Include="MCP2\VlanTests.cs" />
+    <Compile Include="RequestFileResponseType.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Compute.Client\Compute.Client.csproj">
@@ -102,6 +103,7 @@
     <Content Include="SampleOutputs\ListAccounts.xml" />
     <Content Include="SampleOutputs\ListDataCentersWithMaintenanceStatus.xml" />
     <Content Include="SampleOutputs\ListMultiGeographyRegionsWithKey.xml" />
+    <Content Include="SampleOutputs\ServerNotFound.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

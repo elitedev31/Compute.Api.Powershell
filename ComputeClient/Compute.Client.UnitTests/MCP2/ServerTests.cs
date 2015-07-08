@@ -14,8 +14,8 @@ namespace Compute.Client.UnitTests.MCP2
 		[TestMethod]
 		public async Task GetServersFromXML()
 		{
-			requestsAndResponses.Add(ApiUris.MyAccount, "GetMyAccountDetails.xml");
-			requestsAndResponses.Add(ApiUris.GetMcp2Servers(accountId), "GetMcp2ServersResponse.xml");
+			requestsAndResponses.Add(ApiUris.MyAccount,RequestFileResponseType.AsGoodResponse("GetMyAccountDetails.xml"));
+			requestsAndResponses.Add(ApiUris.GetMcp2Servers(accountId), RequestFileResponseType.AsGoodResponse("GetMcp2ServersResponse.xml"));
 
 			var client = GetApiClient();
 			await client.LoginAsync(new NetworkCredential(string.Empty, string.Empty));
@@ -33,8 +33,8 @@ namespace Compute.Client.UnitTests.MCP2
 		public async Task GetServerFromXML()
 		{
 			Guid serverId = new Guid("d577a691-e116-4913-a440-022d2729fc84");
-			requestsAndResponses.Add(ApiUris.MyAccount, "GetMyAccountDetails.xml");
-			requestsAndResponses.Add(ApiUris.GetMcp2Server(accountId, serverId), "GetMcp2ServerResponse.xml");
+			requestsAndResponses.Add(ApiUris.MyAccount, RequestFileResponseType.AsGoodResponse("GetMyAccountDetails.xml"));
+			requestsAndResponses.Add(ApiUris.GetMcp2Server(accountId, serverId), RequestFileResponseType.AsGoodResponse("GetMcp2ServerResponse.xml"));
 
 			var client = GetApiClient();
 			await client.LoginAsync(new NetworkCredential(string.Empty, string.Empty));
@@ -44,6 +44,21 @@ namespace Compute.Client.UnitTests.MCP2
 			Assert.AreEqual(server.datacenterId, "NA9");
 			Assert.AreEqual(server.name, "Production Web Server");
 			Assert.IsNotNull(server.networkInfo);
+		}
+
+		[TestMethod]
+		[ExpectedException(typeof(ComputeApiException))]
+		public async Task GetServerNotFoundFromXML()
+		{
+			Guid serverId = new Guid("0ab41d5f-4c0f-4804-a807-7015ee2adb61");
+			requestsAndResponses.Add(ApiUris.MyAccount, RequestFileResponseType.AsGoodResponse("GetMyAccountDetails.xml"));
+			requestsAndResponses.Add(ApiUris.GetMcp2Server(accountId, serverId), new RequestFileResponseType{ ResponseFile = "ServerNotFound.xml", Status = HttpStatusCode.BadRequest});
+
+			var client = GetApiClient();
+			await client.LoginAsync(new NetworkCredential(string.Empty, string.Empty));
+			
+			// This should explode.
+			await client.GetMcp2DeployedServer(serverId);
 		}
 	}
 }

@@ -13,8 +13,8 @@ namespace Compute.Client.UnitTests.MCP2
 		[TestMethod]
 		public async Task GetVlanTests()
 		{
-			requestsAndResponses.Add(ApiUris.MyAccount, "GetMyAccountDetails.xml");
-			requestsAndResponses.Add(ApiUris.GetVlanByOrgId(accountId), "GetVlansResponse.xml");
+			requestsAndResponses.Add(ApiUris.MyAccount, RequestFileResponseType.AsGoodResponse("GetMyAccountDetails.xml"));
+			requestsAndResponses.Add(ApiUris.GetVlanByOrgId(accountId), RequestFileResponseType.AsGoodResponse("GetVlansResponse.xml"));
 
 			var client = GetApiClient();
 			await client.LoginAsync(new NetworkCredential(string.Empty, string.Empty));

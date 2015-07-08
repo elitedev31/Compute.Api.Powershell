@@ -1,18 +1,6 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ApiUris.cs" company="">
-//   
-// </copyright>
-// <summary>
-//   Constants and formatters for API URLs.
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
-
-
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using DD.CBU.Compute.Api.Contracts.Directory;
 
 namespace DD.CBU.Compute.Api.Client
 {
@@ -24,10 +12,10 @@ namespace DD.CBU.Compute.Api.Client
     public static class ApiUris
     {
 		/// <summary>	The MCP 1.0 prefix. </summary>
-		private const string MCP1_0_PREFIX = "oec/0.9/";
+		public const string MCP1_0_PREFIX = "oec/0.9/";
 
 		/// <summary>	The MCP 2.0 prefix. </summary>
-		private const string MCP2_0_PREFIX = "caas/2.0/";
+		public const string MCP2_0_PREFIX = "caas/2.0/";
 
         /// <summary>
 		/// The path (relative to the base API URL) of the My Account action.
