@@ -1,15 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="DeployCaasServerOnNetworkDomainCmdlet.cs" company="">
-//   
-// </copyright>
-// <summary>
-//   The new CaaS Virtual Machine cmdlet.
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
-
-
-
-using System;
+﻿using System;
 using System.Management.Automation;
 using DD.CBU.Compute.Api.Client;
 using DD.CBU.Compute.Api.Client.Network20;
@@ -71,7 +60,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 		/// <summary>
 		/// Gets or sets the primary private IP.
 		/// </summary>
-		[Parameter(Mandatory = false, ParameterSetName = "PrivateIp", 
+		[Parameter(Mandatory = true, ParameterSetName = "PrivateIp", 
 			HelpMessage = "The private network private IP address that will be assigned to the machine.")]
 		public string PrimaryPrivateIp { get; set; }
 
@@ -84,24 +73,12 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 			base.ProcessRecord();
 			try
 			{
-				VlanIdOrPrivateIpType primaryNic = null;
+				VlanIdOrPrivateIpType primaryNic = new VlanIdOrPrivateIpType
+				{
+					vlanId = PrimaryNetwork.id,
+					privateIpv4 = PrimaryPrivateIp
+				};
 
-				if (ParameterSetName.Equals("VlanId"))
-				{
-					primaryNic = new VlanIdOrPrivateIpType
-					{
-						Item = PrimaryNetwork.id, 
-						ItemElementName = ServerItemChoiceType1.vlanId
-					};
-				}
-				else
-				{
-					primaryNic = new VlanIdOrPrivateIpType
-					{
-						Item = PrimaryPrivateIp, 
-						ItemElementName = ServerItemChoiceType1.privateIpv4
-					};
-				}
 
 				var server = new DeployServerType
 				{
@@ -110,7 +87,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 					imageId = ServerImage.id, 
 					start = IsStarted, 
 					administratorPassword = AdminPassword, 
-					Item =
+					networkInfo = 
 						new DeployServerTypeNetworkInfo
 						{
 							networkDomainId =

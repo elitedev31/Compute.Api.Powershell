@@ -136,6 +136,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Compute.Client.nuspec">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

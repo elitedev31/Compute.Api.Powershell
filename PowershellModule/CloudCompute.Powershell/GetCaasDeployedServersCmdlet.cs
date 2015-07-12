@@ -13,8 +13,11 @@ using System.Linq;
 using System.Management.Automation;
 using System.Threading.Tasks;
 using DD.CBU.Compute.Api.Client;
+using DD.CBU.Compute.Api.Client.Server20;
 using DD.CBU.Compute.Api.Contracts.Network;
+using DD.CBU.Compute.Api.Contracts.Network20;
 using DD.CBU.Compute.Api.Contracts.Server;
+using ServerType = DD.CBU.Compute.Api.Contracts.Network20.ServerType;
 
 namespace DD.CBU.Compute.Powershell
 {
@@ -44,6 +47,26 @@ namespace DD.CBU.Compute.Powershell
 		public NetworkWithLocationsNetwork Network { get; set; }
 
 		/// <summary>
+		/// Get a CaaS server by network
+		/// </summary>
+		[Parameter(Mandatory = false, HelpMessage = "The network domain to show the servers from")]
+		public NetworkDomainType NetworkDomain { get; set; }
+
+		/// <summary>	
+		/// 	Gets or sets the identifier of the network domain. 
+		/// </summary>
+		[Parameter(Mandatory = false, HelpMessage = "The network domain to show the servers from")]
+		public string NetworkDomainId { get; set; }
+
+		/// <summary>	Gets or sets the vlan. </summary>
+		[Parameter(Mandatory = false, HelpMessage = "The VLAN to filter by")]
+		public VlanType Vlan { get; set; }
+
+		/// <summary>	Gets or sets the identifier of the vlan. </summary>
+		[Parameter(Mandatory = false, HelpMessage = "The VLAN ID to filter by")]
+		public string VlanId { get; set; }
+
+		/// <summary>
 		/// Get a CaaS server by location
 		/// </summary>
 		[Parameter(Mandatory = false, HelpMessage = "Location of the server to filter")]
@@ -60,7 +83,10 @@ namespace DD.CBU.Compute.Powershell
 			try
 			{
 				string networkid = Network == null ? null : Network.id;
-				IEnumerable<ServerWithBackupType> servers = GetDeployedServers(ServerId, Name, networkid, Location).Result;
+				string networkDomainId = NetworkDomain == null ? NetworkDomainId : NetworkDomain.id;
+				string vlanId = Vlan == null ? VlanId : Vlan.id; 
+
+				IEnumerable<ServerType> servers = GetDeployedServers(ServerId, Name, networkid, Location, networkDomainId, vlanId).Result;
 				if (servers != null)
 				{
 					if (servers.Count() == 1)
@@ -113,10 +139,51 @@ namespace DD.CBU.Compute.Powershell
 		/// <returns>
 		/// The images
 		/// </returns>
-		private async Task<IEnumerable<ServerWithBackupType>> GetDeployedServers(string serverId, string name, 
-			string networkId, string location)
+		private async Task<IEnumerable<ServerType>> GetDeployedServers(string serverId, string name, 
+			string networkId, string location, string networkDomainId, string vlanId)
 		{
-			return await Connection.ApiClient.GetDeployedServers(serverId, name, networkId, location);
+			ServersResponseCollection serverResponse = await Connection.ApiClient.GetMcp2DeployedServers();
+
+			IEnumerable<ServerType> servers = serverResponse.Server;
+
+			// Filter by server id
+			if (!String.IsNullOrWhiteSpace(serverId))
+			{
+				servers = serverResponse.Server.Where(server => server.id == serverId);
+			}
+
+			// Filter by name
+			if (!String.IsNullOrWhiteSpace(name))
+			{
+				servers = servers.Where(server => server.name == name);
+			}
+
+			// Filter by network ID
+			if (!String.IsNullOrWhiteSpace(networkId))
+			{
+				servers = servers.Where(server => server.nic != null).Where(server => server.nic.First().networkId == networkId);
+			}
+
+			// Filter by datacenter ID
+			if (!String.IsNullOrWhiteSpace(location))
+			{
+				servers = servers.Where(server => server.datacenterId == location);
+			}
+
+			// Filter by network domain ID
+			if (!String.IsNullOrWhiteSpace(networkDomainId))
+			{
+				servers = servers.Where(server => server.networkInfo != null).Where(server => server.networkInfo.networkDomainId == networkDomainId);
+			}
+
+			// Filter by VLAN ID
+			if (!String.IsNullOrWhiteSpace(vlanId))
+			{
+				servers = servers.Where(server => server.networkInfo != null).Where(server => 
+					server.networkInfo.primaryNic.vlanId == vlanId 
+					|| (server.networkInfo.additionalNic != null && server.networkInfo.additionalNic.Any( nic => nic.vlanId == vlanId)));
+			}
+			return servers;
 		}
 	}
 }
