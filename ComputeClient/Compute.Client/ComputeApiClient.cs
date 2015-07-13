@@ -95,6 +95,24 @@ namespace DD.CBU.Compute.Api.Client
 			WebApi = new WebApi(baseUri);
 		}
 
+        /// <summary>
+        /// Initialises a new instance of the <see cref="ComputeApiClient"/> class. 
+        /// Creates a new CaaS API client using a Dimension Data vendor and known region.
+        /// </summary>
+        /// <param name="region">
+        /// The region
+        /// </param>
+        public ComputeApiClient(KnownApiRegion region)
+        {
+            Uri baseUri = KnownApiUri.Instance.GetBaseUri(KnownApiVendor.DimensionData, region);
+            _ftpHost = KnownApiUri.Instance.GetFtpHost(KnownApiVendor.DimensionData, region);
+
+            if (!baseUri.IsAbsoluteUri)
+                throw new ArgumentException("Base URI supplied is not an absolute URI", "region");
+
+            WebApi = new WebApi(baseUri);
+        }
+
 		/// <summary>
 		/// Initialises a new instance of the <see cref="ComputeApiClient"/> class. 
 		/// Creates a new CaaS API client using a base URI.

@@ -23,6 +23,7 @@ namespace DD.CBU.Compute.Powershell
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasDeployedServer")]
 	[OutputType(typeof(ServerWithBackupType[]))]
+    [Obsolete("This cmdlet is obsolete, it only returns MCP 1.0 servers. Please use Get-CaasServers to return all servers.")]
 	public class GetCaasDeployedServerCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
@@ -59,6 +60,7 @@ namespace DD.CBU.Compute.Powershell
 
 			try
 			{
+
 				string networkid = Network == null ? null : Network.id;
 				IEnumerable<ServerWithBackupType> servers = GetDeployedServers(ServerId, Name, networkid, Location).Result;
 				if (servers != null)
@@ -67,7 +69,8 @@ namespace DD.CBU.Compute.Powershell
 						WriteObject(servers.First(), false);
 					else
 						WriteObject(servers, true);
-				}
+			
+                }
 				else
 					WriteError(
 						new ErrorRecord(
