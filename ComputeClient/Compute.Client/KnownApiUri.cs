@@ -75,6 +75,11 @@ namespace DD.CBU.Compute.Api.Client
 		/// </summary>
         DimensionData,
 
+        /// <summary>
+        /// Dimension Data Governament
+        /// </summary>
+        DimensionData_Government,
+
 		/// <summary>
 		/// NTT-America (part of NTT communications).
 		/// </summary>
@@ -98,7 +103,22 @@ namespace DD.CBU.Compute.Api.Client
 		/// <summary>
 		/// BNSL Vendor indosat.
 		/// </summary>
-        BSNL
+        BSNL,
+
+        /// <summary>
+        /// RootAxcess Vendor (NA).
+		/// </summary>
+        RootAxcess,
+
+        /// <summary>
+        /// RootAxcess Vendor (NA).
+        /// </summary>
+        Tenzing_Everest,
+
+        /// <summary>
+        /// PWW Cloud Connect Vendor (NA).
+        /// </summary>
+        PWW_Cloud_Connect
     }
 
     /// <summary>
@@ -231,6 +251,7 @@ namespace DD.CBU.Compute.Api.Client
             AddHostName(KnownApiVendor.DimensionData, KnownApiRegion.Canada_CA, "api-canada.dimensiondata.com");
 			AddFtpHostName(KnownApiVendor.DimensionData, KnownApiRegion.Canada_CA, "ftps-canada.cloud-vpn.net");
 
+            AddHostName(KnownApiVendor.DimensionData_Government, KnownApiRegion.Australia_AU, "api-canberra.dimensiondata.com");
 
             AddHostName(KnownApiVendor.NTTA, KnownApiRegion.NorthAmerica_NA, "cloudapi.nttamerica.com");
 			AddFtpHostName(KnownApiVendor.NTTA, KnownApiRegion.NorthAmerica_NA, "ftps-na.cloud-vpn.net");
@@ -294,6 +315,16 @@ namespace DD.CBU.Compute.Api.Client
 			AddFtpHostName(KnownApiVendor.BSNL, KnownApiRegion.Africa_AF, "ftps-af.cloud-vpn.net");
             AddHostName(KnownApiVendor.BSNL, KnownApiRegion.India_IN, "api.bsnlcloud.com");
 			AddFtpHostName(KnownApiVendor.BSNL, KnownApiRegion.India_IN, "ftps-in.cloud-vpn.net");
+
+            AddHostName(KnownApiVendor.RootAxcess, KnownApiRegion.NorthAmerica_NA, "api.rootaxcesscloud.com");
+            AddFtpHostName(KnownApiVendor.RootAxcess, KnownApiRegion.NorthAmerica_NA, "ftps-na.cloud-vpn.net");
+
+            AddHostName(KnownApiVendor.Tenzing_Everest, KnownApiRegion.NorthAmerica_NA, "api.cloud.tenzing.com");
+            AddFtpHostName(KnownApiVendor.Tenzing_Everest, KnownApiRegion.NorthAmerica_NA, "ftps-na.cloud-vpn.net");
+
+            AddHostName(KnownApiVendor.PWW_Cloud_Connect, KnownApiRegion.NorthAmerica_NA, "api.pwwcloudconnect.net");
+            AddFtpHostName(KnownApiVendor.PWW_Cloud_Connect, KnownApiRegion.NorthAmerica_NA, "ftps-na.cloud-vpn.net");
+
         }
 
         /// <summary>	Add host name to the known endpoints. </summary>
