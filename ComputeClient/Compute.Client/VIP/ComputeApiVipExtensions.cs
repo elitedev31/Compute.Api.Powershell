@@ -1,15 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ComputeApiVipExtensions.cs" company="">
-//   
-// </copyright>
-// <summary>
-//   Defines the ComputeApiVipExtensions type.
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
-
-
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Threading.Tasks;
 using DD.CBU.Compute.Api.Client.Interfaces;

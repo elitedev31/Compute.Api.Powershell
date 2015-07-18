@@ -319,13 +319,21 @@ namespace DD.CBU.Compute.Api.Client
 		/// </returns>
 		public async Task<TResult> ApiPostAsync<TObject, TResult>(Uri relativeOperationUri, TObject content)
 		{
-			var objectContent = new ObjectContent<TObject>(content, _mediaTypeFormatters.XmlFormatter);
+			ObjectContent<TObject> objectContent = new ObjectContent<TObject>(content, _mediaTypeFormatters.XmlFormatter);
 			using (
 				HttpResponseMessage response =
 					await
 						_httpClient.PostAsync(relativeOperationUri, objectContent))
 			{
-				if (response.IsSuccessStatusCode) return await response.Content.ReadAsAsync<TResult>(_mediaTypeFormatters);
+				if (response == null)
+				{
+					throw ComputeApiException.InvalidRequest(relativeOperationUri.ToString(), String.Empty);
+				}
+
+				if (response.IsSuccessStatusCode)
+				{
+					return await response.Content.ReadAsAsync<TResult>(_mediaTypeFormatters);
+				}
 
 				switch (response.StatusCode)
 				{

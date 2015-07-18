@@ -54,10 +54,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.Net.Http.Formatting, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.1.1\lib\net45\System.Net.Http.Formatting.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -74,6 +70,7 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="BaseApiClientTestFixture.cs" />
+    <Compile Include="MCP2\NetworkDomainTests.cs" />
     <Compile Include="MCP2\ServerTests.cs" />
     <Compile Include="MCP2\VlanTests.cs" />
     <Compile Include="RequestFileResponseType.cs" />
@@ -92,6 +89,7 @@
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SampleOutputs\CreateNetworkDomainResponse.xml" />
     <Content Include="SampleOutputs\DeleteSubAdministratorAccount.xml" />
     <Content Include="SampleOutputs\DesignatePrimaryAdministratorAccount.xml" />
     <Content Include="SampleOutputs\GetMcp2ServerResponse.xml" />

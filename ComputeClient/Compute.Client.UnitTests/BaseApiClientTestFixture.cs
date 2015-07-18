@@ -52,6 +52,7 @@ namespace Compute.Client.UnitTests
 			    };
 
 			    fakeClient.Setup(f => f.GetAsync(item.Key)).ReturnsAsync(message);
+				fakeClient.Setup(f => f.PostAsync(item.Key, It.IsAny<HttpContent>())).ReturnsAsync(message);
 		    }
             
             return fakeClient.Object;

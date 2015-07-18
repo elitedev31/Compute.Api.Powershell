@@ -1,6 +1,6 @@
 ﻿namespace DD.CBU.Compute.Api.Contracts.Requests
 {
-	public interface IPageableRequest
+	public interface IPageableRequest 
 	{
 		/// <summary>	The size of the paged results required. </summary>
 		int PageSize { get; set; }

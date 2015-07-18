@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Code Analysis", "Code Analysis", "{E5E0F4D1-CC44-429B-A48B-D41501BDCC0C}"
 	ProjectSection(SolutionItems) = preProject
@@ -26,8 +26,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Compute.Client", "Compute.C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{19AFA63F-B7A0-4DF1-A630-F67D3EE44903}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Compute.Client.IntegrationTests", "Tests\Compute.Client.IntegrationTests\Compute.Client.IntegrationTests.csproj", "{538F64E8-65D6-406F-BEF8-10C03AC53041}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Compute.Client.UnitTests", "Compute.Client.UnitTests\Compute.Client.UnitTests.csproj", "{5ECC7E1B-C8EB-4B22-A5DD-7C1F6B1FAD6E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{C4EABFE4-30A2-4C0C-92D4-16B963EFC7CB}"
@@ -51,10 +49,6 @@ Global
 		{C1F76663-78B7-4C29-B73B-206986567562}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C1F76663-78B7-4C29-B73B-206986567562}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C1F76663-78B7-4C29-B73B-206986567562}.Release|Any CPU.Build.0 = Release|Any CPU
-		{538F64E8-65D6-406F-BEF8-10C03AC53041}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{538F64E8-65D6-406F-BEF8-10C03AC53041}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{538F64E8-65D6-406F-BEF8-10C03AC53041}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{538F64E8-65D6-406F-BEF8-10C03AC53041}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5ECC7E1B-C8EB-4B22-A5DD-7C1F6B1FAD6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5ECC7E1B-C8EB-4B22-A5DD-7C1F6B1FAD6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5ECC7E1B-C8EB-4B22-A5DD-7C1F6B1FAD6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -65,7 +59,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{E5E0F4D1-CC44-429B-A48B-D41501BDCC0C} = {B01410A7-D99E-4F0F-B4DB-AF1AB407C3FB}
-		{538F64E8-65D6-406F-BEF8-10C03AC53041} = {19AFA63F-B7A0-4DF1-A630-F67D3EE44903}
 		{5ECC7E1B-C8EB-4B22-A5DD-7C1F6B1FAD6E} = {19AFA63F-B7A0-4DF1-A630-F67D3EE44903}
 	EndGlobalSection
 EndGlobal

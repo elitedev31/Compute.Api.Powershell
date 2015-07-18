@@ -254,18 +254,20 @@ namespace DD.CBU.Compute.Api.Client
 				String.Format(MCP2_0_PREFIX + "{0}//server/addNic", orgId), UriKind.Relative);
 	    }
 
-		/// <summary>
-		/// The network domains.
-		/// </summary>
-		/// <param name="orgId">
-		/// The org id.
-		/// </param>
-		/// <returns>
-		/// The <see cref="Uri"/>.
-		/// </returns>
+		/// <summary>	Get the URI for creating a network domain. </summary>
+		/// <param name="orgId">	The org id. </param>
+		/// <returns>	The <see cref="Uri"/>. </returns>
 		public static Uri CreateNetworkDomain(Guid orgId)
 		{
 			return new Uri(string.Format(MCP2_0_PREFIX + "{0}/network/deployNetworkDomain", orgId), UriKind.Relative);
+		}
+
+		/// <summary>	Deletes the network domain described by orgId. </summary>
+		/// <param name="orgId">	The org Id. </param>
+		/// <returns>	An URI. </returns>
+		public static Uri DeleteNetworkDomain(Guid orgId)
+		{
+			return new Uri(string.Format(MCP2_0_PREFIX + "{0}/network/deleteNetworkDomain", orgId), UriKind.Relative);
 		}
 
         /// <summary>
@@ -891,6 +893,14 @@ namespace DD.CBU.Compute.Api.Client
         {
 			return new Uri(string.Format(MCP2_0_PREFIX + "{0}/network/deployVlan", orgId), UriKind.Relative);
         }
+
+		/// <summary>	Deletes the vlan described by orgId. </summary>
+		/// <param name="orgId">	The org Id. </param>
+		/// <returns>	An URI. </returns>
+		public static Uri DeleteVlan(Guid orgId)
+		{
+			return new Uri(string.Format(MCP2_0_PREFIX + "{0}/network/deleteVlan", orgId), UriKind.Relative);
+		}
 
 		/// <summary>	Gets MCP 2 servers. </summary>
 		/// <remarks>	Anthony, 6/17/2015. </remarks>
