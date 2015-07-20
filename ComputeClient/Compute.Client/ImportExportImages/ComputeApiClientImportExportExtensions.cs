@@ -37,7 +37,7 @@ namespace DD.CBU.Compute.Api.Client.ImportExportImages
 		{
 			return
 				await
-					client.WebApi.ApiGetAsync<OvfPackages>(
+					client.WebApi.GetAsync<OvfPackages>(
 						ApiUris.GetOvfPackages(client.Account.OrganizationId));
 		}
 
@@ -55,7 +55,7 @@ namespace DD.CBU.Compute.Api.Client.ImportExportImages
 		{
 			ServerImagesWithState imports =
 				await
-					client.WebApi.ApiGetAsync<ServerImagesWithState>(
+					client.WebApi.GetAsync<ServerImagesWithState>(
 						ApiUris.GetCustomerImageImports(client.Account.OrganizationId));
 			return imports.serverImageWithState;
 		}
@@ -74,7 +74,7 @@ namespace DD.CBU.Compute.Api.Client.ImportExportImages
 		{
 			ImageExports result =
 				await
-					client.WebApi.ApiGetAsync<ImageExports>(
+					client.WebApi.GetAsync<ImageExports>(
 						ApiUris.GetCustomerImageExports(client.Account.OrganizationId));
 			return result.imageExport;
 		}
@@ -97,7 +97,7 @@ namespace DD.CBU.Compute.Api.Client.ImportExportImages
 		{
 			ImageExportHistory result =
 				await
-					client.WebApi.ApiGetAsync<ImageExportHistory>(
+					client.WebApi.GetAsync<ImageExportHistory>(
 						ApiUris.GetCustomerImageExportHistory(client.Account.OrganizationId, count));
 			return result.imageExportRecord;
 		}
@@ -140,7 +140,7 @@ namespace DD.CBU.Compute.Api.Client.ImportExportImages
 		{
 			return
 				await
-					client.WebApi.ApiPostAsync<NewImageImport, ServerImageWithStateType>(
+					client.WebApi.PostAsync<NewImageImport, ServerImageWithStateType>(
 						ApiUris.ImportCustomerImage(client.Account.OrganizationId), 
 						new NewImageImport
 						{
@@ -175,7 +175,7 @@ namespace DD.CBU.Compute.Api.Client.ImportExportImages
 		{
 			return
 				await
-					client.WebApi.ApiPostAsync<NewImageExport, ImageExportType>(
+					client.WebApi.PostAsync<NewImageExport, ImageExportType>(
 						ApiUris.ExportCustomerImage(client.Account.OrganizationId), 
 						new NewImageExport
 						{

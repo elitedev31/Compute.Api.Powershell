@@ -9,7 +9,7 @@ namespace DD.CBU.Compute.Api.Client.Network20
 		/// <summary>	The network domain. </summary>
 		private INetworkDomain _networkDomain;
 
-		private IComputeApiClient _client;
+		private IWebApi _client;
 		private IVlan _vlan;
 
 		/// <summary>
@@ -17,7 +17,7 @@ namespace DD.CBU.Compute.Api.Client.Network20
 		/// 	class.
 		/// </summary>
 		/// <param name="computeApiClient"></param>
-		public Networking(IComputeApiClient computeApiClient)
+		public Networking(IWebApi computeApiClient)
 		{
 			_client = computeApiClient;
 			_networkDomain = new NetworkDomain(computeApiClient);

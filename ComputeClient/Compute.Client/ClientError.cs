@@ -34,8 +34,7 @@ namespace DD.CBU.Compute.Api.Client
 		/// The client is already logged into the CaaS API.
 		/// </summary>
 		/// <remarks>
-		/// To log in with different credentials than those currently used by the client, first call
-		///     <see cref="ComputeApiClient.Logout"/> before calling <see cref="ComputeApiClient.LoginAsync"/>.
+		/// To log in with different credentials than those currently used by the client, first call	
 		/// </remarks>
 		AlreadyLoggedIn = 2
 	}

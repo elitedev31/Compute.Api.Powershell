@@ -18,7 +18,7 @@ namespace DD.CBU.Compute.Api.Client.Server20
 		public static async Task<ServersResponseCollection> GetMcp2DeployedServers(this IComputeApiClient client, ServerListOptions options = null, PageableRequest pagingOptions = null)
 		{
 			ServersResponseCollection servers =
-				await client.WebApi.ApiGetAsync<ServersResponseCollection>(ApiUris.GetMcp2Servers(client.Account.OrganizationId), pagingOptions);
+				await client.WebApi.GetAsync<ServersResponseCollection>(ApiUris.GetMcp2Servers(client.Account.OrganizationId), pagingOptions);
 			return servers;
 		}
 
@@ -31,7 +31,7 @@ namespace DD.CBU.Compute.Api.Client.Server20
 		public static async Task<ServerType> GetMcp2DeployedServer(this IComputeApiClient client, Guid serverId)
 		{
 			ServerType servers =
-				await client.WebApi.ApiGetAsync<ServerType>(ApiUris.GetMcp2Server(client.Account.OrganizationId, serverId));
+				await client.WebApi.GetAsync<ServerType>(ApiUris.GetMcp2Server(client.Account.OrganizationId, serverId));
 			return servers;
 		}
 	}

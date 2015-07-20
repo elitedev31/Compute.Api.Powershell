@@ -1,64 +1,36 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IWebApi.cs" company="">
-//   
-// </copyright>
-// <summary>
-//   The web API interface for communication with CaaS REST API.
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
-
-
-
-    using System;
-    using System.Net;
-    using System.Threading.Tasks;
-    using DD.CBU.Compute.Api.Contracts.Directory;
-    using DD.CBU.Compute.Api.Contracts.Requests;
-
-namespace DD.CBU.Compute.Api.Client.Interfaces
+﻿namespace DD.CBU.Compute.Api.Client.Interfaces
 {
+	using System;
+	using System.Threading.Tasks;
+
+	using DD.CBU.Compute.Api.Contracts.Requests;
+
     /// <summary>
     /// The web API interface for communication with CaaS REST API.
     /// </summary>
     public interface IWebApi : IDisposable
-    {
-        /// <summary>
-		/// Is the API client currently logged in to the CaaS API?
-        /// </summary>
-		bool IsLoggedIn { get; }
-
-		/// <summary>
-		/// Read-only information about the CaaS account targeted by the CaaS API client.
-		/// </summary>
-		/// <remarks>
-		/// <c>null</c>, unless logged in.
-		/// </remarks>
-		/// <seealso cref="LoginAsync"/>
-		IAccount Account { get; }
-
-		/// <summary>
-		/// Gets the credentials.
-		/// </summary>
-		ICredentials Credentials { get; }
-
-		/// <summary>
-		/// Gets the region.
-		/// </summary>
-		string Region { get; }
+    {    
+	    /// <summary>
+	    /// Gets the CaaS client organization id.
+	    /// </summary>
+	    Guid OrganizationId { get; }
 
 		/// <summary>
 		/// Invoke a CaaS API operation using a HTTP GET request.
 		/// </summary>
-        /// <typeparam name="TResult">
+		/// <typeparam name="TResult">
 		/// The XML-serialisable data contract type into which the response will be deserialised.
-        /// </typeparam>
-        /// <param name="relativeOperationUri">
+		/// </typeparam>
+		/// <param name="relativeOperationUri">
 		/// The operation URI (relative to the CaaS API's base URI).
-        /// </param>
-        /// <returns>
+		/// </param>
+		/// <param name="pagingOptions">
+		/// The paging Options.
+		/// </param>
+		/// <returns>
 		/// The operation result.
-        /// </returns>
-        Task<TResult> ApiGetAsync<TResult>(Uri relativeOperationUri, IPageableRequest pagingOptions = null);
+		/// </returns>
+        Task<TResult> GetAsync<TResult>(Uri relativeOperationUri, IPageableRequest pagingOptions = null);
 
         /// <summary>
         /// Invoke a CaaS API operation using a HTTP POST request.
@@ -78,8 +50,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 		/// <returns>
 		/// The operation result.
 		/// </returns>
-        Task<TResult> ApiPostAsync<TObject, TResult>(Uri relativeOperationUri, TObject content);
-
+        Task<TResult> PostAsync<TObject, TResult>(Uri relativeOperationUri, TObject content);
 
         /// <summary>
         /// Invoke a CaaS API operation using a HTTP POST request with string content
@@ -96,22 +67,6 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 		/// <returns>
 		/// The operation result.
 		/// </returns>
-        Task<TResult> ApiPostAsync<TResult>(Uri relativeOperationUri, string content);
-
-        /// <summary>
-		/// Asynchronously log into the CaaS API.
-        /// </summary>
-        /// <param name="accountCredentials">
-		/// The CaaS account credentials used to authenticate against the CaaS API.
-        /// </param>
-        /// <returns>
-		/// An <see cref="IAccount"/> implementation representing the CaaS account that the client is logged into.
-        /// </returns>
-        Task<IAccount> LoginAsync(ICredentials accountCredentials);
-
-        /// <summary>
-		/// Log out of the CaaS API.
-        /// </summary>
-        void Logout();
+        Task<TResult> PostAsync<TResult>(Uri relativeOperationUri, string content);
     }
 }

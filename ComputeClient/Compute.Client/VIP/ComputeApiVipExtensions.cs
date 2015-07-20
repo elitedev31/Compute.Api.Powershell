@@ -28,7 +28,7 @@ namespace DD.CBU.Compute.Api.Client.VIP
 		{
 			RealServers realservers =
 				await
-					client.WebApi.ApiGetAsync<RealServers>(
+					client.WebApi.GetAsync<RealServers>(
 						ApiUris.CreateOrGetVipRealServers(client.Account.OrganizationId, networkId));
 			return realservers.Items ?? null;
 		}
@@ -59,7 +59,7 @@ namespace DD.CBU.Compute.Api.Client.VIP
 		{
 			Status status =
 				await
-					client.WebApi.ApiPostAsync<NewRealServer, Status>(
+					client.WebApi.PostAsync<NewRealServer, Status>(
 						ApiUris.CreateOrGetVipRealServers(client.Account.OrganizationId, networkId), 
 						new NewRealServer
 						{
@@ -92,7 +92,7 @@ namespace DD.CBU.Compute.Api.Client.VIP
 		{
 			Status status =
 				await
-					client.WebApi.ApiGetAsync<Status>(
+					client.WebApi.GetAsync<Status>(
 						ApiUris.DeleteVipRealServers(client.Account.OrganizationId, networkId, rServerId));
 			return status;
 		}
@@ -122,7 +122,7 @@ namespace DD.CBU.Compute.Api.Client.VIP
 
 			Status status =
 				await
-					client.WebApi.ApiPostAsync<Status>(
+					client.WebApi.PostAsync<Status>(
 						ApiUris.ModifyVipRealServers(client.Account.OrganizationId, networkId, rServerId), 
 						string.Format(poststring, inService));
 			return status;
@@ -145,7 +145,7 @@ namespace DD.CBU.Compute.Api.Client.VIP
 		{
 			Probes probes =
 				await
-					client.WebApi.ApiGetAsync<Probes>(
+					client.WebApi.GetAsync<Probes>(
 						ApiUris.CreateOrGetVipProbes(client.Account.OrganizationId, networkId));
 			return probes.Items ?? null;
 		}
@@ -233,7 +233,7 @@ namespace DD.CBU.Compute.Api.Client.VIP
 
 			Status status =
 				await
-					client.WebApi.ApiPostAsync<NewProbe, Status>(
+					client.WebApi.PostAsync<NewProbe, Status>(
 						ApiUris.CreateOrGetVipProbes(client.Account.OrganizationId, networkId), probe);
 
 			return status;
@@ -291,7 +291,7 @@ namespace DD.CBU.Compute.Api.Client.VIP
 
 			Status status =
 				await
-					client.WebApi.ApiPostAsync<Status>(
+					client.WebApi.PostAsync<Status>(
 						ApiUris.ModifyVipProbes(client.Account.OrganizationId, networkId, probeId), poststring);
 			return status;
 		}
@@ -317,7 +317,7 @@ namespace DD.CBU.Compute.Api.Client.VIP
 		{
 			Status status =
 				await
-					client.WebApi.ApiGetAsync<Status>(
+					client.WebApi.GetAsync<Status>(
 						ApiUris.DeleteVipProbes(client.Account.OrganizationId, networkId, probeId));
 			return status;
 		}
@@ -338,7 +338,7 @@ namespace DD.CBU.Compute.Api.Client.VIP
 		{
 			ServerFarms serverfarms =
 				await
-					client.WebApi.ApiGetAsync<ServerFarms>(
+					client.WebApi.GetAsync<ServerFarms>(
 						ApiUris.CreateOrGetVipServerFarm(client.Account.OrganizationId, networkId));
 			return serverfarms.Items ?? null;
 		}
@@ -364,7 +364,7 @@ namespace DD.CBU.Compute.Api.Client.VIP
 		{
 			ServerFarmDetails serverfarm =
 				await
-					client.WebApi.ApiGetAsync<ServerFarmDetails>(
+					client.WebApi.GetAsync<ServerFarmDetails>(
 						ApiUris.GetVipServerFarm(client.Account.OrganizationId, networkId, serverFarmId));
 			return serverfarm ?? null;
 		}
@@ -415,7 +415,7 @@ namespace DD.CBU.Compute.Api.Client.VIP
 
 			Status status =
 				await
-					client.WebApi.ApiPostAsync<NewServerFarm, Status>(
+					client.WebApi.PostAsync<NewServerFarm, Status>(
 						ApiUris.CreateOrGetVipServerFarm(client.Account.OrganizationId, networkId), newserverfarm);
 
 
@@ -443,7 +443,7 @@ namespace DD.CBU.Compute.Api.Client.VIP
 		{
 			Status status =
 				await
-					client.WebApi.ApiGetAsync<Status>(
+					client.WebApi.GetAsync<Status>(
 						ApiUris.DeleteVipServerFarm(client.Account.OrganizationId, networkId, serverFarmId));
 			return status;
 		}
@@ -481,7 +481,7 @@ namespace DD.CBU.Compute.Api.Client.VIP
 
 			Status status =
 				await
-					client.WebApi.ApiPostAsync<Status>(
+					client.WebApi.PostAsync<Status>(
 						ApiUris.GetVipServerFarm(client.Account.OrganizationId, networkId, serverFarmId), poststring);
 			return status;
 		}
@@ -526,7 +526,7 @@ namespace DD.CBU.Compute.Api.Client.VIP
 
 			Status status =
 				await
-					client.WebApi.ApiPostAsync<Status>(
+					client.WebApi.PostAsync<Status>(
 						ApiUris.AddVipRealServerToServerFarm(client.Account.OrganizationId, networkId, serverFarmId), poststring);
 			return status;
 		}
@@ -571,7 +571,7 @@ namespace DD.CBU.Compute.Api.Client.VIP
 
 			Status status =
 				await
-					client.WebApi.ApiPostAsync<Status>(
+					client.WebApi.PostAsync<Status>(
 						ApiUris.RemoveVipRealServerFromServerFarm(client.Account.OrganizationId, networkId, serverFarmId), poststring);
 			return status;
 		}
@@ -610,7 +610,7 @@ namespace DD.CBU.Compute.Api.Client.VIP
 
 			Status status =
 				await
-					client.WebApi.ApiPostAsync<Status>(
+					client.WebApi.PostAsync<Status>(
 						ApiUris.AddVipProbeToServerFarm(client.Account.OrganizationId, networkId, serverFarmId), poststring);
 			return status;
 		}
@@ -649,7 +649,7 @@ namespace DD.CBU.Compute.Api.Client.VIP
 
 			Status status =
 				await
-					client.WebApi.ApiPostAsync<Status>(
+					client.WebApi.PostAsync<Status>(
 						ApiUris.RemoveVipProbeFromServerFarm(client.Account.OrganizationId, networkId, serverFarmId), poststring);
 			return status;
 		}
@@ -672,7 +672,7 @@ namespace DD.CBU.Compute.Api.Client.VIP
 		{
 			PersistenceProfiles persprofile =
 				await
-					client.WebApi.ApiGetAsync<PersistenceProfiles>(
+					client.WebApi.GetAsync<PersistenceProfiles>(
 						ApiUris.CreateOrGetVipPersistenceProfile(client.Account.OrganizationId, networkId));
 			return persprofile.Items ?? null;
 		}
@@ -716,7 +716,7 @@ namespace DD.CBU.Compute.Api.Client.VIP
 
 			Status status =
 				await
-					client.WebApi.ApiPostAsync<NewPersistenceProfile, Status>(
+					client.WebApi.PostAsync<NewPersistenceProfile, Status>(
 						ApiUris.CreateOrGetVipPersistenceProfile(client.Account.OrganizationId, networkId), persProfile);
 			return status;
 		}
@@ -760,7 +760,7 @@ namespace DD.CBU.Compute.Api.Client.VIP
 
 			Status status =
 				await
-					client.WebApi.ApiPostAsync<NewPersistenceProfile, Status>(
+					client.WebApi.PostAsync<NewPersistenceProfile, Status>(
 						ApiUris.CreateOrGetVipPersistenceProfile(client.Account.OrganizationId, networkId), persProfile);
 			return status;
 		}
@@ -785,7 +785,7 @@ namespace DD.CBU.Compute.Api.Client.VIP
 		{
 			Status status =
 				await
-					client.WebApi.ApiGetAsync<Status>(
+					client.WebApi.GetAsync<Status>(
 						ApiUris.DeleteVipPersistenceProfile(client.Account.OrganizationId, networkId, persProfileId));
 			return status;
 		}
@@ -807,7 +807,7 @@ namespace DD.CBU.Compute.Api.Client.VIP
 		{
 			Vips vips =
 				await
-					client.WebApi.ApiGetAsync<Vips>(
+					client.WebApi.GetAsync<Vips>(
 						ApiUris.CreateOrGetVip(client.Account.OrganizationId, networkId));
 			return vips.Items ?? null;
 		}
@@ -867,7 +867,7 @@ namespace DD.CBU.Compute.Api.Client.VIP
 
 			Status status =
 				await
-					client.WebApi.ApiPostAsync<NewVip, Status>(
+					client.WebApi.PostAsync<NewVip, Status>(
 						ApiUris.CreateOrGetVip(client.Account.OrganizationId, networkId), vip);
 			return status;
 		}
@@ -892,7 +892,7 @@ namespace DD.CBU.Compute.Api.Client.VIP
 		{
 			Status status =
 				await
-					client.WebApi.ApiGetAsync<Status>(
+					client.WebApi.GetAsync<Status>(
 						ApiUris.DeleteVip(client.Account.OrganizationId, networkId, vipId));
 			return status;
 		}
@@ -929,7 +929,7 @@ namespace DD.CBU.Compute.Api.Client.VIP
 
 			Status status =
 				await
-					client.WebApi.ApiPostAsync<Status>(
+					client.WebApi.PostAsync<Status>(
 						ApiUris.ModifyVip(client.Account.OrganizationId, networkId, vipId), poststring);
 			return status;
 		}

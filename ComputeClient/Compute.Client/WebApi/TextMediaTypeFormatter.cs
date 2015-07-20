@@ -53,7 +53,10 @@ namespace DD.CBU.Compute.Api.Client
 		/// <returns>
 		/// The <see cref="Task"/>.
 		/// </returns>
-		public override Task<object> ReadFromStreamAsync(Type type, Stream readStream, HttpContent content, 
+		public override Task<object> ReadFromStreamAsync(
+			Type type,
+			Stream readStream,
+			HttpContent content,
 			IFormatterLogger formatterLogger)
 		{
 			var taskCompletionSource = new TaskCompletionSource<object>();
@@ -95,7 +98,11 @@ namespace DD.CBU.Compute.Api.Client
 		/// <returns>
 		/// The <see cref="Task"/>.
 		/// </returns>
-		public override Task WriteToStreamAsync(Type type, object value, Stream writeStream, HttpContent content, 
+		public override Task WriteToStreamAsync(
+			Type type,
+			object value,
+			Stream writeStream,
+			HttpContent content,
 			TransportContext transportContext)
 		{
 			var taskCompletionSource = new TaskCompletionSource<object>();
@@ -127,7 +134,7 @@ namespace DD.CBU.Compute.Api.Client
 		/// </returns>
 		public override bool CanReadType(Type type)
 		{
-			return type == typeof (string);
+			return type == typeof(string);
 		}
 
 		/// <summary>
@@ -141,7 +148,7 @@ namespace DD.CBU.Compute.Api.Client
 		/// </returns>
 		public override bool CanWriteType(Type type)
 		{
-			return type == typeof (string);
+			return type == typeof(string);
 		}
 	}
 }

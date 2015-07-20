@@ -55,7 +55,7 @@ namespace DD.CBU.Compute.Api.Client.Network
 		{
 			return
 				await
-					client.WebApi.ApiPostAsync<NewNetworkWithLocationType, Status>(
+					client.WebApi.PostAsync<NewNetworkWithLocationType, Status>(
 						ApiUris.CreateNetwork(client.Account.OrganizationId), 
 						new NewNetworkWithLocationType
 						{
@@ -77,7 +77,7 @@ namespace DD.CBU.Compute.Api.Client.Network
 		public static async Task<IEnumerable<NetworkWithLocationsNetwork>> GetNetworksTask(this IComputeApiClient client)
 		{
 			NetworkWithLocations networks =
-				await client.WebApi.ApiGetAsync<NetworkWithLocations>(ApiUris.NetworkWithLocations(client.Account.OrganizationId));
+				await client.WebApi.GetAsync<NetworkWithLocations>(ApiUris.NetworkWithLocations(client.Account.OrganizationId));
 			return networks.Items;
 		}
 
@@ -97,7 +97,7 @@ namespace DD.CBU.Compute.Api.Client.Network
 		public static async Task<Status> DeleteNetwork(this IComputeApiClient client, string networkId)
 		{
 			return
-				await client.WebApi.ApiGetAsync<Status>(ApiUris.DeleteNetwork(client.Account.OrganizationId, networkId));
+				await client.WebApi.GetAsync<Status>(ApiUris.DeleteNetwork(client.Account.OrganizationId, networkId));
 		}
 
 
@@ -134,7 +134,7 @@ namespace DD.CBU.Compute.Api.Client.Network
 
 			return
 				await
-					client.WebApi.ApiPostAsync<Status>(ApiUris.ModifyNetwork(client.Account.OrganizationId, networkId), poststring);
+					client.WebApi.PostAsync<Status>(ApiUris.ModifyNetwork(client.Account.OrganizationId, networkId), poststring);
 		}
 
 		/// <summary>
@@ -154,7 +154,7 @@ namespace DD.CBU.Compute.Api.Client.Network
 		{
 			return
 				await
-					client.WebApi.ApiGetAsync<NetworkConfigurationType>(ApiUris.GetNetworkConfig(client.Account.OrganizationId, 
+					client.WebApi.GetAsync<NetworkConfigurationType>(ApiUris.GetNetworkConfig(client.Account.OrganizationId, 
 						networkId));
 		}
 
@@ -174,7 +174,7 @@ namespace DD.CBU.Compute.Api.Client.Network
 		public static async Task<IEnumerable<NatRuleType>> GetNatRules(this IComputeApiClient client, string networkId)
 		{
 			NatRules natRules =
-				await client.WebApi.ApiGetAsync<NatRules>(ApiUris.GetNatRules(client.Account.OrganizationId, networkId));
+				await client.WebApi.GetAsync<NatRules>(ApiUris.GetNatRules(client.Account.OrganizationId, networkId));
 
 			return natRules.NatRule;
 		}
@@ -199,7 +199,7 @@ namespace DD.CBU.Compute.Api.Client.Network
 		{
 			return
 				await
-					client.WebApi.ApiGetAsync<Status>(
+					client.WebApi.GetAsync<Status>(
 						ApiUris.DeleteNatRule(client.Account.OrganizationId, networkId, natRuleId));
 		}
 
@@ -236,7 +236,7 @@ namespace DD.CBU.Compute.Api.Client.Network
 
 			return
 				await
-					client.WebApi.ApiPostAsync<NatRuleType, NatRuleType>(
+					client.WebApi.PostAsync<NatRuleType, NatRuleType>(
 						ApiUris.CreateNatRule(client.Account.OrganizationId, networkId), 
 						new NatRuleType {name = natRuleName, sourceIp = sourceIp.ToString()});
 		}
@@ -258,7 +258,7 @@ namespace DD.CBU.Compute.Api.Client.Network
 		{
 			AclRuleListType aclRules =
 				await
-					client.WebApi.ApiGetAsync<AclRuleListType>(
+					client.WebApi.GetAsync<AclRuleListType>(
 						ApiUris.GetAclRules(client.Account.OrganizationId, networkId));
 
 			return aclRules.AclRule;
@@ -291,7 +291,7 @@ namespace DD.CBU.Compute.Api.Client.Network
 		{
 			return
 				await
-					client.WebApi.ApiGetAsync<Status>(
+					client.WebApi.GetAsync<Status>(
 						ApiUris.DeleteAclRule(client.Account.OrganizationId, networkId, aclRuleId));
 		}
 
@@ -439,7 +439,7 @@ namespace DD.CBU.Compute.Api.Client.Network
 
 			return
 				await
-					client.WebApi.ApiPostAsync<AclRuleType, AclRuleType>(
+					client.WebApi.PostAsync<AclRuleType, AclRuleType>(
 						ApiUris.CreateAclRule(client.Account.OrganizationId, networkId), 
 						rule);
 		}
@@ -461,7 +461,7 @@ namespace DD.CBU.Compute.Api.Client.Network
 		{
 			return
 				await
-					client.WebApi.ApiGetAsync<Status>(ApiUris.ReserveNetworkPublicIpAddressBlock(client.Account.OrganizationId, 
+					client.WebApi.GetAsync<Status>(ApiUris.ReserveNetworkPublicIpAddressBlock(client.Account.OrganizationId, 
 						networkId));
 		}
 
@@ -486,7 +486,7 @@ namespace DD.CBU.Compute.Api.Client.Network
 		{
 			return
 				await
-					client.WebApi.ApiGetAsync<Status>(ApiUris.ReleaseNetworkPublicIpAddressBlock(client.Account.OrganizationId, 
+					client.WebApi.GetAsync<Status>(ApiUris.ReleaseNetworkPublicIpAddressBlock(client.Account.OrganizationId, 
 						networkId, ipBlockId));
 		}
 
@@ -538,7 +538,7 @@ namespace DD.CBU.Compute.Api.Client.Network
 
 			return
 				await
-					client.WebApi.ApiPostAsync<Status>(
+					client.WebApi.PostAsync<Status>(
 						ApiUris.SetServerToVipNetworkPublicIpAddressBlock(client.Account.OrganizationId, networkId, ipBlockId), 
 						string.Format(poststring, enable));
 			
@@ -567,7 +567,7 @@ namespace DD.CBU.Compute.Api.Client.Network
 
 			return
 				await
-					client.WebApi.ApiPostAsync<Status>(ApiUris.SetNetworkMulticast(client.Account.OrganizationId, networkId), 
+					client.WebApi.PostAsync<Status>(ApiUris.SetNetworkMulticast(client.Account.OrganizationId, networkId), 
 						string.Format(poststring, enable));
 		}
 	}

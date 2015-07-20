@@ -1,20 +1,11 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ApiClientException.cs" company="">
-//   
-// </copyright>
-// <summary>
-//   The base class for API client exceptions.
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
-
-
-
-using System;
-using System.Diagnostics.Contracts;
-using System.Runtime.Serialization;
-
+﻿// ReSharper disable once CheckNamespace
+// Backwards compatibility
 namespace DD.CBU.Compute.Api.Client
 {
+	using System;
+	using System.Diagnostics.Contracts;
+	using System.Runtime.Serialization;
+
 	/// <summary>
 	/// The base class for API client exceptions.
 	/// </summary>

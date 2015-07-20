@@ -34,7 +34,7 @@ namespace DD.CBU.Compute.Api.Client.Network20
 		{
 			var vlans =
 				await
-				_client.WebApi.ApiGetAsync<vlans>(
+				_client.WebApi.GetAsync<vlans>(
 					ApiUris.GetVlanByOrgId(_client.Account.OrganizationId), pagingOptions);
 
 			return vlans.vlan;
@@ -51,7 +51,7 @@ namespace DD.CBU.Compute.Api.Client.Network20
 		{
 			var vlans =
 				await
-				_client.WebApi.ApiGetAsync<vlans>(
+				_client.WebApi.GetAsync<vlans>(
 					ApiUris.GetVlan(_client.Account.OrganizationId, id, vlanName, networkDomainId), pagingOptions);
 
 			return vlans.vlan;
@@ -63,7 +63,7 @@ namespace DD.CBU.Compute.Api.Client.Network20
 		/// <returns>	The vlan. </returns>
 		public async Task<VlanType> GetVlan(Guid vlanId)
 		{
-			return await _client.WebApi.ApiGetAsync<VlanType>(
+			return await _client.WebApi.GetAsync<VlanType>(
 				ApiUris.GetVlan(_client.Account.OrganizationId, vlanId));
 		}
 
@@ -77,7 +77,7 @@ namespace DD.CBU.Compute.Api.Client.Network20
 		{
 			return
 				await
-				_client.WebApi.ApiPostAsync<DeployVlanType, ResponseType>(
+				_client.WebApi.PostAsync<DeployVlanType, ResponseType>(
 					ApiUris.DeployVlan(_client.Account.OrganizationId),
 					vlan);
 		}
@@ -90,7 +90,7 @@ namespace DD.CBU.Compute.Api.Client.Network20
 		{
 			return 
 				await
-					_client.WebApi.ApiPostAsync<DeleteVlanType, ResponseType>(
+					_client.WebApi.PostAsync<DeleteVlanType, ResponseType>(
 						ApiUris.DeleteVlan(_client.Account.OrganizationId),
 						new DeleteVlanType { id = id });
 		}

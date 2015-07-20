@@ -1,21 +1,12 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ComputeApiException.cs" company="">
-//   
-// </copyright>
-// <summary>
-//   Exception raised by the CaaS API client when it encounters an error response from the CaaS API.
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
-
-
-
-using System;
-using System.Diagnostics;
-using System.Runtime.Serialization;
-using DD.CBU.Compute.Api.Contracts.General;
-
+﻿// ReSharper disable once CheckNamespace
+// Backwards compatibility
 namespace DD.CBU.Compute.Api.Client
 {
+	using System;
+	using System.Diagnostics;
+	using System.Runtime.Serialization;
+	using DD.CBU.Compute.Api.Contracts.General;
+
 	/// <summary>
 	/// Exception raised by the CaaS API client when it encounters an error response from the CaaS API.
 	/// </summary>
@@ -54,7 +45,10 @@ namespace DD.CBU.Compute.Api.Client
 		/// <param name="formatArguments">
 		/// Optional message format arguments.
 		/// </param>
-		public ComputeApiException(ComputeApiError error, string additionalDetail, string messageOrFormat, 
+		public ComputeApiException(
+			ComputeApiError error,
+			string additionalDetail,
+			string messageOrFormat,
 			params object[] formatArguments)
 			: base(messageOrFormat, formatArguments)
 		{
@@ -83,14 +77,21 @@ namespace DD.CBU.Compute.Api.Client
 		/// The exception message or message format.
 		/// </param>
 		/// <param name="status">
+		/// Api error status
 		/// </param>
 		/// <param name="uri">
+		/// Api uri
 		/// </param>
 		/// <param name="formatArguments">
 		/// Optional message format arguments.
 		/// </param>
-		public ComputeApiException(ComputeApiError error, string additionalDetail, string messageOrFormat, Status status, 
-			Uri uri, params object[] formatArguments)
+		public ComputeApiException(
+			ComputeApiError error,
+			string additionalDetail,
+			string messageOrFormat,
+			Status status,
+			Uri uri,
+			params object[] formatArguments)
 			: base(messageOrFormat, formatArguments)
 		{
 			Debug.Assert(error != ComputeApiError.Unknown, "Reason.Unknown should not be used here.");
@@ -125,8 +126,12 @@ namespace DD.CBU.Compute.Api.Client
 		/// <param name="formatArguments">
 		/// Optional message format arguments.
 		/// </param>
-		public ComputeApiException(ComputeApiError error, string additionalDetail, string messageOrFormat, 
-			Exception innerException, params object[] formatArguments)
+		public ComputeApiException(
+			ComputeApiError error,
+			string additionalDetail,
+			string messageOrFormat,
+			Exception innerException,
+			params object[] formatArguments)
 			: base(messageOrFormat, innerException, formatArguments)
 		{
 			Debug.Assert(error != ComputeApiError.Unknown, "Reason.Unknown should not be used here.");
@@ -161,7 +166,7 @@ namespace DD.CBU.Compute.Api.Client
 			if (info == null)
 				throw new ArgumentNullException("info");
 
-			_error = (ComputeApiError) info.GetValue("_error", typeof (ComputeApiError));
+			_error = (ComputeApiError)info.GetValue("_error", typeof(ComputeApiError));
 			_additionalDetail = info.GetString("_additionalDetail");
 		}
 
@@ -276,8 +281,10 @@ namespace DD.CBU.Compute.Api.Client
 		/// Further error details
 		/// </param>
 		/// <param name="status">
+		/// Api call status
 		/// </param>
 		/// <param name="uri">
+		/// Api uri
 		/// </param>
 		/// <returns>
 		/// The configured <see cref="ComputeApiException"/>
