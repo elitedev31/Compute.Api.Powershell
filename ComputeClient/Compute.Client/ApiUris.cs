@@ -1889,9 +1889,48 @@ namespace DD.CBU.Compute.Api.Client
 			return new Uri(string.Format(MCP2_0_PREFIX + "{0}/network/addPublicIpBlock", orgId), UriKind.Relative);
 	    }
 
+	    /// <summary>	Gets public IP blocks. </summary>
+	    /// <param name="orgId">	The org Id. </param>
+	    /// <returns>	The public IP blocks. </returns>
 	    public static Uri GetPublicIpBlocks(Guid orgId)
 	    {
 			return new Uri(string.Format(MCP2_0_PREFIX + "{0}/network/publicIpBlock", orgId), UriKind.Relative);
 	    }
+
+	    /// <summary>	Gets public IP block. </summary>
+	    /// <param name="orgId">		  	The org Id. </param>
+	    /// <param name="publicIpBlockId">	Identifier for the public IP block. </param>
+	    /// <returns>	The public IP block. </returns>
+	    public static Uri GetPublicIpBlock(Guid orgId, string publicIpBlockId)
+	    {
+			return new Uri(string.Format(MCP2_0_PREFIX + "{0}/network/publicIpBlock/{1}", orgId, publicIpBlockId), UriKind.Relative);
+	    }
+
+	    /// <summary>	Gets reserved public addresses. </summary>
+	    /// <param name="orgId">		  	The org Id. </param>
+	    /// <param name="networkDomainId">	The network Domain Id. </param>
+	    /// <returns>	The reserved public addresses. </returns>
+	    public static Uri GetReservedPublicAddresses(Guid orgId, string networkDomainId)
+	    {
+			return new Uri(string.Format(MCP2_0_PREFIX + "{0}/network/reservedPublicIpv4Address?networkDomainId={1}", orgId, networkDomainId), UriKind.Relative);
+	    }
+
+		/// <summary>	Gets reserved public addresses for network. </summary>
+		/// <param name="orgId">		The org Id. </param>
+		/// <param name="networkId">	The server networkid. </param>
+		/// <returns>	The reserved public addresses for network. </returns>
+		public static Uri GetReservedPublicAddressesForNetwork(Guid orgId, string networkId)
+		{
+			return new Uri(string.Format(MCP2_0_PREFIX + "{0}/network/reservedPublicIpv4Address?networkId={1}", orgId, networkId), UriKind.Relative);
+		}
+
+		/// <summary>	Gets reserved private addresses. </summary>
+		/// <param name="orgId">		  	The org Id. </param>
+		/// <param name="networkDomainId">	The network Domain Id. </param>
+		/// <returns>	The reserved public addresses. </returns>
+		public static Uri GetReservedPrivateAddresses(Guid orgId, string networkDomainId)
+		{
+			return new Uri(string.Format(MCP2_0_PREFIX + "{0}/network/reservedPrivateIpv4Address?networkDomainId={1}", orgId, networkDomainId), UriKind.Relative);
+		}
     }
 }
