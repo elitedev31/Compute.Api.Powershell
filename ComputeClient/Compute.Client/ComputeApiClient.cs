@@ -15,6 +15,8 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using DD.CBU.Compute.Api.Client.Interfaces;
+using DD.CBU.Compute.Api.Client.Network;
+using DD.CBU.Compute.Api.Client.Network20;
 using DD.CBU.Compute.Api.Client.Utilities;
 using DD.CBU.Compute.Api.Contracts.Datacenter;
 using DD.CBU.Compute.Api.Contracts.Directory;
@@ -54,6 +56,9 @@ namespace DD.CBU.Compute.Api.Client
 					"Argument cannot be null, empty, or composed entirely of whitespace: 'targetRegionName'.", "targetRegionName");
 
 			WebApi = new WebApi(targetRegionName);
+
+			_networking = new Networking(this);
+			_networkingLegacy = new NetworkingLegacy(this);
 		}
 
 		/// <summary>
@@ -72,6 +77,8 @@ namespace DD.CBU.Compute.Api.Client
 				throw new ArgumentException("Base URI supplied is not an absolute URI", "baseUri");
 
 			WebApi = new WebApi(baseUri);
+			_networking = new Networking(this);
+			_networkingLegacy = new NetworkingLegacy(this);
 		}
 
 		/// <summary>
@@ -93,6 +100,8 @@ namespace DD.CBU.Compute.Api.Client
 				throw new ArgumentException("Base URI supplied is not an absolute URI", "vendor");
 
 			WebApi = new WebApi(baseUri);
+			_networking = new Networking(this);
+			_networkingLegacy = new NetworkingLegacy(this);
 		}
 
         /// <summary>
@@ -111,6 +120,8 @@ namespace DD.CBU.Compute.Api.Client
                 throw new ArgumentException("Base URI supplied is not an absolute URI", "region");
 
             WebApi = new WebApi(baseUri);
+			_networking = new Networking(this);
+			_networkingLegacy = new NetworkingLegacy(this);
         }
 
 		/// <summary>
@@ -127,6 +138,8 @@ namespace DD.CBU.Compute.Api.Client
 				throw new ArgumentNullException("client", "Argument cannot be null");
 
 			WebApi = new WebApi(client);
+			_networking = new Networking(this);
+			_networkingLegacy = new NetworkingLegacy(this);
 		}
 
 		/// <summary>
@@ -1146,5 +1159,20 @@ namespace DD.CBU.Compute.Api.Client
 		
 
 		#endregion // Public methods
+
+		#region Public properties.
+
+		private INetworking _networking;
+		private INetworkingLegacy _networkingLegacy;
+
+		/// <summary>	Gets the networking 2.0 methods. </summary>
+		/// <value>	The networking. </value>
+		/// <seealso cref="P:DD.CBU.Compute.Api.Client.Interfaces.IComputeApiClient.Networking"/>
+		public INetworking Networking { get { return _networking; } }
+
+		/// <summary>	Gets the networking legacy 1.0 methods </summary>
+		public INetworkingLegacy NetworkingLegacy { get { return _networkingLegacy; } }
+
+		#endregion Public properties
 	}
 }

@@ -1881,5 +1881,17 @@ namespace DD.CBU.Compute.Api.Client
 
         #endregion
 
+	    /// <summary>	Adds a public IP block. </summary>
+	    /// <param name="orgId">	The org Id. </param>
+	    /// <returns>	An URI. </returns>
+	    public static Uri AddPublicIpBlock(Guid orgId)
+	    {
+			return new Uri(string.Format(MCP2_0_PREFIX + "{0}/network/addPublicIpBlock", orgId), UriKind.Relative);
+	    }
+
+	    public static Uri GetPublicIpBlocks(Guid orgId)
+	    {
+			return new Uri(string.Format(MCP2_0_PREFIX + "{0}/network/publicIpBlock", orgId), UriKind.Relative);
+	    }
     }
 }

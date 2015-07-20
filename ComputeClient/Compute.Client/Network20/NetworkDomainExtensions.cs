@@ -14,10 +14,10 @@
 		/// <param name="client">			The client. </param>
 		/// <param name="pagingOptions">	Options for controlling the paging. </param>
 		/// <returns>	The list of network domains associated with the organization. </returns>
+		[Obsolete("Use IComputeApiClient.Networking.NetworkDomain instead")]
 		public static async Task<IEnumerable<NetworkDomainType>> GetNetworkDomains(this IComputeApiClient client, PageableRequest pagingOptions = null)
 		{
-			var networks = await client.WebApi.ApiGetAsync<networkDomains>(ApiUris.NetworkDomains(client.Account.OrganizationId), pagingOptions);
-			return networks.networkDomain;
+			return await client.Networking.NetworkDomain.GetNetworkDomains(pagingOptions);
 		}
 
 		/// <summary>	This function gets list of network domains from Cloud. </summary>
@@ -26,10 +26,10 @@
 		/// <param name="networkName">	  	The network Name. </param>
 		/// <param name="pagingOptions">  	Options for controlling the paging. </param>
 		/// <returns>	The list of network domains associated with the organization. </returns>
+		[Obsolete("Use IComputeApiClient.Networking.NetworkDomain instead")]
 		public static async Task<IEnumerable<NetworkDomainType>> GetNetworkDomain(this IComputeApiClient client, Guid networkDomainId, string networkName, PageableRequest pagingOptions = null)
 		{
-			var networks = await client.WebApi.ApiGetAsync<networkDomains>(ApiUris.NetworkDomain(client.Account.OrganizationId, networkDomainId, networkName), pagingOptions);
-			return networks.networkDomain;
+			return await client.Networking.NetworkDomain.GetNetworkDomain(networkDomainId, networkName, pagingOptions);
 		}
 
 		/// <summary>
@@ -44,22 +44,20 @@
 		/// <returns>
 		/// Response containing status.
 		/// </returns>
+		[Obsolete("Use IComputeApiClient.Networking.NetworkDomain instead")]
 		public static async Task<ResponseType> DeployNetworkDomain(this IComputeApiClient client, DeployNetworkDomainType networkDomain)
 		{
-			var response = await client.WebApi.ApiPostAsync<DeployNetworkDomainType, ResponseType>(ApiUris.CreateNetworkDomain(client.Account.OrganizationId), networkDomain);
-			return response;
+			return await client.Networking.NetworkDomain.DeployNetworkDomain(networkDomain);
 		}
 
 		/// <summary>	An IComputeApiClient extension method that deletes the network domain. </summary>
 		/// <param name="client">	The client. </param>
 		/// <param name="id">	 	The identifier of the network domain. </param>
 		/// <returns>	A job response from the API; </returns>
+		[Obsolete("Use IComputeApiClient.Networking.NetworkDomain instead")]
 		public static async Task<ResponseType> DeleteNetworkDomain(this IComputeApiClient client, string id)
 		{
-			ResponseType response = await
-				client.WebApi.ApiPostAsync<DeleteNetworkDomainType, ResponseType>(
-					ApiUris.DeleteNetworkDomain(client.Account.OrganizationId), new DeleteNetworkDomainType { id = id });
-			return response;
+			return await client.Networking.NetworkDomain.DeleteNetworkDomain(id);
 		}
 	}
 }

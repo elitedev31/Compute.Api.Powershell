@@ -236,41 +236,8 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 		IsNullable = false)]
 	public partial class AddPublicIpBlockType
 	{
-
-		private string itemField;
-
-		private NetworkDomainItemChoiceType itemElementNameField;
-
 		/// <remarks/>
 		[System.Xml.Serialization.XmlElementAttribute("networkDomainId", typeof (string))]
-		[System.Xml.Serialization.XmlElementAttribute("networkId", typeof (string))]
-		[System.Xml.Serialization.XmlChoiceIdentifierAttribute("ItemElementName")]
-		public string Item
-		{
-			get { return this.itemField; }
-			set { this.itemField = value; }
-		}
-
-		/// <remarks/>
-		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		public NetworkDomainItemChoiceType ItemElementName
-		{
-			get { return this.itemElementNameField; }
-			set { this.itemElementNameField = value; }
-		}
-	}
-
-	/// <remarks/>
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-	[System.SerializableAttribute()]
-	[System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types", IncludeInSchema = false)]
-	public enum NetworkDomainItemChoiceType
-	{
-
-		/// <remarks/>
-		networkDomainId,
-
-		/// <remarks/>
-		networkId,
+		public string networkDomainId { get; set; }
 	}
 }

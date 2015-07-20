@@ -626,5 +626,11 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 		/// The <see cref="Task"/>.
 		/// </returns>
         Task<IEnumerable<Geo>> DiscoverHomeMultiGeo(KnownApiVendor vendor, ICredentials credential);
+
+	    /// <summary>	Gets the networking 2.0 methods. </summary>
+	    INetworking Networking { get; }
+
+		/// <summary>	Gets the networking legacy 1.0 methods </summary>
+		INetworkingLegacy NetworkingLegacy { get; }
     }
 }

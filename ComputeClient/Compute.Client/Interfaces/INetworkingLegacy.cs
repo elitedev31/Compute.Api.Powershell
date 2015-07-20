@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DD.CBU.Compute.Api.Client.Network20
+namespace DD.CBU.Compute.Api.Client.Interfaces
 {
-	public static class IpAddressManagementExtensions
+	public interface INetworkingLegacy
 	{
 	}
 }

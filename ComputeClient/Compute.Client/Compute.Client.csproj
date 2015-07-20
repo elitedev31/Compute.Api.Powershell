@@ -70,7 +70,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>..\..\CaaS_PS.ruleset</CodeAnalysisRuleSet>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
     <DocumentationFile>bin\Release\DD.CBU.Compute.Api.Client.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
@@ -98,11 +98,22 @@
     <Compile Include="ApiClientException.cs" />
     <Compile Include="ApiUris.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Interfaces\IIpam.cs" />
+    <Compile Include="Interfaces\INetworkAddressTranslation.cs" />
+    <Compile Include="Interfaces\INetworkDomain.cs" />
+    <Compile Include="Interfaces\INetworking.cs" />
+    <Compile Include="Interfaces\INetworkingLegacy.cs" />
+    <Compile Include="Interfaces\IVip.cs" />
+    <Compile Include="Interfaces\IVlan.cs" />
     <Compile Include="KnownApiUri.cs" />
     <Compile Include="Network20\ComputeApiClientNetworkExtensions.cs" />
-    <Compile Include="Network20\IpAddressManagementExtensions.cs" />
+    <Compile Include="Network20\IpAddressManagement.cs" />
+    <Compile Include="Network20\NetworkDomain.cs" />
     <Compile Include="Network20\NetworkDomainExtensions.cs" />
+    <Compile Include="Network20\Networking.cs" />
+    <Compile Include="Network20\Vlan.cs" />
     <Compile Include="Network20\VlanExtensions.cs" />
+    <Compile Include="Network\NetworkingLegacy.cs" />
     <Compile Include="Server20\Server20Extensions.cs" />
     <Compile Include="ServerImageType.cs" />
     <Compile Include="Backup\ComputeApiClientBackupExtensions.cs" />
