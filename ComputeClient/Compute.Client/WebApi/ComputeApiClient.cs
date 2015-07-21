@@ -35,15 +35,123 @@ namespace DD.CBU.Compute.Api.Client
 	public sealed class ComputeApiClient
 		: DisposableObject, IComputeApiClient
 	{
-		#region Instance data		
+		#region Obsolete Contructors
+		/// <summary>
+		/// Initialises a new instance of the <see cref="ComputeApiClient"/> class. 
+		/// Create a new Compute-as-a-Service API client.
+		/// </summary>
+		/// <param name="targetRegionName">
+		/// The name of the region whose CaaS API end-point is targeted by the client.
+		/// </param>
+		[Obsolete("Please use the GetComputeApiClient Factory methods")]
+		public ComputeApiClient(string targetRegionName)
+		{
+			if (string.IsNullOrWhiteSpace(targetRegionName))
+				throw new ArgumentException(
+					"Argument cannot be null, empty, or composed entirely of whitespace: 'targetRegionName'.", "targetRegionName");
 
-		/// <summary>	Gets the networking 2.0 methods. </summary>
-		/// <value>	The networking. </value>		
-		public INetworking Networking { get; private set; }
+			KnownApiRegion region = KnownApiRegion.Australia_AU;
+			if (!KnownApiRegion.TryParse(targetRegionName, true, out region))
+				throw new ArgumentException("targetRegionName doesnt map to a valid region", "targetRegionName");
 
-		/// <summary>	Gets the networking legacy 1.0 methods </summary>
-		public INetworkingLegacy NetworkingLegacy { get; private set; }		
+			Uri baseUri = KnownApiUri.Instance.GetBaseUri(KnownApiVendor.DimensionData, region);
+			_httpClientHandler = new HttpClientHandler();
+			var httpClient = new HttpClientAdapter(
+				new HttpClient(
+					_httpClientHandler)
+				{
+					BaseAddress = baseUri
+				});
+			
+			WebApi = new WebApi(httpClient);
+			Networking = new Networking(WebApi);
+			NetworkingLegacy = new NetworkingLegacy(WebApi);
+		}
 
+		/// <summary>
+		/// Initialises a new instance of the <see cref="ComputeApiClient"/> class. 
+		/// Creates a new CaaS API client using a base URI.
+		/// </summary>
+		/// <param name="baseUri">
+		/// The base URI to use for the CaaS API.
+		/// </param>
+		[Obsolete("Please use the GetComputeApiClient Factory methods")]
+		public ComputeApiClient(Uri baseUri)
+		{
+			if (baseUri == null)
+				throw new ArgumentNullException("baseUri", "Argument cannot be null");
+
+			if (!baseUri.IsAbsoluteUri)
+				throw new ArgumentException("Base URI supplied is not an absolute URI", "baseUri");
+			
+			_httpClientHandler = new HttpClientHandler();
+
+			var httpClient = new HttpClientAdapter(
+				new HttpClient(
+					_httpClientHandler)
+				{
+					BaseAddress = baseUri
+				});
+
+			WebApi = new WebApi(httpClient);
+			Networking = new Networking(WebApi);
+			NetworkingLegacy = new NetworkingLegacy(WebApi);
+		}
+
+		/// <summary>
+		/// Initialises a new instance of the <see cref="ComputeApiClient"/> class. 
+		/// Creates a new CaaS API client using a known vendor and region.
+		/// </summary>
+		/// <param name="vendor">
+		/// The vendor
+		/// </param>
+		/// <param name="region">
+		/// The region
+		/// </param>
+		[Obsolete("Please use the GetComputeApiClient Factory methods")]
+		public ComputeApiClient(KnownApiVendor vendor, KnownApiRegion region)
+		{
+			Uri baseUri = KnownApiUri.Instance.GetBaseUri(vendor, region);
+			_httpClientHandler = new HttpClientHandler();
+			var httpClient = new HttpClientAdapter(
+				new HttpClient(
+					_httpClientHandler)
+				{
+					BaseAddress = baseUri
+				});
+
+			WebApi = new WebApi(httpClient);
+			Networking = new Networking(WebApi);
+			NetworkingLegacy = new NetworkingLegacy(WebApi);
+		}
+
+		/// <summary>
+		/// Initialises a new instance of the <see cref="ComputeApiClient"/> class. 
+		/// Creates a new CaaS API client using a Dimension Data vendor and known region.
+		/// </summary>
+		/// <param name="region">
+		/// The region
+		/// </param>
+		[Obsolete("Please use the GetComputeApiClient Factory methods")]
+		public ComputeApiClient(KnownApiRegion region)
+		{
+			Uri baseUri = KnownApiUri.Instance.GetBaseUri(KnownApiVendor.DimensionData, region);
+			_httpClientHandler = new HttpClientHandler();
+			var httpClient = new HttpClientAdapter(
+				new HttpClient(
+					_httpClientHandler)
+				{
+					BaseAddress = baseUri
+				});
+
+			WebApi = new WebApi(httpClient);
+			Networking = new Networking(WebApi);
+			NetworkingLegacy = new NetworkingLegacy(WebApi);
+		}
+
+		#endregion
+
+		#region Constructor
 		/// <summary>
 		/// Initialises a new instance of the <see cref="ComputeApiClient"/> class.
 		/// </summary>
@@ -55,15 +163,18 @@ namespace DD.CBU.Compute.Api.Client
 		/// </param>
 		/// <exception cref="ArgumentNullException">
 		/// </exception>
+		[Obsolete("Please use the GetComputeApiClient Factory methods")]
 		public ComputeApiClient(IHttpClient httpClient, Guid organizationId = default(Guid))
 		{
 			if (httpClient == null)
-				throw new ArgumentNullException("httpClient", "httpClient cannot be null");			
+				throw new ArgumentNullException("httpClient", "httpClient cannot be null");
 
 			WebApi = new WebApi(httpClient, organizationId);
 			Networking = new Networking(WebApi);
 			NetworkingLegacy = new NetworkingLegacy(WebApi);
 		}
+
+		#endregion
 
 		#region Factory Methods
 
@@ -109,7 +220,7 @@ namespace DD.CBU.Compute.Api.Client
 				{
 					BaseAddress = baseUri
 				});
-			
+
 			return new ComputeApiClient(httpClient, organizationId);
 		}
 
@@ -126,33 +237,39 @@ namespace DD.CBU.Compute.Api.Client
 		/// <param name="credentials">
 		/// The credentials.
 		/// </param>
+		/// <param name="organizationId">
+		/// The organization Id.
+		/// </param>
 		/// <returns>
 		/// The <see cref="ComputeApiClient"/>.
 		/// </returns>
-		public static ComputeApiClient GetComputeApiClient(KnownApiVendor vendor, KnownApiRegion region, ICredentials credentials)
+		public static ComputeApiClient GetComputeApiClient(KnownApiVendor vendor, KnownApiRegion region, ICredentials credentials, Guid organizationId = default(Guid))
 		{
 			Uri baseUri = KnownApiUri.Instance.GetBaseUri(vendor, region);
-			return ComputeApiClient.GetComputeApiClient(baseUri, credentials);
+			return GetComputeApiClient(baseUri, credentials, organizationId);
 		}
 
-        /// <summary>
-        /// Initialises a new instance of the <see cref="ComputeApiClient"/> class. 
-        /// Creates a new CaaS API client using a Dimension Data vendor and known region.
-        /// </summary>
-        /// <param name="region">
-        /// The region
-        /// </param>
-        /// <param name="credentials">
-        /// The credentials.
-        /// </param>
-        /// <returns>
-        /// The <see cref="ComputeApiClient"/>.
-        /// </returns>
-		public static ComputeApiClient GetComputeApiClient(KnownApiRegion region, ICredentials credentials)
-        {
-            Uri baseUri = KnownApiUri.Instance.GetBaseUri(KnownApiVendor.DimensionData, region);
-			return ComputeApiClient.GetComputeApiClient(baseUri, credentials);
-        }
+		/// <summary>
+		/// Initialises a new instance of the <see cref="ComputeApiClient"/> class. 
+		/// Creates a new CaaS API client using a Dimension Data vendor and known region.
+		/// </summary>
+		/// <param name="region">
+		/// The region
+		/// </param>
+		/// <param name="credentials">
+		/// The credentials.
+		/// </param>
+		/// <param name="organizationId">
+		/// The organization Id.
+		/// </param>
+		/// <returns>
+		/// The <see cref="ComputeApiClient"/>.
+		/// </returns>
+		public static ComputeApiClient GetComputeApiClient(KnownApiRegion region, ICredentials credentials, Guid organizationId = default(Guid))
+		{
+			Uri baseUri = KnownApiUri.Instance.GetBaseUri(KnownApiVendor.DimensionData, region);
+			return GetComputeApiClient(baseUri, credentials);
+		}
 
 		/// <summary>
 		/// The get ftp host.
@@ -173,6 +290,22 @@ namespace DD.CBU.Compute.Api.Client
 
 		#endregion
 
+		#region Instance data
+		/// <summary>
+		/// The _http client handler.
+		/// </summary>
+		[Obsolete("The only intent to support this property is to support obsolete contructors and LoginAsync(Credentials)")]
+		HttpClientHandler _httpClientHandler;
+
+		/// <summary>	Gets the networking 2.0 methods. </summary>
+		/// <value>	The networking. </value>		
+		public INetworking Networking { get; private set; }
+
+		/// <summary>	Gets the networking legacy 1.0 methods </summary>
+		public INetworkingLegacy NetworkingLegacy { get; private set; }
+
+		#endregion Instance data
+
 		/// <summary>
 		/// Dispose of resources being used by the CaaS API client.
 		/// </summary>
@@ -188,11 +321,15 @@ namespace DD.CBU.Compute.Api.Client
 					WebApi.Dispose();
 					WebApi = null;
 				}
+
+				if (_httpClientHandler != null)
+				{
+					_httpClientHandler.Dispose();
+					_httpClientHandler = null;
+				}
 			}
 		}
-
-		#endregion // Construction / disposal
-
+		
 		#region Public properties
 
 		/// <summary>
@@ -209,10 +346,15 @@ namespace DD.CBU.Compute.Api.Client
 		/// <returns>
 		/// An <see cref="IAccount"/> implementation representing the CaaS account that the client is logged into.
 		/// </returns>
-		[Obsolete("Use ComputeApiClient(, accountCredentials) and Login()")]
+		[Obsolete("Use GetComputeApiClient Factory passing accountCredentials and Login() method")]
 		public async Task<IAccount> LoginAsync(ICredentials accountCredentials)
 		{
 			IAccount mcp1Account = await WebApi.LoginAsync();
+			if (_httpClientHandler != null)
+			{
+				_httpClientHandler.Credentials = accountCredentials;
+				_httpClientHandler.PreAuthenticate = true;				
+			}			
 			return mcp1Account;
 		}
 
@@ -347,7 +489,6 @@ namespace DD.CBU.Compute.Api.Client
 		/// </returns>
 		public async Task<Status> AddSubAdministratorAccount(AccountWithPhoneNumber account)
 		{
-
 			return await WebApi.PostAsync<AccountWithPhoneNumber, Status>(ApiUris.AccountWithPhoneNumber(WebApi.OrganizationId), account);
 		}
 
