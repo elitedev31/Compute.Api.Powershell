@@ -9,7 +9,7 @@ Import-Module CaaS
 
 #capture the Caas credentials and create a new Caas conneciton
 $login = Get-Credential
-New-CaasConnection -ApiCredentials $login -Vendor DimensionData -Region NorthAmerica_NA 
+New-CaasConnection -ApiCredentials $login -Region NorthAmerica_NA 
 #Get the network with a specific name
 $networkDomain = Get-CaasNetworkDomain -NetworkDomainName $networkDomainName
 
