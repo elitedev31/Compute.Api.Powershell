@@ -154,6 +154,23 @@ namespace DD.CBU.Compute.Api.Client
 			return ComputeApiClient.GetComputeApiClient(baseUri, credentials);
         }
 
+		/// <summary>
+		/// The get ftp host.
+		/// </summary>
+		/// <param name="vendor">
+		/// The vendor.
+		/// </param>
+		/// <param name="region">
+		/// The region.
+		/// </param>
+		/// <returns>
+		/// The <see cref="string"/>.
+		/// </returns>
+		public static string GetFtpHost(KnownApiVendor vendor, KnownApiRegion region)
+		{
+			return KnownApiUri.Instance.GetFtpHost(vendor, region);
+		}
+
 		#endregion
 
 		/// <summary>

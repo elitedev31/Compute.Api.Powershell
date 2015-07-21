@@ -5,12 +5,11 @@ $administratorPassword= "password123"
 $vlanName = "testV1"
 
 #import Caas Module
-#Import-Module CaaS
-Import-Module "C:\Sources\DD\DimensionData.ComputeClient\PowershellModule\CloudCompute.Powershell\bin\Debug\CaaS.psd1"
+Import-Module CaaS
+
 #capture the Caas credentials and create a new Caas conneciton
 $login = Get-Credential
-New-CaasConnection -ApiCredentials $login -ApiDomainName apinashpcs01.opsourcecloud.net
-
+New-CaasConnection -ApiCredentials $login -Vendor DimensionData -Region NorthAmerica_NA 
 #Get the network with a specific name
 $networkDomain = Get-CaasNetworkDomain -NetworkDomainName $networkDomainName
 

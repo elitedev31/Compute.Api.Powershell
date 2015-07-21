@@ -15,6 +15,8 @@ using DD.CBU.Compute.Api.Client;
 
 namespace DD.CBU.Compute.Powershell
 {
+	using System.Net.FtpClient;
+
 	/// <summary>
 	/// The "New-CaasConnection" Cmdlet.
 	/// </summary>
@@ -37,20 +39,7 @@ namespace DD.CBU.Compute.Powershell
 		/// </summary>
 		[Parameter(Mandatory = false, HelpMessage = "Name to identify this connection")]
 		public string Name { get; set; }
-
-
-		/// <summary>
-		/// The base uri of the REST API
-		/// </summary>
-		[Parameter(Mandatory = true, ParameterSetName = "ApiBaseUri", HelpMessage = "The base URI of the REST API")]
-		public Uri ApiBaseUri { get; set; }
-
-		/// <summary>
-		/// The base uri of the REST API
-		/// </summary>
-		[Parameter(Mandatory = true, ParameterSetName = "ApiDomainName", HelpMessage = "The domain name for the REST API")]
-		public string ApiDomainName { get; set; }
-
+		
 		/// <summary>
 		/// The known vendor for the connection
 		/// </summary>
@@ -123,25 +112,24 @@ namespace DD.CBU.Compute.Powershell
 		/// </returns>
 		private async Task<ComputeServiceConnection> LoginTask()
 		{
-			ComputeApiClient apiClient = null;
-			if (ParameterSetName == "ApiBaseUri")
-			{
-				WriteWarning("This parameter is obselete and will not work for MCP2.0 commands");
-				apiClient = new ComputeApiClient(ApiBaseUri);
-			}
-
-			if (ParameterSetName == "KnownApiUri")
-				apiClient = new ComputeApiClient(Vendor, Region);
-			if (ParameterSetName == "ApiDomainName")
-			{
-				WriteWarning("This parameter is obselete and will not work for MCP2.0 commands");
-				apiClient = new ComputeApiClient(ApiDomainName);
-			}
+			ComputeApiClient apiClient = ComputeApiClient.GetComputeApiClient(Vendor, Region, ApiCredentials.GetNetworkCredential());			
 
 			var newCloudComputeConnection = new ComputeServiceConnection(apiClient);
 
 			WriteDebug("Trying to login into the CaaS");
-			await newCloudComputeConnection.ApiClient.LoginAsync(ApiCredentials.GetNetworkCredential());
+			newCloudComputeConnection.Account = await newCloudComputeConnection.ApiClient.Login();
+			
+			var ftpHost = ComputeApiClient.GetFtpHost(Vendor, Region);
+
+			// Right now we dont need to do a connect, as ftp is used in only a few commands
+			newCloudComputeConnection.FtpClient = new FtpClient
+							{
+								Host = ftpHost,
+								EncryptionMode = FtpEncryptionMode.Explicit,
+								DataConnectionEncryption = true,
+								Credentials = ApiCredentials.GetNetworkCredential()
+															.GetCredential(new Uri(string.Format("ftp://{0}", ftpHost)), "Basic")
+							};
 
 			return newCloudComputeConnection;
 		}

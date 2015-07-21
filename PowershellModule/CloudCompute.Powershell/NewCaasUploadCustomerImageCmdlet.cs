@@ -135,41 +135,17 @@ namespace DD.CBU.Compute.Powershell
 		/// Uploads the customer image to the FTP site.
 		/// </summary>
 		private void UploadCustomerImage()
-		{
-			string host = Connection.ApiClient.FtpHost;
-
-			if (string.IsNullOrEmpty(host))
-			{
-				WriteError(new ErrorRecord(
-					new NotSupportedException(
-						"Cannot establish FTP host for non standard API endpoints, use vendor and location parameters to construct a connection."), 
-					"invalid-ftp", 
-					ErrorCategory.InvalidOperation, 
-					host
-					));
-				return;
-			}
-
-			var client = new FtpClient
-			{
-				Host = host, 
-				EncryptionMode = FtpEncryptionMode.Explicit, 
-				DataConnectionEncryption = true, 
-				Credentials =
-					Connection.ApiClient.WebApi.Credentials.GetCredential(new Uri(string.Format("ftp://{0}", host)), "Basic")
-			};
-
-			client.Connect();
-
+		{						
+			Connection.FtpClient.Connect();
 			// TODO : Support for building OVF on the fly.
-			UploadFile(client, Ovf, 1);
+			UploadFile(Connection.FtpClient, Ovf, 1);
 
 
-// TODO : Support for building manifest on the fly.
-			UploadFile(client, Manifest, 2);
-			UploadFile(client, VirtualImage, 3);
+			// TODO : Support for building manifest on the fly.
+			UploadFile(Connection.FtpClient, Manifest, 2);
+			UploadFile(Connection.FtpClient, VirtualImage, 3);
 
-			client.Disconnect();
+			Connection.FtpClient.Disconnect();
 		}
 
 		/// <summary>

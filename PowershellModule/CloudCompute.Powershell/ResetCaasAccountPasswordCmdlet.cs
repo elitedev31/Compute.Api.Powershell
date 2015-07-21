@@ -31,26 +31,17 @@ namespace DD.CBU.Compute.Powershell
 		[ValidateNotNullOrEmpty]
 		public PSCredential ApiCredentials { get; set; }
 
-
-		/// <summary>
-		/// The base uri of the REST API
-		/// </summary>
-		[Parameter(Mandatory = true, ParameterSetName = "ApiBaseUri", HelpMessage = "The base URI of the REST API")]
-		public Uri ApiBaseUri { get; set; }
-
 		/// <summary>
 		/// The known vendor for the connection
 		/// </summary>
-		[Parameter(Mandatory = true, ParameterSetName = "KnownApiUri", 
-			HelpMessage = "A known cloud vendor for the Cloud API Uri. Not all vendor and region combinations are valid.")]
+		[Parameter(Mandatory = true, HelpMessage = "A known cloud vendor for the Cloud API Uri. Not all vendor and region combinations are valid.")]
 		public KnownApiVendor Vendor { get; set; }
 
 
 		/// <summary>
 		/// The known region for the connection
 		/// </summary>
-		[Parameter(Mandatory = true, ParameterSetName = "KnownApiUri", 
-			HelpMessage = "A known cloud region for the Cloud API Uri. Not all vendor and region combinations are valid.")]
+		[Parameter(Mandatory = true, HelpMessage = "A known cloud region for the Cloud API Uri. Not all vendor and region combinations are valid.")]
 		public KnownApiRegion Region { get; set; }
 
 		/// <summary>
@@ -65,7 +56,6 @@ namespace DD.CBU.Compute.Powershell
 		protected override void BeginProcessing()
 		{
 			base.BeginProcessing();
-
 
 			if (NewPassword == null)
 			{
@@ -114,19 +104,12 @@ namespace DD.CBU.Compute.Powershell
 		/// </returns>
 		private async Task<ComputeServiceConnection> LoginTask()
 		{
-			ComputeApiClient apiClient = null;
-			if (ParameterSetName == "ApiBaseUri")
-				apiClient = new ComputeApiClient(ApiBaseUri);
-			if (ParameterSetName == "KnownApiUri")
-				apiClient = new ComputeApiClient(Vendor, Region);
-
+			ComputeApiClient apiClient = ComputeApiClient.GetComputeApiClient(Vendor, Region, ApiCredentials.GetNetworkCredential());
 
 			var newCloudComputeConnection = new ComputeServiceConnection(apiClient);
-
-
 			WriteDebug("Trying to login into the CaaS");
-			await newCloudComputeConnection.ApiClient.LoginAsync(ApiCredentials.GetNetworkCredential());
 
+			await newCloudComputeConnection.ApiClient.Login();
 			return newCloudComputeConnection;
 		}
 

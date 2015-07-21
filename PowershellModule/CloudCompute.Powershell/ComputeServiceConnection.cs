@@ -1,18 +1,11 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ComputeServiceConnection.cs" company="">
-//   
-// </copyright>
-// <summary>
-//   Represents a connection to the CaaS API.
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
-
-using System;
-using DD.CBU.Compute.Api.Client.Interfaces;
-using DD.CBU.Compute.Api.Contracts.Directory;
-
-namespace DD.CBU.Compute.Powershell
+﻿namespace DD.CBU.Compute.Powershell
 {
+	using System;
+	using System.Net.FtpClient;
+
+	using DD.CBU.Compute.Api.Client.Interfaces;
+	using DD.CBU.Compute.Api.Contracts.Directory;
+
 	/// <summary>
 	/// Represents a connection to the CaaS API.
 	/// </summary>
@@ -37,10 +30,12 @@ namespace DD.CBU.Compute.Powershell
 		/// <summary>
 		/// The CaaS account targeted by the connection.
 		/// </summary>
-		public IAccount Account
-		{
-			get { return ApiClient.Account; }
-		}
+		public IAccount Account { get; internal set; }	
+
+		/// <summary>
+		/// The CaaS FTP client.
+		/// </summary>
+		public FtpClient FtpClient { get; set; }
 
 		/// <summary>
 		/// The CaaS API client represented by the connection.
