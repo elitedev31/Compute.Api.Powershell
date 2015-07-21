@@ -109,6 +109,7 @@
     <Compile Include="Interfaces\IVlan.cs" />
     <Compile Include="KnownApiUri.cs" />
     <Compile Include="Network20\ComputeApiClientNetworkExtensions.cs" />
+    <Compile Include="Network20\IpAddressManagement.cs" />
     <Compile Include="Network20\NetworkDomain.cs" />
     <Compile Include="Network20\NetworkDomainExtensions.cs" />
     <Compile Include="Network20\Networking.cs" />
