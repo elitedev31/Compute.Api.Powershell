@@ -212,7 +212,6 @@ namespace DD.CBU.Compute.Api.Client
 		[Obsolete("Use ComputeApiClient(, accountCredentials) and Login()")]
 		public async Task<IAccount> LoginAsync(ICredentials accountCredentials)
 		{
-			// TODO: how to support clients which don't pass credentials via the contructor
 			IAccount mcp1Account = await WebApi.LoginAsync();
 			return mcp1Account;
 		}

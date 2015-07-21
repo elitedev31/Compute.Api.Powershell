@@ -56,7 +56,12 @@ namespace DD.CBU.Compute.Powershell
 			HelpMessage = "A known cloud region for the Cloud API Uri. Not all vendor and region combinations are valid.")]
 		public KnownApiRegion Region { get; set; }
 
-
+		/// <summary>
+		/// The base uri of the REST API
+		/// </summary>
+		[Obsolete("Use Vendor and Region instead")]
+		[Parameter(Mandatory = true, ParameterSetName = "ApiDomainName", HelpMessage = "The domain name for the REST API")]
+		public string ApiDomainName { get; set; }
 		/// <summary>
 		/// Process the record
 		/// </summary>
@@ -112,15 +117,28 @@ namespace DD.CBU.Compute.Powershell
 		/// </returns>
 		private async Task<ComputeServiceConnection> LoginTask()
 		{
-			ComputeApiClient apiClient = ComputeApiClient.GetComputeApiClient(Vendor, Region, ApiCredentials.GetNetworkCredential());			
+			var ftpHost = string.Empty;
+			ComputeApiClient apiClient = null;
+
+			if (ParameterSetName == "KnownApiUri")
+			{
+				apiClient = ComputeApiClient.GetComputeApiClient(Vendor, Region, ApiCredentials.GetNetworkCredential());
+				ftpHost = ComputeApiClient.GetFtpHost(Vendor, Region);
+			}
+
+			if (ParameterSetName == "ApiDomainName")
+			{
+				var baseUri = new Uri(ApiDomainName);
+				WriteWarning("This parameter is obselete and will not work for MCP2.0 commands, use Vendor and Region");
+				apiClient = ComputeApiClient.GetComputeApiClient(baseUri, ApiCredentials.GetNetworkCredential());
+				ftpHost = ApiDomainName;
+			}
 
 			var newCloudComputeConnection = new ComputeServiceConnection(apiClient);
 
 			WriteDebug("Trying to login into the CaaS");
 			newCloudComputeConnection.Account = await newCloudComputeConnection.ApiClient.Login();
-			
-			var ftpHost = ComputeApiClient.GetFtpHost(Vendor, Region);
-
+						
 			// Right now we dont need to do a connect, as ftp is used in only a few commands
 			newCloudComputeConnection.FtpClient = new FtpClient
 							{
