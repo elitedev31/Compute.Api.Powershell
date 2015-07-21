@@ -3,6 +3,7 @@
 	using System;
 	using System.Threading.Tasks;
 
+	using DD.CBU.Compute.Api.Contracts.Directory;
 	using DD.CBU.Compute.Api.Contracts.Requests;
 
     /// <summary>
@@ -14,6 +15,14 @@
 	    /// Gets the CaaS client organization id.
 	    /// </summary>
 	    Guid OrganizationId { get; }
+
+	    /// <summary>
+	    /// The login async.
+	    /// </summary>
+	    /// <returns>
+	    /// The <see cref="Task"/>.
+	    /// </returns>
+	    Task<IAccount> LoginAsync();
 
 		/// <summary>
 		/// Invoke a CaaS API operation using a HTTP GET request.

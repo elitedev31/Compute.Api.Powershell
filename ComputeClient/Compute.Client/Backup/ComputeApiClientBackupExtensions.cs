@@ -42,9 +42,12 @@ namespace DD.CBU.Compute.Api.Client.Backup
 		{
 			return
 				await
-					client.WebApi.PostAsync<NewBackup, Status>(
-						ApiUris.EnableBackup(client.Account.OrganizationId, serverId), 
-						new NewBackup {servicePlan = plan});
+				client.WebApi.PostAsync<NewBackup, Status>(
+					ApiUris.EnableBackup(client.WebApi.OrganizationId, serverId),
+					new NewBackup
+						{
+							servicePlan = plan
+						});
 		}
 
 		/// <summary>
@@ -64,7 +67,7 @@ namespace DD.CBU.Compute.Api.Client.Backup
 		/// </returns>
 		public static async Task<Status> DisableBackup(this IComputeApiClient client, string serverId)
 		{
-			return await client.WebApi.GetAsync<Status>(ApiUris.DisableBackup(client.Account.OrganizationId, serverId));
+			return await client.WebApi.GetAsync<Status>(ApiUris.DisableBackup(client.WebApi.OrganizationId, serverId));
 		}
 
 		/// <summary>
@@ -86,9 +89,12 @@ namespace DD.CBU.Compute.Api.Client.Backup
 		{
 			return
 				await
-					client.WebApi.PostAsync<ModifyBackup, Status>(
-						ApiUris.ChangeBackupPlan(client.Account.OrganizationId, serverId), 
-						new ModifyBackup {servicePlan = plan});
+				client.WebApi.PostAsync<ModifyBackup, Status>(
+					ApiUris.ChangeBackupPlan(client.WebApi.OrganizationId, serverId),
+					new ModifyBackup
+						{
+							servicePlan = plan
+						});
 		}
 
 		/// <summary>
@@ -108,7 +114,7 @@ namespace DD.CBU.Compute.Api.Client.Backup
 		{
 			BackupClientTypes types =
 				await
-					client.WebApi.GetAsync<BackupClientTypes>(ApiUris.BackupClientTypes(client.Account.OrganizationId, serverId));
+					client.WebApi.GetAsync<BackupClientTypes>(ApiUris.BackupClientTypes(client.WebApi.OrganizationId, serverId));
 			return types.Items;
 		}
 
@@ -129,7 +135,7 @@ namespace DD.CBU.Compute.Api.Client.Backup
 		{
 			BackupStoragePolicies types =
 				await
-					client.WebApi.GetAsync<BackupStoragePolicies>(ApiUris.BackupStoragePolicies(client.Account.OrganizationId, 
+					client.WebApi.GetAsync<BackupStoragePolicies>(ApiUris.BackupStoragePolicies(client.WebApi.OrganizationId, 
 						serverId));
 			return types.Items;
 		}
@@ -151,7 +157,7 @@ namespace DD.CBU.Compute.Api.Client.Backup
 		{
 			BackupSchedulePolicies types =
 				await
-					client.WebApi.GetAsync<BackupSchedulePolicies>(ApiUris.BackupSchedulePolicies(client.Account.OrganizationId, 
+					client.WebApi.GetAsync<BackupSchedulePolicies>(ApiUris.BackupSchedulePolicies(client.WebApi.OrganizationId, 
 						serverId));
 			return types.Items;
 		}
@@ -176,7 +182,7 @@ namespace DD.CBU.Compute.Api.Client.Backup
 
 			BackupDetails details =
 				await
-					client.WebApi.GetAsync<BackupDetails>(ApiUris.GetBackupDetails(client.Account.OrganizationId, serverId));
+					client.WebApi.GetAsync<BackupDetails>(ApiUris.GetBackupDetails(client.WebApi.OrganizationId, serverId));
 			return details.backupClient;
 		}
 
@@ -220,7 +226,7 @@ namespace DD.CBU.Compute.Api.Client.Backup
 			return
 				await
 					client.WebApi.PostAsync<NewBackupClient, Status>(
-						ApiUris.AddBackupClient(client.Account.OrganizationId, serverId), 
+						ApiUris.AddBackupClient(client.WebApi.OrganizationId, serverId), 
 						new NewBackupClient
 						{
 							schedulePolicyName = schedulePolicy.name, 
@@ -256,7 +262,7 @@ namespace DD.CBU.Compute.Api.Client.Backup
 			return
 				await
 					client.WebApi.GetAsync<Status>(
-						ApiUris.RemoveBackupClient(client.Account.OrganizationId, serverId, backupClient.id));
+						ApiUris.RemoveBackupClient(client.WebApi.OrganizationId, serverId, backupClient.id));
 		}
 
 		/// <summary>
@@ -297,7 +303,7 @@ namespace DD.CBU.Compute.Api.Client.Backup
 			return
 				await
 					client.WebApi.PostAsync<ModifyBackupClient, Status>(
-						ApiUris.ModifyBackupClient(client.Account.OrganizationId, serverId, backupClient.id), 
+						ApiUris.ModifyBackupClient(client.WebApi.OrganizationId, serverId, backupClient.id), 
 						new ModifyBackupClient
 						{
 							schedulePolicyName = schedulePolicy.name, 
@@ -332,7 +338,7 @@ namespace DD.CBU.Compute.Api.Client.Backup
 			return
 				await
 					client.WebApi.GetAsync<Status>(
-						ApiUris.InitiateBackup(client.Account.OrganizationId, serverId, backupClient.id));
+						ApiUris.InitiateBackup(client.WebApi.OrganizationId, serverId, backupClient.id));
 		}
 
 		/// <summary>
@@ -361,7 +367,7 @@ namespace DD.CBU.Compute.Api.Client.Backup
 			return
 				await
 					client.WebApi.GetAsync<Status>(
-						ApiUris.CancelBackupJobs(client.Account.OrganizationId, serverId, backupClient.id));
+						ApiUris.CancelBackupJobs(client.WebApi.OrganizationId, serverId, backupClient.id));
 		}
 	}
 }

@@ -7,29 +7,27 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
-using DD.CBU.Compute.Api.Client.Interfaces;
-using DD.CBU.Compute.Api.Client.Network;
-using DD.CBU.Compute.Api.Client.Network20;
-using DD.CBU.Compute.Api.Client.Utilities;
-using DD.CBU.Compute.Api.Contracts.Datacenter;
-using DD.CBU.Compute.Api.Contracts.Directory;
-using DD.CBU.Compute.Api.Contracts.General;
-using DD.CBU.Compute.Api.Contracts.Image;
-using DD.CBU.Compute.Api.Contracts.Server;
-using DD.CBU.Compute.Api.Contracts.Software;
-
 // ReSharper disable once CheckNamespace
-// Backwards compatibility
+// Backwards compatibility, hence not moving the NameSpace
 namespace DD.CBU.Compute.Api.Client
 {
+	using System;
+	using System.Collections.Generic;
+	using System.Linq;
+	using System.Net;
 	using System.Net.Http;
+	using System.Threading.Tasks;
+
+	using DD.CBU.Compute.Api.Client.Interfaces;
+	using DD.CBU.Compute.Api.Client.Network;
+	using DD.CBU.Compute.Api.Client.Network20;
+	using DD.CBU.Compute.Api.Client.Utilities;
+	using DD.CBU.Compute.Api.Contracts.Datacenter;
+	using DD.CBU.Compute.Api.Contracts.Directory;
+	using DD.CBU.Compute.Api.Contracts.General;
+	using DD.CBU.Compute.Api.Contracts.Image;
+	using DD.CBU.Compute.Api.Contracts.Server;
+	using DD.CBU.Compute.Api.Contracts.Software;
 
 	/// <summary>
 	/// A client for the Dimension Data Compute-as-a-Service (CaaS) API.
@@ -37,24 +35,58 @@ namespace DD.CBU.Compute.Api.Client
 	public sealed class ComputeApiClient
 		: DisposableObject, IComputeApiClient
 	{
-		#region Instance data
+		#region Instance data		
+
+		/// <summary>	Gets the networking 2.0 methods. </summary>
+		/// <value>	The networking. </value>		
+		public INetworking Networking { get; private set; }
+
+		/// <summary>	Gets the networking legacy 1.0 methods </summary>
+		public INetworkingLegacy NetworkingLegacy { get; private set; }		
 
 		/// <summary>
-		/// The _ftp host.
+		/// Initialises a new instance of the <see cref="ComputeApiClient"/> class.
 		/// </summary>
-		private readonly string _ftpHost;
+		/// <param name="httpClient">
+		/// The http client.
+		/// </param>
+		/// <param name="organizationId">
+		/// The organization id.
+		/// </param>
+		/// <exception cref="ArgumentNullException">
+		/// </exception>
+		public ComputeApiClient(IHttpClient httpClient, Guid organizationId = default(Guid))
+		{
+			if (httpClient == null)
+				throw new ArgumentNullException("httpClient", "httpClient cannot be null");			
+
+			WebApi = new WebApi(httpClient, organizationId);
+			Networking = new Networking(WebApi);
+			NetworkingLegacy = new NetworkingLegacy(WebApi);
+		}
+
+		#region Factory Methods
 
 		/// <summary>
-		/// Initialises a new instance of the <see cref="ComputeApiClient"/> class. 
-		/// Creates a new CaaS API client using a base URI.
+		/// The get compute api client.
 		/// </summary>
 		/// <param name="baseUri">
-		/// The base URI to use for the CaaS API.
+		/// The base uri.
 		/// </param>
 		/// <param name="credentials">
 		/// The credentials.
 		/// </param>
-		public ComputeApiClient(Uri baseUri, ICredentials credentials)
+		/// <param name="organizationId">
+		/// The organization id.
+		/// </param>
+		/// <returns>
+		/// The <see cref="ComputeApiClient"/>.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// </exception>
+		/// <exception cref="ArgumentException">
+		/// </exception>
+		public static ComputeApiClient GetComputeApiClient(Uri baseUri, ICredentials credentials, Guid organizationId = default(Guid))
 		{
 			if (baseUri == null)
 				throw new ArgumentNullException("baseUri", "baseUri cannot be null");
@@ -65,20 +97,20 @@ namespace DD.CBU.Compute.Api.Client
 			if (credentials == null)
 				throw new ArgumentNullException("credentials", "credentials cannot be null");
 
+			var messageHandler = new HttpClientHandler
+			{
+				Credentials = credentials,
+				PreAuthenticate = true
+			};
+
 			var httpClient = new HttpClientAdapter(
 				new HttpClient(
-					new HttpClientHandler
-						{
-							Credentials = credentials,
-							PreAuthenticate = true
-						})
-					{
-						BaseAddress = baseUri
-					});
-
-			WebApi = new WebApi(httpClient);
-			_networking = new Networking(this);
-			_networkingLegacy = new NetworkingLegacy(this);
+					messageHandler)
+				{
+					BaseAddress = baseUri
+				});
+			
+			return new ComputeApiClient(httpClient, organizationId);
 		}
 
 		/// <summary>
@@ -100,7 +132,7 @@ namespace DD.CBU.Compute.Api.Client
 		public static ComputeApiClient GetComputeApiClient(KnownApiVendor vendor, KnownApiRegion region, ICredentials credentials)
 		{
 			Uri baseUri = KnownApiUri.Instance.GetBaseUri(vendor, region);
-			return new ComputeApiClient(baseUri, credentials);
+			return ComputeApiClient.GetComputeApiClient(baseUri, credentials);
 		}
 
         /// <summary>
@@ -119,8 +151,10 @@ namespace DD.CBU.Compute.Api.Client
 		public static ComputeApiClient GetComputeApiClient(KnownApiRegion region, ICredentials credentials)
         {
             Uri baseUri = KnownApiUri.Instance.GetBaseUri(KnownApiVendor.DimensionData, region);
-			return new ComputeApiClient(baseUri, credentials);
+			return ComputeApiClient.GetComputeApiClient(baseUri, credentials);
         }
+
+		#endregion
 
 		/// <summary>
 		/// Dispose of resources being used by the CaaS API client.
@@ -145,17 +179,6 @@ namespace DD.CBU.Compute.Api.Client
 		#region Public properties
 
 		/// <summary>
-		/// Read-only information about the CaaS account targeted by the CaaS API client.
-		/// </summary>
-		/// <remarks>
-		/// <c>null</c>, unless logged in.
-		/// </remarks>
-		public IAccount Account
-		{
-			get { return WebApi.Account; }
-		}
-
-		/// <summary>
 		/// Access to the web API for login/logout and account info
 		/// </summary>
 		public IWebApi WebApi { get; private set; }
@@ -169,10 +192,23 @@ namespace DD.CBU.Compute.Api.Client
 		/// <returns>
 		/// An <see cref="IAccount"/> implementation representing the CaaS account that the client is logged into.
 		/// </returns>
+		[Obsolete("Use ComputeApiClient(, accountCredentials) and Login()")]
 		public async Task<IAccount> LoginAsync(ICredentials accountCredentials)
 		{
-			IAccount mcp1Account = await WebApi.LoginAsync(accountCredentials);
+			// TODO: how to support clients which don't pass credentials via the contructor
+			IAccount mcp1Account = await WebApi.LoginAsync();
 			return mcp1Account;
+		}
+
+		/// <summary>
+		/// The login async.
+		/// </summary>
+		/// <returns>
+		/// The <see cref="Task"/>.
+		/// </returns>
+		public async Task<IAccount> Login()
+		{
+			return await WebApi.LoginAsync();
 		}
 
 		/// <summary>
@@ -183,7 +219,7 @@ namespace DD.CBU.Compute.Api.Client
 		/// </returns>
 		public async Task<IEnumerable<SoftwareLabel>> GetListOfSoftwareLabels()
 		{
-			SoftwareLabels labels = await WebApi.GetAsync<SoftwareLabels>(ApiUris.SoftwareLabels(Account.OrganizationId));
+			SoftwareLabels labels = await WebApi.GetAsync<SoftwareLabels>(ApiUris.SoftwareLabels(WebApi.OrganizationId));
 
 			return labels.Items;
 		}
@@ -197,7 +233,7 @@ namespace DD.CBU.Compute.Api.Client
 		/// </returns>
 		public async Task<IEnumerable<Geo>> GetListOfMultiGeographyRegions()
 		{
-            Geos regions = await WebApi.GetAsync<Geos>(ApiUris.MultiGeographyRegions(Account.OrganizationId));
+            Geos regions = await WebApi.GetAsync<Geos>(ApiUris.MultiGeographyRegions(WebApi.OrganizationId));
 
 			return regions.Items;
 		}
@@ -215,11 +251,11 @@ namespace DD.CBU.Compute.Api.Client
 		/// </returns>
 		public async Task<Status> DeleteSubAdministratorAccount(string username)
 		{
-            return await WebApi.GetAsync<Status>(ApiUris.DeleteSubAdministrator(Account.OrganizationId, username));
+            return await WebApi.GetAsync<Status>(ApiUris.DeleteSubAdministrator(WebApi.OrganizationId, username));
 		}
 
 		/// <summary>
-		/// Used to retrieve full details of an Administrator account associated with the Organization identified by {orgid}.
+		/// Used to retrieve full details of an Administrator account associated with the Organization identified by {org Id}.
 		///     The Sub-Administrator is identified by their <paramref name="username"/>.
 		/// </summary>
 		/// <param name="username">
@@ -230,7 +266,8 @@ namespace DD.CBU.Compute.Api.Client
 		/// </returns>
 		public async Task<AccountWithPhoneNumber> GetAdministratorAccount(string username)
 		{
-			AccountWithPhoneNumber account = await WebApi.GetAsync<AccountWithPhoneNumber>(ApiUris.AccountWithPhoneNumber(Account.OrganizationId,username));
+			AccountWithPhoneNumber account =
+				await WebApi.GetAsync<AccountWithPhoneNumber>(ApiUris.AccountWithPhoneNumber(WebApi.OrganizationId, username));
 			return account;
 		}
 
@@ -248,22 +285,21 @@ namespace DD.CBU.Compute.Api.Client
 		/// </returns>
 		public async Task<Status> DesignatePrimaryAdministratorAccount(string username)
 		{
-
-            return await WebApi.GetAsync<Status>(ApiUris.SetPrimaryAdministrator(Account.OrganizationId,username));
+            return await WebApi.GetAsync<Status>(ApiUris.SetPrimaryAdministrator(WebApi.OrganizationId,username));
 		}
 
 
 		/// <summary>
-		/// This function identifies the list of data centers available to the organization of the authenticating user.
+		/// This function identifies the list of data center 's available to the organization of the authenticating user.
 		/// </summary>
 		/// <returns>
-		/// The list of data centers associated with the organization.
+		/// The list of data center 's associated with the organization.
 		/// </returns>
 		public async Task<IEnumerable<DatacenterWithMaintenanceStatusType>> GetDataCentersWithMaintenanceStatuses()
 		{
 			DatacentersWithMaintenanceStatus dataCenters =
 				await
-					WebApi.GetAsync<DatacentersWithMaintenanceStatus>(ApiUris.DatacentresWithMaintanence(Account.OrganizationId));
+					WebApi.GetAsync<DatacentersWithMaintenanceStatus>(ApiUris.DatacentresWithMaintanence(WebApi.OrganizationId));
 			return dataCenters.datacenter;
 		}
 
@@ -277,7 +313,7 @@ namespace DD.CBU.Compute.Api.Client
 		/// </returns>
 		public async Task<IEnumerable<Account>> GetAccounts()
 		{
-			Accounts accounts = await WebApi.GetAsync<Accounts>(ApiUris.Account(Account.OrganizationId));
+			Accounts accounts = await WebApi.GetAsync<Accounts>(ApiUris.Account(WebApi.OrganizationId));
 			return accounts.Items;
 		}
 
@@ -296,7 +332,7 @@ namespace DD.CBU.Compute.Api.Client
 		public async Task<Status> AddSubAdministratorAccount(AccountWithPhoneNumber account)
 		{
 
-			return await WebApi.PostAsync<AccountWithPhoneNumber, Status>(ApiUris.AccountWithPhoneNumber(Account.OrganizationId), account);
+			return await WebApi.PostAsync<AccountWithPhoneNumber, Status>(ApiUris.AccountWithPhoneNumber(WebApi.OrganizationId), account);
 		}
 
 		/// <summary>
@@ -344,7 +380,7 @@ namespace DD.CBU.Compute.Api.Client
 
 			return
 				await
-					WebApi.PostAsync<Status>(ApiUris.UpdateAdministrator(Account.OrganizationId, account.userName), 
+					WebApi.PostAsync<Status>(ApiUris.UpdateAdministrator(WebApi.OrganizationId, account.userName), 
 						postBody);
 		}
 
@@ -363,7 +399,7 @@ namespace DD.CBU.Compute.Api.Client
 			DatacentersWithDiskSpeedDetails datacentersWithDiskSpeedDetails =
 				await WebApi.GetAsync<DatacentersWithDiskSpeedDetails>(
 					ApiUris.DatacentersWithDiskSpeedDetails(
-						Account.OrganizationId
+						WebApi.OrganizationId
 						)
 					);
 
@@ -422,7 +458,7 @@ namespace DD.CBU.Compute.Api.Client
 		{
 			ImagesWithDiskSpeed imagesWithDiskSpeed =
 				await
-					WebApi.GetAsync<ImagesWithDiskSpeed>(ApiUris.ImagesWithDiskSpeed(Account.OrganizationId, ServerImageType.OS, 
+					WebApi.GetAsync<ImagesWithDiskSpeed>(ApiUris.ImagesWithDiskSpeed(WebApi.OrganizationId, ServerImageType.OS, 
 						imageId, name, location, operatingSystemId, operatingSystemFamily));
 
 			if (imagesWithDiskSpeed == null)
@@ -453,7 +489,7 @@ namespace DD.CBU.Compute.Api.Client
 			DeployedImagesWithSoftwareLabels images =
 				await
 					WebApi.GetAsync<DeployedImagesWithSoftwareLabels>(
-						ApiUris.CustomerImagesWithSoftwareLabels(Account.OrganizationId, networkLocation));
+						ApiUris.CustomerImagesWithSoftwareLabels(WebApi.OrganizationId, networkLocation));
 			return images.DeployedImageWithSoftwareLabels;
 		}
 
@@ -484,7 +520,7 @@ namespace DD.CBU.Compute.Api.Client
 		{
 			ImagesWithDiskSpeed imagesWithDiskSpeed =
 				await
-					WebApi.GetAsync<ImagesWithDiskSpeed>(ApiUris.ImagesWithDiskSpeed(Account.OrganizationId, 
+					WebApi.GetAsync<ImagesWithDiskSpeed>(ApiUris.ImagesWithDiskSpeed(WebApi.OrganizationId, 
 						ServerImageType.CUSTOMER, imageId, name, location, operatingSystemId, operatingSystemFamily));
 
 			if (imagesWithDiskSpeed.image == null)
@@ -505,7 +541,7 @@ namespace DD.CBU.Compute.Api.Client
 		/// </returns>
 		public async Task<Status> RemoveCustomerServerImage(string imageId)
 		{
-			return await WebApi.GetAsync<Status>(ApiUris.RemoveCustomerServerImage(Account.OrganizationId, imageId));
+			return await WebApi.GetAsync<Status>(ApiUris.RemoveCustomerServerImage(WebApi.OrganizationId, imageId));
 		}
 
 		/// <summary>
@@ -537,48 +573,59 @@ namespace DD.CBU.Compute.Api.Client
 			return
 				await
 					WebApi.PostAsync<NewServerToDeploy, Status>(
-						ApiUris.DeployServer(Account.OrganizationId), 
+						ApiUris.DeployServer(WebApi.OrganizationId), 
 						new NewServerToDeploy
 						{
 							name = name, 
 							description = description, 
 							vlanResourcePath =
-								string.Format("/oec/{0}/network/{1}", Account.OrganizationId, networkId), 
+								string.Format("/oec/{0}/network/{1}", WebApi.OrganizationId, networkId), 
 							imageResourcePath = string.Format("/oec/base/image/{0}", imageId), 
 							administratorPassword = adminPassword, 
 							isStarted = isStarted
 						});
 		}
 
-
 		/// <summary>
-		/// Deploys a server using an image into a specified network.
+		/// The deploy server with disk speed image task.
 		/// </summary>
 		/// <param name="name">
+		/// The name.
 		/// </param>
 		/// <param name="description">
+		/// The description.
 		/// </param>
 		/// <param name="networkId">
+		/// The network id.
 		/// </param>
 		/// <param name="privateIp">
-		/// The private Ip.
+		/// The private ip.
 		/// </param>
 		/// <param name="imageId">
+		/// The image id.
 		/// </param>
 		/// <param name="adminPassword">
+		/// The admin password.
 		/// </param>
 		/// <param name="start">
+		/// The start.
 		/// </param>
 		/// <returns>
 		/// The <see cref="Task"/>.
 		/// </returns>
-		public async Task<Status> DeployServerWithDiskSpeedImageTask(string name, string description, string networkId, 
-			string privateIp, string imageId, string adminPassword, bool start)
+		public async Task<Status> DeployServerWithDiskSpeedImageTask(
+			string name,
+			string description,
+			string networkId,
+			string privateIp,
+			string imageId,
+			string adminPassword,
+			bool start)
 		{
 			return
 				await
 					WebApi.PostAsync<NewServerToDeployWithDiskSpeed, Status>(
-						ApiUris.DeployServerWithDiskSpeed(Account.OrganizationId), 
+						ApiUris.DeployServerWithDiskSpeed(WebApi.OrganizationId), 
 						new NewServerToDeployWithDiskSpeed
 						{
 							name = name, 
@@ -621,13 +668,20 @@ namespace DD.CBU.Compute.Api.Client
 		/// <returns>
 		/// The <see cref="Task"/>.
 		/// </returns>
-		public async Task<Status> DeployServerWithDiskSpeedImageTask(string name, string description, string networkId, 
-			string privateIp, string imageId, string adminPassword, bool start, Disk[] disk)
+		public async Task<Status> DeployServerWithDiskSpeedImageTask(
+			string name,
+			string description,
+			string networkId,
+			string privateIp,
+			string imageId,
+			string adminPassword,
+			bool start,
+			Disk[] disk)
 		{
 			return
 				await
 					WebApi.PostAsync<NewServerToDeployWithDiskSpeed, Status>(
-						ApiUris.DeployServerWithDiskSpeed(Account.OrganizationId), 
+						ApiUris.DeployServerWithDiskSpeed(WebApi.OrganizationId), 
 						new NewServerToDeployWithDiskSpeed
 						{
 							name = name, 
@@ -649,7 +703,7 @@ namespace DD.CBU.Compute.Api.Client
 		/// The server id.
 		/// </param>
 		/// <param name="name">
-		/// The server new name on CaaS. This paramenter does not change the machine/host name.
+		/// The server new name on CaaS. This parameter does not change the machine/host name.
 		/// </param>
 		/// <param name="description">
 		/// The new description for the server.
@@ -666,7 +720,12 @@ namespace DD.CBU.Compute.Api.Client
 		/// <returns>
 		/// The <see cref="Task"/>.
 		/// </returns>
-		public async Task<Status> ModifyServer(string serverId, string name, string description, int memory, int cpucount, 
+		public async Task<Status> ModifyServer(
+			string serverId,
+			string name,
+			string description,
+			int memory,
+			int cpucount,
 			string privateIp)
 		{
 			// build que query string paramenters
@@ -685,7 +744,7 @@ namespace DD.CBU.Compute.Api.Client
 			// build the query string
 			string poststring = parameters.ToQueryString();
 
-			return await WebApi.PostAsync<Status>(ApiUris.ModifyServer(Account.OrganizationId, serverId), poststring);
+			return await WebApi.PostAsync<Status>(ApiUris.ModifyServer(WebApi.OrganizationId, serverId), poststring);
 		}
 
 		/// <summary>
@@ -699,7 +758,7 @@ namespace DD.CBU.Compute.Api.Client
 		/// </returns>
 		public async Task<Status> ServerPowerOn(string serverId)
 		{
-			return await WebApi.GetAsync<Status>(ApiUris.PowerOnServer(Account.OrganizationId, serverId));
+			return await WebApi.GetAsync<Status>(ApiUris.PowerOnServer(WebApi.OrganizationId, serverId));
 		}
 
 		/// <summary>
@@ -713,7 +772,7 @@ namespace DD.CBU.Compute.Api.Client
 		/// </returns>
 		public async Task<Status> ServerPowerOff(string serverId)
 		{
-			return await WebApi.GetAsync<Status>(ApiUris.PoweroffServer(Account.OrganizationId, serverId));
+			return await WebApi.GetAsync<Status>(ApiUris.PoweroffServer(WebApi.OrganizationId, serverId));
 		}
 
 		/// <summary>
@@ -727,7 +786,7 @@ namespace DD.CBU.Compute.Api.Client
 		/// </returns>
 		public async Task<Status> ServerRestart(string serverId)
 		{
-			return await WebApi.GetAsync<Status>(ApiUris.RebootServer(Account.OrganizationId, serverId));
+			return await WebApi.GetAsync<Status>(ApiUris.RebootServer(WebApi.OrganizationId, serverId));
 		}
 
 		/// <summary>	Power cycles an existing deployed server. This is the equivalent of pulling and replacing the power cord for
@@ -736,7 +795,7 @@ namespace DD.CBU.Compute.Api.Client
 		/// <returns>	Returns a status of the HTTP request </returns>
 		public async Task<Status> ServerReset(string serverId)
 		{
-			return await WebApi.GetAsync<Status>(ApiUris.ResetServer(Account.OrganizationId, serverId));
+			return await WebApi.GetAsync<Status>(ApiUris.ResetServer(WebApi.OrganizationId, serverId));
 		}
 
 		/// <summary>
@@ -750,12 +809,12 @@ namespace DD.CBU.Compute.Api.Client
 		/// </returns>
 		public async Task<Status> ServerShutdown(string serverId)
 		{
-			return await WebApi.GetAsync<Status>(ApiUris.ShutdownServer(Account.OrganizationId, serverId));
+			return await WebApi.GetAsync<Status>(ApiUris.ShutdownServer(WebApi.OrganizationId, serverId));
 		}
 
 
 		/// <summary>
-		/// Triggers an update of the VMware Tools software running on the guest OS of a virtual server
+		/// Triggers an update of the VMWare Tools software running on the guest OS of a virtual server
 		/// </summary>
 		/// <param name="serverId">
 		/// The server id
@@ -765,7 +824,7 @@ namespace DD.CBU.Compute.Api.Client
 		/// </returns>
 		public async Task<Status> ServerUpdateVMwareTools(string serverId)
 		{
-			return await WebApi.GetAsync<Status>(ApiUris.UpdateServerVMwareTools(Account.OrganizationId, serverId));
+			return await WebApi.GetAsync<Status>(ApiUris.UpdateServerVMwareTools(WebApi.OrganizationId, serverId));
 		}
 
 
@@ -788,8 +847,7 @@ namespace DD.CBU.Compute.Api.Client
 		{
 			return
 				await
-					WebApi.GetAsync<Status>(ApiUris.CloneServerToCustomerImage(Account.OrganizationId, serverId, imageName, 
-						imageDesc));
+				WebApi.GetAsync<Status>(ApiUris.CloneServerToCustomerImage(WebApi.OrganizationId, serverId, imageName, imageDesc));
 		}
 
 		/// <summary>
@@ -799,7 +857,7 @@ namespace DD.CBU.Compute.Api.Client
 		/// The server id
 		/// </param>
 		/// <param name="diskId">
-		/// Ths disk id
+		/// The disk id
 		/// </param>
 		/// <param name="sizeInGb">
 		/// New size of the disk
@@ -811,7 +869,7 @@ namespace DD.CBU.Compute.Api.Client
 		{
 			return await
 				WebApi.PostAsync<ChangeDiskSize, Status>(
-					ApiUris.ChangeServerDiskSize(Account.OrganizationId, serverId, diskId), 
+					ApiUris.ChangeServerDiskSize(WebApi.OrganizationId, serverId, diskId), 
 					new ChangeDiskSize
 					{
 						newSizeGb = sizeInGb
@@ -827,7 +885,7 @@ namespace DD.CBU.Compute.Api.Client
 		/// The server id
 		/// </param>
 		/// <param name="diskId">
-		/// Ths disk id
+		/// The disk id
 		/// </param>
 		/// <param name="speedId">
 		/// New size of the disk
@@ -839,7 +897,7 @@ namespace DD.CBU.Compute.Api.Client
 		{
 			return await
 				WebApi.PostAsync<ChangeDiskSpeed, Status>(
-					ApiUris.ChangeServerDiskSpeed(Account.OrganizationId, serverId, diskId), 
+					ApiUris.ChangeServerDiskSpeed(WebApi.OrganizationId, serverId, diskId), 
 					new ChangeDiskSpeed
 					{
 						speed = speedId
@@ -866,7 +924,7 @@ namespace DD.CBU.Compute.Api.Client
 		{
 			return await
 				WebApi.GetAsync<Status>(
-					ApiUris.AddServerDisk(Account.OrganizationId, serverId, size, speedId));
+					ApiUris.AddServerDisk(WebApi.OrganizationId, serverId, size, speedId));
 		}
 
 		/// <summary>
@@ -885,7 +943,7 @@ namespace DD.CBU.Compute.Api.Client
 		{
 			return await
 				WebApi.GetAsync<Status>(
-					ApiUris.RemoveServerDisk(Account.OrganizationId, serverId, diskId));
+					ApiUris.RemoveServerDisk(WebApi.OrganizationId, serverId, diskId));
 		}
 
 
@@ -903,7 +961,7 @@ namespace DD.CBU.Compute.Api.Client
 		/// </returns>
 		public async Task<Status> ServerDelete(string serverId)
 		{
-			return await WebApi.GetAsync<Status>(ApiUris.DeleteServer(Account.OrganizationId, serverId));
+			return await WebApi.GetAsync<Status>(ApiUris.DeleteServer(WebApi.OrganizationId, serverId));
 		}
 
 		/// <summary>
@@ -915,7 +973,7 @@ namespace DD.CBU.Compute.Api.Client
 		public async Task<IEnumerable<ServerWithBackupType>> GetDeployedServers()
 		{
 			ServersWithBackup servers =
-				await WebApi.GetAsync<ServersWithBackup>(ApiUris.DeployedServers(Account.OrganizationId, null, null, null, null));
+				await WebApi.GetAsync<ServersWithBackup>(ApiUris.DeployedServers(WebApi.OrganizationId, null, null, null, null));
 			return servers.server;
 		}
 
@@ -937,13 +995,16 @@ namespace DD.CBU.Compute.Api.Client
 		/// <returns>
 		/// A list of deployed servers
 		/// </returns>
-		public async Task<IEnumerable<ServerWithBackupType>> GetDeployedServers(string serverId, string name, string networkId, 
+		public async Task<IEnumerable<ServerWithBackupType>> GetDeployedServers(
+			string serverId,
+			string name,
+			string networkId,
 			string location)
 		{
 			ServersWithBackup servers =
 				await
-					WebApi.GetAsync<ServersWithBackup>(ApiUris.DeployedServers(Account.OrganizationId, serverId, name, networkId, 
-						location));
+				WebApi.GetAsync<ServersWithBackup>(
+					ApiUris.DeployedServers(WebApi.OrganizationId, serverId, name, networkId, location));
 			return servers.server;
 		}
         /// <summary>
@@ -968,8 +1029,7 @@ namespace DD.CBU.Compute.Api.Client
         /// <returns>A list of deployed servers</returns>
         public async Task<IEnumerable<ServerWithBackupType>> GetDeployedServersByName(string name)
         {
-            return await GetDeployedServers(string.Empty, name, string.Empty, string.Empty);
-       
+            return await GetDeployedServers(string.Empty, name, string.Empty, string.Empty);       
         }
 
         /// <summary>
@@ -980,7 +1040,6 @@ namespace DD.CBU.Compute.Api.Client
         public async Task<IEnumerable<ServerWithBackupType>> GetDeployedServersByNetworkId(string networkid)
         {
             return await GetDeployedServers(string.Empty, string.Empty, networkid, string.Empty);
-
         }
 
         /// <summary>
@@ -991,7 +1050,6 @@ namespace DD.CBU.Compute.Api.Client
         public async Task<IEnumerable<ServerWithBackupType>> GetDeployedServersByLocation(string location)
         {
             return await GetDeployedServers(string.Empty, string.Empty, string.Empty, location);
-
         }
 
 
@@ -1002,7 +1060,7 @@ namespace DD.CBU.Compute.Api.Client
 		/// The serverId for the 1st server
 		/// </param>
 		/// <param name="serverId2">
-		/// The serverId for the 2nd server
+		/// The serverId for the 2'nd server
 		/// </param>
 		/// <returns>
 		/// The <see cref="Task"/>.
@@ -1011,7 +1069,7 @@ namespace DD.CBU.Compute.Api.Client
 		{
 			return await
 				WebApi.PostAsync<NewAntiAffinityRule, Status>(
-					ApiUris.CreateAntiAffinityRule(Account.OrganizationId), 
+					ApiUris.CreateAntiAffinityRule(WebApi.OrganizationId), 
 					new NewAntiAffinityRule
 					{
 						serverId = new[] {serverId1, serverId2}
@@ -1024,23 +1082,25 @@ namespace DD.CBU.Compute.Api.Client
 		/// List all Server Anti-Affinity Rules
 		/// </summary>
 		/// <param name="ruleId">
-		/// Filter by ruleId
+		/// Filter by rule Id
 		/// </param>
 		/// <param name="location">
 		/// Filter by location
 		/// </param>
 		/// <param name="networkId">
-		/// Filter by networkid
+		/// Filter by network Id
 		/// </param>
 		/// <returns>
 		/// The <see cref="Task"/>.
 		/// </returns>
-		public async Task<IEnumerable<AntiAffinityRuleType>> GetServerAntiAffinityRules(string ruleId, string location, 
+		public async Task<IEnumerable<AntiAffinityRuleType>> GetServerAntiAffinityRules(
+			string ruleId,
+			string location,
 			string networkId)
 		{
-			AntiAffinityRules rules = await
-				WebApi.GetAsync<AntiAffinityRules>(ApiUris.GetAntiAffinityRule(Account.OrganizationId, ruleId, 
-					location, networkId));
+			AntiAffinityRules rules =
+				await
+				WebApi.GetAsync<AntiAffinityRules>(ApiUris.GetAntiAffinityRule(WebApi.OrganizationId, ruleId, location, networkId));
 			return rules.antiAffinityRule;
 		}
 
@@ -1055,7 +1115,7 @@ namespace DD.CBU.Compute.Api.Client
 		/// </returns>
 		public async Task<Status> RemoveServerAntiAffinityRule(string ruleId)
 		{
-			return await WebApi.GetAsync<Status>(ApiUris.RemoveAntiAffinityRule(Account.OrganizationId, ruleId));
+			return await WebApi.GetAsync<Status>(ApiUris.RemoveAntiAffinityRule(WebApi.OrganizationId, ruleId));
 		}
 
 		/// <summary>
@@ -1078,39 +1138,48 @@ namespace DD.CBU.Compute.Api.Client
 		{
 			IEnumerable<KnownApiRegion> regionList = KnownApiUri.Instance.GetKnownRegionList(vendor);
 
-			ComputeApiClient[] computeClients = regionList.Select(region => new ComputeApiClient(vendor, region)).ToArray();
-			if (computeClients.Length == 0)
+			IDictionary<KnownApiRegion, ComputeApiClient> computeClients = regionList.Select(
+				region =>
+				new KeyValuePair<KnownApiRegion, ComputeApiClient>(
+					region,
+					ComputeApiClient.GetComputeApiClient(vendor, region, credential)))
+					.ToDictionary(x => x.Key, x => x.Value);
+
+			if (computeClients.Count == 0)
 			{
 				throw new Exception("No known end points for this vendor");
 			}
 
-			Task<IAccount>[] loginTasks = computeClients.Select(client => client.LoginAsync(credential)).ToArray();
+			IDictionary<KnownApiRegion, Task<IAccount>> loginTasks = computeClients.Select(
+				client => new KeyValuePair<KnownApiRegion, Task<IAccount>>(client.Key, client.Value.Login()))
+																					.ToDictionary(x => x.Key, x => x.Value);
 
 			// try login to all known regions simultaneoulsy. Note, not all regions may be enabled for this particular client.
 			try
 			{
-				await Task.WhenAll(loginTasks);
+				await Task.WhenAll(loginTasks.Values.ToArray());
 			}
-			catch (Exception aex)
+			catch (Exception)
 			{
 				// ignore (there might be region that this user is not enabled)
 			}
 
-			computeClients = computeClients.Where(client => client.WebApi.IsLoggedIn).ToArray();
-			if (computeClients.Length == 0)
+			var loggedInClients = loginTasks.Where(client => client.Value.Status == TaskStatus.RanToCompletion).Select(login => computeClients[login.Key]).ToList();
+
+			if (loggedInClients.Count == 0)
 			{
 				throw new Exception("Invalid login or user doesn't exists");
 			}
 
 			Task<IEnumerable<Geo>>[] multiGeoTasks =
-				computeClients.Select(client => client.GetListOfMultiGeographyRegions()).ToArray();
+				loggedInClients.Select(client => client.GetListOfMultiGeographyRegions()).ToArray();
 
 			// multiGeo only works in the home geo.
 			try
 			{
 				await Task.WhenAll(multiGeoTasks);
 			}
-			catch (Exception aex)
+			catch (Exception)
 			{
 				// ignore (only one task will return with valid result)
 			}
@@ -1118,24 +1187,8 @@ namespace DD.CBU.Compute.Api.Client
 			IEnumerable<Geo> validMultiGeo =
 				multiGeoTasks.Single(task => task.Status == TaskStatus.RanToCompletion && task.Result != null).Result;
 			return validMultiGeo;
-		}	
-		
+		}			
 
 		#endregion // Public methods
-
-		#region Public properties.
-
-		private INetworking _networking;
-		private INetworkingLegacy _networkingLegacy;
-
-		/// <summary>	Gets the networking 2.0 methods. </summary>
-		/// <value>	The networking. </value>
-		/// <seealso cref="P:DD.CBU.Compute.Api.Client.Interfaces.IComputeApiClient.Networking"/>
-		public INetworking Networking { get { return _networking; } }
-
-		/// <summary>	Gets the networking legacy 1.0 methods </summary>
-		public INetworkingLegacy NetworkingLegacy { get { return _networkingLegacy; } }
-
-		#endregion Public properties
 	}
 }

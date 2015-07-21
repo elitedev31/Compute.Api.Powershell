@@ -10,15 +10,29 @@ namespace DD.CBU.Compute.Api.Client.Server20
 	/// <summary>	A server 2.0 extensions methods. </summary>
 	public static class Server20Extensions
 	{
-		/// <summary>	Gets MCP 2 deployed servers. </summary>
-		/// <remarks>	Anthony, 6/17/2015. </remarks>
-		/// <param name="client">	The <see cref="ComputeApiClient"/> object. </param>
-		/// <returns>	The MCP 2 deployed servers. </returns>
+		/// <summary>
+		/// 	Gets MCP 2 deployed servers. 
+		/// </summary>
+		/// <remarks>
+		/// 	Anthony, 6/17/2015. 
+		/// </remarks>
+		/// <param name="client">
+		/// 	The <see cref="ComputeApiClient"/> object. 
+		/// </param>
+		/// <param name="options">
+		/// The options.
+		/// </param>
+		/// <param name="pagingOptions">
+		/// The paging Options.
+		/// </param>
+		/// <returns>
+		/// 	The MCP 2 deployed servers. 
+		/// </returns>
 		/// <seealso cref="M:DD.CBU.Compute.Api.Client.Interfaces.IComputeApiClient.GetMCP2DeployedServers()"/>
 		public static async Task<ServersResponseCollection> GetMcp2DeployedServers(this IComputeApiClient client, ServerListOptions options = null, PageableRequest pagingOptions = null)
 		{
 			ServersResponseCollection servers =
-				await client.WebApi.GetAsync<ServersResponseCollection>(ApiUris.GetMcp2Servers(client.Account.OrganizationId), pagingOptions);
+				await client.WebApi.GetAsync<ServersResponseCollection>(ApiUris.GetMcp2Servers(client.WebApi.OrganizationId), pagingOptions);
 			return servers;
 		}
 
@@ -31,7 +45,7 @@ namespace DD.CBU.Compute.Api.Client.Server20
 		public static async Task<ServerType> GetMcp2DeployedServer(this IComputeApiClient client, Guid serverId)
 		{
 			ServerType servers =
-				await client.WebApi.GetAsync<ServerType>(ApiUris.GetMcp2Server(client.Account.OrganizationId, serverId));
+				await client.WebApi.GetAsync<ServerType>(ApiUris.GetMcp2Server(client.WebApi.OrganizationId, serverId));
 			return servers;
 		}
 	}

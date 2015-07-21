@@ -324,7 +324,6 @@ namespace DD.CBU.Compute.Api.Client
 
             AddHostName(KnownApiVendor.PWW_Cloud_Connect, KnownApiRegion.NorthAmerica_NA, "api.pwwcloudconnect.net");
             AddFtpHostName(KnownApiVendor.PWW_Cloud_Connect, KnownApiRegion.NorthAmerica_NA, "ftps-na.cloud-vpn.net");
-
         }
 
         /// <summary>	Add host name to the known endpoints. </summary>

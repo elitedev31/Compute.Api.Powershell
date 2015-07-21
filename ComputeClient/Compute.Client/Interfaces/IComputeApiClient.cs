@@ -1,47 +1,25 @@
-// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IComputeApiClient.cs" company="">
-//   
-// </copyright>
-// <summary>
-//   The interface of the CaaS API Client
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
-
-
-
-    using System;
-    using System.Collections.Generic;
-    using System.Net;
-    using System.Threading.Tasks;
-    using DD.CBU.Compute.Api.Contracts.Datacenter;
-    using DD.CBU.Compute.Api.Contracts.Directory;
-    using DD.CBU.Compute.Api.Contracts.General;
-using DD.CBU.Compute.Api.Contracts.Image;
-    using DD.CBU.Compute.Api.Contracts.Network20;
-    using DD.CBU.Compute.Api.Contracts.Server;
-using DD.CBU.Compute.Api.Contracts.Software;
-
 namespace DD.CBU.Compute.Api.Client.Interfaces
 {
+	using System;
+	using System.Collections.Generic;
+	using System.Net;
+	using System.Threading.Tasks;
+	using DD.CBU.Compute.Api.Contracts.Datacenter;
+	using DD.CBU.Compute.Api.Contracts.Directory;
+	using DD.CBU.Compute.Api.Contracts.General;
+	using DD.CBU.Compute.Api.Contracts.Image;
+	using DD.CBU.Compute.Api.Contracts.Server;
+	using DD.CBU.Compute.Api.Contracts.Software;
+
     /// <summary>
     /// The interface of the CaaS API Client
     /// </summary>
     public interface IComputeApiClient : IDisposable
-    {
-        /// <summary>
-        /// The account of the organisation.
-        /// </summary>
-        IAccount Account { get; }
-
+    {   
         /// <summary>
         /// The web API that requests directly from the REST API.
         /// </summary>
         IWebApi WebApi { get; }
-
-		/// <summary>
-		/// The FTP host for this connection.
-		/// </summary>
-		string FtpHost { get; }
 
         /// <summary>
         /// Login into the organisation account using credentials.
@@ -52,8 +30,17 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 		/// <returns>
 		/// The account associated with the organisation.
 		/// </returns>
+		[Obsolete("Use Login() instead")]
         Task<IAccount> LoginAsync(ICredentials accountCredentials);
-        
+
+	    /// <summary>
+	    /// The login async.
+	    /// </summary>
+	    /// <returns>
+	    /// The <see cref="Task"/>.
+	    /// </returns>
+	    Task<IAccount> Login();
+
         /// <summary>
         /// Gets a list of software labels.
         /// </summary>
@@ -185,11 +172,15 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 		/// </param>
 		/// <returns>
 		/// The <see cref="Task"/>.
-		/// </returns>
-		Task<IReadOnlyList<ImagesWithDiskSpeedImage>> GetImages(string imageId, string name, string location, 
-			string operatingSystemId, string operatingSystemFamily);
+        /// </returns>
+        Task<IReadOnlyList<ImagesWithDiskSpeedImage>> GetImages(
+	        string imageId,
+			string name,
+			string location,
+			string operatingSystemId,
+			string operatingSystemFamily);
 
-        /// <summary>
+	    /// <summary>
         /// Gets the deployed customer server images.
         /// </summary>
 		/// <param name="networkLocation">
@@ -222,11 +213,15 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 		/// </param>
 		/// <returns>
 		/// The <see cref="Task"/>.
-		/// </returns>
-		Task<IReadOnlyList<ImagesWithDiskSpeedImage>> GetCustomerServerImages(string imageId, string name, string location, 
-			string operatingSystemId, string operatingSystemFamily);
+        /// </returns>
+        Task<IReadOnlyList<ImagesWithDiskSpeedImage>> GetCustomerServerImages(
+	        string imageId,
+			string name,
+			string location,
+			string operatingSystemId,
+			string operatingSystemFamily);
 
-        /// <summary>
+	    /// <summary>
         /// Remove customer images
         /// </summary>
 		/// <param name="imageid">
@@ -366,10 +361,10 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 		/// The memory.
 		/// </param>
 		/// <param name="cpucount">
-		/// The cpucount.
+		/// The CPU count.
 		/// </param>
 		/// <param name="privateIp">
-		/// The private ip.
+		/// The private IP.
 		/// </param>
 		/// <returns>
 		/// The <see cref="Task"/>.
@@ -392,6 +387,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
         /// Powers off the server.
         /// </summary>
 		/// <param name="serverId">
+		/// Server Id
 		/// </param>
 		/// <returns>
 		/// The <see cref="Task"/>.
@@ -434,10 +430,10 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 		/// The server id.
 		/// </param>
 		/// <param name="diskId">
-		/// The scsi disk Id.
+		/// The SCSI disk Id.
 		/// </param>
 		/// <param name="sizeInGb">
-		/// SizeInGb.
+		/// Size In GB.
 		/// </param>
 		/// <returns>
 		/// The status of the deployment.
@@ -452,10 +448,10 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 		/// The server id.
 		/// </param>
 		/// <param name="diskId">
-		/// The scsi disk Id.
+		/// The SCSI disk Id.
 		/// </param>
 		/// <param name="speedId">
-		/// SizeInGb.
+		/// Size in GB.
 		/// </param>
 		/// <returns>
 		/// The status of the deployment.
@@ -464,6 +460,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 
 
         /// <summary>
+        /// Add Disk to Server
         /// </summary>
 		/// <param name="serverId">
 		/// The server id
@@ -487,7 +484,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 		/// The server id.
 		/// </param>
 		/// <param name="diskId">
-		/// The scsi disk Id.
+		/// The SCSI disk Id.
 		/// </param>
 		/// <returns>
 		/// The status of the deployment.
@@ -496,7 +493,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 
 
         /// <summary>
-        /// Triggers an update of the VMware Tools software running on the guest OS of a virtual server
+        /// Triggers an update of the VMWare Tools software running on the guest OS of a virtual server
         /// </summary>
 		/// <param name="serverId">
 		/// The server id.
@@ -548,7 +545,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
         /// Gets a filtered list of deployed servers.
         /// </summary>
 		/// <param name="serverid">
-		/// The serverid.
+		/// The server Id.
 		/// </param>
 		/// <param name="name">
 		/// The name.
@@ -561,18 +558,21 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 		/// </param>
 		/// <returns>
 		/// The <see cref="Task"/>.
-		/// </returns>
-		Task<IEnumerable<ServerWithBackupType>> GetDeployedServers(string serverid, string name, string networkId, 
+        /// </returns>
+        Task<IEnumerable<ServerWithBackupType>> GetDeployedServers(
+	        string serverid,
+			string name,
+			string networkId,
 			string location);
 
-       /// <summary>
+	    /// <summary>
        /// Creates a new Server Anti-Affinity Rule between two servers on the same Cloud network. 
        /// </summary>
 		/// <param name="serverId1">
-		/// The serverId for the 1st server
+		/// The server Id for the 1'st server
 		/// </param>
 		/// <param name="serverId2">
-		/// The serverId for the 2nd server
+		/// The server Id for the 2'nd server
 		/// </param>
 		/// <returns>
 		/// The <see cref="Task"/>.
@@ -583,22 +583,23 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
         /// List all Server Anti-Affinity Rules 
         /// </summary>
 		/// <param name="ruleId">
-		/// Filter by ruleId
+		/// Filter by rule Id
 		/// </param>
 		/// <param name="location">
 		/// Filter by location
 		/// </param>
 		/// <param name="networkId">
-		/// Filter by networkid
+		/// Filter by network Id
 		/// </param>
 		/// <returns>
 		/// The <see cref="Task"/>.
-		/// </returns>
-        Task<IEnumerable<AntiAffinityRuleType>> GetServerAntiAffinityRules(string ruleId, string location,
-            string networkId);
+        /// </returns>
+        Task<IEnumerable<AntiAffinityRuleType>> GetServerAntiAffinityRules(
+	        string ruleId,
+			string location,
+			string networkId);
 
-
-        /// <summary>
+	    /// <summary>
         /// Remove a server Anti-Affinity Rule between two servers on the same Cloud network. 
         /// </summary>
 		/// <param name="ruleId">

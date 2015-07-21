@@ -29,7 +29,7 @@ namespace DD.CBU.Compute.Api.Client.Network20
         /// </returns>
 		public static async Task<ResponseType> DeployServerOnNetworkDomain(this IComputeApiClient client, DeployServerType server)
         {
-			var response = await client.WebApi.PostAsync<DeployServerType, ResponseType>(ApiUris.DeployServerOnNetworkDomain(client.Account.OrganizationId), server);
+			var response = await client.WebApi.PostAsync<DeployServerType, ResponseType>(ApiUris.DeployServerOnNetworkDomain(client.WebApi.OrganizationId), server);
             return response;
         }
 
@@ -42,8 +42,8 @@ namespace DD.CBU.Compute.Api.Client.Network20
 	    /// <returns>	A standard response. </returns>
 	    public static async Task<ResponseType> AddNicToServer(this IComputeApiClient client, AddNicType addNic)
 	    {
-		    return 
-			    await client.WebApi.PostAsync<AddNicType, ResponseType>(ApiUris.AddNic(client.Account.OrganizationId), addNic);
+		    return
+				await client.WebApi.PostAsync<AddNicType, ResponseType>(ApiUris.AddNic(client.WebApi.OrganizationId), addNic);
 	    }
     }
 }

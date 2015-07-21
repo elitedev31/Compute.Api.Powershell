@@ -38,7 +38,7 @@ namespace DD.CBU.Compute.Api.Client.ImportExportImages
 			return
 				await
 					client.WebApi.GetAsync<OvfPackages>(
-						ApiUris.GetOvfPackages(client.Account.OrganizationId));
+						ApiUris.GetOvfPackages(client.WebApi.OrganizationId));
 		}
 
 		/// <summary>
@@ -56,7 +56,7 @@ namespace DD.CBU.Compute.Api.Client.ImportExportImages
 			ServerImagesWithState imports =
 				await
 					client.WebApi.GetAsync<ServerImagesWithState>(
-						ApiUris.GetCustomerImageImports(client.Account.OrganizationId));
+						ApiUris.GetCustomerImageImports(client.WebApi.OrganizationId));
 			return imports.serverImageWithState;
 		}
 
@@ -75,7 +75,7 @@ namespace DD.CBU.Compute.Api.Client.ImportExportImages
 			ImageExports result =
 				await
 					client.WebApi.GetAsync<ImageExports>(
-						ApiUris.GetCustomerImageExports(client.Account.OrganizationId));
+						ApiUris.GetCustomerImageExports(client.WebApi.OrganizationId));
 			return result.imageExport;
 		}
 
@@ -98,7 +98,7 @@ namespace DD.CBU.Compute.Api.Client.ImportExportImages
 			ImageExportHistory result =
 				await
 					client.WebApi.GetAsync<ImageExportHistory>(
-						ApiUris.GetCustomerImageExportHistory(client.Account.OrganizationId, count));
+						ApiUris.GetCustomerImageExportHistory(client.WebApi.OrganizationId, count));
 			return result.imageExportRecord;
 		}
 
@@ -141,7 +141,7 @@ namespace DD.CBU.Compute.Api.Client.ImportExportImages
 			return
 				await
 					client.WebApi.PostAsync<NewImageImport, ServerImageWithStateType>(
-						ApiUris.ImportCustomerImage(client.Account.OrganizationId), 
+						ApiUris.ImportCustomerImage(client.WebApi.OrganizationId), 
 						new NewImageImport
 						{
 							name = customerImageName, 
@@ -176,7 +176,7 @@ namespace DD.CBU.Compute.Api.Client.ImportExportImages
 			return
 				await
 					client.WebApi.PostAsync<NewImageExport, ImageExportType>(
-						ApiUris.ExportCustomerImage(client.Account.OrganizationId), 
+						ApiUris.ExportCustomerImage(client.WebApi.OrganizationId), 
 						new NewImageExport
 						{
 							ovfPackagePrefix = ovfPrefix, 

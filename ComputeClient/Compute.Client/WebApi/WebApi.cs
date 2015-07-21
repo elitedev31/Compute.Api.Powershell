@@ -119,11 +119,11 @@
 
 			using (HttpResponseMessage response = await _httpClient.GetAsync(relativeOperationUri))
 			{
-				if (response.IsSuccessStatusCode)
+				if (!response.IsSuccessStatusCode)
 				{
-					return await response.Content.ReadAsAsync<TResult>(_mediaTypeFormatters);
-				}
-				await HandleApiRequestErrors(response, relativeOperationUri);	
+					await HandleApiRequestErrors(response, relativeOperationUri);		
+				}				
+				return await response.Content.ReadAsAsync<TResult>(_mediaTypeFormatters);
 			}
 		}
 
@@ -158,12 +158,12 @@
 					throw ComputeApiException.InvalidRequest(relativeOperationUri.ToString(), String.Empty);
 				}
 
-				if (response.IsSuccessStatusCode)
+				if (!response.IsSuccessStatusCode)
 				{
-					return await response.Content.ReadAsAsync<TResult>(_mediaTypeFormatters);
+					await HandleApiRequestErrors(response, relativeOperationUri);
 				}
-
-				await HandleApiRequestErrors(response, relativeOperationUri);	
+				
+				return await response.Content.ReadAsAsync<TResult>(_mediaTypeFormatters);
 			}
 		}
 
@@ -194,10 +194,10 @@
 					await
 						_httpClient.PostAsync(relativeOperationUri, objectContent))
 			{
-				if (response.IsSuccessStatusCode)
-					return await response.Content.ReadAsAsync<TResult>(_mediaTypeFormatters);
-
-				await HandleApiRequestErrors(response, relativeOperationUri);				
+				if (!response.IsSuccessStatusCode)
+					await HandleApiRequestErrors(response, relativeOperationUri);
+				
+				return await response.Content.ReadAsAsync<TResult>(_mediaTypeFormatters);
 			}
 		}
 
