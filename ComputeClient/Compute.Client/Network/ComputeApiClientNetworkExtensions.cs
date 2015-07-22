@@ -1,25 +1,13 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ComputeApiClientNetworkExtensions.cs" company="">
-//   
-// </copyright>
-// <summary>
-//   Extension methods for the Network section of the CaaS API.
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
-
-
-
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.Contracts;
-using System.Net;
-using System.Threading.Tasks;
-using DD.CBU.Compute.Api.Client.Interfaces;
-using DD.CBU.Compute.Api.Contracts.General;
-using DD.CBU.Compute.Api.Contracts.Network;
-
-namespace DD.CBU.Compute.Api.Client.Network
+﻿namespace DD.CBU.Compute.Api.Client.Network
 {
+	using System;
+	using System.Collections.Generic;
+	using System.Net;
+	using System.Threading.Tasks;
+	using DD.CBU.Compute.Api.Client.Interfaces;
+	using DD.CBU.Compute.Api.Contracts.General;
+	using DD.CBU.Compute.Api.Contracts.Network;
+
 	/// <summary>
 	/// Extension methods for the Network section of the CaaS API.
 	/// </summary>
@@ -47,22 +35,14 @@ namespace DD.CBU.Compute.Api.Client.Network
 		/// <returns>
 		/// A status of the response.
 		/// </returns>
+		[Obsolete("Use IComputeApiClient.NetworkingLegacy instead")]
 		public static async Task<Status> CreateNetwork(
 			this IComputeApiClient client, 
 			string networkName, 
 			string dataCentreLocation, 
 			string description = null)
 		{
-			return
-				await
-					client.WebApi.PostAsync<NewNetworkWithLocationType, Status>(
-						ApiUris.CreateNetwork(client.WebApi.OrganizationId), 
-						new NewNetworkWithLocationType
-						{
-							name = networkName, 
-							location = dataCentreLocation, 
-							description = description
-						});
+			return await client.NetworkingLegacy.CreateNetwork(networkName, dataCentreLocation, description);
 		}
 
 		/// <summary>
@@ -74,11 +54,10 @@ namespace DD.CBU.Compute.Api.Client.Network
 		/// <returns>
 		/// The networks
 		/// </returns>
+		[Obsolete("Use IComputeApiClient.NetworkingLegacy instead")]
 		public static async Task<IEnumerable<NetworkWithLocationsNetwork>> GetNetworksTask(this IComputeApiClient client)
 		{
-			NetworkWithLocations networks =
-				await client.WebApi.GetAsync<NetworkWithLocations>(ApiUris.NetworkWithLocations(client.WebApi.OrganizationId));
-			return networks.Items;
+			return await client.NetworkingLegacy.GetNetworks();
 		}
 
 		/// <summary>
@@ -94,10 +73,10 @@ namespace DD.CBU.Compute.Api.Client.Network
 		/// <returns>
 		/// A status of the response.
 		/// </returns>
+		[Obsolete("Use IComputeApiClient.NetworkingLegacy instead")]
 		public static async Task<Status> DeleteNetwork(this IComputeApiClient client, string networkId)
 		{
-			return
-				await client.WebApi.GetAsync<Status>(ApiUris.DeleteNetwork(client.WebApi.OrganizationId, networkId));
+			return await client.NetworkingLegacy.DeleteNetwork(networkId);
 		}
 
 
@@ -120,21 +99,14 @@ namespace DD.CBU.Compute.Api.Client.Network
 		/// <returns>
 		/// A status of the response.
 		/// </returns>
-		public static async Task<Status> ModifyNetwork(this IComputeApiClient client, string networkId, string name, 
+		[Obsolete("Use IComputeApiClient.NetworkingLegacy instead")]
+		public static async Task<Status> ModifyNetwork(
+			this IComputeApiClient client,
+			string networkId,
+			string name,
 			string description)
 		{
-			var parameters = new Dictionary<string, string>();
-			if (!string.IsNullOrEmpty(name))
-				parameters.Add("name", name);
-			if (!string.IsNullOrEmpty(description))
-				parameters.Add("description", description);
-
-			// build the query string
-			string poststring = parameters.ToQueryString();
-
-			return
-				await
-					client.WebApi.PostAsync<Status>(ApiUris.ModifyNetwork(client.WebApi.OrganizationId, networkId), poststring);
+			return await client.NetworkingLegacy.ModifyNetwork(networkId, name, description);
 		}
 
 		/// <summary>
@@ -150,12 +122,10 @@ namespace DD.CBU.Compute.Api.Client.Network
 		/// <returns>
 		/// A NetworkConfigurationType of the response.
 		/// </returns>
+		[Obsolete("Use IComputeApiClient.NetworkingLegacy instead")]
 		public static async Task<NetworkConfigurationType> GetNetworkConfig(this IComputeApiClient client, string networkId)
 		{
-			return
-				await
-					client.WebApi.GetAsync<NetworkConfigurationType>(ApiUris.GetNetworkConfig(client.WebApi.OrganizationId, 
-						networkId));
+			return await client.NetworkingLegacy.GetNetworkConfig(networkId);
 		}
 
 		/// <summary>
@@ -171,12 +141,10 @@ namespace DD.CBU.Compute.Api.Client.Network
 		/// <returns>
 		/// The status of the operation.
 		/// </returns>
+		[Obsolete("Use IComputeApiClient.NetworkingLegacy instead")]
 		public static async Task<IEnumerable<NatRuleType>> GetNatRules(this IComputeApiClient client, string networkId)
 		{
-			NatRules natRules =
-				await client.WebApi.GetAsync<NatRules>(ApiUris.GetNatRules(client.WebApi.OrganizationId, networkId));
-
-			return natRules.NatRule;
+			return await client.NetworkingLegacy.GetNatRules(networkId);
 		}
 
 		/// <summary>
@@ -195,54 +163,38 @@ namespace DD.CBU.Compute.Api.Client.Network
 		/// <returns>
 		/// The status of the operation.
 		/// </returns>
+		[Obsolete("Use IComputeApiClient.NetworkingLegacy instead")]
 		public static async Task<Status> DeleteNatRule(this IComputeApiClient client, string networkId, string natRuleId)
 		{
-			return
-				await
-					client.WebApi.GetAsync<Status>(
-						ApiUris.DeleteNatRule(client.WebApi.OrganizationId, networkId, natRuleId));
+			return await client.NetworkingLegacy.DeleteNatRule(networkId, natRuleId);
 		}
 
 		/// <summary>
-		/// Creates a new NAT rule for a specified network.
-		///     This API requires your organization ID and the ID of the target network.
-		///     The XML structured request requires a <paramref name="natRuleName"/> element describing the NAT Rule and a
-		///     <paramref name="sourceIp"/> which is the
-		///     underlying private IP address that the public IP address (natIp) returned in the response will be assigned to.
-		///     Note that IP addresses *.0 through  *.10 are reserved and cannot be used as <paramref name="sourceIp"/> values.
-		///     The available range is *.11 to *.254. For example “10.147.15.11” in the sample request below.
-		///     An attempt to specify one of the reserved addresses as the <paramref name="sourceIp"/> will result in a REASON_240
-		///     reason code being returned.
+		/// The create nat rule.
 		/// </summary>
 		/// <param name="client">
-		/// The <see cref="ComputeApiClient"/> object.
+		/// The client.
 		/// </param>
 		/// <param name="networkId">
-		/// The target network id.
+		/// The network id.
 		/// </param>
 		/// <param name="natRuleName">
+		/// The nat rule name.
 		/// </param>
 		/// <param name="sourceIp">
+		/// The source ip.
 		/// </param>
 		/// <returns>
 		/// The <see cref="Task"/>.
 		/// </returns>
-		public static async Task<NatRuleType> CreateNatRule(this IComputeApiClient client, string networkId, 
-			string natRuleName, IPAddress sourceIp)
+		[Obsolete("Use IComputeApiClient.NetworkingLegacy instead")]
+		public static async Task<NatRuleType> CreateNatRule(
+			this IComputeApiClient client,
+			string networkId,
+			string natRuleName,
+			IPAddress sourceIp)
 		{
-			Contract.Requires(!string.IsNullOrEmpty(networkId), "Network id cannot be null or empty");
-			Contract.Requires(!string.IsNullOrEmpty(natRuleName), "NAT rule name cannot be null or empty");
-			Contract.Requires(sourceIp != null, "Source IP cannot be null");
-
-			return
-				await
-				client.WebApi.PostAsync<NatRuleType, NatRuleType>(
-					ApiUris.CreateNatRule(client.WebApi.OrganizationId, networkId),
-					new NatRuleType
-						{
-							name = natRuleName,
-							sourceIp = sourceIp.ToString()
-						});
+			return await client.NetworkingLegacy.CreateNatRule(networkId, natRuleName, sourceIp);
 		}
 
 		/// <summary>
@@ -258,14 +210,10 @@ namespace DD.CBU.Compute.Api.Client.Network
 		/// <returns>
 		/// The ACL rules.
 		/// </returns>
+		[Obsolete("Use IComputeApiClient.NetworkingLegacy instead")]
 		public static async Task<IEnumerable<AclRuleType>> GetAclRules(this IComputeApiClient client, string networkId)
 		{
-			AclRuleListType aclRules =
-				await
-					client.WebApi.GetAsync<AclRuleListType>(
-						ApiUris.GetAclRules(client.WebApi.OrganizationId, networkId));
-
-			return aclRules.AclRule;
+			return await client.NetworkingLegacy.GetAclRules(networkId);
 		}
 
 		/// <summary>
@@ -291,68 +239,63 @@ namespace DD.CBU.Compute.Api.Client.Network
 		/// <returns>
 		/// The status of the operation.
 		/// </returns>
+		[Obsolete("Use IComputeApiClient.NetworkingLegacy instead")] 
 		public static async Task<Status> DeleteAclRule(this IComputeApiClient client, string networkId, string aclRuleId)
 		{
-			return
-				await
-					client.WebApi.GetAsync<Status>(
-						ApiUris.DeleteAclRule(client.WebApi.OrganizationId, networkId, aclRuleId));
+			return await client.NetworkingLegacy.DeleteAclRule(networkId, aclRuleId);
 		}
 
-
 		/// <summary>
-		/// Creates a new ACL rule at a specified line using your organization ID and the ID of the target network.
-		///     It is possible to create both inbound (OUTSIDE_ACL) and outbound (INSIDE_ACL) rule types.
+		/// The create acl rule.
 		/// </summary>
 		/// <param name="client">
-		/// The <see cref="ComputeApiClient"/> object.
+		/// The client.
 		/// </param>
 		/// <param name="networkId">
-		/// The target network id.
+		/// The network id.
 		/// </param>
 		/// <param name="aclRuleName">
-		/// The name of the ACL rule.
+		/// The acl rule name.
 		/// </param>
 		/// <param name="position">
-		/// The position of the rule between 100-500 inclusive.
+		/// The position.
 		/// </param>
 		/// <param name="action">
-		/// The action (Permit/deny) of the ACL rule.
+		/// The action.
 		/// </param>
 		/// <param name="protocol">
-		/// The protocol to use (IP, ICMP, TCP, UDP).
+		/// The protocol.
 		/// </param>
 		/// <param name="portRangeType">
-		/// The port range type (ALL, EQUAL_TO, RANGE, GREATER_THAN, LESS_THAN).
+		/// The port range type.
 		/// </param>
 		/// <param name="sourceIpAddress">
-		/// Optional. If no source IP Address is supplied, the assumption is that any source IP address is allowed.
-		///     If a source IP address is supplied without the <paramref name="sourceNetmask"/>, source IP Address represent a
-		///     single host.
+		/// The source ip address.
 		/// </param>
 		/// <param name="sourceNetmask">
-		/// Optional. When specified, the <paramref name="sourceIpAddress"/> must be the CIDR boundary for the network.
+		/// The source netmask.
 		/// </param>
 		/// <param name="destIpAddress">
-		/// Optional. If no destination IP Address is supplied, the assumption is that any destination IP address is allowed.
-		///     If a destination IP address is supplied without the <paramref name="destNetmask"/>, source IP Address represent a
-		///     single host.
+		/// The dest ip address.
 		/// </param>
 		/// <param name="destNetmask">
-		/// Optional. When specified, the <paramref name="destIpAddress"/> must be the CIDR boundary for the network.
+		/// The dest netmask.
 		/// </param>
 		/// <param name="port1">
-		/// Optional depending on <paramref name="portRangeType"/>. Value within a range of 1-65535.
+		/// The port 1.
 		/// </param>
 		/// <param name="port2">
-		/// Optional depending on <paramref name="portRangeType"/>. Value within a range of 1-65535.
+		/// The port 2.
 		/// </param>
 		/// <param name="aclType">
-		/// Optional. One of (OUTSIDE_ACL, INSIDE_ACL). Default if not specified is OUTSIDE_ACL.
+		/// The acl type.
 		/// </param>
 		/// <returns>
-		/// The ACL rules.
+		/// The <see cref="Task"/>.
 		/// </returns>
+		/// <exception cref="ArgumentOutOfRangeException">
+		/// </exception>
+		[Obsolete("Use IComputeApiClient.NetworkingLegacy instead")] 
 		public static async Task<AclRuleType> CreateAclRule(
 			this IComputeApiClient client, 
 			string networkId, 
@@ -369,83 +312,22 @@ namespace DD.CBU.Compute.Api.Client.Network
 			int port2 = 0, 
 			AclType aclType = AclType.OUTSIDE_ACL)
 		{
-			Contract.Requires(!string.IsNullOrEmpty(aclRuleName), "The ACL rule name must NOT be empty or null!");
-			Contract.Requires(aclRuleName.Length < 60, "ACL rule name cannot exceed 60 chars");
-			Contract.Requires(position >= 100 && position <= 500, "Position must be between 100 and 500 inclusive");
-			Contract.Requires(aclType == AclType.INSIDE_ACL || aclType == AclType.OUTSIDE_ACL, 
-				"ACL Type must be one of (OUTSIDE_ACL, INSIDE_ACL)");
-
-			var portRange = new PortRangeType {type = portRangeType};
-
-// Validate that the ports are specified when needed
-			switch (portRangeType)
-			{
-				case PortRangeTypeType.EQUAL_TO:
-				case PortRangeTypeType.GREATER_THAN:
-				case PortRangeTypeType.LESS_THAN:
-				{
-					if (port1 < 1 || port1 > 65535)
-						throw new ArgumentOutOfRangeException(
-							"port1", 
-							port1, 
-							string.Format(
-								"Port1 must be between 1-65535 when the port range type is {0}", 
-								portRangeType));
-					portRange.port1 = port1;
-					portRange.port1Specified = true;
-					break;
-				}
-
-				case PortRangeTypeType.RANGE:
-				{
-					if (port1 < 1 || port1 > 65535)
-						throw new ArgumentOutOfRangeException(
-							"port1", 
-							port1, 
-							string.Format(
-								"Port1 must be between 1-65535 when the port range type is {0}", 
-								portRangeType));
-					if (port2 < 1 || port2 > 65535)
-						throw new ArgumentOutOfRangeException(
-							"port2", 
-							port2, 
-							string.Format(
-								"Port2 must be between 1-65535 when the port range type is {0}", 
-								portRangeType));
-					portRange.port1 = port1;
-					portRange.port2 = port2;
-					portRange.port1Specified = portRange.port2Specified = true;
-					break;
-				}
-			}
-
-			// create the acl rule object
-			var rule = new AclRuleType
-			{
-				name = aclRuleName, 
-				action = action, 
-				position = position, 
-				protocol = protocol.ToString(), 
-				portRange = portRange, 
-				type = aclType
-			};
-			if (sourceIpAddress != null)
-			{
-				rule.sourceIpRange = new IpRangeType {ipAddress = sourceIpAddress.ToString()};
-				if (sourceNetmask != null) rule.sourceIpRange.netmask = sourceNetmask.ToString();
-			}
-
-			if (destIpAddress != null)
-			{
-				rule.destinationIpRange = new IpRangeType {ipAddress = destIpAddress.ToString()};
-				if (destNetmask != null) rule.destinationIpRange.netmask = destNetmask.ToString();
-			}
-
 			return
 				await
-					client.WebApi.PostAsync<AclRuleType, AclRuleType>(
-						ApiUris.CreateAclRule(client.WebApi.OrganizationId, networkId), 
-						rule);
+				client.NetworkingLegacy.CreateAclRule(
+					networkId,
+					aclRuleName,
+					position,
+					action,
+					protocol,
+					portRangeType,
+					sourceIpAddress,
+					sourceNetmask,
+					destIpAddress,
+					destNetmask,
+					port1,
+					port2,
+					aclType);
 		}
 
 		/// <summary>
@@ -461,12 +343,10 @@ namespace DD.CBU.Compute.Api.Client.Network
 		/// <returns>
 		/// A Status of the response.
 		/// </returns>
+		[Obsolete("Use IComputeApiClient.NetworkingLegacy instead")] 
 		public static async Task<Status> ReserveNetworkPublicIpAddressBlock(this IComputeApiClient client, string networkId)
 		{
-			return
-				await
-					client.WebApi.GetAsync<Status>(ApiUris.ReserveNetworkPublicIpAddressBlock(client.WebApi.OrganizationId, 
-						networkId));
+			return await client.NetworkingLegacy.ReserveNetworkPublicIpAddressBlock(networkId);		
 		}
 
 		/// <summary>
@@ -485,13 +365,13 @@ namespace DD.CBU.Compute.Api.Client.Network
 		/// <returns>
 		/// A Status of the response.
 		/// </returns>
-		public static async Task<Status> ReleaseNetworkPublicIpAddressBlock(this IComputeApiClient client, string networkId, 
+		[Obsolete("Use IComputeApiClient.NetworkingLegacy instead")]
+		public static async Task<Status> ReleaseNetworkPublicIpAddressBlock(
+			this IComputeApiClient client,
+			string networkId,
 			string ipBlockId)
 		{
-			return
-				await
-				client.WebApi.GetAsync<Status>(
-					ApiUris.ReleaseNetworkPublicIpAddressBlock(client.WebApi.OrganizationId, networkId, ipBlockId));
+			return await client.NetworkingLegacy.ReleaseNetworkPublicIpAddressBlock(networkId, ipBlockId);		
 		}
 
 
@@ -508,12 +388,11 @@ namespace DD.CBU.Compute.Api.Client.Network
 		/// <returns>
 		/// A Status of the response.
 		/// </returns>
+		[Obsolete("Use IComputeApiClient.NetworkingLegacy instead")]
 		public static async Task<IEnumerable<IpBlockType>> GetNetworkPublicIpAddressBlock(this IComputeApiClient client, 
 			string networkId)
 		{
-			NetworkConfigurationType ipblockp = await client.GetNetworkConfig(networkId);
-
-			return ipblockp.publicIps;
+			return await client.NetworkingLegacy.GetNetworkPublicIpAddressBlock(networkId);		
 		}
 
 		/// <summary>
@@ -535,17 +414,14 @@ namespace DD.CBU.Compute.Api.Client.Network
 		/// <returns>
 		/// A Status of the response.
 		/// </returns>
-		public static async Task<Status> SetServertoVipNetworkPublicIpAddressBlock(this IComputeApiClient client, 
-			string networkId, string ipBlockId, bool enable)
+		[Obsolete("Use IComputeApiClient.NetworkingLegacy instead")]
+		public static async Task<Status> SetServertoVipNetworkPublicIpAddressBlock(
+			this IComputeApiClient client,
+			string networkId,
+			string ipBlockId,
+			bool enable)
 		{
-			string poststring = "serverToVipConnectivity={0}";
-
-			return
-				await
-					client.WebApi.PostAsync<Status>(
-						ApiUris.SetServerToVipNetworkPublicIpAddressBlock(client.WebApi.OrganizationId, networkId, ipBlockId), 
-						string.Format(poststring, enable));
-			
+			return await client.NetworkingLegacy.SetServertoVipNetworkPublicIpAddressBlock(networkId, ipBlockId, enable);				
 		}
 
 
@@ -565,14 +441,10 @@ namespace DD.CBU.Compute.Api.Client.Network
 		/// <returns>
 		/// A Status of the response.
 		/// </returns>
+		[Obsolete("Use IComputeApiClient.NetworkingLegacy instead")]
 		public static async Task<Status> SetNetworkMulticast(this IComputeApiClient client, string networkId, bool enable)
 		{
-			string poststring = "enabled={0}";
-
-			return
-				await
-					client.WebApi.PostAsync<Status>(ApiUris.SetNetworkMulticast(client.WebApi.OrganizationId, networkId), 
-						string.Format(poststring, enable));
+			return await client.NetworkingLegacy.SetNetworkMulticast(networkId, enable);				
 		}
 	}
 }

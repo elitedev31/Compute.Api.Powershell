@@ -8,6 +8,11 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Compute.Client.UnitTests.MCP2
 {
+	using DD.CBU.Compute.Api.Client.Interfaces;
+	using DD.CBU.Compute.Api.Client.Network20;
+
+	using Moq;
+
 	[TestClass]
 	public class ServerTests : BaseApiClientTestFixture
 	{
