@@ -1,4 +1,4 @@
-﻿namespace DD.CBU.Compute.Api.Client.Interfaces.Server10
+﻿namespace DD.CBU.Compute.Api.Client.Interfaces.Server
 {
 	using System.Collections.Generic;
 	using System.Threading.Tasks;

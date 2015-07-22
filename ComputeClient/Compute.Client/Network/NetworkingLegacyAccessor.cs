@@ -1,7 +1,7 @@
 ﻿namespace DD.CBU.Compute.Api.Client.Network
 {
 	using DD.CBU.Compute.Api.Client.Interfaces;
-	using DD.CBU.Compute.Api.Client.Interfaces.Network10;
+	using DD.CBU.Compute.Api.Client.Interfaces.Network;
 
 	/// <summary>	A standard implementation of Network 2.0 access methods. </summary>
 	public class NetworkingLegacyAccessor : INetworkingLegacyAccessor

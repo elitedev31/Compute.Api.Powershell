@@ -3,7 +3,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 	using System;
 	using System.Threading.Tasks;
 
-	using DD.CBU.Compute.Api.Client.Interfaces.Network10;
+	using DD.CBU.Compute.Api.Client.Interfaces.Network;
 	using DD.CBU.Compute.Api.Client.Interfaces.Network20;
 	using DD.CBU.Compute.Api.Contracts.Directory;
 

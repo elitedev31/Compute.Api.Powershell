@@ -19,7 +19,7 @@ namespace DD.CBU.Compute.Api.Client
 	using System.Threading.Tasks;
 
 	using DD.CBU.Compute.Api.Client.Interfaces;
-	using DD.CBU.Compute.Api.Client.Interfaces.Network10;
+	using DD.CBU.Compute.Api.Client.Interfaces.Network;
 	using DD.CBU.Compute.Api.Client.Interfaces.Network20;
 	using DD.CBU.Compute.Api.Client.Network;
 	using DD.CBU.Compute.Api.Client.Network20;

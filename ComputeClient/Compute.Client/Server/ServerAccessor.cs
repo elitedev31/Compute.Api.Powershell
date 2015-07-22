@@ -1,7 +1,7 @@
 ﻿namespace DD.CBU.Compute.Api.Client.Server
 {
 	using DD.CBU.Compute.Api.Client.Interfaces;
-	using DD.CBU.Compute.Api.Client.Interfaces.Server10;
+	using DD.CBU.Compute.Api.Client.Interfaces.Server;
 	using DD.CBU.Compute.Api.Contracts.General;
 	using DD.CBU.Compute.Api.Contracts.Server;
 
