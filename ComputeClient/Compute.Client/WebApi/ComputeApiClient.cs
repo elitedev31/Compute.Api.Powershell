@@ -19,6 +19,8 @@ namespace DD.CBU.Compute.Api.Client
 	using System.Threading.Tasks;
 
 	using DD.CBU.Compute.Api.Client.Interfaces;
+	using DD.CBU.Compute.Api.Client.Interfaces.Network10;
+	using DD.CBU.Compute.Api.Client.Interfaces.Network20;
 	using DD.CBU.Compute.Api.Client.Network;
 	using DD.CBU.Compute.Api.Client.Network20;
 	using DD.CBU.Compute.Api.Client.Utilities;
@@ -62,10 +64,8 @@ namespace DD.CBU.Compute.Api.Client
 				{
 					BaseAddress = baseUri
 				});
-			
-			WebApi = new WebApi(httpClient);
-			Networking = new Networking(WebApi);
-			NetworkingLegacy = new NetworkingLegacy(WebApi);
+
+			InitializeProperties(httpClient);
 		}
 
 		/// <summary>
@@ -93,9 +93,7 @@ namespace DD.CBU.Compute.Api.Client
 					BaseAddress = baseUri
 				});
 
-			WebApi = new WebApi(httpClient);
-			Networking = new Networking(WebApi);
-			NetworkingLegacy = new NetworkingLegacy(WebApi);
+			InitializeProperties(httpClient);
 		}
 
 		/// <summary>
@@ -120,9 +118,7 @@ namespace DD.CBU.Compute.Api.Client
 					BaseAddress = baseUri
 				});
 
-			WebApi = new WebApi(httpClient);
-			Networking = new Networking(WebApi);
-			NetworkingLegacy = new NetworkingLegacy(WebApi);
+			InitializeProperties(httpClient);
 		}
 
 		/// <summary>
@@ -144,9 +140,7 @@ namespace DD.CBU.Compute.Api.Client
 					BaseAddress = baseUri
 				});
 
-			WebApi = new WebApi(httpClient);
-			Networking = new Networking(WebApi);
-			NetworkingLegacy = new NetworkingLegacy(WebApi);
+			InitializeProperties(httpClient);
 		}
 
 		#endregion
@@ -169,6 +163,20 @@ namespace DD.CBU.Compute.Api.Client
 			if (httpClient == null)
 				throw new ArgumentNullException("httpClient", "httpClient cannot be null");
 
+			InitializeProperties(httpClient, organizationId);
+		}
+
+		/// <summary>
+		/// The initialize properties.
+		/// </summary>
+		/// <param name="httpClient">
+		/// The http client.
+		/// </param>
+		/// <param name="organizationId">
+		/// The organization Id.
+		/// </param>
+		private void InitializeProperties(IHttpClient httpClient, Guid organizationId = default(Guid))
+		{
 			WebApi = new WebApi(httpClient, organizationId);
 			Networking = new Networking(WebApi);
 			NetworkingLegacy = new NetworkingLegacy(WebApi);

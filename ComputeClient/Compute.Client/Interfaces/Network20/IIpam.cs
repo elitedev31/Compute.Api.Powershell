@@ -1,9 +1,10 @@
-﻿namespace DD.CBU.Compute.Api.Client.Interfaces
+﻿namespace DD.CBU.Compute.Api.Client.Interfaces.Network20
 {
 	using System.Collections.Generic;
 	using System.Threading.Tasks;
-	using Contracts.Network20;
-	using Contracts.Requests;
+
+	using DD.CBU.Compute.Api.Contracts.Network20;
+	using DD.CBU.Compute.Api.Contracts.Requests;
 
 	/// <summary>	IP Address Management functions. </summary>
 	public interface IIpam

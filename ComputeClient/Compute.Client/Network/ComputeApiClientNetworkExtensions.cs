@@ -35,14 +35,14 @@
 		/// <returns>
 		/// A status of the response.
 		/// </returns>
-		[Obsolete("Use IComputeApiClient.NetworkingLegacy instead")]
+		[Obsolete("Use IComputeApiClient.NetworkingLegacy.Network instead")]
 		public static async Task<Status> CreateNetwork(
 			this IComputeApiClient client, 
 			string networkName, 
 			string dataCentreLocation, 
 			string description = null)
 		{
-			return await client.NetworkingLegacy.CreateNetwork(networkName, dataCentreLocation, description);
+			return await client.NetworkingLegacy.Network.CreateNetwork(networkName, dataCentreLocation, description);
 		}
 
 		/// <summary>
@@ -54,10 +54,10 @@
 		/// <returns>
 		/// The networks
 		/// </returns>
-		[Obsolete("Use IComputeApiClient.NetworkingLegacy instead")]
+		[Obsolete("Use IComputeApiClient.NetworkingLegacy.Network instead")]
 		public static async Task<IEnumerable<NetworkWithLocationsNetwork>> GetNetworksTask(this IComputeApiClient client)
 		{
-			return await client.NetworkingLegacy.GetNetworks();
+			return await client.NetworkingLegacy.Network.GetNetworks();
 		}
 
 		/// <summary>
@@ -73,10 +73,10 @@
 		/// <returns>
 		/// A status of the response.
 		/// </returns>
-		[Obsolete("Use IComputeApiClient.NetworkingLegacy instead")]
+		[Obsolete("Use IComputeApiClient.NetworkingLegacy.Network instead")]
 		public static async Task<Status> DeleteNetwork(this IComputeApiClient client, string networkId)
 		{
-			return await client.NetworkingLegacy.DeleteNetwork(networkId);
+			return await client.NetworkingLegacy.Network.DeleteNetwork(networkId);
 		}
 
 
@@ -99,14 +99,14 @@
 		/// <returns>
 		/// A status of the response.
 		/// </returns>
-		[Obsolete("Use IComputeApiClient.NetworkingLegacy instead")]
+		[Obsolete("Use IComputeApiClient.NetworkingLegacy.Network instead")]
 		public static async Task<Status> ModifyNetwork(
 			this IComputeApiClient client,
 			string networkId,
 			string name,
 			string description)
 		{
-			return await client.NetworkingLegacy.ModifyNetwork(networkId, name, description);
+			return await client.NetworkingLegacy.Network.ModifyNetwork(networkId, name, description);
 		}
 
 		/// <summary>
@@ -122,10 +122,10 @@
 		/// <returns>
 		/// A NetworkConfigurationType of the response.
 		/// </returns>
-		[Obsolete("Use IComputeApiClient.NetworkingLegacy instead")]
+		[Obsolete("Use IComputeApiClient.NetworkingLegacy.Network instead")]
 		public static async Task<NetworkConfigurationType> GetNetworkConfig(this IComputeApiClient client, string networkId)
 		{
-			return await client.NetworkingLegacy.GetNetworkConfig(networkId);
+			return await client.NetworkingLegacy.Network.GetNetworkConfig(networkId);
 		}
 
 		/// <summary>
@@ -141,10 +141,10 @@
 		/// <returns>
 		/// The status of the operation.
 		/// </returns>
-		[Obsolete("Use IComputeApiClient.NetworkingLegacy instead")]
+		[Obsolete("Use IComputeApiClient.NetworkingLegacy.Network instead")]
 		public static async Task<IEnumerable<NatRuleType>> GetNatRules(this IComputeApiClient client, string networkId)
 		{
-			return await client.NetworkingLegacy.GetNatRules(networkId);
+			return await client.NetworkingLegacy.Network.GetNatRules(networkId);
 		}
 
 		/// <summary>
@@ -163,10 +163,10 @@
 		/// <returns>
 		/// The status of the operation.
 		/// </returns>
-		[Obsolete("Use IComputeApiClient.NetworkingLegacy instead")]
+		[Obsolete("Use IComputeApiClient.NetworkingLegacy.Network instead")]
 		public static async Task<Status> DeleteNatRule(this IComputeApiClient client, string networkId, string natRuleId)
 		{
-			return await client.NetworkingLegacy.DeleteNatRule(networkId, natRuleId);
+			return await client.NetworkingLegacy.Network.DeleteNatRule(networkId, natRuleId);
 		}
 
 		/// <summary>
@@ -187,14 +187,14 @@
 		/// <returns>
 		/// The <see cref="Task"/>.
 		/// </returns>
-		[Obsolete("Use IComputeApiClient.NetworkingLegacy instead")]
+		[Obsolete("Use IComputeApiClient.NetworkingLegacy.Network instead")]
 		public static async Task<NatRuleType> CreateNatRule(
 			this IComputeApiClient client,
 			string networkId,
 			string natRuleName,
 			IPAddress sourceIp)
 		{
-			return await client.NetworkingLegacy.CreateNatRule(networkId, natRuleName, sourceIp);
+			return await client.NetworkingLegacy.Network.CreateNatRule(networkId, natRuleName, sourceIp);
 		}
 
 		/// <summary>
@@ -210,10 +210,10 @@
 		/// <returns>
 		/// The ACL rules.
 		/// </returns>
-		[Obsolete("Use IComputeApiClient.NetworkingLegacy instead")]
+		[Obsolete("Use IComputeApiClient.NetworkingLegacy.Network instead")]
 		public static async Task<IEnumerable<AclRuleType>> GetAclRules(this IComputeApiClient client, string networkId)
 		{
-			return await client.NetworkingLegacy.GetAclRules(networkId);
+			return await client.NetworkingLegacy.Network.GetAclRules(networkId);
 		}
 
 		/// <summary>
@@ -239,10 +239,10 @@
 		/// <returns>
 		/// The status of the operation.
 		/// </returns>
-		[Obsolete("Use IComputeApiClient.NetworkingLegacy instead")] 
+		[Obsolete("Use IComputeApiClient.NetworkingLegacy.Network instead")]
 		public static async Task<Status> DeleteAclRule(this IComputeApiClient client, string networkId, string aclRuleId)
 		{
-			return await client.NetworkingLegacy.DeleteAclRule(networkId, aclRuleId);
+			return await client.NetworkingLegacy.Network.DeleteAclRule(networkId, aclRuleId);
 		}
 
 		/// <summary>
@@ -295,7 +295,7 @@
 		/// </returns>
 		/// <exception cref="ArgumentOutOfRangeException">
 		/// </exception>
-		[Obsolete("Use IComputeApiClient.NetworkingLegacy instead")] 
+		[Obsolete("Use IComputeApiClient.NetworkingLegacy.Network instead")]
 		public static async Task<AclRuleType> CreateAclRule(
 			this IComputeApiClient client, 
 			string networkId, 
@@ -314,7 +314,7 @@
 		{
 			return
 				await
-				client.NetworkingLegacy.CreateAclRule(
+				client.NetworkingLegacy.Network.CreateAclRule(
 					networkId,
 					aclRuleName,
 					position,
@@ -343,10 +343,10 @@
 		/// <returns>
 		/// A Status of the response.
 		/// </returns>
-		[Obsolete("Use IComputeApiClient.NetworkingLegacy instead")] 
+		[Obsolete("Use IComputeApiClient.NetworkingLegacy.Network instead")]
 		public static async Task<Status> ReserveNetworkPublicIpAddressBlock(this IComputeApiClient client, string networkId)
 		{
-			return await client.NetworkingLegacy.ReserveNetworkPublicIpAddressBlock(networkId);		
+			return await client.NetworkingLegacy.Network.ReserveNetworkPublicIpAddressBlock(networkId);		
 		}
 
 		/// <summary>
@@ -365,13 +365,13 @@
 		/// <returns>
 		/// A Status of the response.
 		/// </returns>
-		[Obsolete("Use IComputeApiClient.NetworkingLegacy instead")]
+		[Obsolete("Use IComputeApiClient.NetworkingLegacy.Network instead")]
 		public static async Task<Status> ReleaseNetworkPublicIpAddressBlock(
 			this IComputeApiClient client,
 			string networkId,
 			string ipBlockId)
 		{
-			return await client.NetworkingLegacy.ReleaseNetworkPublicIpAddressBlock(networkId, ipBlockId);		
+			return await client.NetworkingLegacy.Network.ReleaseNetworkPublicIpAddressBlock(networkId, ipBlockId);		
 		}
 
 
@@ -388,11 +388,11 @@
 		/// <returns>
 		/// A Status of the response.
 		/// </returns>
-		[Obsolete("Use IComputeApiClient.NetworkingLegacy instead")]
+		[Obsolete("Use IComputeApiClient.NetworkingLegacy.Network instead")]
 		public static async Task<IEnumerable<IpBlockType>> GetNetworkPublicIpAddressBlock(this IComputeApiClient client, 
 			string networkId)
 		{
-			return await client.NetworkingLegacy.GetNetworkPublicIpAddressBlock(networkId);		
+			return await client.NetworkingLegacy.Network.GetNetworkPublicIpAddressBlock(networkId);		
 		}
 
 		/// <summary>
@@ -414,14 +414,14 @@
 		/// <returns>
 		/// A Status of the response.
 		/// </returns>
-		[Obsolete("Use IComputeApiClient.NetworkingLegacy instead")]
+		[Obsolete("Use IComputeApiClient.NetworkingLegacy.Network instead")]
 		public static async Task<Status> SetServertoVipNetworkPublicIpAddressBlock(
 			this IComputeApiClient client,
 			string networkId,
 			string ipBlockId,
 			bool enable)
 		{
-			return await client.NetworkingLegacy.SetServertoVipNetworkPublicIpAddressBlock(networkId, ipBlockId, enable);				
+			return await client.NetworkingLegacy.Network.SetServertoVipNetworkPublicIpAddressBlock(networkId, ipBlockId, enable);				
 		}
 
 
@@ -441,10 +441,10 @@
 		/// <returns>
 		/// A Status of the response.
 		/// </returns>
-		[Obsolete("Use IComputeApiClient.NetworkingLegacy instead")]
+		[Obsolete("Use IComputeApiClient.NetworkingLegacy.Network instead")]
 		public static async Task<Status> SetNetworkMulticast(this IComputeApiClient client, string networkId, bool enable)
 		{
-			return await client.NetworkingLegacy.SetNetworkMulticast(networkId, enable);				
+			return await client.NetworkingLegacy.Network.SetNetworkMulticast(networkId, enable);				
 		}
 	}
 }

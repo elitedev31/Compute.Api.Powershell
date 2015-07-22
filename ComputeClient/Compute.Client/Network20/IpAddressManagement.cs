@@ -5,6 +5,9 @@
 	
 	using Contracts.Network20;
 	using Contracts.Requests;
+
+	using DD.CBU.Compute.Api.Client.Interfaces.Network20;
+
 	using Interfaces;
 
 	/// <summary>	An IP address management client. </summary>

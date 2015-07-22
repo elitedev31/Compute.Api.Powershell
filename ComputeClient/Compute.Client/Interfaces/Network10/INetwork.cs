@@ -1,17 +1,16 @@
-﻿namespace DD.CBU.Compute.Api.Client.Interfaces
+﻿namespace DD.CBU.Compute.Api.Client.Interfaces.Network10
 {
 	using System.Collections.Generic;
 	using System.Net;
-
-	using DD.CBU.Compute.Api.Contracts.General;
 	using System.Threading.Tasks;
 
+	using DD.CBU.Compute.Api.Contracts.General;
 	using DD.CBU.Compute.Api.Contracts.Network;
 
 	/// <summary>
-	/// The NetworkingLegacy interface.
+	/// The Network interface.
 	/// </summary>
-	public interface INetworkingLegacy
+	public interface INetwork
 	{
 		/// <summary>
 		/// The create network.
