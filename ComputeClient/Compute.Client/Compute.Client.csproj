@@ -111,6 +111,7 @@
     <Compile Include="Interfaces\Network\INetworkVipAccessor.cs" />
     <Compile Include="Interfaces\Network20\IVlanAccessor.cs" />
     <Compile Include="Interfaces\Server\IServerAccessor.cs" />
+    <Compile Include="Interfaces\Server\IServerImagesAccessor.cs" />
     <Compile Include="KnownApiUri.cs" />
     <Compile Include="Network20\ComputeApiClientNetworkExtensions.cs" />
     <Compile Include="Network20\IpAddressManagementAccessor.cs" />
@@ -127,6 +128,7 @@
     <Compile Include="ClientError.cs" />
     <Compile Include="Network\NetworkVipAccessor.cs" />
     <Compile Include="Server\ServerAccessor.cs" />
+    <Compile Include="Server\ServerImagesAccessor.cs" />
     <Compile Include="WebApi\ComputeApiClient.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>

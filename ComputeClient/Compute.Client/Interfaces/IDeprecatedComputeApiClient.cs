@@ -161,6 +161,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 		/// <returns>
 		/// The <see cref="Task"/>.
         /// </returns>
+        [Obsolete]
         Task<IReadOnlyList<ImagesWithDiskSpeedImage>> GetImages(
 	        string imageId,
 			string name,
@@ -218,6 +219,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 		/// <returns>
 		/// The <see cref="Task"/>.
 		/// </returns>
+		[Obsolete]
         Task<Status> RemoveCustomerServerImage(string imageid);
 
 
@@ -583,6 +585,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 		/// <returns>
 		/// The <see cref="Task"/>.
 		/// </returns>
+		[Obsolete]
         Task<Status> CreateServerAntiAffinityRule(string serverId1, string serverId2);
 
         /// <summary>
@@ -600,6 +603,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 		/// <returns>
 		/// The <see cref="Task"/>.
         /// </returns>
+		[Obsolete]
         Task<IEnumerable<AntiAffinityRuleType>> GetServerAntiAffinityRules(
 	        string ruleId,
 			string location,
@@ -614,6 +618,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 		/// <returns>
 		/// The <see cref="Task"/>.
 		/// </returns>
+		[Obsolete]
         Task<Status> RemoveServerAntiAffinityRule(string ruleId);
 
         /// <summary>

@@ -1,5 +1,6 @@
 ﻿namespace DD.CBU.Compute.Api.Client.Interfaces.Server
 {
+	using System;
 	using System.Collections.Generic;
 	using System.Threading.Tasks;
 
@@ -308,5 +309,51 @@
 			string adminPassword,
 			bool start
 			);
+
+		/// <summary>
+		/// Creates a new Server Anti-Affinity Rule between two servers on the same Cloud network. 
+		/// </summary>
+		/// <param name="serverId1">
+		/// The server Id for the 1'st server
+		/// </param>
+		/// <param name="serverId2">
+		/// The server Id for the 2'nd server
+		/// </param>
+		/// <returns>
+		/// The <see cref="Task"/>.
+		/// </returns>
+		Task<Status> CreateServerAntiAffinityRule(string serverId1, string serverId2);
+
+		/// <summary>
+		/// List all Server Anti-Affinity Rules 
+		/// </summary>
+		/// <param name="ruleId">
+		/// Filter by rule Id
+		/// </param>
+		/// <param name="location">
+		/// Filter by location
+		/// </param>
+		/// <param name="networkId">
+		/// Filter by network Id
+		/// </param>
+		/// <returns>
+		/// The <see cref="Task"/>.
+		/// </returns>
+		[Obsolete("Use MCP2.0 List server anti-affinity rules")]
+		Task<IEnumerable<AntiAffinityRuleType>> GetServerAntiAffinityRules(
+			string ruleId,
+			string location,
+			string networkId);
+
+		/// <summary>
+		/// Remove a server Anti-Affinity Rule between two servers on the same Cloud network. 
+		/// </summary>
+		/// <param name="ruleId">
+		/// The ruleId
+		/// </param>
+		/// <returns>
+		/// The <see cref="Task"/>.
+		/// </returns>
+		Task<Status> RemoveServerAntiAffinityRule(string ruleId);
 	}
 }

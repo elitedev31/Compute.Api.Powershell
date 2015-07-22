@@ -348,10 +348,16 @@ namespace DD.CBU.Compute.Api.Client
 		/// <returns>
 		/// A list of deployed servers
 		/// </returns>
-		public static Uri ImagesWithDiskSpeed(Guid orgId, ServerImageType imagetype, string imageId, string name, 
-			string location, string operatingSystemId, string operatingSystemFamily)
+        public static Uri ImagesWithDiskSpeed(
+	        Guid orgId,
+			ServerImageType imagetype,
+			string imageId,
+			string name,
+			string location,
+			string operatingSystemId,
+			string operatingSystemFamily)
         {
-           string uri = MCP1_0_PREFIX + "base/imageWithDiskSpeed";
+	        string uri = MCP1_0_PREFIX + "base/imageWithDiskSpeed";
             if (imagetype == ServerImageType.CUSTOMER)
             {
                 Contract.Requires(orgId != Guid.Empty, "Organization Id cannot be empty");

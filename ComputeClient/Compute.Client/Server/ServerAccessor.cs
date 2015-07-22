@@ -441,5 +441,73 @@
 							start = start
 						});
 		}
+
+		/// <summary>
+		/// Creates a new Server Anti-Affinity Rule between two servers on the same Cloud network. 
+		/// </summary>
+		/// <param name="serverId1">
+		/// The server Id for the 1'st server
+		/// </param>
+		/// <param name="serverId2">
+		/// The server Id for the 2'nd server
+		/// </param>
+		/// <returns>
+		/// The <see cref="Task"/>.
+		/// </returns>
+		public async Task<Status> CreateServerAntiAffinityRule(string serverId1, string serverId2)
+		{
+			return
+				await
+				_apiClient.PostAsync<NewAntiAffinityRule, Status>(
+					ApiUris.CreateAntiAffinityRule(_apiClient.OrganizationId),
+					new NewAntiAffinityRule
+						{
+							serverId = new[]
+											{
+												serverId1, serverId2
+											}
+						});
+		}
+
+		/// <summary>
+		/// List all Server Anti-Affinity Rules 
+		/// </summary>
+		/// <param name="ruleId">
+		/// Filter by rule Id
+		/// </param>
+		/// <param name="location">
+		/// Filter by location
+		/// </param>
+		/// <param name="networkId">
+		/// Filter by network Id
+		/// </param>
+		/// <returns>
+		/// The <see cref="Task"/>.
+		/// </returns>
+		public async Task<IEnumerable<AntiAffinityRuleType>> GetServerAntiAffinityRules(
+			string ruleId,
+			string location,
+			string networkId)
+		{
+			AntiAffinityRules rules =
+				await
+				_apiClient.GetAsync<AntiAffinityRules>(
+					ApiUris.GetAntiAffinityRule(_apiClient.OrganizationId, ruleId, location, networkId));
+			return rules.antiAffinityRule;
+		}
+
+		/// <summary>
+		/// Remove a server Anti-Affinity Rule between two servers on the same Cloud network. 
+		/// </summary>
+		/// <param name="ruleId">
+		/// The ruleId
+		/// </param>
+		/// <returns>
+		/// The <see cref="Task"/>.
+		/// </returns>		
+		public async Task<Status> RemoveServerAntiAffinityRule(string ruleId)
+		{
+			return await _apiClient.GetAsync<Status>(ApiUris.RemoveAntiAffinityRule(_apiClient.OrganizationId, ruleId));
+		}
 	}
 }

@@ -618,6 +618,7 @@ namespace DD.CBU.Compute.Api.Client
 		/// <returns>
 		/// The <see cref="Task"/>.
 		/// </returns>
+		[Obsolete]
 		public async Task<IReadOnlyList<ImagesWithDiskSpeedImage>> GetImages(string imageId, string name, string location, 
 			string operatingSystemId, string operatingSystemFamily)
 		{
@@ -702,8 +703,9 @@ namespace DD.CBU.Compute.Api.Client
 		/// The ImageId
 		/// </param>
 		/// <returns>
-		/// The <see cref="Task"/>.
+		/// The <see cref="Task"/>.RemoveCustomerServerImage
 		/// </returns>
+		[Obsolete]
 		public async Task<Status> RemoveCustomerServerImage(string imageId)
 		{
 			return await WebApi.GetAsync<Status>(ApiUris.RemoveCustomerServerImage(WebApi.OrganizationId, imageId));
@@ -1230,6 +1232,7 @@ namespace DD.CBU.Compute.Api.Client
 		/// <returns>
 		/// The <see cref="Task"/>.
 		/// </returns>
+		[Obsolete]
 		public async Task<Status> CreateServerAntiAffinityRule(string serverId1, string serverId2)
 		{
 			return await
