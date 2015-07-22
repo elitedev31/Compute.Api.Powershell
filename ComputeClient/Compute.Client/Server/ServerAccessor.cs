@@ -11,7 +11,7 @@
 	/// <summary>
 	/// The server accessor.
 	/// </summary>
-	public class ServerAccessor : IServer
+	public class ServerAccessor : IServerAccessor
 	{
 		/// <summary>
 		/// The _api client.

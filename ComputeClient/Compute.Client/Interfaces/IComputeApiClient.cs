@@ -26,9 +26,9 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 	    Task<IAccount> Login();
 
 	    /// <summary>	Gets the networking 2.0 methods. </summary>
-	    INetworking Networking { get; }
+	    INetworkingAccessor Networking { get; }
 
 		/// <summary>	Gets the networking legacy 1.0 methods </summary>
-		INetworkingLegacy NetworkingLegacy { get; }
+		INetworkingLegacyAccessor NetworkingLegacy { get; }
     }
 }

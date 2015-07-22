@@ -3,7 +3,7 @@
 	/// <summary>
 	/// The NetworkDomainVip interface.
 	/// </summary>
-	public interface INetworkDomainVip
+	public interface INetworkDomainVipAccessor
 	{
 	}
 }

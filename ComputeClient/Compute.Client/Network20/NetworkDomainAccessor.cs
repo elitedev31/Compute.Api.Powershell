@@ -4,13 +4,14 @@
 	using System.Collections.Generic;
 	using System.Threading.Tasks;
 	using DD.CBU.Compute.Api.Client.Interfaces;
+	using DD.CBU.Compute.Api.Client.Interfaces.Network20;
 	using DD.CBU.Compute.Api.Contracts.Network20;
 	using DD.CBU.Compute.Api.Contracts.Requests;
 
 	/// <summary>
 	/// The network domain.
 	/// </summary>
-	public class NetworkDomain : INetworkDomain
+	public class NetworkDomainAccessor : INetworkDomainAccessor
 	{
 		/// <summary>
 		/// The _client.
@@ -22,7 +23,7 @@
 		/// 	class.
 		/// </summary>
 		/// <param name="apiClient">	The client. </param>
-		public NetworkDomain(IWebApi apiClient)
+		public NetworkDomainAccessor(IWebApi apiClient)
 		{
 			_apiClient = apiClient;
 		}

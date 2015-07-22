@@ -10,7 +10,7 @@
 	/// <summary>
 	/// The Network interface.
 	/// </summary>
-	public interface INetwork
+	public interface INetworkAccessor
 	{
 		/// <summary>
 		/// The create network.

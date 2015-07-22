@@ -9,7 +9,7 @@
 	/// <summary>
 	/// The i server.
 	/// </summary>
-	public interface IServer
+	public interface IServerAccessor
 	{
 		/// <summary>
 		/// The get deployed servers.

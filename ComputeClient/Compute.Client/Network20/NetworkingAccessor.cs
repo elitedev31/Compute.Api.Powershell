@@ -5,7 +5,7 @@
 	using Interfaces;
 
 	/// <summary>	A standard implementation of Network 2.0 access methods. </summary>
-	public class Networking : INetworking
+	public class NetworkingAccessor : INetworkingAccessor
 	{	
 		/// <summary>
 		/// 	Initializes a new instance of the DD.CBU.Compute.Api.Client.Network20.Networking
@@ -14,25 +14,25 @@
 		/// <param name="apiClient">
 		/// The api Client.
 		/// </param>
-		public Networking(IWebApi apiClient)
+		public NetworkingAccessor(IWebApi apiClient)
 		{
-			NetworkDomain = new NetworkDomain(apiClient);
-			Vlan = new Vlan(apiClient);
-			IpAddressManagement = new IpAddressManagement(apiClient);
+			NetworkDomain = new NetworkDomainAccessor(apiClient);
+			Vlan = new VlanAccessor(apiClient);
+			IpAddressManagement = new IpAddressManagementAccessor(apiClient);
 		}
 
 		/// <summary> Gets the network domain. </summary>
 		/// <value>	The network domain. </value>
-		public INetworkDomain NetworkDomain { get; private set; }
+		public INetworkDomainAccessor NetworkDomain { get; private set; }
 	
 		/// <summary>
 		/// Gets the vlan.
 		/// </summary>
-		public IVlan Vlan { get; private set; }		
+		public IVlanAccessor Vlan { get; private set; }		
 
 		/// <summary> IP address management. </summary>
 		/// <value>	The IP address management. </value>
 		/// <seealso cref="P:DD.CBU.Compute.Api.Client.Interfaces.INetworking.IpAddressManagement"/>
-		public IIpam IpAddressManagement { get; private set; }			
+		public IIpamAccessor IpAddressManagement { get; private set; }			
 	}
 }

@@ -178,8 +178,8 @@ namespace DD.CBU.Compute.Api.Client
 		private void InitializeProperties(IHttpClient httpClient, Guid organizationId = default(Guid))
 		{
 			WebApi = new WebApi(httpClient, organizationId);
-			Networking = new Networking(WebApi);
-			NetworkingLegacy = new NetworkingLegacy(WebApi);
+			Networking = new NetworkingAccessor(WebApi);
+			NetworkingLegacy = new NetworkingLegacyAccessor(WebApi);
 		}
 
 		#endregion
@@ -307,10 +307,10 @@ namespace DD.CBU.Compute.Api.Client
 
 		/// <summary>	Gets the networking 2.0 methods. </summary>
 		/// <value>	The networking. </value>		
-		public INetworking Networking { get; private set; }
+		public INetworkingAccessor Networking { get; private set; }
 
 		/// <summary>	Gets the networking legacy 1.0 methods </summary>
-		public INetworkingLegacy NetworkingLegacy { get; private set; }
+		public INetworkingLegacyAccessor NetworkingLegacy { get; private set; }
 
 		#endregion Instance data
 

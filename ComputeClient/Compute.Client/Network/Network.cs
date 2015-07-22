@@ -14,7 +14,7 @@
 	/// <summary>
 	/// The networking legacy.
 	/// </summary>
-	public class Network : INetwork
+	public class NetworkAccessor : INetworkAccessor
 	{
 		/// <summary>
 		/// The Api client.
@@ -22,12 +22,12 @@
 		private readonly IWebApi _apiClient;
 
 		/// <summary>
-		/// Initialises a new instance of the <see cref="Network"/> class.
+		/// Initialises a new instance of the <see cref="NetworkAccessor"/> class.
 		/// </summary>
 		/// <param name="apiClient">
 		/// The api client.
 		/// </param>
-		public Network(IWebApi apiClient)
+		public NetworkAccessor(IWebApi apiClient)
 		{
 			_apiClient = apiClient;
 		}

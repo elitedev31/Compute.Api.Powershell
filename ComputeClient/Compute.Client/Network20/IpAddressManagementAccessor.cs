@@ -12,18 +12,18 @@
 
 	/// <summary>	An IP address management client. </summary>
 	/// <seealso cref="T:DD.CBU.Compute.Api.Client.Interfaces.IIpam"/>
-	public class IpAddressManagement : IIpam
+	public class IpAddressManagementAccessor : IIpamAccessor
 	{
 		/// <summary>	The client. </summary>
-		private IWebApi apiClient;
+		private readonly IWebApi _apiClient;
 
 		/// <summary>
-		/// 	Initializes a new instance of the <see cref="IpAddressManagement"/>.
+		/// 	Initializes a new instance of the <see cref="IpAddressManagementAccessor"/>.
 		/// </summary>
 		/// <param name="apiClient">	The client. </param>
-		public IpAddressManagement(IWebApi apiClient)
+		public IpAddressManagementAccessor(IWebApi apiClient)
 		{
-			this.apiClient = apiClient;
+			this._apiClient = apiClient;
 		}
 
 		/// <summary>	Adds a public IP block. </summary>
@@ -34,8 +34,8 @@
 		{
 			return
 				await
-					apiClient.PostAsync<AddPublicIpBlockType, ResponseType>(
-						ApiUris.AddPublicIpBlock(apiClient.OrganizationId), 
+					_apiClient.PostAsync<AddPublicIpBlockType, ResponseType>(
+						ApiUris.AddPublicIpBlock(_apiClient.OrganizationId), 
 						new AddPublicIpBlockType
 							{
 								networkDomainId = networkDomainId
@@ -51,7 +51,7 @@
 		{
 			var response =
 				await
-					apiClient.GetAsync<publicIpBlocks>(ApiUris.GetPublicIpBlocks(apiClient.OrganizationId));
+					_apiClient.GetAsync<publicIpBlocks>(ApiUris.GetPublicIpBlocks(_apiClient.OrganizationId));
 			return response.publicIpBlock;
 		}
 
@@ -64,8 +64,8 @@
 		{
 			return
 				await
-					apiClient.GetAsync<PublicIpBlockType>(
-						ApiUris.GetPublicIpBlock(apiClient.OrganizationId, publicIpBlockId));
+					_apiClient.GetAsync<PublicIpBlockType>(
+						ApiUris.GetPublicIpBlock(_apiClient.OrganizationId, publicIpBlockId));
 		}
 
 		/// <summary>	Deletes the public IP block. </summary>
@@ -77,9 +77,9 @@
 		{
 			return
 				await
-					apiClient.PostAsync<RemovePublicIpBlockType, ResponseType>(
+					_apiClient.PostAsync<RemovePublicIpBlockType, ResponseType>(
 						ApiUris.AddPublicIpBlock(
-							apiClient.OrganizationId), 
+							_apiClient.OrganizationId), 
 							new RemovePublicIpBlockType
 							{
 								id = publicIpBlockId
@@ -92,8 +92,8 @@
 		public async Task<reservedPublicIpv4Addresses> GetReservedPublicAddresses(string networkDomainId)
 		{
 			return await
-					apiClient.GetAsync<reservedPublicIpv4Addresses>(
-						ApiUris.GetReservedPublicAddresses(apiClient.OrganizationId, networkDomainId));
+					_apiClient.GetAsync<reservedPublicIpv4Addresses>(
+						ApiUris.GetReservedPublicAddresses(_apiClient.OrganizationId, networkDomainId));
 		}
 
 		/// <summary>	Gets reserved public addresses for an MCP 1.0 network. </summary>
@@ -102,8 +102,8 @@
 		public async Task<reservedPublicIpv4Addresses> GetReservedPublicAddressesForNetwork(string networkId)
 		{
 			return await
-					apiClient.GetAsync<reservedPublicIpv4Addresses>(
-						ApiUris.GetReservedPublicAddressesForNetwork(apiClient.OrganizationId, networkId));
+					_apiClient.GetAsync<reservedPublicIpv4Addresses>(
+						ApiUris.GetReservedPublicAddressesForNetwork(_apiClient.OrganizationId, networkId));
 		}
 
 		/// <summary>	Gets reserved private addresses. </summary>
@@ -112,8 +112,8 @@
 		public async Task<reservedPrivateIpv4Addresses> GetReservedPrivateAddresses(string networkDomainId)
 		{
 			return await
-					apiClient.GetAsync<reservedPrivateIpv4Addresses>(
-						ApiUris.GetReservedPrivateAddresses(apiClient.OrganizationId, networkDomainId));
+					_apiClient.GetAsync<reservedPrivateIpv4Addresses>(
+						ApiUris.GetReservedPrivateAddresses(_apiClient.OrganizationId, networkDomainId));
 		}
 	}
 }

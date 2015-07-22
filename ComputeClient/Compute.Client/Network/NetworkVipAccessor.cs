@@ -12,7 +12,7 @@
 	/// <summary>
 	/// The vip.
 	/// </summary>
-	public class NetworkVip : INetworkVip
+	public class NetworkVipAccessor : INetworkVipAccessor
 	{
 		/// <summary>
 		/// The _api client.
@@ -20,12 +20,12 @@
 		private readonly IWebApi _apiClient;
 
 		/// <summary>
-		/// Initialises a new instance of the <see cref="NetworkVip"/> class.
+		/// Initialises a new instance of the <see cref="NetworkVipAccessor"/> class.
 		/// </summary>
 		/// <param name="apiClient">
 		/// The api client.
 		/// </param>
-		public NetworkVip(IWebApi apiClient)
+		public NetworkVipAccessor(IWebApi apiClient)
 		{
 			this._apiClient = apiClient;
 		}

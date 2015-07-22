@@ -7,7 +7,7 @@
 	using DD.CBU.Compute.Api.Contracts.Requests;
 
 	/// <summary>	IP Address Management functions. </summary>
-	public interface IIpam
+	public interface IIpamAccessor
 	{
 		/// <summary>	Adds a public IP block. </summary>
 		/// <param name="networkDomainId">	Identifier for the network domain. </param>

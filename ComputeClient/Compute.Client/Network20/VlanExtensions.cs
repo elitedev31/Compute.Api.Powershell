@@ -1,13 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using DD.CBU.Compute.Api.Client.Interfaces;
-using DD.CBU.Compute.Api.Contracts.Network20;
-using DD.CBU.Compute.Api.Contracts.Requests;
-using DD.CBU.Compute.Api.Contracts.Requests.Network;
-
-namespace DD.CBU.Compute.Api.Client.Network20
+﻿namespace DD.CBU.Compute.Api.Client.Network20
 {
+	using System;
+	using System.Collections.Generic;
+	using System.Threading.Tasks;
+	using DD.CBU.Compute.Api.Client.Interfaces;
+	using DD.CBU.Compute.Api.Contracts.Network20;
+	using DD.CBU.Compute.Api.Contracts.Requests;
+	using DD.CBU.Compute.Api.Contracts.Requests.Network;
+
+	/// <summary>
+	/// The vlan extensions.
+	/// </summary>
 	public static class VlanExtensions
 	{
 		/// <summary>
@@ -25,13 +28,27 @@ namespace DD.CBU.Compute.Api.Client.Network20
 			return await client.Networking.Vlan.GetVlans(options, pagingOptions);
 		}
 
-		/// <summary>	The get VLAN list. </summary>
-		/// <remarks>	Anthony, 4/24/2015. </remarks>
-		/// <param name="client">		  	The client. </param>
-		/// <param name="id">			  	The id. </param>
-		/// <param name="vlanName">		  	The VLAN name. </param>
-		/// <param name="networkDomainId">	The network domain id. </param>
-		/// <returns>	The <see cref="Task"/>. </returns>
+		/// <summary>
+		/// 	The get VLAN list. 
+		/// </summary>	
+		/// <param name="client">
+		/// 		  	The client. 
+		/// </param>
+		/// <param name="id">
+		/// 			  	The id. 
+		/// </param>
+		/// <param name="vlanName">
+		/// 		  	The VLAN name. 
+		/// </param>
+		/// <param name="networkDomainId">
+		/// 	The network domain id. 
+		/// </param>
+		/// <param name="pagingOptions">
+		/// The paging Options.
+		/// </param>
+		/// <returns>
+		/// 	The <see cref="Task"/>. 
+		/// </returns>
 		[Obsolete("Use IComputeApiClient.Networking.Vlan instead")]
 		public static async Task<IEnumerable<VlanType>> GetVlans(this IComputeApiClient client, Guid id, string vlanName, Guid networkDomainId, PageableRequest pagingOptions = null)
 		{

@@ -9,7 +9,7 @@
 	/// <summary>
 	/// The Vip interface.
 	/// </summary>
-	public interface INetworkVip
+	public interface INetworkVipAccessor
 	{
 		/// <summary>
 		/// The get real servers.

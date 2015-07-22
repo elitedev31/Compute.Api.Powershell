@@ -3,16 +3,16 @@
 	/// <summary>
 	/// The NetworkingLegacy interface.
 	/// </summary>
-	public interface INetworkingLegacy
+	public interface INetworkingLegacyAccessor
 	{
 		/// <summary>
 		/// Gets the network.
 		/// </summary>
-		INetwork Network { get; }
+		INetworkAccessor Network { get; }
 
 		/// <summary>
 		/// Gets the network vip.
 		/// </summary>
-		INetworkVip NetworkVip { get; }
+		INetworkVipAccessor NetworkVip { get; }
 	}
 }
