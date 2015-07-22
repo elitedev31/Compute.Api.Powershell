@@ -100,6 +100,7 @@
     <Compile Include="Exceptions\InvalidCredentialsException.cs" />
     <Compile Include="Exceptions\CaaSOrganizationNotSetException.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Interfaces\IDeprecatedComputeApiClient.cs" />
     <Compile Include="Interfaces\Network20\IIpam.cs" />
     <Compile Include="Interfaces\Network20\INetworkAddressTranslation.cs" />
     <Compile Include="Interfaces\Network10\INetwork.cs" />
@@ -109,6 +110,7 @@
     <Compile Include="Interfaces\Network10\INetworkingLegacy.cs" />
     <Compile Include="Interfaces\Network10\INetworkVip.cs" />
     <Compile Include="Interfaces\Network20\IVlan.cs" />
+    <Compile Include="Interfaces\Server10\IServer.cs" />
     <Compile Include="KnownApiUri.cs" />
     <Compile Include="Network20\ComputeApiClientNetworkExtensions.cs" />
     <Compile Include="Network20\IpAddressManagement.cs" />
@@ -124,6 +126,7 @@
     <Compile Include="Backup\ComputeApiClientBackupExtensions.cs" />
     <Compile Include="ClientError.cs" />
     <Compile Include="Network\NetworkVip.cs" />
+    <Compile Include="Server\ServerAccessor.cs" />
     <Compile Include="WebApi\ComputeApiClient.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
