@@ -18,8 +18,10 @@ namespace DD.CBU.Compute.Api.Client
 	using System.Net.Http;
 	using System.Threading.Tasks;
 
+	using DD.CBU.Compute.Api.Client.Account;
 	using DD.CBU.Compute.Api.Client.ImportExportImages;
 	using DD.CBU.Compute.Api.Client.Interfaces;
+	using DD.CBU.Compute.Api.Client.Interfaces.Account;
 	using DD.CBU.Compute.Api.Client.Interfaces.ImportExportImages;
 	using DD.CBU.Compute.Api.Client.Interfaces.Network;
 	using DD.CBU.Compute.Api.Client.Interfaces.Network20;
@@ -182,6 +184,7 @@ namespace DD.CBU.Compute.Api.Client
 		private void InitializeProperties(IHttpClient httpClient, Guid organizationId = default(Guid))
 		{
 			WebApi = new WebApi(httpClient, organizationId);
+			Account = new AccountAccessor(WebApi);
 			Networking = new NetworkingAccessor(WebApi);
 			NetworkingLegacy = new NetworkingLegacyAccessor(WebApi);
 			ServerLegacy = new ServerLegacyAccessor(WebApi);
@@ -316,6 +319,11 @@ namespace DD.CBU.Compute.Api.Client
 		[Obsolete("The only intent to support this property is to support obsolete contructors and LoginAsync(Credentials)")]
 		HttpClientHandler _httpClientHandler;
 
+		/// <summary>
+		/// Gets the account.
+		/// </summary>
+		public IAccountAccessor Account { get; private set; }
+
 		/// <summary>	Gets the networking 2.0 methods. </summary>
 		/// <value>	The networking. </value>		
 		public INetworkingAccessor Networking { get; private set; }
@@ -347,176 +355,6 @@ namespace DD.CBU.Compute.Api.Client
 		{
 			return await WebApi.LoginAsync();
 		}
-
-		/// <summary>
-		/// Gets a list of software labels
-		/// </summary>
-		/// <returns>
-		/// The <see cref="Task"/>.
-		/// </returns>
-		public async Task<IEnumerable<SoftwareLabel>> GetListOfSoftwareLabels()
-		{
-			SoftwareLabels labels = await WebApi.GetAsync<SoftwareLabels>(ApiUris.SoftwareLabels(WebApi.OrganizationId));
-
-			return labels.Items;
-		}
-
-		/// <summary>
-		/// Returns a list of the Multi-Geography Regions available for the supplied {org-id
-		///     An element is returned for each available Geographic Region.
-		/// </summary>
-		/// <returns>
-		/// A list of regions associated with the org ID.
-		/// </returns>
-		public async Task<IEnumerable<Geo>> GetListOfMultiGeographyRegions()
-		{
-            Geos regions = await WebApi.GetAsync<Geos>(ApiUris.MultiGeographyRegions(WebApi.OrganizationId));
-
-			return regions.Items;
-		}
-
-		/// <summary>
-		/// Allows the current Primary Administrator user to designate a Sub-Administrator user belonging to the
-		///     same organization to become the Primary Administrator for the organization.
-		///     The Sub-Administrator is identified by their <paramref name="username"/>.
-		/// </summary>
-		/// <param name="username">
-		/// The Sub-Administrator account.
-		/// </param>
-		/// <returns>
-		/// A <see cref="Status"/> result that describes whether or not the operation was successful.
-		/// </returns>
-		public async Task<Status> DeleteSubAdministratorAccount(string username)
-		{
-            return await WebApi.GetAsync<Status>(ApiUris.DeleteSubAdministrator(WebApi.OrganizationId, username));
-		}
-
-		/// <summary>
-		/// Used to retrieve full details of an Administrator account associated with the Organization identified by {org Id}.
-		///     The Sub-Administrator is identified by their <paramref name="username"/>.
-		/// </summary>
-		/// <param name="username">
-		/// The Administrator or sub-administrator account.
-		/// </param>
-		/// <returns>
-		/// A <see cref="Status"/> result that describes whether or not the operation was successful.
-		/// </returns>
-		public async Task<AccountWithPhoneNumber> GetAdministratorAccount(string username)
-		{
-			AccountWithPhoneNumber account =
-				await WebApi.GetAsync<AccountWithPhoneNumber>(ApiUris.AccountWithPhoneNumber(WebApi.OrganizationId, username));
-			return account;
-		}
-
-		/// <summary>
-		/// Allows the current Primary Administrator user to designate a Sub-Administrator user belonging to the
-		///     same organization to become the Primary Administrator for the organization.
-		///     The Sub-Administrator is identified by their <paramref name="username"/>.
-		/// </summary>
-		/// <param name="username">
-		/// The Sub-Administrator account.
-		/// </param>
-		/// <returns>
-		/// A <see cref="Status"/> result that describes whether or not the operation was successful.
-		/// </returns>
-		public async Task<Status> DesignatePrimaryAdministratorAccount(string username)
-		{
-            return await WebApi.GetAsync<Status>(ApiUris.SetPrimaryAdministrator(WebApi.OrganizationId,username));
-		}
-
-		/// <summary>
-		/// This function identifies the list of data center 's available to the organization of the authenticating user.
-		/// </summary>
-		/// <returns>
-		/// The list of data center 's associated with the organization.
-		/// </returns>
-		public async Task<IEnumerable<DatacenterWithMaintenanceStatusType>> GetDataCentersWithMaintenanceStatuses()
-		{
-			DatacentersWithMaintenanceStatus dataCenters =
-				await
-					WebApi.GetAsync<DatacentersWithMaintenanceStatus>(ApiUris.DatacentresWithMaintanence(WebApi.OrganizationId));
-			return dataCenters.datacenter;
-		}
-
-		/// <summary>
-		/// Lists the Accounts belonging to the Organization identified by the organisation. The list will include all
-		///     SubAdministrator accounts and the Primary Administrator account. The Primary Administrator is unique and is
-		///     identified by the “primary administrator” role.
-		/// </summary>
-		/// <returns>
-		/// A list of accounts associated with the organisation.
-		/// </returns>
-		public async Task<IEnumerable<Account>> GetAccounts()
-		{
-			Accounts accounts = await WebApi.GetAsync<Accounts>(ApiUris.Account(WebApi.OrganizationId));
-			return accounts.Items;
-		}
-
-		/// <summary>
-		/// Adds a new Sub-Administrator Account to the organization.
-		///     The account is created with a set of roles defining the level of access to the organization’s Cloud
-		///     resources or the account can be created as “read only”, restricted to just viewing Cloud resources and
-		///     unable to generate Cloud Reports.
-		/// </summary>
-		/// <param name="account">
-		/// The account that will be added to the org.
-		/// </param>
-		/// <returns>
-		/// A <see cref="Status"/> object instance that shows the results of the operation.
-		/// </returns>
-		public async Task<Status> AddSubAdministratorAccount(AccountWithPhoneNumber account)
-		{
-			return await WebApi.PostAsync<AccountWithPhoneNumber, Status>(ApiUris.AccountWithPhoneNumber(WebApi.OrganizationId), account);
-		}
-
-		/// <summary>
-		/// This function updates an existing Administrator Account.
-		/// </summary>
-		/// <param name="account">
-		/// The account to be updated.
-		/// </param>
-		/// <returns>
-		/// A <see cref="Status"/> object instance that shows the results of the operation.
-		/// </returns>
-		public async Task<Status> UpdateAdministratorAccount(AccountWithPhoneNumber account)
-		{
-			var parameters = new Dictionary<string, string>();
-			if (!string.IsNullOrEmpty(account.password))
-				parameters["password"] = account.password;
-			if (!string.IsNullOrEmpty(account.emailAddress))
-				parameters["emailAddress"] = account.emailAddress;
-			if (!string.IsNullOrEmpty(account.fullName))
-				parameters["fullName"] = account.fullName;
-			if (!string.IsNullOrEmpty(account.firstName))
-				parameters["firstName"] = account.firstName;
-			if (!string.IsNullOrEmpty(account.lastName))
-				parameters["lastName"] = account.lastName;
-			if (!string.IsNullOrEmpty(account.department))
-				parameters["department"] = account.department;
-			if (!string.IsNullOrEmpty(account.customDefined1))
-				parameters["customDefined1"] = account.customDefined1;
-			if (!string.IsNullOrEmpty(account.customDefined2))
-				parameters["customDefined2"] = account.customDefined2;
-			if (!string.IsNullOrEmpty(account.phoneCountryCode))
-				parameters["phoneCountryCode"] = account.phoneCountryCode;
-			if (!string.IsNullOrEmpty(account.phoneNumber))
-				parameters["phoneNumber"] = account.phoneNumber;
-
-			string postBody = parameters.ToQueryString();
-
-			if (account.MemberOfRoles.Any())
-			{
-				IEnumerable<string> roles = account.MemberOfRoles.Select(role => string.Format("role={0}", role.Name));
-				string roleParameters = string.Join("&", roles);
-
-				postBody = string.Join("&", postBody, roleParameters);
-			}
-
-			return
-				await
-					WebApi.PostAsync<Status>(ApiUris.UpdateAdministrator(WebApi.OrganizationId, account.userName), 
-						postBody);
-		}			      
 
 		/// <summary>
 		/// Since MultiGeo call is only valid for the home geo, use this method to discover what is your home geo and the
@@ -620,6 +458,140 @@ namespace DD.CBU.Compute.Api.Client
 		#endregion
 
 		#region Obsolete Methods
+		/// <summary>
+		/// Allows the current Primary Administrator user to designate a Sub-Administrator user belonging to the
+		///     same organization to become the Primary Administrator for the organization.
+		///     The Sub-Administrator is identified by their <paramref name="username"/>.
+		/// </summary>
+		/// <param name="username">
+		/// The Sub-Administrator account.
+		/// </param>
+		/// <returns>
+		/// A <see cref="Status"/> result that describes whether or not the operation was successful.
+		/// </returns>
+		[Obsolete("Use IComputeApiClient.Account")]
+		public async Task<Status> DesignatePrimaryAdministratorAccount(string username)
+		{
+			return await Account.DesignatePrimaryAdministratorAccount(username);
+		}
+
+		/// <summary>
+		/// This function identifies the list of data center 's available to the organization of the authenticating user.
+		/// </summary>
+		/// <returns>
+		/// The list of data center 's associated with the organization.
+		/// </returns>
+		[Obsolete("Use IComputeApiClient.Account")]
+		public async Task<IEnumerable<DatacenterWithMaintenanceStatusType>> GetDataCentersWithMaintenanceStatuses()
+		{
+			return await Account.GetDataCentersWithMaintenanceStatuses();
+		}
+
+		/// <summary>
+		/// Gets a list of software labels
+		/// </summary>
+		/// <returns>
+		/// The <see cref="Task"/>.
+		/// </returns>
+		[Obsolete("Use IComputeApiClient.Account")]
+		public async Task<IEnumerable<SoftwareLabel>> GetListOfSoftwareLabels()
+		{
+			return await Account.GetListOfSoftwareLabels();
+		}
+
+		/// <summary>
+		/// Returns a list of the Multi-Geography Regions available for the supplied {org-id
+		///     An element is returned for each available Geographic Region.
+		/// </summary>
+		/// <returns>
+		/// A list of regions associated with the org ID.
+		/// </returns>
+		[Obsolete("Use IComputeApiClient.Account")]
+		public async Task<IEnumerable<Geo>> GetListOfMultiGeographyRegions()
+		{
+			return await Account.GetListOfMultiGeographyRegions();
+		}
+
+		/// <summary>
+		/// Allows the current Primary Administrator user to designate a Sub-Administrator user belonging to the
+		///     same organization to become the Primary Administrator for the organization.
+		///     The Sub-Administrator is identified by their <paramref name="username"/>.
+		/// </summary>
+		/// <param name="username">
+		/// The Sub-Administrator account.
+		/// </param>
+		/// <returns>
+		/// A <see cref="Status"/> result that describes whether or not the operation was successful.
+		/// </returns>
+		[Obsolete("Use IComputeApiClient.Account")]
+		public async Task<Status> DeleteSubAdministratorAccount(string username)
+		{
+			return await Account.DeleteSubAdministratorAccount(username);
+		}
+
+		/// <summary>
+		/// Used to retrieve full details of an Administrator account associated with the Organization identified by {org Id}.
+		///     The Sub-Administrator is identified by their <paramref name="username"/>.
+		/// </summary>
+		/// <param name="username">
+		/// The Administrator or sub-administrator account.
+		/// </param>
+		/// <returns>
+		/// A <see cref="Status"/> result that describes whether or not the operation was successful.
+		/// </returns>
+		[Obsolete("Use IComputeApiClient.Account")]
+		public async Task<AccountWithPhoneNumber> GetAdministratorAccount(string username)
+		{
+			return await Account.GetAdministratorAccount(username);
+		}
+
+		/// <summary>
+		/// Lists the Accounts belonging to the Organization identified by the organisation. The list will include all
+		///     SubAdministrator accounts and the Primary Administrator account. The Primary Administrator is unique and is
+		///     identified by the “primary administrator” role.
+		/// </summary>
+		/// <returns>
+		/// A list of accounts associated with the organisation.
+		/// </returns>
+		[Obsolete("Use IComputeApiClient.Account")]
+		public async Task<IEnumerable<Contracts.Directory.Account>> GetAccounts()
+		{
+			return await Account.GetAccounts();
+		}
+
+		/// <summary>
+		/// Adds a new Sub-Administrator Account to the organization.
+		///     The account is created with a set of roles defining the level of access to the organization’s Cloud
+		///     resources or the account can be created as “read only”, restricted to just viewing Cloud resources and
+		///     unable to generate Cloud Reports.
+		/// </summary>
+		/// <param name="account">
+		/// The account that will be added to the org.
+		/// </param>
+		/// <returns>
+		/// A <see cref="Status"/> object instance that shows the results of the operation.
+		/// </returns>
+		[Obsolete("Use IComputeApiClient.Account")]
+		public async Task<Status> AddSubAdministratorAccount(AccountWithPhoneNumber account)
+		{
+			return await Account.AddSubAdministratorAccount(account);
+		}
+
+		/// <summary>
+		/// This function updates an existing Administrator Account.
+		/// </summary>
+		/// <param name="account">
+		/// The account to be updated.
+		/// </param>
+		/// <returns>
+		/// A <see cref="Status"/> object instance that shows the results of the operation.
+		/// </returns>
+		[Obsolete("Use IComputeApiClient.Account")]
+		public async Task<Status> UpdateAdministratorAccount(AccountWithPhoneNumber account)
+		{
+			return await Account.UpdateAdministratorAccount(account);
+		}			      
+
 		/// <summary>
 		/// Get customer server images
 		/// </summary>

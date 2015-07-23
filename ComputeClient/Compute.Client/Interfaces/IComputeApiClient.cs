@@ -3,6 +3,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 	using System;
 	using System.Threading.Tasks;
 
+	using DD.CBU.Compute.Api.Client.Interfaces.Account;
 	using DD.CBU.Compute.Api.Client.Interfaces.ImportExportImages;
 	using DD.CBU.Compute.Api.Client.Interfaces.Network;
 	using DD.CBU.Compute.Api.Client.Interfaces.Network20;
@@ -26,6 +27,11 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 	    /// The <see cref="Task"/>.
 	    /// </returns>
 	    Task<IAccount> Login();
+
+		/// <summary>
+		/// Gets the account.
+		/// </summary>
+		IAccountAccessor Account { get; }
 
 	    /// <summary>	Gets the networking 2.0 methods. </summary>
 	    INetworkingAccessor Networking { get; }

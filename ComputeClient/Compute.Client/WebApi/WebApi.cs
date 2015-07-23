@@ -81,7 +81,7 @@
 		/// </returns>
 		public async Task<IAccount> LoginAsync()
 		{
-			Account account = await GetAsync<Account>(ApiUris.MyAccount);
+			Contracts.Directory.Account account = await GetAsync<Contracts.Directory.Account>(ApiUris.MyAccount);
 			_organizationId = account.OrganizationId;
 			return account;
 		}

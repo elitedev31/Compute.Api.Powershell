@@ -35,6 +35,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 		/// <returns>
 		/// The <see cref="Task"/>.
 		/// </returns>
+		[Obsolete]
         Task<IEnumerable<SoftwareLabel>> GetListOfSoftwareLabels();
 
         /// <summary>
@@ -43,6 +44,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 		/// <returns>
 		/// The <see cref="Task"/>.
 		/// </returns>
+		[Obsolete]
         Task<IEnumerable<Geo>> GetListOfMultiGeographyRegions();
 
         /// <summary>
@@ -54,6 +56,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 		/// <returns>
 		/// The <see cref="Task"/>.
 		/// </returns>
+		[Obsolete]
         Task<Status> DeleteSubAdministratorAccount(string username);
 
 
@@ -66,6 +69,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 		/// <returns>
 		/// The <see cref="Task"/>.
 		/// </returns>
+		[Obsolete]
         Task<AccountWithPhoneNumber> GetAdministratorAccount(string username);
 
         /// <summary>
@@ -77,6 +81,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 		/// <returns>
 		/// The <see cref="Task"/>.
 		/// </returns>
+		[Obsolete]
         Task<Status> DesignatePrimaryAdministratorAccount(string username);
 
         /// <summary>
@@ -85,6 +90,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 		/// <returns>
 		/// The data centres.
 		/// </returns>
+		[Obsolete]
         Task<IEnumerable<DatacenterWithMaintenanceStatusType>> GetDataCentersWithMaintenanceStatuses();
 
         /// <summary>
@@ -93,7 +99,8 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 		/// <returns>
 		/// The <see cref="Task"/>.
 		/// </returns>
-        Task<IEnumerable<Account>> GetAccounts();
+		[Obsolete]
+		Task<IEnumerable<Contracts.Directory.Account>> GetAccounts();
 
         /// <summary>
         /// Adds a sub administrator account
@@ -104,6 +111,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 		/// <returns>
 		/// The <see cref="Task"/>.
 		/// </returns>
+		[Obsolete]
         Task<Status> AddSubAdministratorAccount(AccountWithPhoneNumber account);
         
         /// <summary>
@@ -115,6 +123,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 		/// <returns>
 		/// The <see cref="Task"/>.
 		/// </returns>
+		[Obsolete]
         Task<Status> UpdateAdministratorAccount(AccountWithPhoneNumber account);
 
 
@@ -637,6 +646,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 		/// <returns>
 		/// The <see cref="Task"/>.
 		/// </returns>
+		[Obsolete]
         Task<IEnumerable<Geo>> DiscoverHomeMultiGeo(KnownApiVendor vendor, ICredentials credential);
     }
 }

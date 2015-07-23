@@ -95,11 +95,13 @@
     <Compile Include="..\SolutionAssemblyInfo.cs">
       <Link>Properties\SolutionAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Account\AccountAccessor.cs" />
     <Compile Include="Exceptions\ApiClientException.cs" />
     <Compile Include="ApiUris.cs" />
     <Compile Include="Exceptions\InvalidCredentialsException.cs" />
     <Compile Include="Exceptions\CaaSOrganizationNotSetException.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Interfaces\Account\IAccountAccessor.cs" />
     <Compile Include="Interfaces\IDeprecatedComputeApiClient.cs" />
     <Compile Include="Interfaces\Network20\IIpamAccessor.cs" />
     <Compile Include="Interfaces\Network20\INetworkAddressTranslationAccessor.cs" />
