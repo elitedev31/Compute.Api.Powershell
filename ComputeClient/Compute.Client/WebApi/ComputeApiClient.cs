@@ -18,11 +18,15 @@ namespace DD.CBU.Compute.Api.Client
 	using System.Net.Http;
 	using System.Threading.Tasks;
 
+	using DD.CBU.Compute.Api.Client.ImportExportImages;
 	using DD.CBU.Compute.Api.Client.Interfaces;
+	using DD.CBU.Compute.Api.Client.Interfaces.ImportExportImages;
 	using DD.CBU.Compute.Api.Client.Interfaces.Network;
 	using DD.CBU.Compute.Api.Client.Interfaces.Network20;
+	using DD.CBU.Compute.Api.Client.Interfaces.Server;
 	using DD.CBU.Compute.Api.Client.Network;
 	using DD.CBU.Compute.Api.Client.Network20;
+	using DD.CBU.Compute.Api.Client.Server;
 	using DD.CBU.Compute.Api.Client.Utilities;
 	using DD.CBU.Compute.Api.Contracts.Datacenter;
 	using DD.CBU.Compute.Api.Contracts.Directory;
@@ -180,6 +184,8 @@ namespace DD.CBU.Compute.Api.Client
 			WebApi = new WebApi(httpClient, organizationId);
 			Networking = new NetworkingAccessor(WebApi);
 			NetworkingLegacy = new NetworkingLegacyAccessor(WebApi);
+			ServerLegacy = new ServerLegacyAccessor(WebApi);
+			ImportExportCustomerImage = new ImportExportCustomerImageAccessor(WebApi);
 		}
 
 		#endregion
@@ -300,6 +306,11 @@ namespace DD.CBU.Compute.Api.Client
 
 		#region Instance data
 		/// <summary>
+		/// Access to the web API for login/logout and account info
+		/// </summary>
+		public IWebApi WebApi { get; private set; }	
+
+		/// <summary>
 		/// The _http client handler.
 		/// </summary>
 		[Obsolete("The only intent to support this property is to support obsolete contructors and LoginAsync(Credentials)")]
@@ -312,59 +323,19 @@ namespace DD.CBU.Compute.Api.Client
 		/// <summary>	Gets the networking legacy 1.0 methods </summary>
 		public INetworkingLegacyAccessor NetworkingLegacy { get; private set; }
 
+		/// <summary>
+		/// Gets the server legacy.
+		/// </summary>
+		public IServerLegacyAccessor ServerLegacy { get; private set; }
+
+		/// <summary>
+		/// Gets or sets the import export customer image.
+		/// </summary>
+		public IImportExportCustomerImageAccessor ImportExportCustomerImage { get; private set; }
+
 		#endregion Instance data
 
-		/// <summary>
-		/// Dispose of resources being used by the CaaS API client.
-		/// </summary>
-		/// <param name="disposing">
-		/// Explicit disposal?
-		/// </param>
-		protected override void Dispose(bool disposing)
-		{
-			if (disposing)
-			{
-				if (WebApi != null)
-				{
-					WebApi.Dispose();
-					WebApi = null;
-				}
-
-				if (_httpClientHandler != null)
-				{
-					_httpClientHandler.Dispose();
-					_httpClientHandler = null;
-				}
-			}
-		}
-		
-		#region Public properties
-
-		/// <summary>
-		/// Access to the web API for login/logout and account info
-		/// </summary>
-		public IWebApi WebApi { get; private set; }
-
-		/// <summary>
-		/// Asynchronously log into the CaaS API.
-		/// </summary>
-		/// <param name="accountCredentials">
-		/// The CaaS account credentials used to authenticate against the CaaS API.
-		/// </param>
-		/// <returns>
-		/// An <see cref="IAccount"/> implementation representing the CaaS account that the client is logged into.
-		/// </returns>
-		[Obsolete("Use GetComputeApiClient Factory passing accountCredentials and Login() method")]
-		public async Task<IAccount> LoginAsync(ICredentials accountCredentials)
-		{
-			IAccount mcp1Account = await WebApi.LoginAsync();
-			if (_httpClientHandler != null)
-			{
-				_httpClientHandler.Credentials = accountCredentials;
-				_httpClientHandler.PreAuthenticate = true;				
-			}			
-			return mcp1Account;
-		}
+		#region Public Methods
 
 		/// <summary>
 		/// The login async.
@@ -437,7 +408,6 @@ namespace DD.CBU.Compute.Api.Client
 			return account;
 		}
 
-
 		/// <summary>
 		/// Allows the current Primary Administrator user to designate a Sub-Administrator user belonging to the
 		///     same organization to become the Primary Administrator for the organization.
@@ -453,7 +423,6 @@ namespace DD.CBU.Compute.Api.Client
 		{
             return await WebApi.GetAsync<Status>(ApiUris.SetPrimaryAdministrator(WebApi.OrganizationId,username));
 		}
-
 
 		/// <summary>
 		/// This function identifies the list of data center 's available to the organization of the authenticating user.
@@ -547,744 +516,7 @@ namespace DD.CBU.Compute.Api.Client
 				await
 					WebApi.PostAsync<Status>(ApiUris.UpdateAdministrator(WebApi.OrganizationId, account.userName), 
 						postBody);
-		}
-
-
-		/// <summary>
-		/// Asynchronously get a list of all CaaS data centres that are available for use by the specified organisation.
-		/// </summary>
-		/// <returns>
-		/// A read-only list of <see cref="IDatacenterDetail"/>s representing the data centre information.
-		/// </returns>
-		[Obsolete("This method was replaced by GetListOfDataCentersWithMaintenanceStatuses based on CaaS API!")]
-		public async Task<IReadOnlyList<DatacenterWithDiskSpeedDetails>> GetAvailableDataCenters()
-		{
-			CheckDisposed();
-
-			DatacentersWithDiskSpeedDetails datacentersWithDiskSpeedDetails =
-				await WebApi.GetAsync<DatacentersWithDiskSpeedDetails>(
-					ApiUris.DatacentersWithDiskSpeedDetails(
-						WebApi.OrganizationId
-						)
-					);
-
-			return datacentersWithDiskSpeedDetails.datacenter;
-		}
-
-		/// <summary>
-		/// Get a list of all system-defined images (with software labels) deployed in the specified data centre.
-		/// </summary>
-		/// <param name="locationName">
-		/// The short name of the location in which the data centre is located.
-		/// </param>
-		/// <returns>
-		/// A read-only list <see cref="DeployedImageWithSoftwareLabelsType"/>, sorted by UTC creation date / time,
-		///     representing the images.
-		/// </returns>
-		[Obsolete]
-		public async Task<IReadOnlyList<DeployedImageWithSoftwareLabelsType>> GetImages(string locationName)
-		{
-			if (string.IsNullOrWhiteSpace(locationName))
-				throw new ArgumentException(
-					"Argument cannot be null, empty, or composed entirely of whitespace: 'locationName'.", 
-					"locationName");
-
-			DeployedImagesWithSoftwareLabels imagesWithSoftwareLabels =
-				await
-					WebApi.GetAsync<DeployedImagesWithSoftwareLabels>(ApiUris.ImagesWithSoftwareLabels(locationName));
-
-			return imagesWithSoftwareLabels.DeployedImageWithSoftwareLabels;
-		}
-
-		/// <summary>
-		/// Get OS server images, paramenters are just for filtering. Use String.Empty on the parameter where filtering is not
-		///     required.
-		/// </summary>
-		/// <param name="imageId">
-		/// The image Id.
-		/// </param>
-		/// <param name="name">
-		/// The name filter
-		/// </param>
-		/// <param name="location">
-		/// The location filter
-		/// </param>
-		/// <param name="operatingSystemId">
-		/// The OS id
-		/// </param>
-		/// <param name="operatingSystemFamily">
-		/// The OS family
-		/// </param>
-		/// <returns>
-		/// The <see cref="Task"/>.
-		/// </returns>
-		[Obsolete]
-		public async Task<IReadOnlyList<ImagesWithDiskSpeedImage>> GetImages(string imageId, string name, string location, 
-			string operatingSystemId, string operatingSystemFamily)
-		{
-			ImagesWithDiskSpeed imagesWithDiskSpeed =
-				await
-					WebApi.GetAsync<ImagesWithDiskSpeed>(ApiUris.ImagesWithDiskSpeed(WebApi.OrganizationId, ServerImageType.OS, 
-						imageId, name, location, operatingSystemId, operatingSystemFamily));
-
-			if (imagesWithDiskSpeed == null)
-				return null;
-			if (imagesWithDiskSpeed.image == null)
-				return null;
-
-			return imagesWithDiskSpeed.image;
-		}
-
-
-		/// <summary>
-		/// This function lists the available Customer Images at a particular Location for the provided org-id.
-		///     The response adds to the deprecated List Deployed Customer Images in Location function with
-		///     the addition of zero to many, optional softwareLabel elements, listing the Priced Software packages installed on
-		///     the Customer Image.
-		/// </summary>
-		/// <param name="networkLocation">
-		/// The network location
-		/// </param>
-		/// <returns>
-		/// A list of deployed customer images with software labels in location
-		/// </returns>
-		[Obsolete]
-		public async Task<IEnumerable<DeployedImageWithSoftwareLabelsType>> GetCustomerServerImages(string networkLocation)
-		{
-			// Contract.Requires(!string.IsNullOrWhiteSpace(networkLocation), "Network location must not be empty or null");
-			DeployedImagesWithSoftwareLabels images =
-				await
-					WebApi.GetAsync<DeployedImagesWithSoftwareLabels>(
-						ApiUris.CustomerImagesWithSoftwareLabels(WebApi.OrganizationId, networkLocation));
-			return images.DeployedImageWithSoftwareLabels;
-		}
-
-
-		/// <summary>
-		/// Get customer server images
-		/// </summary>
-		/// <param name="imageId">
-		/// The image Id.
-		/// </param>
-		/// <param name="name">
-		/// The name filter
-		/// </param>
-		/// <param name="location">
-		/// The location filter
-		/// </param>
-		/// <param name="operatingSystemId">
-		/// The OS id
-		/// </param>
-		/// <param name="operatingSystemFamily">
-		/// The OS family
-		/// </param>
-		/// <returns>
-		/// The <see cref="Task"/>.
-		/// </returns>
-		public async Task<IReadOnlyList<ImagesWithDiskSpeedImage>> GetCustomerServerImages(string imageId, string name, 
-			string location, string operatingSystemId, string operatingSystemFamily)
-		{
-			ImagesWithDiskSpeed imagesWithDiskSpeed =
-				await
-					WebApi.GetAsync<ImagesWithDiskSpeed>(ApiUris.ImagesWithDiskSpeed(WebApi.OrganizationId, 
-						ServerImageType.CUSTOMER, imageId, name, location, operatingSystemId, operatingSystemFamily));
-
-			if (imagesWithDiskSpeed.image == null)
-				return null;
-
-			return imagesWithDiskSpeed.image;
-		}
-
-
-		/// <summary>
-		/// Remove customer server images
-		/// </summary>
-		/// <param name="imageId">
-		/// The ImageId
-		/// </param>
-		/// <returns>
-		/// The <see cref="Task"/>.RemoveCustomerServerImage
-		/// </returns>
-		[Obsolete]
-		public async Task<Status> RemoveCustomerServerImage(string imageId)
-		{
-			return await WebApi.GetAsync<Status>(ApiUris.RemoveCustomerServerImage(WebApi.OrganizationId, imageId));
-		}
-
-		/// <summary>
-		/// Deploys a server using an image into a specified network.
-		/// </summary>
-		/// <param name="name">
-		/// </param>
-		/// <param name="description">
-		/// </param>
-		/// <param name="networkId">
-		/// </param>
-		/// <param name="imageId">
-		/// </param>
-		/// <param name="adminPassword">
-		/// </param>
-		/// <param name="isStarted">
-		/// </param>
-		/// <returns>
-		/// The <see cref="Task"/>.
-		/// </returns>
-		[Obsolete("This method is deprecated, please use DeployServerWithDiskSpeedImageTask instead.")]
-		public async Task<Status> DeployServerImageTask(string name, string description, string networkId, string imageId, 
-			string adminPassword, bool isStarted)
-		{
-			// Contract.Requires<ArgumentException>(!string.IsNullOrEmpty(name), "name argument must not be empty");
-			// Contract.Requires<ArgumentException>(!string.IsNullOrWhiteSpace(networkId), "network id must not be empty");
-			// Contract.Requires<ArgumentException>(!string.IsNullOrWhiteSpace(imageId), "Image id must not be empty");
-			// Contract.Requires<ArgumentException>(!string.IsNullOrWhiteSpace(adminPassword), "administrator password cannot be null or empty");
-			return
-				await
-					WebApi.PostAsync<NewServerToDeploy, Status>(
-						ApiUris.DeployServer(WebApi.OrganizationId), 
-						new NewServerToDeploy
-						{
-							name = name, 
-							description = description, 
-							vlanResourcePath =
-								string.Format("/oec/{0}/network/{1}", WebApi.OrganizationId, networkId), 
-							imageResourcePath = string.Format("/oec/base/image/{0}", imageId), 
-							administratorPassword = adminPassword, 
-							isStarted = isStarted
-						});
-		}
-
-		/// <summary>
-		/// The deploy server with disk speed image task.
-		/// </summary>
-		/// <param name="name">
-		/// The name.
-		/// </param>
-		/// <param name="description">
-		/// The description.
-		/// </param>
-		/// <param name="networkId">
-		/// The network id.
-		/// </param>
-		/// <param name="privateIp">
-		/// The private ip.
-		/// </param>
-		/// <param name="imageId">
-		/// The image id.
-		/// </param>
-		/// <param name="adminPassword">
-		/// The admin password.
-		/// </param>
-		/// <param name="start">
-		/// The start.
-		/// </param>
-		/// <returns>
-		/// The <see cref="Task"/>.
-		/// </returns>
-		public async Task<Status> DeployServerWithDiskSpeedImageTask(
-			string name,
-			string description,
-			string networkId,
-			string privateIp,
-			string imageId,
-			string adminPassword,
-			bool start)
-		{
-			return
-				await
-					WebApi.PostAsync<NewServerToDeployWithDiskSpeed, Status>(
-						ApiUris.DeployServerWithDiskSpeed(WebApi.OrganizationId), 
-						new NewServerToDeployWithDiskSpeed
-						{
-							name = name, 
-							description = description, 
-							imageId = imageId, 
-							networkId = networkId, 
-							privateIp = privateIp, 
-							administratorPassword = adminPassword, 
-							start = start
-						});
-		}
-
-		/// <summary>
-		/// The deploy server with disk speed image task.
-		/// </summary>
-		/// <param name="name">
-		/// The name.
-		/// </param>
-		/// <param name="description">
-		/// The description.
-		/// </param>
-		/// <param name="networkId">
-		/// The network id.
-		/// </param>
-		/// <param name="privateIp">
-		/// The private ip.
-		/// </param>
-		/// <param name="imageId">
-		/// The image id.
-		/// </param>
-		/// <param name="adminPassword">
-		/// The admin password.
-		/// </param>
-		/// <param name="start">
-		/// The start.
-		/// </param>
-		/// <param name="disk">
-		/// The disk.
-		/// </param>
-		/// <returns>
-		/// The <see cref="Task"/>.
-		/// </returns>
-		public async Task<Status> DeployServerWithDiskSpeedImageTask(
-			string name,
-			string description,
-			string networkId,
-			string privateIp,
-			string imageId,
-			string adminPassword,
-			bool start,
-			Disk[] disk)
-		{
-			return
-				await
-					WebApi.PostAsync<NewServerToDeployWithDiskSpeed, Status>(
-						ApiUris.DeployServerWithDiskSpeed(WebApi.OrganizationId), 
-						new NewServerToDeployWithDiskSpeed
-						{
-							name = name, 
-							description = description, 
-							imageId = imageId, 
-							networkId = networkId, 
-							privateIp = privateIp, 
-							administratorPassword = adminPassword, 
-							start = start, 
-							disk = disk
-						});
-		}
-
-
-		/// <summary>
-		/// Modify server server settings.
-		/// </summary>
-		/// <param name="serverId">
-		/// The server id.
-		/// </param>
-		/// <param name="name">
-		/// The server new name on CaaS. This parameter does not change the machine/host name.
-		/// </param>
-		/// <param name="description">
-		/// The new description for the server.
-		/// </param>
-		/// <param name="memory">
-		/// Memory (in MB). Value must be represent a GB integer (e.g. 1024,. 2048, 3072, 4096, etc.)
-		/// </param>
-		/// <param name="cpucount">
-		/// Number of virtual CPU’s (e.g. 1, 2, 4 etc.)
-		/// </param>
-		/// <param name="privateIp">
-		/// The new privateIp of the server.
-		/// </param>
-		/// <returns>
-		/// The <see cref="Task"/>.
-		/// </returns>
-		public async Task<Status> ModifyServer(
-			string serverId,
-			string name,
-			string description,
-			int memory,
-			int cpucount,
-			string privateIp)
-		{
-			// build que query string paramenters
-			var parameters = new Dictionary<string, string>();
-			if (!string.IsNullOrEmpty(name))
-				parameters.Add("name", name);
-			if (!string.IsNullOrEmpty(description))
-				parameters.Add("description", description);
-			if (memory > 0)
-				parameters.Add("memory", memory.ToString());
-			if (cpucount > 0)
-				parameters.Add("cpuCount", cpucount.ToString());
-			if (!string.IsNullOrEmpty(privateIp))
-				parameters.Add("privateIp", privateIp);
-
-			// build the query string
-			string poststring = parameters.ToQueryString();
-
-			return await WebApi.PostAsync<Status>(ApiUris.ModifyServer(WebApi.OrganizationId, serverId), poststring);
-		}
-
-		/// <summary>
-		/// Powers on the server.
-		/// </summary>
-		/// <param name="serverId">
-		/// The server id
-		/// </param>
-		/// <returns>
-		/// Returns a status of the HTTP request
-		/// </returns>
-		public async Task<Status> ServerPowerOn(string serverId)
-		{
-			return await WebApi.GetAsync<Status>(ApiUris.PowerOnServer(WebApi.OrganizationId, serverId));
-		}
-
-		/// <summary>
-		/// Powers off the server
-		/// </summary>
-		/// <param name="serverId">
-		/// The server id
-		/// </param>
-		/// <returns>
-		/// Returns a status of the HTTP request
-		/// </returns>
-		public async Task<Status> ServerPowerOff(string serverId)
-		{
-			return await WebApi.GetAsync<Status>(ApiUris.PoweroffServer(WebApi.OrganizationId, serverId));
-		}
-
-		/// <summary>
-		/// Graceful reset of a server
-		/// </summary>
-		/// <param name="serverId">
-		/// The server id
-		/// </param>
-		/// <returns>
-		/// Returns a status of the HTTP request
-		/// </returns>
-		public async Task<Status> ServerRestart(string serverId)
-		{
-			return await WebApi.GetAsync<Status>(ApiUris.RebootServer(WebApi.OrganizationId, serverId));
-		}
-
-		/// <summary>	Power cycles an existing deployed server. This is the equivalent of pulling and replacing the power cord for
-		/// a physical server. Requires your organization ID and the ID of the target server.. </summary>
-		/// <param name="serverId">	The server id. </param>
-		/// <returns>	Returns a status of the HTTP request </returns>
-		public async Task<Status> ServerReset(string serverId)
-		{
-			return await WebApi.GetAsync<Status>(ApiUris.ResetServer(WebApi.OrganizationId, serverId));
-		}
-
-		/// <summary>
-		/// "Graceful" shutdown of the server.
-		/// </summary>
-		/// <param name="serverId">
-		/// The server id
-		/// </param>
-		/// <returns>
-		/// Returns a status of the HTTP request
-		/// </returns>
-		public async Task<Status> ServerShutdown(string serverId)
-		{
-			return await WebApi.GetAsync<Status>(ApiUris.ShutdownServer(WebApi.OrganizationId, serverId));
-		}
-
-
-		/// <summary>
-		/// Triggers an update of the VMWare Tools software running on the guest OS of a virtual server
-		/// </summary>
-		/// <param name="serverId">
-		/// The server id
-		/// </param>
-		/// <returns>
-		/// Returns a status of the HTTP request
-		/// </returns>
-		public async Task<Status> ServerUpdateVMwareTools(string serverId)
-		{
-			return await WebApi.GetAsync<Status>(ApiUris.UpdateServerVMwareTools(WebApi.OrganizationId, serverId));
-		}
-
-
-		/// <summary>
-		/// Initiates a clone of a server to create a Customer Image
-		/// </summary>
-		/// <param name="serverId">
-		/// The server id.
-		/// </param>
-		/// <param name="imageName">
-		/// The customer image name.
-		/// </param>
-		/// <param name="imageDesc">
-		/// The customer image description.
-		/// </param>
-		/// <returns>
-		/// The <see cref="Task"/>.
-		/// </returns>
-		public async Task<Status> ServerCloneToCustomerImage(string serverId, string imageName, string imageDesc)
-		{
-			return
-				await
-				WebApi.GetAsync<Status>(ApiUris.CloneServerToCustomerImage(WebApi.OrganizationId, serverId, imageName, imageDesc));
-		}
-
-		/// <summary>
-		/// Change server disk size
-		/// </summary>
-		/// <param name="serverId">
-		/// The server id
-		/// </param>
-		/// <param name="diskId">
-		/// The disk id
-		/// </param>
-		/// <param name="sizeInGb">
-		/// New size of the disk
-		/// </param>
-		/// <returns>
-		/// The <see cref="Task"/>.
-		/// </returns>
-		public async Task<Status> ChangeServerDiskSize(string serverId, string diskId, string sizeInGb)
-		{
-			return await
-				WebApi.PostAsync<ChangeDiskSize, Status>(
-					ApiUris.ChangeServerDiskSize(WebApi.OrganizationId, serverId, diskId), 
-					new ChangeDiskSize
-					{
-						newSizeGb = sizeInGb
-					}
-					);
-		}
-
-
-		/// <summary>
-		/// Change server disk speed
-		/// </summary>
-		/// <param name="serverId">
-		/// The server id
-		/// </param>
-		/// <param name="diskId">
-		/// The disk id
-		/// </param>
-		/// <param name="speedId">
-		/// New size of the disk
-		/// </param>
-		/// <returns>
-		/// The <see cref="Task"/>.
-		/// </returns>
-		public async Task<Status> ChangeServerDiskSpeed(string serverId, string diskId, string speedId)
-		{
-			return await
-				WebApi.PostAsync<ChangeDiskSpeed, Status>(
-					ApiUris.ChangeServerDiskSpeed(WebApi.OrganizationId, serverId, diskId), 
-					new ChangeDiskSpeed
-					{
-						speed = speedId
-					}
-					);
-		}
-
-		/// <summary>
-		/// Add disk to existing server
-		/// </summary>
-		/// <param name="serverId">
-		/// The server id
-		/// </param>
-		/// <param name="size">
-		/// Size in GB
-		/// </param>
-		/// <param name="speedId">
-		/// The speed id
-		/// </param>
-		/// <returns>
-		/// Returns a status of the HTTP request
-		/// </returns>
-		public async Task<Status> AddServerDisk(string serverId, string size, string speedId)
-		{
-			return await
-				WebApi.GetAsync<Status>(
-					ApiUris.AddServerDisk(WebApi.OrganizationId, serverId, size, speedId));
-		}
-
-		/// <summary>
-		/// Remove disk from existing server
-		/// </summary>
-		/// <param name="serverId">
-		/// The server id
-		/// </param>
-		/// <param name="diskId">
-		/// The disk id
-		/// </param>
-		/// <returns>
-		/// The <see cref="Task"/>.
-		/// </returns>
-		public async Task<Status> RemoveServerDisk(string serverId, string diskId)
-		{
-			return await
-				WebApi.GetAsync<Status>(
-					ApiUris.RemoveServerDisk(WebApi.OrganizationId, serverId, diskId));
-		}
-
-
-		/// <summary>
-		/// Deletes the server.
-		///     <remarks>
-		/// The server must be turned off and with backup disabled
-		/// </remarks>
-		/// </summary>
-		/// <param name="serverId">
-		/// The server id
-		/// </param>
-		/// <returns>
-		/// Returns a status of the HTTP request
-		/// </returns>
-		public async Task<Status> ServerDelete(string serverId)
-		{
-			return await WebApi.GetAsync<Status>(ApiUris.DeleteServer(WebApi.OrganizationId, serverId));
-		}
-
-		/// <summary>
-		/// Gets all the deployed servers.
-		/// </summary>
-		/// <returns>
-		/// A list of deployed servers
-		/// </returns>
-		public async Task<IEnumerable<ServerWithBackupType>> GetDeployedServers()
-		{
-			ServersWithBackup servers =
-				await WebApi.GetAsync<ServersWithBackup>(ApiUris.DeployedServers(WebApi.OrganizationId, null, null, null, null));
-			return servers.server;
-		}
-
-		/// <summary>
-		/// Gets filtered list of the deployed servers.
-		/// </summary>
-		/// <param name="serverId">
-		/// The server Id.
-		/// </param>
-		/// <param name="name">
-		/// The name.
-		/// </param>
-		/// <param name="networkId">
-		/// The network Id.
-		/// </param>
-		/// <param name="location">
-		/// The location.
-		/// </param>
-		/// <returns>
-		/// A list of deployed servers
-		/// </returns>
-		public async Task<IEnumerable<ServerWithBackupType>> GetDeployedServers(
-			string serverId,
-			string name,
-			string networkId,
-			string location)
-		{
-			ServersWithBackup servers =
-				await
-				WebApi.GetAsync<ServersWithBackup>(
-					ApiUris.DeployedServers(WebApi.OrganizationId, serverId, name, networkId, location));
-			return servers.server;
-		}
-        /// <summary>
-        /// Gets a deployed server by Id.
-        /// </summary>
-        /// <param name="serverId">The server Id.</param>
-        /// <returns>A list of deployed servers</returns>
-	    public async Task<ServerWithBackupType> GetDeployedServerById(string serverId)
-	    {
-            var servers = await GetDeployedServers(serverId, string.Empty, string.Empty, string.Empty);
-            if (servers.Any())
-                return servers.SingleOrDefault();
-            else
-                return null;
-	    }
-
-
-        /// <summary>
-        /// Gets filtered list of the deployed servers by name
-        /// </summary>
-        /// <param name="name">The server name.</param>
-        /// <returns>A list of deployed servers</returns>
-        public async Task<IEnumerable<ServerWithBackupType>> GetDeployedServersByName(string name)
-        {
-            return await GetDeployedServers(string.Empty, name, string.Empty, string.Empty);       
-        }
-
-        /// <summary>
-        /// Gets filtered list of the deployed servers by network id
-        /// </summary>
-        /// <param name="networkid">The network id.</param>
-        /// <returns>A list of deployed servers</returns>
-        public async Task<IEnumerable<ServerWithBackupType>> GetDeployedServersByNetworkId(string networkid)
-        {
-            return await GetDeployedServers(string.Empty, string.Empty, networkid, string.Empty);
-        }
-
-        /// <summary>
-        /// Gets filtered list of the deployed servers by location
-        /// </summary>
-        /// <param name="location">The location code</param>
-        /// <returns>A list of deployed servers</returns>
-        public async Task<IEnumerable<ServerWithBackupType>> GetDeployedServersByLocation(string location)
-        {
-            return await GetDeployedServers(string.Empty, string.Empty, string.Empty, location);
-        }
-
-
-	    /// <summary>
-		/// Creates a new Server Anti-Affinity Rule between two servers on the same Cloud network.
-		/// </summary>
-		/// <param name="serverId1">
-		/// The serverId for the 1st server
-		/// </param>
-		/// <param name="serverId2">
-		/// The serverId for the 2'nd server
-		/// </param>
-		/// <returns>
-		/// The <see cref="Task"/>.
-		/// </returns>
-		[Obsolete]
-		public async Task<Status> CreateServerAntiAffinityRule(string serverId1, string serverId2)
-		{
-			return await
-				WebApi.PostAsync<NewAntiAffinityRule, Status>(
-					ApiUris.CreateAntiAffinityRule(WebApi.OrganizationId), 
-					new NewAntiAffinityRule
-					{
-						serverId = new[] {serverId1, serverId2}
-					}
-					);
-		}
-
-
-		/// <summary>
-		/// List all Server Anti-Affinity Rules
-		/// </summary>
-		/// <param name="ruleId">
-		/// Filter by rule Id
-		/// </param>
-		/// <param name="location">
-		/// Filter by location
-		/// </param>
-		/// <param name="networkId">
-		/// Filter by network Id
-		/// </param>
-		/// <returns>
-		/// The <see cref="Task"/>.
-		/// </returns>
-		public async Task<IEnumerable<AntiAffinityRuleType>> GetServerAntiAffinityRules(
-			string ruleId,
-			string location,
-			string networkId)
-		{
-			AntiAffinityRules rules =
-				await
-				WebApi.GetAsync<AntiAffinityRules>(ApiUris.GetAntiAffinityRule(WebApi.OrganizationId, ruleId, location, networkId));
-			return rules.antiAffinityRule;
-		}
-
-		/// <summary>
-		/// Remove a server Anti-Affinity Rule between two servers on the same Cloud network.
-		/// </summary>
-		/// <param name="ruleId">
-		/// The ruleId
-		/// </param>
-		/// <returns>
-		/// The <see cref="Task"/>.
-		/// </returns>
-		public async Task<Status> RemoveServerAntiAffinityRule(string ruleId)
-		{
-			return await WebApi.GetAsync<Status>(ApiUris.RemoveAntiAffinityRule(WebApi.OrganizationId, ruleId));
-		}
+		}			      
 
 		/// <summary>
 		/// Since MultiGeo call is only valid for the home geo, use this method to discover what is your home geo and the
@@ -1358,5 +590,756 @@ namespace DD.CBU.Compute.Api.Client
 		}			
 
 		#endregion // Public methods
+
+		#region Protected Methods
+
+		/// <summary>
+		/// Dispose of resources being used by the CaaS API client.
+		/// </summary>
+		/// <param name="disposing">
+		/// Explicit disposal?
+		/// </param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing)
+			{
+				if (WebApi != null)
+				{
+					WebApi.Dispose();
+					WebApi = null;
+				}
+
+				if (_httpClientHandler != null)
+				{
+					_httpClientHandler.Dispose();
+					_httpClientHandler = null;
+				}
+			}
+		}
+		
+		#endregion
+
+		#region Obsolete Methods
+		/// <summary>
+		/// Get customer server images
+		/// </summary>
+		/// <param name="imageId">
+		/// The image Id.
+		/// </param>
+		/// <param name="name">
+		/// The name filter
+		/// </param>
+		/// <param name="location">
+		/// The location filter
+		/// </param>
+		/// <param name="operatingSystemId">
+		/// The OS id
+		/// </param>
+		/// <param name="operatingSystemFamily">
+		/// The OS family
+		/// </param>
+		/// <returns>
+		/// The <see cref="Task"/>.
+		/// </returns>
+		[Obsolete("Use IComputeApi.ServerLegacy.ServerImage instead")]
+		public async Task<IReadOnlyList<ImagesWithDiskSpeedImage>> GetCustomerServerImages(
+			string imageId,
+			string name,
+			string location,
+			string operatingSystemId,
+			string operatingSystemFamily)
+		{
+			return
+				await
+				ServerLegacy.ServerImage.GetCustomerServerImages(imageId, name, location, operatingSystemId, operatingSystemFamily);
+		}  
+
+		/// <summary>
+		/// Get a list of all system-defined images (with software labels) deployed in the specified data centre.
+		/// </summary>
+		/// <param name="locationName">
+		/// The short name of the location in which the data centre is located.
+		/// </param>
+		/// <returns>
+		/// A read-only list <see cref="DeployedImageWithSoftwareLabelsType"/>, sorted by UTC creation date / time,
+		///     representing the images.
+		/// </returns>
+		[Obsolete]
+		public async Task<IReadOnlyList<DeployedImageWithSoftwareLabelsType>> GetImages(string locationName)
+		{
+			if (string.IsNullOrWhiteSpace(locationName))
+				throw new ArgumentException(
+					"Argument cannot be null, empty, or composed entirely of whitespace: 'locationName'.",
+					"locationName");
+
+			DeployedImagesWithSoftwareLabels imagesWithSoftwareLabels =
+				await
+					WebApi.GetAsync<DeployedImagesWithSoftwareLabels>(ApiUris.ImagesWithSoftwareLabels(locationName));
+
+			return imagesWithSoftwareLabels.DeployedImageWithSoftwareLabels;
+		}
+
+		/// <summary>
+		/// This function lists the available Customer Images at a particular Location for the provided org-id.
+		///     The response adds to the deprecated List Deployed Customer Images in Location function with
+		///     the addition of zero to many, optional softwareLabel elements, listing the Priced Software packages installed on
+		///     the Customer Image.
+		/// </summary>
+		/// <param name="networkLocation">
+		/// The network location
+		/// </param>
+		/// <returns>
+		/// A list of deployed customer images with software labels in location
+		/// </returns>
+		[Obsolete]
+		public async Task<IEnumerable<DeployedImageWithSoftwareLabelsType>> GetCustomerServerImages(string networkLocation)
+		{
+			// Contract.Requires(!string.IsNullOrWhiteSpace(networkLocation), "Network location must not be empty or null");
+			DeployedImagesWithSoftwareLabels images =
+				await
+					WebApi.GetAsync<DeployedImagesWithSoftwareLabels>(
+						ApiUris.CustomerImagesWithSoftwareLabels(WebApi.OrganizationId, networkLocation));
+			return images.DeployedImageWithSoftwareLabels;
+		}
+
+
+		/// <summary>
+		/// Asynchronously get a list of all CaaS data centres that are available for use by the specified organisation.
+		/// </summary>
+		/// <returns>
+		/// A read-only list of <see cref="IDatacenterDetail"/>s representing the data centre information.
+		/// </returns>
+		[Obsolete("This method was replaced by GetListOfDataCentersWithMaintenanceStatuses based on CaaS API!")]
+		public async Task<IReadOnlyList<DatacenterWithDiskSpeedDetails>> GetAvailableDataCenters()
+		{
+			CheckDisposed();
+
+			DatacentersWithDiskSpeedDetails datacentersWithDiskSpeedDetails =
+				await WebApi.GetAsync<DatacentersWithDiskSpeedDetails>(
+					ApiUris.DatacentersWithDiskSpeedDetails(
+						WebApi.OrganizationId
+						)
+					);
+
+			return datacentersWithDiskSpeedDetails.datacenter;
+		}
+		/// <summary>
+		/// Remove customer server images
+		/// </summary>
+		/// <param name="imageId">
+		/// The ImageId
+		/// </param>
+		/// <returns>
+		/// The <see cref="Task"/>.RemoveCustomerServerImage
+		/// </returns>
+		[Obsolete("Use IComputeApiClient.ServerLegacy.ServerImage instead")]
+		public async Task<Status> RemoveCustomerServerImage(string imageId)
+		{
+			return await ServerLegacy.ServerImage.RemoveCustomerServerImage(imageId);
+		}
+
+		/// <summary>
+		/// The deploy server image task.
+		/// </summary>
+		/// <param name="name">
+		/// The name.
+		/// </param>
+		/// <param name="description">
+		/// The description.
+		/// </param>
+		/// <param name="networkId">
+		/// The network id.
+		/// </param>
+		/// <param name="imageId">
+		/// The image id.
+		/// </param>
+		/// <param name="adminPassword">
+		/// The admin password.
+		/// </param>
+		/// <param name="isStarted">
+		/// The is started.
+		/// </param>
+		/// <returns>
+		/// The <see cref="Task"/>.
+		/// </returns>
+		[Obsolete("This method is deprecated, please use DeployServerWithDiskSpeedImageTask instead.")]
+		public async Task<Status> DeployServerImageTask(
+			string name,
+			string description,
+			string networkId,
+			string imageId,
+			string adminPassword,
+			bool isStarted)
+		{
+			// Contract.Requires<ArgumentException>(!string.IsNullOrEmpty(name), "name argument must not be empty");
+			// Contract.Requires<ArgumentException>(!string.IsNullOrWhiteSpace(networkId), "network id must not be empty");
+			// Contract.Requires<ArgumentException>(!string.IsNullOrWhiteSpace(imageId), "Image id must not be empty");
+			// Contract.Requires<ArgumentException>(!string.IsNullOrWhiteSpace(adminPassword), "administrator password cannot be null or empty");
+			return
+				await
+					WebApi.PostAsync<NewServerToDeploy, Status>(
+						ApiUris.DeployServer(WebApi.OrganizationId),
+						new NewServerToDeploy
+						{
+							name = name,
+							description = description,
+							vlanResourcePath =
+								string.Format("/oec/{0}/network/{1}", WebApi.OrganizationId, networkId),
+							imageResourcePath = string.Format("/oec/base/image/{0}", imageId),
+							administratorPassword = adminPassword,
+							isStarted = isStarted
+						});
+		}
+
+		/// <summary>
+		/// The deploy server with disk speed image task.
+		/// </summary>
+		/// <param name="name">
+		/// The name.
+		/// </param>
+		/// <param name="description">
+		/// The description.
+		/// </param>
+		/// <param name="networkId">
+		/// The network id.
+		/// </param>
+		/// <param name="privateIp">
+		/// The private ip.
+		/// </param>
+		/// <param name="imageId">
+		/// The image id.
+		/// </param>
+		/// <param name="adminPassword">
+		/// The admin password.
+		/// </param>
+		/// <param name="start">
+		/// The start.
+		/// </param>
+		/// <returns>
+		/// The <see cref="Task"/>.
+		/// </returns>
+		[Obsolete("Use IComputeApi.ServerLegacy.Server instead")]
+		public async Task<Status> DeployServerWithDiskSpeedImageTask(
+			string name,
+			string description,
+			string networkId,
+			string privateIp,
+			string imageId,
+			string adminPassword,
+			bool start)
+		{
+			return
+				await
+				ServerLegacy.Server.DeployServerWithDiskSpeedImageTask(
+					name,
+					description,
+					networkId,
+					privateIp,
+					imageId,
+					adminPassword,
+					start);
+		}
+
+		/// <summary>
+		/// The deploy server with disk speed image task.
+		/// </summary>
+		/// <param name="name">
+		/// The name.
+		/// </param>
+		/// <param name="description">
+		/// The description.
+		/// </param>
+		/// <param name="networkId">
+		/// The network id.
+		/// </param>
+		/// <param name="privateIp">
+		/// The private ip.
+		/// </param>
+		/// <param name="imageId">
+		/// The image id.
+		/// </param>
+		/// <param name="adminPassword">
+		/// The admin password.
+		/// </param>
+		/// <param name="start">
+		/// The start.
+		/// </param>
+		/// <param name="disk">
+		/// The disk.
+		/// </param>
+		/// <returns>
+		/// The <see cref="Task"/>.
+		/// </returns>
+		[Obsolete("Use IComputeApi.ServerLegacy.Server instead")]
+		public async Task<Status> DeployServerWithDiskSpeedImageTask(
+			string name,
+			string description,
+			string networkId,
+			string privateIp,
+			string imageId,
+			string adminPassword,
+			bool start,
+			Disk[] disk)
+		{
+			return
+				await
+				ServerLegacy.Server.DeployServerWithDiskSpeedImageTask(
+					name,
+					description,
+					networkId,
+					privateIp,
+					imageId,
+					adminPassword,
+					start,
+					disk);
+		}
+
+
+		/// <summary>
+		/// Modify server server settings.
+		/// </summary>
+		/// <param name="serverId">
+		/// The server id.
+		/// </param>
+		/// <param name="name">
+		/// The server new name on CaaS. This parameter does not change the machine/host name.
+		/// </param>
+		/// <param name="description">
+		/// The new description for the server.
+		/// </param>
+		/// <param name="memory">
+		/// Memory (in MB). Value must be represent a GB integer (e.g. 1024,. 2048, 3072, 4096, etc.)
+		/// </param>
+		/// <param name="cpucount">
+		/// Number of virtual CPU’s (e.g. 1, 2, 4 etc.)
+		/// </param>
+		/// <param name="privateIp">
+		/// The new privateIp of the server.
+		/// </param>
+		/// <returns>
+		/// The <see cref="Task"/>.
+		/// </returns>
+		[Obsolete("Use IComputeApi.ServerLegacy.Server instead")]
+		public async Task<Status> ModifyServer(
+			string serverId,
+			string name,
+			string description,
+			int memory,
+			int cpucount,
+			string privateIp)
+		{
+			return await ServerLegacy.Server.ModifyServer(serverId, name, description, memory, cpucount, privateIp);
+		}
+
+		/// <summary>
+		/// Powers on the server.
+		/// </summary>
+		/// <param name="serverId">
+		/// The server id
+		/// </param>
+		/// <returns>
+		/// Returns a status of the HTTP request
+		/// </returns>
+		[Obsolete("Use IComputeApi.ServerLegacy.Server instead")]
+		public async Task<Status> ServerPowerOn(string serverId)
+		{
+			return await ServerLegacy.Server.ServerPowerOn(serverId);
+		}
+
+		/// <summary>
+		/// Powers off the server
+		/// </summary>
+		/// <param name="serverId">
+		/// The server id
+		/// </param>
+		/// <returns>
+		/// Returns a status of the HTTP request
+		/// </returns>
+		[Obsolete("Use IComputeApi.ServerLegacy.Server instead")]
+		public async Task<Status> ServerPowerOff(string serverId)
+		{
+			return await ServerLegacy.Server.ServerPowerOff(serverId);
+		}
+
+		/// <summary>
+		/// Graceful reset of a server
+		/// </summary>
+		/// <param name="serverId">
+		/// The server id
+		/// </param>
+		/// <returns>
+		/// Returns a status of the HTTP request
+		/// </returns>
+		[Obsolete("Use IComputeApi.ServerLegacy.Server instead")]
+		public async Task<Status> ServerRestart(string serverId)
+		{
+			return await ServerLegacy.Server.ServerRestart(serverId);
+		}
+
+		/// <summary>	Power cycles an existing deployed server. This is the equivalent of pulling and replacing the power cord for
+		/// a physical server. Requires your organization ID and the ID of the target server.. </summary>
+		/// <param name="serverId">	The server id. </param>
+		/// <returns>	Returns a status of the HTTP request </returns>
+		[Obsolete("Use IComputeApi.ServerLegacy.Server instead")]
+		public async Task<Status> ServerReset(string serverId)
+		{
+			return await ServerLegacy.Server.ServerReset(serverId);
+		}
+
+		/// <summary>
+		/// "Graceful" shutdown of the server.
+		/// </summary>
+		/// <param name="serverId">
+		/// The server id
+		/// </param>
+		/// <returns>
+		/// Returns a status of the HTTP request
+		/// </returns>
+		[Obsolete("Use IComputeApi.ServerLegacy.Server instead")]
+		public async Task<Status> ServerShutdown(string serverId)
+		{
+			return await ServerLegacy.Server.ServerShutdown(serverId);
+		}
+
+
+		/// <summary>
+		/// Triggers an update of the VMWare Tools software running on the guest OS of a virtual server
+		/// </summary>
+		/// <param name="serverId">
+		/// The server id
+		/// </param>
+		/// <returns>
+		/// Returns a status of the HTTP request
+		/// </returns>
+		[Obsolete("Use IComputeApi.ServerLegacy.Server instead")]
+		public async Task<Status> ServerUpdateVMwareTools(string serverId)
+		{
+			return await ServerLegacy.Server.ServerUpdateVMwareTools(serverId);
+		}
+
+
+		/// <summary>
+		/// Initiates a clone of a server to create a Customer Image
+		/// </summary>
+		/// <param name="serverId">
+		/// The server id.
+		/// </param>
+		/// <param name="imageName">
+		/// The customer image name.
+		/// </param>
+		/// <param name="imageDesc">
+		/// The customer image description.
+		/// </param>
+		/// <returns>
+		/// The <see cref="Task"/>.
+		/// </returns>
+		[Obsolete("Use IComputeApi.ServerLegacy.Server instead")]
+		public async Task<Status> ServerCloneToCustomerImage(string serverId, string imageName, string imageDesc)
+		{
+			return await ServerLegacy.Server.ServerCloneToCustomerImage(serverId, imageName, imageDesc);
+		}
+
+		/// <summary>
+		/// Change server disk size
+		/// </summary>
+		/// <param name="serverId">
+		/// The server id
+		/// </param>
+		/// <param name="diskId">
+		/// The disk id
+		/// </param>
+		/// <param name="sizeInGb">
+		/// New size of the disk
+		/// </param>
+		/// <returns>
+		/// The <see cref="Task"/>.
+		/// </returns>
+		[Obsolete("Use IComputeApi.ServerLegacy.Server instead")]
+		public async Task<Status> ChangeServerDiskSize(string serverId, string diskId, string sizeInGb)
+		{
+			return await ServerLegacy.Server.ChangeServerDiskSize(serverId, diskId, sizeInGb);
+		}
+
+
+		/// <summary>
+		/// Change server disk speed
+		/// </summary>
+		/// <param name="serverId">
+		/// The server id
+		/// </param>
+		/// <param name="diskId">
+		/// The disk id
+		/// </param>
+		/// <param name="speedId">
+		/// New size of the disk
+		/// </param>
+		/// <returns>
+		/// The <see cref="Task"/>.
+		/// </returns>
+		[Obsolete("Use IComputeApi.ServerLegacy.Server instead")]
+		public async Task<Status> ChangeServerDiskSpeed(string serverId, string diskId, string speedId)
+		{
+			return await ServerLegacy.Server.ChangeServerDiskSpeed(serverId, diskId, speedId);
+		}
+
+		/// <summary>
+		/// Add disk to existing server
+		/// </summary>
+		/// <param name="serverId">
+		/// The server id
+		/// </param>
+		/// <param name="size">
+		/// Size in GB
+		/// </param>
+		/// <param name="speedId">
+		/// The speed id
+		/// </param>
+		/// <returns>
+		/// Returns a status of the HTTP request
+		/// </returns>
+		[Obsolete("Use IComputeApi.ServerLegacy.Server instead")]
+		public async Task<Status> AddServerDisk(string serverId, string size, string speedId)
+		{
+			return await ServerLegacy.Server.AddServerDisk(serverId, size, speedId);
+		}
+
+		/// <summary>
+		/// Remove disk from existing server
+		/// </summary>
+		/// <param name="serverId">
+		/// The server id
+		/// </param>
+		/// <param name="diskId">
+		/// The disk id
+		/// </param>
+		/// <returns>
+		/// The <see cref="Task"/>.
+		/// </returns>
+		[Obsolete("Use IComputeApi.ServerLegacy.Server instead")]
+		public async Task<Status> RemoveServerDisk(string serverId, string diskId)
+		{
+			return await ServerLegacy.Server.RemoveServerDisk(serverId, diskId);
+		}
+
+
+		/// <summary>
+		/// Deletes the server.
+		///     <remarks>
+		/// The server must be turned off and with backup disabled
+		/// </remarks>
+		/// </summary>
+		/// <param name="serverId">
+		/// The server id
+		/// </param>
+		/// <returns>
+		/// Returns a status of the HTTP request
+		/// </returns>
+		[Obsolete("Use IComputeApi.ServerLegacy.Server instead")]
+		public async Task<Status> ServerDelete(string serverId)
+		{
+			return await ServerLegacy.Server.ServerDelete(serverId);
+		}
+
+		/// <summary>
+		/// Gets all the deployed servers.
+		/// </summary>
+		/// <returns>
+		/// A list of deployed servers
+		/// </returns>
+		[Obsolete("Use IComputeApi.ServerLegacy.Server instead")]
+		public async Task<IEnumerable<ServerWithBackupType>> GetDeployedServers()
+		{
+			return await ServerLegacy.Server.GetDeployedServers();
+		}
+
+		/// <summary>
+		/// Gets filtered list of the deployed servers.
+		/// </summary>
+		/// <param name="serverId">
+		/// The server Id.
+		/// </param>
+		/// <param name="name">
+		/// The name.
+		/// </param>
+		/// <param name="networkId">
+		/// The network Id.
+		/// </param>
+		/// <param name="location">
+		/// The location.
+		/// </param>
+		/// <returns>
+		/// A list of deployed servers
+		/// </returns>
+		[Obsolete("Use IComputeApi.ServerLegacy.Server instead")]
+		public async Task<IEnumerable<ServerWithBackupType>> GetDeployedServers(
+			string serverId,
+			string name,
+			string networkId,
+			string location)
+		{
+			return await ServerLegacy.Server.GetDeployedServers(serverId, name, networkId, location);
+		}
+
+		/// <summary>
+		/// Gets a deployed server by Id.
+		/// </summary>
+		/// <param name="serverId">The server Id.</param>
+		/// <returns>A list of deployed servers</returns>
+		[Obsolete("Use IComputeApi.ServerLegacy.Server instead")]
+		public async Task<ServerWithBackupType> GetDeployedServerById(string serverId)
+		{
+			var servers = await GetDeployedServers(serverId, string.Empty, string.Empty, string.Empty);
+			if (servers.Any())
+				return servers.SingleOrDefault();
+			else
+				return null;
+		}
+
+
+		/// <summary>
+		/// Gets filtered list of the deployed servers by name
+		/// </summary>
+		/// <param name="name">The server name.</param>
+		/// <returns>A list of deployed servers</returns>
+		[Obsolete("Use IComputeApi.ServerLegacy.Server instead")]
+		public async Task<IEnumerable<ServerWithBackupType>> GetDeployedServersByName(string name)
+		{
+			return await GetDeployedServers(string.Empty, name, string.Empty, string.Empty);
+		}
+
+		/// <summary>
+		/// Gets filtered list of the deployed servers by network id
+		/// </summary>
+		/// <param name="networkid">The network id.</param>
+		/// <returns>A list of deployed servers</returns>
+		[Obsolete("Use IComputeApi.ServerLegacy.Server instead")]
+		public async Task<IEnumerable<ServerWithBackupType>> GetDeployedServersByNetworkId(string networkid)
+		{
+			return await GetDeployedServers(string.Empty, string.Empty, networkid, string.Empty);
+		}
+
+		/// <summary>
+		/// Gets filtered list of the deployed servers by location
+		/// </summary>
+		/// <param name="location">The location code</param>
+		/// <returns>A list of deployed servers</returns>
+		[Obsolete("Use IComputeApi.ServerLegacy.Server instead")]
+		public async Task<IEnumerable<ServerWithBackupType>> GetDeployedServersByLocation(string location)
+		{
+			return await GetDeployedServers(string.Empty, string.Empty, string.Empty, location);
+		}
+
+		/// <summary>
+		/// Creates a new Server Anti-Affinity Rule between two servers on the same Cloud network.
+		/// </summary>
+		/// <param name="serverId1">
+		/// The serverId for the 1st server
+		/// </param>
+		/// <param name="serverId2">
+		/// The serverId for the 2'nd server
+		/// </param>
+		/// <returns>
+		/// The <see cref="Task"/>.
+		/// </returns>
+		[Obsolete("Use IComputeApi.ServerLegacy.Server instead")]
+		public async Task<Status> CreateServerAntiAffinityRule(string serverId1, string serverId2)
+		{
+			return await ServerLegacy.Server.CreateServerAntiAffinityRule(serverId1, serverId2);
+		}
+
+
+		/// <summary>
+		/// List all Server Anti-Affinity Rules
+		/// </summary>
+		/// <param name="ruleId">
+		/// Filter by rule Id
+		/// </param>
+		/// <param name="location">
+		/// Filter by location
+		/// </param>
+		/// <param name="networkId">
+		/// Filter by network Id
+		/// </param>
+		/// <returns>
+		/// The <see cref="Task"/>.
+		/// </returns>
+		[Obsolete("Use IComputeApi.ServerLegacy.Server instead")]
+		public async Task<IEnumerable<AntiAffinityRuleType>> GetServerAntiAffinityRules(
+			string ruleId,
+			string location,
+			string networkId)
+		{
+			return await ServerLegacy.Server.GetServerAntiAffinityRules(ruleId, location, networkId);
+		}
+
+		/// <summary>
+		/// Remove a server Anti-Affinity Rule between two servers on the same Cloud network.
+		/// </summary>
+		/// <param name="ruleId">
+		/// The ruleId
+		/// </param>
+		/// <returns>
+		/// The <see cref="Task"/>.
+		/// </returns>
+		[Obsolete("Use IComputeApi.ServerLegacy.Server instead")]
+		public async Task<Status> RemoveServerAntiAffinityRule(string ruleId)
+		{
+			return await ServerLegacy.Server.RemoveServerAntiAffinityRule(ruleId);
+		}
+
+		/// <summary>
+		/// Get OS server images, paramenters are just for filtering. Use String.Empty on the parameter where filtering is not
+		///     required.
+		/// </summary>
+		/// <param name="imageId">
+		/// The image Id.
+		/// </param>
+		/// <param name="name">
+		/// The name filter
+		/// </param>
+		/// <param name="location">
+		/// The location filter
+		/// </param>
+		/// <param name="operatingSystemId">
+		/// The OS id
+		/// </param>
+		/// <param name="operatingSystemFamily">
+		/// The OS family
+		/// </param>
+		/// <returns>
+		/// The <see cref="Task"/>.
+		/// </returns>
+		[Obsolete("Use IComputeApi.ServerLegacy.ServerImage instead")]
+		public async Task<IReadOnlyList<ImagesWithDiskSpeedImage>> GetImages(
+			string imageId,
+			string name,
+			string location,
+			string operatingSystemId,
+			string operatingSystemFamily)
+		{
+			return await ServerLegacy.ServerImage.GetImages(imageId, name, location, operatingSystemId, operatingSystemFamily);
+		}
+
+		/// <summary>
+		/// Asynchronously log into the CaaS API.
+		/// </summary>
+		/// <param name="accountCredentials">
+		/// The CaaS account credentials used to authenticate against the CaaS API.
+		/// </param>
+		/// <returns>
+		/// An <see cref="IAccount"/> implementation representing the CaaS account that the client is logged into.
+		/// </returns>
+		[Obsolete("Use GetComputeApiClient Factory passing accountCredentials and Login() method")]
+		public async Task<IAccount> LoginAsync(ICredentials accountCredentials)
+		{
+			IAccount mcp1Account = await WebApi.LoginAsync();
+			if (_httpClientHandler != null)
+			{
+				_httpClientHandler.Credentials = accountCredentials;
+				_httpClientHandler.PreAuthenticate = true;
+			}
+			return mcp1Account;
+		}
+		#endregion
 	}
 }

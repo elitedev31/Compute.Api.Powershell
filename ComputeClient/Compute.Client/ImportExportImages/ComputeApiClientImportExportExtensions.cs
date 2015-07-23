@@ -1,22 +1,12 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ComputeApiClientImportExportExtensions.cs" company="">
-//   
-// </copyright>
-// <summary>
-//   Extension methods for the "import and export of customer images" section of the CaaS API.
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
-
-
-
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using DD.CBU.Compute.Api.Client.Interfaces;
-using DD.CBU.Compute.Api.Contracts.Image;
-using DD.CBU.Compute.Api.Contracts.Server;
-
-namespace DD.CBU.Compute.Api.Client.ImportExportImages
+﻿namespace DD.CBU.Compute.Api.Client.ImportExportImages
 {
+	using System;
+	using System.Collections.Generic;
+	using System.Threading.Tasks;
+	using DD.CBU.Compute.Api.Client.Interfaces;
+	using DD.CBU.Compute.Api.Contracts.Image;
+	using DD.CBU.Compute.Api.Contracts.Server;
+
 	/// <summary>
 	/// Extension methods for the "import and export of customer images" section of the CaaS API.
 	/// </summary>
@@ -32,13 +22,10 @@ namespace DD.CBU.Compute.Api.Client.ImportExportImages
 		/// <returns>
 		/// The OVF Packages
 		/// </returns>
-		public static async Task<OvfPackages> GetOvfPackages(
-			this IComputeApiClient client)
+		[Obsolete("Use IComputeApiClient.ImportExportCustomerImage instead")]
+		public static async Task<OvfPackages> GetOvfPackages(this IComputeApiClient client)
 		{
-			return
-				await
-					client.WebApi.GetAsync<OvfPackages>(
-						ApiUris.GetOvfPackages(client.WebApi.OrganizationId));
+			return await client.ImportExportCustomerImage.GetOvfPackages();
 		}
 
 		/// <summary>
@@ -50,14 +37,11 @@ namespace DD.CBU.Compute.Api.Client.ImportExportImages
 		/// <returns>
 		/// The customer image imports currently in progress
 		/// </returns>
+		[Obsolete("Use IComputeApiClient.ImportExportCustomerImage instead")]
 		public static async Task<IEnumerable<ServerImageWithStateType>> GetCustomerImagesImports(
 			this IComputeApiClient client)
 		{
-			ServerImagesWithState imports =
-				await
-					client.WebApi.GetAsync<ServerImagesWithState>(
-						ApiUris.GetCustomerImageImports(client.WebApi.OrganizationId));
-			return imports.serverImageWithState;
+			return await client.ImportExportCustomerImage.GetCustomerImagesImports();
 		}
 
 		/// <summary>
@@ -69,14 +53,10 @@ namespace DD.CBU.Compute.Api.Client.ImportExportImages
 		/// <returns>
 		/// The customer image exports currently in progress
 		/// </returns>
-		public static async Task<IEnumerable<ImageExportType>> GetCustomerImagesExports(
-			this IComputeApiClient client)
+		[Obsolete("Use IComputeApiClient.ImportExportCustomerImage instead")]
+		public static async Task<IEnumerable<ImageExportType>> GetCustomerImagesExports(this IComputeApiClient client)
 		{
-			ImageExports result =
-				await
-					client.WebApi.GetAsync<ImageExports>(
-						ApiUris.GetCustomerImageExports(client.WebApi.OrganizationId));
-			return result.imageExport;
+			return await client.ImportExportCustomerImage.GetCustomerImagesExports();
 		}
 
 		/// <summary>
@@ -91,15 +71,12 @@ namespace DD.CBU.Compute.Api.Client.ImportExportImages
 		/// <returns>
 		/// The customer image exports
 		/// </returns>
+		[Obsolete("Use IComputeApiClient.ImportExportCustomerImage instead")]
 		public static async Task<IEnumerable<ImageExportRecord>> GetCustomerImagesExportHistory(
 			this IComputeApiClient client, 
 			int count = 20)
 		{
-			ImageExportHistory result =
-				await
-					client.WebApi.GetAsync<ImageExportHistory>(
-						ApiUris.GetCustomerImageExportHistory(client.WebApi.OrganizationId, count));
-			return result.imageExportRecord;
+			return await client.ImportExportCustomerImage.GetCustomerImagesExportHistory(count);
 		}
 
 		/// <summary>
@@ -131,24 +108,21 @@ namespace DD.CBU.Compute.Api.Client.ImportExportImages
 		/// <returns>
 		/// Returns the ServerImageWithState object
 		/// </returns>
+		[Obsolete("Use IComputeApiClient.ImportExportCustomerImage instead")]
 		public static async Task<ServerImageWithStateType> ImportCustomerImage(
-			this IComputeApiClient client, 
-			string customerImageName, 
-			string ovfPackageName, 
-			string networkLocation, 
+			this IComputeApiClient client,
+			string customerImageName,
+			string ovfPackageName,
+			string networkLocation,
 			string description)
 		{
 			return
 				await
-					client.WebApi.PostAsync<NewImageImport, ServerImageWithStateType>(
-						ApiUris.ImportCustomerImage(client.WebApi.OrganizationId), 
-						new NewImageImport
-						{
-							name = customerImageName, 
-							location = networkLocation, 
-							ovfPackage = ovfPackageName, 
-							description = description
-						});
+				client.ImportExportCustomerImage.ImportCustomerImage(
+					customerImageName,
+					ovfPackageName,
+					networkLocation,
+					description);
 		}
 
 		/// <summary>
@@ -168,21 +142,13 @@ namespace DD.CBU.Compute.Api.Client.ImportExportImages
 		/// <returns>
 		/// The image export record, with the target names.
 		/// </returns>
+		[Obsolete("Use IComputeApiClient.ImportExportCustomerImage instead")]
 		public static async Task<ImageExportType> ExportCustomerImage(
-			this IComputeApiClient client, 
-			ImagesWithDiskSpeedImage image, 
+			this IComputeApiClient client,
+			ImagesWithDiskSpeedImage image,
 			string ovfPrefix)
 		{
-			return
-				await
-					client.WebApi.PostAsync<NewImageExport, ImageExportType>(
-						ApiUris.ExportCustomerImage(client.WebApi.OrganizationId), 
-						new NewImageExport
-						{
-							ovfPackagePrefix = ovfPrefix, 
-							imageId = image.id
-						}
-						);
+			return await client.ImportExportCustomerImage.ExportCustomerImage(image, ovfPrefix);
 		}
 	}
 }

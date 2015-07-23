@@ -3,8 +3,10 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 	using System;
 	using System.Threading.Tasks;
 
+	using DD.CBU.Compute.Api.Client.Interfaces.ImportExportImages;
 	using DD.CBU.Compute.Api.Client.Interfaces.Network;
 	using DD.CBU.Compute.Api.Client.Interfaces.Network20;
+	using DD.CBU.Compute.Api.Client.Interfaces.Server;
 	using DD.CBU.Compute.Api.Contracts.Directory;
 
 	/// <summary>
@@ -30,5 +32,15 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 
 		/// <summary>	Gets the networking legacy 1.0 methods </summary>
 		INetworkingLegacyAccessor NetworkingLegacy { get; }
+
+		/// <summary>
+		/// Gets the server legacy.
+		/// </summary>
+		IServerLegacyAccessor ServerLegacy { get; }
+
+		/// <summary>
+		/// Gets the import and export customer images accessor
+		/// </summary>
+		IImportExportCustomerImageAccessor ImportExportCustomerImage { get; }
     }
 }

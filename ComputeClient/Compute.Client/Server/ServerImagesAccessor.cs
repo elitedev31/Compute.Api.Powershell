@@ -78,6 +78,53 @@
 		}
 
 		/// <summary>
+		/// The get customer server images.
+		/// </summary>
+		/// <param name="imageId">
+		/// The image id.
+		/// </param>
+		/// <param name="name">
+		/// The name.
+		/// </param>
+		/// <param name="location">
+		/// The location.
+		/// </param>
+		/// <param name="operatingSystemId">
+		/// The operating system id.
+		/// </param>
+		/// <param name="operatingSystemFamily">
+		/// The operating system family.
+		/// </param>
+		/// <returns>
+		/// The <see cref="Task"/>.
+		/// </returns>	
+		public async Task<IReadOnlyList<ImagesWithDiskSpeedImage>> GetCustomerServerImages(
+			string imageId,
+			string name,
+			string location,
+			string operatingSystemId,
+			string operatingSystemFamily)
+		{
+			ImagesWithDiskSpeed imagesWithDiskSpeed =
+				await
+				_apiClient.GetAsync<ImagesWithDiskSpeed>(
+					ApiUris.ImagesWithDiskSpeed(
+						_apiClient.OrganizationId,
+						ServerImageType.CUSTOMER,
+						imageId,
+						name,
+						location,
+						operatingSystemId,
+						operatingSystemFamily));
+
+			if (imagesWithDiskSpeed.image == null)
+				return null;
+
+			return imagesWithDiskSpeed.image;
+		}
+
+
+		/// <summary>
 		/// The remove customer server image.
 		/// </summary>
 		/// <param name="imageId">

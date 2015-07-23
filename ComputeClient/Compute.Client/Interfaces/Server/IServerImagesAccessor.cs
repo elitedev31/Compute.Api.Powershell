@@ -40,6 +40,34 @@
 		 string operatingSystemFamily);
 
 		/// <summary>
+		/// The get customer server images.
+		/// </summary>
+		/// <param name="imageId">
+		/// The image id.
+		/// </param>
+		/// <param name="name">
+		/// The name.
+		/// </param>
+		/// <param name="location">
+		/// The location.
+		/// </param>
+		/// <param name="operatingSystemId">
+		/// The operating system id.
+		/// </param>
+		/// <param name="operatingSystemFamily">
+		/// The operating system family.
+		/// </param>
+		/// <returns>
+		/// The <see cref="Task"/>.
+		/// </returns>
+		Task<IReadOnlyList<ImagesWithDiskSpeedImage>> GetCustomerServerImages(
+			string imageId,
+			string name,
+			string location,
+			string operatingSystemId,
+			string operatingSystemFamily);
+		
+		/// <summary>
 		/// The remove customer server image.
 		/// </summary>
 		/// <param name="imageid">

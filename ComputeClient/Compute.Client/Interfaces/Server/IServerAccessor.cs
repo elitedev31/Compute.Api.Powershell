@@ -8,7 +8,7 @@
 	using DD.CBU.Compute.Api.Contracts.Server;
 
 	/// <summary>
-	/// The i server.
+	/// The server Interface
 	/// </summary>
 	public interface IServerAccessor
 	{
