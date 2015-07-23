@@ -646,7 +646,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 		/// <returns>
 		/// The <see cref="Task"/>.
 		/// </returns>
-		[Obsolete]
+		[Obsolete("Use static method ComputeApiClient.GetListOfMultiGeographyRegionsFromHomeRegion instead")]
         Task<IEnumerable<Geo>> DiscoverHomeMultiGeo(KnownApiVendor vendor, ICredentials credential);
     }
 }

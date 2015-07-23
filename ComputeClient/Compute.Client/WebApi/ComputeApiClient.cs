@@ -149,9 +149,26 @@ namespace DD.CBU.Compute.Api.Client
 			InitializeProperties(httpClient);
 		}
 
+		/// <summary>
+		/// Initialises a new instance of the <see cref="ComputeApiClient"/> class.
+		/// </summary>
+		/// <param name="httpClient">
+		/// The http client.
+		/// </param>
+		/// <exception cref="ArgumentNullException">
+		/// </exception>
+		[Obsolete("Please use the GetComputeApiClient Factory methods")]
+		public ComputeApiClient(IHttpClient httpClient)	
+		{
+			if (httpClient == null)
+				throw new ArgumentNullException("httpClient", "httpClient cannot be null");
+
+			InitializeProperties(httpClient);
+		}
 		#endregion
 
 		#region Constructor
+
 		/// <summary>
 		/// Initialises a new instance of the <see cref="ComputeApiClient"/> class.
 		/// </summary>
@@ -162,9 +179,8 @@ namespace DD.CBU.Compute.Api.Client
 		/// The organization id.
 		/// </param>
 		/// <exception cref="ArgumentNullException">
-		/// </exception>
-		[Obsolete("Please use the GetComputeApiClient Factory methods")]
-		public ComputeApiClient(IHttpClient httpClient, Guid organizationId = default(Guid))
+		/// </exception>		
+		private ComputeApiClient(IHttpClient httpClient, Guid organizationId = default(Guid))
 		{
 			if (httpClient == null)
 				throw new ArgumentNullException("httpClient", "httpClient cannot be null");
@@ -356,32 +372,36 @@ namespace DD.CBU.Compute.Api.Client
 			return await WebApi.LoginAsync();
 		}
 
+		#endregion // Public methods
+
+		#region Static Utility Methods
+
 		/// <summary>
-		/// Since MultiGeo call is only valid for the home geo, use this method to discover what is your home geo and the
-		///     applicable regions for this user.
-		///     This is a multithreaded call that uses the underlying ComputeApiClient.GetListOfMultiGeographyRegions()
-		///     to discover the home geo and multi geo for this user to all API endpoints known for vendor.
-		///     Note: Most of the user vendor is DimensionData. Use this if you have to guess which vendor the user is under.
+		/// The discover home multi geo.
 		/// </summary>
 		/// <param name="vendor">
-		/// The vendor of the user
+		/// The vendor.
 		/// </param>
 		/// <param name="credential">
-		/// Credential of the user
+		/// The credential.
 		/// </param>
 		/// <returns>
 		/// The <see cref="Task"/>.
 		/// </returns>
-		public async Task<IEnumerable<Geo>> DiscoverHomeMultiGeo(KnownApiVendor vendor, ICredentials credential)
+		/// <exception cref="Exception">
+		/// </exception>
+		public static async Task<IEnumerable<Geo>> GetListOfMultiGeographyRegionsFromHomeRegion(
+			KnownApiVendor vendor,
+			ICredentials credential)
 		{
 			IEnumerable<KnownApiRegion> regionList = KnownApiUri.Instance.GetKnownRegionList(vendor);
 
-			IDictionary<KnownApiRegion, ComputeApiClient> computeClients = regionList.Select(
+			IDictionary<KnownApiRegion, IComputeApiClient> computeClients = regionList.Select(
 				region =>
-				new KeyValuePair<KnownApiRegion, ComputeApiClient>(
+				new KeyValuePair<KnownApiRegion, IComputeApiClient>(
 					region,
 					ComputeApiClient.GetComputeApiClient(vendor, region, credential)))
-					.ToDictionary(x => x.Key, x => x.Value);
+																					.ToDictionary(x => x.Key, x => x.Value);
 
 			if (computeClients.Count == 0)
 			{
@@ -402,7 +422,9 @@ namespace DD.CBU.Compute.Api.Client
 				// ignore (there might be region that this user is not enabled)
 			}
 
-			var loggedInClients = loginTasks.Where(client => client.Value.Status == TaskStatus.RanToCompletion).Select(login => computeClients[login.Key]).ToList();
+			var loggedInClients = loginTasks.Where(client => client.Value.Status == TaskStatus.RanToCompletion)
+											.Select(login => computeClients[login.Key])
+											.ToList();
 
 			if (loggedInClients.Count == 0)
 			{
@@ -410,7 +432,8 @@ namespace DD.CBU.Compute.Api.Client
 			}
 
 			Task<IEnumerable<Geo>>[] multiGeoTasks =
-				loggedInClients.Select(client => client.GetListOfMultiGeographyRegions()).ToArray();
+				loggedInClients.Select(client => client.Account.GetListOfMultiGeographyRegions())
+								.ToArray();
 
 			// multiGeo only works in the home geo.
 			try
@@ -423,11 +446,12 @@ namespace DD.CBU.Compute.Api.Client
 			}
 
 			IEnumerable<Geo> validMultiGeo =
-				multiGeoTasks.Single(task => task.Status == TaskStatus.RanToCompletion && task.Result != null).Result;
+				multiGeoTasks.Single(task => task.Status == TaskStatus.RanToCompletion && task.Result != null)
+							.Result;
 			return validMultiGeo;
-		}			
+		}
 
-		#endregion // Public methods
+		#endregion
 
 		#region Protected Methods
 
@@ -458,6 +482,29 @@ namespace DD.CBU.Compute.Api.Client
 		#endregion
 
 		#region Obsolete Methods
+
+		/// <summary>
+		/// Since MultiGeo call is only valid for the home geo, use this method to discover what is your home geo and the
+		///     applicable regions for this user.
+		///     This is a multithreaded call that uses the underlying ComputeApiClient.GetListOfMultiGeographyRegions()
+		///     to discover the home geo and multi geo for this user to all API endpoints known for vendor.
+		///     Note: Most of the user vendor is DimensionData. Use this if you have to guess which vendor the user is under.
+		/// </summary>
+		/// <param name="vendor">
+		/// The vendor of the user
+		/// </param>
+		/// <param name="credential">
+		/// Credential of the user
+		/// </param>
+		/// <returns>
+		/// The <see cref="Task"/>.
+		/// </returns>
+		[Obsolete("Use static method ComputeApiClient.GetListOfMultiGeographyRegionsFromHomeRegion instead")]
+		public async Task<IEnumerable<Geo>> DiscoverHomeMultiGeo(KnownApiVendor vendor, ICredentials credential)
+		{
+			return await ComputeApiClient.GetListOfMultiGeographyRegionsFromHomeRegion(vendor, credential);
+		}			
+
 		/// <summary>
 		/// Allows the current Primary Administrator user to designate a Sub-Administrator user belonging to the
 		///     same organization to become the Primary Administrator for the organization.
