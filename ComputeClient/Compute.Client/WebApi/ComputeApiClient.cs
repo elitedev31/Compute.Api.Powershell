@@ -19,9 +19,11 @@ namespace DD.CBU.Compute.Api.Client
 	using System.Threading.Tasks;
 
 	using DD.CBU.Compute.Api.Client.Account;
+	using DD.CBU.Compute.Api.Client.Backup;
 	using DD.CBU.Compute.Api.Client.ImportExportImages;
 	using DD.CBU.Compute.Api.Client.Interfaces;
 	using DD.CBU.Compute.Api.Client.Interfaces.Account;
+	using DD.CBU.Compute.Api.Client.Interfaces.Backup;
 	using DD.CBU.Compute.Api.Client.Interfaces.ImportExportImages;
 	using DD.CBU.Compute.Api.Client.Interfaces.Network;
 	using DD.CBU.Compute.Api.Client.Interfaces.Network20;
@@ -205,6 +207,7 @@ namespace DD.CBU.Compute.Api.Client
 			NetworkingLegacy = new NetworkingLegacyAccessor(WebApi);
 			ServerLegacy = new ServerLegacyAccessor(WebApi);
 			ImportExportCustomerImage = new ImportExportCustomerImageAccessor(WebApi);
+			Backup = new BackupAccessor(WebApi);
 		}
 
 		#endregion
@@ -356,6 +359,11 @@ namespace DD.CBU.Compute.Api.Client
 		/// Gets or sets the import export customer image.
 		/// </summary>
 		public IImportExportCustomerImageAccessor ImportExportCustomerImage { get; private set; }
+
+		/// <summary>
+		/// Gets the backup.
+		/// </summary>
+		public IBackupAccessor Backup { get; private set; }
 
 		#endregion Instance data
 

@@ -4,6 +4,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 	using System.Threading.Tasks;
 
 	using DD.CBU.Compute.Api.Client.Interfaces.Account;
+	using DD.CBU.Compute.Api.Client.Interfaces.Backup;
 	using DD.CBU.Compute.Api.Client.Interfaces.ImportExportImages;
 	using DD.CBU.Compute.Api.Client.Interfaces.Network;
 	using DD.CBU.Compute.Api.Client.Interfaces.Network20;
@@ -48,5 +49,10 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 		/// Gets the import and export customer images accessor
 		/// </summary>
 		IImportExportCustomerImageAccessor ImportExportCustomerImage { get; }
+
+		/// <summary>
+		/// Gets the backup.
+		/// </summary>
+		IBackupAccessor Backup { get; }
     }
 }
