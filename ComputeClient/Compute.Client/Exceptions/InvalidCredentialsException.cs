@@ -1,8 +1,10 @@
 ﻿namespace DD.CBU.Compute.Api.Client.Exceptions
 {
+	using System;
+
 	/// <summary>
 	/// The caa s organization not set exception.
-	/// </summary>
+	/// </summary>	
 	public class InvalidCredentialsException : ComputeApiException
 	{
 		/// <summary>
@@ -14,8 +16,11 @@
 		/// <summary>
 		/// Initialises a new instance of the <see cref="InvalidCredentialsException"/> class.
 		/// </summary>
-		public InvalidCredentialsException()
-			: base(ComputeApiError.InvalidCredentials, ErrorMessage, ErrorMessage)
+		/// <param name="uri">
+		/// The uri.
+		/// </param>
+		public InvalidCredentialsException(Uri uri)
+			: base(ComputeApiError.InvalidCredentials, uri, ErrorMessage)
 		{
 		}
 	}

@@ -3,9 +3,7 @@
 namespace DD.CBU.Compute.Api.Client
 {
 	using System;
-	using System.Diagnostics;
 	using System.Runtime.Serialization;
-	using DD.CBU.Compute.Api.Contracts.General;
 
 	/// <summary>
 	/// Exception raised by the CaaS API client when it encounters an error response from the CaaS API.
@@ -15,30 +13,19 @@ namespace DD.CBU.Compute.Api.Client
 		: ApiClientException
 	{
 		/// <summary>
-		/// The default additional detail message used if there is no additional error detail available.
+		/// Gets or sets the error.
 		/// </summary>
-		public const string DefaultAdditionalErrorDetailMessage = "No additional information is available.";
+		public ComputeApiError Error { get; set; }
 
 		/// <summary>
-		/// Additional error detail (if any) provided by the CaaS API.
+		/// The uri which caused the exception
 		/// </summary>
-		private readonly string _additionalDetail;
-
-		/// <summary>
-		/// The reason that the <see cref="ComputeApiException"/> was raised.
-		/// </summary>
-		private readonly ComputeApiError _error;
-
+		public Uri Uri { get; set; }	
+		
 		/// <summary>
 		/// Initialises a new instance of the <see cref="ComputeApiException"/> class. 
 		/// Create a new <see cref="ComputeApiException"/>.
 		/// </summary>
-		/// <param name="error">
-		/// The reason that the exception is being raised.
-		/// </param>
-		/// <param name="additionalDetail">
-		/// Additional error detail (if any) provided by the CaaS API.
-		/// </param>
 		/// <param name="messageOrFormat">
 		/// The exception message or message format.
 		/// </param>
@@ -46,102 +33,100 @@ namespace DD.CBU.Compute.Api.Client
 		/// Optional message format arguments.
 		/// </param>
 		public ComputeApiException(
-			ComputeApiError error,
-			string additionalDetail,
 			string messageOrFormat,
 			params object[] formatArguments)
 			: base(messageOrFormat, formatArguments)
-		{
-			Debug.Assert(error != ComputeApiError.Unknown, "Reason.Unknown should not be used here.");
-			Debug.Assert(!string.IsNullOrWhiteSpace(messageOrFormat), "Exception message should not be empty.");
-
-			_error = error;
-
-			_additionalDetail =
-				!string.IsNullOrWhiteSpace(additionalDetail)
-					? additionalDetail
-					: DefaultAdditionalErrorDetailMessage;
+		{	
+			Error = ComputeApiError.Unknown;
 		}
 
 		/// <summary>
 		/// Initialises a new instance of the <see cref="ComputeApiException"/> class. 
 		/// Create a new <see cref="ComputeApiException"/>.
 		/// </summary>
-		/// <param name="error">
-		/// The reason that the exception is being raised.
-		/// </param>
-		/// <param name="additionalDetail">
-		/// Additional error detail (if any) provided by the CaaS API.
-		/// </param>
-		/// <param name="messageOrFormat">
-		/// The exception message or message format.
-		/// </param>
-		/// <param name="status">
-		/// Api error status
-		/// </param>
 		/// <param name="uri">
 		/// Api uri
 		/// </param>
+		/// <param name="messageOrFormat">
+		/// The exception message or message format.
+		/// </param>
 		/// <param name="formatArguments">
 		/// Optional message format arguments.
 		/// </param>
-		public ComputeApiException(
-			ComputeApiError error,
-			string additionalDetail,
-			string messageOrFormat,
-			Status status,
+		public ComputeApiException(						
 			Uri uri,
+			string messageOrFormat,	
 			params object[] formatArguments)
 			: base(messageOrFormat, formatArguments)
 		{
-			Debug.Assert(error != ComputeApiError.Unknown, "Reason.Unknown should not be used here.");
-			Debug.Assert(!string.IsNullOrWhiteSpace(messageOrFormat), "Exception message should not be empty.");
-
-			_error = error;
-			Status = status;
+			Error = ComputeApiError.Unknown;			
 			Uri = uri;
-
-			_additionalDetail =
-				!string.IsNullOrWhiteSpace(additionalDetail)
-					? additionalDetail
-					: DefaultAdditionalErrorDetailMessage;
 		}
 
 		/// <summary>
 		/// Initialises a new instance of the <see cref="ComputeApiException"/> class. 
 		/// Create a new <see cref="ComputeApiException"/>.
 		/// </summary>
-		/// <param name="error">
-		/// The reason that the exception is being raised.
-		/// </param>
-		/// <param name="additionalDetail">
-		/// Additional error detail (if any) provided by the CaaS API.
+		/// <param name="innerException">
+		/// A previous exception that caused the current exception to be raised.
 		/// </param>
 		/// <param name="messageOrFormat">
 		/// The exception message or message format.
 		/// </param>
-		/// <param name="innerException">
-		/// A previous exception that caused the current exception to be raised.
-		/// </param>
 		/// <param name="formatArguments">
 		/// Optional message format arguments.
 		/// </param>
-		public ComputeApiException(
-			ComputeApiError error,
-			string additionalDetail,
-			string messageOrFormat,
+		public ComputeApiException(					
 			Exception innerException,
+			string messageOrFormat,
 			params object[] formatArguments)
 			: base(messageOrFormat, innerException, formatArguments)
 		{
-			Debug.Assert(error != ComputeApiError.Unknown, "Reason.Unknown should not be used here.");
-			Debug.Assert(!string.IsNullOrWhiteSpace(messageOrFormat), "Exception message should not be empty.");
+			Error = ComputeApiError.Unknown;	
+		}
 
-			_error = error;
-			_additionalDetail =
-				!string.IsNullOrWhiteSpace(additionalDetail)
-					? additionalDetail
-					: DefaultAdditionalErrorDetailMessage;
+		/// <summary>
+		/// Initialises a new instance of the <see cref="ComputeApiException"/> class.
+		/// </summary>
+		/// <param name="error">
+		/// The error.
+		/// </param>
+		/// <param name="messageOrFormat">
+		/// The message or format.
+		/// </param>
+		/// <param name="formatArguments">
+		/// The format arguments.
+		/// </param>
+		public ComputeApiException(ComputeApiError error, string messageOrFormat, params object[] formatArguments)
+			: base(messageOrFormat, formatArguments)
+		{
+			Error = error;
+		}
+
+		/// <summary>
+		/// Initialises a new instance of the <see cref="ComputeApiException"/> class.
+		/// </summary>
+		/// <param name="error">
+		/// The error.
+		/// </param>
+		/// <param name="uri">
+		/// The uri.
+		/// </param>
+		/// <param name="messageOrFormat">
+		/// The message or format.
+		/// </param>
+		/// <param name="formatArguments">
+		/// The format arguments.
+		/// </param>
+		public ComputeApiException(				
+			ComputeApiError error,
+			Uri uri,
+			string messageOrFormat,
+			params object[] formatArguments)
+			: base(messageOrFormat, formatArguments)
+		{
+			Error = error;
+			Uri = uri;
 		}
 
 		/// <summary>
@@ -166,44 +151,10 @@ namespace DD.CBU.Compute.Api.Client
 			if (info == null)
 				throw new ArgumentNullException("info");
 
-			_error = (ComputeApiError)info.GetValue("_error", typeof(ComputeApiError));
-			_additionalDetail = info.GetString("_additionalDetail");
+			Error = (ComputeApiError)info.GetValue("Error", typeof(ComputeApiError));
+			Uri = (Uri)info.GetValue("Error", typeof(Uri));
 		}
-
-		/// <summary>
-		/// The error status of the exception
-		/// </summary>
-		public Status Status { get; set; }
-
-		/// <summary>
-		/// The uri which caused the exception
-		/// </summary>
-		public Uri Uri { get; set; }
-
-		/// <summary>
-		/// The reason that the <see cref="ComputeApiException"/> was raised.
-		/// </summary>
-		public ComputeApiError Error
-		{
-			get { return _error; }
-		}
-
-		/// <summary>
-		/// Does the exception include additional error details from the CaaS API?
-		/// </summary>
-		public bool HaveAdditionalDetail
-		{
-			get { return _additionalDetail != DefaultAdditionalErrorDetailMessage; }
-		}
-
-		/// <summary>
-		/// Additional error detail (if any) provided by the CaaS API.
-		/// </summary>
-		public string AdditionalDetail
-		{
-			get { return _additionalDetail; }
-		}
-
+		
 		/// <summary>
 		/// Get exception data for serialisation.
 		/// </summary>
@@ -224,81 +175,25 @@ namespace DD.CBU.Compute.Api.Client
 			if (info == null)
 				throw new ArgumentNullException("info");
 
-			info.AddValue("_error", _error);
-			info.AddValue("_additionalDetail", _additionalDetail);
-
 			base.GetObjectData(info, context);
-		}
-
-		#region Factory methods
-
-		/// <summary>
-		/// Create a <see cref="ComputeApiException"/> to be raised because the CaaS API indicates that the supplied
-		///     credentials are invalid..
-		/// </summary>
-		/// <param name="loginName">
-		/// The login name that the API indicates is invalid.
-		/// </param>
-		/// <returns>
-		/// The configured <see cref="ComputeApiException"/>.
-		/// </returns>
-		public static ComputeApiException InvalidCredentials(string loginName)
-		{
-			return new ComputeApiException(
-				ComputeApiError.InvalidCredentials, 
-				string.Format("The supplied login / password for '{0}' is not valid.", loginName), 
-				"The supplied credentials are not valid."
-				);
+			info.AddValue("Error", Error);					
+			info.AddValue("Uri", Uri);
 		}
 
 		/// <summary>
-		/// Creates a <see cref="ComputeApiException"/> to be raised because the CaaS API indicates a bad HTTP request
+		/// Creates and returns a string representation of the current exception.
 		/// </summary>
-		/// <param name="operation">
-		/// The operation that was attempted
-		/// </param>
-		/// <param name="details">
-		/// Further error details
-		/// </param>
 		/// <returns>
-		/// The configured <see cref="ComputeApiException"/>
+		/// A string representation of the current exception.
 		/// </returns>
-		public static ComputeApiException InvalidRequest(string operation, string details)
+		/// <PermissionSet><IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" PathDiscovery="*AllFiles*"/></PermissionSet>
+		public override string ToString()
 		{
-			return new ComputeApiException(
-				ComputeApiError.BadRequest, 
-				details, 
-				string.Format("The operation {0} failed with an error: {1}", operation, details));
+			return String.Format(
+				"{0}, Error:{1}, Uri:{2}",
+				base.ToString(),
+				Error.ToString(),
+				Uri != null ? Uri.ToString() : String.Empty);			
 		}
-
-		/// <summary>
-		/// Creates a <see cref="ComputeApiException"/> to be raised because the CaaS API indicates a bad HTTP request
-		/// </summary>
-		/// <param name="operation">
-		/// The operation that was attempted
-		/// </param>
-		/// <param name="details">
-		/// Further error details
-		/// </param>
-		/// <param name="status">
-		/// Api call status
-		/// </param>
-		/// <param name="uri">
-		/// Api uri
-		/// </param>
-		/// <returns>
-		/// The configured <see cref="ComputeApiException"/>
-		/// </returns>
-		public static ComputeApiException InvalidRequest(string operation, string details, Status status, Uri uri)
-		{
-			return new ComputeApiException(
-				ComputeApiError.BadRequest, 
-				details, 
-				string.Format("The operation {0} failed with an error: {1}", operation, details), 
-				status, 
-				uri);
-		}
-
-		#endregion // Factory methods
 	}
 }

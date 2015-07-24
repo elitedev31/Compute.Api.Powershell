@@ -3,7 +3,6 @@
 namespace DD.CBU.Compute.Api.Client
 {
 	using System;
-	using System.Diagnostics.Contracts;
 	using System.Runtime.Serialization;
 
 	/// <summary>
@@ -25,10 +24,7 @@ namespace DD.CBU.Compute.Api.Client
 		/// </param>
 		protected ApiClientException(string messageOrFormat, params object[] formatArguments)
 			: base(string.Format(messageOrFormat, formatArguments))
-		{
-			Contract.Requires(!string.IsNullOrWhiteSpace(messageOrFormat), "Exception message should not be empty.");
-
-// Debug.Assert(!String.IsNullOrWhiteSpace(messageOrFormat), "Exception message should not be empty.");
+		{		
 		}
 
 		/// <summary>
@@ -46,10 +42,7 @@ namespace DD.CBU.Compute.Api.Client
 		/// </param>
 		protected ApiClientException(string messageOrFormat, Exception innerException, params object[] formatArguments)
 			: base(string.Format(messageOrFormat, formatArguments), innerException)
-		{
-			Contract.Requires(!string.IsNullOrWhiteSpace(messageOrFormat), "Exception message should not be empty.");
-
-// Debug.Assert(!String.IsNullOrWhiteSpace(messageOrFormat), "Exception message should not be empty.");
+		{		
 		}
 
 		/// <summary>

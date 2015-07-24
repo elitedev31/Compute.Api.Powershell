@@ -152,12 +152,7 @@
 				HttpResponseMessage response =
 					await
 						_httpClient.PostAsync(relativeOperationUri, objectContent))
-			{
-				if (response == null)
-				{
-					throw ComputeApiException.InvalidRequest(relativeOperationUri.ToString(), String.Empty);
-				}
-
+			{				
 				if (!response.IsSuccessStatusCode)
 				{
 					await HandleApiRequestErrors(response, relativeOperationUri);
@@ -243,7 +238,7 @@
 			{
 				case HttpStatusCode.Unauthorized:
 					{
-						throw new InvalidCredentialsException();
+						throw new InvalidCredentialsException(uri);
 					}
 
 				case HttpStatusCode.BadRequest:
@@ -252,12 +247,12 @@
 						if (uri.ToString().StartsWith(ApiUris.MCP1_0_PREFIX))
 						{
 							Status status = await response.Content.ReadAsAsync<Status>(_mediaTypeFormatters);
-							throw ComputeApiException.InvalidRequest(status.operation, status.resultDetail, status, uri);
+							throw new BadRequestException(status, uri);
 						}
 						else
 						{
 							Response responseMessage = await response.Content.ReadAsAsync<Response>(_mediaTypeFormatters);
-							throw ComputeApiException.InvalidRequest(responseMessage.Operation, responseMessage.Message);
+							throw new BadRequestException(responseMessage, uri);
 						}
 					}
 

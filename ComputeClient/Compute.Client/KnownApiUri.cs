@@ -15,7 +15,9 @@ using System.Linq;
 
 namespace DD.CBU.Compute.Api.Client
 {
-    /// <summary>	Values that represent known API regions. </summary>
+	using DD.CBU.Compute.Api.Client.Exceptions;
+
+	/// <summary>	Values that represent known API regions. </summary>
     /// <remarks>	Anthony, 4/24/2015. </remarks>
     public enum KnownApiRegion
     {
@@ -182,13 +184,8 @@ namespace DD.CBU.Compute.Api.Client
         {
             const string urltemplate = "https://{0}/";
             string key = string.Concat(vendor.ToString(), '-', region.ToString());
-			if (!KnownApiHostNames.ContainsKey(key))
-				throw new ComputeApiException (
-					ComputeApiError.BadRequest, 
-					"Known Cloud API hostname not found with this vendor and region combination.", 
-					string.Empty, 
-					null, 
-					string.Empty);
+	        if (!KnownApiHostNames.ContainsKey(key))
+		        throw new ApiHostNotFoundException(vendor, region);
 
 
             string apiurl = string.Format(urltemplate, KnownApiHostNames[key]);
@@ -213,12 +210,7 @@ namespace DD.CBU.Compute.Api.Client
 	    {
 			string key = string.Concat(vendor.ToString(), '-', region.ToString());
 			if (!KnownApiHostNames.ContainsKey(key))
-				throw new ComputeApiException(
-					ComputeApiError.BadRequest, 
-					"Known Cloud API hostname not found with this vendor and region combination.", 
-					string.Empty, 
-					null, 
-					string.Empty);
+				throw new ApiHostNotFoundException(vendor, region);
 			return KnownFtpHostNames[key];
 	    }
 

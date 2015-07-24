@@ -99,6 +99,9 @@
     <Compile Include="Backup\BackupAccessor.cs" />
     <Compile Include="Exceptions\ApiClientException.cs" />
     <Compile Include="ApiUris.cs" />
+    <Compile Include="Exceptions\ApiHostNotFoundException.cs" />
+    <Compile Include="Exceptions\BadRequestException.cs" />
+    <Compile Include="Exceptions\ComputeApiError.cs" />
     <Compile Include="Exceptions\InvalidCredentialsException.cs" />
     <Compile Include="Exceptions\CaaSOrganizationNotSetException.cs" />
     <Compile Include="GlobalSuppressions.cs" />
@@ -146,7 +149,6 @@
     </Compile>
     <Compile Include="Exceptions\ComputeApiClientException.cs" />
     <Compile Include="Exceptions\ComputeApiException.cs" />
-    <Compile Include="Exceptions\ComputeApiError.cs" />
     <Compile Include="StringExtensions.cs" />
     <Compile Include="Interfaces\IComputeApiClient.cs" />
     <Compile Include="ImportExportImages\ComputeApiClientImportExportExtensions.cs" />
