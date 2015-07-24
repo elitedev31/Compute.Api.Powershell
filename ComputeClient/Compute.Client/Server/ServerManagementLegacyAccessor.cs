@@ -6,15 +6,15 @@
 	/// <summary>
 	/// The server legacy accessor.
 	/// </summary>
-	public class ServerLegacyAccessor : IServerLegacyAccessor
+	public class ServerManagementLegacyAccessor : IServerManagementLegacyAccessor
 	{
 		/// <summary>
-		/// Initialises a new instance of the <see cref="ServerLegacyAccessor"/> class.
+		/// Initialises a new instance of the <see cref="ServerManagementLegacyAccessor"/> class.
 		/// </summary>
 		/// <param name="apiClient">
 		/// The api client.
 		/// </param>
-		public ServerLegacyAccessor(IWebApi apiClient)
+		public ServerManagementLegacyAccessor(IWebApi apiClient)
 		{
 			this.Server = new ServerAccessor(apiClient);
 			this.ServerImage = new ServerImagesAccessor(apiClient);		

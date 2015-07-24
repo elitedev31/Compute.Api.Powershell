@@ -1,21 +1,19 @@
-﻿using System;
-using System.Threading.Tasks;
-using DD.CBU.Compute.Api.Client.Interfaces;
-using DD.CBU.Compute.Api.Contracts.Network20;
-using DD.CBU.Compute.Api.Contracts.Requests;
-using DD.CBU.Compute.Api.Contracts.Requests.Server;
-
-namespace DD.CBU.Compute.Api.Client.Server20
+﻿namespace DD.CBU.Compute.Api.Client.Server20
 {
+	using System;
+	using System.Threading.Tasks;
+
+	using DD.CBU.Compute.Api.Client.Interfaces;
+	using DD.CBU.Compute.Api.Contracts.Network20;
+	using DD.CBU.Compute.Api.Contracts.Requests;
+	using DD.CBU.Compute.Api.Contracts.Requests.Server;
+
 	/// <summary>	A server 2.0 extensions methods. </summary>
 	public static class Server20Extensions
 	{
 		/// <summary>
 		/// 	Gets MCP 2 deployed servers. 
-		/// </summary>
-		/// <remarks>
-		/// 	Anthony, 6/17/2015. 
-		/// </remarks>
+		/// </summary>		
 		/// <param name="client">
 		/// 	The <see cref="ComputeApiClient"/> object. 
 		/// </param>
@@ -29,11 +27,13 @@ namespace DD.CBU.Compute.Api.Client.Server20
 		/// 	The MCP 2 deployed servers. 
 		/// </returns>
 		/// <seealso cref="M:DD.CBU.Compute.Api.Client.Interfaces.IComputeApiClient.GetMCP2DeployedServers()"/>
-		public static async Task<ServersResponseCollection> GetMcp2DeployedServers(this IComputeApiClient client, ServerListOptions options = null, PageableRequest pagingOptions = null)
+		[Obsolete("Use IComputeApiClient.ServerManagement.Server methods")]
+		public static async Task<ServersResponseCollection> GetMcp2DeployedServers(
+			this IComputeApiClient client,
+			ServerListOptions options = null,
+			PageableRequest pagingOptions = null)
 		{
-			ServersResponseCollection servers =
-				await client.WebApi.GetAsync<ServersResponseCollection>(ApiUris.GetMcp2Servers(client.WebApi.OrganizationId), pagingOptions);
-			return servers;
+			return await client.ServerManagement.Server.GetMcp2DeployedServers(options, pagingOptions);
 		}
 
 		/// <summary>	Gets MCP 2 deployed servers. </summary>
@@ -42,11 +42,10 @@ namespace DD.CBU.Compute.Api.Client.Server20
 		/// <param name="serverId">	Identifier for the server. </param>
 		/// <returns>	The MCP 2 deployed servers. </returns>
 		/// <seealso cref="M:DD.CBU.Compute.Api.Client.Interfaces.IComputeApiClient.GetMCP2DeployedServers()"/>
+		[Obsolete("Use IComputeApiClient.ServerManagement.Server methods")]
 		public static async Task<ServerType> GetMcp2DeployedServer(this IComputeApiClient client, Guid serverId)
 		{
-			ServerType servers =
-				await client.WebApi.GetAsync<ServerType>(ApiUris.GetMcp2Server(client.WebApi.OrganizationId, serverId));
-			return servers;
+			return await client.ServerManagement.Server.GetMcp2DeployedServer(serverId);
 		}
 	}
 }

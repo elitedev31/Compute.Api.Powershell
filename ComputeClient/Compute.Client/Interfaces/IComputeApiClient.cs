@@ -9,6 +9,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 	using DD.CBU.Compute.Api.Client.Interfaces.Network;
 	using DD.CBU.Compute.Api.Client.Interfaces.Network20;
 	using DD.CBU.Compute.Api.Client.Interfaces.Server;
+	using DD.CBU.Compute.Api.Client.Interfaces.Server20;
 	using DD.CBU.Compute.Api.Contracts.Directory;
 
 	/// <summary>
@@ -43,7 +44,12 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 		/// <summary>
 		/// Gets the server legacy.
 		/// </summary>
-		IServerLegacyAccessor ServerLegacy { get; }
+		IServerManagementLegacyAccessor ServerManagementLegacy { get; }
+
+		/// <summary>
+		/// Gets the server management.
+		/// </summary>
+		IServerManagementAccessor ServerManagement { get; }
 
 		/// <summary>
 		/// Gets the import and export customer images accessor

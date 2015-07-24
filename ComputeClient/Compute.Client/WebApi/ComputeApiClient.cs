@@ -28,9 +28,11 @@ namespace DD.CBU.Compute.Api.Client
 	using DD.CBU.Compute.Api.Client.Interfaces.Network;
 	using DD.CBU.Compute.Api.Client.Interfaces.Network20;
 	using DD.CBU.Compute.Api.Client.Interfaces.Server;
+	using DD.CBU.Compute.Api.Client.Interfaces.Server20;
 	using DD.CBU.Compute.Api.Client.Network;
 	using DD.CBU.Compute.Api.Client.Network20;
 	using DD.CBU.Compute.Api.Client.Server;
+	using DD.CBU.Compute.Api.Client.Server20;
 	using DD.CBU.Compute.Api.Client.Utilities;
 	using DD.CBU.Compute.Api.Contracts.Datacenter;
 	using DD.CBU.Compute.Api.Contracts.Directory;
@@ -205,7 +207,8 @@ namespace DD.CBU.Compute.Api.Client
 			Account = new AccountAccessor(WebApi);
 			Networking = new NetworkingAccessor(WebApi);
 			NetworkingLegacy = new NetworkingLegacyAccessor(WebApi);
-			ServerLegacy = new ServerLegacyAccessor(WebApi);
+			ServerManagementLegacy = new ServerManagementLegacyAccessor(WebApi);
+			ServerManagement = new ServerManagementAccessor(WebApi);
 			ImportExportCustomerImage = new ImportExportCustomerImageAccessor(WebApi);
 			Backup = new BackupAccessor(WebApi);
 		}
@@ -353,7 +356,12 @@ namespace DD.CBU.Compute.Api.Client
 		/// <summary>
 		/// Gets the server legacy.
 		/// </summary>
-		public IServerLegacyAccessor ServerLegacy { get; private set; }
+		public IServerManagementLegacyAccessor ServerManagementLegacy { get; private set; }
+
+		/// <summary>
+		/// Gets the server management.
+		/// </summary>
+		public IServerManagementAccessor ServerManagement { get; private set; }
 
 		/// <summary>
 		/// Gets or sets the import export customer image.
@@ -668,7 +676,7 @@ namespace DD.CBU.Compute.Api.Client
 		/// <returns>
 		/// The <see cref="Task"/>.
 		/// </returns>
-		[Obsolete("Use IComputeApi.ServerLegacy.ServerImage instead")]
+		[Obsolete("Use IComputeApi.ServerManagementLegacy.ServerImage instead")]
 		public async Task<IReadOnlyList<ImagesWithDiskSpeedImage>> GetCustomerServerImages(
 			string imageId,
 			string name,
@@ -678,7 +686,7 @@ namespace DD.CBU.Compute.Api.Client
 		{
 			return
 				await
-				ServerLegacy.ServerImage.GetCustomerServerImages(imageId, name, location, operatingSystemId, operatingSystemFamily);
+				ServerManagementLegacy.ServerImage.GetCustomerServerImages(imageId, name, location, operatingSystemId, operatingSystemFamily);
 		}  
 
 		/// <summary>
@@ -759,10 +767,10 @@ namespace DD.CBU.Compute.Api.Client
 		/// <returns>
 		/// The <see cref="Task"/>.RemoveCustomerServerImage
 		/// </returns>
-		[Obsolete("Use IComputeApiClient.ServerLegacy.ServerImage instead")]
+		[Obsolete("Use IComputeApiClient.ServerManagementLegacy.ServerImage instead")]
 		public async Task<Status> RemoveCustomerServerImage(string imageId)
 		{
-			return await ServerLegacy.ServerImage.RemoveCustomerServerImage(imageId);
+			return await ServerManagementLegacy.ServerImage.RemoveCustomerServerImage(imageId);
 		}
 
 		/// <summary>
@@ -845,7 +853,7 @@ namespace DD.CBU.Compute.Api.Client
 		/// <returns>
 		/// The <see cref="Task"/>.
 		/// </returns>
-		[Obsolete("Use IComputeApi.ServerLegacy.Server instead")]
+		[Obsolete("Use IComputeApi.ServerManagementLegacy.Server instead")]
 		public async Task<Status> DeployServerWithDiskSpeedImageTask(
 			string name,
 			string description,
@@ -857,7 +865,7 @@ namespace DD.CBU.Compute.Api.Client
 		{
 			return
 				await
-				ServerLegacy.Server.DeployServerWithDiskSpeedImageTask(
+				ServerManagementLegacy.Server.DeployServerWithDiskSpeedImageTask(
 					name,
 					description,
 					networkId,
@@ -897,7 +905,7 @@ namespace DD.CBU.Compute.Api.Client
 		/// <returns>
 		/// The <see cref="Task"/>.
 		/// </returns>
-		[Obsolete("Use IComputeApi.ServerLegacy.Server instead")]
+		[Obsolete("Use IComputeApi.ServerManagementLegacy.Server instead")]
 		public async Task<Status> DeployServerWithDiskSpeedImageTask(
 			string name,
 			string description,
@@ -910,7 +918,7 @@ namespace DD.CBU.Compute.Api.Client
 		{
 			return
 				await
-				ServerLegacy.Server.DeployServerWithDiskSpeedImageTask(
+				ServerManagementLegacy.Server.DeployServerWithDiskSpeedImageTask(
 					name,
 					description,
 					networkId,
@@ -946,7 +954,7 @@ namespace DD.CBU.Compute.Api.Client
 		/// <returns>
 		/// The <see cref="Task"/>.
 		/// </returns>
-		[Obsolete("Use IComputeApi.ServerLegacy.Server instead")]
+		[Obsolete("Use IComputeApi.ServerManagementLegacy.Server instead")]
 		public async Task<Status> ModifyServer(
 			string serverId,
 			string name,
@@ -955,7 +963,7 @@ namespace DD.CBU.Compute.Api.Client
 			int cpucount,
 			string privateIp)
 		{
-			return await ServerLegacy.Server.ModifyServer(serverId, name, description, memory, cpucount, privateIp);
+			return await ServerManagementLegacy.Server.ModifyServer(serverId, name, description, memory, cpucount, privateIp);
 		}
 
 		/// <summary>
@@ -967,10 +975,10 @@ namespace DD.CBU.Compute.Api.Client
 		/// <returns>
 		/// Returns a status of the HTTP request
 		/// </returns>
-		[Obsolete("Use IComputeApi.ServerLegacy.Server instead")]
+		[Obsolete("Use IComputeApi.ServerManagementLegacy.Server instead")]
 		public async Task<Status> ServerPowerOn(string serverId)
 		{
-			return await ServerLegacy.Server.ServerPowerOn(serverId);
+			return await ServerManagementLegacy.Server.ServerPowerOn(serverId);
 		}
 
 		/// <summary>
@@ -982,10 +990,10 @@ namespace DD.CBU.Compute.Api.Client
 		/// <returns>
 		/// Returns a status of the HTTP request
 		/// </returns>
-		[Obsolete("Use IComputeApi.ServerLegacy.Server instead")]
+		[Obsolete("Use IComputeApi.ServerManagementLegacy.Server instead")]
 		public async Task<Status> ServerPowerOff(string serverId)
 		{
-			return await ServerLegacy.Server.ServerPowerOff(serverId);
+			return await ServerManagementLegacy.Server.ServerPowerOff(serverId);
 		}
 
 		/// <summary>
@@ -997,20 +1005,20 @@ namespace DD.CBU.Compute.Api.Client
 		/// <returns>
 		/// Returns a status of the HTTP request
 		/// </returns>
-		[Obsolete("Use IComputeApi.ServerLegacy.Server instead")]
+		[Obsolete("Use IComputeApi.ServerManagementLegacy.Server instead")]
 		public async Task<Status> ServerRestart(string serverId)
 		{
-			return await ServerLegacy.Server.ServerRestart(serverId);
+			return await ServerManagementLegacy.Server.ServerRestart(serverId);
 		}
 
 		/// <summary>	Power cycles an existing deployed server. This is the equivalent of pulling and replacing the power cord for
 		/// a physical server. Requires your organization ID and the ID of the target server.. </summary>
 		/// <param name="serverId">	The server id. </param>
 		/// <returns>	Returns a status of the HTTP request </returns>
-		[Obsolete("Use IComputeApi.ServerLegacy.Server instead")]
+		[Obsolete("Use IComputeApi.ServerManagementLegacy.Server instead")]
 		public async Task<Status> ServerReset(string serverId)
 		{
-			return await ServerLegacy.Server.ServerReset(serverId);
+			return await ServerManagementLegacy.Server.ServerReset(serverId);
 		}
 
 		/// <summary>
@@ -1022,10 +1030,10 @@ namespace DD.CBU.Compute.Api.Client
 		/// <returns>
 		/// Returns a status of the HTTP request
 		/// </returns>
-		[Obsolete("Use IComputeApi.ServerLegacy.Server instead")]
+		[Obsolete("Use IComputeApi.ServerManagementLegacy.Server instead")]
 		public async Task<Status> ServerShutdown(string serverId)
 		{
-			return await ServerLegacy.Server.ServerShutdown(serverId);
+			return await ServerManagementLegacy.Server.ServerShutdown(serverId);
 		}
 
 
@@ -1038,10 +1046,10 @@ namespace DD.CBU.Compute.Api.Client
 		/// <returns>
 		/// Returns a status of the HTTP request
 		/// </returns>
-		[Obsolete("Use IComputeApi.ServerLegacy.Server instead")]
+		[Obsolete("Use IComputeApi.ServerManagementLegacy.Server instead")]
 		public async Task<Status> ServerUpdateVMwareTools(string serverId)
 		{
-			return await ServerLegacy.Server.ServerUpdateVMwareTools(serverId);
+			return await ServerManagementLegacy.Server.ServerUpdateVMwareTools(serverId);
 		}
 
 
@@ -1060,10 +1068,10 @@ namespace DD.CBU.Compute.Api.Client
 		/// <returns>
 		/// The <see cref="Task"/>.
 		/// </returns>
-		[Obsolete("Use IComputeApi.ServerLegacy.Server instead")]
+		[Obsolete("Use IComputeApi.ServerManagementLegacy.Server instead")]
 		public async Task<Status> ServerCloneToCustomerImage(string serverId, string imageName, string imageDesc)
 		{
-			return await ServerLegacy.Server.ServerCloneToCustomerImage(serverId, imageName, imageDesc);
+			return await ServerManagementLegacy.Server.ServerCloneToCustomerImage(serverId, imageName, imageDesc);
 		}
 
 		/// <summary>
@@ -1081,10 +1089,10 @@ namespace DD.CBU.Compute.Api.Client
 		/// <returns>
 		/// The <see cref="Task"/>.
 		/// </returns>
-		[Obsolete("Use IComputeApi.ServerLegacy.Server instead")]
+		[Obsolete("Use IComputeApi.ServerManagementLegacy.Server instead")]
 		public async Task<Status> ChangeServerDiskSize(string serverId, string diskId, string sizeInGb)
 		{
-			return await ServerLegacy.Server.ChangeServerDiskSize(serverId, diskId, sizeInGb);
+			return await ServerManagementLegacy.Server.ChangeServerDiskSize(serverId, diskId, sizeInGb);
 		}
 
 
@@ -1103,10 +1111,10 @@ namespace DD.CBU.Compute.Api.Client
 		/// <returns>
 		/// The <see cref="Task"/>.
 		/// </returns>
-		[Obsolete("Use IComputeApi.ServerLegacy.Server instead")]
+		[Obsolete("Use IComputeApi.ServerManagementLegacy.Server instead")]
 		public async Task<Status> ChangeServerDiskSpeed(string serverId, string diskId, string speedId)
 		{
-			return await ServerLegacy.Server.ChangeServerDiskSpeed(serverId, diskId, speedId);
+			return await ServerManagementLegacy.Server.ChangeServerDiskSpeed(serverId, diskId, speedId);
 		}
 
 		/// <summary>
@@ -1124,10 +1132,10 @@ namespace DD.CBU.Compute.Api.Client
 		/// <returns>
 		/// Returns a status of the HTTP request
 		/// </returns>
-		[Obsolete("Use IComputeApi.ServerLegacy.Server instead")]
+		[Obsolete("Use IComputeApi.ServerManagementLegacy.Server instead")]
 		public async Task<Status> AddServerDisk(string serverId, string size, string speedId)
 		{
-			return await ServerLegacy.Server.AddServerDisk(serverId, size, speedId);
+			return await ServerManagementLegacy.Server.AddServerDisk(serverId, size, speedId);
 		}
 
 		/// <summary>
@@ -1142,10 +1150,10 @@ namespace DD.CBU.Compute.Api.Client
 		/// <returns>
 		/// The <see cref="Task"/>.
 		/// </returns>
-		[Obsolete("Use IComputeApi.ServerLegacy.Server instead")]
+		[Obsolete("Use IComputeApi.ServerManagementLegacy.Server instead")]
 		public async Task<Status> RemoveServerDisk(string serverId, string diskId)
 		{
-			return await ServerLegacy.Server.RemoveServerDisk(serverId, diskId);
+			return await ServerManagementLegacy.Server.RemoveServerDisk(serverId, diskId);
 		}
 
 
@@ -1161,10 +1169,10 @@ namespace DD.CBU.Compute.Api.Client
 		/// <returns>
 		/// Returns a status of the HTTP request
 		/// </returns>
-		[Obsolete("Use IComputeApi.ServerLegacy.Server instead")]
+		[Obsolete("Use IComputeApi.ServerManagementLegacy.Server instead")]
 		public async Task<Status> ServerDelete(string serverId)
 		{
-			return await ServerLegacy.Server.ServerDelete(serverId);
+			return await ServerManagementLegacy.Server.ServerDelete(serverId);
 		}
 
 		/// <summary>
@@ -1173,10 +1181,10 @@ namespace DD.CBU.Compute.Api.Client
 		/// <returns>
 		/// A list of deployed servers
 		/// </returns>
-		[Obsolete("Use IComputeApi.ServerLegacy.Server instead")]
+		[Obsolete("Use IComputeApi.ServerManagementLegacy.Server instead")]
 		public async Task<IEnumerable<ServerWithBackupType>> GetDeployedServers()
 		{
-			return await ServerLegacy.Server.GetDeployedServers();
+			return await ServerManagementLegacy.Server.GetDeployedServers();
 		}
 
 		/// <summary>
@@ -1197,14 +1205,14 @@ namespace DD.CBU.Compute.Api.Client
 		/// <returns>
 		/// A list of deployed servers
 		/// </returns>
-		[Obsolete("Use IComputeApi.ServerLegacy.Server instead")]
+		[Obsolete("Use IComputeApi.ServerManagementLegacy.Server instead")]
 		public async Task<IEnumerable<ServerWithBackupType>> GetDeployedServers(
 			string serverId,
 			string name,
 			string networkId,
 			string location)
 		{
-			return await ServerLegacy.Server.GetDeployedServers(serverId, name, networkId, location);
+			return await ServerManagementLegacy.Server.GetDeployedServers(serverId, name, networkId, location);
 		}
 
 		/// <summary>
@@ -1212,7 +1220,7 @@ namespace DD.CBU.Compute.Api.Client
 		/// </summary>
 		/// <param name="serverId">The server Id.</param>
 		/// <returns>A list of deployed servers</returns>
-		[Obsolete("Use IComputeApi.ServerLegacy.Server instead")]
+		[Obsolete("Use IComputeApi.ServerManagementLegacy.Server instead")]
 		public async Task<ServerWithBackupType> GetDeployedServerById(string serverId)
 		{
 			var servers = await GetDeployedServers(serverId, string.Empty, string.Empty, string.Empty);
@@ -1228,7 +1236,7 @@ namespace DD.CBU.Compute.Api.Client
 		/// </summary>
 		/// <param name="name">The server name.</param>
 		/// <returns>A list of deployed servers</returns>
-		[Obsolete("Use IComputeApi.ServerLegacy.Server instead")]
+		[Obsolete("Use IComputeApi.ServerManagementLegacy.Server instead")]
 		public async Task<IEnumerable<ServerWithBackupType>> GetDeployedServersByName(string name)
 		{
 			return await GetDeployedServers(string.Empty, name, string.Empty, string.Empty);
@@ -1239,7 +1247,7 @@ namespace DD.CBU.Compute.Api.Client
 		/// </summary>
 		/// <param name="networkid">The network id.</param>
 		/// <returns>A list of deployed servers</returns>
-		[Obsolete("Use IComputeApi.ServerLegacy.Server instead")]
+		[Obsolete("Use IComputeApi.ServerManagementLegacy.Server instead")]
 		public async Task<IEnumerable<ServerWithBackupType>> GetDeployedServersByNetworkId(string networkid)
 		{
 			return await GetDeployedServers(string.Empty, string.Empty, networkid, string.Empty);
@@ -1250,7 +1258,7 @@ namespace DD.CBU.Compute.Api.Client
 		/// </summary>
 		/// <param name="location">The location code</param>
 		/// <returns>A list of deployed servers</returns>
-		[Obsolete("Use IComputeApi.ServerLegacy.Server instead")]
+		[Obsolete("Use IComputeApi.ServerManagementLegacy.Server instead")]
 		public async Task<IEnumerable<ServerWithBackupType>> GetDeployedServersByLocation(string location)
 		{
 			return await GetDeployedServers(string.Empty, string.Empty, string.Empty, location);
@@ -1268,10 +1276,10 @@ namespace DD.CBU.Compute.Api.Client
 		/// <returns>
 		/// The <see cref="Task"/>.
 		/// </returns>
-		[Obsolete("Use IComputeApi.ServerLegacy.Server instead")]
+		[Obsolete("Use IComputeApi.ServerManagementLegacy.Server instead")]
 		public async Task<Status> CreateServerAntiAffinityRule(string serverId1, string serverId2)
 		{
-			return await ServerLegacy.Server.CreateServerAntiAffinityRule(serverId1, serverId2);
+			return await ServerManagementLegacy.Server.CreateServerAntiAffinityRule(serverId1, serverId2);
 		}
 
 
@@ -1290,13 +1298,13 @@ namespace DD.CBU.Compute.Api.Client
 		/// <returns>
 		/// The <see cref="Task"/>.
 		/// </returns>
-		[Obsolete("Use IComputeApi.ServerLegacy.Server instead")]
+		[Obsolete("Use IComputeApi.ServerManagementLegacy.Server instead")]
 		public async Task<IEnumerable<AntiAffinityRuleType>> GetServerAntiAffinityRules(
 			string ruleId,
 			string location,
 			string networkId)
 		{
-			return await ServerLegacy.Server.GetServerAntiAffinityRules(ruleId, location, networkId);
+			return await ServerManagementLegacy.Server.GetServerAntiAffinityRules(ruleId, location, networkId);
 		}
 
 		/// <summary>
@@ -1308,10 +1316,10 @@ namespace DD.CBU.Compute.Api.Client
 		/// <returns>
 		/// The <see cref="Task"/>.
 		/// </returns>
-		[Obsolete("Use IComputeApi.ServerLegacy.Server instead")]
+		[Obsolete("Use IComputeApi.ServerManagementLegacy.Server instead")]
 		public async Task<Status> RemoveServerAntiAffinityRule(string ruleId)
 		{
-			return await ServerLegacy.Server.RemoveServerAntiAffinityRule(ruleId);
+			return await ServerManagementLegacy.Server.RemoveServerAntiAffinityRule(ruleId);
 		}
 
 		/// <summary>
@@ -1336,7 +1344,7 @@ namespace DD.CBU.Compute.Api.Client
 		/// <returns>
 		/// The <see cref="Task"/>.
 		/// </returns>
-		[Obsolete("Use IComputeApi.ServerLegacy.ServerImage instead")]
+		[Obsolete("Use IComputeApi.ServerManagementLegacy.ServerImage instead")]
 		public async Task<IReadOnlyList<ImagesWithDiskSpeedImage>> GetImages(
 			string imageId,
 			string name,
@@ -1344,7 +1352,7 @@ namespace DD.CBU.Compute.Api.Client
 			string operatingSystemId,
 			string operatingSystemFamily)
 		{
-			return await ServerLegacy.ServerImage.GetImages(imageId, name, location, operatingSystemId, operatingSystemFamily);
+			return await ServerManagementLegacy.ServerImage.GetImages(imageId, name, location, operatingSystemId, operatingSystemFamily);
 		}
 
 		/// <summary>

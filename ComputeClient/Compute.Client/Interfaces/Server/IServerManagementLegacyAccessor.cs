@@ -1,9 +1,9 @@
 ﻿namespace DD.CBU.Compute.Api.Client.Interfaces.Server
 {
 	/// <summary>
-	/// The ServerLegacyAccessor interface.
+	/// The ServerManagementLegacyAccessor interface.
 	/// </summary>
-	public interface IServerLegacyAccessor
+	public interface IServerManagementLegacyAccessor
 	{
 		/// <summary>
 		/// Gets the server.

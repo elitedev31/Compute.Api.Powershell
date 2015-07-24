@@ -115,9 +115,11 @@
     <Compile Include="Interfaces\Network\INetworkVipAccessor.cs" />
     <Compile Include="Interfaces\Network20\IVlanAccessor.cs" />
     <Compile Include="Interfaces\ImportExportImages\IImportExportCustomerImageAccessor.cs" />
+    <Compile Include="Interfaces\Server20\IServerAccessor.cs" />
+    <Compile Include="Interfaces\Server20\IServerManagementAccessor.cs" />
     <Compile Include="Interfaces\Server\IServerAccessor.cs" />
     <Compile Include="Interfaces\Server\IServerImagesAccessor.cs" />
-    <Compile Include="Interfaces\Server\IServerLegacyAccessor.cs" />
+    <Compile Include="Interfaces\Server\IServerManagementLegacyAccessor.cs" />
     <Compile Include="KnownApiUri.cs" />
     <Compile Include="Network20\ComputeApiClientNetworkExtensions.cs" />
     <Compile Include="Network20\IpAddressManagementAccessor.cs" />
@@ -129,6 +131,8 @@
     <Compile Include="Network\Network.cs" />
     <Compile Include="Network\NetworkingLegacyAccessor.cs" />
     <Compile Include="Server20\Server20Extensions.cs" />
+    <Compile Include="Server20\ServerAccessor.cs" />
+    <Compile Include="Server20\ServerManagementAccessor.cs" />
     <Compile Include="ServerImageType.cs" />
     <Compile Include="Backup\ComputeApiClientBackupExtensions.cs" />
     <Compile Include="ClientError.cs" />
@@ -136,7 +140,7 @@
     <Compile Include="ImportExportImages\ImportExportCustomerImageAccessor.cs" />
     <Compile Include="Server\ServerAccessor.cs" />
     <Compile Include="Server\ServerImagesAccessor.cs" />
-    <Compile Include="Server\ServerLegacyAccessor.cs" />
+    <Compile Include="Server\ServerManagementLegacyAccessor.cs" />
     <Compile Include="WebApi\ComputeApiClient.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
