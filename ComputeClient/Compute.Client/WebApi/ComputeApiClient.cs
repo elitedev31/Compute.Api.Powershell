@@ -70,7 +70,7 @@ namespace DD.CBU.Compute.Api.Client
 			_httpClientHandler = new HttpClientHandler();
 			var httpClient = new HttpClientAdapter(
 				new HttpClient(
-					_httpClientHandler)
+					_httpClientHandler, disposeHandler: true)
 				{
 					BaseAddress = baseUri
 				});
@@ -98,7 +98,7 @@ namespace DD.CBU.Compute.Api.Client
 
 			var httpClient = new HttpClientAdapter(
 				new HttpClient(
-					_httpClientHandler)
+					_httpClientHandler, disposeHandler: true)
 				{
 					BaseAddress = baseUri
 				});
@@ -122,10 +122,9 @@ namespace DD.CBU.Compute.Api.Client
 			Uri baseUri = KnownApiUri.Instance.GetBaseUri(vendor, region);
 			_httpClientHandler = new HttpClientHandler();
 			var httpClient = new HttpClientAdapter(
-				new HttpClient(
-					_httpClientHandler)
-				{
-					BaseAddress = baseUri
+				new HttpClient(_httpClientHandler, disposeHandler: true)
+					{
+						BaseAddress = baseUri
 				});
 
 			InitializeProperties(httpClient);
@@ -145,7 +144,7 @@ namespace DD.CBU.Compute.Api.Client
 			_httpClientHandler = new HttpClientHandler();
 			var httpClient = new HttpClientAdapter(
 				new HttpClient(
-					_httpClientHandler)
+					_httpClientHandler, disposeHandler: true)
 				{
 					BaseAddress = baseUri
 				});
@@ -153,22 +152,6 @@ namespace DD.CBU.Compute.Api.Client
 			InitializeProperties(httpClient);
 		}
 
-		/// <summary>
-		/// Initialises a new instance of the <see cref="ComputeApiClient"/> class.
-		/// </summary>
-		/// <param name="httpClient">
-		/// The http client.
-		/// </param>
-		/// <exception cref="ArgumentNullException">
-		/// </exception>
-		[Obsolete("Please use the GetComputeApiClient Factory methods")]
-		public ComputeApiClient(IHttpClient httpClient)	
-		{
-			if (httpClient == null)
-				throw new ArgumentNullException("httpClient", "httpClient cannot be null");
-
-			InitializeProperties(httpClient);
-		}
 		#endregion
 
 		#region Constructor
@@ -184,7 +167,7 @@ namespace DD.CBU.Compute.Api.Client
 		/// </param>
 		/// <exception cref="ArgumentNullException">
 		/// </exception>		
-		private ComputeApiClient(IHttpClient httpClient, Guid organizationId = default(Guid))
+		public ComputeApiClient(IHttpClient httpClient, Guid organizationId = default(Guid))
 		{
 			if (httpClient == null)
 				throw new ArgumentNullException("httpClient", "httpClient cannot be null");
@@ -203,7 +186,7 @@ namespace DD.CBU.Compute.Api.Client
 		/// </param>
 		private void InitializeProperties(IHttpClient httpClient, Guid organizationId = default(Guid))
 		{
-			WebApi = new WebApi(httpClient, organizationId);
+			WebApi = new WebApi.WebApi(httpClient, organizationId);
 			Account = new AccountAccessor(WebApi);
 			Networking = new NetworkingAccessor(WebApi);
 			NetworkingLegacy = new NetworkingLegacyAccessor(WebApi);
@@ -252,10 +235,10 @@ namespace DD.CBU.Compute.Api.Client
 				Credentials = credentials,
 				PreAuthenticate = true
 			};
-
+			// Handle disposing the message handler
 			var httpClient = new HttpClientAdapter(
 				new HttpClient(
-					messageHandler)
+					messageHandler, disposeHandler: true)
 				{
 					BaseAddress = baseUri
 				});
@@ -308,23 +291,6 @@ namespace DD.CBU.Compute.Api.Client
 		{
 			Uri baseUri = KnownApiUri.Instance.GetBaseUri(KnownApiVendor.DimensionData, region);
 			return GetComputeApiClient(baseUri, credentials);
-		}
-
-		/// <summary>
-		/// The get ftp host.
-		/// </summary>
-		/// <param name="vendor">
-		/// The vendor.
-		/// </param>
-		/// <param name="region">
-		/// The region.
-		/// </param>
-		/// <returns>
-		/// The <see cref="string"/>.
-		/// </returns>
-		public static string GetFtpHost(KnownApiVendor vendor, KnownApiRegion region)
-		{
-			return KnownApiUri.Instance.GetFtpHost(vendor, region);
 		}
 
 		#endregion
@@ -391,6 +357,23 @@ namespace DD.CBU.Compute.Api.Client
 		#endregion // Public methods
 
 		#region Static Utility Methods
+
+		/// <summary>
+		/// The get ftp host.
+		/// </summary>
+		/// <param name="vendor">
+		/// The vendor.
+		/// </param>
+		/// <param name="region">
+		/// The region.
+		/// </param>
+		/// <returns>
+		/// The <see cref="string"/>.
+		/// </returns>
+		public static string GetFtpHost(KnownApiVendor vendor, KnownApiRegion region)
+		{
+			return KnownApiUri.Instance.GetFtpHost(vendor, region);
+		}
 
 		/// <summary>
 		/// The discover home multi geo.
@@ -485,12 +468,6 @@ namespace DD.CBU.Compute.Api.Client
 				{
 					WebApi.Dispose();
 					WebApi = null;
-				}
-
-				if (_httpClientHandler != null)
-				{
-					_httpClientHandler.Dispose();
-					_httpClientHandler = null;
 				}
 			}
 		}

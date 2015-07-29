@@ -1,4 +1,4 @@
-﻿namespace DD.CBU.Compute.Api.Client
+﻿namespace DD.CBU.Compute.Api.Client.WebApi
 {
 	using System;
 	using System.Net;
@@ -81,7 +81,7 @@
 		/// </returns>
 		public async Task<IAccount> LoginAsync()
 		{
-			Contracts.Directory.Account account = await GetAsync<Contracts.Directory.Account>(ApiUris.MyAccount);
+			Account account = await GetAsync<Account>(ApiUris.MyAccount);
 			_organizationId = account.OrganizationId;
 			return account;
 		}
@@ -249,11 +249,8 @@
 							Status status = await response.Content.ReadAsAsync<Status>(_mediaTypeFormatters);
 							throw new BadRequestException(status, uri);
 						}
-						else
-						{
-							Response responseMessage = await response.Content.ReadAsAsync<Response>(_mediaTypeFormatters);
-							throw new BadRequestException(responseMessage, uri);
-						}
+						Response responseMessage = await response.Content.ReadAsAsync<Response>(_mediaTypeFormatters);
+						throw new BadRequestException(responseMessage, uri);
 					}
 
 				default:

@@ -177,8 +177,7 @@ namespace DD.CBU.Compute.Api.Client
         /// <returns>The relative action Uri.</returns>
         public static Uri MultiGeographyRegions(Guid organizationId)
         {
-            return new Uri(string.Format(MCP1_0_PREFIX + "{0}/multigeo", organizationId), UriKind.Relative);
-           
+            return new Uri(string.Format(MCP1_0_PREFIX + "{0}/multigeo", organizationId), UriKind.Relative);           
         }
 
         /// <summary>
