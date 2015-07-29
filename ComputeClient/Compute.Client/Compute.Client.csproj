@@ -152,7 +152,7 @@
     <Compile Include="StringExtensions.cs" />
     <Compile Include="Interfaces\IComputeApiClient.cs" />
     <Compile Include="ImportExportImages\ComputeApiClientImportExportExtensions.cs" />
-    <Compile Include="Interfaces\HttpClientAdapter.cs" />
+    <Compile Include="WebApi\HttpClientAdapter.cs" />
     <Compile Include="Interfaces\IHttpClient.cs" />
     <Compile Include="Interfaces\IWebApi.cs" />
     <Compile Include="Network\ComputeApiClientNetworkExtensions.cs" />

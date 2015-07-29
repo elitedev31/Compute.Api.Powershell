@@ -20,8 +20,8 @@ namespace DD.CBU.Compute.Api.Client
 		/// <summary>
 		/// The uri which caused the exception
 		/// </summary>
-		public Uri Uri { get; set; }	
-		
+		public Uri Uri { get; set; }
+
 		/// <summary>
 		/// Initialises a new instance of the <see cref="ComputeApiException"/> class. 
 		/// Create a new <see cref="ComputeApiException"/>.
@@ -181,19 +181,21 @@ namespace DD.CBU.Compute.Api.Client
 		}
 
 		/// <summary>
-		/// Creates and returns a string representation of the current exception.
+		/// Gets a message that describes the current exception.
 		/// </summary>
 		/// <returns>
-		/// A string representation of the current exception.
+		/// The error message that explains the reason for the exception, or an empty string("").
 		/// </returns>
-		/// <PermissionSet><IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" PathDiscovery="*AllFiles*"/></PermissionSet>
-		public override string ToString()
+		public override string Message
 		{
-			return String.Format(
+			get
+			{
+				return String.Format(
 				"{0}, Error:{1}, Uri:{2}",
-				base.ToString(),
+				base.Message,
 				Error.ToString(),
-				Uri != null ? Uri.ToString() : String.Empty);			
+				Uri != null ? Uri.ToString() : String.Empty);					
+			}
 		}
 	}
 }

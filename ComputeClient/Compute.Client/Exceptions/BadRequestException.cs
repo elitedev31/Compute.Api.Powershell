@@ -106,25 +106,24 @@
 		}
 
 		/// <summary>
-		/// Creates and returns a string representation of the current exception.
+		/// Gets the message.
 		/// </summary>
-		/// <returns>
-		/// A string representation of the current exception.
-		/// </returns>
-		/// <PermissionSet><IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" PathDiscovery="*AllFiles*"/></PermissionSet>
-		public override string ToString()
+		public override string Message
 		{
-			StringBuilder sb = new StringBuilder(base.ToString());
+			get
+			{
+				StringBuilder sb = new StringBuilder(base.Message);
 
-			if (CaaSOperationStatus != null)
-			{
-				sb.AppendFormat("CaaSOperationStatus: {0}", JsonConvert.SerializeObject(CaaSOperationStatus));
+				if (CaaSOperationStatus != null)
+				{
+					sb.AppendFormat("CaaSOperationStatus: {0}", JsonConvert.SerializeObject(CaaSOperationStatus));
+				}
+				if (CaaSOperationResponse != null)
+				{
+					sb.AppendFormat("CaaSOperationResponse: {0}", JsonConvert.SerializeObject(CaaSOperationResponse));
+				}
+				return sb.ToString();
 			}
-			if (CaaSOperationResponse != null)
-			{
-				sb.AppendFormat("CaaSOperationResponse: {0}", JsonConvert.SerializeObject(CaaSOperationResponse));
-			}
-			return sb.ToString();
 		}
 	}
 }

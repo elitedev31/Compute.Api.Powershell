@@ -1,25 +1,16 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="HttpClientAdapter.cs" company="">
-//   
-// </copyright>
-// <summary>
-//   The http client adapter.
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
-
-
-
-using System;
-using System.Net.Http;
-using System.Threading.Tasks;
-using DD.CBU.Compute.Api.Client.Utilities;
-
-namespace DD.CBU.Compute.Api.Client.Interfaces
+﻿namespace DD.CBU.Compute.Api.Client.WebApi
 {
+	using System;
+	using System.Net.Http;
+	using System.Threading.Tasks;
+
+	using DD.CBU.Compute.Api.Client.Interfaces;
+	using DD.CBU.Compute.Api.Client.Utilities;
+
 	/// <summary>
 	/// The http client adapter.
 	/// </summary>
-	internal class HttpClientAdapter : DisposableObject, IHttpClient
+	public class HttpClientAdapter : DisposableObject, IHttpClient
 	{
 		/// <summary>
 		/// The underlying <see cref="HttpClient"/>.
@@ -38,7 +29,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 			if (client == null)
 				throw new ArgumentNullException("client");
 
-			_client = client;
+			this._client = client;
 		}
 
 		/// <summary>
@@ -48,9 +39,9 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 		{
 			get
 			{
-				CheckDisposed();
+				this.CheckDisposed();
 
-				return _client.BaseAddress;
+				return this._client.BaseAddress;
 			}
 		}
 
@@ -65,9 +56,9 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 		/// </returns>
 		public Task<HttpResponseMessage> GetAsync(Uri uri)
 		{
-			CheckDisposed();
+			this.CheckDisposed();
 
-			return _client.GetAsync(uri);
+			return this._client.GetAsync(uri);
 		}
 
 		/// <summary>
@@ -81,9 +72,9 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 		/// </returns>
 		public Task<HttpResponseMessage> DeleteAsync(Uri uri)
 		{
-			CheckDisposed();
+			this.CheckDisposed();
 
-			return _client.DeleteAsync(uri);
+			return this._client.DeleteAsync(uri);
 		}
 
 		/// <summary>
@@ -100,9 +91,9 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 		/// </returns>
 		public Task<HttpResponseMessage> PutAsync(Uri uri, HttpContent content)
 		{
-			CheckDisposed();
+			this.CheckDisposed();
 
-			return _client.PutAsync(uri, content);
+			return this._client.PutAsync(uri, content);
 		}
 
 		/// <summary>
@@ -119,9 +110,9 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 		/// </returns>
 		public Task<HttpResponseMessage> PostAsync(Uri uri, HttpContent content)
 		{
-			CheckDisposed();
+			this.CheckDisposed();
 
-			return _client.PostAsync(uri, content);
+			return this._client.PostAsync(uri, content);
 		}
 
 		/// <summary>
@@ -133,7 +124,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 		protected override void Dispose(bool disposing)
 		{
 			if (disposing)
-				_client.Dispose();
+				this._client.Dispose();
 		}
 	}
 }

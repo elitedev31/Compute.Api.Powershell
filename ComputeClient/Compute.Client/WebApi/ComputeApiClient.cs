@@ -34,6 +34,7 @@ namespace DD.CBU.Compute.Api.Client
 	using DD.CBU.Compute.Api.Client.Server;
 	using DD.CBU.Compute.Api.Client.Server20;
 	using DD.CBU.Compute.Api.Client.Utilities;
+	using DD.CBU.Compute.Api.Client.WebApi;
 	using DD.CBU.Compute.Api.Contracts.Datacenter;
 	using DD.CBU.Compute.Api.Contracts.Directory;
 	using DD.CBU.Compute.Api.Contracts.General;
@@ -62,7 +63,7 @@ namespace DD.CBU.Compute.Api.Client
 				throw new ArgumentException(
 					"Argument cannot be null, empty, or composed entirely of whitespace: 'targetRegionName'.", "targetRegionName");
 
-			KnownApiRegion region = KnownApiRegion.Australia_AU;
+			KnownApiRegion region;
 			if (!KnownApiRegion.TryParse(targetRegionName, true, out region))
 				throw new ArgumentException("targetRegionName doesnt map to a valid region", "targetRegionName");
 
@@ -399,7 +400,7 @@ namespace DD.CBU.Compute.Api.Client
 				region =>
 				new KeyValuePair<KnownApiRegion, IComputeApiClient>(
 					region,
-					ComputeApiClient.GetComputeApiClient(vendor, region, credential)))
+					GetComputeApiClient(vendor, region, credential)))
 																					.ToDictionary(x => x.Key, x => x.Value);
 
 			if (computeClients.Count == 0)
@@ -416,6 +417,7 @@ namespace DD.CBU.Compute.Api.Client
 			{
 				await Task.WhenAll(loginTasks.Values.ToArray());
 			}
+			// ReSharper disable once EmptyGeneralCatchClause
 			catch (Exception)
 			{
 				// ignore (there might be region that this user is not enabled)
@@ -439,6 +441,7 @@ namespace DD.CBU.Compute.Api.Client
 			{
 				await Task.WhenAll(multiGeoTasks);
 			}
+			// ReSharper disable once EmptyGeneralCatchClause
 			catch (Exception)
 			{
 				// ignore (only one task will return with valid result)
@@ -495,7 +498,7 @@ namespace DD.CBU.Compute.Api.Client
 		[Obsolete("Use static method ComputeApiClient.GetListOfMultiGeographyRegionsFromHomeRegion instead")]
 		public async Task<IEnumerable<Geo>> DiscoverHomeMultiGeo(KnownApiVendor vendor, ICredentials credential)
 		{
-			return await ComputeApiClient.GetListOfMultiGeographyRegionsFromHomeRegion(vendor, credential);
+			return await GetListOfMultiGeographyRegionsFromHomeRegion(vendor, credential);
 		}			
 
 		/// <summary>
@@ -1203,8 +1206,7 @@ namespace DD.CBU.Compute.Api.Client
 			var servers = await GetDeployedServers(serverId, string.Empty, string.Empty, string.Empty);
 			if (servers.Any())
 				return servers.SingleOrDefault();
-			else
-				return null;
+			return null;
 		}
 
 
