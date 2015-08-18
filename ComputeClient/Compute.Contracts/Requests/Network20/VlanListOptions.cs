@@ -16,13 +16,13 @@
         /// Domain.
         /// networkDomainId=9a857b7c-37bd-
         /// 11e2-a91c-0030487e0302. </summary>
-        [FilterParameter("id")]
+        [FilterParameter("networkDomainId")]
         public Guid? NetworkDomainId { get; set; }
 
         /// <summary>	Identifies an individual Data Center.
         /// See List Data Centers.
         /// datacenterId=NA9. </summary>
-        [FilterParameter("id")]
+        [FilterParameter("datacenterId")]
         public string DatacenterId { get; set; }
 
         /// <summary>	Identifies VLANs by their name.
@@ -31,20 +31,20 @@
         /// comparator defined in the Paging
         /// and Filtering for List API
         /// Functions overview. </summary>
-        [FilterParameter("id")]
+        [FilterParameter("name")]
         public string Name { get; set; }
 
         /// <summary> Identifies VLANs by their base
         /// network IPv4 address.
         /// privateIpv4Address=10.1.1.0. </summary>
-        [FilterParameter("id")]
+        [FilterParameter("privateIpv4Address")]
         public string PrivateIpv4Address { get; set; }
 
         /// <summary>	Identifies VLANs by their base
         /// network IPv6 address.
         /// ipv6Address=
         /// 2607:f480:1111:1102:0:0:0:0. </summary>
-        [FilterParameter("id")]
+        [FilterParameter("ipv6Address")]
         public string Ipv6Address { get; set; }
 
         /// <summary>	Identifies VLANs by their state.
@@ -61,7 +61,7 @@
         /// This set of values should not be
         /// assumed to be static and can
         /// increase at any time. </summary>
-        [FilterParameter("id")]
+        [FilterParameter("state")]
         public string State { get; set; }
 
         /// <summary>	Identifies the date of creation of
