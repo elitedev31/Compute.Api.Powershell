@@ -6,7 +6,7 @@
 	using DD.CBU.Compute.Api.Client.Interfaces;
 	using DD.CBU.Compute.Api.Contracts.Network20;
 	using DD.CBU.Compute.Api.Contracts.Requests;
-	using DD.CBU.Compute.Api.Contracts.Requests.Server;
+	using DD.CBU.Compute.Api.Contracts.Requests.Server20;
 
 	/// <summary>	A server 2.0 extensions methods. </summary>
 	public static class Server20Extensions

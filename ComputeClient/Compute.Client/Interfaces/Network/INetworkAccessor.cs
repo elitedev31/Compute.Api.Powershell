@@ -32,24 +32,35 @@
 			string dataCentreLocation,
 			string description = null);
 
-		/// <summary>
-		/// The get networks task.
-		/// </summary>
-		/// <returns>
-		/// The <see cref="Task"/>.
-		/// </returns>
-		Task<IEnumerable<NetworkWithLocationsNetwork>> GetNetworks();
+        /// <summary>
+        /// The get networks task.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        Task<IEnumerable<NetworkWithLocationsNetwork>> GetNetworks();
 
-		/// <summary>
-		/// The delete network.
-		/// </summary>
-		/// <param name="networkId">
-		/// The network id.
-		/// </param>
-		/// <returns>
-		/// The <see cref="Task"/>.
-		/// </returns>
-		Task<Status> DeleteNetwork(string networkId);
+        /// <summary>
+        /// The get networks task.
+        /// </summary>
+        /// <param name="locationId">
+        /// The identifier of the location to get the networks from.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        Task<IEnumerable<NetworkWithLocationsNetwork>> GetNetworks(string locationId);
+
+        /// <summary>
+        /// The delete network.
+        /// </summary>
+        /// <param name="networkId">
+        /// The network id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        Task<Status> DeleteNetwork(string networkId);
 
 		/// <summary>
 		/// The modify network.

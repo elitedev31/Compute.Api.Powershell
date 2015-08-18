@@ -300,6 +300,25 @@ namespace DD.CBU.Compute.Api.Client
         }
 
         /// <summary>
+        /// Get the relative URI for the CaaS API action that retrieves a list of all data centres available for use by the specified organisation.
+        /// </summary>
+		/// <param name="orgId">
+		/// The organisation Id
+		/// </param>
+        /// <param name="locationId">
+        /// The location id.
+        /// </param>
+		/// <returns>
+		/// The relative action Uri.
+		/// </returns>
+        public static Uri DatacentreWithMaintanence(Guid orgId, string locationId)
+        {
+            Contract.Requires(orgId != Guid.Empty, "Organization id cannot be empty!");
+            Contract.Requires(String.IsNullOrEmpty(locationId), "Location id cannot be empty!");
+            return new Uri(string.Format(MCP1_0_PREFIX + "{0}/datacenterWithMaintenanceStatus?location={1}", orgId, locationId), UriKind.Relative);
+        }
+
+        /// <summary>
 		/// Get the relative URI for the CaaS API action that retrieves a list of all system-defined images deployed in the
 		///     specified data centre.
         /// </summary>
@@ -404,6 +423,20 @@ namespace DD.CBU.Compute.Api.Client
         {
             return new Uri(
 				string.Format(MCP1_0_PREFIX + "{0}/image/{1}?delete", orgId, imageId), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// Gets the relative URI for the CaaS API action that retrieves a filtered list of deployed servers.
+        /// </summary>
+		/// <param name="orgId">
+		/// The organization id
+		/// </param>
+		/// <returns>
+		/// A list of deployed servers
+		/// </returns>
+        public static Uri DeployedServers(Guid orgId)
+        {
+            return new Uri(string.Format(MCP1_0_PREFIX + "{0}/serverWithBackup", orgId), UriKind.Relative);
         }
 
         /// <summary>
@@ -940,6 +973,23 @@ namespace DD.CBU.Compute.Api.Client
         public static Uri NetworkWithLocations(Guid orgId)
         {
 			return new Uri(string.Format(MCP1_0_PREFIX + "{0}/networkWithLocation", orgId), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// Lists the Networks deployed across all data center locations for the supplied organization.
+        /// </summary>
+		/// <param name="orgId">
+		/// The organization id
+		/// </param>
+        /// <param name="locationId">
+        /// The identifier of the location to get the networks from.
+        /// </param>
+		/// <returns>
+		/// Returns the relative URI of the REST request for a list of networks
+		/// </returns>
+        public static Uri NetworkWithLocation(Guid orgId, string locationId)
+        {
+            return new Uri(string.Format(MCP1_0_PREFIX + "{0}/networkWithLocation/{1}", orgId, locationId), UriKind.Relative);
         }
 
         /// <summary>

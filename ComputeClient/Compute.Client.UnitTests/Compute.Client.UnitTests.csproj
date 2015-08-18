@@ -63,7 +63,9 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
@@ -74,6 +76,8 @@
     <Compile Include="MCP2\ServerTests.cs" />
     <Compile Include="MCP2\VlanTests.cs" />
     <Compile Include="RequestFileResponseType.cs" />
+    <Compile Include="Utilities\PageableRequestExtensionsTests.cs" />
+    <Compile Include="Utilities\FilterableRequestExtensionsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Compute.Client\Compute.Client.csproj">

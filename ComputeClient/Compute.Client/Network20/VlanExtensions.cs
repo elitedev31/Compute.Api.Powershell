@@ -6,7 +6,7 @@
 	using DD.CBU.Compute.Api.Client.Interfaces;
 	using DD.CBU.Compute.Api.Contracts.Network20;
 	using DD.CBU.Compute.Api.Contracts.Requests;
-	using DD.CBU.Compute.Api.Contracts.Requests.Network;
+	using DD.CBU.Compute.Api.Contracts.Requests.Network20;
 
 	/// <summary>
 	/// The vlan extensions.

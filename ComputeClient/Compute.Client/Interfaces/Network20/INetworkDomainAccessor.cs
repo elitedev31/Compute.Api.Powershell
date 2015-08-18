@@ -1,27 +1,31 @@
 ﻿namespace DD.CBU.Compute.Api.Client.Interfaces.Network20
 {
-	using System;
-	using System.Collections.Generic;
-	using System.Threading.Tasks;
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
 
-	using DD.CBU.Compute.Api.Contracts.Network20;
-	using DD.CBU.Compute.Api.Contracts.Requests;
+    using DD.CBU.Compute.Api.Contracts.Network20;
+    using DD.CBU.Compute.Api.Contracts.Requests;
+    using DD.CBU.Compute.Api.Contracts.Requests.Network20;
 
-	/// <summary>
-	/// The NetworkDomain interface.
-	/// </summary>
-	public interface INetworkDomainAccessor
+    /// <summary>
+    /// The NetworkDomain interface.
+    /// </summary>
+    public interface INetworkDomainAccessor
 	{
-		/// <summary>
-		/// The get network domains.
-		/// </summary>
-		/// <param name="pagingOptions">
-		/// The paging options.
+        /// <summary>
+        /// The get network domains.
+        /// </summary>
+        /// <param name="pagingOptions">
+        /// The paging options.
+        /// </param>
+		/// <param name="filteringOptions">
+		/// The filtering options.
 		/// </param>
-		/// <returns>
-		/// The <see cref="Task"/>.
-		/// </returns>
-		Task<IEnumerable<NetworkDomainType>> GetNetworkDomains(PageableRequest pagingOptions = null);
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        Task<IEnumerable<NetworkDomainType>> GetNetworkDomains(PageableRequest pagingOptions = null, NetworkDomainListOptions filteringOptions = null);
 
 		/// <summary>
 		/// 	This function gets list of network domains from Cloud. 

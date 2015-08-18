@@ -24,22 +24,25 @@
 	    /// </returns>
 	    Task<IAccount> LoginAsync();
 
-		/// <summary>
-		/// Invoke a CaaS API operation using a HTTP GET request.
-		/// </summary>
-		/// <typeparam name="TResult">
-		/// The XML-serialisable data contract type into which the response will be deserialised.
-		/// </typeparam>
-		/// <param name="relativeOperationUri">
-		/// The operation URI (relative to the CaaS API's base URI).
+        /// <summary>
+        /// Invoke a CaaS API operation using a HTTP GET request.
+        /// </summary>
+        /// <typeparam name="TResult">
+        /// The XML-serialisable data contract type into which the response will be deserialised.
+        /// </typeparam>
+        /// <param name="relativeOperationUri">
+        /// The operation URI (relative to the CaaS API's base URI).
+        /// </param>
+        /// <param name="pagingOptions">
+        /// The paging Options.
+        /// </param>
+		/// <param name="filteringOptions">
+		/// The filtering Options.
 		/// </param>
-		/// <param name="pagingOptions">
-		/// The paging Options.
-		/// </param>
-		/// <returns>
-		/// The operation result.
-		/// </returns>
-        Task<TResult> GetAsync<TResult>(Uri relativeOperationUri, IPageableRequest pagingOptions = null);
+        /// <returns>
+        /// The operation result.
+        /// </returns>
+        Task<TResult> GetAsync<TResult>(Uri relativeOperationUri, IPageableRequest pagingOptions = null, IFilterableRequest filteringOptions = null);
 
         /// <summary>
         /// Invoke a CaaS API operation using a HTTP POST request.

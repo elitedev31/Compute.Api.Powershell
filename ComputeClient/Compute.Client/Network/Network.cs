@@ -74,16 +74,32 @@
 			return networks.Items;
 		}
 
-		/// <summary>
-		/// The delete network.
-		/// </summary>
-		/// <param name="networkId">
-		/// The network id.
-		/// </param>
-		/// <returns>
-		/// The <see cref="Task"/>.
-		/// </returns>
-		public async Task<Status> DeleteNetwork(string networkId)
+        /// <summary>
+        /// The get networks task.
+        /// </summary>
+        /// <param name="locationId">
+        /// The identifier of the location to get the networks from.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        public async Task<IEnumerable<NetworkWithLocationsNetwork>> GetNetworks(string locationId)
+        {
+            NetworkWithLocations networks =
+                await _apiClient.GetAsync<NetworkWithLocations>(ApiUris.NetworkWithLocation(_apiClient.OrganizationId, locationId));
+            return networks.Items;
+        }
+
+        /// <summary>
+        /// The delete network.
+        /// </summary>
+        /// <param name="networkId">
+        /// The network id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        public async Task<Status> DeleteNetwork(string networkId)
 		{
 			return
 				await _apiClient.GetAsync<Status>(ApiUris.DeleteNetwork(_apiClient.OrganizationId, networkId));

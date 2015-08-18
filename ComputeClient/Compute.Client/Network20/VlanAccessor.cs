@@ -7,7 +7,7 @@
 	using DD.CBU.Compute.Api.Client.Interfaces.Network20;
 	using DD.CBU.Compute.Api.Contracts.Network20;
 	using DD.CBU.Compute.Api.Contracts.Requests;
-	using DD.CBU.Compute.Api.Contracts.Requests.Network;
+	using DD.CBU.Compute.Api.Contracts.Requests.Network20;
 
 	/// <summary>	Access methods for VLAN Operations </summary>
 	/// <seealso cref="T:DD.CBU.Compute.Api.Client.Interfaces.IVlan"/>
@@ -47,7 +47,7 @@
 			var vlans =
 				await
 				_api.GetAsync<vlans>(
-					ApiUris.GetVlanByOrgId(_api.OrganizationId), pagingOptions);
+					ApiUris.GetVlanByOrgId(_api.OrganizationId), pagingOptions, options);
 
 			return vlans.vlan;
 		}

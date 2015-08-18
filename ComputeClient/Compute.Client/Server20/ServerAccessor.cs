@@ -7,7 +7,7 @@
 	using DD.CBU.Compute.Api.Client.Interfaces.Server20;
 	using DD.CBU.Compute.Api.Contracts.Network20;
 	using DD.CBU.Compute.Api.Contracts.Requests;
-	using DD.CBU.Compute.Api.Contracts.Requests.Server;
+	using DD.CBU.Compute.Api.Contracts.Requests.Server20;
 
 	/// <summary>
 	/// The server 2.0 accessor.
@@ -30,25 +30,26 @@
 			_apiClient = apiClient;
 		}
 
-		/// <summary>
-		/// The get mcp 2 deployed servers.
-		/// </summary>
-		/// <param name="options">
-		/// The options.
-		/// </param>
-		/// <param name="pagingOptions">
-		/// The paging options.
-		/// </param>
-		/// <returns>
-		/// The <see cref="Task"/>.
-		/// </returns>	
-		public async Task<ServersResponseCollection> GetMcp2DeployedServers(
-			ServerListOptions options = null,
-			PageableRequest pagingOptions = null)
+        /// <summary>
+        /// The get mcp 2 deployed servers.
+        /// </summary>
+        /// <param name="filteringOptions">
+        /// The filtering options.
+        /// </param>
+        /// <param name="pagingOptions">
+        /// The paging options.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>	
+        public async Task<ServersResponseCollection> GetMcp2DeployedServers(
+			ServerListOptions filteringOptions = null,
+            IPageableRequest pagingOptions = null)
 		{
-			ServersResponseCollection servers =
-				await
-				_apiClient.GetAsync<ServersResponseCollection>(ApiUris.GetMcp2Servers(_apiClient.OrganizationId), pagingOptions);
+			ServersResponseCollection servers = await _apiClient.GetAsync<ServersResponseCollection>(
+                ApiUris.GetMcp2Servers(_apiClient.OrganizationId),
+                pagingOptions,
+                filteringOptions);
 			return servers;
 		}
 

@@ -1,20 +1,21 @@
 ﻿namespace DD.CBU.Compute.Api.Client.Account
 {
-	using System.Collections.Generic;
-	using System.Linq;
-	using System.Threading.Tasks;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
 
-	using DD.CBU.Compute.Api.Client.Interfaces;
-	using DD.CBU.Compute.Api.Client.Interfaces.Account;
-	using DD.CBU.Compute.Api.Contracts.Datacenter;
-	using DD.CBU.Compute.Api.Contracts.Directory;
-	using DD.CBU.Compute.Api.Contracts.General;
-	using DD.CBU.Compute.Api.Contracts.Software;
+    using DD.CBU.Compute.Api.Client.Interfaces;
+    using DD.CBU.Compute.Api.Client.Interfaces.Account;
+    using DD.CBU.Compute.Api.Contracts.Datacenter;
+    using DD.CBU.Compute.Api.Contracts.Directory;
+    using DD.CBU.Compute.Api.Contracts.General;
+    using DD.CBU.Compute.Api.Contracts.Requests;
+    using DD.CBU.Compute.Api.Contracts.Software;
 
-	/// <summary>
-	/// The account accessor.
-	/// </summary>
-	public class AccountAccessor : IAccountAccessor
+    /// <summary>
+    /// The account accessor.
+    /// </summary>
+    public class AccountAccessor : IAccountAccessor
 	{
 		/// <summary>
 		/// The _api client.
@@ -165,30 +166,51 @@
 			return labels.Items;
 		}
 
-		/// <summary>
-		/// The get data centers with maintenance statuses.
-		/// </summary>
-		/// <returns>
-		/// The <see cref="Task"/>.
-		/// </returns>
-		public async Task<IEnumerable<DatacenterWithMaintenanceStatusType>> GetDataCentersWithMaintenanceStatuses()
+        /// <summary>
+        /// The get data centers with maintenance statuses.
+        /// </summary>
+        /// <param name="pagingOptions">
+        /// The paging options.
+        /// </param>
+        /// <param name="filteringOptions">
+        /// The filtering options.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        public async Task<IEnumerable<DatacenterWithMaintenanceStatusType>> GetDataCentersWithMaintenanceStatuses(IPageableRequest pagingOptions = null)
 		{
-			DatacentersWithMaintenanceStatus dataCenters =
-				await
-					_apiClient.GetAsync<DatacentersWithMaintenanceStatus>(ApiUris.DatacentresWithMaintanence(_apiClient.OrganizationId));
+			DatacentersWithMaintenanceStatus dataCenters = await _apiClient.GetAsync<DatacentersWithMaintenanceStatus>(
+                ApiUris.DatacentresWithMaintanence(_apiClient.OrganizationId), pagingOptions);
 			return dataCenters.datacenter;
 		}
 
-		/// <summary>
-		/// The designate primary administrator account.
-		/// </summary>
-		/// <param name="username">
-		/// The username.
-		/// </param>
-		/// <returns>
-		/// The <see cref="Task"/>.
-		/// </returns>
-		public async Task<Status> DesignatePrimaryAdministratorAccount(string username)
+        /// <summary>
+        /// The get data center with maintenance status.
+        /// </summary>
+        /// <param name="locationId">
+        /// The identifier of the datacenter.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        public async Task<DatacenterWithMaintenanceStatusType> GetDataCenterWithMaintenanceStatus(string locationId)
+        {
+            DatacentersWithMaintenanceStatus dataCenters = await _apiClient.GetAsync<DatacentersWithMaintenanceStatus>(
+                ApiUris.DatacentreWithMaintanence(_apiClient.OrganizationId, locationId));
+            return dataCenters.datacenter.FirstOrDefault();
+        }
+
+        /// <summary>
+        /// The designate primary administrator account.
+        /// </summary>
+        /// <param name="username">
+        /// The username.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        public async Task<Status> DesignatePrimaryAdministratorAccount(string username)
 		{
 			return await _apiClient.GetAsync<Status>(ApiUris.SetPrimaryAdministrator(_apiClient.OrganizationId, username));
 		}	

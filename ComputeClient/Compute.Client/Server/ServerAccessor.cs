@@ -1,17 +1,19 @@
 ﻿namespace DD.CBU.Compute.Api.Client.Server
 {
-	using DD.CBU.Compute.Api.Client.Interfaces;
-	using DD.CBU.Compute.Api.Client.Interfaces.Server;
-	using DD.CBU.Compute.Api.Contracts.General;
-	using DD.CBU.Compute.Api.Contracts.Server;
+    using DD.CBU.Compute.Api.Client.Interfaces;
+    using DD.CBU.Compute.Api.Client.Interfaces.Server;
+    using DD.CBU.Compute.Api.Contracts.General;
+    using DD.CBU.Compute.Api.Contracts.Requests;
+    using DD.CBU.Compute.Api.Contracts.Requests.Server;
+    using DD.CBU.Compute.Api.Contracts.Server;
 
-	using System.Collections.Generic;
-	using System.Threading.Tasks;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
 
-	/// <summary>
-	/// The server accessor.
-	/// </summary>
-	public class ServerAccessor : IServerAccessor
+    /// <summary>
+    /// The server accessor.
+    /// </summary>
+    public class ServerAccessor : IServerAccessor
 	{
 		/// <summary>
 		/// The _api client.
@@ -63,15 +65,26 @@
 		/// <summary>
 		/// The get deployed servers.
 		/// </summary>
+        /// <param name="filteringOptions">
+        /// The filtering options.
+        /// </param>
+        /// <param name="pagingOptions">
+        /// The paging options.
+        /// </param>
 		/// <returns>
 		/// The <see cref="Task"/>.
 		/// </returns>		
-		public async Task<IEnumerable<ServerWithBackupType>> GetDeployedServers()
+		public async Task<IEnumerable<ServerWithBackupType>> GetDeployedServers(
+            ServerListOptions filteringOptions = null,
+            IPageableRequest pagingOptions = null)
 		{
-			ServersWithBackup servers =
-				await _apiClient.GetAsync<ServersWithBackup>(ApiUris.DeployedServers(_apiClient.OrganizationId, null, null, null, null));
+			ServersWithBackup servers = await _apiClient.GetAsync<ServersWithBackup>(
+                ApiUris.DeployedServers(_apiClient.OrganizationId),
+                pagingOptions,
+                filteringOptions);
 			return servers.server;
 		}
+
 		/// <summary>
 		/// The modify server.
 		/// </summary>

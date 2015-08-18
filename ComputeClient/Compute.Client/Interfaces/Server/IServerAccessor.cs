@@ -1,16 +1,18 @@
 ﻿namespace DD.CBU.Compute.Api.Client.Interfaces.Server
 {
-	using System;
-	using System.Collections.Generic;
-	using System.Threading.Tasks;
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
 
-	using DD.CBU.Compute.Api.Contracts.General;
-	using DD.CBU.Compute.Api.Contracts.Server;
+    using DD.CBU.Compute.Api.Contracts.General;
+    using DD.CBU.Compute.Api.Contracts.Requests;
+    using DD.CBU.Compute.Api.Contracts.Requests.Server;
+    using DD.CBU.Compute.Api.Contracts.Server;
 
-	/// <summary>
-	/// The server Interface
-	/// </summary>
-	public interface IServerAccessor
+    /// <summary>
+    /// The server Interface
+    /// </summary>
+    public interface IServerAccessor
 	{
 		/// <summary>
 		/// The get deployed servers.
@@ -36,13 +38,21 @@
 			string networkId,
 			string location);
 
-		/// <summary>
-		/// The get deployed servers.
-		/// </summary>
-		/// <returns>
-		/// The <see cref="Task"/>.
-		/// </returns>
-		Task<IEnumerable<ServerWithBackupType>> GetDeployedServers();
+        /// <summary>
+        /// The get deployed servers.
+        /// </summary>
+        /// <param name="filteringOptions">
+        /// The filtering options.
+        /// </param>
+        /// <param name="pagingOptions">
+        /// The paging options.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        Task<IEnumerable<ServerWithBackupType>> GetDeployedServers(
+            ServerListOptions filteringOptions = null,
+            IPageableRequest pagingOptions = null);
 
 		/// <summary>
 		/// The modify server.

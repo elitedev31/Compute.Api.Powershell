@@ -1,17 +1,18 @@
 ﻿namespace DD.CBU.Compute.Api.Client.Network20
 {
-	using System;
-	using System.Collections.Generic;
-	using System.Threading.Tasks;
-	using DD.CBU.Compute.Api.Client.Interfaces;
-	using DD.CBU.Compute.Api.Client.Interfaces.Network20;
-	using DD.CBU.Compute.Api.Contracts.Network20;
-	using DD.CBU.Compute.Api.Contracts.Requests;
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using DD.CBU.Compute.Api.Client.Interfaces;
+    using DD.CBU.Compute.Api.Client.Interfaces.Network20;
+    using DD.CBU.Compute.Api.Contracts.Network20;
+    using DD.CBU.Compute.Api.Contracts.Requests;
+    using DD.CBU.Compute.Api.Contracts.Requests.Network20;
 
-	/// <summary>
-	/// The network domain.
-	/// </summary>
-	public class NetworkDomainAccessor : INetworkDomainAccessor
+    /// <summary>
+    /// The network domain.
+    /// </summary>
+    public class NetworkDomainAccessor : INetworkDomainAccessor
 	{
 		/// <summary>
 		/// The _client.
@@ -28,18 +29,24 @@
 			_apiClient = apiClient;
 		}
 
-		/// <summary>
-		/// The get network domains.
-		/// </summary>
-		/// <param name="pagingOptions">
-		/// The paging options.
+        /// <summary>
+        /// The get network domains.
+        /// </summary>
+        /// <param name="pagingOptions">
+        /// The paging options.
+        /// </param>
+		/// <param name="filteringOptions">
+		/// The filtering options.
 		/// </param>
-		/// <returns>
-		/// The <see cref="Task"/>.
-		/// </returns>
-		public async Task<IEnumerable<NetworkDomainType>> GetNetworkDomains(PageableRequest pagingOptions = null)
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        public async Task<IEnumerable<NetworkDomainType>> GetNetworkDomains(PageableRequest pagingOptions = null, NetworkDomainListOptions filteringOptions = null)
 		{
-			var networks = await _apiClient.GetAsync<networkDomains>(ApiUris.NetworkDomains(_apiClient.OrganizationId), pagingOptions);
+			var networks = await _apiClient.GetAsync<networkDomains>(
+                ApiUris.NetworkDomains(_apiClient.OrganizationId),
+                pagingOptions,
+                filteringOptions);
 			return networks.networkDomain;
 		}
 

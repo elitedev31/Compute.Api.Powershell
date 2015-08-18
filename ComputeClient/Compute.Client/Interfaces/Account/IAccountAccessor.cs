@@ -1,13 +1,13 @@
 ﻿namespace DD.CBU.Compute.Api.Client.Interfaces.Account
 {
 	using System.Collections.Generic;
-	using System.Net;
 	using System.Threading.Tasks;
 
 	using DD.CBU.Compute.Api.Contracts.Datacenter;
 	using DD.CBU.Compute.Api.Contracts.Directory;
 	using DD.CBU.Compute.Api.Contracts.General;
-	using DD.CBU.Compute.Api.Contracts.Software;
+    using DD.CBU.Compute.Api.Contracts.Requests;
+    using DD.CBU.Compute.Api.Contracts.Software;
 
 	/// <summary>
 	/// The AccountAccessor interface.
@@ -82,23 +82,37 @@
 		/// </returns>
 		Task<IEnumerable<SoftwareLabel>> GetListOfSoftwareLabels();
 
-		/// <summary>
-		/// The get data centers with maintenance statuses.
-		/// </summary>
-		/// <returns>
-		/// The <see cref="Task"/>.
-		/// </returns>
-		Task<IEnumerable<DatacenterWithMaintenanceStatusType>> GetDataCentersWithMaintenanceStatuses();
+        /// <summary>
+        /// The get data centers with maintenance statuses.
+        /// </summary>
+        /// <param name="pagingOptions">
+        /// The paging options.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        Task<IEnumerable<DatacenterWithMaintenanceStatusType>> GetDataCentersWithMaintenanceStatuses(IPageableRequest pagingOptions = null);
 
-		/// <summary>
-		/// The designate primary administrator account.
-		/// </summary>
-		/// <param name="username">
-		/// The username.
-		/// </param>
-		/// <returns>
-		/// The <see cref="Task"/>.
-		/// </returns>
-		Task<Status> DesignatePrimaryAdministratorAccount(string username);
+        /// <summary>
+        /// The get data center with maintenance status.
+        /// </summary>
+        /// <param name="locationId">
+        /// The identifier of the datacenter.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        Task<DatacenterWithMaintenanceStatusType> GetDataCenterWithMaintenanceStatus(string locationId);
+
+        /// <summary>
+        /// The designate primary administrator account.
+        /// </summary>
+        /// <param name="username">
+        /// The username.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        Task<Status> DesignatePrimaryAdministratorAccount(string username);
 	}
 }

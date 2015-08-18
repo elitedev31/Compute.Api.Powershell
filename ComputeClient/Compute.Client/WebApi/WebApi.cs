@@ -86,30 +86,33 @@
 			return account;
 		}
 
-		/// <summary>
-		/// The get async.
-		/// </summary>
-		/// <param name="relativeOperationUri">
-		/// The relative operation uri.
+        /// <summary>
+        /// The get async.
+        /// </summary>
+        /// <param name="relativeOperationUri">
+        /// The relative operation uri.
+        /// </param>
+        /// <param name="pagingOptions">
+        /// The paging options.
+        /// </param>
+		/// <param name="filteringOptions">
+		/// The filtering options.
 		/// </param>
-		/// <param name="pagingOptions">
-		/// The paging options.
-		/// </param>
-		/// <typeparam name="TResult">
-		/// Result from the Get call
-		/// </typeparam>
-		/// <returns>
-		/// The <see cref="Task"/>.
-		/// </returns>
-		/// <exception cref="ArgumentNullException">
-		/// </exception>
-		/// <exception cref="ArgumentException">
-		/// </exception>
-		/// <exception cref="ComputeApiException">
-		/// </exception>
-		/// <exception cref="HttpRequestException">
-		/// </exception>
-		public async Task<TResult> GetAsync<TResult>(Uri relativeOperationUri, IPageableRequest pagingOptions = null)
+        /// <typeparam name="TResult">
+        /// Result from the Get call
+        /// </typeparam>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// </exception>
+        /// <exception cref="ComputeApiException">
+        /// </exception>
+        /// <exception cref="HttpRequestException">
+        /// </exception>
+        public async Task<TResult> GetAsync<TResult>(Uri relativeOperationUri, IPageableRequest pagingOptions = null, IFilterableRequest filteringOptions = null)
 		{
 			if (relativeOperationUri == null)
 				throw new ArgumentNullException("relativeOperationUri");
@@ -117,7 +120,17 @@
 			if (relativeOperationUri.IsAbsoluteUri)
 				throw new ArgumentException("The supplied URI is not a relative URI.", "relativeOperationUri");
 
-			using (HttpResponseMessage response = await _httpClient.GetAsync(relativeOperationUri))
+            if (filteringOptions != null)
+            {
+                relativeOperationUri = filteringOptions.AppendToUri(relativeOperationUri);
+            }
+
+            if (pagingOptions != null)
+            {
+                relativeOperationUri = pagingOptions.AppendToUri(relativeOperationUri);
+            }
+
+            using (HttpResponseMessage response = await _httpClient.GetAsync(relativeOperationUri))
 			{
 				if (!response.IsSuccessStatusCode)
 				{

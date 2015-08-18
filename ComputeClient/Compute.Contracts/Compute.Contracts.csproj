@@ -189,9 +189,13 @@
     <Compile Include="Network\PortRangeTypeType.cs" />
     <Compile Include="Network2.0\PublicIPBlock.cs" />
     <Compile Include="Network2.0\Server.cs" />
+    <Compile Include="Requests\Attributes\FilterParameterAttribute.cs" />
+    <Compile Include="Requests\IFilterableRequest.cs" />
     <Compile Include="Requests\IPageableRequest.cs" />
-    <Compile Include="Requests\Network\VlanListOptions.cs" />
+    <Compile Include="Requests\Network20\NetworkDomainListOptions.cs" />
+    <Compile Include="Requests\Network20\VlanListOptions.cs" />
     <Compile Include="Requests\PageableRequest.cs" />
+    <Compile Include="Requests\Server20\ServerListOptions.cs" />
     <Compile Include="Requests\Server\ServerListOptions.cs" />
     <Compile Include="Server\AntiAffinityRules.cs" />
     <Compile Include="Server\AntiAffinityRuleType.cs" />
