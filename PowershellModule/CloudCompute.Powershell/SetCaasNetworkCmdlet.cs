@@ -60,14 +60,14 @@ namespace DD.CBU.Compute.Powershell
 				switch (ParameterSetName)
 				{
 					case "Multicast":
-						status = Connection.ApiClient.SetNetworkMulticast(Network.id, Multicast).Result;
+						status = Connection.ApiClient.NetworkingLegacy.Network.SetNetworkMulticast(Network.id, Multicast).Result;
 						break;
 					default:
-						status = Connection.ApiClient.ModifyNetwork(Network.id, Name, Description).Result;
+						status = Connection.ApiClient.NetworkingLegacy.Network.ModifyNetwork(Network.id, Name, Description).Result;
 						break;
 				}
 
-				status = Connection.ApiClient.ModifyNetwork(Network.id, Name, Description).Result;
+				status = Connection.ApiClient.NetworkingLegacy.Network.ModifyNetwork(Network.id, Name, Description).Result;
 				if (status != null)
 					WriteDebug(
 						string.Format(

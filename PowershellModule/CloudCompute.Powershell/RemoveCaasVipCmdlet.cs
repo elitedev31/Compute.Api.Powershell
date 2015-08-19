@@ -45,7 +45,7 @@ namespace DD.CBU.Compute.Powershell
 			try
 			{
 				if (!ShouldProcess(Vip.name)) return;
-				Status status = Connection.ApiClient.RemoveVip(Network.id, Vip.id).Result;
+				Status status = Connection.ApiClient.NetworkingLegacy.NetworkVip.RemoveVip(Network.id, Vip.id).Result;
 
 				if (status != null)
 					WriteDebug(

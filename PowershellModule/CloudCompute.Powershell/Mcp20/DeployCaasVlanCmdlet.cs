@@ -58,7 +58,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 			try
 			{
 				response =
-					Connection.ApiClient.DeployVlan(
+					Connection.ApiClient.Networking.Vlan.DeployVlan(
 						new DeployVlanType
 						{
 							name = Name, 

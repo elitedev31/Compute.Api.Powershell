@@ -72,7 +72,7 @@ namespace DD.CBU.Compute.Powershell
 		/// </summary>
 		private void DeleteNatRule()
 		{
-			Status status = Connection.ApiClient.DeleteNatRule(Network.id, NatRule.id).Result;
+			Status status = Connection.ApiClient.NetworkingLegacy.Network.DeleteNatRule(Network.id, NatRule.id).Result;
 			if (status != null)
 			{
 				WriteDebug(

@@ -45,7 +45,7 @@ namespace DD.CBU.Compute.Powershell
 			try
 			{
 				if (!ShouldProcess(Probe.name)) return;
-				Status status = Connection.ApiClient.RemoveProbe(Network.id, Probe.id).Result;
+				Status status = Connection.ApiClient.NetworkingLegacy.NetworkVip.RemoveProbe(Network.id, Probe.id).Result;
 
 				if (status != null)
 					WriteDebug(

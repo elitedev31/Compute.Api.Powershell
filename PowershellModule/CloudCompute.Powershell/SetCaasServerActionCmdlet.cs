@@ -73,16 +73,16 @@ namespace DD.CBU.Compute.Powershell
 				switch (Action)
 				{
 					case ServerAction.PowerOff:
-						status = Connection.ApiClient.ServerPowerOff(Server.id).Result;
+						status = Connection.ApiClient.ServerManagementLegacy.Server.ServerPowerOff(Server.id).Result;
 						break;
 					case ServerAction.PowerOn:
-						status = Connection.ApiClient.ServerPowerOn(Server.id).Result;
+						status = Connection.ApiClient.ServerManagementLegacy.Server.ServerPowerOn(Server.id).Result;
 						break;
 					case ServerAction.Restart:
-						status = Connection.ApiClient.ServerRestart(Server.id).Result;
+						status = Connection.ApiClient.ServerManagementLegacy.Server.ServerRestart(Server.id).Result;
 						break;
 					case ServerAction.Shutdown:
-						status = Connection.ApiClient.ServerShutdown(Server.id).Result;
+						status = Connection.ApiClient.ServerManagementLegacy.Server.ServerShutdown(Server.id).Result;
 						break;
 					default:
 						ThrowTerminatingError(

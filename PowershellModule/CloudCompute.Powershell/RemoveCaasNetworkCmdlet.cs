@@ -42,7 +42,7 @@ namespace DD.CBU.Compute.Powershell
 			try
 			{
 				if (!ShouldProcess(Network.name)) return;
-				Status status = Connection.ApiClient.DeleteNetwork(Network.id).Result;
+				Status status = Connection.ApiClient.NetworkingLegacy.Network.DeleteNetwork(Network.id).Result;
 				if (status != null)
 					WriteDebug(
 						string.Format(

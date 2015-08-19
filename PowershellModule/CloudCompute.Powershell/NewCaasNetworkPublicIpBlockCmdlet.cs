@@ -45,7 +45,7 @@ namespace DD.CBU.Compute.Powershell
 			base.ProcessRecord();
 			try
 			{
-				Status status = Connection.ApiClient.ReserveNetworkPublicIpAddressBlock(Network.id).Result;
+				Status status = Connection.ApiClient.NetworkingLegacy.Network.ReserveNetworkPublicIpAddressBlock(Network.id).Result;
 				if (status != null)
 				{
 					if (status.additionalInformation != null && PassThru.IsPresent)

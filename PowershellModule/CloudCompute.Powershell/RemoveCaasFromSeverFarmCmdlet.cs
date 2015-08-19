@@ -70,10 +70,10 @@ namespace DD.CBU.Compute.Powershell
 				if (!ShouldProcess(ServerFarm.name)) return;
 				if (ParameterSetName.Equals("RealServer"))
 					status =
-						Connection.ApiClient.RemoveRealServerFromServerFarm(Network.id, ServerFarm.id, RealServer.id, RealServerPort)
+						Connection.ApiClient.NetworkingLegacy.NetworkVip.RemoveRealServerFromServerFarm(Network.id, ServerFarm.id, RealServer.id, RealServerPort)
 							.Result;
 				else
-					status = Connection.ApiClient.RemoveProbeFromServerFarm(Network.id, ServerFarm.id, Probe.id).Result;
+					status = Connection.ApiClient.NetworkingLegacy.NetworkVip.RemoveProbeFromServerFarm(Network.id, ServerFarm.id, Probe.id).Result;
 
 
 				if (status != null)

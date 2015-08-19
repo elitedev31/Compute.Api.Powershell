@@ -131,7 +131,7 @@ namespace DD.CBU.Compute.Powershell
 				password = NewPassword.ToPlainString()
 			};
 
-			return await connection.ApiClient.UpdateAdministratorAccount(account);
+			return await connection.ApiClient.Account.UpdateAdministratorAccount(account);
 		}
 	}
 }

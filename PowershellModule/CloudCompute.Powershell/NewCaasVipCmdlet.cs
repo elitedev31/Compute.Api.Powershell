@@ -127,7 +127,7 @@ namespace DD.CBU.Compute.Powershell
 
 
 				Status status =
-					Connection.ApiClient.CreateVip(Network.id, Name, Port, Protocol, targetType, targetid, ReplyToIcmp, InService, 
+					Connection.ApiClient.NetworkingLegacy.NetworkVip.CreateVip(Network.id, Name, Port, Protocol, targetType, targetid, ReplyToIcmp, InService, 
 						ipAddress).Result;
 				if (status != null && PassThru.IsPresent)
 				{

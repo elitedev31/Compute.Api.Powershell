@@ -141,7 +141,7 @@ namespace DD.CBU.Compute.Powershell
 		private async Task<IEnumerable<ServerType>> GetDeployedServers(string serverId, string name,
 			string networkId, string location, string networkDomainId, string vlanId)
 		{
-			ServersResponseCollection serverResponse = await Connection.ApiClient.GetMcp2DeployedServers();
+			ServersResponseCollection serverResponse = await Connection.ApiClient.ServerManagement.Server.GetMcp2DeployedServers();
 
 			IEnumerable<ServerType> servers = serverResponse.Server;
 

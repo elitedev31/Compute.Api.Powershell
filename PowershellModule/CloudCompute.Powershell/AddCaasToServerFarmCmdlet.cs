@@ -69,9 +69,9 @@ namespace DD.CBU.Compute.Powershell
 				Status status = null;
 				if (ParameterSetName.Equals("RealServer"))
 					status =
-						Connection.ApiClient.AddRealServerToServerFarm(Network.id, ServerFarm.id, RealServer.id, RealServerPort).Result;
+						Connection.ApiClient.NetworkingLegacy.NetworkVip.AddRealServerToServerFarm(Network.id, ServerFarm.id, RealServer.id, RealServerPort).Result;
 				else
-					status = Connection.ApiClient.AddProbeToServerFarm(Network.id, ServerFarm.id, Probe.id).Result;
+					status = Connection.ApiClient.NetworkingLegacy.NetworkVip.AddProbeToServerFarm(Network.id, ServerFarm.id, Probe.id).Result;
 
 
 				if (status != null)

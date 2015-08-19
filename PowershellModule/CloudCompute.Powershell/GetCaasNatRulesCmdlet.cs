@@ -99,7 +99,7 @@ namespace DD.CBU.Compute.Powershell
 		/// </returns>
 		private IEnumerable<NatRuleType> GetNatRules()
 		{
-			return Connection.ApiClient.GetNatRules(Network.id).Result;
+			return Connection.ApiClient.NetworkingLegacy.Network.GetNatRules(Network.id).Result;
 		}
 	}
 }

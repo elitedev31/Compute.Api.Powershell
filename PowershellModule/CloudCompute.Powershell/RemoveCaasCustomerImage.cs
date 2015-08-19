@@ -39,7 +39,7 @@ namespace DD.CBU.Compute.Powershell
 			try
 			{
 				if (!ShouldProcess(ServerImage.name)) return;
-				Status status = Connection.ApiClient.RemoveCustomerServerImage(ServerImage.id).Result;
+				Status status = Connection.ApiClient.ServerManagementLegacy.ServerImage.RemoveCustomerServerImage(ServerImage.id).Result;
 
 				if (status != null)
 				{

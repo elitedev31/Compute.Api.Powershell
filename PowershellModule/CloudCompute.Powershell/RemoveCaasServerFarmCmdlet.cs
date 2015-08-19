@@ -45,7 +45,7 @@ namespace DD.CBU.Compute.Powershell
 			try
 			{
 				if (!ShouldProcess(ServerFarm.name)) return;
-				Status status = Connection.ApiClient.RemoveServerFarm(Network.id, ServerFarm.id).Result;
+				Status status = Connection.ApiClient.NetworkingLegacy.NetworkVip.RemoveServerFarm(Network.id, ServerFarm.id).Result;
 
 				if (status != null)
 					WriteDebug(

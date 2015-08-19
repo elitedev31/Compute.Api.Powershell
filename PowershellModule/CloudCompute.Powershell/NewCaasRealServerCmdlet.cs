@@ -14,7 +14,7 @@ using DD.CBU.Compute.Api.Client;
 using DD.CBU.Compute.Api.Client.VIP;
 using DD.CBU.Compute.Api.Contracts.General;
 using DD.CBU.Compute.Api.Contracts.Network;
-using DD.CBU.Compute.Api.Contracts.Server;
+using DD.CBU.Compute.Api.Contracts.Network20;
 using DD.CBU.Compute.Api.Contracts.Vip;
 
 namespace DD.CBU.Compute.Powershell
@@ -37,7 +37,7 @@ namespace DD.CBU.Compute.Powershell
 		/// The server to be added as real server
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The server to be added as real server", ValueFromPipeline = true)]
-		public ServerWithBackupType Server { get; set; }
+		public ServerType Server { get; set; }
 
 		/// <summary>
 		/// The name for the real server
@@ -66,7 +66,7 @@ namespace DD.CBU.Compute.Powershell
 			base.ProcessRecord();
 			try
 			{
-				Status status = Connection.ApiClient.CreateRealServer(Network.id, Name, Server.id, InService).Result;
+				Status status = Connection.ApiClient.NetworkingLegacy.NetworkVip.CreateRealServer(Network.id, Name, Server.id, InService).Result;
 				if (status != null && PassThru.IsPresent)
 				{
 					// Regex to extract the Id from the status result detail: Real-Server (id:b1a3aea6-37) created
@@ -81,14 +81,19 @@ namespace DD.CBU.Compute.Powershell
 							inService = InService.ToString().ToLower(), 
 							serverName = Server.name, 
 							serverId = Server.id, 
-							serverIp = Server.privateIp
+							serverIp = Server.nic != null ? Server.nic[0].privateIpv4 : Server.networkInfo.primaryNic.privateIpv4
 						};
 						WriteObject(rserver);
 					}
 					else
 					{
-						WriteError(new ErrorRecord(new CloudComputePsException("object Id not returned from API"), "-1", 
-							ErrorCategory.InvalidData, status));
+						WriteError(
+							new ErrorRecord(
+								new CloudComputePsException(
+									"object Id not returned from API"), 
+									"-1",
+									ErrorCategory.InvalidData, status)
+							);
 					}
 				}
 

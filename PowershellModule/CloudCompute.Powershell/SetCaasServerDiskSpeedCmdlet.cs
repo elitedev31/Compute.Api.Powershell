@@ -67,10 +67,10 @@ namespace DD.CBU.Compute.Powershell
 
 				Status status = null;
 
-				IEnumerable<DiskWithSpeedType> disk = Server.disk.Where(d => d.scsiId == ScsiId);
+				var disk = Server.disk.Where(d => d.scsiId == ScsiId);
 				if (disk.Any())
 				{
-					status = Connection.ApiClient.ChangeServerDiskSpeed(Server.id, disk.ElementAt(0).id, SpeedId).Result;
+					status = Connection.ApiClient.ServerManagementLegacy.Server.ChangeServerDiskSpeed(Server.id, disk.ElementAt(0).id, SpeedId).Result;
 				}
 				else
 					WriteError(new ErrorRecord(new PSArgumentException("The scsi id does not exits"), "-1", 

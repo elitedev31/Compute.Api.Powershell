@@ -102,11 +102,11 @@ namespace DD.CBU.Compute.Powershell
 				Status status = null;
 				if (ParameterSetName.Equals("HttpCookie"))
 					status =
-						Connection.ApiClient.CreatePersistenceProfileHttpCookie(Network.id, Name, ServerFarm.id, 
+						Connection.ApiClient.NetworkingLegacy.NetworkVip.CreatePersistenceProfileHttpCookie(Network.id, Name, ServerFarm.id, 
 							TimeoutMinutes, CookieName, CookieType).Result;
 				else
 					status =
-						Connection.ApiClient.CreatePersistenceProfileIpNetmask(Network.id, Name, ServerFarm.id, TimeoutMinutes, 
+						Connection.ApiClient.NetworkingLegacy.NetworkVip.CreatePersistenceProfileIpNetmask(Network.id, Name, ServerFarm.id, TimeoutMinutes, 
 							Direction, Netmask).Result;
 				if (status != null && PassThru.IsPresent)
 				{

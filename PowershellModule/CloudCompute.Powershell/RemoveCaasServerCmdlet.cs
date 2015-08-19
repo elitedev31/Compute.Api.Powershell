@@ -28,7 +28,7 @@ namespace DD.CBU.Compute.Powershell
 			try
 			{
 				if (!ShouldProcess(Server.name)) return;
-				Status status = Connection.ApiClient.ServerDelete(Server.id).Result;
+				Status status = Connection.ApiClient.ServerManagementLegacy.Server.ServerDelete(Server.id).Result;
 
 				if (status != null)
 					WriteDebug(

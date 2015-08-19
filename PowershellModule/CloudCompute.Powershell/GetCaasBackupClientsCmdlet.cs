@@ -14,7 +14,7 @@ using System.Management.Automation;
 using DD.CBU.Compute.Api.Client;
 using DD.CBU.Compute.Api.Client.Backup;
 using DD.CBU.Compute.Api.Contracts.Backup;
-using DD.CBU.Compute.Api.Contracts.Server;
+using DD.CBU.Compute.Api.Contracts.Network20;
 
 namespace DD.CBU.Compute.Powershell
 {
@@ -30,7 +30,7 @@ namespace DD.CBU.Compute.Powershell
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The server associated with the backup client types", 
 			ValueFromPipeline = true)]
-		public ServerWithBackupType Server { get; set; }
+		public ServerType Server { get; set; }
 
 
 		/// <summary>
@@ -99,7 +99,7 @@ namespace DD.CBU.Compute.Powershell
 		/// </returns>
 		private IEnumerable<BackupClientDetailsType> GetBackupClients()
 		{
-			return Connection.ApiClient.GetBackupClients(Server.id).Result;
+			return Connection.ApiClient.Backup.GetBackupClients(Server.id).Result;
 		}
 	}
 }

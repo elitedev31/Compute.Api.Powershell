@@ -102,7 +102,7 @@ namespace DD.CBU.Compute.Powershell
 		/// </returns>
 		private IEnumerable<AclRuleType> GetAclRules()
 		{
-			return Connection.ApiClient.GetAclRules(Network.id).Result;
+			return Connection.ApiClient.NetworkingLegacy.Network.GetAclRules(Network.id).Result;
 		}
 	}
 }

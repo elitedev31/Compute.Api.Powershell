@@ -57,11 +57,11 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 			try
 			{
 				vlans = ParameterSetName.Equals("Filtered")
-					? Connection.ApiClient.GetVlans(
+					? Connection.ApiClient.Networking.Vlan.GetVlans(
 						VirtualLanId, 
 						Name, 
 						(NetworkDomain != null) ? Guid.Parse(NetworkDomain.id) : Guid.Empty).Result
-					: Connection.ApiClient.GetVlans().Result;
+					: Connection.ApiClient.Networking.Vlan.GetVlans().Result;
 			}
 			catch (AggregateException ae)
 			{

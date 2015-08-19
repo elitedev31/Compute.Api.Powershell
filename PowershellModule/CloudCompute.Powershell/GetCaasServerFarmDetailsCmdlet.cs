@@ -47,7 +47,7 @@ namespace DD.CBU.Compute.Powershell
 
 			try
 			{
-				ServerFarmDetails serverfarmdetails = Connection.ApiClient.GetServerFarmDetails(Network.id, ServerFarm.id).Result;
+				ServerFarmDetails serverfarmdetails = Connection.ApiClient.NetworkingLegacy.NetworkVip.GetServerFarmDetails(Network.id, ServerFarm.id).Result;
 				if (serverfarmdetails != null)
 					WriteObject(serverfarmdetails);
 			}

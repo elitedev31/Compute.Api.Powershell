@@ -14,6 +14,7 @@ using System.Management.Automation;
 using DD.CBU.Compute.Api.Client;
 using DD.CBU.Compute.Api.Contracts.Network;
 using DD.CBU.Compute.Api.Contracts.Server;
+using ServerType = DD.CBU.Compute.Api.Contracts.Network20.ServerType;
 
 namespace DD.CBU.Compute.Powershell
 {
@@ -48,7 +49,7 @@ namespace DD.CBU.Compute.Powershell
 		/// A server to find to show the anti affinity rules from
 		/// </summary>
 		[Parameter(Mandatory = false, HelpMessage = "find a rule base in a server")]
-		public ServerWithBackupType Server { get; set; }
+		public ServerType Server { get; set; }
 
 
 		/// <summary>
@@ -67,7 +68,7 @@ namespace DD.CBU.Compute.Powershell
 				}
 
 				IEnumerable<AntiAffinityRuleType> resultlist =
-					Connection.ApiClient.GetServerAntiAffinityRules(RuleId, Location, networkid).Result;
+					Connection.ApiClient.ServerManagementLegacy.Server.GetServerAntiAffinityRules(RuleId, Location, networkid).Result;
 				if (Server != null)
 				{
 					resultlist = resultlist.Where(rule => rule.serverSummary.Any(server => server.id == Server.id));

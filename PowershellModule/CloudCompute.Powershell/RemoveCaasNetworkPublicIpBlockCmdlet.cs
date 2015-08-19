@@ -45,7 +45,7 @@ namespace DD.CBU.Compute.Powershell
 			{
 				if (!ShouldProcess(PublicIpBlock.baseIp)) return;
 
-				Status status = Connection.ApiClient.ReleaseNetworkPublicIpAddressBlock(Network.id, PublicIpBlock.id).Result;
+				Status status = Connection.ApiClient.NetworkingLegacy.Network.ReleaseNetworkPublicIpAddressBlock(Network.id, PublicIpBlock.id).Result;
 				if (status != null)
 				{
 					WriteDebug(

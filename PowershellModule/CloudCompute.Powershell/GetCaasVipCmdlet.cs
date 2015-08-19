@@ -47,7 +47,7 @@ namespace DD.CBU.Compute.Powershell
 
 			try
 			{
-				IEnumerable<Vip> resultlist = Connection.ApiClient.GetVips(Network.id).Result;
+				IEnumerable<Vip> resultlist = Connection.ApiClient.NetworkingLegacy.NetworkVip.GetVips(Network.id).Result;
 				if (resultlist != null && resultlist.Any())
 				{
 					if (!string.IsNullOrEmpty(Name))

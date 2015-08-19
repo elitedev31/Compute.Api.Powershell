@@ -15,7 +15,7 @@ using DD.CBU.Compute.Api.Client;
 using DD.CBU.Compute.Api.Client.Backup;
 using DD.CBU.Compute.Api.Contracts.Backup;
 using DD.CBU.Compute.Api.Contracts.General;
-using DD.CBU.Compute.Api.Contracts.Server;
+using DD.CBU.Compute.Api.Contracts.Network20;
 
 namespace DD.CBU.Compute.Powershell
 {
@@ -31,7 +31,7 @@ namespace DD.CBU.Compute.Powershell
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The server to add the backup client", 
 			ValueFromPipeline = true)]
-		public ServerWithBackupType Server { get; set; }
+		public ServerType Server { get; set; }
 
 		/// <summary>
 		/// Gets or sets the storage policy.
@@ -120,7 +120,7 @@ namespace DD.CBU.Compute.Powershell
 			}
 
 			Status status =
-				Connection.ApiClient.AddBackupClient(Server.id, ClientType, StoragePolicy, SchedulePolicy, alerting).Result;
+				Connection.ApiClient.Backup.AddBackupClient(Server.id, ClientType, StoragePolicy, SchedulePolicy, alerting).Result;
 			if (status != null)
 			{
 				WriteDebug(

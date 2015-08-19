@@ -57,7 +57,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 			try
 			{
 				response =
-					Connection.ApiClient.DeployNetworkDomain(
+					Connection.ApiClient.Networking.NetworkDomain.DeployNetworkDomain(
 						new DeployNetworkDomainType
 						{
 							name = Name, 

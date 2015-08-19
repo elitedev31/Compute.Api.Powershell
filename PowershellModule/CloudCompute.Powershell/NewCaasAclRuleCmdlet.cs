@@ -156,7 +156,7 @@ namespace DD.CBU.Compute.Powershell
 		private AclRuleType CreateAclRule()
 		{
 			return
-				Connection.ApiClient.CreateAclRule(
+				Connection.ApiClient.NetworkingLegacy.Network.CreateAclRule(
 					Network.id, 
 					AclRuleName, 
 					Position, 

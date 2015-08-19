@@ -14,7 +14,7 @@ using System.Management.Automation;
 using System.Threading;
 using System.Threading.Tasks;
 using DD.CBU.Compute.Api.Client;
-using DD.CBU.Compute.Api.Contracts.Server;
+using DD.CBU.Compute.Api.Contracts.Network20;
 
 namespace DD.CBU.Compute.Powershell
 {
@@ -22,7 +22,7 @@ namespace DD.CBU.Compute.Powershell
 	/// Monitor CaaS provisioning progress
 	/// </summary>
 	[Cmdlet(VerbsLifecycle.Wait, "CaasServerOperation")]
-	[OutputType(typeof (ServerWithBackupType))]
+	[OutputType(typeof (ServerType))]
 	public class WaitCaasServerOperationCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
@@ -34,7 +34,7 @@ namespace DD.CBU.Compute.Powershell
 		/// Gets or sets the server.
 		/// </summary>
 		[Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The server to action on")]
-		public ServerWithBackupType Server { get; set; }
+		public ServerType Server { get; set; }
 
 		/// <summary>
 		/// Gets the operation progress record.
@@ -59,15 +59,14 @@ namespace DD.CBU.Compute.Powershell
 			{
 				bool operationInProgress = false;
 				bool waitingToStart = true;
-				ServerWithBackupType server = null;
+				ServerType server = null;
 
 				// initial loop to cover for any delay on the CaaS API, do while state of the server is normal (max 5 min)
 				do
 				{
-					IEnumerable<ServerWithBackupType> servers = GetDeployeServers(Server.id).Result;
-					if (servers != null)
+					server = GetCaasServer(Server.id).Result;
+					if (server != null)
 					{
-						server = servers.First();
 						waitingToStart = server.state.Equals("normal", StringComparison.InvariantCultureIgnoreCase);
 						OperationProgressRecord.Activity = "Waiting CaaS to start the operation...CaaS server state still NORMAL";
 						OperationProgressRecord.StatusDescription =
@@ -98,26 +97,24 @@ namespace DD.CBU.Compute.Powershell
 				do
 				{
 					// query the API to get the server progress
-					IEnumerable<ServerWithBackupType> servers = GetDeployeServers(Server.id).Result;
-					if (servers != null)
+					server = GetCaasServer(Server.id).Result;
+					if (server != null)
 					{
-						server = servers.First();
-
-						if (server.status != null)
+						if (server.progress != null)
 						{
-							string activity = server.status.action.Replace('_', ' ').ToTitleCase();
+							string activity = server.progress.action.Replace('_', ' ').ToTitleCase();
 							string stepname = string.Empty;
 							string activitytemplate = string.Empty;
 							string activitydescription = "Provisioning...";
 							int activityPercentComplete = 0;
-							if (server.status.step != null)
+							if (server.progress.step != null)
 							{
-								activity = server.status.action.Replace('_', ' ').ToTitleCase();
-								stepname = server.status.step.name.Replace('_', ' ').ToTitleCase();
+								activity = server.progress.action.Replace('_', ' ').ToTitleCase();
+								stepname = server.progress.step.name.Replace('_', ' ').ToTitleCase();
 								activitytemplate = "{0} - Step {1} of {2}";
-								activitydescription = string.Format(activitytemplate, stepname, server.status.step.number, 
-									server.status.numberOfSteps);
-								activityPercentComplete = server.status.step.percentComplete;
+								activitydescription = string.Format(activitytemplate, stepname, server.progress.step.number, 
+									server.progress.numberOfSteps);
+								activityPercentComplete = server.progress.step.percentComplete;
 							}
 
 							OperationProgressRecord.Activity = activity;
@@ -173,9 +170,9 @@ namespace DD.CBU.Compute.Powershell
 		/// <returns>
 		/// The <see cref="Task"/>.
 		/// </returns>
-		private async Task<IEnumerable<ServerWithBackupType>> GetDeployeServers(string serverId)
+		private async Task<ServerType> GetCaasServer(string serverId)
 		{
-			return await Connection.ApiClient.GetDeployedServers(serverId, null, null, null);
+			return await Connection.ApiClient.ServerManagement.Server.GetMcp2DeployedServer(Guid.Parse(serverId));
 		}
 	}
 }

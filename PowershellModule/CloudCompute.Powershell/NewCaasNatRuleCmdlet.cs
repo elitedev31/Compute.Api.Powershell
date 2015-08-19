@@ -85,7 +85,7 @@ namespace DD.CBU.Compute.Powershell
 		/// </returns>
 		private NatRuleType CreateNatRule()
 		{
-			return Connection.ApiClient.CreateNatRule(Network.id, NatRuleName, SourceIpAddress).Result;
+			return Connection.ApiClient.NetworkingLegacy.Network.CreateNatRule(Network.id, NatRuleName, SourceIpAddress).Result;
 		}
 	}
 }

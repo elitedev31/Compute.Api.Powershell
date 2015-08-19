@@ -45,7 +45,7 @@ namespace DD.CBU.Compute.Powershell
 			try
 			{
 				if (!ShouldProcess(RealServer.name)) return;
-				Status status = Connection.ApiClient.RemoveRealServer(Network.id, RealServer.id).Result;
+				Status status = Connection.ApiClient.NetworkingLegacy.NetworkVip.RemoveRealServer(Network.id, RealServer.id).Result;
 
 				if (status != null)
 					WriteDebug(

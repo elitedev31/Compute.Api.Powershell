@@ -124,7 +124,7 @@ namespace DD.CBU.Compute.Powershell
 		/// </returns>
 		private IEnumerable<ImagesWithDiskSpeedImage> GetOsImagesTask()
 		{
-			return Connection.ApiClient.GetImages(ImageId, Name, Location, OperatingSystemId, OperatingSystemFamily).Result;
+			return Connection.ApiClient.ServerManagementLegacy.ServerImage.GetImages(ImageId, Name, Location, OperatingSystemId, OperatingSystemFamily).Result;
 		}
 	}
 }

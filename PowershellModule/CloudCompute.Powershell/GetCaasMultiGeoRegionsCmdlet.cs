@@ -32,7 +32,7 @@ namespace DD.CBU.Compute.Powershell
 
 			try
 			{
-				IEnumerable<Geo> resultlist = Connection.ApiClient.GetListOfMultiGeographyRegions().Result;
+				IEnumerable<Geo> resultlist = Connection.ApiClient.Account.GetListOfMultiGeographyRegions().Result;
 				if (resultlist != null && resultlist.Any())
 				{
 					switch (resultlist.Count())

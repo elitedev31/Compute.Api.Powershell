@@ -45,7 +45,7 @@ namespace DD.CBU.Compute.Powershell
 			try
 			{
 				if (!ShouldProcess(PersistenceProfile.name)) return;
-				Status status = Connection.ApiClient.RemovePersistenceProfile(Network.id, PersistenceProfile.id).Result;
+				Status status = Connection.ApiClient.NetworkingLegacy.NetworkVip.RemovePersistenceProfile(Network.id, PersistenceProfile.id).Result;
 
 				if (status != null)
 					WriteDebug(

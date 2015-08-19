@@ -14,7 +14,7 @@ using DD.CBU.Compute.Api.Client;
 using DD.CBU.Compute.Api.Client.Backup;
 using DD.CBU.Compute.Api.Contracts.Backup;
 using DD.CBU.Compute.Api.Contracts.General;
-using DD.CBU.Compute.Api.Contracts.Server;
+using DD.CBU.Compute.Api.Contracts.Network20;
 
 namespace DD.CBU.Compute.Powershell
 {
@@ -22,7 +22,7 @@ namespace DD.CBU.Compute.Powershell
 	/// The New-Backup now job cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.New, "CaasBackupJob")]
-	[OutputType(typeof (ServerWithBackupType))]
+	[OutputType(typeof (ServerType))]
 	public class NewCaasBackupJobCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
@@ -30,7 +30,7 @@ namespace DD.CBU.Compute.Powershell
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The server to modify the backup client", 
 			ValueFromPipeline = true)]
-		public ServerWithBackupType Server { get; set; }
+		public ServerType Server { get; set; }
 
 		/// <summary>
 		/// Gets or sets the backup client.
@@ -75,7 +75,7 @@ namespace DD.CBU.Compute.Powershell
 		/// </summary>
 		private void RunBackupNow()
 		{
-			Status status = Connection.ApiClient.InitiateBackup(Server.id, BackupClient).Result;
+			Status status = Connection.ApiClient.Backup.InitiateBackup(Server.id, BackupClient).Result;
 			if (status != null)
 			{
 				WriteDebug(

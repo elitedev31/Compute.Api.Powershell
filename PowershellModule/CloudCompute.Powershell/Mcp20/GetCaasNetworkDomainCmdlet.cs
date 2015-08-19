@@ -14,6 +14,7 @@ using System.Management.Automation;
 using DD.CBU.Compute.Api.Client;
 using DD.CBU.Compute.Api.Client.Network20;
 using DD.CBU.Compute.Api.Contracts.Network20;
+using DD.CBU.Compute.Api.Contracts.Requests.Network20;
 
 namespace DD.CBU.Compute.Powershell.Mcp20
 {
@@ -27,13 +28,13 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 		/// <summary>
 		/// Get a CaaS server by ServerId
 		/// </summary>
-		[Parameter(Mandatory = false, ParameterSetName = "FilterNetworkDomains", HelpMessage = "NetworkDomain id")]
+		[Parameter(Mandatory = false, ParameterSetName = "FilterById", HelpMessage = "NetworkDomain id")]
 		public Guid NetworkDomainId { get; set; }
 
 		/// <summary>
 		/// Get a CaaS server by ServerId
 		/// </summary>
-		[Parameter(Mandatory = false, ParameterSetName = "FilterNetworkDomains", HelpMessage = "NetworkDomain name")]
+		[Parameter(Mandatory = false, ParameterSetName = "FilterByName", HelpMessage = "NetworkDomain name")]
 		public string NetworkDomainName { get; set; }
 
 		/// <summary>
@@ -45,9 +46,12 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 			base.ProcessRecord();
 			try
 			{
-				networks = ParameterSetName.Equals("FilterNetworkDomains")
-					? Connection.ApiClient.GetNetworkDomain(NetworkDomainId, NetworkDomainName).Result
-					: Connection.ApiClient.GetNetworkDomains().Result;
+				networks = Connection.ApiClient.Networking.NetworkDomain.GetNetworkDomains(new NetworkDomainListOptions(){Name = NetworkDomainName}).Result;
+
+				if (Guid.Empty != NetworkDomainId)
+				{
+					networks = networks.Where(net => Guid.Parse(net.id) == NetworkDomainId);
+				}
 			}
 			catch (AggregateException ae)
 			{

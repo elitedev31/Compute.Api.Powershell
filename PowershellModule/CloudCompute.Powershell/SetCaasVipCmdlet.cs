@@ -56,7 +56,7 @@ namespace DD.CBU.Compute.Powershell
 			base.ProcessRecord();
 			try
 			{
-				Status status = Connection.ApiClient.ModifyVip(Network.id, Vip.id, ReplyToIcmp, InService).Result;
+				Status status = Connection.ApiClient.NetworkingLegacy.NetworkVip.ModifyVip(Network.id, Vip.id, ReplyToIcmp, InService).Result;
 
 				if (status != null)
 					WriteDebug(

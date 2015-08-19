@@ -68,7 +68,7 @@ namespace DD.CBU.Compute.Powershell
 		/// </returns>
 		private IEnumerable<OvfPackageType> GetOvfPackages()
 		{
-			OvfPackages packages = Connection.ApiClient.GetOvfPackages().Result;
+			OvfPackages packages = Connection.ApiClient.ImportExportCustomerImage.GetOvfPackages().Result;
 			return packages.ovfPackage;
 		}
 	}

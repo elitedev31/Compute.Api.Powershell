@@ -33,7 +33,7 @@ namespace DD.CBU.Compute.Powershell
 			try
 			{
 				IEnumerable<DatacenterWithMaintenanceStatusType> resultlist =
-					Connection.ApiClient.GetDataCentersWithMaintenanceStatuses().Result;
+					Connection.ApiClient.Account.GetDataCentersWithMaintenanceStatuses().Result;
 
 				if (resultlist != null && resultlist.Any())
 				{

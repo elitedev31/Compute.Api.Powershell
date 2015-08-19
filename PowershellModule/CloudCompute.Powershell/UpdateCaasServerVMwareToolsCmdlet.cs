@@ -27,7 +27,7 @@ namespace DD.CBU.Compute.Powershell
 		{
 			try
 			{
-				Status status = Connection.ApiClient.ServerUpdateVMwareTools(Server.id).Result;
+				Status status = Connection.ApiClient.ServerManagementLegacy.Server.ServerUpdateVMwareTools(Server.id).Result;
 				if (status != null)
 					WriteDebug(
 						string.Format(

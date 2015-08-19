@@ -96,7 +96,7 @@ namespace DD.CBU.Compute.Powershell
 		private ServerImageWithStateType ImportCustomerImage()
 		{
 			return
-				Connection.ApiClient.ImportCustomerImage(CustomerImageName, OvfPackage.name, Network.location, Description).Result;
+				Connection.ApiClient.ImportExportCustomerImage.ImportCustomerImage(CustomerImageName, OvfPackage.name, Network.location, Description).Result;
 		}
 	}
 }

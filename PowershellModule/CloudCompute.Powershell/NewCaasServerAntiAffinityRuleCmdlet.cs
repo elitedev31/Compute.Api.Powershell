@@ -14,6 +14,7 @@ using System.Management.Automation;
 using DD.CBU.Compute.Api.Client;
 using DD.CBU.Compute.Api.Contracts.General;
 using DD.CBU.Compute.Api.Contracts.Server;
+using ServerType = DD.CBU.Compute.Api.Contracts.Network20.ServerType;
 
 namespace DD.CBU.Compute.Powershell
 {
@@ -28,13 +29,13 @@ namespace DD.CBU.Compute.Powershell
 		/// Gets or sets the server 1.
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The server to add to anti affinity rule")]
-		public ServerWithBackupType Server1 { get; set; }
+		public ServerType Server1 { get; set; }
 
 		/// <summary>
 		/// Gets or sets the server 2.
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The server to add to anti affinity rule")]
-		public ServerWithBackupType Server2 { get; set; }
+		public ServerType Server2 { get; set; }
 
 		/// <summary>
 		/// Gets or sets the pass thru.
@@ -51,7 +52,7 @@ namespace DD.CBU.Compute.Powershell
 			base.ProcessRecord();
 			try
 			{
-				Status status = Connection.ApiClient.CreateServerAntiAffinityRule(Server1.id, Server2.id).Result;
+				Status status = Connection.ApiClient.ServerManagementLegacy.Server.CreateServerAntiAffinityRule(Server1.id, Server2.id).Result;
 				if (status.result == "SUCCESS")
 				{
 					AdditionalInformation statusadditionalInfo =
@@ -59,7 +60,7 @@ namespace DD.CBU.Compute.Powershell
 					if (statusadditionalInfo != null && PassThru.IsPresent)
 					{
 						IEnumerable<AntiAffinityRuleType> rules =
-							Connection.ApiClient.GetServerAntiAffinityRules(statusadditionalInfo.value, null, null).Result;
+							Connection.ApiClient.ServerManagementLegacy.Server.GetServerAntiAffinityRules(statusadditionalInfo.value, null, null).Result;
 						if (rules.Any())
 						{
 							rule = rules.First();

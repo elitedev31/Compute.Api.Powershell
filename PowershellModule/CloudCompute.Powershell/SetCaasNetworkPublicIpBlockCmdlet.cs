@@ -51,7 +51,9 @@ namespace DD.CBU.Compute.Powershell
 			try
 			{
 				Status status =
-					Connection.ApiClient.SetServertoVipNetworkPublicIpAddressBlock(Network.id, PublicIpBlock.id, 
+					Connection.ApiClient.NetworkingLegacy.Network.SetServertoVipNetworkPublicIpAddressBlock(
+						Network.id, 
+						PublicIpBlock.id, 
 						ServerToVipConnectivity).Result;
 				if (status != null)
 				{

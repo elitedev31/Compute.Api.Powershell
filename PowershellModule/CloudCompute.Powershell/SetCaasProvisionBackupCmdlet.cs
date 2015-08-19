@@ -13,7 +13,7 @@ using DD.CBU.Compute.Api.Client;
 using DD.CBU.Compute.Api.Client.Backup;
 using DD.CBU.Compute.Api.Contracts.Backup;
 using DD.CBU.Compute.Api.Contracts.General;
-using DD.CBU.Compute.Api.Contracts.Server;
+using DD.CBU.Compute.Api.Contracts.Network20;
 
 namespace DD.CBU.Compute.Powershell
 {
@@ -21,14 +21,14 @@ namespace DD.CBU.Compute.Powershell
 	/// The provision/deprovision backup cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Set, "CaasProvisionBackup")]
-	[OutputType(typeof (ServerWithBackupType))]
+	[OutputType(typeof (ServerType))]
 	public class SetCaasProvisionBackupCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
 		/// Gets or sets the server.
 		/// </summary>
 		[Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The server to action on")]
-		public ServerWithBackupType Server { get; set; }
+		public ServerType Server { get; set; }
 
 		/// <summary>
 		/// Gets or sets a value indicating whether is enable.
@@ -100,7 +100,7 @@ namespace DD.CBU.Compute.Powershell
 				return;
 			}
 
-			Status status = Connection.ApiClient.EnableBackup(Server.id, BackupServicePlan.Value).Result;
+			Status status = Connection.ApiClient.Backup.EnableBackup(Server.id, BackupServicePlan.Value).Result;
 			if (status != null)
 			{
 				WriteDebug(
@@ -118,7 +118,7 @@ namespace DD.CBU.Compute.Powershell
 		/// </summary>
 		private void DeprovisionBackup()
 		{
-			Status status = Connection.ApiClient.DisableBackup(Server.id).Result;
+			Status status = Connection.ApiClient.Backup.DisableBackup(Server.id).Result;
 			if (status != null)
 			{
 				WriteDebug(

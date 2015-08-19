@@ -39,7 +39,7 @@ namespace DD.CBU.Compute.Powershell
 
 			try
 			{
-				IEnumerable<Account> resultlist = Connection.ApiClient.GetAccounts().Result;
+				IEnumerable<Account> resultlist = Connection.ApiClient.Account.GetAccounts().Result;
 
 				if (resultlist != null && resultlist.Any())
 				{

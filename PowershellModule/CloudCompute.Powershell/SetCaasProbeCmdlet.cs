@@ -96,7 +96,7 @@ namespace DD.CBU.Compute.Powershell
 			try
 			{
 				Status status =
-					Connection.ApiClient.ModifyProbe(Network.id, Probe.id, ProbeIntervalSeconds, ErrorCountBeforeServerFail, 
+					Connection.ApiClient.NetworkingLegacy.NetworkVip.ModifyProbe(Network.id, Probe.id, ProbeIntervalSeconds, ErrorCountBeforeServerFail, 
 						SuccessCountBeforeServerEnable, FailedProbeIntervalSeconds, MaxReplyWaitSeconds).Result;
 
 				if (status != null)

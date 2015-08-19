@@ -13,7 +13,7 @@ using DD.CBU.Compute.Api.Client;
 using DD.CBU.Compute.Api.Client.Backup;
 using DD.CBU.Compute.Api.Contracts.Backup;
 using DD.CBU.Compute.Api.Contracts.General;
-using DD.CBU.Compute.Api.Contracts.Server;
+using DD.CBU.Compute.Api.Contracts.Network20;
 
 namespace DD.CBU.Compute.Powershell
 {
@@ -21,14 +21,14 @@ namespace DD.CBU.Compute.Powershell
 	/// The set backup service plan cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Set, "CaasBackupPlan")]
-	[OutputType(typeof (ServerWithBackupType))]
+	[OutputType(typeof (ServerType))]
 	public class SetCaasBackupPlanCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
 		/// Gets or sets the server.
 		/// </summary>
 		[Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The server to action on")]
-		public ServerWithBackupType Server { get; set; }
+		public ServerType Server { get; set; }
 
 		/// <summary>
 		/// Gets or sets the backup service plan.
@@ -45,7 +45,7 @@ namespace DD.CBU.Compute.Powershell
 
 			try
 			{
-				Status status = Connection.ApiClient.ChangeBackupPlan(Server.id, BackupServicePlan).Result;
+				Status status = Connection.ApiClient.Backup.ChangeBackupPlan(Server.id, BackupServicePlan).Result;
 
 				if (status != null)
 				{

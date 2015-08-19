@@ -33,7 +33,7 @@ namespace DD.CBU.Compute.Powershell
 		{
 			try
 			{
-				Status status = Connection.ApiClient.DesignatePrimaryAdministratorAccount(Username).Result;
+				Status status = Connection.ApiClient.Account.DesignatePrimaryAdministratorAccount(Username).Result;
 
 				if (status != null)
 					WriteDebug(

@@ -41,7 +41,7 @@ namespace DD.CBU.Compute.Powershell
 		{
 			try
 			{
-				Status status = Connection.ApiClient.ServerCloneToCustomerImage(Server.id, Name, Description).Result;
+				Status status = Connection.ApiClient.ServerManagementLegacy.Server.ServerCloneToCustomerImage(Server.id, Name, Description).Result;
 				if (status != null)
 					WriteDebug(
 						string.Format(

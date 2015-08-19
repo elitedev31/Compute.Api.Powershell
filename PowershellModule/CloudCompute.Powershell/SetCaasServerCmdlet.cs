@@ -11,7 +11,7 @@ using System;
 using System.Management.Automation;
 using DD.CBU.Compute.Api.Client;
 using DD.CBU.Compute.Api.Contracts.General;
-using DD.CBU.Compute.Api.Contracts.Server;
+using DD.CBU.Compute.Api.Contracts.Network20;
 
 namespace DD.CBU.Compute.Powershell
 {
@@ -19,7 +19,7 @@ namespace DD.CBU.Compute.Powershell
 	/// The set server state cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Set, "CaasServer")]
-	[OutputType(typeof (ServerWithBackupType))]
+	[OutputType(typeof (ServerType))]
 	public class SetCaasServerCmdlet : PsCmdletCaasServerBase
 	{
 		/// <summary>
@@ -72,7 +72,7 @@ namespace DD.CBU.Compute.Powershell
 			{
 				Status status = null;
 
-				status = Connection.ApiClient.ModifyServer(Server.id, Name, Description, MemoryInMB, CPUCount, PrivateIp).Result;
+				status = Connection.ApiClient.ServerManagementLegacy.Server.ModifyServer(Server.id, Name, Description, MemoryInMB, CPUCount, PrivateIp).Result;
 				if (status != null)
 					WriteDebug(
 						string.Format(

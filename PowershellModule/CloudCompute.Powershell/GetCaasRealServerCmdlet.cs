@@ -47,7 +47,7 @@ namespace DD.CBU.Compute.Powershell
 
 			try
 			{
-				IEnumerable<RealServer> resultlist = Connection.ApiClient.GetRealServers(Network.id).Result;
+				IEnumerable<RealServer> resultlist = Connection.ApiClient.NetworkingLegacy.NetworkVip.GetRealServers(Network.id).Result;
 				if (resultlist != null && resultlist.Any())
 				{
 					if (!string.IsNullOrEmpty(Name))

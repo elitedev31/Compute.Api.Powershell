@@ -81,7 +81,7 @@ namespace DD.CBU.Compute.Powershell
 		/// </returns>
 		private ImageExportType ExportCustomerImage()
 		{
-			return Connection.ApiClient.ExportCustomerImage(CustomerImage, OvfPrefix).Result;
+			return Connection.ApiClient.ImportExportCustomerImage.ExportCustomerImage(CustomerImage, OvfPrefix).Result;
 		}
 	}
 }

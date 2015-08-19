@@ -104,7 +104,7 @@ namespace DD.CBU.Compute.Powershell
 			}
 
 			Status status =
-				Connection.ApiClient.DeployServerWithDiskSpeedImageTask(
+				Connection.ApiClient.ServerManagementLegacy.Server.DeployServerWithDiskSpeedImageTask(
 					ServerDetails.Name, 
 					ServerDetails.Description, 
 					networkid, 
@@ -121,7 +121,7 @@ namespace DD.CBU.Compute.Powershell
 			if (statusadditionalInfo != null)
 			{
 				IEnumerable<ServerWithBackupType> servers =
-					Connection.ApiClient.GetDeployedServers(statusadditionalInfo.value, null, null, null).Result;
+					Connection.ApiClient.ServerManagementLegacy.Server.GetDeployedServers(statusadditionalInfo.value, null, null, null).Result;
 				if (servers.Any())
 				{
 					server = servers.First();

@@ -46,7 +46,7 @@ namespace DD.CBU.Compute.Powershell
 
 			try
 			{
-				IEnumerable<NetworkWithLocationsNetwork> resultlist = Connection.ApiClient.GetNetworksTask().Result;
+				IEnumerable<NetworkWithLocationsNetwork> resultlist = Connection.ApiClient.NetworkingLegacy.Network.GetNetworks().Result;
 
 				if (resultlist != null && resultlist.Any())
 				{

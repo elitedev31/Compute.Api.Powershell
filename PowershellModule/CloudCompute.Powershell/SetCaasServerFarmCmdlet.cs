@@ -51,7 +51,7 @@ namespace DD.CBU.Compute.Powershell
 			try
 			{
 				if (!ShouldProcess(ServerFarm.name)) return;
-				Status status = Connection.ApiClient.ModifyServerFarm(Network.id, ServerFarm.id, Predictor).Result;
+				Status status = Connection.ApiClient.NetworkingLegacy.NetworkVip.ModifyServerFarm(Network.id, ServerFarm.id, Predictor).Result;
 
 				if (status != null)
 					WriteDebug(

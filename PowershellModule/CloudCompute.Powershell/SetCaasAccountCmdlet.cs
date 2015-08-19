@@ -132,7 +132,7 @@ namespace DD.CBU.Compute.Powershell
 				if (Password != null)
 					account.password = Password.ToPlainString();
 
-				Status status = Connection.ApiClient.UpdateAdministratorAccount(account).Result;
+				Status status = Connection.ApiClient.Account.UpdateAdministratorAccount(account).Result;
 				if (status != null)
 					WriteDebug(
 						string.Format(

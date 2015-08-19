@@ -82,7 +82,7 @@ namespace DD.CBU.Compute.Powershell
 		/// </returns>
 		private IEnumerable<ImageExportType> GetCustomerImageExports()
 		{
-			return Connection.ApiClient.GetCustomerImagesExports().Result;
+			return Connection.ApiClient.ImportExportCustomerImage.GetCustomerImagesExports().Result;
 		}
 	}
 }

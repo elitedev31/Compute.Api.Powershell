@@ -51,7 +51,7 @@ namespace DD.CBU.Compute.Powershell
 			base.ProcessRecord();
 			try
 			{
-				Status status = Connection.ApiClient.ModifyRealServer(Network.id, RealServer.id, InService).Result;
+				Status status = Connection.ApiClient.NetworkingLegacy.NetworkVip.ModifyRealServer(Network.id, RealServer.id, InService).Result;
 
 				if (status != null)
 					WriteDebug(

@@ -165,7 +165,7 @@ namespace DD.CBU.Compute.Powershell
 			};
 
 
-			Status status = Connection.ApiClient.AddSubAdministratorAccount(account).Result;
+			Status status = Connection.ApiClient.Account.AddSubAdministratorAccount(account).Result;
 			if (status != null)
 				WriteDebug(
 					string.Format(

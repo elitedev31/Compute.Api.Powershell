@@ -72,7 +72,7 @@ namespace DD.CBU.Compute.Powershell
 		/// </summary>
 		private void DeleteAclRule()
 		{
-			Status status = Connection.ApiClient.DeleteAclRule(Network.id, AclRule.id).Result;
+			Status status = Connection.ApiClient.NetworkingLegacy.Network.DeleteAclRule(Network.id, AclRule.id).Result;
 			if (status != null)
 			{
 				WriteDebug(

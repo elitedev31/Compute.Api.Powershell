@@ -47,7 +47,7 @@ namespace DD.CBU.Compute.Powershell
 
 			try
 			{
-				IEnumerable<ServerFarm> resultlist = Connection.ApiClient.GetServerFarms(Network.id).Result;
+				IEnumerable<ServerFarm> resultlist = Connection.ApiClient.NetworkingLegacy.NetworkVip.GetServerFarms(Network.id).Result;
 				if (resultlist != null && resultlist.Any())
 				{
 					if (!string.IsNullOrEmpty(Name))

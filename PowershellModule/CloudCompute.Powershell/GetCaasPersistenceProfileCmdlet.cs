@@ -47,7 +47,7 @@ namespace DD.CBU.Compute.Powershell
 
 			try
 			{
-				IEnumerable<PersistenceProfile> resultlist = Connection.ApiClient.GetPersistenceProfile(Network.id).Result;
+				IEnumerable<PersistenceProfile> resultlist = Connection.ApiClient.NetworkingLegacy.NetworkVip.GetPersistenceProfile(Network.id).Result;
 				if (resultlist != null && resultlist.Any())
 				{
 					if (!string.IsNullOrEmpty(Name))

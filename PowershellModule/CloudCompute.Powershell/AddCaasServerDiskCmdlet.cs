@@ -56,7 +56,7 @@ namespace DD.CBU.Compute.Powershell
 				if (ParameterSetName.Equals("DiskSpeedType"))
 					SpeedId = Speed.ToString();
 				Status status =
-					Connection.ApiClient.AddServerDisk(Server.id, SizeInGB.ToString(CultureInfo.InvariantCulture), SpeedId).Result;
+					Connection.ApiClient.ServerManagementLegacy.Server.AddServerDisk(Server.id, SizeInGB.ToString(CultureInfo.InvariantCulture), SpeedId).Result;
 				if (status != null)
 					WriteDebug(
 						string.Format(

@@ -14,7 +14,7 @@ using DD.CBU.Compute.Api.Client;
 using DD.CBU.Compute.Api.Client.Backup;
 using DD.CBU.Compute.Api.Contracts.Backup;
 using DD.CBU.Compute.Api.Contracts.General;
-using DD.CBU.Compute.Api.Contracts.Server;
+using DD.CBU.Compute.Api.Contracts.Network20;
 
 namespace DD.CBU.Compute.Powershell
 {
@@ -22,7 +22,7 @@ namespace DD.CBU.Compute.Powershell
 	/// The Set backup client cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Set, "CaasBackupClient")]
-	[OutputType(typeof (ServerWithBackupType))]
+	[OutputType(typeof (ServerType))]
 	public class SetCaasBackupClientCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
@@ -30,7 +30,7 @@ namespace DD.CBU.Compute.Powershell
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The server to modify the backup client", 
 			ValueFromPipeline = true)]
-		public ServerWithBackupType Server { get; set; }
+		public ServerType Server { get; set; }
 
 		/// <summary>
 		/// Gets or sets the backup client.
@@ -94,7 +94,7 @@ namespace DD.CBU.Compute.Powershell
 		private void ModifyBackupClient()
 		{
 			Status status =
-				Connection.ApiClient.ModifyBackupClient(Server.id, BackupClient, StoragePolicy, SchedulePolicy, Aletring).Result;
+				Connection.ApiClient.Backup.ModifyBackupClient(Server.id, BackupClient, StoragePolicy, SchedulePolicy, Aletring).Result;
 			if (status != null)
 			{
 				WriteDebug(

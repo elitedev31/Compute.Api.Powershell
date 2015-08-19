@@ -35,7 +35,7 @@ namespace DD.CBU.Compute.Powershell
 			try
 			{
 				if (!ShouldProcess(Username)) return;
-				Status status = Connection.ApiClient.DeleteSubAdministratorAccount(Username).Result;
+				Status status = Connection.ApiClient.Account.DeleteSubAdministratorAccount(Username).Result;
 
 				if (status != null)
 					WriteDebug(

@@ -38,7 +38,7 @@ namespace DD.CBU.Compute.Powershell
 			try
 			{
 				if (!ShouldProcess(Rule.id)) return;
-				Status status = Connection.ApiClient.RemoveServerAntiAffinityRule(Rule.id).Result;
+				Status status = Connection.ApiClient.ServerManagementLegacy.Server.RemoveServerAntiAffinityRule(Rule.id).Result;
 				if (status != null)
 					WriteDebug(
 						string.Format(

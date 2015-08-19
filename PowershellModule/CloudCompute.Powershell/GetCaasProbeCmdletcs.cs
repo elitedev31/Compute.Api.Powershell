@@ -47,7 +47,7 @@ namespace DD.CBU.Compute.Powershell
 
 			try
 			{
-				IEnumerable<Probe> resultlist = Connection.ApiClient.GetProbes(Network.id).Result;
+				IEnumerable<Probe> resultlist = Connection.ApiClient.NetworkingLegacy.NetworkVip.GetProbes(Network.id).Result;
 				if (resultlist != null && resultlist.Any())
 				{
 					if (!string.IsNullOrEmpty(Name))

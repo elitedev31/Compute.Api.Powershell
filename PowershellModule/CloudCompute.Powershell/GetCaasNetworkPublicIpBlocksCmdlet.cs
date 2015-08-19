@@ -46,7 +46,7 @@ namespace DD.CBU.Compute.Powershell
 			base.ProcessRecord();
 			try
 			{
-				IEnumerable<IpBlockType> resultlist = Connection.ApiClient.GetNetworkPublicIpAddressBlock(Network.id).Result;
+				IEnumerable<IpBlockType> resultlist = Connection.ApiClient.NetworkingLegacy.Network.GetNetworkPublicIpAddressBlock(Network.id).Result;
 				if (resultlist != null && resultlist.Any())
 				{
 					if (!string.IsNullOrEmpty(BaseIp))

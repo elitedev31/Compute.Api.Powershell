@@ -36,7 +36,7 @@ namespace DD.CBU.Compute.Powershell
 			base.ProcessRecord();
 			try
 			{
-				NetworkConfigurationType network = Connection.ApiClient.GetNetworkConfig(Network.id).Result;
+				NetworkConfigurationType network = Connection.ApiClient.NetworkingLegacy.Network.GetNetworkConfig(Network.id).Result;
 				if (network != null)
 					WriteObject(network);
 			}

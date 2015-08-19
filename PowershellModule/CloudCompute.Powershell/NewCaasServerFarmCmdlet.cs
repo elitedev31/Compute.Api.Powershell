@@ -84,7 +84,7 @@ namespace DD.CBU.Compute.Powershell
 					probeId = Probe.id;
 
 				Status status =
-					Connection.ApiClient.CreateServerFarm(Network.id, Name, Predictor, RealServer.id, RealServerPort, probeId).Result;
+					Connection.ApiClient.NetworkingLegacy.NetworkVip.CreateServerFarm(Network.id, Name, Predictor, RealServer.id, RealServerPort, probeId).Result;
 				if (status != null && PassThru.IsPresent)
 				{
 					var regexObj = new Regex(@"\x28id\x3A([-\w]*)\x29");

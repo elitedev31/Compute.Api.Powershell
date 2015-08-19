@@ -168,7 +168,7 @@ namespace DD.CBU.Compute.Powershell
 			try
 			{
 				Status status =
-					Connection.ApiClient.CreateProbe(Network.id, Name, Type, Port, ProbeIntervalSeconds, ErrorCountBeforeServerFail, 
+					Connection.ApiClient.NetworkingLegacy.NetworkVip.CreateProbe(Network.id, Name, Type, Port, ProbeIntervalSeconds, ErrorCountBeforeServerFail, 
 						SuccessCountBeforeServerEnable, FailedProbeIntervalSeconds, MaxReplyWaitSeconds, StatusCodeLowerBound, 
 						StatusCodeUpperBound, RequestMethod, RequestUrl, MatchContent).Result;
 				if (status != null && PassThru.IsPresent)
