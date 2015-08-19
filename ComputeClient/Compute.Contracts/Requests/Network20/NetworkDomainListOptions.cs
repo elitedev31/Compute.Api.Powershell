@@ -9,12 +9,6 @@
     public sealed class NetworkDomainListOptions : IFilterableRequest
 	{
         /// <summary>
-        /// Gets or sets the Id filter.
-        /// </summary>
-        [FilterParameter("id")]
-		public Guid? Id { get; set; }
-
-        /// <summary>
         /// Gets or sets the DatacenterId filter.
         /// </summary>
         [FilterParameter("datacenterId")]

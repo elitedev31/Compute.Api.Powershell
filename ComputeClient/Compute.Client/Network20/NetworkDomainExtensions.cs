@@ -17,34 +17,42 @@
 		[Obsolete("Use IComputeApiClient.Networking.NetworkDomain instead")]
 		public static async Task<IEnumerable<NetworkDomainType>> GetNetworkDomains(this IComputeApiClient client, PageableRequest pagingOptions = null)
 		{
-			return await client.Networking.NetworkDomain.GetNetworkDomains(pagingOptions);
+			return await client.Networking.NetworkDomain.GetNetworkDomains(null, pagingOptions);
 		}
 
 		/// <summary>	This function gets list of network domains from Cloud. </summary>
 		/// <param name="client">		  	The client. </param>
 		/// <param name="networkDomainId">	Network domain id. </param>
-		/// <param name="networkName">	  	The network Name. </param>
-		/// <param name="pagingOptions">  	Options for controlling the paging. </param>
 		/// <returns>	The list of network domains associated with the organization. </returns>
 		[Obsolete("Use IComputeApiClient.Networking.NetworkDomain instead")]
-		public static async Task<IEnumerable<NetworkDomainType>> GetNetworkDomain(this IComputeApiClient client, Guid networkDomainId, string networkName, PageableRequest pagingOptions = null)
+		public static async Task<NetworkDomainType> GetNetworkDomain(this IComputeApiClient client, Guid networkDomainId)
 		{
-			return await client.Networking.NetworkDomain.GetNetworkDomain(networkDomainId, networkName, pagingOptions);
+			return await client.Networking.NetworkDomain.GetNetworkDomain(networkDomainId);
 		}
 
-		/// <summary>
-		/// This function deploys a new network domains to Cloud
-		/// </summary>
-		/// <param name="client">
-		/// The client.
-		/// </param>
-		/// <param name="networkDomain">
-		/// The network Domain.
-		/// </param>
-		/// <returns>
-		/// Response containing status.
-		/// </returns>
-		[Obsolete("Use IComputeApiClient.Networking.NetworkDomain instead")]
+        /// <summary>	This function gets list of network domains from Cloud. </summary>
+        /// <param name="client">		  	The client. </param>
+        /// <param name="networkDomainName">The network domain name. </param>
+        /// <returns>	The list of network domains associated with the organization. </returns>
+        [Obsolete("Use IComputeApiClient.Networking.NetworkDomain instead")]
+        public static async Task<NetworkDomainType> GetNetworkDomain(this IComputeApiClient client, string networkDomainName)
+        {
+            return await client.Networking.NetworkDomain.GetNetworkDomain(networkDomainName);
+        }
+
+        /// <summary>
+        /// This function deploys a new network domains to Cloud
+        /// </summary>
+        /// <param name="client">
+        /// The client.
+        /// </param>
+        /// <param name="networkDomain">
+        /// The network Domain.
+        /// </param>
+        /// <returns>
+        /// Response containing status.
+        /// </returns>
+        [Obsolete("Use IComputeApiClient.Networking.NetworkDomain instead")]
 		public static async Task<ResponseType> DeployNetworkDomain(this IComputeApiClient client, DeployNetworkDomainType networkDomain)
 		{
 			return await client.Networking.NetworkDomain.DeployNetworkDomain(networkDomain);

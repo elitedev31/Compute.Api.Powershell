@@ -16,44 +16,49 @@
         /// <summary>
         /// The get network domains.
         /// </summary>
-        /// <param name="pagingOptions">
-        /// The paging options.
-        /// </param>
 		/// <param name="filteringOptions">
 		/// The filtering options.
 		/// </param>
+        /// <param name="pagingOptions">
+        /// The paging options.
+        /// </param>
         /// <returns>
         /// The <see cref="Task"/>.
         /// </returns>
-        Task<IEnumerable<NetworkDomainType>> GetNetworkDomains(PageableRequest pagingOptions = null, NetworkDomainListOptions filteringOptions = null);
+        Task<IEnumerable<NetworkDomainType>> GetNetworkDomains(NetworkDomainListOptions filteringOptions = null, PageableRequest pagingOptions = null);
 
-		/// <summary>
-		/// 	This function gets list of network domains from Cloud. 
-		/// </summary>
-		/// <param name="networkDomainId">
-		/// 	Network domain id. 
-		/// </param>
-		/// <param name="networkName">
-		/// 	  	The network Name. 
-		/// </param>
-		/// <param name="pagingOptions">
-		/// 	Options for controlling the paging. 
-		/// </param>
-		/// <returns>
-		/// 	The list of network domains associated with the organization. 
-		/// </returns>
-		Task<IEnumerable<NetworkDomainType>> GetNetworkDomain(Guid networkDomainId, string networkName, PageableRequest pagingOptions = null);
+        /// <summary>
+        /// 	This function gets a network domain from Cloud.
+        /// </summary>
+        /// <param name="networkDomainId">
+        /// 	Network domain id. 
+        /// </param>
+        /// <returns>
+        /// 	The network domain with the supplied id. 
+        /// </returns>
+        Task<NetworkDomainType> GetNetworkDomain(Guid networkDomainId);
 
-		/// <summary>
-		/// This function deploys a new network domains to Cloud
-		/// </summary>
-		/// <param name="networkDomain">
-		/// The network Domain.
-		/// </param>
-		/// <returns>
-		/// Response containing status.
-		/// </returns>
-		Task<ResponseType> DeployNetworkDomain(DeployNetworkDomainType networkDomain);
+        /// <summary>
+        /// 	This function gets a network domain from Cloud.
+        /// </summary>
+        /// <param name="networkDomainName">
+        /// 	The network domain name. 
+        /// </param>
+        /// <returns>
+        /// 	The network domain with the supplid name.
+        /// </returns>
+        Task<NetworkDomainType> GetNetworkDomain(string networkDomainName);
+
+        /// <summary>
+        /// This function deploys a new network domains to Cloud
+        /// </summary>
+        /// <param name="networkDomain">
+        /// The network Domain.
+        /// </param>
+        /// <returns>
+        /// Response containing status.
+        /// </returns>
+        Task<ResponseType> DeployNetworkDomain(DeployNetworkDomainType networkDomain);
 
 		/// <summary>
 		/// 	An IComputeApiClient extension method that deletes the network domain. 

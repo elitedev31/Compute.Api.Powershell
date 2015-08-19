@@ -42,9 +42,7 @@
         /// <returns>
         /// The <see cref="Task"/>.
         /// </returns>	
-        public async Task<ServersResponseCollection> GetMcp2DeployedServers(
-			ServerListOptions filteringOptions = null,
-            IPageableRequest pagingOptions = null)
+        public async Task<ServersResponseCollection> GetMcp2DeployedServers(ServerListOptions filteringOptions = null, IPageableRequest pagingOptions = null)
 		{
 			ServersResponseCollection servers = await _apiClient.GetAsync<ServersResponseCollection>(
                 ApiUris.GetMcp2Servers(_apiClient.OrganizationId),
@@ -64,9 +62,9 @@
 		/// </returns>
 		public async Task<ServerType> GetMcp2DeployedServer(Guid serverId)
 		{
-			ServerType servers =
+			ServerType server =
 				await _apiClient.GetAsync<ServerType>(ApiUris.GetMcp2Server(_apiClient.OrganizationId, serverId));
-			return servers;
+			return server;
 		}
 	}
 }

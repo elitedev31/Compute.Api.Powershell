@@ -213,7 +213,7 @@ namespace DD.CBU.Compute.Api.Client
 		}
 
         /// <summary>
-        /// The network domains.
+        /// The network domain.
         /// </summary>
         /// <param name="orgId">
         /// The org id.
@@ -221,25 +221,13 @@ namespace DD.CBU.Compute.Api.Client
         /// <param name="networkDomainId">
         /// The network Domain Id.
         /// </param>
-        /// <param name="networkName">
-        /// The network Name.
-        /// </param>
         /// <returns>
         /// The <see cref="Uri"/>.
         /// </returns>
-        public static Uri NetworkDomain(Guid orgId, Guid networkDomainId, string networkName)
+        public static Uri NetworkDomain(Guid orgId, Guid networkDomainId)
         {
-            var queryParameters = new List<string>();
-            if (networkDomainId != Guid.Empty)
-            {
-                queryParameters.Add(string.Format("Id={0}", networkDomainId));
-            }
-            if (!String.IsNullOrEmpty(networkName))
-            {
-                queryParameters.Add(string.Format("Name={0}", networkName));
-            }
             return new Uri(
-				string.Format(MCP2_0_PREFIX + "{0}/network/networkDomain?{1}", orgId, String.Join("&", queryParameters)),
+				string.Format(MCP2_0_PREFIX + "{0}/network/networkDomain/{1}", orgId, networkDomainId),
                 UriKind.Relative);
         }
 

@@ -24,9 +24,7 @@
         /// <returns>
         /// The <see cref="Task"/>.
         /// </returns>
-        Task<ServersResponseCollection> GetMcp2DeployedServers(
-			ServerListOptions filteringOptions = null,
-            IPageableRequest pagingOptions = null);
+        Task<ServersResponseCollection> GetMcp2DeployedServers(ServerListOptions filteringOptions = null, IPageableRequest pagingOptions = null);
 
 		/// <summary>
 		/// The get mcp 2 deployed server.

@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using DD.CBU.Compute.Api.Client.Interfaces;
     using DD.CBU.Compute.Api.Client.Interfaces.Network20;
@@ -32,55 +33,66 @@
         /// <summary>
         /// The get network domains.
         /// </summary>
-        /// <param name="pagingOptions">
-        /// The paging options.
-        /// </param>
 		/// <param name="filteringOptions">
 		/// The filtering options.
 		/// </param>
+        /// <param name="pagingOptions">
+        /// The paging options.
+        /// </param>
         /// <returns>
         /// The <see cref="Task"/>.
         /// </returns>
-        public async Task<IEnumerable<NetworkDomainType>> GetNetworkDomains(PageableRequest pagingOptions = null, NetworkDomainListOptions filteringOptions = null)
-		{
-			var networks = await _apiClient.GetAsync<networkDomains>(
+        public async Task<IEnumerable<NetworkDomainType>> GetNetworkDomains(NetworkDomainListOptions filteringOptions = null, PageableRequest pagingOptions = null)
+        {
+            var networks = await _apiClient.GetAsync<networkDomains>(
                 ApiUris.NetworkDomains(_apiClient.OrganizationId),
                 pagingOptions,
                 filteringOptions);
-			return networks.networkDomain;
-		}
+            return networks.networkDomain;
+        }
 
-		/// <summary>
-		/// 	This function gets list of network domains from Cloud. 
-		/// </summary>
-		/// <param name="networkDomainId">
-		/// 	Network domain id. 
-		/// </param>
-		/// <param name="networkName">
-		/// 	  	The network Name. 
-		/// </param>
-		/// <param name="pagingOptions">
-		/// 	Options for controlling the paging. 
-		/// </param>
-		/// <returns>
-		/// 	The list of network domains associated with the organization. 
-		/// </returns>
-		public async Task<IEnumerable<NetworkDomainType>> GetNetworkDomain(Guid networkDomainId, string networkName, PageableRequest pagingOptions = null)
-		{
-			var networks = await _apiClient.GetAsync<networkDomains>(ApiUris.NetworkDomain(_apiClient.OrganizationId, networkDomainId, networkName), pagingOptions);
-			return networks.networkDomain;
-		}
+        /// <summary>
+        /// 	This function gets a network domain from Cloud.
+        /// </summary>
+        /// <param name="networkDomainId">
+        /// 	Network domain id. 
+        /// </param>
+        /// <returns>
+        /// 	The network domain with the supplied id. 
+        /// </returns>
+        public async Task<NetworkDomainType> GetNetworkDomain(Guid networkDomainId)
+        {
+            return await _apiClient.GetAsync<NetworkDomainType>(
+                ApiUris.NetworkDomain(_apiClient.OrganizationId, networkDomainId));
+        }
 
-		/// <summary>
-		/// This function deploys a new network domains to Cloud
-		/// </summary>
-		/// <param name="networkDomain">
-		/// The network Domain.
-		/// </param>
-		/// <returns>
-		/// Response containing status.
-		/// </returns>
-		public async Task<ResponseType> DeployNetworkDomain(DeployNetworkDomainType networkDomain)
+        /// <summary>
+        /// 	This function gets a network domain from Cloud.
+        /// </summary>
+        /// <param name="networkDomainName">
+        /// 	The network domain name. 
+        /// </param>
+        /// <returns>
+        /// 	The network domain with the supplid name.
+        /// </returns>
+        public async Task<NetworkDomainType> GetNetworkDomain(string networkDomainName)
+        {
+            var networkDomains = await GetNetworkDomains(new NetworkDomainListOptions { Name = networkDomainName });
+            return (networkDomains != null)
+                ? networkDomains.FirstOrDefault()
+                : null;
+        }
+
+        /// <summary>
+        /// This function deploys a new network domains to Cloud
+        /// </summary>
+        /// <param name="networkDomain">
+        /// The network Domain.
+        /// </param>
+        /// <returns>
+        /// Response containing status.
+        /// </returns>
+        public async Task<ResponseType> DeployNetworkDomain(DeployNetworkDomainType networkDomain)
 		{
 			var response = await _apiClient.PostAsync<DeployNetworkDomainType, ResponseType>(ApiUris.CreateNetworkDomain(_apiClient.OrganizationId), networkDomain);
 			return response;
