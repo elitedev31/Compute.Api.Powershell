@@ -16,20 +16,20 @@ using DD.CBU.Compute.Api.Contracts.Server;
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The remove caas server anti affinity rule cmdlet.
+	///     The remove caas server anti affinity rule cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Remove, "CaasServerAntiAffinityRule", SupportsShouldProcess = true)]
 	public class RemoveCaasServerAntiAffinityRuleCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
-		/// Gets or sets the rule.
+		///     Gets or sets the rule.
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The Anti affinity rule, retrived by Get-CaasServerAntiAffinityRule.", 
 			ValueFromPipeline = true)]
 		public AntiAffinityRuleType Rule { get; set; }
 
 		/// <summary>
-		/// Process the record
+		///     Process the record
 		/// </summary>
 		protected override void ProcessRecord()
 		{

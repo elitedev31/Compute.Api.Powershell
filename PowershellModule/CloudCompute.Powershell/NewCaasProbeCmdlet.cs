@@ -11,7 +11,6 @@ using System;
 using System.Management.Automation;
 using System.Text.RegularExpressions;
 using DD.CBU.Compute.Api.Client;
-using DD.CBU.Compute.Api.Client.VIP;
 using DD.CBU.Compute.Api.Contracts.General;
 using DD.CBU.Compute.Api.Contracts.Network;
 using DD.CBU.Compute.Api.Contracts.Vip;
@@ -19,39 +18,39 @@ using DD.CBU.Compute.Api.Contracts.Vip;
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The new CaaS VIP Real cmdlet.
+	///     The new CaaS VIP Real cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.New, "CaasProbe")]
 	[OutputType(typeof (Probe))]
 	public class NewCaasProbeCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
-		/// The network to manage the VIP settings
+		///     The network to manage the VIP settings
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The network to manage the VIP settings", ValueFromPipeline = true)]
 		public NetworkWithLocationsNetwork Network { get; set; }
 
 		/// <summary>
-		/// The name for the real server
+		///     The name for the real server
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The name for the probe")]
 		public string Name { get; set; }
 
 		/// <summary>
-		/// Gets or sets the type.
+		///     Gets or sets the type.
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The type of probe. One of (TCP, UDP, HTTP, HTTPS, ICMP)")]
 		public ProbeType Type { get; set; }
 
 		/// <summary>
-		/// Gets or sets the port.
+		///     Gets or sets the port.
 		/// </summary>
 		[Parameter(Mandatory = false, HelpMessage = "The port to probe. valid range 1-65535")]
 		[ValidateRange(1, 65535)]
 		public int Port { get; set; }
 
 		/// <summary>
-		/// Gets or sets the probe interval seconds.
+		///     Gets or sets the probe interval seconds.
 		/// </summary>
 		[Parameter(Mandatory = false, HelpMessage = "The interval to probe in seconds. valid range 15-65535")]
 		[ValidateRange(15, 65535)]
@@ -59,7 +58,7 @@ namespace DD.CBU.Compute.Powershell
 		public int ProbeIntervalSeconds { get; set; }
 
 		/// <summary>
-		/// The error count before server fail.
+		///     The error count before server fail.
 		/// </summary>
 		/// <remarks>
 		/// </remarks>
@@ -71,7 +70,7 @@ namespace DD.CBU.Compute.Powershell
 
 
 		/// <summary>
-		/// The success count before server enable.
+		///     The success count before server enable.
 		/// </summary>
 		/// <remarks>
 		/// </remarks>
@@ -83,7 +82,7 @@ namespace DD.CBU.Compute.Powershell
 
 
 		/// <summary>
-		/// The failed probe interval seconds.
+		///     The failed probe interval seconds.
 		/// </summary>
 		/// <remarks>
 		/// </remarks>
@@ -95,7 +94,7 @@ namespace DD.CBU.Compute.Powershell
 
 
 		/// <summary>
-		/// The max reply wait seconds.
+		///     The max reply wait seconds.
 		/// </summary>
 		/// <remarks>
 		/// </remarks>
@@ -107,7 +106,7 @@ namespace DD.CBU.Compute.Powershell
 
 
 		/// <summary>
-		/// The request method.
+		///     The request method.
 		/// </summary>
 		/// <remarks>
 		/// </remarks>
@@ -118,7 +117,7 @@ namespace DD.CBU.Compute.Powershell
 
 
 		/// <summary>
-		/// The status code upper bound.
+		///     The status code upper bound.
 		/// </summary>
 		/// <remarks>
 		/// </remarks>
@@ -129,7 +128,7 @@ namespace DD.CBU.Compute.Powershell
 		public int StatusCodeUpperBound { get; set; }
 
 		/// <summary>
-		/// The status code lower bound.
+		///     The status code lower bound.
 		/// </summary>
 		/// <remarks>
 		/// </remarks>
@@ -140,27 +139,27 @@ namespace DD.CBU.Compute.Powershell
 		public int StatusCodeLowerBound { get; set; }
 
 		/// <summary>
-		/// Gets or sets the request url.
+		///     Gets or sets the request url.
 		/// </summary>
 		[Parameter(Mandatory = false, HelpMessage = "Applicable if type is HTTP/HTTPS. The Url to be requested ")]
 		public string RequestUrl { get; set; }
 
 
 		/// <summary>
-		/// Gets or sets the match content.
+		///     Gets or sets the match content.
 		/// </summary>
 		[Parameter(Mandatory = false, HelpMessage = "Applicable if type is HTTP/HTTPS. The content to be matched.")]
 		public string MatchContent { get; set; }
 
 		/// <summary>
-		/// The network to add the public ip addresses
+		///     The network to add the public ip addresses
 		/// </summary>
 		[Parameter(Mandatory = false, HelpMessage = "Return the Probe object")]
 		public SwitchParameter PassThru { get; set; }
 
 
 		/// <summary>
-		/// The process record.
+		///     The process record.
 		/// </summary>
 		protected override void ProcessRecord()
 		{
@@ -168,7 +167,8 @@ namespace DD.CBU.Compute.Powershell
 			try
 			{
 				Status status =
-					Connection.ApiClient.NetworkingLegacy.NetworkVip.CreateProbe(Network.id, Name, Type, Port, ProbeIntervalSeconds, ErrorCountBeforeServerFail, 
+					Connection.ApiClient.NetworkingLegacy.NetworkVip.CreateProbe(Network.id, Name, Type, Port, ProbeIntervalSeconds, 
+						ErrorCountBeforeServerFail, 
 						SuccessCountBeforeServerEnable, FailedProbeIntervalSeconds, MaxReplyWaitSeconds, StatusCodeLowerBound, 
 						StatusCodeUpperBound, RequestMethod, RequestUrl, MatchContent).Result;
 				if (status != null && PassThru.IsPresent)

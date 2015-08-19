@@ -13,14 +13,14 @@ using System.Management.Automation;
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The get caas connection cmdlet.
+	///     The get caas connection cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasConnection")]
 	[OutputType(typeof (KeyValuePair<string, ComputeServiceConnection>[]))]
 	public class GetCaasConnectionCmdlet : PSCmdlet
 	{
 		/// <summary>
-		/// The process record.
+		///     The process record.
 		/// </summary>
 		protected override void ProcessRecord()
 		{

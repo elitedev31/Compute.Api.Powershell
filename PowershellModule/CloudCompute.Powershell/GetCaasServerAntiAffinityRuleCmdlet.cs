@@ -19,41 +19,41 @@ using ServerType = DD.CBU.Compute.Api.Contracts.Network20.ServerType;
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The get caas server anti affinity rule cmdlet.
+	///     The get caas server anti affinity rule cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasServerAntiAffinityRule")]
 	[OutputType(typeof (AntiAffinityRuleType))]
 	public class GetCaasServerAntiAffinityRuleCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
-		/// The network to show the anti affinity rules from
+		///     The network to show the anti affinity rules from
 		/// </summary>
 		[Parameter(Mandatory = false, HelpMessage = "filter the network to show the the rules")]
 		public NetworkWithLocationsNetwork Network { get; set; }
 
 
 		/// <summary>
-		/// The ruleid to show the anti affinity rules from
+		///     The ruleid to show the anti affinity rules from
 		/// </summary>
 		[Parameter(Mandatory = false, Position = 0, HelpMessage = "filter the Antiaffinity rule id")]
 		public string RuleId { get; set; }
 
 		/// <summary>
-		/// The location to show the anti affinity rules from
+		///     The location to show the anti affinity rules from
 		/// </summary>
 		[Parameter(Mandatory = false, HelpMessage = "filter the location to show the rules")]
 		public string Location { get; set; }
 
 
 		/// <summary>
-		/// A server to find to show the anti affinity rules from
+		///     A server to find to show the anti affinity rules from
 		/// </summary>
 		[Parameter(Mandatory = false, HelpMessage = "find a rule base in a server")]
 		public ServerType Server { get; set; }
 
 
 		/// <summary>
-		/// The process record.
+		///     The process record.
 		/// </summary>
 		protected override void ProcessRecord()
 		{

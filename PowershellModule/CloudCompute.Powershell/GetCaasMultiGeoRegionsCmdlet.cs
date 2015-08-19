@@ -17,14 +17,14 @@ using DD.CBU.Compute.Api.Contracts.Datacenter;
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The get caas multi geo regions cmdlet.
+	///     The get caas multi geo regions cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasMultiGeoRegions")]
 	[OutputType(typeof (Geo[]))]
 	public class GetCaasMultiGeoRegionsCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
-		/// The process record method.
+		///     The process record method.
 		/// </summary>
 		protected override void ProcessRecord()
 		{

@@ -11,7 +11,6 @@ using System;
 using System.Globalization;
 using System.Management.Automation;
 using DD.CBU.Compute.Api.Client;
-using DD.CBU.Compute.Api.Client.Backup;
 using DD.CBU.Compute.Api.Contracts.Backup;
 using DD.CBU.Compute.Api.Contracts.General;
 using DD.CBU.Compute.Api.Contracts.Network20;
@@ -19,26 +18,26 @@ using DD.CBU.Compute.Api.Contracts.Network20;
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The Remove-Backup now job cmdlet.
+	///     The Remove-Backup now job cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Remove, "CaasBackupJob", SupportsShouldProcess = true)]
 	public class RemoveCaasBackupJobCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
-		/// Gets or sets the server.
+		///     Gets or sets the server.
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The server to modify the backup client", 
 			ValueFromPipeline = true)]
 		public ServerType Server { get; set; }
 
 		/// <summary>
-		/// Gets or sets the backup client.
+		///     Gets or sets the backup client.
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The backup client details to modify")]
 		public BackupClientDetailsType BackupClient { get; set; }
 
 		/// <summary>
-		/// The process record method.
+		///     The process record method.
 		/// </summary>
 		protected override void ProcessRecord()
 		{
@@ -70,7 +69,7 @@ namespace DD.CBU.Compute.Powershell
 		}
 
 		/// <summary>
-		/// Modify a backup client
+		///     Modify a backup client
 		/// </summary>
 		private void RemoveBackupJob()
 		{

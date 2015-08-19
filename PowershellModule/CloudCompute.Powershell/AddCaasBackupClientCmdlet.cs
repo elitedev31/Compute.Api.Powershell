@@ -12,7 +12,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Management.Automation;
 using DD.CBU.Compute.Api.Client;
-using DD.CBU.Compute.Api.Client.Backup;
 using DD.CBU.Compute.Api.Contracts.Backup;
 using DD.CBU.Compute.Api.Contracts.General;
 using DD.CBU.Compute.Api.Contracts.Network20;
@@ -20,51 +19,51 @@ using DD.CBU.Compute.Api.Contracts.Network20;
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The Add backup client cmdlet.
+	///     The Add backup client cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Add, "CaasBackupClient")]
 	[OutputType(typeof (string))]
 	public class AddCaasBackupClientCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
-		/// Gets or sets the server.
+		///     Gets or sets the server.
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The server to add the backup client", 
 			ValueFromPipeline = true)]
 		public ServerType Server { get; set; }
 
 		/// <summary>
-		/// Gets or sets the storage policy.
+		///     Gets or sets the storage policy.
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The storage policy availabe from Get-CaasBackupStoragePolicies cmdlet")]
 		public BackupStoragePolicy StoragePolicy { get; set; }
 
 		/// <summary>
-		/// Gets or sets the schedule policy.
+		///     Gets or sets the schedule policy.
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The schedule policy availabe from Get-CaasBackupSchedulePolicies cmdlet")]
 		public BackupSchedulePolicy SchedulePolicy { get; set; }
 
 		/// <summary>
-		/// Gets or sets the client type.
+		///     Gets or sets the client type.
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The backup client type availabe from Get-CaasBackupClientTypes cmdlet")]
 		public BackupClientType ClientType { get; set; }
 
 		/// <summary>
-		/// Gets or sets the trigger.
+		///     Gets or sets the trigger.
 		/// </summary>
 		[Parameter(HelpMessage = "The trigger type for alerting purposes")]
 		public TriggerType? Trigger { get; set; }
 
 		/// <summary>
-		/// Gets or sets the email addresses.
+		///     Gets or sets the email addresses.
 		/// </summary>
 		[Parameter(HelpMessage = "The email addresses for alerting purposes. At least one must be added when using alerting")]
 		public IReadOnlyList<string> EmailAddresses { get; set; }
 
 		/// <summary>
-		/// The process record method.
+		///     The process record method.
 		/// </summary>
 		protected override void ProcessRecord()
 		{
@@ -97,10 +96,10 @@ namespace DD.CBU.Compute.Powershell
 		}
 
 		/// <summary>
-		/// Adds a backup client to the server and returns the download link url
+		///     Adds a backup client to the server and returns the download link url
 		/// </summary>
 		/// <returns>
-		/// The download link
+		///     The download link
 		/// </returns>
 		private string AddBackupClient()
 		{

@@ -11,7 +11,6 @@ using System;
 using System.Management.Automation;
 using System.Text.RegularExpressions;
 using DD.CBU.Compute.Api.Client;
-using DD.CBU.Compute.Api.Client.VIP;
 using DD.CBU.Compute.Api.Contracts.General;
 using DD.CBU.Compute.Api.Contracts.Network;
 using DD.CBU.Compute.Api.Contracts.Vip;
@@ -19,60 +18,60 @@ using DD.CBU.Compute.Api.Contracts.Vip;
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The new caas server farm cmdlet.
+	///     The new caas server farm cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.New, "CaasServerFarm")]
 	[OutputType(typeof (ServerFarm))]
 	public class NewCaasServerFarmCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
-		/// The network to manage the VIP settings
+		///     The network to manage the VIP settings
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The network to manage the VIP settings", ValueFromPipeline = true)]
 		public NetworkWithLocationsNetwork Network { get; set; }
 
 		/// <summary>
-		/// The name for the server farm
+		///     The name for the server farm
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The name for the server farm")]
 		public string Name { get; set; }
 
 
 		/// <summary>
-		/// The server farm predictor
+		///     The server farm predictor
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The server farm predictor ")]
 		public ServerFarmPredictorType Predictor { get; set; }
 
 		/// <summary>
-		/// The first real server to be added to the server farm
+		///     The first real server to be added to the server farm
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The first real server to be added to the server farm")]
 		public RealServer RealServer { get; set; }
 
 
 		/// <summary>
-		/// The first real server port to be added to the server farm
+		///     The first real server port to be added to the server farm
 		/// </summary>
 		[Parameter(Mandatory = false, HelpMessage = "The first real server port to be added to the server farm")]
 		[ValidateRange(1, 65535)]
 		public int RealServerPort { get; set; }
 
 		/// <summary>
-		/// The probe to be added to the server farm
+		///     The probe to be added to the server farm
 		/// </summary>
 		[Parameter(Mandatory = false, HelpMessage = "The probe to be added to the server farm")]
 		public Probe Probe { get; set; }
 
 
 		/// <summary>
-		/// The network to add the public ip addresses
+		///     The network to add the public ip addresses
 		/// </summary>
 		[Parameter(Mandatory = false, HelpMessage = "Return the ServerFarm object")]
 		public SwitchParameter PassThru { get; set; }
 
 		/// <summary>
-		/// The process record.
+		///     The process record.
 		/// </summary>
 		protected override void ProcessRecord()
 		{
@@ -84,7 +83,8 @@ namespace DD.CBU.Compute.Powershell
 					probeId = Probe.id;
 
 				Status status =
-					Connection.ApiClient.NetworkingLegacy.NetworkVip.CreateServerFarm(Network.id, Name, Predictor, RealServer.id, RealServerPort, probeId).Result;
+					Connection.ApiClient.NetworkingLegacy.NetworkVip.CreateServerFarm(Network.id, Name, Predictor, RealServer.id, 
+						RealServerPort, probeId).Result;
 				if (status != null && PassThru.IsPresent)
 				{
 					var regexObj = new Regex(@"\x28id\x3A([-\w]*)\x29");

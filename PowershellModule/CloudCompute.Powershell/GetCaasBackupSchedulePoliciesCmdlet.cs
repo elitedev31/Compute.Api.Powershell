@@ -12,28 +12,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Management.Automation;
 using DD.CBU.Compute.Api.Client;
-using DD.CBU.Compute.Api.Client.Backup;
 using DD.CBU.Compute.Api.Contracts.Backup;
 using DD.CBU.Compute.Api.Contracts.Network20;
 
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The get backup schedule policies cmdlet.
+	///     The get backup schedule policies cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasBackupSchedulePolicies")]
 	[OutputType(typeof (BackupSchedulePolicy[]))]
 	public class GetCaasBackupSchedulePoliciesCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
-		/// Gets or sets the server.
+		///     Gets or sets the server.
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The server associated with the backup schedule policies", 
 			ValueFromPipeline = true)]
 		public ServerType Server { get; set; }
 
 		/// <summary>
-		/// The process record method.
+		///     The process record method.
 		/// </summary>
 		protected override void ProcessRecord()
 		{
@@ -84,10 +83,10 @@ namespace DD.CBU.Compute.Powershell
 		}
 
 		/// <summary>
-		/// Gets the schedule policies
+		///     Gets the schedule policies
 		/// </summary>
 		/// <returns>
-		/// The schedule policies
+		///     The schedule policies
 		/// </returns>
 		private IEnumerable<BackupSchedulePolicy> GetBackupSchedulePolicies()
 		{

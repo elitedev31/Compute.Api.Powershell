@@ -1,13 +1,11 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="DeployCaasServerOnNetworkDomainCmdlet.cs" company="">
+// <copyright file="NewCaasServerNic.cs" company="">
 //   
 // </copyright>
 // <summary>
 //   The new CaaS Virtual Machine cmdlet.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
-
 
 using System;
 using System.Management.Automation;
@@ -18,40 +16,40 @@ using DD.CBU.Compute.Api.Contracts.Network20;
 namespace DD.CBU.Compute.Powershell.Mcp20
 {
 	/// <summary>
-	/// The new CaaS Server NIC CmdLet
+	///     The new CaaS Server NIC CmdLet
 	/// </summary>
 	[Cmdlet(VerbsCommon.New, "CaasServerNic")]
-	[OutputType(typeof(ResponseType))]
+	[OutputType(typeof (ResponseType))]
 	public class NewCaasServerNicCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
-		/// The Virtual Server
+		///     The Virtual Server
 		/// </summary>
-		[Parameter(Mandatory = false, ValueFromPipeline = true,
+		[Parameter(Mandatory = false, ValueFromPipeline = true, 
 			HelpMessage = "The server on which the nic will be deployed")]
 		public ServerType Server { get; set; }
 
 		/// <summary>
-		/// Gets or sets the server id.
+		///     Gets or sets the server id.
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The server ID")]
 		public string ServerId { get; set; }
 
 		/// <summary>
-		/// Gets or sets the primary network.
+		///     Gets or sets the primary network.
 		/// </summary>
 		[Parameter(Mandatory = true, ParameterSetName = "Vlan", HelpMessage = "The server's primary network")]
 		public VlanType Vlan { get; set; }
 
 		/// <summary>
-		/// Gets or sets the primary private IP.
+		///     Gets or sets the primary private IP.
 		/// </summary>
-		[Parameter(Mandatory = false, ParameterSetName = "PrivateIp",
+		[Parameter(Mandatory = false, ParameterSetName = "PrivateIp", 
 			HelpMessage = "The private network private IP address that will be assigned to the machine.")]
 		public string PrimaryPrivateIp { get; set; }
 
 		/// <summary>
-		/// The process record method.
+		///     The process record method.
 		/// </summary>
 		protected override void ProcessRecord()
 		{
@@ -59,11 +57,10 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 			base.ProcessRecord();
 			try
 			{
-
 				var nic = new AddNicType
 				{
-					serverId = (Server != null ? Server.id : ServerId),
-					PrivateIPv4 = PrimaryPrivateIp,
+					serverId = Server != null ? Server.id : ServerId, 
+					PrivateIPv4 = PrimaryPrivateIp, 
 					VLANId = Vlan.id
 				};
 

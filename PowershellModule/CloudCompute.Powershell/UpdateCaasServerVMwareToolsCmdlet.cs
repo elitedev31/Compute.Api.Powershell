@@ -15,13 +15,13 @@ using DD.CBU.Compute.Api.Contracts.General;
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The set server state cmdlet.
+	///     The set server state cmdlet.
 	/// </summary>
 	[Cmdlet("Update", "CaasServerVMwareTools")]
 	public class UpdateCaasServerVMwareToolsCmdlet : PsCmdletCaasServerBase
 	{
 		/// <summary>
-		/// The process record method.
+		///     The process record method.
 		/// </summary>
 		protected override void ProcessRecord()
 		{

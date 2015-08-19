@@ -18,28 +18,28 @@ using DD.CBU.Compute.Api.Contracts.Server;
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The new CaaS Virtual Machine cmdlet.
+	///     The new CaaS Virtual Machine cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.New, "CaasServer")]
 	[OutputType(typeof (ServerWithBackupType))]
 	public class NewCaasServerCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
-		/// The Server Details that will be used to deploy the VM
+		///     The Server Details that will be used to deploy the VM
 		/// </summary>
 		[Parameter(Mandatory = true, ValueFromPipeline = true, 
 			HelpMessage = "The server details created by New-CaasServerDetails")]
 		public CaasServerDetails ServerDetails { get; set; }
 
 		/// <summary>
-		/// Switch to return the server object after execution
+		///     Switch to return the server object after execution
 		/// </summary>
 		[Parameter(Mandatory = false, HelpMessage = "Return the Server object after execution")]
 		public SwitchParameter PassThru { get; set; }
 
 
 		/// <summary>
-		/// The process record method.
+		///     The process record method.
 		/// </summary>
 		protected override void ProcessRecord()
 		{
@@ -73,10 +73,10 @@ namespace DD.CBU.Compute.Powershell
 		}
 
 		/// <summary>
-		/// The deploy server task.
+		///     The deploy server task.
 		/// </summary>
 		/// <returns>
-		/// The <see cref="ServerWithBackupType"/>.
+		///     The <see cref="ServerWithBackupType" />.
 		/// </returns>
 		private ServerWithBackupType DeployServerTask()
 		{
@@ -121,7 +121,8 @@ namespace DD.CBU.Compute.Powershell
 			if (statusadditionalInfo != null)
 			{
 				IEnumerable<ServerWithBackupType> servers =
-					Connection.ApiClient.ServerManagementLegacy.Server.GetDeployedServers(statusadditionalInfo.value, null, null, null).Result;
+					Connection.ApiClient.ServerManagementLegacy.Server.GetDeployedServers(statusadditionalInfo.value, null, null, null)
+						.Result;
 				if (servers.Any())
 				{
 					server = servers.First();

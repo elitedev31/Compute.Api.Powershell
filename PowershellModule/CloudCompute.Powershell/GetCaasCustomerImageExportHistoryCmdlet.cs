@@ -12,26 +12,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Management.Automation;
 using DD.CBU.Compute.Api.Client;
-using DD.CBU.Compute.Api.Client.ImportExportImages;
 using DD.CBU.Compute.Api.Contracts.Image;
 
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The Get Customer Image Imports cmdlet.
+	///     The Get Customer Image Imports cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasCustomerImageExportHistory")]
 	[OutputType(typeof (ImageExportRecord[]))]
 	public class GetCaasCustomerImageExportHistoryCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
-		/// Gets or sets the records to return.
+		///     Gets or sets the records to return.
 		/// </summary>
 		[Parameter(Mandatory = false, HelpMessage = "Number of records to return, max 100.")]
 		public int RecordsToReturn { get; set; }
 
 		/// <summary>
-		/// The process record method.
+		///     The process record method.
 		/// </summary>
 		protected override void ProcessRecord()
 		{
@@ -81,10 +80,10 @@ namespace DD.CBU.Compute.Powershell
 		}
 
 		/// <summary>
-		/// Gets the customer image imports
+		///     Gets the customer image imports
 		/// </summary>
 		/// <returns>
-		/// The customer image imports in progress
+		///     The customer image imports in progress
 		/// </returns>
 		private IEnumerable<ImageExportRecord> GetCustomerImageExportHistory()
 		{

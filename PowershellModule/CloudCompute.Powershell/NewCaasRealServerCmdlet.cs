@@ -11,7 +11,6 @@ using System;
 using System.Management.Automation;
 using System.Text.RegularExpressions;
 using DD.CBU.Compute.Api.Client;
-using DD.CBU.Compute.Api.Client.VIP;
 using DD.CBU.Compute.Api.Contracts.General;
 using DD.CBU.Compute.Api.Contracts.Network;
 using DD.CBU.Compute.Api.Contracts.Network20;
@@ -20,53 +19,54 @@ using DD.CBU.Compute.Api.Contracts.Vip;
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The new CaaS VIP Real cmdlet.
+	///     The new CaaS VIP Real cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.New, "CaasRealServer")]
 	[OutputType(typeof (RealServer))]
 	public class NewCaasRealServerCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
-		/// The network to manage the VIP settings
+		///     The network to manage the VIP settings
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The network to manage the VIP settings", 
 			ValueFromPipelineByPropertyName = true)]
 		public NetworkWithLocationsNetwork Network { get; set; }
 
 		/// <summary>
-		/// The server to be added as real server
+		///     The server to be added as real server
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The server to be added as real server", ValueFromPipeline = true)]
 		public ServerType Server { get; set; }
 
 		/// <summary>
-		/// The name for the real server
+		///     The name for the real server
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The name for the real server")]
 		public string Name { get; set; }
 
 		/// <summary>
-		/// The real server status
+		///     The real server status
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The real server status")]
 		public bool InService { get; set; }
 
 
 		/// <summary>
-		/// The network to add the public ip addresses
+		///     The network to add the public ip addresses
 		/// </summary>
 		[Parameter(Mandatory = false, HelpMessage = "Return the RealServer object")]
 		public SwitchParameter PassThru { get; set; }
 
 		/// <summary>
-		/// The process record.
+		///     The process record.
 		/// </summary>
 		protected override void ProcessRecord()
 		{
 			base.ProcessRecord();
 			try
 			{
-				Status status = Connection.ApiClient.NetworkingLegacy.NetworkVip.CreateRealServer(Network.id, Name, Server.id, InService).Result;
+				Status status =
+					Connection.ApiClient.NetworkingLegacy.NetworkVip.CreateRealServer(Network.id, Name, Server.id, InService).Result;
 				if (status != null && PassThru.IsPresent)
 				{
 					// Regex to extract the Id from the status result detail: Real-Server (id:b1a3aea6-37) created
@@ -91,8 +91,8 @@ namespace DD.CBU.Compute.Powershell
 							new ErrorRecord(
 								new CloudComputePsException(
 									"object Id not returned from API"), 
-									"-1",
-									ErrorCategory.InvalidData, status)
+								"-1", 
+								ErrorCategory.InvalidData, status)
 							);
 					}
 				}

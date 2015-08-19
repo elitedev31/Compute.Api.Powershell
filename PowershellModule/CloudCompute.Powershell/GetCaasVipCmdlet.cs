@@ -12,34 +12,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Management.Automation;
 using DD.CBU.Compute.Api.Client;
-using DD.CBU.Compute.Api.Client.VIP;
 using DD.CBU.Compute.Api.Contracts.Network;
 using DD.CBU.Compute.Api.Contracts.Vip;
 
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The get caas vip cmdlet.
+	///     The get caas vip cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasVip")]
 	[OutputType(typeof (Vip[]))]
 	public class GetCaasVipCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
-		/// The network to manage the VIP settings
+		///     The network to manage the VIP settings
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The network to manage the VIP settings", ValueFromPipeline = true)]
 		public NetworkWithLocationsNetwork Network { get; set; }
 
 		/// <summary>
-		/// The name for the Vip
+		///     The name for the Vip
 		/// </summary>
 		[Parameter(Mandatory = false, HelpMessage = "The name for the Vip")]
 		public string Name { get; set; }
 
 
 		/// <summary>
-		/// The process record.
+		///     The process record.
 		/// </summary>
 		protected override void ProcessRecord()
 		{

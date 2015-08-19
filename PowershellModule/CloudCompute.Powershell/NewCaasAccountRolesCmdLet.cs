@@ -14,35 +14,35 @@ using DD.CBU.Compute.Api.Contracts.Directory;
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The new caas account roles cmd let.
+	///     The new caas account roles cmd let.
 	/// </summary>
 	[Cmdlet(VerbsCommon.New, "CaasAccountRoles")]
 	[OutputType(typeof (Role[]))]
 	public class NewCaasAccountRolesCmdLet : PsCmdletCaasBase
 	{
 		/// <summary>
-		/// Gets or sets a value indicating whether network.
+		///     Gets or sets a value indicating whether network.
 		/// </summary>
 		[Parameter(Mandatory = false, ParameterSetName = "SubAdministrator", 
 			HelpMessage = "True of False for network role")]
 		public bool Network { get; set; }
 
 		/// <summary>
-		/// Gets or sets a value indicating whether server.
+		///     Gets or sets a value indicating whether server.
 		/// </summary>
 		[Parameter(Mandatory = false, ParameterSetName = "SubAdministrator", 
 			HelpMessage = "True of False for server role")]
 		public bool Server { get; set; }
 
 		/// <summary>
-		/// Gets or sets a value indicating whether backup.
+		///     Gets or sets a value indicating whether backup.
 		/// </summary>
 		[Parameter(Mandatory = false, ParameterSetName = "SubAdministrator", 
 			HelpMessage = "True of False for backup role")]
 		public bool Backup { get; set; }
 
 		/// <summary>
-		/// Gets or sets a value indicating whether create image.
+		///     Gets or sets a value indicating whether create image.
 		/// </summary>
 		[Parameter(Mandatory = false, ParameterSetName = "SubAdministrator", 
 			HelpMessage = "True of False for create image role")]
@@ -50,21 +50,21 @@ namespace DD.CBU.Compute.Powershell
 
 
 		/// <summary>
-		/// Gets or sets a value indicating whether storage.
+		///     Gets or sets a value indicating whether storage.
 		/// </summary>
 		[Parameter(Mandatory = false, ParameterSetName = "SubAdministrator", 
 			HelpMessage = "True of False for storage role")]
 		public bool Storage { get; set; }
 
 		/// <summary>
-		/// Gets or sets a value indicating whether reports.
+		///     Gets or sets a value indicating whether reports.
 		/// </summary>
 		[Parameter(Mandatory = false, ParameterSetName = "SubAdministrator", 
 			HelpMessage = "True of False for reports role")]
 		public bool Reports { get; set; }
 
 		/// <summary>
-		/// Gets or sets a value indicating whether read only.
+		///     Gets or sets a value indicating whether read only.
 		/// </summary>
 		[Parameter(Mandatory = false, ParameterSetName = "ReadOnly", 
 			HelpMessage = "True of False for reports role")]
@@ -72,7 +72,7 @@ namespace DD.CBU.Compute.Powershell
 
 
 		/// <summary>
-		/// The process record.
+		///     The process record.
 		/// </summary>
 		protected override void ProcessRecord()
 		{

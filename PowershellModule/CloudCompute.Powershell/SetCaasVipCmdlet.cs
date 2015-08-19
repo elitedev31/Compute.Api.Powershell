@@ -10,7 +10,6 @@
 using System;
 using System.Management.Automation;
 using DD.CBU.Compute.Api.Client;
-using DD.CBU.Compute.Api.Client.VIP;
 using DD.CBU.Compute.Api.Contracts.General;
 using DD.CBU.Compute.Api.Contracts.Network;
 using DD.CBU.Compute.Api.Contracts.Vip;
@@ -18,45 +17,46 @@ using DD.CBU.Compute.Api.Contracts.Vip;
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The set caas vip cmdlet.
+	///     The set caas vip cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Set, "CaasVip")]
 	public class SetCaasVipCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
-		/// The network to manage the VIP settings
+		///     The network to manage the VIP settings
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The network to manage the VIP settings", 
 			ValueFromPipelineByPropertyName = true)]
 		public NetworkWithLocationsNetwork Network { get; set; }
 
 		/// <summary>
-		/// The real server to be deleted
+		///     The real server to be deleted
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The vip to be deleted", ValueFromPipeline = true)]
 		public Vip Vip { get; set; }
 
 		/// <summary>
-		/// The Vip status
+		///     The Vip status
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The Vip status")]
 		public bool InService { get; set; }
 
 		/// <summary>
-		/// The vip reply to ICMP status
+		///     The vip reply to ICMP status
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The vip reply to ICMP status")]
 		public bool ReplyToIcmp { get; set; }
 
 		/// <summary>
-		/// The process record.
+		///     The process record.
 		/// </summary>
 		protected override void ProcessRecord()
 		{
 			base.ProcessRecord();
 			try
 			{
-				Status status = Connection.ApiClient.NetworkingLegacy.NetworkVip.ModifyVip(Network.id, Vip.id, ReplyToIcmp, InService).Result;
+				Status status =
+					Connection.ApiClient.NetworkingLegacy.NetworkVip.ModifyVip(Network.id, Vip.id, ReplyToIcmp, InService).Result;
 
 				if (status != null)
 					WriteDebug(

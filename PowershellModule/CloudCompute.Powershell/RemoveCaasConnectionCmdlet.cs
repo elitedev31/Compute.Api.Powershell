@@ -13,20 +13,20 @@ using System.Management.Automation;
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The remove caas connection cmdlet.
+	///     The remove caas connection cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Remove, "CaasConnection")]
 	public class RemoveCaasConnectionCmdlet : PSCmdlet
 	{
 		/// <summary>
-		/// Name for this connection
+		///     Name for this connection
 		/// </summary>
 		[Parameter(Mandatory = true, Position = 0, HelpMessage = "Connection name to be removed from session.")]
 		public string Name { get; set; }
 
 
 		/// <summary>
-		/// The process record.
+		///     The process record.
 		/// </summary>
 		protected override void ProcessRecord()
 		{

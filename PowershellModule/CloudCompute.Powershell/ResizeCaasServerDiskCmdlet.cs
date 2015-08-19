@@ -13,33 +13,32 @@ using System.Linq;
 using System.Management.Automation;
 using DD.CBU.Compute.Api.Client;
 using DD.CBU.Compute.Api.Contracts.General;
-using DD.CBU.Compute.Api.Contracts.Server;
-using ServerType = DD.CBU.Compute.Api.Contracts.Network20.ServerType;
+using DD.CBU.Compute.Api.Contracts.Network20;
 
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The set server state cmdlet.
+	///     The set server state cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Resize, "CaasServerDisk")]
 	[OutputType(typeof (ServerType))]
 	public class ResizeCaasServerDiskCmdlet : PsCmdletCaasServerBase
 	{
 		/// <summary>
-		/// Gets or sets the scsi id.
+		///     Gets or sets the scsi id.
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "SCSI Id of the disk to be resized")]
 		public int ScsiId { get; set; }
 
 		/// <summary>
-		/// Gets or sets the new size in gb.
+		///     Gets or sets the new size in gb.
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "New disk size in GB")]
 		public int NewSizeInGB { get; set; }
 
 
 		/// <summary>
-		/// The process record method.
+		///     The process record method.
 		/// </summary>
 		protected override void ProcessRecord()
 		{
@@ -48,7 +47,7 @@ namespace DD.CBU.Compute.Powershell
 		}
 
 		/// <summary>
-		/// Edit the server disk details
+		///     Edit the server disk details
 		/// </summary>
 		private void SetServerTask()
 		{
@@ -56,10 +55,12 @@ namespace DD.CBU.Compute.Powershell
 			{
 				Status status = null;
 
-				var disk = Server.disk.Where(d => d.scsiId == ScsiId);
+				IEnumerable<ServerTypeDisk> disk = Server.disk.Where(d => d.scsiId == ScsiId);
 				if (disk.Any())
 				{
-					status = Connection.ApiClient.ServerManagementLegacy.Server.ChangeServerDiskSize(Server.id, disk.ElementAt(0).id, NewSizeInGB.ToString()).Result;
+					status =
+						Connection.ApiClient.ServerManagementLegacy.Server.ChangeServerDiskSize(Server.id, disk.ElementAt(0).id, 
+							NewSizeInGB.ToString()).Result;
 				}
 				else
 					WriteError(new ErrorRecord(new PSArgumentException("The scsi id does not exits"), "-1", 

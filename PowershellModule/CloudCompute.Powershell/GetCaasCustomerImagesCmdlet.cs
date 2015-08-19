@@ -18,51 +18,51 @@ using DD.CBU.Compute.Api.Contracts.Network;
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The get CaaS Customer Images cmdlet.
+	///     The get CaaS Customer Images cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasCustomerImages")]
 	[OutputType(typeof (ImagesWithDiskSpeedImage[]))]
 	public class GetCaasCustomerImagesCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
-		/// The network to show the images from
+		///     The network to show the images from
 		/// </summary>
 		[Parameter(Mandatory = false, HelpMessage = "The network to show the images from")]
 		public NetworkWithLocationsNetwork Network { get; set; }
 
 		/// <summary>
-		/// Get a customer image by name
+		///     Get a customer image by name
 		/// </summary>
 		[Parameter(Mandatory = false, Position = 0, HelpMessage = "Name to filter")]
 		public string Name { get; set; }
 
 		/// <summary>
-		/// Get a customer image by location
+		///     Get a customer image by location
 		/// </summary>
 		[Parameter(Mandatory = false, HelpMessage = "Location to filter")]
 		public string Location { get; set; }
 
 		/// <summary>
-		/// Get a customer image by imageId
+		///     Get a customer image by imageId
 		/// </summary>
 		[Parameter(Mandatory = false, HelpMessage = "ImageId to filter")]
 		public string ImageId { get; set; }
 
 		/// <summary>
-		/// Get a customer image by OS Id
+		///     Get a customer image by OS Id
 		/// </summary>
 		[Parameter(Mandatory = false, HelpMessage = "Operating System Id to filter")]
 		public string OperatingSystemId { get; set; }
 
 		/// <summary>
-		/// Get a customer image by OS family
+		///     Get a customer image by OS family
 		/// </summary>
 		[Parameter(Mandatory = false, HelpMessage = "Operating System family to filter")]
 		public string OperatingSystemFamily { get; set; }
 
 
 		/// <summary>
-		/// The process record method.
+		///     The process record method.
 		/// </summary>
 		protected override void ProcessRecord()
 		{
@@ -118,10 +118,10 @@ namespace DD.CBU.Compute.Powershell
 		}
 
 		/// <summary>
-		/// Gets the customer images in the network
+		///     Gets the customer images in the network
 		/// </summary>
 		/// <returns>
-		/// The images
+		///     The images
 		/// </returns>
 		private IEnumerable<ImagesWithDiskSpeedImage> GetCustomerImages()
 		{

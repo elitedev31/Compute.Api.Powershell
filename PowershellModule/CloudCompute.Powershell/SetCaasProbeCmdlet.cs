@@ -10,7 +10,6 @@
 using System;
 using System.Management.Automation;
 using DD.CBU.Compute.Api.Client;
-using DD.CBU.Compute.Api.Client.VIP;
 using DD.CBU.Compute.Api.Contracts.General;
 using DD.CBU.Compute.Api.Contracts.Network;
 using DD.CBU.Compute.Api.Contracts.Vip;
@@ -18,33 +17,33 @@ using DD.CBU.Compute.Api.Contracts.Vip;
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The set caas probe cmdlet.
+	///     The set caas probe cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Set, "CaasProbe")]
 	public class SetCaasProbeCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
-		/// The network to manage the VIP settings
+		///     The network to manage the VIP settings
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The network to manage the VIP settings", 
 			ValueFromPipelineByPropertyName = true)]
 		public NetworkWithLocationsNetwork Network { get; set; }
 
 		/// <summary>
-		/// The name for the real server
+		///     The name for the real server
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The Probe object", ValueFromPipeline = true)]
 		public Probe Probe { get; set; }
 
 		/// <summary>
-		/// Gets or sets the probe interval seconds.
+		///     Gets or sets the probe interval seconds.
 		/// </summary>
 		[Parameter(Mandatory = false, HelpMessage = "The interval to probe in seconds. valid range 15-65535")]
 		[ValidateRange(15, 65535)]
 		public int ProbeIntervalSeconds { get; set; }
 
 		/// <summary>
-		/// The error count before server fail.
+		///     The error count before server fail.
 		/// </summary>
 		/// <remarks>
 		/// </remarks>
@@ -55,7 +54,7 @@ namespace DD.CBU.Compute.Powershell
 
 
 		/// <summary>
-		/// The success count before server enable.
+		///     The success count before server enable.
 		/// </summary>
 		/// <remarks>
 		/// </remarks>
@@ -66,7 +65,7 @@ namespace DD.CBU.Compute.Powershell
 
 
 		/// <summary>
-		/// The failed probe interval seconds.
+		///     The failed probe interval seconds.
 		/// </summary>
 		/// <remarks>
 		/// </remarks>
@@ -77,7 +76,7 @@ namespace DD.CBU.Compute.Powershell
 
 
 		/// <summary>
-		/// The max reply wait seconds.
+		///     The max reply wait seconds.
 		/// </summary>
 		/// <remarks>
 		/// </remarks>
@@ -88,7 +87,7 @@ namespace DD.CBU.Compute.Powershell
 
 
 		/// <summary>
-		/// The process record.
+		///     The process record.
 		/// </summary>
 		protected override void ProcessRecord()
 		{
@@ -96,7 +95,8 @@ namespace DD.CBU.Compute.Powershell
 			try
 			{
 				Status status =
-					Connection.ApiClient.NetworkingLegacy.NetworkVip.ModifyProbe(Network.id, Probe.id, ProbeIntervalSeconds, ErrorCountBeforeServerFail, 
+					Connection.ApiClient.NetworkingLegacy.NetworkVip.ModifyProbe(Network.id, Probe.id, ProbeIntervalSeconds, 
+						ErrorCountBeforeServerFail, 
 						SuccessCountBeforeServerEnable, FailedProbeIntervalSeconds, MaxReplyWaitSeconds).Result;
 
 				if (status != null)

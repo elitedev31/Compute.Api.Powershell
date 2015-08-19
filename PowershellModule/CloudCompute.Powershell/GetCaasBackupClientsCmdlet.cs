@@ -12,21 +12,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Management.Automation;
 using DD.CBU.Compute.Api.Client;
-using DD.CBU.Compute.Api.Client.Backup;
 using DD.CBU.Compute.Api.Contracts.Backup;
 using DD.CBU.Compute.Api.Contracts.Network20;
 
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The get backup client types cmdlet.
+	///     The get backup client types cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasBackupClients")]
 	[OutputType(typeof (BackupClientDetailsType[]))]
 	public class GetCaasBackupClientsCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
-		/// Gets or sets the server.
+		///     Gets or sets the server.
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The server associated with the backup client types", 
 			ValueFromPipeline = true)]
@@ -34,14 +33,14 @@ namespace DD.CBU.Compute.Powershell
 
 
 		/// <summary>
-		/// Name to filter
+		///     Name to filter
 		/// </summary>
 		[Parameter(Mandatory = false, Position = 0, HelpMessage = "Name to filter")]
 		public string Name { get; set; }
 
 
 		/// <summary>
-		/// The process record method.
+		///     The process record method.
 		/// </summary>
 		protected override void ProcessRecord()
 		{
@@ -92,10 +91,10 @@ namespace DD.CBU.Compute.Powershell
 		}
 
 		/// <summary>
-		/// Gets the backup clients
+		///     Gets the backup clients
 		/// </summary>
 		/// <returns>
-		/// The backup clients
+		///     The backup clients
 		/// </returns>
 		private IEnumerable<BackupClientDetailsType> GetBackupClients()
 		{

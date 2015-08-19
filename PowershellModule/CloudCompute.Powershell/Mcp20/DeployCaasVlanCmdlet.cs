@@ -7,50 +7,47 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-
-
 using System;
 using System.Management.Automation;
 using System.Net;
 using DD.CBU.Compute.Api.Client;
-using DD.CBU.Compute.Api.Client.Network20;
 using DD.CBU.Compute.Api.Contracts.Network20;
 
 namespace DD.CBU.Compute.Powershell.Mcp20
 {
 	/// <summary>
-	/// The new CaaS Virtual Machine cmdlet.
+	///     The new CaaS Virtual Machine cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.New, "CaasVlan")]
 	[OutputType(typeof (ResponseType))]
 	public class DeployCaasVlanCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
-		/// Gets or sets the network domain id.
+		///     Gets or sets the network domain id.
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The network domain Id")]
 		public Guid NetworkDomainId { get; set; }
 
 		/// <summary>
-		/// Gets or sets the name.
+		///     Gets or sets the name.
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The vlan name")]
 		public string Name { get; set; }
 
 		/// <summary>
-		/// Gets or sets the description.
+		///     Gets or sets the description.
 		/// </summary>
 		[Parameter(Mandatory = false, HelpMessage = "The vlan description")]
 		public string Description { get; set; }
 
 		/// <summary>
-		/// Gets or sets the private ip v4 base address.
+		///     Gets or sets the private ip v4 base address.
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The vlan Private Ipv4BaseAddress")]
 		public IPAddress PrivateIpv4BaseAddress { get; set; }
 
 		/// <summary>
-		/// The process record method.
+		///     The process record method.
 		/// </summary>
 		protected override void ProcessRecord()
 		{

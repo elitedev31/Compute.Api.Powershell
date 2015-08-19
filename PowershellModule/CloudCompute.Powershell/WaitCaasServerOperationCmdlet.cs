@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="OutCaasWaitForOperationCmdlet.cs" company="">
+// <copyright file="WaitCaasServerOperationCmdlet.cs" company="">
 //   
 // </copyright>
 // <summary>
@@ -8,8 +8,6 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Management.Automation;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,25 +17,25 @@ using DD.CBU.Compute.Api.Contracts.Network20;
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// Monitor CaaS provisioning progress
+	///     Monitor CaaS provisioning progress
 	/// </summary>
 	[Cmdlet(VerbsLifecycle.Wait, "CaasServerOperation")]
 	[OutputType(typeof (ServerType))]
 	public class WaitCaasServerOperationCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
-		/// The _operationprogress record.
+		///     The _operationprogress record.
 		/// </summary>
 		private ProgressRecord _operationprogressRecord;
 
 		/// <summary>
-		/// Gets or sets the server.
+		///     Gets or sets the server.
 		/// </summary>
 		[Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The server to action on")]
 		public ServerType Server { get; set; }
 
 		/// <summary>
-		/// Gets the operation progress record.
+		///     Gets the operation progress record.
 		/// </summary>
 		private ProgressRecord OperationProgressRecord
 		{
@@ -50,7 +48,7 @@ namespace DD.CBU.Compute.Powershell
 		}
 
 		/// <summary>
-		/// The process record.
+		///     The process record.
 		/// </summary>
 		protected override void ProcessRecord()
 		{

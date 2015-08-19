@@ -15,31 +15,31 @@ using System.Management.Automation;
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// Extension methods for working with PowerShell <see cref="SessionState"/>.
+	///     Extension methods for working with PowerShell <see cref="SessionState" />.
 	/// </summary>
 	/// <remarks>
-	/// TODO: Add getter / setter for default connection.
+	///     TODO: Add getter / setter for default connection.
 	/// </remarks>
 	public static class SessionStateExtensions
 	{
 		#region Constants
 
 		/// <summary>
-		/// Statically-cached empty list of compute service connections.
+		///     Statically-cached empty list of compute service connections.
 		/// </summary>
 		/// <remarks>
-		/// Returned when there are no active compute service connections.
+		///     Returned when there are no active compute service connections.
 		/// </remarks>
 		private static readonly IReadOnlyDictionary<string, ComputeServiceConnection> EmptyConnectionList =
 			new Dictionary<string, ComputeServiceConnection>();
 
 		/// <summary>
-		/// Variable name constants.
+		///     Variable name constants.
 		/// </summary>
 		public static class VariableNames
 		{
 			/// <summary>
-			/// The name of the PowerShell variable in which active cloud-compute sessions are stored.
+			///     The name of the PowerShell variable in which active cloud-compute sessions are stored.
 			/// </summary>
 			public static readonly string ComputeSessions = "_CloudComputeSessions";
 		}
@@ -47,7 +47,7 @@ namespace DD.CBU.Compute.Powershell
 		#endregion // Constants
 
 		/// <summary>
-		/// The _default compute service connection name.
+		///     The _default compute service connection name.
 		/// </summary>
 		private static string _defaultComputeServiceConnectionName;
 
@@ -202,7 +202,6 @@ namespace DD.CBU.Compute.Powershell
 					ScopedItemOptions.AllScope
 					);
 				sessionState.PSVariable.Set(connectionsVariable);
-
 			}
 			else
 			{
@@ -211,9 +210,6 @@ namespace DD.CBU.Compute.Powershell
 				{
 					connectionsVariable.Value = connections = new Dictionary<string, ComputeServiceConnection>();
 					sessionState.PSVariable.Set(connectionsVariable);
-
-
-
 				}
 			}
 

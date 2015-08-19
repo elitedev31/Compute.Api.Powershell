@@ -15,46 +15,46 @@ using DD.CBU.Compute.Api.Contracts.General;
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The set server state cmdlet.
+	///     The set server state cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Set, "CaasServerState")]
 	public class SetCaasServerActionCmdlet : PsCmdletCaasServerBase
 	{
 		/// <summary>
-		/// The server action.
+		///     The server action.
 		/// </summary>
 		public enum ServerAction
 		{
 			/// <summary>
-			/// The power off.
+			///     The power off.
 			/// </summary>
 			PowerOff, 
 
 			/// <summary>
-			/// The power on.
+			///     The power on.
 			/// </summary>
 			PowerOn, 
 
 			/// <summary>
-			/// The restart.
+			///     The restart.
 			/// </summary>
 			Restart, 
 
 			/// <summary>
-			/// The shutdown.
+			///     The shutdown.
 			/// </summary>
 			Shutdown
 		}
 
 		/// <summary>
-		/// Gets or sets the action.
+		///     Gets or sets the action.
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The server action to take")]
 		public ServerAction Action { get; set; }
 
 
 		/// <summary>
-		/// The process record method.
+		///     The process record method.
 		/// </summary>
 		protected override void ProcessRecord()
 		{
@@ -63,7 +63,7 @@ namespace DD.CBU.Compute.Powershell
 		}
 
 		/// <summary>
-		/// Sets the state of the server
+		///     Sets the state of the server
 		/// </summary>
 		private void SetServerActionTask()
 		{

@@ -10,7 +10,6 @@
 using System;
 using System.Management.Automation;
 using DD.CBU.Compute.Api.Client;
-using DD.CBU.Compute.Api.Client.VIP;
 using DD.CBU.Compute.Api.Contracts.General;
 using DD.CBU.Compute.Api.Contracts.Network;
 using DD.CBU.Compute.Api.Contracts.Vip;
@@ -18,40 +17,41 @@ using DD.CBU.Compute.Api.Contracts.Vip;
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The set caas real server cmdlet.
+	///     The set caas real server cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Set, "CaasRealServer")]
 	public class SetCaasRealServerCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
-		/// The network to manage the VIP settings
+		///     The network to manage the VIP settings
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The network to manage the VIP settings", 
 			ValueFromPipelineByPropertyName = true)]
 		public NetworkWithLocationsNetwork Network { get; set; }
 
 		/// <summary>
-		/// The server to be added as real server
+		///     The server to be added as real server
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The real server to be modified", ValueFromPipeline = true)]
 		public RealServer RealServer { get; set; }
 
 
 		/// <summary>
-		/// The real server status
+		///     The real server status
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The real server status")]
 		public bool InService { get; set; }
 
 		/// <summary>
-		/// The process record.
+		///     The process record.
 		/// </summary>
 		protected override void ProcessRecord()
 		{
 			base.ProcessRecord();
 			try
 			{
-				Status status = Connection.ApiClient.NetworkingLegacy.NetworkVip.ModifyRealServer(Network.id, RealServer.id, InService).Result;
+				Status status =
+					Connection.ApiClient.NetworkingLegacy.NetworkVip.ModifyRealServer(Network.id, RealServer.id, InService).Result;
 
 				if (status != null)
 					WriteDebug(

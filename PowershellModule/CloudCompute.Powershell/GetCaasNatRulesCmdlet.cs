@@ -12,34 +12,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Management.Automation;
 using DD.CBU.Compute.Api.Client;
-using DD.CBU.Compute.Api.Client.Network;
 using DD.CBU.Compute.Api.Contracts.Network;
 
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The get CaaS NAT Rules cmdlet.
+	///     The get CaaS NAT Rules cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasNatRules")]
 	[OutputType(typeof (NatRuleType[]))]
 	public class GetCaasNatRulesCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
-		/// The network to show the NAT rules from
+		///     The network to show the NAT rules from
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The network to show the images from", ValueFromPipeline = true)]
 		public NetworkWithLocationsNetwork Network { get; set; }
 
 
 		/// <summary>
-		/// Get a CaaS network by name
+		///     Get a CaaS network by name
 		/// </summary>
 		[Parameter(Mandatory = false, Position = 0, HelpMessage = "Name to filter")]
 		public string Name { get; set; }
 
 
 		/// <summary>
-		/// The process record method.
+		///     The process record method.
 		/// </summary>
 		protected override void ProcessRecord()
 		{
@@ -92,10 +91,10 @@ namespace DD.CBU.Compute.Powershell
 		}
 
 		/// <summary>
-		/// Gets the NAT rules
+		///     Gets the NAT rules
 		/// </summary>
 		/// <returns>
-		/// The NAT rules
+		///     The NAT rules
 		/// </returns>
 		private IEnumerable<NatRuleType> GetNatRules()
 		{

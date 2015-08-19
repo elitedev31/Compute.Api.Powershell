@@ -18,48 +18,48 @@ using ICSharpCode.SharpZipLib.Tar;
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The "New-CaasUploadCustomerImage" Cmdlet.
+	///     The "New-CaasUploadCustomerImage" Cmdlet.
 	/// </summary>
 	/// <remarks>
-	/// Upload a new customer image.
+	///     Upload a new customer image.
 	/// </remarks>
 	[Cmdlet(VerbsCommon.New, "CaasUploadCustomerImage")]
 	[OutputType(typeof (ServerImageWithStateType))]
 	public class NewCaasUploadCustomerImageCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
-		/// The temporary folder.
+		///     The temporary folder.
 		/// </summary>
 		private const string temporaryFolder = "%TEMP%\\OVAExtraction";
 
 		/// <summary>
-		/// Gets or sets the ovf.
+		///     Gets or sets the ovf.
 		/// </summary>
 		[Parameter(ParameterSetName = "IndividualFiles", Mandatory = true, HelpMessage = "The path to the OVF file.")]
 		public string Ovf { get; set; }
 
 		/// <summary>
-		/// Gets or sets the virtual image.
+		///     Gets or sets the virtual image.
 		/// </summary>
 		[Parameter(ParameterSetName = "IndividualFiles", Mandatory = true, 
 			HelpMessage = "The path to the virtual image (e.g. VMDK, VHD) file.")]
 		public string VirtualImage { get; set; }
 
 		/// <summary>
-		/// Gets or sets the manifest.
+		///     Gets or sets the manifest.
 		/// </summary>
 		[Parameter(ParameterSetName = "IndividualFiles", Mandatory = false, HelpMessage = "The path to the manifest file")]
 		public string Manifest { get; set; }
 
 		/// <summary>
-		/// Gets or sets the virtual appliance.
+		///     Gets or sets the virtual appliance.
 		/// </summary>
 		[Parameter(ParameterSetName = "Appliance", Mandatory = true, 
 			HelpMessage = "The path to an OVA (Virtual Appliance) file.")]
 		public string VirtualAppliance { get; set; }
 
 		/// <summary>
-		/// Process the record
+		///     Process the record
 		/// </summary>
 		protected override void ProcessRecord()
 		{
@@ -99,7 +99,7 @@ namespace DD.CBU.Compute.Powershell
 		}
 
 		/// <summary>
-		/// The decompress appliance.
+		///     The decompress appliance.
 		/// </summary>
 		private void DecompressAppliance()
 		{
@@ -132,12 +132,13 @@ namespace DD.CBU.Compute.Powershell
 		}
 
 		/// <summary>
-		/// Uploads the customer image to the FTP site.
+		///     Uploads the customer image to the FTP site.
 		/// </summary>
 		private void UploadCustomerImage()
-		{						
+		{
 			Connection.FtpClient.Connect();
-			// TODO : Support for building OVF on the fly.
+
+// TODO : Support for building OVF on the fly.
 			UploadFile(Connection.FtpClient, Ovf, 1);
 
 

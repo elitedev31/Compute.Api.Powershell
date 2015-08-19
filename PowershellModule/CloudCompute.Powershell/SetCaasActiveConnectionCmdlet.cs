@@ -13,21 +13,21 @@ using System.Management.Automation;
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The set caas active connection cmdlet.
+	///     The set caas active connection cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Set, "CaasActiveConnection")]
 	[OutputType(typeof (ComputeServiceConnection))]
 	public class SetCaasActiveConnectionCmdlet : PSCmdlet
 	{
 		/// <summary>
-		/// Name for this connection
+		///     Name for this connection
 		/// </summary>
 		[Parameter(Mandatory = true, Position = 0, HelpMessage = "Connection name to be set as active.")]
 		public string Name { get; set; }
 
 
 		/// <summary>
-		/// The process record.
+		///     The process record.
 		/// </summary>
 		protected override void ProcessRecord()
 		{

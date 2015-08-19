@@ -13,19 +13,19 @@ using System.Security.Authentication;
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// This base Cmdlet is used for authenticating cmdlets that requires an active CaaS Connection.
+	///     This base Cmdlet is used for authenticating cmdlets that requires an active CaaS Connection.
 	/// </summary>
 	public abstract class PsCmdletCaasBase : PSCmdlet
 	{
 		/// <summary>
-		/// The CaaS connection created by <see cref="NewCaasConnectionCmdlet"/>
+		///     The CaaS connection created by <see cref="NewCaasConnectionCmdlet" />
 		/// </summary>
 		[Parameter(Mandatory = false, ValueFromPipelineByPropertyName = true, 
 			HelpMessage = "The CaaS Connection created by New-CaasConnection")]
 		public ComputeServiceConnection Connection { get; set; }
 
 		/// <summary>
-		/// The begin processing.
+		///     The begin processing.
 		/// </summary>
 		protected override void BeginProcessing()
 		{

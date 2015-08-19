@@ -17,21 +17,21 @@ using DD.CBU.Compute.Api.Contracts.Directory;
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The Get-CaasDataCentre cmdlet.
+	///     The Get-CaasDataCentre cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasAccounts")]
 	[OutputType(typeof (AccountWithPhoneNumber[]))]
 	public class GetCaasAccountsCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
-		/// Get a CaaS network by name
+		///     Get a CaaS network by name
 		/// </summary>
 		[Parameter(Mandatory = false, Position = 1, HelpMessage = "Username to filter")]
 		public string UserName { get; set; }
 
 
 		/// <summary>
-		/// The process record method.
+		///     The process record method.
 		/// </summary>
 		protected override void ProcessRecord()
 		{

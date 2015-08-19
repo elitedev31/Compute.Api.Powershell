@@ -17,20 +17,20 @@ using DD.CBU.Compute.Api.Contracts.Server;
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The new CaaS Virtual Machine cmdlet.
+	///     The new CaaS Virtual Machine cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Add, "CaasServerDisk")]
 	public class AddCaasServerDiskCmdlet : PsCmdletCaasServerBase
 	{
 		/// <summary>
-		/// Gets or sets the size in gb.
+		///     Gets or sets the size in gb.
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The new disk size")]
 		public int SizeInGB { get; set; }
 
 
 		/// <summary>
-		/// Gets or sets the speed id.
+		///     Gets or sets the speed id.
 		/// </summary>
 		[Parameter(Mandatory = false, ParameterSetName = "SpeedId", 
 			HelpMessage =
@@ -40,14 +40,14 @@ namespace DD.CBU.Compute.Powershell
 
 
 		/// <summary>
-		/// Gets or sets the speed.
+		///     Gets or sets the speed.
 		/// </summary>
 		[Parameter(Mandatory = false, ParameterSetName = "DiskSpeedType", HelpMessage = "The disk speed to be created")]
 		public DiskSpeedType Speed { get; set; }
 
 
 		/// <summary>
-		/// The process record method.
+		///     The process record method.
 		/// </summary>
 		protected override void ProcessRecord()
 		{
@@ -56,7 +56,8 @@ namespace DD.CBU.Compute.Powershell
 				if (ParameterSetName.Equals("DiskSpeedType"))
 					SpeedId = Speed.ToString();
 				Status status =
-					Connection.ApiClient.ServerManagementLegacy.Server.AddServerDisk(Server.id, SizeInGB.ToString(CultureInfo.InvariantCulture), SpeedId).Result;
+					Connection.ApiClient.ServerManagementLegacy.Server.AddServerDisk(Server.id, 
+						SizeInGB.ToString(CultureInfo.InvariantCulture), SpeedId).Result;
 				if (status != null)
 					WriteDebug(
 						string.Format(

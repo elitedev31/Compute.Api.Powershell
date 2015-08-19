@@ -10,7 +10,6 @@
 using System;
 using System.Management.Automation;
 using DD.CBU.Compute.Api.Client;
-using DD.CBU.Compute.Api.Client.Backup;
 using DD.CBU.Compute.Api.Contracts.Backup;
 using DD.CBU.Compute.Api.Contracts.General;
 using DD.CBU.Compute.Api.Contracts.Network20;
@@ -18,26 +17,26 @@ using DD.CBU.Compute.Api.Contracts.Network20;
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The set backup service plan cmdlet.
+	///     The set backup service plan cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Set, "CaasBackupPlan")]
 	[OutputType(typeof (ServerType))]
 	public class SetCaasBackupPlanCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
-		/// Gets or sets the server.
+		///     Gets or sets the server.
 		/// </summary>
 		[Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The server to action on")]
 		public ServerType Server { get; set; }
 
 		/// <summary>
-		/// Gets or sets the backup service plan.
+		///     Gets or sets the backup service plan.
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The service plan of the backup")]
 		public ServicePlan BackupServicePlan { get; set; }
 
 		/// <summary>
-		/// The process record method.
+		///     The process record method.
 		/// </summary>
 		protected override void ProcessRecord()
 		{

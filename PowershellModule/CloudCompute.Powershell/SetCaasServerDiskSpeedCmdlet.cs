@@ -13,24 +13,25 @@ using System.Linq;
 using System.Management.Automation;
 using DD.CBU.Compute.Api.Client;
 using DD.CBU.Compute.Api.Contracts.General;
-using DD.CBU.Compute.Api.Contracts.Server;
+using DD.CBU.Compute.Api.Contracts.Network20;
+using DiskSpeedType = DD.CBU.Compute.Api.Contracts.Server.DiskSpeedType;
 
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The set server state cmdlet.
+	///     The set server state cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Set, "CaasServerDiskSpeed")]
 	public class SetCaasServerDiskSpeedCmdlet : PsCmdletCaasServerBase
 	{
 		/// <summary>
-		/// Gets or sets the scsi id.
+		///     Gets or sets the scsi id.
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "SCSI Id of the disk to be resized")]
 		public int ScsiId { get; set; }
 
 		/// <summary>
-		/// Gets or sets the speed id.
+		///     Gets or sets the speed id.
 		/// </summary>
 		[Parameter(Mandatory = false, ParameterSetName = "SpeedId", 
 			HelpMessage =
@@ -40,14 +41,14 @@ namespace DD.CBU.Compute.Powershell
 
 
 		/// <summary>
-		/// Gets or sets the speed.
+		///     Gets or sets the speed.
 		/// </summary>
 		[Parameter(Mandatory = false, ParameterSetName = "DiskSpeedType", HelpMessage = "The disk speed")]
 		public DiskSpeedType Speed { get; set; }
 
 
 		/// <summary>
-		/// The process record method.
+		///     The process record method.
 		/// </summary>
 		protected override void ProcessRecord()
 		{
@@ -56,7 +57,7 @@ namespace DD.CBU.Compute.Powershell
 		}
 
 		/// <summary>
-		/// Edit the server disk details
+		///     Edit the server disk details
 		/// </summary>
 		private void SetServerTask()
 		{
@@ -67,10 +68,12 @@ namespace DD.CBU.Compute.Powershell
 
 				Status status = null;
 
-				var disk = Server.disk.Where(d => d.scsiId == ScsiId);
+				IEnumerable<ServerTypeDisk> disk = Server.disk.Where(d => d.scsiId == ScsiId);
 				if (disk.Any())
 				{
-					status = Connection.ApiClient.ServerManagementLegacy.Server.ChangeServerDiskSpeed(Server.id, disk.ElementAt(0).id, SpeedId).Result;
+					status =
+						Connection.ApiClient.ServerManagementLegacy.Server.ChangeServerDiskSpeed(Server.id, disk.ElementAt(0).id, SpeedId)
+							.Result;
 				}
 				else
 					WriteError(new ErrorRecord(new PSArgumentException("The scsi id does not exits"), "-1", 

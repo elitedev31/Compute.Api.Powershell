@@ -15,13 +15,13 @@ using DD.CBU.Compute.Api.Contracts.General;
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The Re,pve CaaS Virtual Machine cmdlet.
+	///     The Re,pve CaaS Virtual Machine cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Remove, "CaasServer", SupportsShouldProcess = true)]
 	public class RemoveCaasServerCmdlet : PsCmdletCaasServerBase
 	{
 		/// <summary>
-		/// The process record method.
+		///     The process record method.
 		/// </summary>
 		protected override void ProcessRecord()
 		{

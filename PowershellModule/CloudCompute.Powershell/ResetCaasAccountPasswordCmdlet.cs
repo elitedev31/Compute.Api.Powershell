@@ -19,39 +19,41 @@ using DD.CBU.Compute.Api.Contracts.General;
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The reset caas account password cmdlet.
+	///     The reset caas account password cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Reset, "CaasAccountPassword")]
 	public class ResetCaasAccountPasswordCmdlet : PSCmdlet
 	{
 		/// <summary>
-		/// The credentials used to connect to the CaaS API.
+		///     The credentials used to connect to the CaaS API.
 		/// </summary>
 		[Parameter(Mandatory = true, ValueFromPipeline = true)]
 		[ValidateNotNullOrEmpty]
 		public PSCredential ApiCredentials { get; set; }
 
 		/// <summary>
-		/// The known vendor for the connection
+		///     The known vendor for the connection
 		/// </summary>
-		[Parameter(Mandatory = true, HelpMessage = "A known cloud vendor for the Cloud API Uri. Not all vendor and region combinations are valid.")]
+		[Parameter(Mandatory = true, 
+			HelpMessage = "A known cloud vendor for the Cloud API Uri. Not all vendor and region combinations are valid.")]
 		public KnownApiVendor Vendor { get; set; }
 
 
 		/// <summary>
-		/// The known region for the connection
+		///     The known region for the connection
 		/// </summary>
-		[Parameter(Mandatory = true, HelpMessage = "A known cloud region for the Cloud API Uri. Not all vendor and region combinations are valid.")]
+		[Parameter(Mandatory = true, 
+			HelpMessage = "A known cloud region for the Cloud API Uri. Not all vendor and region combinations are valid.")]
 		public KnownApiRegion Region { get; set; }
 
 		/// <summary>
-		/// Gets or sets the new password.
+		///     Gets or sets the new password.
 		/// </summary>
 		[Parameter(Mandatory = false)]
 		public SecureString NewPassword { private get; set; }
 
 		/// <summary>
-		/// The begin processing.
+		///     The begin processing.
 		/// </summary>
 		protected override void BeginProcessing()
 		{
@@ -66,7 +68,7 @@ namespace DD.CBU.Compute.Powershell
 		}
 
 		/// <summary>
-		/// The process record.
+		///     The process record.
 		/// </summary>
 		protected override void ProcessRecord()
 		{
@@ -96,15 +98,16 @@ namespace DD.CBU.Compute.Powershell
 
 
 		/// <summary>
-		/// Try to login into the account using the credentials.
+		///     Try to login into the account using the credentials.
 		///     If succeed, it will return the account details.
 		/// </summary>
 		/// <returns>
-		/// The CaaS connection
+		///     The CaaS connection
 		/// </returns>
 		private async Task<ComputeServiceConnection> LoginTask()
 		{
-			ComputeApiClient apiClient = ComputeApiClient.GetComputeApiClient(Vendor, Region, ApiCredentials.GetNetworkCredential());
+			ComputeApiClient apiClient = ComputeApiClient.GetComputeApiClient(Vendor, Region, 
+				ApiCredentials.GetNetworkCredential());
 
 			var newCloudComputeConnection = new ComputeServiceConnection(apiClient);
 			WriteDebug("Trying to login into the CaaS");

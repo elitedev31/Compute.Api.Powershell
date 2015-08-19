@@ -12,34 +12,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Management.Automation;
 using DD.CBU.Compute.Api.Client;
-using DD.CBU.Compute.Api.Client.VIP;
 using DD.CBU.Compute.Api.Contracts.Network;
 using DD.CBU.Compute.Api.Contracts.Vip;
 
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The get caas server farm cmdlet.
+	///     The get caas server farm cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasServerFarm")]
 	[OutputType(typeof (ServerFarm[]))]
 	public class GetCaasServerFarmCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
-		/// The network to manage the VIP settings
+		///     The network to manage the VIP settings
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The network to manage the VIP settings", ValueFromPipeline = true)]
 		public NetworkWithLocationsNetwork Network { get; set; }
 
 		/// <summary>
-		/// The name for the real server
+		///     The name for the real server
 		/// </summary>
 		[Parameter(Mandatory = false, HelpMessage = "The name for the server farm")]
 		public string Name { get; set; }
 
 
 		/// <summary>
-		/// The process record.
+		///     The process record.
 		/// </summary>
 		protected override void ProcessRecord()
 		{
@@ -47,7 +46,8 @@ namespace DD.CBU.Compute.Powershell
 
 			try
 			{
-				IEnumerable<ServerFarm> resultlist = Connection.ApiClient.NetworkingLegacy.NetworkVip.GetServerFarms(Network.id).Result;
+				IEnumerable<ServerFarm> resultlist =
+					Connection.ApiClient.NetworkingLegacy.NetworkVip.GetServerFarms(Network.id).Result;
 				if (resultlist != null && resultlist.Any())
 				{
 					if (!string.IsNullOrEmpty(Name))

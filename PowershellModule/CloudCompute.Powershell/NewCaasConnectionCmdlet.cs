@@ -10,60 +10,60 @@
 using System;
 using System.Linq;
 using System.Management.Automation;
+using System.Net.FtpClient;
 using System.Threading.Tasks;
 using DD.CBU.Compute.Api.Client;
 
 namespace DD.CBU.Compute.Powershell
 {
-	using System.Net.FtpClient;
-
 	/// <summary>
-	/// The "New-CaasConnection" Cmdlet.
+	///     The "New-CaasConnection" Cmdlet.
 	/// </summary>
 	/// <remarks>
-	/// Used to create a new connection to the CaaS API.
+	///     Used to create a new connection to the CaaS API.
 	/// </remarks>
 	[Cmdlet(VerbsCommon.New, "CaasConnection")]
 	[OutputType(typeof (ComputeServiceConnection))]
 	public class NewCaasConnectionCmdlet : PSCmdlet
 	{
 		/// <summary>
-		/// The credentials used to connect to the CaaS API.
+		///     The credentials used to connect to the CaaS API.
 		/// </summary>
 		[Parameter(Mandatory = true, ValueFromPipeline = true)]
 		[ValidateNotNullOrEmpty]
 		public PSCredential ApiCredentials { get; set; }
 
 		/// <summary>
-		/// Name for this connection
+		///     Name for this connection
 		/// </summary>
 		[Parameter(Mandatory = false, HelpMessage = "Name to identify this connection")]
 		public string Name { get; set; }
-		
+
 		/// <summary>
-		/// The known vendor for the connection
+		///     The known vendor for the connection
 		/// </summary>
 		[Parameter(Mandatory = false, ParameterSetName = "KnownApiUri", 
 			HelpMessage = "A known cloud vendor for the Cloud API Uri. Not all vendor and region combinations are valid.")]
-        [PSDefaultValue(Help = "Dimension Data is the default value", Value = KnownApiVendor.DimensionData)]
+		[PSDefaultValue(Help = "Dimension Data is the default value", Value = KnownApiVendor.DimensionData)]
 		public KnownApiVendor Vendor { get; set; }
 
 
 		/// <summary>
-		/// The known region for the connection
+		///     The known region for the connection
 		/// </summary>
 		[Parameter(Mandatory = true, ParameterSetName = "KnownApiUri", 
 			HelpMessage = "A known cloud region for the Cloud API Uri. Not all vendor and region combinations are valid.")]
 		public KnownApiRegion Region { get; set; }
 
 		/// <summary>
-		/// The base uri of the REST API
+		///     The base uri of the REST API
 		/// </summary>
 		[Obsolete("Use Vendor and Region instead")]
 		[Parameter(Mandatory = true, ParameterSetName = "ApiDomainName", HelpMessage = "The domain name for the REST API")]
 		public string ApiDomainName { get; set; }
+
 		/// <summary>
-		/// Process the record
+		///     Process the record
 		/// </summary>
 		protected override void ProcessRecord()
 		{
@@ -92,7 +92,7 @@ namespace DD.CBU.Compute.Powershell
 					if (SessionState.GetComputeServiceConnections().Count > 1)
 						WriteWarning(
 							"You have created more than one connection on this session, please use the cmdlet Set-CaasActiveConnection -Name <name> to change the active/default connection");
-					
+
 					SessionState.AddComputeServiceConnection(Name, newCloudComputeConnection);
 					WriteObject(newCloudComputeConnection);
 				}
@@ -109,15 +109,15 @@ namespace DD.CBU.Compute.Powershell
 		}
 
 		/// <summary>
-		/// Try to login into the account using the credentials.
+		///     Try to login into the account using the credentials.
 		///     If succeed, it will return the account details.
 		/// </summary>
 		/// <returns>
-		/// The CaaS connection
+		///     The CaaS connection
 		/// </returns>
 		private async Task<ComputeServiceConnection> LoginTask()
 		{
-			var ftpHost = string.Empty;
+			string ftpHost = string.Empty;
 			ComputeApiClient apiClient = null;
 
 			if (ParameterSetName == "KnownApiUri")
@@ -138,16 +138,16 @@ namespace DD.CBU.Compute.Powershell
 
 			WriteDebug("Trying to login into the CaaS");
 			newCloudComputeConnection.Account = await newCloudComputeConnection.ApiClient.Login();
-						
+
 			// Right now we dont need to do a connect, as ftp is used in only a few commands
 			newCloudComputeConnection.FtpClient = new FtpClient
-							{
-								Host = ftpHost,
-								EncryptionMode = FtpEncryptionMode.Explicit,
-								DataConnectionEncryption = true,
-								Credentials = ApiCredentials.GetNetworkCredential()
-															.GetCredential(new Uri(string.Format("ftp://{0}", ftpHost)), "Basic")
-							};
+			{
+				Host = ftpHost, 
+				EncryptionMode = FtpEncryptionMode.Explicit, 
+				DataConnectionEncryption = true, 
+				Credentials = ApiCredentials.GetNetworkCredential()
+					.GetCredential(new Uri(string.Format("ftp://{0}", ftpHost)), "Basic")
+			};
 
 			return newCloudComputeConnection;
 		}

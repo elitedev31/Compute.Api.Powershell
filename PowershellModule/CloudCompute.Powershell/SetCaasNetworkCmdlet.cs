@@ -10,46 +10,45 @@
 using System;
 using System.Management.Automation;
 using DD.CBU.Compute.Api.Client;
-using DD.CBU.Compute.Api.Client.Network;
 using DD.CBU.Compute.Api.Contracts.General;
 using DD.CBU.Compute.Api.Contracts.Network;
 
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The set caas network cmdlet.
+	///     The set caas network cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Set, "CaasNetwork")]
 	public class SetCaasNetworkCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
-		/// Gets or sets the network.
+		///     Gets or sets the network.
 		/// </summary>
 		[Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "Set the server name on CaaS")]
 		public NetworkWithLocationsNetwork Network { get; set; }
 
 		/// <summary>
-		/// Gets or sets the name.
+		///     Gets or sets the name.
 		/// </summary>
 		[Parameter(Mandatory = false, ParameterSetName = "NetworkName", HelpMessage = "Set new name for the network")]
 		public string Name { get; set; }
 
 		/// <summary>
-		/// Gets or sets the description.
+		///     Gets or sets the description.
 		/// </summary>
 		[Parameter(Mandatory = false, ParameterSetName = "NetworkName", 
 			HelpMessage = "Set the new description for the network")]
 		public string Description { get; set; }
 
 		/// <summary>
-		/// Gets or sets a value indicating whether multicast.
+		///     Gets or sets a value indicating whether multicast.
 		/// </summary>
 		[Parameter(Mandatory = false, ParameterSetName = "Multicast", HelpMessage = "Enable/Disable multicast on the network")
 		]
 		public bool Multicast { get; set; }
 
 		/// <summary>
-		/// The process record.
+		///     The process record.
 		/// </summary>
 		protected override void ProcessRecord()
 		{

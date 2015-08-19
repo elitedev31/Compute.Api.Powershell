@@ -19,40 +19,41 @@ using DD.CBU.Compute.Api.Contracts.Server;
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The get deployed server/s cmdlet.
+	///     The get deployed server/s cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasDeployedServer")]
-	[OutputType(typeof(ServerWithBackupType[]))]
-    [Obsolete("This cmdlet is obsolete, it only returns MCP 1.0 servers. Please use Get-CaasServers to return all servers.")]
+	[OutputType(typeof (ServerWithBackupType[]))]
+	[Obsolete("This cmdlet is obsolete, it only returns MCP 1.0 servers. Please use Get-CaasServers to return all servers."
+		)]
 	public class GetCaasDeployedServerCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
-		/// Get a CaaS server by name
+		///     Get a CaaS server by name
 		/// </summary>
 		[Parameter(Mandatory = false, Position = 0, HelpMessage = "Name of the server to filter")]
 		public string Name { get; set; }
 
 		/// <summary>
-		/// Get a CaaS server by ServerId
+		///     Get a CaaS server by ServerId
 		/// </summary>
 		[Parameter(Mandatory = false, HelpMessage = "Server id  to filter")]
 		public string ServerId { get; set; }
 
 		/// <summary>
-		/// Get a CaaS server by network
+		///     Get a CaaS server by network
 		/// </summary>
 		[Parameter(Mandatory = false, HelpMessage = "The network to show the servers from")]
 		public NetworkWithLocationsNetwork Network { get; set; }
 
 		/// <summary>
-		/// Get a CaaS server by location
+		///     Get a CaaS server by location
 		/// </summary>
 		[Parameter(Mandatory = false, HelpMessage = "Location of the server to filter")]
 		public string Location { get; set; }
 
 
 		/// <summary>
-		/// The process record method.
+		///     The process record method.
 		/// </summary>
 		protected override void ProcessRecord()
 		{
@@ -60,7 +61,6 @@ namespace DD.CBU.Compute.Powershell
 
 			try
 			{
-
 				string networkid = Network == null ? null : Network.id;
 				IEnumerable<ServerWithBackupType> servers = GetDeployedServers(ServerId, Name, networkid, Location).Result;
 				if (servers != null)
@@ -69,8 +69,7 @@ namespace DD.CBU.Compute.Powershell
 						WriteObject(servers.First(), false);
 					else
 						WriteObject(servers, true);
-			
-                }
+				}
 				else
 					WriteError(
 						new ErrorRecord(
@@ -116,7 +115,7 @@ namespace DD.CBU.Compute.Powershell
 		/// <returns>
 		/// The images
 		/// </returns>
-		private async Task<IEnumerable<ServerWithBackupType>> GetDeployedServers(string serverId, string name,
+		private async Task<IEnumerable<ServerWithBackupType>> GetDeployedServers(string serverId, string name, 
 			string networkId, string location)
 		{
 			return await Connection.ApiClient.GetDeployedServers(serverId, name, networkId, location);

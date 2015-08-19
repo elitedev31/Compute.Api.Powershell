@@ -15,19 +15,19 @@ using DD.CBU.Compute.Api.Contracts.General;
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The set caas account primary administrator.
+	///     The set caas account primary administrator.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Set, "CaasAccountPrimaryAdministrator")]
 	public class SetCaasAccountPrimaryAdministrator : PsCmdletCaasBase
 	{
 		/// <summary>
-		/// The account username to be primary administrator
+		///     The account username to be primary administrator
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The account username to be primary administrator")]
 		public string Username { get; set; }
 
 		/// <summary>
-		/// The process record.
+		///     The process record.
 		/// </summary>
 		protected override void ProcessRecord()
 		{

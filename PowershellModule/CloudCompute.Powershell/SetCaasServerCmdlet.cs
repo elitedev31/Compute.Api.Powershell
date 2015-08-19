@@ -16,46 +16,46 @@ using DD.CBU.Compute.Api.Contracts.Network20;
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The set server state cmdlet.
+	///     The set server state cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Set, "CaasServer")]
 	[OutputType(typeof (ServerType))]
 	public class SetCaasServerCmdlet : PsCmdletCaasServerBase
 	{
 		/// <summary>
-		/// Gets or sets the name.
+		///     Gets or sets the name.
 		/// </summary>
 		[Parameter(Mandatory = false, HelpMessage = "Set the server name on CaaS")]
 		public string Name { get; set; }
 
 		/// <summary>
-		/// Gets or sets the description.
+		///     Gets or sets the description.
 		/// </summary>
 		[Parameter(Mandatory = false, HelpMessage = "Set the server description")]
 		public string Description { get; set; }
 
 
 		/// <summary>
-		/// Gets or sets the memory in mb.
+		///     Gets or sets the memory in mb.
 		/// </summary>
 		[Parameter(Mandatory = false, 
 			HelpMessage = "Set the server RAM memory. Value must be represent a GB integer (e.g. 1024, 2048, 3072, 4096, etc.)")]
 		public int MemoryInMB { get; set; }
 
 		/// <summary>
-		/// Gets or sets the cpu count.
+		///     Gets or sets the cpu count.
 		/// </summary>
 		[Parameter(Mandatory = false, HelpMessage = "Set the number of virtual CPUs.")]
 		public int CPUCount { get; set; }
 
 		/// <summary>
-		/// Gets or sets the private ip.
+		///     Gets or sets the private ip.
 		/// </summary>
 		[Parameter(Mandatory = false, HelpMessage = "Set the privateIp of the server")]
 		public string PrivateIp { get; set; }
 
 		/// <summary>
-		/// The process record method.
+		///     The process record method.
 		/// </summary>
 		protected override void ProcessRecord()
 		{
@@ -64,7 +64,7 @@ namespace DD.CBU.Compute.Powershell
 		}
 
 		/// <summary>
-		/// Edit the server details the state of the server
+		///     Edit the server details the state of the server
 		/// </summary>
 		private void SetServerTask()
 		{
@@ -72,7 +72,9 @@ namespace DD.CBU.Compute.Powershell
 			{
 				Status status = null;
 
-				status = Connection.ApiClient.ServerManagementLegacy.Server.ModifyServer(Server.id, Name, Description, MemoryInMB, CPUCount, PrivateIp).Result;
+				status =
+					Connection.ApiClient.ServerManagementLegacy.Server.ModifyServer(Server.id, Name, Description, MemoryInMB, CPUCount, 
+						PrivateIp).Result;
 				if (status != null)
 					WriteDebug(
 						string.Format(

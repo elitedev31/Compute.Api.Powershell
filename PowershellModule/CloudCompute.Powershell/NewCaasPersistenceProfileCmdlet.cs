@@ -12,7 +12,6 @@ using System.Globalization;
 using System.Management.Automation;
 using System.Text.RegularExpressions;
 using DD.CBU.Compute.Api.Client;
-using DD.CBU.Compute.Api.Client.VIP;
 using DD.CBU.Compute.Api.Contracts.General;
 using DD.CBU.Compute.Api.Contracts.Network;
 using DD.CBU.Compute.Api.Contracts.Vip;
@@ -20,41 +19,41 @@ using DD.CBU.Compute.Api.Contracts.Vip;
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The new CaaS VIP Real cmdlet.
+	///     The new CaaS VIP Real cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.New, "CaasPersistenceProfile")]
 	[OutputType(typeof (PersistenceProfile))]
 	public class NewCaasPersistenceProfileCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
-		/// The network to manage the VIP settings
+		///     The network to manage the VIP settings
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The network to manage the VIP settings", 
 			ValueFromPipelineByPropertyName = true)]
 		public NetworkWithLocationsNetwork Network { get; set; }
 
 		/// <summary>
-		/// The name for the real server
+		///     The name for the real server
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The name for the persistence profile")]
 		public string Name { get; set; }
 
 
 		/// <summary>
-		/// The name for the real server
+		///     The name for the real server
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The server farm for the persistence profile", 
 			ValueFromPipeline = true)]
 		public ServerFarm ServerFarm { get; set; }
 
 		/// <summary>
-		/// Gets or sets the timeout minutes.
+		///     Gets or sets the timeout minutes.
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The timeout in munites to the profile.")]
 		public int TimeoutMinutes { get; set; }
 
 		/// <summary>
-		/// Gets or sets the direction.
+		///     Gets or sets the direction.
 		/// </summary>
 		[Parameter(Mandatory = true, ParameterSetName = "IpNetMask", 
 			HelpMessage = "For IP_NETMASK only.The direction for the persistence profile")]
@@ -62,7 +61,7 @@ namespace DD.CBU.Compute.Powershell
 
 
 		/// <summary>
-		/// Gets or sets the netmask.
+		///     Gets or sets the netmask.
 		/// </summary>
 		[Parameter(Mandatory = true, ParameterSetName = "IpNetMask", 
 			HelpMessage = "For IP_NETMASK only.The netmask for the persistence profile")]
@@ -70,7 +69,7 @@ namespace DD.CBU.Compute.Powershell
 
 
 		/// <summary>
-		/// Gets or sets the cookie name.
+		///     Gets or sets the cookie name.
 		/// </summary>
 		[Parameter(Mandatory = true, ParameterSetName = "HttpCookie", 
 			HelpMessage = "For HTTP_COOKIE only.The name of the cookie for the persistence profile")]
@@ -78,21 +77,21 @@ namespace DD.CBU.Compute.Powershell
 
 
 		/// <summary>
-		/// Gets or sets the cookie type.
+		///     Gets or sets the cookie type.
 		/// </summary>
 		[Parameter(Mandatory = true, ParameterSetName = "HttpCookie", 
 			HelpMessage = "For HTTP_COOKIE only.The HTTP cookie type for the persistence profile")]
 		public PersistenceProfileCookieType CookieType { get; set; }
 
 		/// <summary>
-		/// The network to add the public ip addresses
+		///     The network to add the public ip addresses
 		/// </summary>
 		[Parameter(Mandatory = false, HelpMessage = "Return the Probe object")]
 		public SwitchParameter PassThru { get; set; }
 
 
 		/// <summary>
-		/// The process record.
+		///     The process record.
 		/// </summary>
 		protected override void ProcessRecord()
 		{
@@ -102,11 +101,13 @@ namespace DD.CBU.Compute.Powershell
 				Status status = null;
 				if (ParameterSetName.Equals("HttpCookie"))
 					status =
-						Connection.ApiClient.NetworkingLegacy.NetworkVip.CreatePersistenceProfileHttpCookie(Network.id, Name, ServerFarm.id, 
+						Connection.ApiClient.NetworkingLegacy.NetworkVip.CreatePersistenceProfileHttpCookie(Network.id, Name, 
+							ServerFarm.id, 
 							TimeoutMinutes, CookieName, CookieType).Result;
 				else
 					status =
-						Connection.ApiClient.NetworkingLegacy.NetworkVip.CreatePersistenceProfileIpNetmask(Network.id, Name, ServerFarm.id, TimeoutMinutes, 
+						Connection.ApiClient.NetworkingLegacy.NetworkVip.CreatePersistenceProfileIpNetmask(Network.id, Name, ServerFarm.id, 
+							TimeoutMinutes, 
 							Direction, Netmask).Result;
 				if (status != null && PassThru.IsPresent)
 				{

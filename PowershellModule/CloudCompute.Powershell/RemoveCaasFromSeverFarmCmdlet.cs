@@ -10,7 +10,6 @@
 using System;
 using System.Management.Automation;
 using DD.CBU.Compute.Api.Client;
-using DD.CBU.Compute.Api.Client.VIP;
 using DD.CBU.Compute.Api.Contracts.General;
 using DD.CBU.Compute.Api.Contracts.Network;
 using DD.CBU.Compute.Api.Contracts.Vip;
@@ -18,27 +17,27 @@ using DD.CBU.Compute.Api.Contracts.Vip;
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The remove caas from server farm cmdlet.
+	///     The remove caas from server farm cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Remove, "CaasFromServerFarm", SupportsShouldProcess = true)]
 	public class RemoveCaasFromServerFarmCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
-		/// The network to manage the VIP settings
+		///     The network to manage the VIP settings
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The network to manage the VIP settings", 
 			ValueFromPipelineByPropertyName = true)]
 		public NetworkWithLocationsNetwork Network { get; set; }
 
 		/// <summary>
-		/// The server farm that will get added a probe or real server
+		///     The server farm that will get added a probe or real server
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The server farm that will get removed a probe or real server", 
 			ValueFromPipeline = true)]
 		public ServerFarm ServerFarm { get; set; }
 
 		/// <summary>
-		/// The real server to be added to the server farm
+		///     The real server to be added to the server farm
 		/// </summary>
 		[Parameter(Mandatory = true, ParameterSetName = "RealServer", 
 			HelpMessage = "The real server to be removed to the server farm")]
@@ -46,7 +45,7 @@ namespace DD.CBU.Compute.Powershell
 
 
 		/// <summary>
-		/// The real server port to be added to the server farm
+		///     The real server port to be added to the server farm
 		/// </summary>
 		[Parameter(Mandatory = false, ParameterSetName = "RealServer", 
 			HelpMessage = "The real server port to be removed to the server farm")]
@@ -54,13 +53,13 @@ namespace DD.CBU.Compute.Powershell
 		public int RealServerPort { get; set; }
 
 		/// <summary>
-		/// The probe to be added to the server farm
+		///     The probe to be added to the server farm
 		/// </summary>
 		[Parameter(Mandatory = true, ParameterSetName = "Probe", HelpMessage = "The probe to be removed to the server farm")]
 		public Probe Probe { get; set; }
 
 		/// <summary>
-		/// The process record.
+		///     The process record.
 		/// </summary>
 		protected override void ProcessRecord()
 		{
@@ -70,10 +69,13 @@ namespace DD.CBU.Compute.Powershell
 				if (!ShouldProcess(ServerFarm.name)) return;
 				if (ParameterSetName.Equals("RealServer"))
 					status =
-						Connection.ApiClient.NetworkingLegacy.NetworkVip.RemoveRealServerFromServerFarm(Network.id, ServerFarm.id, RealServer.id, RealServerPort)
+						Connection.ApiClient.NetworkingLegacy.NetworkVip.RemoveRealServerFromServerFarm(Network.id, ServerFarm.id, 
+							RealServer.id, RealServerPort)
 							.Result;
 				else
-					status = Connection.ApiClient.NetworkingLegacy.NetworkVip.RemoveProbeFromServerFarm(Network.id, ServerFarm.id, Probe.id).Result;
+					status =
+						Connection.ApiClient.NetworkingLegacy.NetworkVip.RemoveProbeFromServerFarm(Network.id, ServerFarm.id, Probe.id)
+							.Result;
 
 
 				if (status != null)

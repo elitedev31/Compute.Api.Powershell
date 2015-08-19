@@ -17,14 +17,14 @@ using DD.CBU.Compute.Api.Contracts.Datacenter;
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The Get-CaasDataCentre cmdlet.
+	///     The Get-CaasDataCentre cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasDataCentre")]
 	[OutputType(typeof (DatacenterWithMaintenanceStatusType[]))]
 	public class GetCaasDataCentreCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
-		/// The process record method.
+		///     The process record method.
 		/// </summary>
 		protected override void ProcessRecord()
 		{

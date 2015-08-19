@@ -10,33 +10,32 @@
 using System;
 using System.Management.Automation;
 using DD.CBU.Compute.Api.Client;
-using DD.CBU.Compute.Api.Client.Network;
 using DD.CBU.Compute.Api.Contracts.General;
 using DD.CBU.Compute.Api.Contracts.Network;
 
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The remove caas network public ip block cmdlet.
+	///     The remove caas network public ip block cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Remove, "CaasNetworkPublicIpBlock", SupportsShouldProcess = true)]
 	public class RemoveCaasNetworkPublicIpBlockCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
-		/// The network to add the public ip addresses
+		///     The network to add the public ip addresses
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The network to release the public ip addresses", 
 			ValueFromPipelineByPropertyName = true)]
 		public NetworkWithLocationsNetwork Network { get; set; }
 
 		/// <summary>
-		/// The public ip block to be released
+		///     The public ip block to be released
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The public ip block to be released", ValueFromPipeline = true)]
 		public IpBlockType PublicIpBlock { get; set; }
 
 		/// <summary>
-		/// The process record.
+		///     The process record.
 		/// </summary>
 		protected override void ProcessRecord()
 		{
@@ -45,7 +44,9 @@ namespace DD.CBU.Compute.Powershell
 			{
 				if (!ShouldProcess(PublicIpBlock.baseIp)) return;
 
-				Status status = Connection.ApiClient.NetworkingLegacy.Network.ReleaseNetworkPublicIpAddressBlock(Network.id, PublicIpBlock.id).Result;
+				Status status =
+					Connection.ApiClient.NetworkingLegacy.Network.ReleaseNetworkPublicIpAddressBlock(Network.id, PublicIpBlock.id)
+						.Result;
 				if (status != null)
 				{
 					WriteDebug(

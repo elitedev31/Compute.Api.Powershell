@@ -14,7 +14,7 @@ using System.Security;
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The secure string extensions.
+	///     The secure string extensions.
 	/// </summary>
 	public static class SecureStringExtensions
 	{

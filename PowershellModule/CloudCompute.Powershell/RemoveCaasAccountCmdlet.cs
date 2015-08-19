@@ -15,20 +15,20 @@ using DD.CBU.Compute.Api.Contracts.General;
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The remove account cmdlet
+	///     The remove account cmdlet
 	/// </summary>
 	[Cmdlet(VerbsCommon.Remove, "CaasAccount", SupportsShouldProcess = true)]
 	public class RemoveCaasAccountCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
-		/// The username to be deleted
+		///     The username to be deleted
 		/// </summary>
 		[Parameter(Mandatory = true, ValueFromPipelineByPropertyName = true, 
 			HelpMessage = "The account username to be deleted")]
 		public string Username { get; set; }
 
 		/// <summary>
-		/// The process record.
+		///     The process record.
 		/// </summary>
 		protected override void ProcessRecord()
 		{

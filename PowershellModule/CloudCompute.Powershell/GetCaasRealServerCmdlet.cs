@@ -12,34 +12,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Management.Automation;
 using DD.CBU.Compute.Api.Client;
-using DD.CBU.Compute.Api.Client.VIP;
 using DD.CBU.Compute.Api.Contracts.Network;
 using DD.CBU.Compute.Api.Contracts.Vip;
 
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The get caas real server cmdlet.
+	///     The get caas real server cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasRealServer")]
 	[OutputType(typeof (RealServer[]))]
 	public class GetCaasRealServerCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
-		/// The network to manage the VIP settings
+		///     The network to manage the VIP settings
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The network to manage the VIP settings", ValueFromPipeline = true)]
 		public NetworkWithLocationsNetwork Network { get; set; }
 
 		/// <summary>
-		/// The name for the real server
+		///     The name for the real server
 		/// </summary>
 		[Parameter(Mandatory = false, HelpMessage = "The name for the real server")]
 		public string Name { get; set; }
 
 
 		/// <summary>
-		/// The process record.
+		///     The process record.
 		/// </summary>
 		protected override void ProcessRecord()
 		{
@@ -47,7 +46,8 @@ namespace DD.CBU.Compute.Powershell
 
 			try
 			{
-				IEnumerable<RealServer> resultlist = Connection.ApiClient.NetworkingLegacy.NetworkVip.GetRealServers(Network.id).Result;
+				IEnumerable<RealServer> resultlist =
+					Connection.ApiClient.NetworkingLegacy.NetworkVip.GetRealServers(Network.id).Result;
 				if (resultlist != null && resultlist.Any())
 				{
 					if (!string.IsNullOrEmpty(Name))

@@ -10,7 +10,6 @@
 using System;
 using System.Management.Automation;
 using DD.CBU.Compute.Api.Client;
-using DD.CBU.Compute.Api.Client.Backup;
 using DD.CBU.Compute.Api.Contracts.Backup;
 using DD.CBU.Compute.Api.Contracts.General;
 using DD.CBU.Compute.Api.Contracts.Network20;
@@ -18,33 +17,33 @@ using DD.CBU.Compute.Api.Contracts.Network20;
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The provision/deprovision backup cmdlet.
+	///     The provision/deprovision backup cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Set, "CaasProvisionBackup")]
 	[OutputType(typeof (ServerType))]
 	public class SetCaasProvisionBackupCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
-		/// Gets or sets the server.
+		///     Gets or sets the server.
 		/// </summary>
 		[Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The server to action on")]
 		public ServerType Server { get; set; }
 
 		/// <summary>
-		/// Gets or sets a value indicating whether is enable.
+		///     Gets or sets a value indicating whether is enable.
 		/// </summary>
 		[Parameter(Mandatory = true, 
 			HelpMessage = "Determines whether to enable or disable backup. If enable, you must use BackupServicePlan")]
 		public bool IsEnable { get; set; }
 
 		/// <summary>
-		/// Gets or sets the backup service plan.
+		///     Gets or sets the backup service plan.
 		/// </summary>
 		[Parameter(Mandatory = false, HelpMessage = "The service plan of the backup")]
 		public ServicePlan? BackupServicePlan { get; set; }
 
 		/// <summary>
-		/// The process record method.
+		///     The process record method.
 		/// </summary>
 		protected override void ProcessRecord()
 		{
@@ -84,7 +83,7 @@ namespace DD.CBU.Compute.Powershell
 		}
 
 		/// <summary>
-		/// The provision backup.
+		///     The provision backup.
 		/// </summary>
 		private void ProvisionBackup()
 		{
@@ -114,7 +113,7 @@ namespace DD.CBU.Compute.Powershell
 		}
 
 		/// <summary>
-		/// The deprovision backup.
+		///     The deprovision backup.
 		/// </summary>
 		private void DeprovisionBackup()
 		{

@@ -18,87 +18,87 @@ using DD.CBU.Compute.Api.Contracts.General;
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The Add CaaS Account Cmdlet.
+	///     The Add CaaS Account Cmdlet.
 	/// </summary>
 	/// <remarks>
-	/// Add new sub administrator account
+	///     Add new sub administrator account
 	/// </remarks>
 	[Cmdlet(VerbsCommon.New, "CaasAccount")]
 	public class NewCaasAccountCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
-		/// Gets or sets the username.
+		///     Gets or sets the username.
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The account username.")]
 		[ValidateLength(1, 32)]
 		public string Username { get; set; }
 
 		/// <summary>
-		/// Gets or sets the full name.
+		///     Gets or sets the full name.
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The account full name")]
 		public string FullName { get; set; }
 
 
 		/// <summary>
-		/// Gets or sets the first name.
+		///     Gets or sets the first name.
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The account first name")]
 		public string FirstName { get; set; }
 
 
 		/// <summary>
-		/// Gets or sets the last name.
+		///     Gets or sets the last name.
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The account last name")]
 		public string LastName { get; set; }
 
 		/// <summary>
-		/// Gets or sets the password.
+		///     Gets or sets the password.
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The account password")]
 		public SecureString Password { get; set; }
 
 		/// <summary>
-		/// Gets or sets the email address.
+		///     Gets or sets the email address.
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The account email address")]
 		public string EmailAddress { get; set; }
 
 
 		/// <summary>
-		/// Gets or sets the department.
+		///     Gets or sets the department.
 		/// </summary>
 		[Parameter(Mandatory = false, HelpMessage = "The account department")]
 		public string Department { get; set; }
 
 		/// <summary>
-		/// Gets or sets the phone country code.
+		///     Gets or sets the phone country code.
 		/// </summary>
 		[Parameter(Mandatory = false, HelpMessage = "The account phone country code address")]
 		public string PhoneCountryCode { get; set; }
 
 		/// <summary>
-		/// Gets or sets the phone number.
+		///     Gets or sets the phone number.
 		/// </summary>
 		[Parameter(Mandatory = false, HelpMessage = "The account phone number")]
 		public string PhoneNumber { get; set; }
 
 
 		/// <summary>
-		/// Gets or sets the custom defined 1.
+		///     Gets or sets the custom defined 1.
 		/// </summary>
 		[Parameter(Mandatory = false, HelpMessage = "The account custom defined field 1")]
 		public string CustomDefined1 { get; set; }
 
 		/// <summary>
-		/// Gets or sets the custom defined 2.
+		///     Gets or sets the custom defined 2.
 		/// </summary>
 		[Parameter(Mandatory = false, HelpMessage = "The account custom defined field 2")]
 		public string CustomDefined2 { get; set; }
 
 		/// <summary>
-		/// Gets or sets the roles.
+		///     Gets or sets the roles.
 		/// </summary>
 		[Parameter(Mandatory = false, ValueFromPipeline = true, 
 			HelpMessage = "The roles for this account, use the cmdlet New-CaasAccountRoles to create the values")]
@@ -106,7 +106,7 @@ namespace DD.CBU.Compute.Powershell
 
 
 		/// <summary>
-		/// Process the record
+		///     Process the record
 		/// </summary>
 		protected override void ProcessRecord()
 		{
@@ -137,10 +137,10 @@ namespace DD.CBU.Compute.Powershell
 		}
 
 		/// <summary>
-		/// The create account.
+		///     The create account.
 		/// </summary>
 		/// <returns>
-		/// The <see cref="Status"/>.
+		///     The <see cref="Status" />.
 		/// </returns>
 		private Status CreateAccount()
 		{

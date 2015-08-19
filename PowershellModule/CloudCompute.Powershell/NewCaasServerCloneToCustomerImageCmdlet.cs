@@ -15,13 +15,13 @@ using DD.CBU.Compute.Api.Contracts.General;
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The set server state cmdlet.
+	///     The set server state cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.New, "CaasServerCloneToCustomerImage")]
 	public class NewCaasServerCloneToCustomerImageCmdlet : PsCmdletCaasServerBase
 	{
 		/// <summary>
-		/// Customer Image name
+		///     Customer Image name
 		/// </summary>
 		[Parameter(Mandatory = true, 
 			HelpMessage =
@@ -29,19 +29,20 @@ namespace DD.CBU.Compute.Powershell
 		public string Name { get; set; }
 
 		/// <summary>
-		/// Gets or sets the description.
+		///     Gets or sets the description.
 		/// </summary>
 		[Parameter(Mandatory = false, HelpMessage = "Set the customer image description")]
 		public string Description { get; set; }
 
 		/// <summary>
-		/// The process record method.
+		///     The process record method.
 		/// </summary>
 		protected override void ProcessRecord()
 		{
 			try
 			{
-				Status status = Connection.ApiClient.ServerManagementLegacy.Server.ServerCloneToCustomerImage(Server.id, Name, Description).Result;
+				Status status =
+					Connection.ApiClient.ServerManagementLegacy.Server.ServerCloneToCustomerImage(Server.id, Name, Description).Result;
 				if (status != null)
 					WriteDebug(
 						string.Format(

@@ -19,32 +19,32 @@ using ServerType = DD.CBU.Compute.Api.Contracts.Network20.ServerType;
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The new caas server anti affinity rule cmdlet.
+	///     The new caas server anti affinity rule cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.New, "CaasServerAntiAffinityRule")]
 	[OutputType(typeof (AntiAffinityRuleType))]
 	public class NewCaasServerAntiAffinityRuleCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
-		/// Gets or sets the server 1.
+		///     Gets or sets the server 1.
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The server to add to anti affinity rule")]
 		public ServerType Server1 { get; set; }
 
 		/// <summary>
-		/// Gets or sets the server 2.
+		///     Gets or sets the server 2.
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The server to add to anti affinity rule")]
 		public ServerType Server2 { get; set; }
 
 		/// <summary>
-		/// Gets or sets the pass thru.
+		///     Gets or sets the pass thru.
 		/// </summary>
 		[Parameter(Mandatory = false, HelpMessage = "Return the  AntiAffinity object after execution")]
 		public SwitchParameter PassThru { get; set; }
 
 		/// <summary>
-		/// The process record.
+		///     The process record.
 		/// </summary>
 		protected override void ProcessRecord()
 		{
@@ -52,7 +52,8 @@ namespace DD.CBU.Compute.Powershell
 			base.ProcessRecord();
 			try
 			{
-				Status status = Connection.ApiClient.ServerManagementLegacy.Server.CreateServerAntiAffinityRule(Server1.id, Server2.id).Result;
+				Status status =
+					Connection.ApiClient.ServerManagementLegacy.Server.CreateServerAntiAffinityRule(Server1.id, Server2.id).Result;
 				if (status.result == "SUCCESS")
 				{
 					AdditionalInformation statusadditionalInfo =
@@ -60,7 +61,8 @@ namespace DD.CBU.Compute.Powershell
 					if (statusadditionalInfo != null && PassThru.IsPresent)
 					{
 						IEnumerable<AntiAffinityRuleType> rules =
-							Connection.ApiClient.ServerManagementLegacy.Server.GetServerAntiAffinityRules(statusadditionalInfo.value, null, null).Result;
+							Connection.ApiClient.ServerManagementLegacy.Server.GetServerAntiAffinityRules(statusadditionalInfo.value, null, 
+								null).Result;
 						if (rules.Any())
 						{
 							rule = rules.First();

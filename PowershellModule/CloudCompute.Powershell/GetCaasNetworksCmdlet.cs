@@ -12,33 +12,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Management.Automation;
 using DD.CBU.Compute.Api.Client;
-using DD.CBU.Compute.Api.Client.Network;
 using DD.CBU.Compute.Api.Contracts.Network;
 
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The get networks cmdlet.
+	///     The get networks cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasNetworks")]
 	[OutputType(typeof (NetworkWithLocationsNetwork[]))]
 	public class GetCaasNetworksCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
-		/// Get a CaaS network by name
+		///     Get a CaaS network by name
 		/// </summary>
 		[Parameter(Mandatory = false, Position = 1, HelpMessage = "Network name to filter")]
 		public string Name { get; set; }
 
 
 		/// <summary>
-		/// Get a CaaS network by name
+		///     Get a CaaS network by name
 		/// </summary>
 		[Parameter(Mandatory = false, Position = 0, HelpMessage = "Location to filter")]
 		public string Location { get; set; }
 
 		/// <summary>
-		/// The process record method.
+		///     The process record method.
 		/// </summary>
 		protected override void ProcessRecord()
 		{
@@ -46,7 +45,8 @@ namespace DD.CBU.Compute.Powershell
 
 			try
 			{
-				IEnumerable<NetworkWithLocationsNetwork> resultlist = Connection.ApiClient.NetworkingLegacy.Network.GetNetworks().Result;
+				IEnumerable<NetworkWithLocationsNetwork> resultlist =
+					Connection.ApiClient.NetworkingLegacy.Network.GetNetworks().Result;
 
 				if (resultlist != null && resultlist.Any())
 				{

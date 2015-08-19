@@ -10,33 +10,32 @@
 using System;
 using System.Management.Automation;
 using DD.CBU.Compute.Api.Client;
-using DD.CBU.Compute.Api.Client.Network;
 using DD.CBU.Compute.Api.Contracts.General;
 using DD.CBU.Compute.Api.Contracts.Network;
 
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The Remove NAT Rule cmdlet.
+	///     The Remove NAT Rule cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Remove, "CaasNatRule")]
 	public class RemoveCaasNatRuleCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
-		/// Gets or sets the network.
+		///     Gets or sets the network.
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The network that the ACL Rule exists", 
 			ValueFromPipelineByPropertyName = true)]
 		public NetworkWithLocationsNetwork Network { get; set; }
 
 		/// <summary>
-		/// Gets or sets the nat rule.
+		///     Gets or sets the nat rule.
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The ACL rule to delete", ValueFromPipeline = true)]
 		public NatRuleType NatRule { get; set; }
 
 		/// <summary>
-		/// The process record method.
+		///     The process record method.
 		/// </summary>
 		protected override void ProcessRecord()
 		{
@@ -68,7 +67,7 @@ namespace DD.CBU.Compute.Powershell
 		}
 
 		/// <summary>
-		/// Removes a NAT Rule
+		///     Removes a NAT Rule
 		/// </summary>
 		private void DeleteNatRule()
 		{

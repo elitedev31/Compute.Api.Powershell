@@ -1,18 +1,29 @@
-﻿namespace DD.CBU.Compute.Powershell
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ComputeServiceConnection.cs" company="">
+//   
+// </copyright>
+// <summary>
+//   Represents a connection to the CaaS API.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+
+
+using System;
+using System.Net.FtpClient;
+using DD.CBU.Compute.Api.Client.Interfaces;
+using DD.CBU.Compute.Api.Contracts.Directory;
+
+namespace DD.CBU.Compute.Powershell
 {
-	using System;
-	using System.Net.FtpClient;
-
-	using DD.CBU.Compute.Api.Client.Interfaces;
-	using DD.CBU.Compute.Api.Contracts.Directory;
-
 	/// <summary>
-	/// Represents a connection to the CaaS API.
+	///     Represents a connection to the CaaS API.
 	/// </summary>
 	public sealed class ComputeServiceConnection
 		: IDisposable
 	{
 		/// <summary>
+		/// Initializes a new instance of the <see cref="ComputeServiceConnection"/> class. 
 		/// Initialises a new instance of the <see cref="ComputeServiceConnection"/> class.
 		///     Create a new compute service connection.
 		/// </summary>
@@ -28,22 +39,22 @@
 		}
 
 		/// <summary>
-		/// The CaaS account targeted by the connection.
+		///     The CaaS account targeted by the connection.
 		/// </summary>
-		public IAccount Account { get; internal set; }	
+		public IAccount Account { get; internal set; }
 
 		/// <summary>
-		/// The CaaS FTP client.
+		///     The CaaS FTP client.
 		/// </summary>
 		public FtpClient FtpClient { get; set; }
 
 		/// <summary>
-		/// The CaaS API client represented by the connection.
+		///     The CaaS API client represented by the connection.
 		/// </summary>
 		internal IComputeApiClient ApiClient { get; private set; }
 
 		/// <summary>
-		/// Dispose of resources being used by the CaaS API connection.
+		///     Dispose of resources being used by the CaaS API connection.
 		/// </summary>
 		public void Dispose()
 		{

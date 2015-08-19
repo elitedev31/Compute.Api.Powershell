@@ -16,13 +16,13 @@ using DD.CBU.Compute.Api.Contracts.Image;
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The Remove NAT Rule cmdlet.
+	///     The Remove NAT Rule cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Remove, "CaasCustomerImage", SupportsShouldProcess = true)]
 	public class RemoveCaasCustomerImageCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
-		/// Gets or sets the server image.
+		///     Gets or sets the server image.
 		/// </summary>
 		[Parameter(Mandatory = true, ValueFromPipeline = true, 
 			HelpMessage = "The server image retrieved by Get-CaasCustomerImages")]
@@ -30,7 +30,7 @@ namespace DD.CBU.Compute.Powershell
 
 
 		/// <summary>
-		/// The process record method.
+		///     The process record method.
 		/// </summary>
 		protected override void ProcessRecord()
 		{
@@ -39,7 +39,8 @@ namespace DD.CBU.Compute.Powershell
 			try
 			{
 				if (!ShouldProcess(ServerImage.name)) return;
-				Status status = Connection.ApiClient.ServerManagementLegacy.ServerImage.RemoveCustomerServerImage(ServerImage.id).Result;
+				Status status =
+					Connection.ApiClient.ServerManagementLegacy.ServerImage.RemoveCustomerServerImage(ServerImage.id).Result;
 
 				if (status != null)
 				{

@@ -12,28 +12,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Management.Automation;
 using DD.CBU.Compute.Api.Client;
-using DD.CBU.Compute.Api.Client.Backup;
 using DD.CBU.Compute.Api.Contracts.Backup;
 using DD.CBU.Compute.Api.Contracts.Network20;
 
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The get backup storage policies cmdlet.
+	///     The get backup storage policies cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasBackupStoragePolicies")]
 	[OutputType(typeof (BackupStoragePolicy[]))]
 	public class GetCaasBackupStragePoliciesCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
-		/// Gets or sets the server.
+		///     Gets or sets the server.
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The server associated with the backup storage policies", 
 			ValueFromPipeline = true)]
 		public ServerType Server { get; set; }
 
 		/// <summary>
-		/// The process record method.
+		///     The process record method.
 		/// </summary>
 		protected override void ProcessRecord()
 		{
@@ -84,10 +83,10 @@ namespace DD.CBU.Compute.Powershell
 		}
 
 		/// <summary>
-		/// Gets the storage policies
+		///     Gets the storage policies
 		/// </summary>
 		/// <returns>
-		/// The storage policies
+		///     The storage policies
 		/// </returns>
 		private IEnumerable<BackupStoragePolicy> GetBackupStoragePolicies()
 		{

@@ -11,34 +11,33 @@ using System;
 using System.Linq;
 using System.Management.Automation;
 using DD.CBU.Compute.Api.Client;
-using DD.CBU.Compute.Api.Client.Network;
 using DD.CBU.Compute.Api.Contracts.General;
 using DD.CBU.Compute.Api.Contracts.Network;
 
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The new caas network public ip block cmdlet.
+	///     The new caas network public ip block cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.New, "CaasNetworkPublicIpBlock")]
 	[OutputType(typeof (IpBlockType[]))]
 	public class NewCaasNetworkPublicIpBlockCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
-		/// The network to add the public ip addresses
+		///     The network to add the public ip addresses
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The network to add the public ip addresses", ValueFromPipeline = true)]
 		public NetworkWithLocationsNetwork Network { get; set; }
 
 
 		/// <summary>
-		/// The network to add the public ip addresses
+		///     The network to add the public ip addresses
 		/// </summary>
 		[Parameter(Mandatory = false, HelpMessage = "Return the IpBlockType object")]
 		public SwitchParameter PassThru { get; set; }
 
 		/// <summary>
-		/// The process record.
+		///     The process record.
 		/// </summary>
 		protected override void ProcessRecord()
 		{

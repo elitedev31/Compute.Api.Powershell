@@ -12,34 +12,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Management.Automation;
 using DD.CBU.Compute.Api.Client;
-using DD.CBU.Compute.Api.Client.Network;
 using DD.CBU.Compute.Api.Contracts.Network;
 
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The get CaaS ACL Rules cmdlet.
+	///     The get CaaS ACL Rules cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasAclRules")]
 	[OutputType(typeof (AclRuleType[]))]
 	public class GetCaasAclRulesCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
-		/// The network to show the images from
+		///     The network to show the images from
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The network to show the ACL rules from", 
 			ValueFromPipelineByPropertyName = true)]
 		public NetworkWithLocationsNetwork Network { get; set; }
 
 		/// <summary>
-		/// Get a CaaS ACL by name
+		///     Get a CaaS ACL by name
 		/// </summary>
 		[Parameter(Mandatory = false, Position = 0, HelpMessage = "ACL name to filter", ValueFromPipeline = true)]
 		public string Name { get; set; }
 
 
 		/// <summary>
-		/// The process record method.
+		///     The process record method.
 		/// </summary>
 		protected override void ProcessRecord()
 		{
@@ -95,10 +94,10 @@ namespace DD.CBU.Compute.Powershell
 		}
 
 		/// <summary>
-		/// Gets the ACL rules from the specified network
+		///     Gets the ACL rules from the specified network
 		/// </summary>
 		/// <returns>
-		/// The ACL Rules
+		///     The ACL Rules
 		/// </returns>
 		private IEnumerable<AclRuleType> GetAclRules()
 		{

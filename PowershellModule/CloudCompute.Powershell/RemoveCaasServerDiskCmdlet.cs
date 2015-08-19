@@ -14,25 +14,25 @@ using System.Linq;
 using System.Management.Automation;
 using DD.CBU.Compute.Api.Client;
 using DD.CBU.Compute.Api.Contracts.General;
-using DD.CBU.Compute.Api.Contracts.Server;
+using DD.CBU.Compute.Api.Contracts.Network20;
 
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	/// The set server state cmdlet.
+	///     The set server state cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Remove, "CaasServerDisk", SupportsShouldProcess = true)]
 	public class RemoveCaasServerDiskCmdlet : PsCmdletCaasServerBase
 	{
 		/// <summary>
-		/// Gets or sets the scsi id.
+		///     Gets or sets the scsi id.
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "SCSI Id of the disk to be resized")]
 		public int ScsiId { get; set; }
 
 
 		/// <summary>
-		/// The process record method.
+		///     The process record method.
 		/// </summary>
 		protected override void ProcessRecord()
 		{
@@ -42,7 +42,7 @@ namespace DD.CBU.Compute.Powershell
 		}
 
 		/// <summary>
-		/// Edit the server disk details
+		///     Edit the server disk details
 		/// </summary>
 		private void SetServerTask()
 		{
@@ -50,10 +50,11 @@ namespace DD.CBU.Compute.Powershell
 			{
 				Status status = null;
 
-				var disk = Server.disk.Where(d => d.scsiId == ScsiId);
+				IEnumerable<ServerTypeDisk> disk = Server.disk.Where(d => d.scsiId == ScsiId);
 				if (disk.Any())
 				{
-					status = Connection.ApiClient.ServerManagementLegacy.Server.RemoveServerDisk(Server.id, disk.ElementAt(0).id).Result;
+					status =
+						Connection.ApiClient.ServerManagementLegacy.Server.RemoveServerDisk(Server.id, disk.ElementAt(0).id).Result;
 				}
 				else
 					WriteError(new ErrorRecord(new PSArgumentException("The scsi id does not exits"), "-1", 
