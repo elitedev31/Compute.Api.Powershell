@@ -23,8 +23,7 @@ namespace DD.CBU.Compute.Powershell
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasDeployedServer")]
 	[OutputType(typeof (ServerWithBackupType[]))]
-	[Obsolete("This cmdlet is obsolete, it only returns MCP 1.0 servers. Please use Get-CaasServers to return all servers."
-		)]
+	[Obsolete("This command is obselete, use Get-CaasServers, the response of this command will not be accepted by any other commands.")]
 	public class GetCaasDeployedServerCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
@@ -58,7 +57,6 @@ namespace DD.CBU.Compute.Powershell
 		protected override void ProcessRecord()
 		{
 			base.ProcessRecord();
-
 			try
 			{
 				string networkid = Network == null ? null : Network.id;
