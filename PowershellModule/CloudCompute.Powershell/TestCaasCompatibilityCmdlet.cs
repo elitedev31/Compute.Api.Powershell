@@ -18,7 +18,7 @@ namespace DD.CBU.Compute.Powershell
 				new TestOutcomeResult("CPU", CompatibilityTests.CheckCpuConfiguration()),
 				new TestOutcomeResult("RAM", CompatibilityTests.CheckRamConfiguration()),
 				new TestOutcomeResult("Disk",  CompatibilityTests.CheckDiskCount()),
-				new TestOutcomeResult("Parition", CompatibilityTests.CheckDisksPartitions()),
+				new TestOutcomeResult("Partition", CompatibilityTests.CheckDisksPartitions()),
 				new TestOutcomeResult("Networking", CompatibilityTests.CheckNetworking()),
 				new TestOutcomeResult("IP", CompatibilityTests.CheckNetworkAddressing()),
 				new TestOutcomeResult("VMWare",  CompatibilityTests.CheckVmwareTools()),
