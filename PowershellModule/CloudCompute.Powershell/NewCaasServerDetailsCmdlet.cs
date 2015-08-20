@@ -38,6 +38,7 @@ namespace DD.CBU.Compute.Powershell
 		///     The administrator password of the machine
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The VM administrator password")]
+		[ValidateLength(8, 50)]
 		public string AdminPassword { get; set; }
 
 		/// <summary>

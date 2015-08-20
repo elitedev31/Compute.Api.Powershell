@@ -125,6 +125,7 @@
     <Compile Include="Mcp20\NewCaasServerNic.cs" />
     <Compile Include="NewCaasExportCustomerImageCmdlet.cs" />
     <Compile Include="NewCaasUploadCustomerImageCmdlet.cs" />
+    <Compile Include="TestCaasCompatibilityCmdlet.cs" />
     <Compile Include="WaitCaasServerOperationCmdlet.cs" />
     <Compile Include="RemoveCaasConnectionCmdlet.cs" />
     <Compile Include="SecureStringExtensions.cs" />
@@ -239,6 +240,10 @@
     <ProjectReference Include="..\..\ComputeClient\Compute.Contracts\Compute.Contracts.csproj">
       <Project>{4acbf469-17a8-407b-8c84-0fa112d5cfcf}</Project>
       <Name>Compute.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\x2C\x2C.lib\x2C.lib.csproj">
+      <Project>{CF20DB42-786E-4F4C-9AFB-673990D05FFB}</Project>
+      <Name>x2C.lib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
