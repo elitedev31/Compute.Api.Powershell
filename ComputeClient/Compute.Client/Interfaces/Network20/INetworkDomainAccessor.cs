@@ -60,6 +60,17 @@
         /// </returns>
         Task<ResponseType> DeployNetworkDomain(DeployNetworkDomainType networkDomain);
 
+	    /// <summary>
+	    /// The modify network domain.
+	    /// </summary>
+	    /// <param name="networkDomain">
+	    /// The network domain.
+	    /// </param>
+	    /// <returns>
+	    /// The <see cref="Task"/>.
+	    /// </returns>
+	    Task<ResponseType> ModifyNetworkDomain(EditNetworkDomainType networkDomain);
+
 		/// <summary>
 		/// 	An IComputeApiClient extension method that deletes the network domain. 
 		/// </summary>

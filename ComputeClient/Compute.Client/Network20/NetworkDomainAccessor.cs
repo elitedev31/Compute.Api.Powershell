@@ -98,7 +98,21 @@
 			return response;
 		}
 
-		/// <summary>
+	    /// <summary>
+	    /// The modify network domain.
+	    /// </summary>
+	    /// <param name="networkDomain">
+	    /// The network domain.
+	    /// </param>
+	    /// <returns>
+	    /// The <see cref="Task"/>.
+	    /// </returns>
+	    public async Task<ResponseType> ModifyNetworkDomain(EditNetworkDomainType networkDomain)
+	    {
+			return await _apiClient.PostAsync<EditNetworkDomainType, ResponseType>(ApiUris.ModifyNetworkDomain(_apiClient.OrganizationId), networkDomain);
+	    }
+
+	    /// <summary>
 		/// 	An IComputeApiClient extension method that deletes the network domain. 
 		/// </summary>
 		/// <param name="id">
@@ -114,6 +128,5 @@
 					ApiUris.DeleteNetworkDomain(_apiClient.OrganizationId), new DeleteNetworkDomainType { id = id });
 			return response;
 		}
-
 	}
 }

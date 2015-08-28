@@ -249,6 +249,20 @@ namespace DD.CBU.Compute.Api.Client
 			return new Uri(string.Format(MCP2_0_PREFIX + "{0}/network/deployNetworkDomain", orgId), UriKind.Relative);
 		}
 
+	    /// <summary>
+	    /// The modify network domain.
+	    /// </summary>
+	    /// <param name="orgId">
+	    /// The org id.
+	    /// </param>
+	    /// <returns>
+	    /// The <see cref="Uri"/>.
+	    /// </returns>
+	    public static Uri ModifyNetworkDomain(Guid orgId)
+		{
+			return new Uri(string.Format(MCP2_0_PREFIX + "{0}/network/editNetworkDomain", orgId), UriKind.Relative);
+		}
+
 		/// <summary>	Deletes the network domain described by orgId. </summary>
 		/// <param name="orgId">	The org Id. </param>
 		/// <returns>	An URI. </returns>
