@@ -14,8 +14,8 @@
     <copyright>Copyright Dimension Data 2015</copyright>
     <dependencies>
       <group targetFramework=".NETFramework4.5">
-        <dependency id="Newtonsoft.Json" version="6.0.6" />
-        <dependency id="Microsoft.AspNet.WebApi" version="5.2.2" />
+        <dependency id="Newtonsoft.Json" version="7.0.1" />
+        <dependency id="Microsoft.AspNet.WebApi" version="5.2.3" />
       </group>
     </dependencies>
   </metadata>
