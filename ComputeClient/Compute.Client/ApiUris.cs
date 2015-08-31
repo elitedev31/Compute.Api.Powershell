@@ -4,8 +4,6 @@ using System.Linq;
 
 namespace DD.CBU.Compute.Api.Client
 {
-    using System.Diagnostics.Contracts;
-
     /// <summary>
 	/// Constants and formatters for API URLs.
     /// </summary>
@@ -27,8 +25,6 @@ namespace DD.CBU.Compute.Api.Client
         /// <returns>	An URI. </returns>
         public static Uri Account(Guid orgId)
         {
-            Contract.Requires(orgId != Guid.Empty, "Organization id cannot be empty!");
-
             return new Uri(string.Format(MCP1_0_PREFIX + "{0}/account", orgId), UriKind.Relative);
         }
 
@@ -39,8 +35,6 @@ namespace DD.CBU.Compute.Api.Client
         /// <returns>	The <see cref="Uri"/>. </returns>
         public static Uri AccountWithPhoneNumber(Guid orgId)
         {
-            Contract.Requires(orgId != Guid.Empty, "Organization id cannot be empty!");
-
             return new Uri(string.Format(MCP1_0_PREFIX + "{0}/accountWithPhoneNumber", orgId), UriKind.Relative);
         }
 
@@ -58,8 +52,6 @@ namespace DD.CBU.Compute.Api.Client
 		/// </returns>
 		public static Uri UpdateAdministrator(Guid orgId, string username)
         {
-            Contract.Requires(orgId != Guid.Empty, "Organization id cannot be empty!");
-
 			return new Uri(string.Format(MCP1_0_PREFIX + "{0}/account/{1}", orgId, username), UriKind.Relative);
         }
 
@@ -78,8 +70,6 @@ namespace DD.CBU.Compute.Api.Client
         /// </returns>
         public static Uri AccountWithPhoneNumber(Guid orgId, string username)
         {
-            Contract.Requires(orgId != Guid.Empty, "Organization id cannot be empty!");
-
             return new Uri(string.Format(MCP1_0_PREFIX + "{0}/accountWithPhoneNumber/{1}", orgId, username), UriKind.Relative);
         }
 
@@ -97,8 +87,6 @@ namespace DD.CBU.Compute.Api.Client
         /// </returns>
         public static Uri SetPrimaryAdministrator(Guid orgId, string username)
         {
-            Contract.Requires(orgId != Guid.Empty, "Organization id cannot be empty!");
-
             return new Uri(string.Format(MCP1_0_PREFIX + "{0}/account/{1}?primary", orgId, username), UriKind.Relative);
         }
 
@@ -116,8 +104,6 @@ namespace DD.CBU.Compute.Api.Client
         /// </returns>
         public static Uri DeleteSubAdministrator(Guid orgId, string username)
         {
-            Contract.Requires(orgId != Guid.Empty, "Organization id cannot be empty!");
-
             return new Uri(string.Format(MCP1_0_PREFIX + "{0}/account/{1}?delete", orgId, username), UriKind.Relative);
         }
 
@@ -278,8 +264,6 @@ namespace DD.CBU.Compute.Api.Client
 		/// </returns>
         public static Uri DatacentresWithMaintanence(Guid orgId)
         {
-            Contract.Requires(orgId != Guid.Empty, "Organization id cannot be empty!");
-
             return new Uri(string.Format(MCP1_0_PREFIX + "{0}/datacenterWithMaintenanceStatus", orgId), UriKind.Relative);
         }
 
@@ -297,9 +281,7 @@ namespace DD.CBU.Compute.Api.Client
 		/// </returns>
         public static Uri DatacentreWithMaintanence(Guid orgId, string locationId)
         {
-            Contract.Requires(orgId != Guid.Empty, "Organization id cannot be empty!");
-            Contract.Requires(String.IsNullOrEmpty(locationId), "Location id cannot be empty!");
-            return new Uri(string.Format(MCP1_0_PREFIX + "{0}/datacenterWithMaintenanceStatus?location={1}", orgId, locationId), UriKind.Relative);
+			return new Uri(string.Format(MCP1_0_PREFIX + "{0}/datacenterWithMaintenanceStatus?location={1}", orgId, locationId), UriKind.Relative);
         }
 
         /// <summary>
@@ -362,7 +344,6 @@ namespace DD.CBU.Compute.Api.Client
 	        string uri = MCP1_0_PREFIX + "base/imageWithDiskSpeed";
             if (imagetype == ServerImageType.CUSTOMER)
             {
-                Contract.Requires(orgId != Guid.Empty, "Organization Id cannot be empty");
 				uri = string.Format(MCP1_0_PREFIX + "/{0}/imageWithDiskSpeed", orgId);
             }
 
@@ -446,7 +427,6 @@ namespace DD.CBU.Compute.Api.Client
 		/// </returns>
         public static Uri DeployedServers(Guid orgId, string serverId, string name, string networkId, string location)
         {
-           Contract.Requires(orgId != Guid.Empty, "Organization Id cannot be empty");
 			string uri = MCP1_0_PREFIX + "{0}/serverWithBackup";
 
 // build que query string paramenters

@@ -2,7 +2,6 @@
 {
 	using System;
 	using System.Collections.Generic;
-	using System.Diagnostics.Contracts;
 	using System.Net;
 	using System.Threading.Tasks;
 
@@ -207,10 +206,6 @@
 		/// </returns>
 		public async Task<NatRuleType> CreateNatRule(string networkId, string natRuleName, IPAddress sourceIp)
 		{
-			Contract.Requires(!string.IsNullOrEmpty(networkId), "Network id cannot be null or empty");
-			Contract.Requires(!string.IsNullOrEmpty(natRuleName), "NAT rule name cannot be null or empty");
-			Contract.Requires(sourceIp != null, "Source IP cannot be null");
-
 			return
 				await
 				_apiClient.PostAsync<NatRuleType, NatRuleType>(
@@ -284,12 +279,6 @@
 			int port2 = 0,
 			AclType aclType = AclType.OUTSIDE_ACL)
 		{
-			Contract.Requires(!string.IsNullOrEmpty(aclRuleName), "The ACL rule name must NOT be empty or null!");
-			Contract.Requires(aclRuleName.Length < 60, "ACL rule name cannot exceed 60 chars");
-			Contract.Requires(position >= 100 && position <= 500, "Position must be between 100 and 500 inclusive");
-			Contract.Requires(aclType == AclType.INSIDE_ACL || aclType == AclType.OUTSIDE_ACL,
-				"ACL Type must be one of (OUTSIDE_ACL, INSIDE_ACL)");
-
 			var portRange = new PortRangeType { type = portRangeType };
 
 			// Validate that the ports are specified when needed

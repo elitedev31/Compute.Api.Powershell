@@ -1,7 +1,6 @@
 ﻿namespace DD.CBU.Compute.Api.Client.Backup
 {
 	using System.Collections.Generic;
-	using System.Diagnostics.Contracts;
 	using System.Threading.Tasks;
 
 	using DD.CBU.Compute.Api.Client.Interfaces;
@@ -153,7 +152,6 @@
 		/// </returns>
 		public async Task<IEnumerable<BackupClientDetailsType>> GetBackupClients(string serverId)
 		{
-			Contract.Requires(!string.IsNullOrWhiteSpace(serverId), "Server id must not be null or empty");
 			BackupDetails details =
 				await _apiClient.GetAsync<BackupDetails>(ApiUris.GetBackupDetails(_apiClient.OrganizationId, serverId));
 			return details.backupClient;
@@ -187,11 +185,6 @@
 			BackupSchedulePolicy schedulePolicy,
 			AlertingType alertingType)
 		{
-			Contract.Requires(!string.IsNullOrEmpty(serverId), "Server id cannot be null or empty");
-			Contract.Requires(clientType != null, "Client type cannot be null");
-			Contract.Requires(storagePolicy != null, "Storage policy cannot be null");
-			Contract.Requires(schedulePolicy != null, "Schedule policy cannot be null");
-
 			return
 				await
 				_apiClient.PostAsync<NewBackupClient, Status>(
@@ -219,9 +212,6 @@
 		/// </returns>		
 		public async Task<Status> RemoveBackupClient(string serverId, BackupClientDetailsType backupClient)
 		{
-			Contract.Requires(!string.IsNullOrWhiteSpace(serverId), "Server cannot be null or empty");
-			Contract.Requires(backupClient != null, "Backup client cannot be null");
-
 			return
 				await _apiClient.GetAsync<Status>(ApiUris.RemoveBackupClient(_apiClient.OrganizationId, serverId, backupClient.id));
 		}
@@ -254,9 +244,6 @@
 			BackupSchedulePolicy schedulePolicy,
 			AlertingType alertingType)
 		{
-			Contract.Requires(!string.IsNullOrWhiteSpace(serverId), "Server cannot be null or empty");
-			Contract.Requires(backupClient != null, "Backup client cannot be null");
-
 			return
 				await
 				_apiClient.PostAsync<ModifyBackupClient, Status>(
@@ -283,9 +270,6 @@
 		/// </returns>
 		public async Task<Status> InitiateBackup(string serverId, BackupClientDetailsType backupClient)
 		{
-			Contract.Requires(!string.IsNullOrWhiteSpace(serverId), "Server cannot be null or empty");
-			Contract.Requires(backupClient != null, "Backup client cannot be null");
-
 			return
 				await _apiClient.GetAsync<Status>(ApiUris.InitiateBackup(_apiClient.OrganizationId, serverId, backupClient.id));
 		}
@@ -304,9 +288,6 @@
 		/// </returns>
 		public async Task<Status> CancelBackupJob(string serverId, BackupClientDetailsType backupClient)
 		{
-			Contract.Requires(!string.IsNullOrWhiteSpace(serverId), "Server cannot be null or empty");
-			Contract.Requires(backupClient != null, "Backup client cannot be null");
-
 			return
 				await _apiClient.GetAsync<Status>(ApiUris.CancelBackupJobs(_apiClient.OrganizationId, serverId, backupClient.id));
 		}
