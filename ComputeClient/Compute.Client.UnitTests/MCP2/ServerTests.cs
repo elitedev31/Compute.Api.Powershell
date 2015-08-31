@@ -3,6 +3,7 @@ using System.Net;
 using System.Runtime;
 using System.Threading.Tasks;
 using DD.CBU.Compute.Api.Client;
+using DD.CBU.Compute.Api.Client.Exceptions;
 using DD.CBU.Compute.Api.Client.Server20;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -52,7 +53,7 @@ namespace Compute.Client.UnitTests.MCP2
 		}
 
 		[TestMethod]
-		[ExpectedException(typeof(ComputeApiException))]
+		[ExpectedException(typeof(BadRequestException))]
 		public async Task GetServerNotFoundFromXML()
 		{
 			Guid serverId = new Guid("0ab41d5f-4c0f-4804-a807-7015ee2adb61");
