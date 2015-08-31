@@ -593,7 +593,7 @@ namespace DD.CBU.Compute.Api.Client
 		/// <returns>
 		/// Returns the relative URI of the REST request for powering off the server
 		/// </returns>
-        public static Uri PoweroffServer(Guid orgId, string serverId)
+        public static Uri PoweroffMcp1Server(Guid orgId, string serverId)
         {
 			return new Uri(string.Format(MCP1_0_PREFIX + "{0}/server/{1}?poweroff", orgId, serverId), UriKind.Relative);
         }

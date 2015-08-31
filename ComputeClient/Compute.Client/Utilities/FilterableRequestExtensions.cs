@@ -26,6 +26,9 @@
         /// </returns>
         public static Uri AppendToUri(this IFilterableRequest filterableRequest, Uri uri)
         {
+	        if (uri == null)
+		        throw new ArgumentNullException("uri");
+
             if (filterableRequest == null)
             {
                 return uri;

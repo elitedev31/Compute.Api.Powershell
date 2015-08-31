@@ -22,6 +22,9 @@
         /// </returns>
         public static Uri AppendToUri(this IPageableRequest pagingOptions, Uri uri)
         {
+	        if (uri == null)
+		        throw new ArgumentNullException("uri");
+
             if (pagingOptions == null)
             {
                 return uri;

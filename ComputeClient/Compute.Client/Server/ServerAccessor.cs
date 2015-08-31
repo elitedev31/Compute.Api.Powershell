@@ -161,7 +161,7 @@
 		/// </returns>
 		public async Task<Status> ServerPowerOff(string serverId)
 		{
-			return await _apiClient.GetAsync<Status>(ApiUris.PoweroffServer(_apiClient.OrganizationId, serverId));
+			return await _apiClient.GetAsync<Status>(ApiUris.PoweroffMcp1Server(_apiClient.OrganizationId, serverId));
 		}
 
 
