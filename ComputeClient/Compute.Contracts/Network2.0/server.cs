@@ -985,4 +985,144 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 			get; set;
 		}
 	}
+
+	/// <content>	A delete server type. </content>
+	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+	[System.SerializableAttribute()]
+	[System.Diagnostics.DebuggerStepThroughAttribute()]
+	[System.ComponentModel.DesignerCategoryAttribute("code")]
+	[System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
+	[System.Xml.Serialization.XmlRootAttribute("deleteServer", Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
+	public partial class DeleteServerType
+	{
+
+		/// <summary>	Gets or sets the identifier of the server. </summary>
+		/// <value>	The identifier of the server. </value>
+		[System.Xml.Serialization.XmlElementAttribute("id", typeof(string))]
+		public string serverId
+		{
+			get;
+			set;
+		}
+	}
+
+	/// <content>	A start server type. </content>
+	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+	[System.SerializableAttribute()]
+	[System.Diagnostics.DebuggerStepThroughAttribute()]
+	[System.ComponentModel.DesignerCategoryAttribute("code")]
+	[System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
+	[System.Xml.Serialization.XmlRootAttribute("startServer", Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
+	public partial class StartServerType
+	{
+
+		/// <summary>	Gets or sets the identifier of the server. </summary>
+		/// <value>	The identifier of the server. </value>
+		[System.Xml.Serialization.XmlElementAttribute("id", typeof(string))]
+		public string serverId
+		{
+			get;
+			set;
+		}
+	}
+
+	/// <content>	A shutdown server type. </content>
+	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+	[System.SerializableAttribute()]
+	[System.Diagnostics.DebuggerStepThroughAttribute()]
+	[System.ComponentModel.DesignerCategoryAttribute("code")]
+	[System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
+	[System.Xml.Serialization.XmlRootAttribute("shutdownServer", Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
+	public partial class ShutdownServerType
+	{
+
+		/// <summary>	Gets or sets the identifier of the server. </summary>
+		/// <value>	The identifier of the server. </value>
+		[System.Xml.Serialization.XmlElementAttribute("id", typeof(string))]
+		public string serverId
+		{
+			get;
+			set;
+		}
+	}
+
+	/// <content>	A reboot server type. </content>
+	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+	[System.SerializableAttribute()]
+	[System.Diagnostics.DebuggerStepThroughAttribute()]
+	[System.ComponentModel.DesignerCategoryAttribute("code")]
+	[System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
+	[System.Xml.Serialization.XmlRootAttribute("rebootServer", Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
+	public partial class RebootServerType
+	{
+
+		/// <summary>	Gets or sets the identifier of the server. </summary>
+		/// <value>	The identifier of the server. </value>
+		[System.Xml.Serialization.XmlElementAttribute("id", typeof(string))]
+		public string serverId
+		{
+			get;
+			set;
+		}
+	}
+
+	/// <content>	A reset server type. </content>
+	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+	[System.SerializableAttribute()]
+	[System.Diagnostics.DebuggerStepThroughAttribute()]
+	[System.ComponentModel.DesignerCategoryAttribute("code")]
+	[System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
+	[System.Xml.Serialization.XmlRootAttribute("resetServer", Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
+	public partial class ResetServerType
+	{
+
+		/// <summary>	Gets or sets the identifier of the server. </summary>
+		/// <value>	The identifier of the server. </value>
+		[System.Xml.Serialization.XmlElementAttribute("id", typeof(string))]
+		public string serverId
+		{
+			get;
+			set;
+		}
+	}
+
+	/// <content>	A power off server type. </content>
+	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+	[System.SerializableAttribute()]
+	[System.Diagnostics.DebuggerStepThroughAttribute()]
+	[System.ComponentModel.DesignerCategoryAttribute("code")]
+	[System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
+	[System.Xml.Serialization.XmlRootAttribute("powerOffServer", Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
+	public partial class PowerOffServerType
+	{
+
+		/// <summary>	Gets or sets the identifier of the server. </summary>
+		/// <value>	The identifier of the server. </value>
+		[System.Xml.Serialization.XmlElementAttribute("id", typeof(string))]
+		public string serverId
+		{
+			get;
+			set;
+		}
+	}
+
+	/// <content>	An update vmware tools server type. </content>
+	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+	[System.SerializableAttribute()]
+	[System.Diagnostics.DebuggerStepThroughAttribute()]
+	[System.ComponentModel.DesignerCategoryAttribute("code")]
+	[System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
+	[System.Xml.Serialization.XmlRootAttribute("updateVmwareTools", Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
+	public partial class UpdateVmwareToolsServerType
+	{
+
+		/// <summary>	Gets or sets the identifier of the server. </summary>
+		/// <value>	The identifier of the server. </value>
+		[System.Xml.Serialization.XmlElementAttribute("id", typeof(string))]
+		public string serverId
+		{
+			get;
+			set;
+		}
+	}
 }

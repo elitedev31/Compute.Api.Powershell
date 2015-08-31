@@ -36,5 +36,40 @@
 		/// The <see cref="Task"/>.
 		/// </returns>
 		Task<ServerType> GetMcp2DeployedServer(Guid serverId);
+
+		/// <summary>	Deletes the server described by serverId. </summary>
+		/// <param name="serverId">	The server id. </param>
+		/// <returns>	A standard CaaS response </returns>
+		Task<ResponseType> DeleteServer(Guid serverId);
+
+		/// <summary>	Starts a server. </summary>
+		/// <param name="serverId">	The server id. </param>
+		/// <returns>	A standard CaaS response </returns>
+		Task<ResponseType> StartServer(Guid serverId);
+
+		/// <summary>	Shutdown server. </summary>
+		/// <param name="serverId">	The server id. </param>
+		/// <returns>	A standard CaaS response </returns>
+		Task<ResponseType> ShutdownServer(Guid serverId);
+
+		/// <summary>	Reboot server. </summary>
+		/// <param name="serverId">	The server id. </param>
+		/// <returns>	A standard CaaS response </returns>
+		Task<ResponseType> RebootServer(Guid serverId);
+
+		/// <summary>	Resets the server described by serverId. </summary>
+		/// <param name="serverId">	The server id. </param>
+		/// <returns>	A standard CaaS response </returns>
+		Task<ResponseType> ResetServer(Guid serverId);
+
+		/// <summary>	Power off server. </summary>
+		/// <param name="serverId">	The server id. </param>
+		/// <returns>	A standard CaaS response </returns>
+		Task<ResponseType> PowerOffServer(Guid serverId);
+
+		/// <summary>	Updates the v mware tools described by serverId. </summary>
+		/// <param name="serverId">	The server id. </param>
+		/// <returns>	A standard CaaS response </returns>
+		Task<ResponseType> UpdateVmwareTools(Guid serverId);
 	}
 }

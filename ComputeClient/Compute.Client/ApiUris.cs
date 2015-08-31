@@ -1989,5 +1989,66 @@ namespace DD.CBU.Compute.Api.Client
 		{
 			return new Uri(string.Format(MCP2_0_PREFIX + "{0}/network/reservedPrivateIpv4Address?networkDomainId={1}", orgId, networkDomainId), UriKind.Relative);
 		}
+
+		/// <summary>	Deletes the server. </summary>
+		/// <param name="orgId">	The organization id. </param>
+		/// <returns>	Returns the relative URI of the REST request for a deletion of the server. </returns>
+		public static Uri DeleteServer(Guid orgId)
+		{
+			return new Uri(string.Format(MCP2_0_PREFIX + "{0}/server/deleteServer", orgId), UriKind.Relative);
+		}
+
+		/// <summary>	Starts a server. </summary>
+		/// <param name="orgId">	The org Id. </param>
+		/// <returns>	An URI. </returns>
+		public static Uri StartServer(Guid orgId)
+		{
+			return new Uri(string.Format(MCP2_0_PREFIX + "{0}/server/startServer", orgId), UriKind.Relative);
+		}
+
+		/// <summary>	Resets the server (hard reset). </summary>
+		/// <param name="orgId">	The org Id. </param>
+		/// <returns>	An URI. </returns>
+		public static Uri ResetServer(Guid orgId)
+		{
+			return new Uri(string.Format(MCP2_0_PREFIX + "{0}/server/resetServer", orgId), UriKind.Relative);
+		}
+
+		/// <summary>	A "graceful" reboot of the server. </summary>
+		/// <param name="orgId">	The organization id. </param>
+		/// <returns>	Returns the relative URI of the REST request for rebooting the server. </returns>
+		public static Uri RebootServer(Guid orgId)
+		{
+			return new Uri(string.Format(MCP2_0_PREFIX + "{0}/server/rebootServer", orgId), UriKind.Relative);
+		}
+
+		/// <summary>
+		/// 	A “graceful” stop of a server by initiating a shutdown sequence within the guest
+		/// 	operating system.
+		/// </summary>
+		/// <param name="orgId">	The organization id. </param>
+		/// <returns>
+		/// 	Returns the relative URI of the REST request for a graceful shutdown of the server.
+		/// </returns>
+		public static Uri ShutdownServer(Guid orgId)
+		{
+			return new Uri(string.Format(MCP2_0_PREFIX + "{0}/server/shutdownServer", orgId), UriKind.Relative);
+		}
+
+		/// <summary>	Power off server. </summary>
+		/// <param name="orgId">	The org Id. </param>
+		/// <returns>	An URI. </returns>
+		public static Uri PowerOffServer(Guid orgId)
+		{
+			return new Uri(string.Format(MCP2_0_PREFIX + "{0}/server/powerOffServer", orgId), UriKind.Relative);
+		}
+
+		/// <summary>	Updates the vmware tools described by orgId. </summary>
+		/// <param name="orgId">	The org Id. </param>
+		/// <returns>	An URI. </returns>
+		public static Uri UpdateVmwareTools(Guid orgId)
+		{
+			return new Uri(string.Format(MCP2_0_PREFIX + "{0}/server/updateVmwareTools", orgId), UriKind.Relative);
+		}
     }
 }
