@@ -22,18 +22,9 @@ namespace DD.CBU.Compute.Api.Client
         /// </summary>
         public static Uri MyAccount = new Uri(MCP1_0_PREFIX + "myaccount", UriKind.Relative);
 
-        /// <summary>
-        /// The path (relative to the base API URL) to list accounts action.
-        /// </summary>
-        /// <param name="orgId">
-        /// The org Id.
-        /// </param>
-        /// <param name="username">
-        /// The username.
-        /// </param>
-        /// <returns>
-        /// The <see cref="Uri"/>.
-        /// </returns>
+        /// <summary>	Accounts the given organisation identifier. </summary>
+        /// <param name="orgId">	The org Id. </param>
+        /// <returns>	An URI. </returns>
         public static Uri Account(Guid orgId)
         {
             Contract.Requires(orgId != Guid.Empty, "Organization id cannot be empty!");
@@ -41,19 +32,11 @@ namespace DD.CBU.Compute.Api.Client
             return new Uri(string.Format(MCP1_0_PREFIX + "{0}/account", orgId), UriKind.Relative);
         }
 
-
         /// <summary>
-        /// The path (relative to the base API URL) to list accounts action.
+        /// 	The path (relative to the base API URL) to Account With Phone Number  action.
         /// </summary>
-        /// <param name="orgId">
-        /// The org Id.
-        /// </param>
-        /// <param name="username">
-        /// The username.
-        /// </param>
-        /// <returns>
-        /// The <see cref="Uri"/>.
-        /// </returns>
+        /// <param name="orgId">	The org Id. </param>
+        /// <returns>	The <see cref="Uri"/>. </returns>
         public static Uri AccountWithPhoneNumber(Guid orgId)
         {
             Contract.Requires(orgId != Guid.Empty, "Organization id cannot be empty!");
@@ -165,7 +148,6 @@ namespace DD.CBU.Compute.Api.Client
         /// <returns>The relative action Uri.</returns>
         public static Uri SoftwareLabels(Guid organizationId)
         {
-          
            return new Uri(string.Format(MCP1_0_PREFIX + "{0}/softwarelabel", organizationId), UriKind.Relative);
         }
 
@@ -509,28 +491,18 @@ namespace DD.CBU.Compute.Api.Client
                 UriKind.Relative);
         }
 
-        /// <summary>
-        /// The relative URI for the CaaS API action that allows a server to be deployed
-        /// </summary>
-		/// <param name="orgId">
-		/// </param>
-		/// <returns>
-		/// The <see cref="Uri"/>.
-		/// </returns>
+        /// <summary>	(This method is obsolete) deploy server. </summary>
+        /// <param name="orgId">	The org Id. </param>
+        /// <returns>	An URI. </returns>
         [Obsolete("This Uri is deprecated, please use DeployServerWithDiskSpeed instead.")]
         public static Uri DeployServer(Guid orgId)
         {
 			return new Uri(string.Format(MCP1_0_PREFIX + "{0}/server", orgId), UriKind.Relative);
         }
 
-        /// <summary>
-        /// The relative URI for the CaaS API action that allows a server to be deployed
-        /// </summary>
-		/// <param name="orgId">
-		/// </param>
-		/// <returns>
-		/// The <see cref="Uri"/>.
-		/// </returns>
+        /// <summary>	Deploy server with disk speed. </summary>
+        /// <param name="orgId">	The org Id. </param>
+        /// <returns>	An URI. </returns>
         public static Uri DeployServerWithDiskSpeed(Guid orgId)
         {
 			return new Uri(string.Format(MCP1_0_PREFIX + "/{0}/deployServer", orgId), UriKind.Relative);
@@ -690,7 +662,7 @@ namespace DD.CBU.Compute.Api.Client
 		/// </returns>
 		public static Uri CloneServerToCustomerImage(Guid orgId, string serverId, string imageName, string imageDesc)
         {
-            Uri uri = null;
+            Uri uri;
             if (string.IsNullOrEmpty(imageDesc))
 				uri = new Uri(string.Format(MCP1_0_PREFIX + "{0}/server/{1}?clone={2}", orgId, serverId, imageName), UriKind.Relative);
             else
@@ -855,16 +827,10 @@ namespace DD.CBU.Compute.Api.Client
             return new Uri(string.Format(uri, orgId), UriKind.Relative);
         }
 
-        /// <summary>
-        /// The relative URI for the CaaS API action that deletes a anti affinity rule
-        /// </summary>
-		/// <param name="orgId">
-		/// </param>
-		/// <param name="ruleId">
-		/// </param>
-		/// <returns>
-		/// The <see cref="Uri"/>.
-		/// </returns>
+        /// <summary>	Removes the anti affinity rule. </summary>
+        /// <param name="orgId"> 	The org Id. </param>
+        /// <param name="ruleId">	The anti affinity rule id. </param>
+        /// <returns>	An URI. </returns>
         public static Uri RemoveAntiAffinityRule(Guid orgId, string ruleId)
         {
 			return new Uri(string.Format(MCP1_0_PREFIX + "{0}/antiAffinityRule/{1}?delete", orgId, ruleId), UriKind.Relative);
@@ -878,7 +844,7 @@ namespace DD.CBU.Compute.Api.Client
         /// <param name="orgId">
         /// The org id.
         /// </param>
-        /// <param name="Id">
+        /// <param name="id">
         /// The id.
         /// </param>
         /// <param name="vlanName">
@@ -1118,60 +1084,37 @@ namespace DD.CBU.Compute.Api.Client
 			return new Uri(string.Format(MCP1_0_PREFIX + "{0}/networkWithLocation", orgId), UriKind.Relative);
         }
 
-        /// <summary>
-        /// </summary>
-		/// <param name="orgId">
-		/// </param>
-		/// <param name="networkId">
-		/// </param>
-		/// <returns>
-		/// The <see cref="Uri"/>.
-		/// </returns>
+        /// <summary>	Deletes the network. </summary>
+        /// <param name="orgId">		The org Id. </param>
+        /// <param name="networkId">	The server networkid. </param>
+        /// <returns>	An URI. </returns>
         public static Uri DeleteNetwork(Guid orgId, string networkId)
         {
 			return new Uri(string.Format(MCP1_0_PREFIX + "/{0}/network/{1}?delete", orgId, networkId), UriKind.Relative);
         }
 
-        /// <summary>
-        /// </summary>
-		/// <param name="orgId">
-		/// </param>
-		/// <param name="networkId">
-		/// </param>
-		/// <returns>
-		/// The <see cref="Uri"/>.
-		/// </returns>
+        /// <summary>	Modify network. </summary>
+        /// <param name="orgId">		The org Id. </param>
+        /// <param name="networkId">	The server networkid. </param>
+        /// <returns>	An URI. </returns>
         public static Uri ModifyNetwork(Guid orgId, string networkId)
         {
 			return new Uri(string.Format(MCP1_0_PREFIX + "{0}/network/{1}", orgId, networkId), UriKind.Relative);
         }
 
-        /// <summary>
-        /// </summary>
-		/// <param name="orgId">
-		/// </param>
-		/// <param name="networkId">
-		/// </param>
-		/// <returns>
-		/// The <see cref="Uri"/>.
-		/// </returns>
+        /// <summary>	Gets network configuration. </summary>
+        /// <param name="orgId">		The org Id. </param>
+        /// <param name="networkId">	The server networkid. </param>
+        /// <returns>	The network configuration. </returns>
         public static Uri GetNetworkConfig(Guid orgId, string networkId)
         {
 			return new Uri(string.Format(MCP1_0_PREFIX + "/{0}/network/{1}/config", orgId, networkId), UriKind.Relative);
         }
 
-        /// <summary>
-        /// Reseve public ip address block
-        /// </summary>
-		/// <param name="orgId">
-		/// The org id
-		/// </param>
-		/// <param name="networkId">
-		/// The network id
-		/// </param>
-		/// <returns>
-		/// Uri
-		/// </returns>
+        /// <summary>	Reserve network public IP address block. </summary>
+        /// <param name="orgId">		The org Id. </param>
+        /// <param name="networkId">	The server networkid. </param>
+        /// <returns>	An URI. </returns>
         public static Uri ReserveNetworkPublicIpAddressBlock(Guid orgId, string networkId)
         {
 			return new Uri(string.Format(MCP1_0_PREFIX + "{0}/network/{1}/publicip?reserveNewWithSize", orgId, networkId), UriKind.Relative);
@@ -1637,300 +1580,153 @@ namespace DD.CBU.Compute.Api.Client
 			return new Uri(string.Format(MCP1_0_PREFIX + "{0}/network/{1}/realServer/{2}", orgId, networkId, rServerId), UriKind.Relative);
         }
 
-        /// <summary>
-        /// The relative URI for the CaaS API action that creates or lists VIP probes
-        /// </summary>
-		/// <param name="orgId">
-		/// The org id
-		/// </param>
-		/// <param name="networkId">
-		/// The network id
-		/// </param>
-		/// <returns>
-		/// Uri
-		/// </returns>
+        /// <summary>	Creates or get vip probes. </summary>
+        /// <param name="orgId">		The org Id. </param>
+        /// <param name="networkId">	The server networkid. </param>
+        /// <returns>	The new or get vip probes. </returns>
         public static Uri CreateOrGetVipProbes(Guid orgId, string networkId)
         {
 			return new Uri(string.Format(MCP1_0_PREFIX + "{0}/network/{1}/probe", orgId, networkId), UriKind.Relative);
         }
 
-        /// <summary>
-        /// The relative URI for the CaaS API action that deletes VIP probes
-        /// </summary>
-		/// <param name="orgId">
-		/// The org id
-		/// </param>
-		/// <param name="networkId">
-		/// The network id
-		/// </param>
-		/// <param name="probeId">
-		/// The probe id
-		/// </param>
-		/// <returns>
-		/// Uri
-		/// </returns>
+        /// <summary>	The relative URI for the CaaS API action that deletes VIP probes. </summary>
+        /// <param name="orgId">		The org id. </param>
+        /// <param name="networkId">	The network id. </param>
+        /// <param name="probeId">  	The probe id. </param>
+        /// <returns>	An URI. </returns>
         public static Uri DeleteVipProbes(Guid orgId, string networkId, string probeId)
         {
 			return new Uri(string.Format(MCP1_0_PREFIX + "/{0}/network/{1}/probe/{2}?delete", orgId, networkId, probeId), UriKind.Relative);
         }
 
-        /// <summary>
-        /// The relative URI for the CaaS API action that modify VIP probes
-        /// </summary>
-		/// <param name="orgId">
-		/// The org id
-		/// </param>
-		/// <param name="networkId">
-		/// The network id
-		/// </param>
-		/// <param name="probeId">
-		/// The probe id
-		/// </param>
-		/// <returns>
-		/// Uri
-		/// </returns>
+        /// <summary>	Modify vip probes. </summary>
+        /// <param name="orgId">		The org Id. </param>
+        /// <param name="networkId">	The server networkid. </param>
+        /// <param name="probeId">  	The probe id. </param>
+        /// <returns>	An URI. </returns>
         public static Uri ModifyVipProbes(Guid orgId, string networkId, string probeId)
         {
 			return new Uri(string.Format(MCP1_0_PREFIX + "{0}/network/{1}/probe/{2}", orgId, networkId, probeId), UriKind.Relative);
         }
 
-
-         /// <summary>
-        /// The relative URI for the CaaS API action that creates or lists VIP server farms
-        /// </summary>
-		/// <param name="orgId">
-		/// The org id
-		/// </param>
-		/// <param name="networkId">
-		/// The network id
-		/// </param>
-		/// <returns>
-		/// Uri
-		/// </returns>
+        /// <summary>	Creates or get vip server farm. </summary>
+        /// <param name="orgId">		The org Id. </param>
+        /// <param name="networkId">	The server networkid. </param>
+        /// <returns>	The new or get vip server farm. </returns>
         public static Uri CreateOrGetVipServerFarm(Guid orgId, string networkId)
         {
 			return new Uri(string.Format(MCP1_0_PREFIX + "/{0}/network/{1}/serverFarm", orgId, networkId), UriKind.Relative);
         }
 
-        /// <summary>
-        /// The relative URI for the CaaS API action that deletes VIP server farms
-        /// </summary>
-		/// <param name="orgId">
-		/// The org id
-		/// </param>
-		/// <param name="networkId">
-		/// The network id
-		/// </param>
-		/// <param name="serverFarmId">
-		/// The probe id
-		/// </param>
-		/// <returns>
-		/// Uri
-		/// </returns>
+        /// <summary>	Deletes the vip server farm. </summary>
+        /// <param name="orgId">	   	The org Id. </param>
+        /// <param name="networkId">   	The server networkid. </param>
+        /// <param name="serverFarmId">	The probe id. </param>
+        /// <returns>	An URI. </returns>
         public static Uri DeleteVipServerFarm(Guid orgId, string networkId, string serverFarmId)
         {
 			return new Uri(string.Format(MCP1_0_PREFIX + "{0}/network/{1}/serverFarm/{2}?delete", orgId, networkId, serverFarmId), 
 				UriKind.Relative);
         }
 
-        /// <summary>
-        /// The relative URI for the CaaS API action that get VIP server farm details
-        /// </summary>
-		/// <param name="orgId">
-		/// The org id
-		/// </param>
-		/// <param name="networkId">
-		/// The network id
-		/// </param>
-		/// <param name="serverFarmId">
-		/// The probe id
-		/// </param>
-		/// <returns>
-		/// Uri
-		/// </returns>
+        /// <summary>	Gets vip server farm. </summary>
+        /// <param name="orgId">	   	The org Id. </param>
+        /// <param name="networkId">   	The server networkid. </param>
+        /// <param name="serverFarmId">	The probe id. </param>
+        /// <returns>	The vip server farm. </returns>
         public static Uri GetVipServerFarm(Guid orgId, string networkId, string serverFarmId)
         {
 			return new Uri(string.Format(MCP1_0_PREFIX + "{0}/network/{1}/serverFarm/{2}", orgId, networkId, serverFarmId), UriKind.Relative);
         }
 
-         /// <summary>
-        /// The relative URI for the CaaS API action that add real server to server farm
-        /// </summary>
-		/// <param name="orgId">
-		/// The org id
-		/// </param>
-		/// <param name="networkId">
-		/// The network id
-		/// </param>
-		/// <param name="serverFarmId">
-		/// The probe id
-		/// </param>
-		/// <returns>
-		/// Uri
-		/// </returns>
+        /// <summary>	Adds a vip real server to server farm. </summary>
+        /// <param name="orgId">	   	The org Id. </param>
+        /// <param name="networkId">   	The server networkid. </param>
+        /// <param name="serverFarmId">	The probe id. </param>
+        /// <returns>	An URI. </returns>
         public static Uri AddVipRealServerToServerFarm(Guid orgId, string networkId, string serverFarmId)
         {
 			return new Uri(string.Format(MCP1_0_PREFIX + "{0}/network/{1}/serverFarm/{2}/addRealServer", orgId, networkId, serverFarmId), 
 				UriKind.Relative);
         }
 
-        /// <summary>
-        /// The relative URI for the CaaS API action that remove real server to server farm
-        /// </summary>
-		/// <param name="orgId">
-		/// The org id
-		/// </param>
-		/// <param name="networkId">
-		/// The network id
-		/// </param>
-		/// <param name="serverFarmId">
-		/// The probe id
-		/// </param>
-		/// <returns>
-		/// Uri
-		/// </returns>
+        /// <summary>	Removes the vip real server from server farm. </summary>
+        /// <param name="orgId">	   	The org Id. </param>
+        /// <param name="networkId">   	The server networkid. </param>
+        /// <param name="serverFarmId">	The probe id. </param>
+        /// <returns>	An URI. </returns>
         public static Uri RemoveVipRealServerFromServerFarm(Guid orgId, string networkId, string serverFarmId)
         {
 			return new Uri(string.Format(MCP1_0_PREFIX + "{0}/network/{1}/serverFarm/{2}/removeRealServer", orgId, networkId, serverFarmId), 
 				UriKind.Relative);
         }
 
-
-          /// <summary>
-        /// The relative URI for the CaaS API action that add Probe to server farm
-        /// </summary>
-		/// <param name="orgId">
-		/// The org id
-		/// </param>
-		/// <param name="networkId">
-		/// The network id
-		/// </param>
-		/// <param name="serverFarmId">
-		/// The probe id
-		/// </param>
-		/// <returns>
-		/// Uri
-		/// </returns>
+        /// <summary>	Adds a vip probe to server farm. </summary>
+        /// <param name="orgId">	   	The org Id. </param>
+        /// <param name="networkId">   	The server networkid. </param>
+        /// <param name="serverFarmId">	The probe id. </param>
+        /// <returns>	An URI. </returns>
         public static Uri AddVipProbeToServerFarm(Guid orgId, string networkId, string serverFarmId)
         {
 			return new Uri(string.Format(MCP1_0_PREFIX + "{0}/network/{1}/serverFarm/{2}/addProbe", orgId, networkId, serverFarmId), 
 				UriKind.Relative);
         }
 
-          /// <summary>
-        /// The relative URI for the CaaS API action that remove Probe to server farm
-        /// </summary>
-		/// <param name="orgId">
-		/// The org id
-		/// </param>
-		/// <param name="networkId">
-		/// The network id
-		/// </param>
-		/// <param name="serverFarmId">
-		/// The probe id
-		/// </param>
-		/// <returns>
-		/// Uri
-		/// </returns>
+        /// <summary>	Removes the vip probe from server farm. </summary>
+        /// <param name="orgId">	   	The org Id. </param>
+        /// <param name="networkId">   	The server networkid. </param>
+        /// <param name="serverFarmId">	The probe id. </param>
+        /// <returns>	An URI. </returns>
         public static Uri RemoveVipProbeFromServerFarm(Guid orgId, string networkId, string serverFarmId)
         {
 			return new Uri(string.Format(MCP1_0_PREFIX + "/{0}/network/{1}/serverFarm/{2}/removeProbe", orgId, networkId, serverFarmId), 
 				UriKind.Relative);
         }
 
-
-        /// <summary>
-        /// The relative URI for the CaaS API action that list persistence profile
-        /// </summary>
-		/// <param name="orgId">
-		/// The org id
-		/// </param>
-		/// <param name="networkId">
-		/// The network id
-		/// </param>
-		/// <returns>
-		/// Uri
-		/// </returns>
+        /// <summary>	Creates or get vip persistence profile. </summary>
+        /// <param name="orgId">		The org Id. </param>
+        /// <param name="networkId">	The server networkid. </param>
+        /// <returns>	The new or get vip persistence profile. </returns>
         public static Uri CreateOrGetVipPersistenceProfile(Guid orgId, string networkId)
         {
 			return new Uri(string.Format(MCP1_0_PREFIX + "{0}/network/{1}/persistenceProfile", orgId, networkId), UriKind.Relative);
         }
 
-        /// <summary>
-        /// The relative URI for the CaaS API action that deletes VIP server farms
-        /// </summary>
-		/// <param name="orgId">
-		/// The org id
-		/// </param>
-		/// <param name="networkId">
-		/// The network id
-		/// </param>
-		/// <param name="persProfileId">
-		/// The probe id
-		/// </param>
-		/// <returns>
-		/// Uri
-		/// </returns>
+        /// <summary>	Deletes the vip persistence profile. </summary>
+        /// <param name="orgId">			The org Id. </param>
+        /// <param name="networkId">		The server networkid. </param>
+        /// <param name="persProfileId">	Identifier for the pers profile. </param>
+        /// <returns>	An URI. </returns>
         public static Uri DeleteVipPersistenceProfile(Guid orgId, string networkId, string persProfileId)
         {
 			return new Uri(string.Format(MCP1_0_PREFIX + "{0}/network/{1}/persistenceProfile/{2}?delete", orgId, networkId, persProfileId), 
 				UriKind.Relative);
         }
 
-
-        /// <summary>
-        /// The relative URI for the CaaS API action that list VIPs
-        /// </summary>
-		/// <param name="orgId">
-		/// The org id
-		/// </param>
-		/// <param name="networkId">
-		/// The network id
-		/// </param>
-		/// <returns>
-		/// Uri
-		/// </returns>
+        /// <summary>	Creates or get vip. </summary>
+        /// <param name="orgId">		The org Id. </param>
+        /// <param name="networkId">	The server networkid. </param>
+        /// <returns>	The new or get vip. </returns>
         public static Uri CreateOrGetVip(Guid orgId, string networkId)
         {
 			return new Uri(string.Format(MCP1_0_PREFIX + "{0}/network/{1}/vip", orgId, networkId), UriKind.Relative);
         }
 
-
-        /// <summary>
-        /// The relative URI for the CaaS API action that deletes VIPs 
-        /// </summary>
-		/// <param name="orgId">
-		/// The org id
-		/// </param>
-		/// <param name="networkId">
-		/// The network id
-		/// </param>
-		/// <param name="vipId">
-		/// The vip id
-		/// </param>
-		/// <returns>
-		/// Uri
-		/// </returns>
+        /// <summary>	Deletes the vip. </summary>
+        /// <param name="orgId">		The org Id. </param>
+        /// <param name="networkId">	The server networkid. </param>
+        /// <param name="vipId">		The vip id. </param>
+        /// <returns>	An URI. </returns>
         public static Uri DeleteVip(Guid orgId, string networkId, string vipId)
         {
 			return new Uri(string.Format(MCP1_0_PREFIX + "{0}/network/{1}/vip/{2}?delete", orgId, networkId, vipId), UriKind.Relative);
         }
 
-        /// <summary>
-        /// The relative URI for the CaaS API action that modifies VIPs 
-        /// </summary>
-		/// <param name="orgId">
-		/// The org id
-		/// </param>
-		/// <param name="networkId">
-		/// The network id
-		/// </param>
-		/// <param name="vipId">
-		/// The vip id
-		/// </param>
-		/// <returns>
-		/// Uri
-		/// </returns>
+        /// <summary>	Modify vip. </summary>
+        /// <param name="orgId">		The org Id. </param>
+        /// <param name="networkId">	The server networkid. </param>
+        /// <param name="vipId">		The vip id. </param>
+        /// <returns>	An URI. </returns>
         public static Uri ModifyVip(Guid orgId, string networkId, string vipId)
         {
 			return new Uri(string.Format(MCP1_0_PREFIX + "{0}/network/{1}/vip/{2}", orgId, networkId, vipId), UriKind.Relative);
