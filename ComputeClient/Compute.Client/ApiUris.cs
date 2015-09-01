@@ -347,10 +347,10 @@ namespace DD.CBU.Compute.Api.Client
 				uri = string.Format(MCP1_0_PREFIX + "/{0}/imageWithDiskSpeed", orgId);
             }
 
-// build que query string paramenters
+            // build que query string paramenters
             var querystringcollection = new Dictionary<string, string>();
             if (!string.IsNullOrEmpty(name))
-                querystringcollection.Add("name", name);
+                querystringcollection.Add(name.Contains("*") ? "name.LIKE" : "name", name);
             if (!string.IsNullOrEmpty(imageId))
                 querystringcollection.Add("id", imageId);
             if (!string.IsNullOrEmpty(location))
