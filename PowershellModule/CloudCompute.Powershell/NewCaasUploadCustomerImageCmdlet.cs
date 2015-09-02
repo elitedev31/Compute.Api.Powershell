@@ -30,7 +30,7 @@ namespace DD.CBU.Compute.Powershell
 		/// <summary>
 		///     The temporary folder.
 		/// </summary>
-		private const string temporaryFolder = "%TEMP%\\OVAExtraction";
+		private const string temporaryFolder = "OVA-Extraction";
 
 		/// <summary>
 		///     Gets or sets the ovf.
@@ -138,7 +138,7 @@ namespace DD.CBU.Compute.Powershell
 		{
 			Connection.FtpClient.Connect();
 
-// TODO : Support for building OVF on the fly.
+			// TODO : Support for building OVF on the fly.
 			UploadFile(Connection.FtpClient, Ovf, 1);
 
 

@@ -1,13 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="GetCaasCustomerImagesCmdlet.cs" company="">
-//   
-// </copyright>
-// <summary>
-//   The get CaaS Customer Images cmdlet.
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Management.Automation;
@@ -21,7 +12,7 @@ namespace DD.CBU.Compute.Powershell
 	///     The get CaaS Customer Images cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasCustomerImages")]
-	[OutputType(typeof (ImagesWithDiskSpeedImage[]))]
+	[OutputType(typeof(ImagesWithDiskSpeedImage[]))]
 	public class GetCaasCustomerImagesCmdlet : PsCmdletCaasBase
 	{
 		/// <summary>
@@ -84,9 +75,10 @@ namespace DD.CBU.Compute.Powershell
 						case 0:
 							WriteError(
 								new ErrorRecord(
-									new ItemNotFoundException(
-										"This command cannot find a matching object with the given parameters."
-										), "ItemNotFoundException", ErrorCategory.ObjectNotFound, resultlist));
+									new ItemNotFoundException("This command cannot find a matching object with the given parameters."), 
+									"ItemNotFoundException", 
+									ErrorCategory.ObjectNotFound, 
+									resultlist));
 							break;
 						case 1:
 							WriteObject(resultlist.First());
@@ -108,7 +100,6 @@ namespace DD.CBU.Compute.Powershell
 						}
 						else
 						{
-// if (e is HttpRequestException)
 							ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, Connection));
 						}
 

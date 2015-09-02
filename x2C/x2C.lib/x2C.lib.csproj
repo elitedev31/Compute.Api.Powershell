@@ -39,12 +39,6 @@
     <AssemblyOriginatorKeyFile>CaaS_PS.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DD.CBU.Compute.Api.Client">
-      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.0.0\lib\net45\DD.CBU.Compute.Api.Client.dll</HintPath>
-    </Reference>
-    <Reference Include="DD.CBU.Compute.Api.Contracts">
-      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.0.0\lib\net45\DD.CBU.Compute.Api.Contracts.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -87,6 +81,16 @@
   <ItemGroup>
     <None Include="CaaS_PS.snk" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\ComputeClient\Compute.Client\Compute.Client.csproj">
+      <Project>{c1f76663-78b7-4c29-b73b-206986567562}</Project>
+      <Name>Compute.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ComputeClient\Compute.Contracts\Compute.Contracts.csproj">
+      <Project>{4acbf469-17a8-407b-8c84-0fa112d5cfcf}</Project>
+      <Name>Compute.Contracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,5 +1,6 @@
 ﻿using System;
 using DD.CBU.Compute.Api.Contracts.Server;
+using ServerType = DD.CBU.Compute.Api.Contracts.Network20.ServerType;
 
 namespace DD.CBU.Compute.Api.Client.Backup
 {
@@ -354,6 +355,18 @@ namespace DD.CBU.Compute.Api.Client.Backup
 							asAtDateSpecified = true,
 							targetServerId = targetServerId
 						});
+		}
+
+		/// <summary>	Out of place restore. </summary>
+		/// <param name="serverId">	   	The server id. </param>
+		/// <param name="backupClient">	The backup client. </param>
+		/// <param name="asAtDate">	   	The date and time to recover to. </param>
+		/// <param name="targetServer">	Target server. </param>
+		/// <returns>	A Status message from the API; </returns>
+		/// <seealso cref="M:DD.CBU.Compute.Api.Client.Interfaces.Backup.IBackupAccessor.OutOfPlaceRestore(string,BackupClientDetailsType,DateTime,ServerType)"/>
+		public async Task<Status> OutOfPlaceRestore(string serverId, BackupClientDetailsType backupClient, DateTime asAtDate, ServerType targetServer)
+		{
+			return await this.OutOfPlaceRestore(serverId, backupClient.id, asAtDate, targetServer.id);
 		}
 	}
 }

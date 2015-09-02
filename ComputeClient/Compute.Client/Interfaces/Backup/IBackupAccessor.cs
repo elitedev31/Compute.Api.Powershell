@@ -1,13 +1,14 @@
 ﻿using System;
 using DD.CBU.Compute.Api.Contracts.Server;
+using ServerType = DD.CBU.Compute.Api.Contracts.Network20.ServerType;
 
 namespace DD.CBU.Compute.Api.Client.Interfaces.Backup
 {
 	using System.Collections.Generic;
 	using System.Threading.Tasks;
 
-	using DD.CBU.Compute.Api.Contracts.Backup;
-	using DD.CBU.Compute.Api.Contracts.General;
+	using Contracts.Backup;
+	using Contracts.General;
 
 	/// <summary>
 	/// The BackupAccessor interface.
@@ -213,7 +214,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces.Backup
 		/// <param name="serverId">	   	The server id. </param>
 		/// <param name="backupClient">	The backup client. </param>
 		/// <param name="asAtDate">	   	The date and time to recover to. </param>
-		/// <param name="targetServer">	Target client. </param>
+		/// <param name="targetServer">	Target server. </param>
 		/// <returns>	A Status message from the API; </returns>
 		Task<Status> OutOfPlaceRestore(string serverId, BackupClientDetailsType backupClient, DateTime asAtDate, ServerWithBackupType targetServer);
 
@@ -224,5 +225,13 @@ namespace DD.CBU.Compute.Api.Client.Interfaces.Backup
 		/// <param name="targetServerId">	Identifier for the target client. </param>
 		/// <returns>	A Status message from the API; </returns>
 		Task<Status> OutOfPlaceRestore(string serverId, string backupClientId, DateTime asAtDate, string targetServerId);
+
+		/// <summary>	Out of place restore. </summary>
+		/// <param name="serverId">	   	The server id. </param>
+		/// <param name="backupClient">	The backup client. </param>
+		/// <param name="asAtDate">	   	The date and time to recover to. </param>
+		/// <param name="targetServer">	Target server. </param>
+		/// <returns>	A Status message from the API; </returns>
+		Task<Status> OutOfPlaceRestore(string serverId, BackupClientDetailsType backupClient, DateTime asAtDate, ServerType targetServer);
 	}
 }

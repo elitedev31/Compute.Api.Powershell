@@ -114,6 +114,7 @@
     <Compile Include="GetCaasConnectionCmdlet.cs" />
     <Compile Include="GetCaasCustomerImageExportHistoryCmdlet.cs" />
     <Compile Include="GetCaasCustomerImageExportsCmdlet.cs" />
+    <Compile Include="GetCaasExportedImageCmdlet.cs" />
     <Compile Include="GetCaasServersCmdlet.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Mcp20\DeployCaasNetworkDomainCmdlet.cs" />
@@ -123,6 +124,7 @@
     <Compile Include="Mcp20\NetworkDomainType.cs" />
     <Compile Include="Mcp20\DeployCaasServerOnNetworkDomainCmdlet.cs" />
     <Compile Include="Mcp20\NewCaasServerNic.cs" />
+    <Compile Include="NewCaasBackupRestoreJob.cs" />
     <Compile Include="NewCaasExportCustomerImageCmdlet.cs" />
     <Compile Include="NewCaasUploadCustomerImageCmdlet.cs" />
     <Compile Include="TestCaasCompatibilityCmdlet.cs" />
