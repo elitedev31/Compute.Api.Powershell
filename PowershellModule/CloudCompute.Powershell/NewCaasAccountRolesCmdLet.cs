@@ -17,7 +17,7 @@ namespace DD.CBU.Compute.Powershell
 	///     The new caas account roles cmd let.
 	/// </summary>
 	[Cmdlet(VerbsCommon.New, "CaasAccountRoles")]
-	[OutputType(typeof (Role[]))]
+	[OutputType(typeof(Role[]))]
 	public class NewCaasAccountRolesCmdLet : PsCmdletCaasBase
 	{
 		/// <summary>
@@ -85,13 +85,13 @@ namespace DD.CBU.Compute.Powershell
 			if (Server)
 				roles.Add(new Role(RoleType.Server));
 			if (CreateImage)
-				roles.Add(new Role(RoleType.Create_Image));
+				roles.Add(new Role(RoleType.CreateImage));
 			if (Storage)
 				roles.Add(new Role(RoleType.Storage));
 			if (Reports)
 				roles.Add(new Role(RoleType.Reports));
 			if (ReadOnly)
-				roles.Add(new Role(RoleType.Read_Only));
+				roles.Add(new Role(RoleType.ReadOnly));
 
 			WriteObject(roles.ToArray());
 		}

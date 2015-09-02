@@ -446,6 +446,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 		}
 	}
 
+	/// <content>	A delete network domain type. </content>
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
 	[System.SerializableAttribute()]
 	[System.Diagnostics.DebuggerStepThroughAttribute()]
