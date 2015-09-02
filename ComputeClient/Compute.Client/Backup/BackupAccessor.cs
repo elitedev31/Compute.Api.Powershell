@@ -1,4 +1,7 @@
-﻿namespace DD.CBU.Compute.Api.Client.Backup
+﻿using System;
+using DD.CBU.Compute.Api.Contracts.Server;
+
+namespace DD.CBU.Compute.Api.Client.Backup
 {
 	using System.Collections.Generic;
 	using System.Threading.Tasks;
@@ -290,6 +293,67 @@
 		{
 			return
 				await _apiClient.GetAsync<Status>(ApiUris.CancelBackupJobs(_apiClient.OrganizationId, serverId, backupClient.id));
+		}
+
+		/// <summary>	In place restore. </summary>
+		/// <param name="serverId">	   	The server id. </param>
+		/// <param name="backupClient">	The backup client. </param>
+		/// <param name="asAtDate">	   	The date and time to recover to. </param>
+		/// <returns>	A Status message from the API. </returns>
+		/// <seealso cref="M:DD.CBU.Compute.Api.Client.Interfaces.Backup.IBackupAccessor.InPlaceRestore(BackupClientDetailsType,DateTime)"/>
+		public async Task<Status> InPlaceRestore(string serverId, BackupClientDetailsType backupClient, DateTime asAtDate)
+		{
+			return await InPlaceRestore(serverId, backupClient.id, asAtDate);
+		}
+
+		/// <summary>	In place restore. </summary>
+		/// <param name="serverId">		 	The server id. </param>
+		/// <param name="backupClientId">	Identifier for the backup client. </param>
+		/// <param name="asAtDate">		 	The date and time to recover to. </param>
+		/// <returns>	A Status message from the API. </returns>
+		/// <seealso cref="M:DD.CBU.Compute.Api.Client.Interfaces.Backup.IBackupAccessor.InPlaceRestore(string,string,DateTime)"/>
+		public async Task<Status> InPlaceRestore(string serverId, string backupClientId, DateTime asAtDate)
+		{
+			return
+				await
+					_apiClient.PostAsync<RestoreBackup, Status>(ApiUris.RestoreBackup(_apiClient.OrganizationId, serverId, backupClientId),
+						new RestoreBackup
+						{
+							asAtDate = asAtDate,
+							asAtDateSpecified = true
+						});
+		}
+
+		/// <summary>	Out of place restore. </summary>
+		/// <param name="serverId">	   	The server id. </param>
+		/// <param name="backupClient">	The backup client. </param>
+		/// <param name="asAtDate">	   	The date and time to recover to. </param>
+		/// <param name="targetServer">	Target client. </param>
+		/// <returns>	A Status message from the API; </returns>
+		/// <seealso cref="M:DD.CBU.Compute.Api.Client.Interfaces.Backup.IBackupAccessor.OutOfPlaceRestore(string,BackupClientDetailsType,DateTime,BackupClientDetailsType)"/>
+		public async Task<Status> OutOfPlaceRestore(string serverId, BackupClientDetailsType backupClient, DateTime asAtDate, ServerWithBackupType targetServer)
+		{
+			return await this.OutOfPlaceRestore(serverId, backupClient.id, asAtDate, targetServer.id);
+		}
+
+		/// <summary>	Out of place restore. </summary>
+		/// <param name="serverId">		 	The server id. </param>
+		/// <param name="backupClientId">	Identifier for the backup client. </param>
+		/// <param name="asAtDate">		 	The date and time to recover to. </param>
+		/// <param name="targetServerId">	Identifier for the target client. </param>
+		/// <returns>	A Status message from the API; </returns>
+		/// <seealso cref="M:DD.CBU.Compute.Api.Client.Interfaces.Backup.IBackupAccessor.OutOfPlaceRestore(string,string,DateTime,string)"/>
+		public async Task<Status> OutOfPlaceRestore(string serverId, string backupClientId, DateTime asAtDate, string targetServerId)
+		{
+			return
+				await
+					_apiClient.PostAsync<RestoreBackup, Status>(ApiUris.RestoreBackup(_apiClient.OrganizationId, serverId, backupClientId),
+						new RestoreBackup
+						{
+							asAtDate = asAtDate,
+							asAtDateSpecified = true,
+							targetServerId = targetServerId
+						});
 		}
 	}
 }

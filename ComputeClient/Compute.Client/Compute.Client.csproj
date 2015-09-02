@@ -144,6 +144,7 @@
     <Compile Include="Server\ServerAccessor.cs" />
     <Compile Include="Server\ServerImagesAccessor.cs" />
     <Compile Include="Server\ServerManagementLegacyAccessor.cs" />
+    <Compile Include="StatusExtensions.cs" />
     <Compile Include="Utilities\PageableRequestExtensions.cs" />
     <Compile Include="Utilities\FilterableRequestExtensions.cs" />
     <Compile Include="WebApi\ComputeApiClient.cs">

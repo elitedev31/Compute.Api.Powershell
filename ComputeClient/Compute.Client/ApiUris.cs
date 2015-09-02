@@ -1335,6 +1335,18 @@ namespace DD.CBU.Compute.Api.Client
                 UriKind.Relative);
         }
 
+		/// <summary>	Restore backup. </summary>
+		/// <param name="orgId">		 	The org Id. </param>
+		/// <param name="serverId">		 	The server Id. </param>
+		/// <param name="backupClientId">	The backup client id restore. </param>
+		/// <returns>	An URI. </returns>
+		public static Uri RestoreBackup(Guid orgId, string serverId, string backupClientId)
+		{
+			return new Uri(
+				string.Format(MCP1_0_PREFIX + "{0}/server/{1}/backup/client/{2}/restore", orgId, serverId, backupClientId),
+				UriKind.Relative);
+		}
+
         /// <summary>
         /// Modifies the settings of an existing Backup Client for a deployed Server.
 		///     Requires the Organization ID, the Server ID for the server and that the Server already has the Backup service

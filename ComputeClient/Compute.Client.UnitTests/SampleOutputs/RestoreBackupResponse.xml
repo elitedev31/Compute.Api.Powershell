@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Status xmlns="http://oec.api.opsource.net/schemas/general">
+<operation>Restore File System Backup</operation>
+<result>SUCCESS</result>
+<resultDetail>Restore File System Backup initiated</resultDetail>
+<resultCode>REASON_0</resultCode>
+<additionalInformation name="backupClient.restoreJobId"><value>2f357232-
+bc95-4508-a491-d75b5682e925</value></additionalInformation>
+</Status>
