@@ -73,6 +73,14 @@
     <DocumentationFile>bin\Release\DD.CBU.Compute.Powershell.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DD.CBU.Compute.Api.Client, Version=3.0.3.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.0.3.0-develop\lib\net45\DD.CBU.Compute.Api.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="DD.CBU.Compute.Api.Contracts, Version=3.0.3.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.0.3.0-develop\lib\net45\DD.CBU.Compute.Api.Contracts.dll</HintPath>
+    </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
@@ -93,6 +101,14 @@
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -235,14 +251,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ComputeClient\Compute.Client\Compute.Client.csproj">
-      <Project>{c1f76663-78b7-4c29-b73b-206986567562}</Project>
-      <Name>Compute.Client</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\ComputeClient\Compute.Contracts\Compute.Contracts.csproj">
-      <Project>{4acbf469-17a8-407b-8c84-0fa112d5cfcf}</Project>
-      <Name>Compute.Contracts</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\x2C\x2C.lib\x2C.lib.csproj">
       <Project>{CF20DB42-786E-4F4C-9AFB-673990D05FFB}</Project>
       <Name>x2C.lib</Name>

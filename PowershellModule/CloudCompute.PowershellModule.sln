@@ -15,10 +15,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{5F5803
 		SolutionAssemblyInfo.cs = SolutionAssemblyInfo.cs
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Compute.Client", "..\ComputeClient\Compute.Client\Compute.Client.csproj", "{C1F76663-78B7-4C29-B73B-206986567562}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Compute.Contracts", "..\ComputeClient\Compute.Contracts\Compute.Contracts.csproj", "{4ACBF469-17A8-407B-8C84-0FA112D5CFCF}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "x2C.lib", "..\x2C\x2C.lib\x2C.lib.csproj", "{CF20DB42-786E-4F4C-9AFB-673990D05FFB}"
 EndProject
 Global
@@ -31,14 +27,6 @@ Global
 		{311D58DB-8DC6-45D7-BA45-566AE443E985}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{311D58DB-8DC6-45D7-BA45-566AE443E985}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{311D58DB-8DC6-45D7-BA45-566AE443E985}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C1F76663-78B7-4C29-B73B-206986567562}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C1F76663-78B7-4C29-B73B-206986567562}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C1F76663-78B7-4C29-B73B-206986567562}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C1F76663-78B7-4C29-B73B-206986567562}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4ACBF469-17A8-407B-8C84-0FA112D5CFCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4ACBF469-17A8-407B-8C84-0FA112D5CFCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4ACBF469-17A8-407B-8C84-0FA112D5CFCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4ACBF469-17A8-407B-8C84-0FA112D5CFCF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CF20DB42-786E-4F4C-9AFB-673990D05FFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CF20DB42-786E-4F4C-9AFB-673990D05FFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF20DB42-786E-4F4C-9AFB-673990D05FFB}.Release|Any CPU.ActiveCfg = Release|Any CPU

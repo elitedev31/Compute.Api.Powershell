@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>DD.CBU.Compute.Api.Client</id>
-    <version>3.0.3.0-develop</version>
+    <version>3.0.4.0-develop</version>
     <title>Dimension Data Compute Client API</title>
     <authors>Dimension Data</authors>
     <projectUrl>https://github.com/DimensionDataCBUSydney/DimensionData.ComputeClient</projectUrl>
@@ -15,7 +15,7 @@
     <dependencies>
       <group targetFramework=".NETFramework4.5">
         <dependency id="Newtonsoft.Json" version="7.0.1" />
-        <dependency id="Microsoft.AspNet.WebApi" version="5.2.3" />
+        <dependency id="Microsoft.AspNet.WebApi.Client" version="5.2.3" />
       </group>
     </dependencies>
   </metadata>
