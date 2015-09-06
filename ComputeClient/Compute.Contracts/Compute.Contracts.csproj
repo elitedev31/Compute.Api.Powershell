@@ -192,6 +192,7 @@
     <Compile Include="Requests\Attributes\FilterParameterAttribute.cs" />
     <Compile Include="Requests\IFilterableRequest.cs" />
     <Compile Include="Requests\IPageableRequest.cs" />
+    <Compile Include="Requests\Network20\NatRuleListOptions.cs" />
     <Compile Include="Requests\Network20\NetworkDomainListOptions.cs" />
     <Compile Include="Requests\Network20\VlanListOptions.cs" />
     <Compile Include="Requests\PageableRequest.cs" />
