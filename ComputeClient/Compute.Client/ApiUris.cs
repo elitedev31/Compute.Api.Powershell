@@ -1734,12 +1734,13 @@ namespace DD.CBU.Compute.Api.Client
 			return new Uri(string.Format(MCP2_0_PREFIX + "{0}/network/addPublicIpBlock", orgId), UriKind.Relative);
 	    }
 
-	    /// <summary>	Gets public IP blocks. </summary>
-	    /// <param name="orgId">	The org Id. </param>
-	    /// <returns>	The public IP blocks. </returns>
-	    public static Uri GetPublicIpBlocks(Guid orgId)
+        /// <summary>	Gets public IP blocks. </summary>
+        /// <param name="orgId">	The org Id. </param>
+        /// /// <param name="networkDomainId">	The network Domain Id. </param>
+        /// <returns>	The public IP blocks. </returns>
+        public static Uri GetPublicIpBlocks(Guid orgId, string networkDomainId)
 	    {
-			return new Uri(string.Format(MCP2_0_PREFIX + "{0}/network/publicIpBlock", orgId), UriKind.Relative);
+			return new Uri(string.Format(MCP2_0_PREFIX + "{0}/network/publicIpBlock?networkDomainId={1}", orgId, networkDomainId), UriKind.Relative);
 	    }
 
 	    /// <summary>	Gets public IP block. </summary>
