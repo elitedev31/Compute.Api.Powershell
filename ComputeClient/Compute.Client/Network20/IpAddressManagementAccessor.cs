@@ -51,7 +51,7 @@
 		{
 			var response =
 				await
-					_apiClient.GetAsync<publicIpBlocks>(ApiUris.GetPublicIpBlocks(_apiClient.OrganizationId));
+					_apiClient.GetAsync<publicIpBlocks>(ApiUris.GetPublicIpBlocks(_apiClient.OrganizationId, networkDomainId));
 			return response.publicIpBlock;
 		}
 

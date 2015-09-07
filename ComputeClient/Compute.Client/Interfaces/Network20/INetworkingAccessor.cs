@@ -11,5 +11,8 @@
 
 		/// <summary>	IP address management. </summary>
 		IIpamAccessor IpAddressManagement { get; }
-	}
+
+        /// <summary>	NAT Rule management. </summary>
+		INatAccessor NatAccessor { get; }
+    }
 }

@@ -1734,12 +1734,13 @@ namespace DD.CBU.Compute.Api.Client
 			return new Uri(string.Format(MCP2_0_PREFIX + "{0}/network/addPublicIpBlock", orgId), UriKind.Relative);
 	    }
 
-	    /// <summary>	Gets public IP blocks. </summary>
-	    /// <param name="orgId">	The org Id. </param>
-	    /// <returns>	The public IP blocks. </returns>
-	    public static Uri GetPublicIpBlocks(Guid orgId)
+        /// <summary>	Gets public IP blocks. </summary>
+        /// <param name="orgId">	The org Id. </param>
+        /// /// <param name="networkDomainId">	The network Domain Id. </param>
+        /// <returns>	The public IP blocks. </returns>
+        public static Uri GetPublicIpBlocks(Guid orgId, string networkDomainId)
 	    {
-			return new Uri(string.Format(MCP2_0_PREFIX + "{0}/network/publicIpBlock", orgId), UriKind.Relative);
+			return new Uri(string.Format(MCP2_0_PREFIX + "{0}/network/publicIpBlock?networkDomainId={1}", orgId, networkDomainId), UriKind.Relative);
 	    }
 
 	    /// <summary>	Gets public IP block. </summary>
@@ -1838,5 +1839,66 @@ namespace DD.CBU.Compute.Api.Client
 		{
 			return new Uri(string.Format(MCP2_0_PREFIX + "{0}/server/updateVmwareTools", orgId), UriKind.Relative);
 		}
+        /// <summary>
+        /// Gets all the NAT rules for a specified network.
+        /// </summary>
+		/// <param name="orgId">
+		/// The organization id.
+		/// </param>
+		/// <param name="networkDomainId">
+		/// The network id.
+		/// </param>
+		/// <returns>
+		/// Returns the relative URI of the REST request for getting the NAT rules
+		/// </returns>
+        public static Uri GetDomainNatRules(Guid orgId, string networkDomainId)
+        {
+            return new Uri(string.Format(MCP2_0_PREFIX + "{0}/network/natRule?networkDomainId={1}", orgId, networkDomainId), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// Deletes a NAT Rule. 
+        /// </summary>
+        /// <param name="orgId">
+        /// The NAT Rule.
+        /// </param>
+        /// <param name="natRuleId">
+        /// The NAT Rule id to be deleted.
+        /// </param>
+        /// <returns>
+        /// Returns the relative URI of the REST request for getting the NAT rule.
+        /// </returns>
+        public static Uri GetNatRule(Guid orgId, string natRuleId)
+        {
+            return new Uri(string.Format(MCP2_0_PREFIX + "{0}/network/natRule/{1}", orgId, natRuleId), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// Creates a NAT Rule on a Network Domain in an MCP 2.0 data center location.
+        /// </summary>
+        /// <param name="orgId">
+        /// The NAT Rule.
+        /// </param>
+        /// <returns>
+        /// Returns the relative URI of the REST request for creating the NAT rule.
+        /// </returns>
+        public static Uri CreateNatRule(Guid orgId)
+        {
+            return new Uri(string.Format(MCP2_0_PREFIX + "{0}/network/natRule/createNatRule", orgId), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// Deletes a NAT Rule. 
+        /// </summary>
+        /// <param name="orgId">
+        /// The NAT Rule.
+        /// </param>
+        /// <returns>
+        /// Returns the relative URI of the REST request for deleting the NAT rule.
+        /// </returns>
+        public static Uri DeleteNatRule(Guid orgId)
+        {
+            return new Uri(string.Format(MCP2_0_PREFIX + "{0}/network/natRule/deleteNatRule", orgId), UriKind.Relative);
+        }
     }
 }
