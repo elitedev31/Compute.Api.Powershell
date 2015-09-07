@@ -19,6 +19,7 @@
 			NetworkDomain = new NetworkDomainAccessor(apiClient);
 			Vlan = new VlanAccessor(apiClient);
 			IpAddressManagement = new IpAddressManagementAccessor(apiClient);
+            NatAccessor = new NatAccessor(apiClient);
 		}
 
 		/// <summary> Gets the network domain. </summary>
@@ -33,6 +34,11 @@
 		/// <summary> IP address management. </summary>
 		/// <value>	The IP address management. </value>
 		/// <seealso cref="P:DD.CBU.Compute.Api.Client.Interfaces.INetworking.IpAddressManagement"/>
-		public IIpamAccessor IpAddressManagement { get; private set; }			
+		public IIpamAccessor IpAddressManagement { get; private set; }
+
+        /// <summary>
+        /// Gets the NAT Rule Accessor.
+        /// </summary>
+        public INatAccessor NatAccessor { get; }
 	}
 }
