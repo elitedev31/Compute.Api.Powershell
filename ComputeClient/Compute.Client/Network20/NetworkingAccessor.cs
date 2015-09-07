@@ -39,6 +39,6 @@
         /// <summary>
         /// Gets the NAT Rule Accessor.
         /// </summary>
-        public INatAccessor NatAccessor { get; }
+        public INatAccessor NatAccessor { get; private set; }
 	}
 }
