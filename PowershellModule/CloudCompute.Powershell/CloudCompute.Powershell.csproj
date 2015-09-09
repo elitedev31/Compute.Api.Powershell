@@ -75,11 +75,11 @@
   <ItemGroup>
     <Reference Include="DD.CBU.Compute.Api.Client, Version=3.0.6.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.0.6.0-develop\lib\net45\DD.CBU.Compute.Api.Client.dll</HintPath>
+      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.0.7.0-develop\lib\net45\DD.CBU.Compute.Api.Client.dll</HintPath>
     </Reference>
     <Reference Include="DD.CBU.Compute.Api.Contracts, Version=3.0.6.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.0.6.0-develop\lib\net45\DD.CBU.Compute.Api.Contracts.dll</HintPath>
+      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.0.7.0-develop\lib\net45\DD.CBU.Compute.Api.Contracts.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
