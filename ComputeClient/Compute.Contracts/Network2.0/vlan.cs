@@ -314,8 +314,10 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 
 		private string privateIpv4BaseAddressField;
 
-		/// <remarks/>
-		public string networkDomainId
+        private int privateIpv4PrefixSizeField;
+
+        /// <remarks/>
+        public string networkDomainId
 		{
 			get { return this.networkDomainIdField; }
 			set { this.networkDomainIdField = value; }
@@ -335,16 +337,23 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 			set { this.descriptionField = value; }
 		}
 
-		/// <remarks/>
-		public string privateIpv4BaseAddress
-		{
-			get { return this.privateIpv4BaseAddressField; }
-			set { this.privateIpv4BaseAddressField = value; }
-		}
-	}
+        /// <remarks/>
+        public string privateIpv4BaseAddress
+        {
+            get { return this.privateIpv4BaseAddressField; }
+            set { this.privateIpv4BaseAddressField = value; }
+        }
 
-	/// <remarks/>
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+        /// <remarks/>
+        public int privateIpv4PrefixSize
+        {
+            get { return this.privateIpv4PrefixSizeField; }
+            set { this.privateIpv4PrefixSizeField = value; }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
 	[System.SerializableAttribute()]
 	[System.Diagnostics.DebuggerStepThroughAttribute()]
 	[System.ComponentModel.DesignerCategoryAttribute("code")]
