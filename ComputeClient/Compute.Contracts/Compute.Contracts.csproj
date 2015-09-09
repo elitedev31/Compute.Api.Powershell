@@ -198,6 +198,9 @@
     <Compile Include="Requests\PageableRequest.cs" />
     <Compile Include="Requests\Server20\ServerListOptions.cs" />
     <Compile Include="Requests\Server\ServerListOptions.cs" />
+    <Compile Include="Requests\Vip\NodeListOptions.cs" />
+    <Compile Include="Requests\Vip\PoolListOptions.cs" />
+    <Compile Include="Requests\Vip\PoolMemberListOptions.cs" />
     <Compile Include="Server\AntiAffinityRules.cs" />
     <Compile Include="Server\AntiAffinityRuleType.cs" />
     <Compile Include="Server\AntiAffinityRuleTypeServerSummary.cs" />
@@ -270,9 +273,12 @@
     <Compile Include="Vip\NewPersistenceProfile.cs" />
     <Compile Include="Vip\NewProbe.cs" />
     <Compile Include="Vip\NewServerFarmRealServer.cs" />
+    <Compile Include="Vip\Node.cs" />
     <Compile Include="Vip\PersistenceProfileCookieType.cs" />
     <Compile Include="Vip\PersistenceProfileDirection.cs" />
     <Compile Include="Vip\PersistenceProfileType.cs" />
+    <Compile Include="Vip\Pool.cs" />
+    <Compile Include="Vip\PoolMember.cs" />
     <Compile Include="Vip\ProbeStatusCodeRange.cs" />
     <Compile Include="Vip\NewRealServer.cs" />
     <Compile Include="Vip\NewServerFarm.cs" />

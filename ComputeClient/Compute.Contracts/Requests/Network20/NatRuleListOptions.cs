@@ -12,7 +12,7 @@ namespace DD.CBU.Compute.Api.Contracts.Requests.Network20
         /// Identifies an individual NAT Rule.
         /// </summary>
         [FilterParameter("id")]
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
 
         /// <summary>	
         /// Identifies NAT Rules by their state.
@@ -37,7 +37,7 @@ namespace DD.CBU.Compute.Api.Contracts.Requests.Network20
         /// Filtering for List API Functions. 
         /// </summary>
         [FilterParameter("createTime")]
-        public DateTime CreateTime { get; set; }
+        public DateTime? CreateTime { get; set; }
 
         /// <summary>	
         /// Identifies internal IPv4 address addresses.
@@ -55,6 +55,6 @@ namespace DD.CBU.Compute.Api.Contracts.Requests.Network20
         /// Identifies NAT Rule by node id.
         /// </summary>
         [FilterParameter("nodeId")]
-        public Guid NodeId { get; set; }
+        public Guid? NodeId { get; set; }
     }
 }

@@ -85,6 +85,7 @@
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -111,6 +112,7 @@
     <Compile Include="Interfaces\Network20\IIpamAccessor.cs" />
     <Compile Include="Interfaces\Network20\INatAccessor.cs" />
     <Compile Include="Interfaces\Network20\INetworkAddressTranslationAccessor.cs" />
+    <Compile Include="Interfaces\Network20\IVipNodeManagement.cs" />
     <Compile Include="Interfaces\Network\INetworkAccessor.cs" />
     <Compile Include="Interfaces\Network20\INetworkDomainAccessor.cs" />
     <Compile Include="Interfaces\Network20\INetworkDomainVipAccessor.cs" />
@@ -130,7 +132,9 @@
     <Compile Include="Network20\NatAccessor.cs" />
     <Compile Include="Network20\NetworkDomainAccessor.cs" />
     <Compile Include="Network20\NetworkDomainExtensions.cs" />
+    <Compile Include="Network20\NetworkDomainVipAccessor.cs" />
     <Compile Include="Network20\NetworkingAccessor.cs" />
+    <Compile Include="Network20\VipNodeManagement.cs" />
     <Compile Include="Network20\VlanAccessor.cs" />
     <Compile Include="Network20\VlanExtensions.cs" />
     <Compile Include="Network\Network.cs" />

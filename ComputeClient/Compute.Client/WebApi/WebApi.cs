@@ -276,9 +276,11 @@
 					{
 						throw new HttpRequestException(
 							string.Format(
-								"CaaS API returned HTTP status code {0} ({1}) when performing HTTP POST on '{2}'.",
+								"CaaS API returned HTTP status code {0} ({1}) when performing {2} {3} on '{4}'.",
 								(int)response.StatusCode,
 								response.StatusCode,
+                                response.RequestMessage.RequestUri.Scheme,
+                                response.RequestMessage.Method,
 								response.RequestMessage.RequestUri));
 					}
 			}

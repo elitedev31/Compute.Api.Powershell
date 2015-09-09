@@ -14,5 +14,15 @@
 
         /// <summary>	NAT Rule management. </summary>
 		INatAccessor NatAccessor { get; }
+
+        /// <summary>
+        /// Network Domain VIP Accessor.
+        /// </summary>
+        INetworkDomainVipAccessor VipAccessor { get; }
+
+        /// <summary>
+        /// Network Domain VIP Node Management.
+        /// </summary>
+        IVipNodeManagement NodeManagement { get; }
     }
 }

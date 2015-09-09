@@ -70,9 +70,11 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ApiUriTests.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="BaseApiClientTestFixture.cs" />
     <Compile Include="MCP1\BackupTests.cs" />
+    <Compile Include="MCP2\VipNodesTests.cs" />
     <Compile Include="MCP2\NetworkDomainTests.cs" />
     <Compile Include="MCP2\ServerTests.cs" />
     <Compile Include="MCP2\VlanTests.cs" />
@@ -95,6 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="SampleOutputs\CreateNetworkDomainResponse.xml" />
+    <Content Include="SampleOutputs\CreateVipNodeResponse.xml" />
     <Content Include="SampleOutputs\DeleteSubAdministratorAccount.xml" />
     <Content Include="SampleOutputs\DesignatePrimaryAdministratorAccount.xml" />
     <Content Include="SampleOutputs\GetMcp2ServerResponse.xml" />
