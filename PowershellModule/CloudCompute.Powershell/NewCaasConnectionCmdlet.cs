@@ -23,8 +23,8 @@ namespace DD.CBU.Compute.Powershell
 	///     Used to create a new connection to the CaaS API.
 	/// </remarks>
 	[Cmdlet(VerbsCommon.New, "CaasConnection")]
-	[OutputType(typeof (ComputeServiceConnection))]
-	public class NewCaasConnectionCmdlet : PSCmdlet
+	[OutputType(typeof(ComputeServiceConnection))]
+	public class NewCaasConnectionCmdlet : PSCmdletCaasBase
 	{
 		/// <summary>
 		///     The credentials used to connect to the CaaS API.
