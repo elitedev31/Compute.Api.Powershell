@@ -23,7 +23,7 @@ namespace DD.CBU.Compute.Powershell
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasServerAntiAffinityRule")]
 	[OutputType(typeof (AntiAffinityRuleType))]
-	public class GetCaasServerAntiAffinityRuleCmdlet : PsCmdletCaasBase
+	public class GetCaasServerAntiAffinityRuleCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     The network to show the anti affinity rules from

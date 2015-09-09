@@ -20,7 +20,7 @@ namespace DD.CBU.Compute.Powershell
 	///     The set caas vip cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Set, "CaasVip")]
-	public class SetCaasVipCmdlet : PsCmdletCaasBase
+	public class SetCaasVipCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     The network to manage the VIP settings

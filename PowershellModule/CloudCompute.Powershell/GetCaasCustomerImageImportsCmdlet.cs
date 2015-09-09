@@ -21,7 +21,7 @@ namespace DD.CBU.Compute.Powershell
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasCustomerImageImports")]
 	[OutputType(typeof (ServerImageWithStateType[]))]
-	public class GetCaasCustomerImageImportsCmdlet : PsCmdletCaasBase
+	public class GetCaasCustomerImageImportsCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     The process record method.

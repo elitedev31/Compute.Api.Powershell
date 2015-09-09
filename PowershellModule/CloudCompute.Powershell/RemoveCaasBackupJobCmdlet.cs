@@ -21,7 +21,7 @@ namespace DD.CBU.Compute.Powershell
 	///     The Remove-Backup now job cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Remove, "CaasBackupJob", SupportsShouldProcess = true)]
-	public class RemoveCaasBackupJobCmdlet : PsCmdletCaasBase
+	public class RemoveCaasBackupJobCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     Gets or sets the server.

@@ -13,7 +13,7 @@ namespace DD.CBU.Compute.Powershell
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasCustomerImages")]
 	[OutputType(typeof(ImagesWithDiskSpeedImage[]))]
-	public class GetCaasCustomerImagesCmdlet : PsCmdletCaasBase
+	public class GetCaasCustomerImagesCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     The network to show the images from

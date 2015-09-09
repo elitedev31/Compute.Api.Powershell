@@ -18,7 +18,7 @@ namespace DD.CBU.Compute.Powershell
 	/// </summary>
 	[Cmdlet(VerbsCommon.New, "CaasAccountRoles")]
 	[OutputType(typeof(Role[]))]
-	public class NewCaasAccountRolesCmdLet : PsCmdletCaasBase
+	public class NewCaasAccountRolesCmdLet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     Gets or sets a value indicating whether network.

@@ -18,7 +18,7 @@ namespace DD.CBU.Compute.Powershell
 	///     The remove account cmdlet
 	/// </summary>
 	[Cmdlet(VerbsCommon.Remove, "CaasAccount", SupportsShouldProcess = true)]
-	public class RemoveCaasAccountCmdlet : PsCmdletCaasBase
+	public class RemoveCaasAccountCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     The username to be deleted

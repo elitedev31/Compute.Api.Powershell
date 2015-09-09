@@ -22,7 +22,7 @@ namespace DD.CBU.Compute.Powershell
 	///     Removes a network from a data centre using the network id.
 	/// </remarks>
 	[Cmdlet(VerbsCommon.Remove, "CaasNetwork", SupportsShouldProcess = true)]
-	public class RemoveCaasNetworkCmdlet : PsCmdletCaasBase
+	public class RemoveCaasNetworkCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     Gets or sets the network.

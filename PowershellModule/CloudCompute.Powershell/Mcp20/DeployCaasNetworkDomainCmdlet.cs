@@ -19,7 +19,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 	/// </summary>
 	[Cmdlet(VerbsCommon.New, "CaasNetworkDomain")]
 	[OutputType(typeof (ResponseType))]
-	public class DeployCaasNetworkDomainCmdlet : PsCmdletCaasBase
+	public class DeployCaasNetworkDomainCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     Gets or sets the network domain location.

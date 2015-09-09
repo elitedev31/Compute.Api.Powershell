@@ -21,7 +21,7 @@ namespace DD.CBU.Compute.Powershell
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasMultiGeoRegions")]
 	[OutputType(typeof (Geo[]))]
-	public class GetCaasMultiGeoRegionsCmdlet : PsCmdletCaasBase
+	public class GetCaasMultiGeoRegionsCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     The process record method.

@@ -22,7 +22,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasNetworkDomain")]
 	[OutputType(typeof (NetworkDomainType[]))]
-	public class GetCaasNetworkDomainCmdlet : PsCmdletCaasBase
+	public class GetCaasNetworkDomainCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     Get a CaaS server by ServerId

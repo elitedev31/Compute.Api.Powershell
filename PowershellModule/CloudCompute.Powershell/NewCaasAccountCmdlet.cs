@@ -24,7 +24,7 @@ namespace DD.CBU.Compute.Powershell
 	///     Add new sub administrator account
 	/// </remarks>
 	[Cmdlet(VerbsCommon.New, "CaasAccount")]
-	public class NewCaasAccountCmdlet : PsCmdletCaasBase
+	public class NewCaasAccountCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     Gets or sets the username.

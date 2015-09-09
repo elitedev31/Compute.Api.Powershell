@@ -20,7 +20,7 @@ namespace DD.CBU.Compute.Powershell
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasServerFarmDetails")]
 	[OutputType(typeof (ServerFarmDetails))]
-	public class GetCaasServerFarmDetailsCmdlet : PsCmdletCaasBase
+	public class GetCaasServerFarmDetailsCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     The network to manage the VIP settings

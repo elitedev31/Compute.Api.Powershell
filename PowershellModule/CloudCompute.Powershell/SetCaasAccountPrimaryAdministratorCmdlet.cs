@@ -18,7 +18,7 @@ namespace DD.CBU.Compute.Powershell
 	///     The set caas account primary administrator.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Set, "CaasAccountPrimaryAdministrator")]
-	public class SetCaasAccountPrimaryAdministrator : PsCmdletCaasBase
+	public class SetCaasAccountPrimaryAdministrator : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     The account username to be primary administrator

@@ -20,7 +20,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 	/// </summary>
 	[Cmdlet(VerbsCommon.New, "CaasServerNic")]
 	[OutputType(typeof (ResponseType))]
-	public class NewCaasServerNicCmdlet : PsCmdletCaasBase
+	public class NewCaasServerNicCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     The Virtual Server

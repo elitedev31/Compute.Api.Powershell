@@ -19,7 +19,7 @@ namespace DD.CBU.Compute.Powershell
 	///     The set caas network cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Set, "CaasNetwork")]
-	public class SetCaasNetworkCmdlet : PsCmdletCaasBase
+	public class SetCaasNetworkCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     Gets or sets the network.

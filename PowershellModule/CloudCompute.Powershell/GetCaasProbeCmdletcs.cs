@@ -22,7 +22,7 @@ namespace DD.CBU.Compute.Powershell
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasProbe")]
 	[OutputType(typeof (Probe[]))]
-	public class GetCaasProbeCmdletcs : PsCmdletCaasBase
+	public class GetCaasProbeCmdletcs : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     The network to manage the VIP settings

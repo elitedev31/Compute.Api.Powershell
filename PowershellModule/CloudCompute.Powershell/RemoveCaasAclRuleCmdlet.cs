@@ -19,7 +19,7 @@ namespace DD.CBU.Compute.Powershell
 	///     The Remove ACL Rule cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Remove, "CaasAclRule", SupportsShouldProcess = true)]
-	public class RemoveCaasAclRuleCmdlet : PsCmdletCaasBase
+	public class RemoveCaasAclRuleCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     Gets or sets the network.

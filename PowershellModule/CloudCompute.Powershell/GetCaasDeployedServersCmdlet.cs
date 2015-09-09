@@ -24,7 +24,7 @@ namespace DD.CBU.Compute.Powershell
 	[Cmdlet(VerbsCommon.Get, "CaasDeployedServer")]
 	[OutputType(typeof (ServerWithBackupType[]))]
 	[Obsolete("This command is obselete, use Get-CaasServers, the response of this command will not be accepted by any other commands.")]
-	public class GetCaasDeployedServerCmdlet : PsCmdletCaasBase
+	public class GetCaasDeployedServerCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     Get a CaaS server by name

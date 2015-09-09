@@ -22,7 +22,7 @@ namespace DD.CBU.Compute.Powershell
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasServerFarm")]
 	[OutputType(typeof (ServerFarm[]))]
-	public class GetCaasServerFarmCmdlet : PsCmdletCaasBase
+	public class GetCaasServerFarmCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     The network to manage the VIP settings

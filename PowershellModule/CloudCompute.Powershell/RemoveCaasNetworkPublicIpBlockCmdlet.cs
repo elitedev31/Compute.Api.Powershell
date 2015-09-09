@@ -19,7 +19,7 @@ namespace DD.CBU.Compute.Powershell
 	///     The remove caas network public ip block cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Remove, "CaasNetworkPublicIpBlock", SupportsShouldProcess = true)]
-	public class RemoveCaasNetworkPublicIpBlockCmdlet : PsCmdletCaasBase
+	public class RemoveCaasNetworkPublicIpBlockCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     The network to add the public ip addresses

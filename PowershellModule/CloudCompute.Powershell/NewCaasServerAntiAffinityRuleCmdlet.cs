@@ -23,7 +23,7 @@ namespace DD.CBU.Compute.Powershell
 	/// </summary>
 	[Cmdlet(VerbsCommon.New, "CaasServerAntiAffinityRule")]
 	[OutputType(typeof (AntiAffinityRuleType))]
-	public class NewCaasServerAntiAffinityRuleCmdlet : PsCmdletCaasBase
+	public class NewCaasServerAntiAffinityRuleCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     Gets or sets the server 1.

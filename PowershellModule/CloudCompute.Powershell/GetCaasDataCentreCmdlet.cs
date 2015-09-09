@@ -21,7 +21,7 @@ namespace DD.CBU.Compute.Powershell
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasDataCentre")]
 	[OutputType(typeof (DatacenterWithMaintenanceStatusType[]))]
-	public class GetCaasDataCentreCmdlet : PsCmdletCaasBase
+	public class GetCaasDataCentreCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     The process record method.

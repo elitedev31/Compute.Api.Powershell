@@ -19,7 +19,7 @@ namespace DD.CBU.Compute.Powershell
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasNetworkConfiguration")]
 	[OutputType(typeof (NetworkConfigurationType[]))]
-	public class GetCaasNetworkConfigurationCmdlet : PsCmdletCaasBase
+	public class GetCaasNetworkConfigurationCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     Gets or sets the network.

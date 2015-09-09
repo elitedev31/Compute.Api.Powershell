@@ -20,7 +20,7 @@ namespace DD.CBU.Compute.Powershell
 	///     The remove caas server farm cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Remove, "CaasServerFarm", SupportsShouldProcess = true)]
-	public class RemoveCaasServerFarmCmdlet : PsCmdletCaasBase
+	public class RemoveCaasServerFarmCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     The network to manage the VIP settings

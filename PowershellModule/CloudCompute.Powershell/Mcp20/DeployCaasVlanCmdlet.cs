@@ -20,7 +20,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 	/// </summary>
 	[Cmdlet(VerbsCommon.New, "CaasVlan")]
 	[OutputType(typeof (ResponseType))]
-	public class DeployCaasVlanCmdlet : PsCmdletCaasBase
+	public class DeployCaasVlanCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     Gets or sets the network domain id.

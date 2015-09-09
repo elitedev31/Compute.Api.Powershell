@@ -22,7 +22,7 @@ namespace DD.CBU.Compute.Powershell
 	/// </remarks>
 	[Cmdlet(VerbsCommon.New, "CaasExportCustomerImage")]
 	[OutputType(typeof (ImageExportType))]
-	public class NewCaasExportCustomerImageCmdlet : PsCmdletCaasBase
+	public class NewCaasExportCustomerImageCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     Gets or sets the customer image.

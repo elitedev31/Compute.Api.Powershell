@@ -20,7 +20,7 @@ namespace DD.CBU.Compute.Powershell
 	///     The add caas to server farm cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Add, "CaasToServerFarm")]
-	public class AddCaasToServerFarmCmdlet : PsCmdletCaasBase
+	public class AddCaasToServerFarmCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     The network to manage the VIP settings

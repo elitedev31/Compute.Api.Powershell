@@ -24,7 +24,7 @@ namespace DD.CBU.Compute.Powershell
 	/// </remarks>
 	[Cmdlet(VerbsCommon.New, "CaasImportCustomerImage")]
 	[OutputType(typeof (ServerImageWithStateType))]
-	public class NewCaasImportCustomerImageCmdlet : PsCmdletCaasBase
+	public class NewCaasImportCustomerImageCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     Gets or sets the customer image name.

@@ -19,7 +19,7 @@ namespace DD.CBU.Compute.Powershell
 	///     The set caas network public ip block cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Set, "CaasNetworkPublicIpBlock")]
-	public class SetCaasNetworkPublicIpBlockCmdlet : PsCmdletCaasBase
+	public class SetCaasNetworkPublicIpBlockCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     The network to add the public ip addresses

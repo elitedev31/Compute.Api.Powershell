@@ -21,7 +21,7 @@ namespace DD.CBU.Compute.Powershell
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasOvfPackages")]
 	[OutputType(typeof (OvfPackageType[]))]
-	public class GetCaasOvfPackagesCmdlet : PsCmdletCaasBase
+	public class GetCaasOvfPackagesCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     The process record method.

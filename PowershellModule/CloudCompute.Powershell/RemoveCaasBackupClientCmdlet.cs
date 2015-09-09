@@ -20,7 +20,7 @@ namespace DD.CBU.Compute.Powershell
 	///     The Remove backup client cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Remove, "CaasBackupClient", SupportsShouldProcess = true)]
-	public class RemoveCaasBackupClientCmdlet : PsCmdletCaasBase
+	public class RemoveCaasBackupClientCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     Gets or sets the server.

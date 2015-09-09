@@ -22,7 +22,7 @@ namespace DD.CBU.Compute.Powershell
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasBackupSchedulePolicies")]
 	[OutputType(typeof (BackupSchedulePolicy[]))]
-	public class GetCaasBackupSchedulePoliciesCmdlet : PsCmdletCaasBase
+	public class GetCaasBackupSchedulePoliciesCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     Gets or sets the server.

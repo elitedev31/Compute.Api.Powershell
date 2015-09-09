@@ -19,7 +19,7 @@ namespace DD.CBU.Compute.Powershell
 	///     The remove caas server anti affinity rule cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Remove, "CaasServerAntiAffinityRule", SupportsShouldProcess = true)]
-	public class RemoveCaasServerAntiAffinityRuleCmdlet : PsCmdletCaasBase
+	public class RemoveCaasServerAntiAffinityRuleCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     Gets or sets the rule.

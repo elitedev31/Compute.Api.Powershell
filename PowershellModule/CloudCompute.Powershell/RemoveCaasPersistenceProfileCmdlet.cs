@@ -20,7 +20,7 @@ namespace DD.CBU.Compute.Powershell
 	///     The remove caas persistence profile cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Remove, "CaasPersistenceProfile", SupportsShouldProcess = true)]
-	public class RemoveCaasPersistenceProfileCmdlet : PsCmdletCaasBase
+	public class RemoveCaasPersistenceProfileCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     The network to manage the VIP settings

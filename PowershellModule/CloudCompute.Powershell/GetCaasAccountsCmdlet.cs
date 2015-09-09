@@ -21,7 +21,7 @@ namespace DD.CBU.Compute.Powershell
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasAccounts")]
 	[OutputType(typeof (AccountWithPhoneNumber[]))]
-	public class GetCaasAccountsCmdlet : PsCmdletCaasBase
+	public class GetCaasAccountsCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     Get a CaaS network by name

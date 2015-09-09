@@ -21,7 +21,7 @@ namespace DD.CBU.Compute.Powershell
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasAclRules")]
 	[OutputType(typeof (AclRuleType[]))]
-	public class GetCaasAclRulesCmdlet : PsCmdletCaasBase
+	public class GetCaasAclRulesCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     The network to show the images from

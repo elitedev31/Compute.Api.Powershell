@@ -23,7 +23,7 @@ namespace DD.CBU.Compute.Powershell
 	/// </remarks>
 	[Cmdlet(VerbsCommon.New, "CaasAclRule")]
 	[OutputType(typeof (AclRuleType))]
-	public class NewCaasAclRuleCmdlet : PsCmdletCaasBase
+	public class NewCaasAclRuleCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     Gets or sets the network.

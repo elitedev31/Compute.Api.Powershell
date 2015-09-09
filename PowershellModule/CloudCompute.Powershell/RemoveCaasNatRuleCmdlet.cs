@@ -19,7 +19,7 @@ namespace DD.CBU.Compute.Powershell
 	///     The Remove NAT Rule cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Remove, "CaasNatRule")]
-	public class RemoveCaasNatRuleCmdlet : PsCmdletCaasBase
+	public class RemoveCaasNatRuleCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     Gets or sets the network.

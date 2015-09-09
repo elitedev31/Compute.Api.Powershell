@@ -19,7 +19,7 @@ namespace DD.CBU.Compute.Powershell
 	///     The Remove NAT Rule cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Remove, "CaasCustomerImage", SupportsShouldProcess = true)]
-	public class RemoveCaasCustomerImageCmdlet : PsCmdletCaasBase
+	public class RemoveCaasCustomerImageCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     Gets or sets the server image.

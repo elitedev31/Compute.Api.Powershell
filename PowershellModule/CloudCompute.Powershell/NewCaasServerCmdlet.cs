@@ -22,7 +22,7 @@ namespace DD.CBU.Compute.Powershell
 	/// </summary>
 	[Cmdlet(VerbsCommon.New, "CaasServer")]
 	[OutputType(typeof (ServerWithBackupType))]
-	public class NewCaasServerCmdlet : PsCmdletCaasBase
+	public class NewCaasServerCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     The Server Details that will be used to deploy the VM

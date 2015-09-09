@@ -25,7 +25,7 @@ namespace DD.CBU.Compute.Powershell
 	/// </remarks>
 	[Cmdlet(VerbsCommon.New, "CaasUploadCustomerImage")]
 	[OutputType(typeof (ServerImageWithStateType))]
-	public class NewCaasUploadCustomerImageCmdlet : PsCmdletCaasBase
+	public class NewCaasUploadCustomerImageCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     The temporary folder.

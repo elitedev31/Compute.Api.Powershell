@@ -21,7 +21,7 @@ namespace DD.CBU.Compute.Powershell
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasCustomerImageExportHistory")]
 	[OutputType(typeof (ImageExportRecord[]))]
-	public class GetCaasCustomerImageExportHistoryCmdlet : PsCmdletCaasBase
+	public class GetCaasCustomerImageExportHistoryCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     Gets or sets the records to return.

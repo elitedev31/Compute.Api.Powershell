@@ -20,7 +20,7 @@ namespace DD.CBU.Compute.Powershell
 	///     The set caas server farm cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Set, "CaasServerFarm")]
-	public class SetCaasServerFarmCmdlet : PsCmdletCaasBase
+	public class SetCaasServerFarmCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     The network to manage the VIP settings

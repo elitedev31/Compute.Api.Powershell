@@ -20,7 +20,7 @@ namespace DD.CBU.Compute.Powershell
 	///     The remove caas vip cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Remove, "CaasVip", SupportsShouldProcess = true)]
-	public class RemoveCaasVipCmdlet : PsCmdletCaasBase
+	public class RemoveCaasVipCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     The network to manage the VIP settings

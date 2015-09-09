@@ -23,7 +23,7 @@ namespace DD.CBU.Compute.Powershell
 	/// </summary>
 	[Cmdlet(VerbsCommon.New, "CaasVip")]
 	[OutputType(typeof (Vip))]
-	public class NewCaasVipCmdlet : PsCmdletCaasBase
+	public class NewCaasVipCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     The network to manage the VIP settings

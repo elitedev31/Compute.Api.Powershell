@@ -20,7 +20,7 @@ namespace DD.CBU.Compute.Powershell
 	///     The set caas probe cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Set, "CaasProbe")]
-	public class SetCaasProbeCmdlet : PsCmdletCaasBase
+	public class SetCaasProbeCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     The network to manage the VIP settings

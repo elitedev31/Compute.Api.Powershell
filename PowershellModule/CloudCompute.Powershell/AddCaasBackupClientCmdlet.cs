@@ -23,7 +23,7 @@ namespace DD.CBU.Compute.Powershell
 	/// </summary>
 	[Cmdlet(VerbsCommon.Add, "CaasBackupClient")]
 	[OutputType(typeof (string))]
-	public class AddCaasBackupClientCmdlet : PsCmdletCaasBase
+	public class AddCaasBackupClientCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     Gets or sets the server.

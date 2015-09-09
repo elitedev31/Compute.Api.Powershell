@@ -21,7 +21,7 @@ namespace DD.CBU.Compute.Powershell
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasNetworkPublicIpBlock")]
 	[OutputType(typeof (IpBlockType[]))]
-	public class GetCaasNetworkPublicIpBlocksCmdlet : PsCmdletCaasBase
+	public class GetCaasNetworkPublicIpBlocksCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     The network to list the public ip addresses

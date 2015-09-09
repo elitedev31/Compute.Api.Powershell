@@ -21,7 +21,7 @@ namespace DD.CBU.Compute.Powershell
 	///     The set caas account cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Set, "CaasAccount")]
-	public class SetCaasAccountCmdlet : PsCmdletCaasBase
+	public class SetCaasAccountCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     Gets or sets the username.

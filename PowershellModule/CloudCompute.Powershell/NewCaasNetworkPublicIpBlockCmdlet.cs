@@ -21,7 +21,7 @@ namespace DD.CBU.Compute.Powershell
 	/// </summary>
 	[Cmdlet(VerbsCommon.New, "CaasNetworkPublicIpBlock")]
 	[OutputType(typeof (IpBlockType[]))]
-	public class NewCaasNetworkPublicIpBlockCmdlet : PsCmdletCaasBase
+	public class NewCaasNetworkPublicIpBlockCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     The network to add the public ip addresses

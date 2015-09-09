@@ -23,7 +23,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 	/// </summary>
 	[Cmdlet(VerbsCommon.New, "CaasServerOnNetworkDomain")]
 	[OutputType(typeof (ResponseType))]
-	public class DeployCaasServerOnNetworkDomainCmdlet : PsCmdletCaasBase
+	public class DeployCaasServerOnNetworkDomainCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     The Network Domain deploy the VM

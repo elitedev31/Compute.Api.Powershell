@@ -20,7 +20,7 @@ namespace DD.CBU.Compute.Powershell
 	///     The remove caas probe cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Remove, "CaasProbe", SupportsShouldProcess = true)]
-	public class RemoveCaasProbeCmdlet : PsCmdletCaasBase
+	public class RemoveCaasProbeCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     The network to manage the VIP settings

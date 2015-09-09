@@ -21,7 +21,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasVlan")]
 	[OutputType(typeof (VlanType[]))]
-	public class GetCaasVlanCmdlet : PsCmdletCaasBase
+	public class GetCaasVlanCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     Gets or sets the name.

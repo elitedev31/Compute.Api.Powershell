@@ -12,7 +12,7 @@ namespace DD.CBU.Compute.Powershell
 	[Cmdlet(VerbsCommon.New, "CaasBackupRestoreJob")]
 	[OutputType(typeof(Status))]
 	public class NewCaasBackupRestoreJob
-		: PsCmdletCaasBase
+		: PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     Gets or sets the server.

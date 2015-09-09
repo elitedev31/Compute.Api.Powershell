@@ -16,7 +16,7 @@ namespace DD.CBU.Compute.Powershell
 	///     This base Cmdlet is used for authenticating cmdlets that requires an active CaaS Connection.
 	/// </summary>
 	[OutputType(typeof (ServerType))]
-	public abstract class PsCmdletCaasServerBase : PsCmdletCaasBase
+	public abstract class PsCmdletCaasServerBase : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     Gets or sets the server.

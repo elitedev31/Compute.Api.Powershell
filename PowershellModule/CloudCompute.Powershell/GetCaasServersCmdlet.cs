@@ -23,7 +23,7 @@ namespace DD.CBU.Compute.Powershell
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasServers")]
 	[OutputType(typeof (ServerType[]))]
-	public class GetCaasServersCmdlet : PsCmdletCaasBase
+	public class GetCaasServersCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     Get a CaaS server by name

@@ -22,7 +22,7 @@ namespace DD.CBU.Compute.Powershell
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasOsImages")]
 	[OutputType(typeof (ImagesWithDiskSpeedImage[]))]
-	public class GetCaasOsImagesCmdlet : PsCmdletCaasBase
+	public class GetCaasOsImagesCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     The network to show the images from

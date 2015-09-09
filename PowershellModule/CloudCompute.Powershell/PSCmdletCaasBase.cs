@@ -7,43 +7,34 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System.Management.Automation;
-using System.Security.Authentication;
-
 namespace DD.CBU.Compute.Powershell
 {
+	using System;
+	using System.IO;
+	using System.Management.Automation;
+	using System.Reflection;
+
 	/// <summary>
-	///     This base Cmdlet is used for authenticating cmdlets that requires an active CaaS Connection.
+	///     This base command is used for loading private CaaS dlls.
 	/// </summary>
-	public abstract class PsCmdletCaasBase : PSCmdlet
+	public abstract class PSCmdletCaasBase : PSCmdlet
 	{
-		/// <summary>
-		///     The CaaS connection created by <see cref="NewCaasConnectionCmdlet" />
-		/// </summary>
-		[Parameter(Mandatory = false, ValueFromPipelineByPropertyName = true, 
-			HelpMessage = "The CaaS Connection created by New-CaasConnection")]
-		public ComputeServiceConnection Connection { get; set; }
-
-		/// <summary>
-		///     The begin processing.
-		/// </summary>
-		protected override void BeginProcessing()
+		static PSCmdletCaasBase()
 		{
-			base.BeginProcessing();
+			var currentDomain = AppDomain.CurrentDomain;
+			currentDomain.AssemblyResolve += LoadFromSameFolder;	
+		}
+	
+		private static Assembly LoadFromSameFolder(object sender, ResolveEventArgs args)
+		{
+			string folderPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+			string assemblyPath = Path.Combine(folderPath ?? string.Empty, new AssemblyName(args.Name).Name + ".dll");
 
-			// If CaaS connection is NOT set via parameter, get it from the PS session
-			if (Connection == null)
-			{
-				Connection = SessionState.GetDefaultComputeServiceConnection();
-				if (Connection == null)
-					ThrowTerminatingError(
-						new ErrorRecord(
-							new AuthenticationException(
-								"Cannot find a valid connection. Use New-CaasConnection to create or Set-CaasActiveConnection to set a valid connection"), 
-							"-1", 
-							ErrorCategory.AuthenticationError, 
-							this));
-			}
+			if (File.Exists(assemblyPath) == false)
+				return null;
+
+			Assembly assembly = Assembly.LoadFrom(assemblyPath);
+			return assembly;
 		}
 	}
 }

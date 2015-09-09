@@ -22,7 +22,7 @@ namespace DD.CBU.Compute.Powershell
 	///     Deploys a new network in a specified data centre location.
 	/// </remarks>
 	[Cmdlet(VerbsCommon.New, "CaasNetwork")]
-	public class NewCaasNetworkCmdlet : PsCmdletCaasBase
+	public class NewCaasNetworkCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     Gets or sets the name.

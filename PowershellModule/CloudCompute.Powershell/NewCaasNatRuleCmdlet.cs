@@ -20,7 +20,7 @@ namespace DD.CBU.Compute.Powershell
 	/// </summary>
 	[Cmdlet(VerbsCommon.New, "CaasNatRule")]
 	[OutputType(typeof (NatRuleType))]
-	public class NewCaasNatRuleCmdlet : PsCmdletCaasBase
+	public class NewCaasNatRuleCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     Gets or sets the network.

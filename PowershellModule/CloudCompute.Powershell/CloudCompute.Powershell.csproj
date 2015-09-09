@@ -135,6 +135,7 @@
     <Compile Include="NewCaasBackupRestoreJob.cs" />
     <Compile Include="NewCaasExportCustomerImageCmdlet.cs" />
     <Compile Include="NewCaasUploadCustomerImageCmdlet.cs" />
+    <Compile Include="PSCmdletCaasBase.cs" />
     <Compile Include="TestCaasCompatibilityCmdlet.cs" />
     <Compile Include="WaitCaasServerOperationCmdlet.cs" />
     <Compile Include="RemoveCaasConnectionCmdlet.cs" />
@@ -210,7 +211,7 @@
     <Compile Include="GetCaasBackupClientTypesCmdlet.cs" />
     <Compile Include="SetCaasBackupPlanCmdlet.cs" />
     <Compile Include="SetCaasProvisionBackupCmdlet.cs" />
-    <Compile Include="PSCmdletCaasBase.cs" />
+    <Compile Include="PSCmdletCaasWithConnectionBase.cs" />
     <Compile Include="SessionStateExtensions.cs" />
     <Compile Include="NewCaasServerDetailsCmdlet.cs" />
     <Compile Include="ResizeCaasServerDiskCmdlet.cs" />
