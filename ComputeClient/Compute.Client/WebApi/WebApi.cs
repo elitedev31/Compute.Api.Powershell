@@ -21,7 +21,13 @@
 		/// <summary>
 		/// Media type formatters used to serialise and deserialise data contracts when communicating with the CaaS API.
 		/// </summary>
-		private readonly MediaTypeFormatterCollection _mediaTypeFormatters = new MediaTypeFormatterCollection();
+		readonly MediaTypeFormatterCollection _mediaTypeFormatters =
+			new MediaTypeFormatterCollection(
+				new MediaTypeFormatter[2]
+					{					
+						(MediaTypeFormatter)new XmlMediaTypeFormatter(),
+						(MediaTypeFormatter)new FormUrlEncodedMediaTypeFormatter()
+					});
 
 		/// <summary>
 		/// The <see cref="HttpClient"/> used to communicate with the CaaS API.
