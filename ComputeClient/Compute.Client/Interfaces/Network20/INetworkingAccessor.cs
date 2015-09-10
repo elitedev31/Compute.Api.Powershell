@@ -24,5 +24,10 @@
         /// Network Domain VIP Node Management.
         /// </summary>
         IVipNodeManagement NodeManagement { get; }
+
+        /// <summary>
+        /// VIP Virtual Listener Management.
+        /// </summary>
+        IVipVirtualListenerManagement VirtualListenerManagement { get; }
     }
 }

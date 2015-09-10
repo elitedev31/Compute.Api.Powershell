@@ -112,6 +112,7 @@
     <Compile Include="Interfaces\Network20\IIpamAccessor.cs" />
     <Compile Include="Interfaces\Network20\INatAccessor.cs" />
     <Compile Include="Interfaces\Network20\INetworkAddressTranslationAccessor.cs" />
+    <Compile Include="Interfaces\Network20\IVipVirtualListenerManagement.cs" />
     <Compile Include="Interfaces\Network20\IVipNodeManagement.cs" />
     <Compile Include="Interfaces\Network\INetworkAccessor.cs" />
     <Compile Include="Interfaces\Network20\INetworkDomainAccessor.cs" />
@@ -135,6 +136,7 @@
     <Compile Include="Network20\NetworkDomainVipAccessor.cs" />
     <Compile Include="Network20\NetworkingAccessor.cs" />
     <Compile Include="Network20\VipNodeManagement.cs" />
+    <Compile Include="Network20\VipVirtualListenerManagement.cs" />
     <Compile Include="Network20\VlanAccessor.cs" />
     <Compile Include="Network20\VlanExtensions.cs" />
     <Compile Include="Network\Network.cs" />

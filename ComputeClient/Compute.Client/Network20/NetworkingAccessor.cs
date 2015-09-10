@@ -22,6 +22,7 @@
             NatAccessor = new NatAccessor(apiClient);
             VipAccessor = new NetworkDomainVipAccessor(apiClient);
             NodeManagement = new VipNodeManagement(apiClient);
+            VirtualListenerManagement = new VipVirtualListenerManagement(apiClient);
         }
 
         /// <summary> Gets the network domain. </summary>
@@ -52,5 +53,10 @@
         /// Network Domain VIP Node Management.
         /// </summary>
         public IVipNodeManagement NodeManagement { get; private set; }
+
+        /// <summary>
+        /// VIP Virtual Listener Management.
+        /// </summary>
+        public IVipVirtualListenerManagement VirtualListenerManagement { get; private set; }
     }
 }

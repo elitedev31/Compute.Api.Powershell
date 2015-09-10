@@ -201,6 +201,7 @@
     <Compile Include="Requests\Vip\NodeListOptions.cs" />
     <Compile Include="Requests\Vip\PoolListOptions.cs" />
     <Compile Include="Requests\Vip\PoolMemberListOptions.cs" />
+    <Compile Include="Requests\Vip\VirtualListenerListOptions.cs" />
     <Compile Include="Server\AntiAffinityRules.cs" />
     <Compile Include="Server\AntiAffinityRuleType.cs" />
     <Compile Include="Server\AntiAffinityRuleTypeServerSummary.cs" />
@@ -302,6 +303,7 @@
     <Compile Include="Vip\VipProtocol.cs" />
     <Compile Include="Vip\VipTargetType.cs" />
     <Compile Include="Network2.0\Vlan.cs" />
+    <Compile Include="Vip\VirtualListener.cs" />
     <Compile Include="XmlNamespaceConstants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

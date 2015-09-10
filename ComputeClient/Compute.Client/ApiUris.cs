@@ -2053,5 +2053,56 @@ namespace DD.CBU.Compute.Api.Client
         {
             return new Uri(string.Format(MCP2_0_PREFIX + "{0}/networkDomainVip/deleteNode", orgId), UriKind.Relative);
         }
+
+        /// <summary>
+        /// Returns the relative URI of the REST request for creating the Virtual Listener.
+        /// </summary>
+        /// <param name="orgId">The organization id.</param>
+        /// <returns> The <see cref="Uri"/>.</returns>
+        public static Uri CreateVirtualListener(Guid orgId)
+        {
+            return new Uri(string.Format(MCP2_0_PREFIX + "{0}/networkDomainVip/createVirtualListener", orgId), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// Returns the relative URI of the REST request for getting the Virtual Listeners.
+        /// </summary>
+        /// <param name="orgId">The organization id.</param>
+        /// <returns> The <see cref="Uri"/>.</returns>
+        public static Uri GetVirtualListeners(Guid orgId)
+        {
+            return new Uri(string.Format(MCP2_0_PREFIX + "{0}/networkDomainVip/virtualListener", orgId), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// Returns the relative URI of the REST request for getting the Single Virtual Listener details.
+        /// </summary>
+        /// <param name="orgId">The organization id.</param>
+        /// <param name="virtualListenerId">The Virtual Listener id.</param>
+        /// <returns> The <see cref="Uri"/>.</returns>
+        public static Uri GetVirtualListener(Guid orgId, Guid virtualListenerId)
+        {
+            return new Uri(string.Format(MCP2_0_PREFIX + "{0}/networkDomainVip/virtualListener/{1}", orgId, virtualListenerId), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// Returns the relative URI of the REST request for updating the Virtual Listener.
+        /// </summary>
+        /// <param name="orgId">The organization id.</param>
+        /// <returns> The <see cref="Uri"/>.</returns>
+        public static Uri EditVirtualListener(Guid orgId)
+        {
+            return new Uri(string.Format(MCP2_0_PREFIX + "{0}/networkDomainVip/editVirtualListener", orgId), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// Returns the relative URI of the REST request for deleting the Virtual Listener.
+        /// </summary>
+        /// <param name="orgId">The organization id.</param>
+        /// <returns> The <see cref="Uri"/>.</returns>
+        public static Uri DeleteVirtualListener(Guid orgId)
+        {
+            return new Uri(string.Format(MCP2_0_PREFIX + "{0}/networkDomainVip/deleteVirtualListener", orgId), UriKind.Relative);
+        }
     }
 }
