@@ -36,7 +36,7 @@ namespace DD.CBU.Compute.Api.Contracts.Requests.Vip
         /// Identifies Virtual Listeners by whether or not they are enabled.
         /// </summary>
         [FilterParameter("enabled")]
-        public bool Enabled { get; set; }
+        public bool? Enabled { get; set; }
 
         /// <summary>	
         /// Identifies Virtual Listeners by their state.

@@ -50,17 +50,37 @@ namespace DD.CBU.Compute.Api.Client
 			return string.Empty;
 		}
 
-		// Convert all first latter
-		/// <summary>
-		/// The to title case.
+        /// <summary>
+		/// The to query string.
 		/// </summary>
-		/// <param name="str">
-		/// The str.
+		/// <param name="collection">
+		/// The collection.
 		/// </param>
 		/// <returns>
 		/// The <see cref="string"/>.
 		/// </returns>
-		public static string ToTitleCase(this string str)
+		public static string ToQueryStringWithEmpty(this Dictionary<string, string> collection)
+        {
+            if (collection != null)
+            {
+                return string.Join("&",
+                    collection.Keys.Select(key => string.Format("{0}={1}", WebUtility.UrlEncode(key), WebUtility.UrlEncode(collection[key]))));
+            }
+
+            return string.Empty;
+        }
+
+        // Convert all first latter
+        /// <summary>
+        /// The to title case.
+        /// </summary>
+        /// <param name="str">
+        /// The str.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public static string ToTitleCase(this string str)
 		{
 			if (string.IsNullOrEmpty(str))
 				return str;
