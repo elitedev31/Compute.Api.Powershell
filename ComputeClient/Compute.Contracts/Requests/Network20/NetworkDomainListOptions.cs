@@ -20,6 +20,13 @@
         [FilterParameter("name")]
         public string Name { get; set; }
 
+		/// <summary>
+		/// Gets or sets the Name filter.
+		/// 
+		/// </summary>
+		[FilterParameter("id")]
+		public string Id { get; set; }
+
         /// <summary>
         /// Gets or sets the Type filter.
         /// </summary>
