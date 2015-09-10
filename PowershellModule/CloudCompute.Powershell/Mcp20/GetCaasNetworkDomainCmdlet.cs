@@ -20,18 +20,18 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 	/// <summary>
 	///     The new CaaS Virtual Machine cmdlet.
 	/// </summary>
-	[Cmdlet(VerbsCommon.Get, "CaasNetworkDomain")]
-	[OutputType(typeof (NetworkDomainType[]))]
+	[Cmdlet(VerbsCommon.Get, "CaasNetworkDomain", DefaultParameterSetName = "None")]
+	[OutputType(typeof(NetworkDomainType[]))]
 	public class GetCaasNetworkDomainCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
-		///     Get a CaaS server by ServerId
+		///     Get a CaaS network domain by NetworkDomain Id
 		/// </summary>
 		[Parameter(Mandatory = false, ParameterSetName = "FilterById", HelpMessage = "NetworkDomain id")]
 		public Guid NetworkDomainId { get; set; }
 
 		/// <summary>
-		///     Get a CaaS server by ServerId
+		///     Get a CaaS network domain by NetworkDomain Name
 		/// </summary>
 		[Parameter(Mandatory = false, ParameterSetName = "FilterByName", HelpMessage = "NetworkDomain name")]
 		public string NetworkDomainName { get; set; }
@@ -45,16 +45,24 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 			base.ProcessRecord();
 			try
 			{
-				networks =
-					Connection.ApiClient.Networking.NetworkDomain.GetNetworkDomains(new NetworkDomainListOptions
-					{
-						Name = NetworkDomainName
-					}).Result;
-
-				if (Guid.Empty != NetworkDomainId)
+				NetworkDomainListOptions options = null;
+				if (ParameterSetName.Equals("FilterByName"))
 				{
-					networks = networks.Where(net => Guid.Parse(net.id) == NetworkDomainId);
+					options = new NetworkDomainListOptions
+								{
+									Name = NetworkDomainName
+								};
 				}
+				else if (ParameterSetName.Equals("FilterById"))
+				{
+					options = new NetworkDomainListOptions
+								{
+									Id = NetworkDomainId.ToString()
+								};
+				}
+
+				networks = Connection.ApiClient.Networking.NetworkDomain.GetNetworkDomains(options)
+										.Result;
 			}
 			catch (AggregateException ae)
 			{
