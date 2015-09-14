@@ -161,5 +161,22 @@
             }
             return _apiClient.PostAsync<AddNicType, ResponseType>(ApiUris.AddNic(_apiClient.OrganizationId), addNicType);
         }
+
+        /// <summary>
+        /// Removes an additional NIC from a server.
+        /// </summary>
+        /// <param name="nicId">The NIC id.</param>
+        /// <returns></returns>
+        public Task<ResponseType> RemoveNic(Guid nicId)
+        {
+            if (nicId == Guid.Empty)
+            {
+                throw new ArgumentException("'nicId' cannot be empty.");
+            }
+
+            return _apiClient.PostAsync<RemoveNicType, ResponseType>(
+                ApiUris.RemoveNic(_apiClient.OrganizationId),
+                new RemoveNicType { id = nicId.ToString() });
+        }
     }
 }

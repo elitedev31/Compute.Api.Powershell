@@ -957,7 +957,6 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 		}
 	}
 
-
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.81.0")]
     [System.SerializableAttribute()]
@@ -995,6 +994,32 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
             set
             {
                 this.nicField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.81.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
+    [System.Xml.Serialization.XmlRootAttribute("removeNic", Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
+    public partial class RemoveNicType
+    {
+
+        private string idField;
+
+        /// <remarks/>
+        public string id
+        {
+            get
+            {
+                return this.idField;
+            }
+            set
+            {
+                this.idField = value;
             }
         }
     }
