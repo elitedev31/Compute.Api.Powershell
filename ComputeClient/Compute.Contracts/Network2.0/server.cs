@@ -1011,7 +1011,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
         private string idField;
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("id", typeof(string))]
+        [System.Xml.Serialization.XmlAttributeAttribute]
         public string id
         {
             get
