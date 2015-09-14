@@ -21,7 +21,7 @@ namespace DD.CBU.Compute.Powershell
 	///     The new CaaS Virtual Machine cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.New, "CaasServer")]
-	[OutputType(typeof (ServerWithBackupType))]
+	[OutputType(typeof(Api.Contracts.Network20.ServerType))]
 	public class NewCaasServerCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
@@ -43,7 +43,7 @@ namespace DD.CBU.Compute.Powershell
 		/// </summary>
 		protected override void ProcessRecord()
 		{
-			ServerWithBackupType server = null;
+			Api.Contracts.Network20.ServerType server = null;
 			base.ProcessRecord();
 			try
 			{
@@ -78,9 +78,9 @@ namespace DD.CBU.Compute.Powershell
 		/// <returns>
 		///     The <see cref="ServerWithBackupType" />.
 		/// </returns>
-		private ServerWithBackupType DeployServerTask()
+		private Api.Contracts.Network20.ServerType DeployServerTask()
 		{
-			ServerWithBackupType server = null;
+			Api.Contracts.Network20.ServerType server = null;
 			string networkid = ServerDetails.Network != null ? ServerDetails.Network.id : null;
 
 			// convert CaasServerDiskDetails to Disk[]
@@ -120,13 +120,8 @@ namespace DD.CBU.Compute.Powershell
 			AdditionalInformation statusadditionalInfo = status.additionalInformation.Single(info => info.name == "serverId");
 			if (statusadditionalInfo != null)
 			{
-				IEnumerable<ServerWithBackupType> servers =
-					Connection.ApiClient.ServerManagementLegacy.Server.GetDeployedServers(statusadditionalInfo.value, null, null, null)
-						.Result;
-				if (servers.Any())
-				{
-					server = servers.First();
-				}
+				server =
+					Connection.ApiClient.ServerManagement.Server.GetMcp2DeployedServer(Guid.Parse(statusadditionalInfo.value)).Result;			
 			}
 
 			if (status != null)
