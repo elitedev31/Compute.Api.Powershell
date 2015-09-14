@@ -957,37 +957,50 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 		}
 	}
 
-	/// <remarks/>
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-	[System.SerializableAttribute()]
-	[System.Diagnostics.DebuggerStepThroughAttribute()]
-	[System.ComponentModel.DesignerCategoryAttribute("code")]
-	[System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
-	[System.Xml.Serialization.XmlRootAttribute("addNic", Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
-	public partial class AddNicType
-	{
-		/// <remarks/>
-		public string serverId { get; set; }
 
-		/// <summary>	Gets or sets the private IPv4. </summary>
-		/// <value>	The private IPv4. </value>
-		[System.Xml.Serialization.XmlElementAttribute("privateIpv4", typeof (string))]
-		public string PrivateIPv4
-		{
-			get; set;
-		}
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.81.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
+    [System.Xml.Serialization.XmlRootAttribute("addNic", Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
+    public partial class AddNicType
+    {
 
-		/// <summary>	Gets or sets the identifier of the vlan. </summary>
-		/// <value>	The identifier of the vlan. </value>
-		[System.Xml.Serialization.XmlElementAttribute("vlanId", typeof (string))]
-		public string VLANId
-		{
-			get; set;
-		}
-	}
+        private string serverIdField;
 
-	/// <content>	A delete server type. </content>
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+        private VlanIdOrPrivateIpType nicField;
+
+        /// <remarks/>
+        public string serverId
+        {
+            get
+            {
+                return this.serverIdField;
+            }
+            set
+            {
+                this.serverIdField = value;
+            }
+        }
+
+        /// <remarks/>
+        public VlanIdOrPrivateIpType nic
+        {
+            get
+            {
+                return this.nicField;
+            }
+            set
+            {
+                this.nicField = value;
+            }
+        }
+    }
+
+    /// <content>	A delete server type. </content>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
 	[System.SerializableAttribute()]
 	[System.Diagnostics.DebuggerStepThroughAttribute()]
 	[System.ComponentModel.DesignerCategoryAttribute("code")]

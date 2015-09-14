@@ -71,5 +71,14 @@
 		/// <param name="serverId">	The server id. </param>
 		/// <returns>	A standard CaaS response </returns>
 		Task<ResponseType> UpdateVmwareTools(Guid serverId);
+
+	    /// <summary>
+	    /// Adds an additional NIC to a server.
+	    /// </summary>
+	    /// <param name="serverId">The server id.</param>
+	    /// <param name="vlanId">The VLAN id</param>
+	    /// <param name="privateIpv4">The Private IP v4 address</param>
+	    /// <returns></returns>
+	    Task<ResponseType> AddNic(Guid serverId, Guid? vlanId, string privateIpv4);
 	}
 }
