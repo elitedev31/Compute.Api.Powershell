@@ -217,6 +217,16 @@ namespace DD.CBU.Compute.Api.Client
             return new Uri(string.Format(MCP2_0_PREFIX + "{0}/server/removeNic", orgId), UriKind.Relative);
         }
 
+        /// <summary>
+        /// Returns the relative URI of the REST request for Botify NIC IP change.
+        /// </summary>
+        /// <param name="orgId">The organization id.</param>
+        /// <returns> The <see cref="Uri"/>.</returns>
+        public static Uri NotifyNicIpChange(Guid orgId)
+        {
+            return new Uri(string.Format(MCP2_0_PREFIX + "{0}/server/notifyNicIpChange", orgId), UriKind.Relative);
+        }
+
         /// <summary>	Get the URI for creating a network domain. </summary>
         /// <param name="orgId">	The org id. </param>
         /// <returns>	The <see cref="Uri"/>. </returns>

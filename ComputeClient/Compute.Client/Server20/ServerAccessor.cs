@@ -176,7 +176,20 @@
 
             return _apiClient.PostAsync<RemoveNicType, ResponseType>(
                 ApiUris.RemoveNic(_apiClient.OrganizationId),
-                new RemoveNicType { id = nicId.ToString() });
+                new RemoveNicType {id = nicId.ToString()});
+        }
+
+        /// <summary>
+        /// Updates the Cloud record to match the value set on the deployed server.
+        /// </summary>
+        /// <param name="notifyNicIpChange">The Notify NIC IP change model.</param>
+        /// <returns>The async type of <see cref="ResponseType"/></returns>
+        public async Task<ResponseType> NotifyNicIpChange(NotifyNicIpChangeType notifyNicIpChange)
+        {
+            return
+                await
+                    _apiClient.PostAsync<NotifyNicIpChangeType, ResponseType>(
+                        ApiUris.NotifyNicIpChange(_apiClient.OrganizationId), notifyNicIpChange);
         }
     }
 }
