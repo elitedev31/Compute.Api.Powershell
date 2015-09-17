@@ -2122,5 +2122,16 @@ namespace DD.CBU.Compute.Api.Client
         {
             return new Uri(string.Format(MCP2_0_PREFIX + "{0}/networkDomainVip/deleteVirtualListener", orgId), UriKind.Relative);
         }
+
+        /// <summary>
+        /// Returns the relative URI of the REST request for notify private IP address change.
+        /// </summary>
+        /// <param name="orgId">The organization id.</param>
+        /// <param name="serverId">The Server Id.</param>
+        /// <returns> The <see cref="Uri"/>.</returns>
+        public static Uri NotifyPrivateIpChange(Guid orgId, string serverId)
+        {
+            return new Uri(string.Format(MCP1_0_PREFIX + "{0}/server/{1}", orgId, serverId), UriKind.Relative);
+        }
     }
 }
