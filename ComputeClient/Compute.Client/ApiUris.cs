@@ -1902,7 +1902,7 @@ namespace DD.CBU.Compute.Api.Client
         /// </returns>
         public static Uri CreateNatRule(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_0_PREFIX + "{0}/network/natRule/createNatRule", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_0_PREFIX + "{0}/network/createNatRule", orgId), UriKind.Relative);
         }
 
         /// <summary>
@@ -1916,7 +1916,7 @@ namespace DD.CBU.Compute.Api.Client
         /// </returns>
         public static Uri DeleteNatRule(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_0_PREFIX + "{0}/network/natRule/deleteNatRule", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_0_PREFIX + "{0}/network/deleteNatRule", orgId), UriKind.Relative);
         }
 
         /// <summary>

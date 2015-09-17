@@ -30,14 +30,14 @@ namespace Compute.Client.UnitTests
         public void ReturnsCreateNatRuleUri()
         {
             var uri = ApiUris.CreateNatRule(_orgId);
-            Assert.AreEqual("caas/2.0/" + _orgId + "/network/natRule/createNatRule", uri.OriginalString);
+            Assert.AreEqual("caas/2.0/" + _orgId + "/network/createNatRule", uri.OriginalString);
         }
 
         [TestMethod]
         public void ReturnsDeleteNatRuleUri()
         {
             var uri = ApiUris.DeleteNatRule(_orgId);
-            Assert.AreEqual("caas/2.0/" + _orgId + "/network/natRule/deleteNatRule", uri.OriginalString);
+            Assert.AreEqual("caas/2.0/" + _orgId + "/network/deleteNatRule", uri.OriginalString);
         }
 
         [TestMethod]
