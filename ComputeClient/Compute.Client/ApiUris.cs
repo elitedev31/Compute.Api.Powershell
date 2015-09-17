@@ -1790,11 +1790,11 @@ namespace DD.CBU.Compute.Api.Client
 
         /// <summary>	Gets reserved private addresses. </summary>
         /// <param name="orgId">		  	The org Id. </param>
-        /// <param name="networkDomainId">	The network Domain Id. </param>
+        /// <param name="vlanId">	The VLAN Id. </param>
         /// <returns>	The reserved public addresses. </returns>
-        public static Uri GetReservedPrivateAddresses(Guid orgId, string networkDomainId)
+        public static Uri GetReservedPrivateAddresses(Guid orgId, string vlanId)
         {
-            return new Uri(string.Format(MCP2_0_PREFIX + "{0}/network/reservedPrivateIpv4Address?networkDomainId={1}", orgId, networkDomainId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_0_PREFIX + "{0}/network/reservedPrivateIpv4Address?vlanId={1}", orgId, vlanId), UriKind.Relative);
         }
 
         /// <summary>	Deletes the server. </summary>

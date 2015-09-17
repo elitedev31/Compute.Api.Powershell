@@ -1,4 +1,6 @@
-﻿namespace DD.CBU.Compute.Api.Client.Network20
+﻿using System;
+
+namespace DD.CBU.Compute.Api.Client.Network20
 {
 	using System.Collections.Generic;
 	using System.Threading.Tasks;
@@ -106,14 +108,14 @@
 						ApiUris.GetReservedPublicAddressesForNetwork(_apiClient.OrganizationId, networkId));
 		}
 
-		/// <summary>	Gets reserved private addresses. </summary>
-		/// <param name="networkDomainId">	Identifier for the network domain. </param>
-		/// <returns>	The reserved private addresses. </returns>
-		public async Task<reservedPrivateIpv4Addresses> GetReservedPrivateAddresses(string networkDomainId)
+        /// <summary>	Gets reserved private addresses. </summary>
+        /// <param name="vlanId">The VLAN Id.</param>
+        /// <returns>	The reserved private addresses. </returns>
+        public async Task<reservedPrivateIpv4Addresses> GetReservedPrivateAddresses(Guid vlanId)
 		{
 			return await
 					_apiClient.GetAsync<reservedPrivateIpv4Addresses>(
-						ApiUris.GetReservedPrivateAddresses(_apiClient.OrganizationId, networkDomainId));
+						ApiUris.GetReservedPrivateAddresses(_apiClient.OrganizationId, vlanId.ToString()));
 		}
 	}
 }

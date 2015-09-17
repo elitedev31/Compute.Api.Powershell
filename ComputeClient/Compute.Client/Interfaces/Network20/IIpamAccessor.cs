@@ -1,4 +1,6 @@
-﻿namespace DD.CBU.Compute.Api.Client.Interfaces.Network20
+﻿using System;
+
+namespace DD.CBU.Compute.Api.Client.Interfaces.Network20
 {
 	using System.Collections.Generic;
 	using System.Threading.Tasks;
@@ -42,9 +44,9 @@
 		/// <returns>	The reserved public addresses for network. </returns>
 		Task<reservedPublicIpv4Addresses> GetReservedPublicAddressesForNetwork(string networkId);
 
-		/// <summary>	Gets reserved private addresses. </summary>
-		/// <param name="networkDomainId">	Identifier for the network domain. </param>
-		/// <returns>	The reserved private addresses. </returns>
-		Task<reservedPrivateIpv4Addresses> GetReservedPrivateAddresses(string networkDomainId);
+	    /// <summary>	Gets reserved private addresses. </summary>
+	    /// <param name="vlanId">The VLAN Id.</param>
+	    /// <returns>	The reserved private addresses. </returns>
+	    Task<reservedPrivateIpv4Addresses> GetReservedPrivateAddresses(Guid vlanId);
 	}
 }
