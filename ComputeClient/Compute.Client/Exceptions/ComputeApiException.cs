@@ -152,7 +152,7 @@ namespace DD.CBU.Compute.Api.Client
 				throw new ArgumentNullException("info");
 
 			Error = (ComputeApiError)info.GetValue("Error", typeof(ComputeApiError));
-			Uri = (Uri)info.GetValue("Error", typeof(Uri));
+			Uri = (Uri)info.GetValue("Uri", typeof(Uri));
 		}
 		
 		/// <summary>
