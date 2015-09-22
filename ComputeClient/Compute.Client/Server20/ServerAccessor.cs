@@ -150,15 +150,16 @@
             {
                 throw new ArgumentNullException("vlanId");
             }
-            AddNicType addNicType = new AddNicType { serverId = serverId.ToString(), nic = new VlanIdOrPrivateIpType()};
-            if (vlanId != null)
-            {
-                addNicType.nic.vlanId = vlanId.ToString();
-            }
-            else
+            AddNicType addNicType = new AddNicType { serverId = serverId.ToString(), nic = new VlanIdOrPrivateIpType() };
+            if (!string.IsNullOrEmpty(privateIpv4))
             {
                 addNicType.nic.privateIpv4 = privateIpv4;
             }
+            else if (vlanId != null)
+            {
+                addNicType.nic.vlanId = vlanId.ToString();
+            }
+
             return _apiClient.PostAsync<AddNicType, ResponseType>(ApiUris.AddNic(_apiClient.OrganizationId), addNicType);
         }
 
@@ -176,7 +177,7 @@
 
             return _apiClient.PostAsync<RemoveNicType, ResponseType>(
                 ApiUris.RemoveNic(_apiClient.OrganizationId),
-                new RemoveNicType {id = nicId.ToString()});
+                new RemoveNicType { id = nicId.ToString() });
         }
 
         /// <summary>
