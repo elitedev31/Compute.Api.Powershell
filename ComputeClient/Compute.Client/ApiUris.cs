@@ -898,6 +898,22 @@ namespace DD.CBU.Compute.Api.Client
             return new Uri(string.Format(MCP2_0_PREFIX + "{0}/network/deployVlan", orgId), UriKind.Relative);
         }
 
+        /// <summary>	The relative URI for the CaaS API for editing the VLan. </summary>
+        /// <param name="orgId">	The organization ID. </param>
+        /// <returns>	A URI. </returns>
+        public static Uri EditVlan(Guid orgId)
+        {
+            return new Uri(string.Format(MCP2_0_PREFIX + "{0}/network/editVlan", orgId), UriKind.Relative);
+        }
+
+        /// <summary>	The relative URI for the CaaS API for expanding the VLan. </summary>
+        /// <param name="orgId">	The organization ID. </param>
+        /// <returns>	A URI. </returns>
+        public static Uri ExpandVlan(Guid orgId)
+        {
+            return new Uri(string.Format(MCP2_0_PREFIX + "{0}/network/expandVlan", orgId), UriKind.Relative);
+        }
+
         /// <summary>	Deletes the vlan described by orgId. </summary>
         /// <param name="orgId">	The org Id. </param>
         /// <returns>	An URI. </returns>

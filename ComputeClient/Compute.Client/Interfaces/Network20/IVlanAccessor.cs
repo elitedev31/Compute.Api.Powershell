@@ -70,15 +70,37 @@
 		/// </returns>
 		Task<ResponseType> DeployVlan(DeployVlanType vlan);
 
-		/// <summary>
-		/// 	An IComputeApiClient extension method that deletes the vlan. 
-		/// </summary>
-		/// <param name="id">
-		/// 	 	The id of the VLAN. 
-		/// </param>
-		/// <returns>
-		/// 	The job from the API; 
-		/// </returns>
-		Task<ResponseType> DeleteVlan(string id);
+        /// <summary>
+        /// Edit Virtual LAN on a network domain.
+        /// </summary>
+        /// <param name="editVlan">
+        /// Edit Virtual LAN request.
+        /// </param>
+        /// <returns>
+        /// Operation status
+        /// </returns>
+        Task<ResponseType> EditVlan(EditVlanType editVlan);
+
+        /// <summary>
+        /// Expand Virtual LAN on a network domain.
+        /// </summary>
+        /// <param name="expandVlan">
+        /// Expand Virtual LAN request.
+        /// </param>
+        /// <returns>
+        /// Operation status
+        /// </returns>
+        Task<ResponseType> ExpandVlan(ExpandVlanType expandVlan);
+
+        /// <summary>
+        /// 	An IComputeApiClient extension method that deletes the vlan. 
+        /// </summary>
+        /// <param name="id">
+        /// 	 	The id of the VLAN. 
+        /// </param>
+        /// <returns>
+        /// 	The job from the API; 
+        /// </returns>
+        Task<ResponseType> DeleteVlan(string id);
 	}
 }
