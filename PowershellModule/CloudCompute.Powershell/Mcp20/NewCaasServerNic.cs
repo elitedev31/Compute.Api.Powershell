@@ -59,9 +59,12 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 			{
 				var nic = new AddNicType
 				{
-					serverId = Server != null ? Server.id : ServerId, 
-					PrivateIPv4 = PrimaryPrivateIp, 
-					VLANId = Vlan.id
+					serverId = Server != null ? Server.id : ServerId,
+                    nic = new VlanIdOrPrivateIpType
+                    {
+                        privateIpv4 = PrimaryPrivateIp,
+                        vlanId = Vlan.id
+                    }
 				};
 
 				response = Connection.ApiClient.AddNicToServer(nic).Result;
