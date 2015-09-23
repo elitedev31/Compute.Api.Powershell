@@ -1037,7 +1037,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 
 		/// <summary>	Gets or sets the identifier of the server. </summary>
 		/// <value>	The identifier of the server. </value>
-		[System.Xml.Serialization.XmlElementAttribute("id", typeof(string))]
+		[System.Xml.Serialization.XmlAttributeAttribute("id", typeof(string))]
 		public string serverId
 		{
 			get;
@@ -1057,7 +1057,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 
 		/// <summary>	Gets or sets the identifier of the server. </summary>
 		/// <value>	The identifier of the server. </value>
-		[System.Xml.Serialization.XmlElementAttribute("id", typeof(string))]
+		[System.Xml.Serialization.XmlAttributeAttribute("id", typeof(string))]
 		public string serverId
 		{
 			get;
@@ -1077,7 +1077,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 
 		/// <summary>	Gets or sets the identifier of the server. </summary>
 		/// <value>	The identifier of the server. </value>
-		[System.Xml.Serialization.XmlElementAttribute("id", typeof(string))]
+		[System.Xml.Serialization.XmlAttributeAttribute("id", typeof(string))]
 		public string serverId
 		{
 			get;
@@ -1097,7 +1097,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 
 		/// <summary>	Gets or sets the identifier of the server. </summary>
 		/// <value>	The identifier of the server. </value>
-		[System.Xml.Serialization.XmlElementAttribute("id", typeof(string))]
+		[System.Xml.Serialization.XmlAttributeAttribute("id", typeof(string))]
 		public string serverId
 		{
 			get;
@@ -1117,7 +1117,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 
 		/// <summary>	Gets or sets the identifier of the server. </summary>
 		/// <value>	The identifier of the server. </value>
-		[System.Xml.Serialization.XmlElementAttribute("id", typeof(string))]
+		[System.Xml.Serialization.XmlAttributeAttribute("id", typeof(string))]
 		public string serverId
 		{
 			get;
@@ -1137,7 +1137,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 
 		/// <summary>	Gets or sets the identifier of the server. </summary>
 		/// <value>	The identifier of the server. </value>
-		[System.Xml.Serialization.XmlElementAttribute("id", typeof(string))]
+		[System.Xml.Serialization.XmlAttributeAttribute("id", typeof(string))]
 		public string serverId
 		{
 			get;
@@ -1157,7 +1157,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 
 		/// <summary>	Gets or sets the identifier of the server. </summary>
 		/// <value>	The identifier of the server. </value>
-		[System.Xml.Serialization.XmlElementAttribute("id", typeof(string))]
+		[System.Xml.Serialization.XmlAttributeAttribute("id", typeof(string))]
 		public string serverId
 		{
 			get;
