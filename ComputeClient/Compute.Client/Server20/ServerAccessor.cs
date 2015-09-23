@@ -74,7 +74,7 @@
         public Task<ResponseType> DeleteServer(Guid serverId)
         {
             return _apiClient.PostAsync<DeleteServerType, ResponseType>(ApiUris.DeleteServer(_apiClient.OrganizationId),
-                new DeleteServerType { serverId = serverId.ToString() });
+                new DeleteServerType { id = serverId.ToString() });
         }
 
         /// <summary>	Starts a server. </summary>
@@ -84,7 +84,7 @@
         public Task<ResponseType> StartServer(Guid serverId)
         {
             return _apiClient.PostAsync<StartServerType, ResponseType>(ApiUris.StartServer(_apiClient.OrganizationId),
-                new StartServerType { serverId = serverId.ToString() });
+                new StartServerType { id = serverId.ToString() });
         }
 
         /// <summary>	Shutdown server. </summary>
@@ -94,7 +94,7 @@
         public Task<ResponseType> ShutdownServer(Guid serverId)
         {
             return _apiClient.PostAsync<ShutdownServerType, ResponseType>(ApiUris.ShutdownServer(_apiClient.OrganizationId),
-                new ShutdownServerType { serverId = serverId.ToString() });
+                new ShutdownServerType { id = serverId.ToString() });
         }
 
         /// <summary>	Reboot server. </summary>
@@ -104,7 +104,7 @@
         public Task<ResponseType> RebootServer(Guid serverId)
         {
             return _apiClient.PostAsync<RebootServerType, ResponseType>(ApiUris.RebootServer(_apiClient.OrganizationId),
-                new RebootServerType { serverId = serverId.ToString() });
+                new RebootServerType { id = serverId.ToString() });
         }
 
         /// <summary>	Resets the server described by serverId. </summary>
@@ -114,7 +114,7 @@
         public Task<ResponseType> ResetServer(Guid serverId)
         {
             return _apiClient.PostAsync<ResetServerType, ResponseType>(ApiUris.ResetServer(_apiClient.OrganizationId),
-                new ResetServerType { serverId = serverId.ToString() });
+                new ResetServerType { id = serverId.ToString() });
         }
 
         /// <summary>	Power off server. </summary>
@@ -124,7 +124,7 @@
         public Task<ResponseType> PowerOffServer(Guid serverId)
         {
             return _apiClient.PostAsync<PowerOffServerType, ResponseType>(ApiUris.PowerOffServer(_apiClient.OrganizationId),
-                new PowerOffServerType { serverId = serverId.ToString() });
+                new PowerOffServerType { id = serverId.ToString() });
         }
 
         /// <summary>	Updates the v mware tools described by serverId. </summary>
@@ -134,7 +134,7 @@
         public Task<ResponseType> UpdateVmwareTools(Guid serverId)
         {
             return _apiClient.PostAsync<UpdateVmwareToolsServerType, ResponseType>(ApiUris.UpdateVmwareTools(_apiClient.OrganizationId),
-                new UpdateVmwareToolsServerType { serverId = serverId.ToString() });
+                new UpdateVmwareToolsServerType { id = serverId.ToString() });
         }
 
         /// <summary>
