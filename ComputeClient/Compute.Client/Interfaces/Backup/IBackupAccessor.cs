@@ -168,31 +168,27 @@ namespace DD.CBU.Compute.Api.Client.Interfaces.Backup
 			BackupSchedulePolicy schedulePolicy,
 			AlertingType alertingType);
 
-        /// <summary>
+	    /// <summary>
 	    /// The modify backup client.
 	    /// </summary>
 	    /// <param name="serverId">
 	    /// The server id.
 	    /// </param>
 	    /// <param name="backupClientId">The Backup Client Id.</param>
-	    /// <param name="storagePolicy">
-	    /// The storage policy.
-	    /// </param>
-	    /// <param name="schedulePolicy">
-	    /// The schedule policy.
-	    /// </param>
+	    /// <param name="schedulePolicyName">The Schedule Policy Name</param>
 	    /// <param name="alertingType">
 	    /// The alerting type.
 	    /// </param>
+	    /// <param name="storagePolicyName">The Storage Policy Name</param>
 	    /// <returns>
 	    /// The <see cref="Task"/>.
 	    /// </returns>
 	    Task<Status> ModifyBackupClient(
-            string serverId,
-            string backupClientId,
-            BackupStoragePolicy storagePolicy,
-            BackupSchedulePolicy schedulePolicy,
-            AlertingType alertingType);
+	        string serverId,
+	        string backupClientId,
+	        string storagePolicyName,
+	        string schedulePolicyName,
+	        AlertingType alertingType);
 
         /// <summary>
         /// The initiate backup.

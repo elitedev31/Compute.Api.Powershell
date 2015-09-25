@@ -260,30 +260,26 @@ namespace DD.CBU.Compute.Api.Client.Backup
 						});
 		}
 
-        /// <summary>
+	    /// <summary>
 	    /// The modify backup client.
 	    /// </summary>
 	    /// <param name="serverId">
 	    /// The server id.
 	    /// </param>
 	    /// <param name="backupClientId">The Backup Client Id.</param>
-	    /// <param name="storagePolicy">
-	    /// The storage policy.
-	    /// </param>
-	    /// <param name="schedulePolicy">
-	    /// The schedule policy.
-	    /// </param>
+	    /// <param name="schedulePolicyName">The Schedule Policy Name</param>
 	    /// <param name="alertingType">
 	    /// The alerting type.
 	    /// </param>
+	    /// <param name="storagePolicyName">The Storage Policy Name</param>
 	    /// <returns>
 	    /// The <see cref="Task"/>.
 	    /// </returns>
 	    public async Task<Status> ModifyBackupClient(
             string serverId,
             string backupClientId,
-            BackupStoragePolicy storagePolicy,
-            BackupSchedulePolicy schedulePolicy,
+            string storagePolicyName,
+            string schedulePolicyName,
             AlertingType alertingType)
         {
             return
@@ -292,8 +288,8 @@ namespace DD.CBU.Compute.Api.Client.Backup
                     ApiUris.ModifyBackupClient(_apiClient.OrganizationId, serverId, backupClientId),
                     new ModifyBackupClient
                     {
-                        schedulePolicyName = schedulePolicy.name,
-                        storagePolicyName = storagePolicy.name,
+                        schedulePolicyName = schedulePolicyName,
+                        storagePolicyName = storagePolicyName,
                         alerting = alertingType
                     });
         }
