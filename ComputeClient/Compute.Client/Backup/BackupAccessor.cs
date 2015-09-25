@@ -260,19 +260,57 @@ namespace DD.CBU.Compute.Api.Client.Backup
 						});
 		}
 
-		/// <summary>
-		/// The initiate backup.
-		/// </summary>
-		/// <param name="serverId">
-		/// The server id.
-		/// </param>
-		/// <param name="backupClient">
-		/// The backup client.
-		/// </param>
-		/// <returns>
-		/// The <see cref="Task"/>.
-		/// </returns>
-		public async Task<Status> InitiateBackup(string serverId, BackupClientDetailsType backupClient)
+        /// <summary>
+	    /// The modify backup client.
+	    /// </summary>
+	    /// <param name="serverId">
+	    /// The server id.
+	    /// </param>
+	    /// <param name="backupClientId">The Backup Client Id.</param>
+	    /// <param name="storagePolicy">
+	    /// The storage policy.
+	    /// </param>
+	    /// <param name="schedulePolicy">
+	    /// The schedule policy.
+	    /// </param>
+	    /// <param name="alertingType">
+	    /// The alerting type.
+	    /// </param>
+	    /// <returns>
+	    /// The <see cref="Task"/>.
+	    /// </returns>
+	    public async Task<Status> ModifyBackupClient(
+            string serverId,
+            string backupClientId,
+            BackupStoragePolicy storagePolicy,
+            BackupSchedulePolicy schedulePolicy,
+            AlertingType alertingType)
+        {
+            return
+                await
+                _apiClient.PostAsync<ModifyBackupClient, Status>(
+                    ApiUris.ModifyBackupClient(_apiClient.OrganizationId, serverId, backupClientId),
+                    new ModifyBackupClient
+                    {
+                        schedulePolicyName = schedulePolicy.name,
+                        storagePolicyName = storagePolicy.name,
+                        alerting = alertingType
+                    });
+        }
+
+        /// <summary>
+        /// The initiate backup.
+        /// </summary>
+        /// <param name="serverId">
+        /// The server id.
+        /// </param>
+        /// <param name="backupClient">
+        /// The backup client.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        public async Task<Status> InitiateBackup(string serverId, BackupClientDetailsType backupClient)
 		{
 			return
 				await _apiClient.GetAsync<Status>(ApiUris.InitiateBackup(_apiClient.OrganizationId, serverId, backupClient.id));

@@ -168,19 +168,45 @@ namespace DD.CBU.Compute.Api.Client.Interfaces.Backup
 			BackupSchedulePolicy schedulePolicy,
 			AlertingType alertingType);
 
-		/// <summary>
-		/// The initiate backup.
-		/// </summary>
-		/// <param name="serverId">
-		/// The server id.
-		/// </param>
-		/// <param name="backupClient">
-		/// The backup client.
-		/// </param>
-		/// <returns>
-		/// The <see cref="Task"/>.
-		/// </returns>
-		Task<Status> InitiateBackup(string serverId, BackupClientDetailsType backupClient);
+        /// <summary>
+	    /// The modify backup client.
+	    /// </summary>
+	    /// <param name="serverId">
+	    /// The server id.
+	    /// </param>
+	    /// <param name="backupClientId">The Backup Client Id.</param>
+	    /// <param name="storagePolicy">
+	    /// The storage policy.
+	    /// </param>
+	    /// <param name="schedulePolicy">
+	    /// The schedule policy.
+	    /// </param>
+	    /// <param name="alertingType">
+	    /// The alerting type.
+	    /// </param>
+	    /// <returns>
+	    /// The <see cref="Task"/>.
+	    /// </returns>
+	    Task<Status> ModifyBackupClient(
+            string serverId,
+            string backupClientId,
+            BackupStoragePolicy storagePolicy,
+            BackupSchedulePolicy schedulePolicy,
+            AlertingType alertingType);
+
+        /// <summary>
+        /// The initiate backup.
+        /// </summary>
+        /// <param name="serverId">
+        /// The server id.
+        /// </param>
+        /// <param name="backupClient">
+        /// The backup client.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        Task<Status> InitiateBackup(string serverId, BackupClientDetailsType backupClient);
 
 		/// <summary>
 		/// The cancel backup job.
