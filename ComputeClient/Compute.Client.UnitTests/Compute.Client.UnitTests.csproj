@@ -75,6 +75,7 @@
     <Compile Include="BaseApiClientTestFixture.cs" />
     <Compile Include="MCP1\BackupTests.cs" />
     <Compile Include="MCP2\NatRuleAccessorTests.cs" />
+    <Compile Include="MCP2\IpAddressManagementAccessorTests.cs" />
     <Compile Include="MCP2\VirtualListenerTests.cs" />
     <Compile Include="MCP2\VipNodesTests.cs" />
     <Compile Include="MCP2\NetworkDomainTests.cs" />
@@ -98,11 +99,13 @@
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SampleOutputs\AddPublicIpBlockResponse.xml" />
     <Content Include="SampleOutputs\CreateNatRuleResponse.xml" />
     <Content Include="SampleOutputs\CreateNetworkDomainResponse.xml" />
     <Content Include="SampleOutputs\CreateVipNodeResponse.xml" />
     <Content Include="SampleOutputs\CreateVirtualListenerResponse.xml" />
     <Content Include="SampleOutputs\DeleteNatRule.xml" />
+    <Content Include="SampleOutputs\DeletePublicIpBlock.xml" />
     <Content Include="SampleOutputs\DeleteSubAdministratorAccount.xml" />
     <Content Include="SampleOutputs\DeleteVirtualListener.xml" />
     <Content Include="SampleOutputs\DesignatePrimaryAdministratorAccount.xml" />
@@ -113,6 +116,11 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="SampleOutputs\GetNatRule.xml" />
+    <Content Include="SampleOutputs\GetPublicIpBlockReponse.xml" />
+    <Content Include="SampleOutputs\GetReservedPrivateAddresses.xml" />
+    <Content Include="SampleOutputs\GetReservedPublicAddresses.xml" />
+    <Content Include="SampleOutputs\GetReservedPublicAddressesForNetwork.xml" />
+    <Content Include="SampleOutputs\ListPublicIpBlocksResponse.xml" />
     <Content Include="SampleOutputs\GetVirtualListener.xml" />
     <Content Include="SampleOutputs\GetVlansResponse.xml" />
     <Content Include="SampleOutputs\ListAccounts.xml" />

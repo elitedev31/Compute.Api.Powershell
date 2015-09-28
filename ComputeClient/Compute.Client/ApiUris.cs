@@ -2149,5 +2149,15 @@ namespace DD.CBU.Compute.Api.Client
         {
             return new Uri(string.Format(MCP1_0_PREFIX + "{0}/server/{1}", orgId, serverId), UriKind.Relative);
         }
+
+        /// <summary>
+        /// Returns the relative URI of the REST request for removing a Public IPv4 Address Block from a Network Domain.
+        /// </summary>
+        /// <param name="orgId">The organization id.</param>
+        /// <returns> The <see cref="Uri"/>.</returns>
+        public static Uri RemovePublicIpv4AddressBlock(Guid orgId)
+        {
+            return new Uri(string.Format(MCP2_0_PREFIX + "{0}/network/removePublicIpBlock", orgId), UriKind.Relative);
+        }
     }
 }

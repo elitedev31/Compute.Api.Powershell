@@ -8,6 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System;
 using System.Xml.Serialization;
 
 namespace DD.CBU.Compute.Api.Contracts.Network20
@@ -221,10 +222,16 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 	[System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
 	[System.Xml.Serialization.XmlRootAttribute("removePublicIpBlock", Namespace = "urn:didata.com:api:cloud:types",
 		IsNullable = false)]
-	public class RemovePublicIpBlockType
+	public partial class RemovePublicIpBlockType
 	{
-		/// <remarks/>
-		[System.Xml.Serialization.XmlAttributeAttribute("idd", typeof(string))]
-		public string id { get; set; }
-	}
+        private string idField;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string id
+        {
+            get { return this.idField; }
+            set { this.idField = value.Replace(" ", String.Empty); }
+        }
+    }
 }

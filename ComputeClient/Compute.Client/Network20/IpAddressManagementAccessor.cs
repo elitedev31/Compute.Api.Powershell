@@ -80,7 +80,7 @@ namespace DD.CBU.Compute.Api.Client.Network20
 			return
 				await
 					_apiClient.PostAsync<RemovePublicIpBlockType, ResponseType>(
-						ApiUris.AddPublicIpBlock(
+						ApiUris.RemovePublicIpv4AddressBlock(
 							_apiClient.OrganizationId), 
 							new RemovePublicIpBlockType
 							{

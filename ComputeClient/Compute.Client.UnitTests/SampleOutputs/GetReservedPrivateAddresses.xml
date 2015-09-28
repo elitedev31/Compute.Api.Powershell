@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<reservedPrivateIpv4Addresses
+xmlns="urn:didata.com:api:cloud:types" pageNumber="1" pageCount="86"
+totalCount="86" pageSize="250">
+  <ipv4 datacenterId="NA9" vlanId="5d1d62c4-0627-4dc9-83a3-
+985fbd82ff29">10.0.0.11</ipv4>
+  <ipv4 datacenterId="NA9" vlanId="5d1d62c4-0627-4dc9-83a3-
+985fbd82ff29">10.0.0.12</ipv4>
+  <ipv4 datacenterId="NA5" networkId="50a8b326-2cbe-11e1-b5d6-
+0030487e0302">10.157.101.12</ipv4>
+  <ipv4 datacenterId="NA5" networkId="50a8b326-2cbe-11e1-b5d6-
+© 2015 Dimension Data Cloud Solutions 61
+0030487e0302">10.157.101.13</ipv4>
+</reservedPrivateIpv4Addresses>
