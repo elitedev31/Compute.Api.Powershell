@@ -76,7 +76,7 @@ namespace Compute.Client.UnitTests.MCP2
 
             var result = await virtualListener.GetVirtualListener(virtualListenerId);
 
-            Assert.IsNotNull(1, result.networkDomainId);
+            Assert.IsNotNull(result.networkDomainId);
             Assert.IsNotNull(result.state);
         }
 
@@ -102,8 +102,6 @@ namespace Compute.Client.UnitTests.MCP2
             requestsAndResponses.Add(ApiUris.DeleteVirtualListener(accountId), RequestFileResponseType.AsGoodResponse("DeleteVirtualListener.xml"));
             var webApi = GetWebApiClient();
             var virtualListener = new VipVirtualListenerManagement(webApi);
-
-            var editVirtualListener = new editVirtualListener();
 
             var result = await virtualListener.DeleteVirtualListener(virtualListenerId);
 
