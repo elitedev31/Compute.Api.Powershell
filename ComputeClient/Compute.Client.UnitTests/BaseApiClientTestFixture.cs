@@ -6,9 +6,11 @@ using System.Text;
 
 namespace Compute.Client.UnitTests
 {
-	using DD.CBU.Compute.Api.Client;
-	using DD.CBU.Compute.Api.Client.Interfaces;
-	using Moq;
+    using DD.CBU.Compute.Api.Client;
+    using DD.CBU.Compute.Api.Client.Interfaces;
+    using DD.CBU.Compute.Api.Client.WebApi;
+    using Moq;
+    using System.Threading.Tasks;
 
     /// <summary>	A base API client test fixture. </summary>
     public class BaseApiClientTestFixture
@@ -28,10 +30,19 @@ namespace Compute.Client.UnitTests
 			return client;
 		}
 
-	    /// <summary>	Gets contents of test file. </summary>
-	    /// <param name="filename">	Filename of the file. </param>
-	    /// <returns>	The contents of test file. </returns>
-	    private string GetContentsOfTestFile(string filename)
+        /// <summary>	Get a mocked API Client, using the call and response collection in <see cref="requestsAndResponses"/>. </summary>
+		/// <returns>	The API client. </returns>
+		protected IWebApi GetWebApiClient()
+        {
+            var httpClient = CreateFakeHttpClient();
+            var client = new WebApi(httpClient, accountId);
+            return client;
+        }
+
+        /// <summary>	Gets contents of test file. </summary>
+        /// <param name="filename">	Filename of the file. </param>
+        /// <returns>	The contents of test file. </returns>
+        private string GetContentsOfTestFile(string filename)
 	    {
 			var sampleFolderLocation = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\SampleOutputs");
 			var targetFile = Path.Combine(sampleFolderLocation, filename);

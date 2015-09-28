@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<response
+xmlns="urn:didata.com:api:cloud:types" requestId="NA9/2015-06-
+12T04:41:35.010-04:00/ae9f8391-457c-494c-b058-99483b5fe7d0">
+  <operation>EDIT_VIRTUAL_LISTENER</operation>
+  <responseCode>OK</responseCode>
+  <message>
+    Virtual Listener 'Production.Load.Balancer' has been
+    updated.
+  </message>
+</response>
