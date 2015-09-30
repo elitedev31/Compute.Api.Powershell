@@ -2159,5 +2159,13 @@ namespace DD.CBU.Compute.Api.Client
         {
             return new Uri(string.Format(MCP2_0_PREFIX + "{0}/network/removePublicIpBlock", orgId), UriKind.Relative);
         }
+
+        /// <summary>	Deploy server via MCP 2.0 api </summary>
+        /// <param name="orgId">	The org Id. </param>
+        /// <returns>	An URI for the mcp2.0 deploy server api. </returns>      
+        public static Uri DeployMCP20Server(Guid orgId)
+        {
+            return new Uri(string.Format(MCP2_0_PREFIX + "{0}/server/deployServer", orgId), UriKind.Relative);
+        }
     }
 }

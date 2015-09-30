@@ -94,5 +94,12 @@
         /// <param name="notifyNicIpChange">The Notify NIC IP change model.</param>
         /// <returns>The async type of <see cref="ResponseType"/></returns>
         Task<ResponseType> NotifyNicIpChange(NotifyNicIpChangeType notifyNicIpChange);
+
+        /// <summary>
+        /// Deploys a server to MCP1.0 or MCP 2.0 data centers 
+        /// </summary>
+        /// <param name="serverDetails">Details of the server to be deployed</param>
+        /// <returns>Response containing the server id</returns>
+        Task<ResponseType> DeployServer(DeployServerType serverDetails);
     }
 }

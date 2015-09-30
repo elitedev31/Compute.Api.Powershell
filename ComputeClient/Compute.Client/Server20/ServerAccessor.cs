@@ -192,5 +192,18 @@
                     _apiClient.PostAsync<NotifyNicIpChangeType, ResponseType>(
                         ApiUris.NotifyNicIpChange(_apiClient.OrganizationId), notifyNicIpChange);
         }
+
+        /// <summary>
+        /// Deploys a server to MCP1.0 or MCP 2.0 data centers 
+        /// </summary>
+        /// <param name="serverDetails">Details of the server to be deployed</param>
+        /// <returns>Response containing the server id</returns>
+        public async Task<ResponseType> DeployServer(DeployServerType serverDetails)
+        {
+            return
+              await
+                  _apiClient.PostAsync<DeployServerType, ResponseType>(
+                      ApiUris.DeployMCP20Server(_apiClient.OrganizationId), serverDetails);
+        }
     }
 }
