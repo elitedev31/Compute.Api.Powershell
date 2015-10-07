@@ -134,7 +134,7 @@
     <Compile Include="Network20\NatAccessor.cs" />
     <Compile Include="Network20\NetworkDomainAccessor.cs" />
     <Compile Include="Network20\NetworkDomainExtensions.cs" />
-    <Compile Include="Network20\VipAccessor.cs" />
+    <Compile Include="Network20\VipSupportAccessor.cs" />
     <Compile Include="Network20\VipPoolAccessor.cs" />
     <Compile Include="Network20\NetworkingAccessor.cs" />
     <Compile Include="Network20\VipNodeAccessor.cs" />

@@ -77,7 +77,7 @@
     <Compile Include="MCP2\NatRuleAccessorTests.cs" />
     <Compile Include="MCP2\IpAddressAccessorTests.cs" />
     <Compile Include="MCP2\FirewallRuleAccessorTests.cs" />
-    <Compile Include="MCP2\VipAccessorTests.cs" />
+    <Compile Include="MCP2\VipSupportAccessorTests.cs" />
     <Compile Include="MCP2\VipPoolAccessorTests.cs" />
     <Compile Include="MCP2\VirtualListenerAccessorTests.cs" />
     <Compile Include="MCP2\VipNodeAccessorTests.cs" />

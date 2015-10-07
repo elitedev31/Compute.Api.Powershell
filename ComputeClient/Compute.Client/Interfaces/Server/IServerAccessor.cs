@@ -8,6 +8,7 @@
     using DD.CBU.Compute.Api.Contracts.Requests;
     using DD.CBU.Compute.Api.Contracts.Requests.Server;
     using DD.CBU.Compute.Api.Contracts.Server;
+    using DD.CBU.Compute.Api.Contracts.Server10;
 
     /// <summary>
     /// The server Interface

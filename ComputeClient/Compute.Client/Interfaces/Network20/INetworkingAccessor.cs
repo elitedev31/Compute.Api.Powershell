@@ -29,9 +29,9 @@
         IFirewallRuleAccessor FirewallRule { get; }
 
         /// <summary>
-        /// Gets the VIP Accessor.
+        /// Gets the VIP Support Accessor.
         /// </summary>
-        IVipAccessor Vip { get; }
+        IVipSupportAccessor VipSupport { get; }
 
         /// <summary>
         /// Gets the VIP Pool Accessor.

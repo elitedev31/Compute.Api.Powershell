@@ -32,7 +32,7 @@ namespace DD.CBU.Compute.Api.Client
 	using DD.CBU.Compute.Api.Client.Network;
 	using DD.CBU.Compute.Api.Client.Network20;
 	using DD.CBU.Compute.Api.Client.Server;
-	using DD.CBU.Compute.Api.Client.Server20;
+    using DD.CBU.Compute.Api.Client.Server20;
 	using DD.CBU.Compute.Api.Client.Utilities;
 	using DD.CBU.Compute.Api.Client.WebApi;
 	using DD.CBU.Compute.Api.Contracts.Datacenter;
@@ -40,7 +40,8 @@ namespace DD.CBU.Compute.Api.Client
 	using DD.CBU.Compute.Api.Contracts.General;
 	using DD.CBU.Compute.Api.Contracts.Image;
 	using DD.CBU.Compute.Api.Contracts.Server;
-	using DD.CBU.Compute.Api.Contracts.Software;
+    using DD.CBU.Compute.Api.Contracts.Server10;
+    using DD.CBU.Compute.Api.Contracts.Software;
 
 	/// <summary>
 	/// A client for the Dimension Data Compute-as-a-Service (CaaS) API.

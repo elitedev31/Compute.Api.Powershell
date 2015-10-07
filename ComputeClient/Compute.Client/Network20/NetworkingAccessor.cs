@@ -1,6 +1,7 @@
 ﻿namespace DD.CBU.Compute.Api.Client.Network20
 {
     using DD.CBU.Compute.Api.Client.Interfaces.Network20;
+    using DD.CBU.Compute.Api.Contracts.Server10;
 
     using Interfaces;
 
@@ -20,7 +21,7 @@
             IpAddress = new IpAddressAccessor(apiClient);
             Nat = new NatAccessor(apiClient);
             FirewallRule = new FirewallRuleAccessor(apiClient);
-            Vip = new VipAccessor(apiClient);
+            VipSupport = new VipSupportAccessor(apiClient);
             VipPool = new VipPoolAccessor(apiClient);
             VipNode = new VipNodeAccessor(apiClient);
             VipVirtualListener = new VipVirtualListenerAccessor(apiClient);
@@ -52,9 +53,9 @@
         public IFirewallRuleAccessor FirewallRule { get; private set; }
 
         /// <summary>
-        /// Gets the VIP Accessor.
+        /// Gets the VIP Support Accessor.
         /// </summary>
-        public IVipAccessor Vip { get; private set; }
+        public IVipSupportAccessor VipSupport { get; private set; }
 
         /// <summary>
         /// Gets the VIP Pool Accessor.

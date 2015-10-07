@@ -11,9 +11,9 @@ using DD.CBU.Compute.Api.Contracts.Requests.Network20;
 namespace DD.CBU.Compute.Api.Client.Network20
 {
     /// <summary>
-    /// The VIP Management type.
+    /// The VIP support type.
     /// </summary>
-    public class VipAccessor : IVipAccessor
+    public class VipSupportAccessor : IVipSupportAccessor
     {
         /// <summary>
         /// The Web Api.
@@ -21,10 +21,10 @@ namespace DD.CBU.Compute.Api.Client.Network20
         private readonly IWebApi _api;
 
         /// <summary>
-        /// Initializes a new instance of <see cref="VipAccessor"/>
+        /// Initializes a new instance of <see cref="VipSupportAccessor"/>
         /// </summary>
         /// <param name="api">The Web Api</param>
-        public VipAccessor(IWebApi api)
+        public VipSupportAccessor(IWebApi api)
         {
             _api = api;
         }

@@ -10,7 +10,8 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 	using DD.CBU.Compute.Api.Contracts.General;
 	using DD.CBU.Compute.Api.Contracts.Image;
 	using DD.CBU.Compute.Api.Contracts.Server;
-	using DD.CBU.Compute.Api.Contracts.Software;
+    using DD.CBU.Compute.Api.Contracts.Server10;
+    using DD.CBU.Compute.Api.Contracts.Software;
 
     /// <summary>
     /// The interface of the CaaS API Client

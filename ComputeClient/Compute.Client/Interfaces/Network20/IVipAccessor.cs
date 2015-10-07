@@ -9,9 +9,9 @@ using DD.CBU.Compute.Api.Contracts.Requests.Network20;
 namespace DD.CBU.Compute.Api.Client.Interfaces.Network20
 {
     /// <summary>
-    /// The VIP Management interface.
+    /// The VIP support interface.
     /// </summary>
-    public interface IVipAccessor
+    public interface IVipSupportAccessor
     {
         /// <summary>
         /// Retrieves default health monitors.

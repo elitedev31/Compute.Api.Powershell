@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Compute.Client.UnitTests.MCP2
 {
 	[TestClass]
-	public class VipAccessorTests : BaseApiClientTestFixture
+	public class VipSupportAccessorTests : BaseApiClientTestFixture
 	{
         [TestMethod]
         public async Task GetDefaultHealthMonitors_ReturnsResponse()
@@ -19,7 +19,7 @@ namespace Compute.Client.UnitTests.MCP2
             requestsAndResponses.Add(ApiUris.GetDefaultHealthMonitors(this.accountId, networkDomainId), RequestFileResponseType.AsGoodResponse("ListDefaultHealthMonitorsResponse.xml"));
 
             var client = GetWebApiClient();
-            var accessor = new VipAccessor(client);
+            var accessor = new VipSupportAccessor(client);
 
             var response = await accessor.GetDefaultHealthMonitors(networkDomainId);
 
@@ -36,7 +36,7 @@ namespace Compute.Client.UnitTests.MCP2
             requestsAndResponses.Add(ApiUris.GetDefaultPersistenceProfile(this.accountId, networkDomainId), RequestFileResponseType.AsGoodResponse("ListDefaultPersistenceProfilesResponse.xml"));
 
             var client = GetWebApiClient();
-            var accessor = new VipAccessor(client);
+            var accessor = new VipSupportAccessor(client);
 
             var response = await accessor.GetDefaultPersistenceProfiles(networkDomainId);
 
@@ -53,7 +53,7 @@ namespace Compute.Client.UnitTests.MCP2
             requestsAndResponses.Add(ApiUris.GetDefaultIrule(this.accountId, networkDomainId), RequestFileResponseType.AsGoodResponse("ListDefaultIrulesResponse.xml"));
 
             var client = GetWebApiClient();
-            var accessor = new VipAccessor(client);
+            var accessor = new VipSupportAccessor(client);
 
             var response = await accessor.GetDefaultIrules(networkDomainId);
 

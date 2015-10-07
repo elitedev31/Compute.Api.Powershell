@@ -1,4 +1,4 @@
-namespace DD.CBU.Compute.Api.Contracts.Server
+namespace DD.CBU.Compute.Api.Contracts.Server10
 {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.18020")]
