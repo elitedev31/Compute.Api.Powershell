@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using DD.CBU.Compute.Api.Client;
 using DD.CBU.Compute.Api.Client.Network20;
 using DD.CBU.Compute.Api.Contracts.Network20;
-using DD.CBU.Compute.Api.Contracts.Vip;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Compute.Client.UnitTests.MCP2
@@ -15,7 +14,7 @@ namespace Compute.Client.UnitTests.MCP2
     public class NatRuleAccessorTests : BaseApiClientTestFixture
     {
         [TestMethod]
-        public async Task CreateNatRuleReturnsResponse()
+        public async Task CreateNatRule_ReturnsResponse()
         {
             requestsAndResponses.Add(ApiUris.CreateNatRule(accountId), RequestFileResponseType.AsGoodResponse("CreateNatRuleResponse.xml"));
 
@@ -32,25 +31,40 @@ namespace Compute.Client.UnitTests.MCP2
         }
 
         [TestMethod]
-        public async Task ListNatRulesReturnsResponse()
+        public async Task GetNatRules_ReturnsResponse()
         {
-            var networkDomainId = Guid.NewGuid().ToString();
-            requestsAndResponses.Add(ApiUris.GetDomainNatRules(accountId, networkDomainId), RequestFileResponseType.AsGoodResponse("ListNatRules.xml"));
+            var networkDomainId = Guid.NewGuid();
+            requestsAndResponses.Add(ApiUris.GetDomainNatRules(accountId, networkDomainId.ToString()), RequestFileResponseType.AsGoodResponse("ListNatRules.xml"));
             var webApi = GetWebApiClient();
             var NatRule = new NatAccessor(webApi);
 
             var result = await NatRule.GetNatRules(networkDomainId);
 
-            Assert.AreEqual(2, result.natRule.Count());
-            Assert.IsNotNull(result.natRule.First().internalIp);
-            Assert.IsNotNull(result.natRule.First().externalIp);
+            Assert.AreEqual(2, result.Count());
+            Assert.IsNotNull(result.First().internalIp);
+            Assert.IsNotNull(result.First().externalIp);
         }
 
         [TestMethod]
-        public async Task GetNatRuleReturnsResponse()
+        public async Task GetNatRulesPaginated_ReturnsResponse()
         {
-            var natRuleId = Guid.NewGuid().ToString();
-            requestsAndResponses.Add(ApiUris.GetNatRule(accountId, natRuleId), RequestFileResponseType.AsGoodResponse("GetNatRule.xml"));
+            var networkDomainId = Guid.NewGuid();
+            requestsAndResponses.Add(ApiUris.GetDomainNatRules(accountId, networkDomainId.ToString()), RequestFileResponseType.AsGoodResponse("ListNatRules.xml"));
+            var webApi = GetWebApiClient();
+            var NatRule = new NatAccessor(webApi);
+
+            var result = await NatRule.GetNatRulesPaginated(networkDomainId);
+
+            Assert.AreEqual(2, result.items.Count());
+            Assert.IsNotNull(result.items.First().internalIp);
+            Assert.IsNotNull(result.items.First().externalIp);
+        }
+
+        [TestMethod]
+        public async Task GetNatRule_ReturnsResponse()
+        {
+            var natRuleId = Guid.NewGuid();
+            requestsAndResponses.Add(ApiUris.GetNatRule(accountId, natRuleId.ToString()), RequestFileResponseType.AsGoodResponse("GetNatRule.xml"));
             var webApi = GetWebApiClient();
             var NatRule = new NatAccessor(webApi);
 
@@ -61,9 +75,9 @@ namespace Compute.Client.UnitTests.MCP2
         }
 
         [TestMethod]
-        public async Task DeleteNatRuleReturnsResponse()
+        public async Task DeleteNatRule_ReturnsResponse()
         {
-            var natRuleId = Guid.NewGuid().ToString();
+            var natRuleId = Guid.NewGuid();
             requestsAndResponses.Add(ApiUris.DeleteNatRule(accountId), RequestFileResponseType.AsGoodResponse("DeleteNatRule.xml"));
             var webApi = GetWebApiClient();
             var NatRule = new NatAccessor(webApi);

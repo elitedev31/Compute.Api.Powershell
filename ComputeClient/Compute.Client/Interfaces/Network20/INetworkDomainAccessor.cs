@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    using DD.CBU.Compute.Api.Contracts.General;
     using DD.CBU.Compute.Api.Contracts.Network20;
     using DD.CBU.Compute.Api.Contracts.Requests;
     using DD.CBU.Compute.Api.Contracts.Requests.Network20;
@@ -19,13 +20,24 @@
 		/// <param name="filteringOptions">
 		/// The filtering options.
 		/// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        Task<IEnumerable<NetworkDomainType>> GetNetworkDomains(NetworkDomainListOptions filteringOptions = null);
+
+        /// <summary>
+        /// The get network domains.
+        /// </summary>
+		/// <param name="filteringOptions">
+		/// The filtering options.
+		/// </param>
         /// <param name="pagingOptions">
         /// The paging options.
         /// </param>
         /// <returns>
         /// The <see cref="Task"/>.
         /// </returns>
-        Task<IEnumerable<NetworkDomainType>> GetNetworkDomains(NetworkDomainListOptions filteringOptions = null, PageableRequest pagingOptions = null);
+        Task<PagedResponse<NetworkDomainType>> GetNetworkDomainsPaginated(NetworkDomainListOptions filteringOptions = null, PageableRequest pagingOptions = null);
 
         /// <summary>
         /// 	This function gets a network domain from Cloud.
@@ -71,15 +83,15 @@
 	    /// </returns>
 	    Task<ResponseType> ModifyNetworkDomain(EditNetworkDomainType networkDomain);
 
-		/// <summary>
-		/// 	An IComputeApiClient extension method that deletes the network domain. 
-		/// </summary>
-		/// <param name="id">
-		/// 	 	The identifier of the network domain. 
-		/// </param>
-		/// <returns>
-		/// 	A job response from the API; 
-		/// </returns>
-		Task<ResponseType> DeleteNetworkDomain(string id);
+        /// <summary>
+        /// Delete the network domain. 
+        /// </summary>
+        /// <param name="id">
+        /// The identifier of the network domain. 
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        Task<ResponseType> DeleteNetworkDomain(Guid id);
 	}
 }

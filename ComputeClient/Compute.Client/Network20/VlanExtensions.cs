@@ -25,7 +25,7 @@
 		[Obsolete("Use IComputeApiClient.Networking.Vlan instead")]
 		public static async Task<IEnumerable<VlanType>> GetVlans(this IComputeApiClient client, VlanListOptions options = null, PageableRequest pagingOptions = null)
 		{
-			return await client.Networking.Vlan.GetVlans(options, pagingOptions);
+			return (await client.Networking.Vlan.GetVlansPaginated(options, pagingOptions)).items;
 		}
 
 		/// <summary>
@@ -84,7 +84,7 @@
 		[Obsolete("Use IComputeApiClient.Networking.Vlan instead")]
 		public static async Task<ResponseType> DeleteVlan(this IComputeApiClient client, string id)
 		{
-			return await client.Networking.Vlan.DeleteVlan(id);
+			return await client.Networking.Vlan.DeleteVlan(Guid.Parse(id));
 		}
 	}
 }

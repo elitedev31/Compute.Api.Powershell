@@ -6,6 +6,7 @@
     using System.Threading.Tasks;
     using DD.CBU.Compute.Api.Client.Interfaces;
     using DD.CBU.Compute.Api.Client.Interfaces.Network20;
+    using DD.CBU.Compute.Api.Contracts.General;
     using DD.CBU.Compute.Api.Contracts.Network20;
     using DD.CBU.Compute.Api.Contracts.Requests;
     using DD.CBU.Compute.Api.Contracts.Requests.Network20;
@@ -36,19 +37,38 @@
 		/// <param name="filteringOptions">
 		/// The filtering options.
 		/// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        public async Task<IEnumerable<NetworkDomainType>> GetNetworkDomains(NetworkDomainListOptions filteringOptions = null)
+        {
+            var response = await GetNetworkDomainsPaginated(filteringOptions, null);
+            return response.items;
+        }
+
+        /// <summary>
+        /// The get network domains.
+        /// </summary>
+		/// <param name="filteringOptions">
+		/// The filtering options.
+		/// </param>
         /// <param name="pagingOptions">
         /// The paging options.
         /// </param>
         /// <returns>
         /// The <see cref="Task"/>.
         /// </returns>
-        public async Task<IEnumerable<NetworkDomainType>> GetNetworkDomains(NetworkDomainListOptions filteringOptions = null, PageableRequest pagingOptions = null)
+        public async Task<PagedResponse<NetworkDomainType>> GetNetworkDomainsPaginated(NetworkDomainListOptions filteringOptions = null, PageableRequest pagingOptions = null)
         {
-            var networks = await _apiClient.GetAsync<networkDomains>(
-                ApiUris.NetworkDomains(_apiClient.OrganizationId),
-                pagingOptions,
-                filteringOptions);
-            return networks.networkDomain;
+            var response = await _apiClient.GetAsync<networkDomains>(ApiUris.NetworkDomains(_apiClient.OrganizationId), pagingOptions, filteringOptions);
+            return new PagedResponse<NetworkDomainType>
+            {
+                items = response.networkDomain,
+                totalCount = response.totalCountSpecified ? response.totalCount : (int?)null,
+                pageCount = response.pageCountSpecified ? response.pageCount : (int?)null,
+                pageNumber = response.pageNumberSpecified ? response.pageNumber : (int?)null,
+                pageSize = response.pageSizeSpecified ? response.pageSize : (int?)null
+            };
         }
 
         /// <summary>
@@ -94,8 +114,9 @@
         /// </returns>
         public async Task<ResponseType> DeployNetworkDomain(DeployNetworkDomainType networkDomain)
 		{
-			var response = await _apiClient.PostAsync<DeployNetworkDomainType, ResponseType>(ApiUris.CreateNetworkDomain(_apiClient.OrganizationId), networkDomain);
-			return response;
+			return await _apiClient.PostAsync<DeployNetworkDomainType, ResponseType>(
+                ApiUris.CreateNetworkDomain(_apiClient.OrganizationId),
+                networkDomain);
 		}
 
 	    /// <summary>
@@ -109,24 +130,25 @@
 	    /// </returns>
 	    public async Task<ResponseType> ModifyNetworkDomain(EditNetworkDomainType networkDomain)
 	    {
-			return await _apiClient.PostAsync<EditNetworkDomainType, ResponseType>(ApiUris.ModifyNetworkDomain(_apiClient.OrganizationId), networkDomain);
+			return await _apiClient.PostAsync<EditNetworkDomainType, ResponseType>(
+                ApiUris.ModifyNetworkDomain(_apiClient.OrganizationId),
+                networkDomain);
 	    }
 
-	    /// <summary>
-		/// 	An IComputeApiClient extension method that deletes the network domain. 
-		/// </summary>
-		/// <param name="id">
-		/// 	 	The identifier of the network domain. 
-		/// </param>
-		/// <returns>
-		/// 	A job response from the API; 
-		/// </returns>
-		public async Task<ResponseType> DeleteNetworkDomain(string id)
+        /// <summary>
+        /// Delete the network domain. 
+        /// </summary>
+        /// <param name="id">
+        /// The identifier of the network domain. 
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+		public async Task<ResponseType> DeleteNetworkDomain(Guid id)
 		{
-			ResponseType response = await
-				_apiClient.PostAsync<DeleteNetworkDomainType, ResponseType>(
-					ApiUris.DeleteNetworkDomain(_apiClient.OrganizationId), new DeleteNetworkDomainType { id = id });
-			return response;
+			return await _apiClient.PostAsync<DeleteNetworkDomainType, ResponseType>(
+			    ApiUris.DeleteNetworkDomain(_apiClient.OrganizationId),
+                new DeleteNetworkDomainType { id = id.ToString() });
 		}
 	}
 }

@@ -834,7 +834,79 @@ namespace DD.CBU.Compute.Api.Client
             return new Uri(string.Format(MCP1_0_PREFIX + "{0}/antiAffinityRule/{1}?delete", orgId, ruleId), UriKind.Relative);
         }
 
+        /// <summary>	Gets MCP 2 servers. </summary>
+        /// <remarks>	Anthony, 6/17/2015. </remarks>
+        /// <param name="orgId">	The organization Id. </param>
+        /// <returns>	The MCP 2 servers. </returns>
+        public static Uri GetMcp2Servers(Guid orgId)
+        {
+            return new Uri(string.Format(MCP2_0_PREFIX + "{0}/server/server", orgId), UriKind.Relative);
+        }
 
+        /// <summary>	Gets MCP 2 server. </summary>
+        /// <remarks>	Anthony, 6/17/2015. </remarks>
+        /// <param name="orgId">   	The organization Id. </param>
+        /// <param name="serverId">	The server Id. </param>
+        /// <returns>	The MCP 2 servers. </returns>
+        public static Uri GetMcp2Server(Guid orgId, Guid serverId)
+        {
+            return new Uri(string.Format(MCP2_0_PREFIX + "{0}/server/server/{1}", orgId, serverId), UriKind.Relative);
+        }
+
+        /// <summary>Gets the list anti affinity rule URL.</summary>
+        /// <param name="orgId">The org Id.</param>
+        /// <returns>The URL.</returns>
+        public static Uri GetMcp2GetAntiAffinityRules(Guid orgId)
+        {
+            return new Uri(string.Format(MCP2_0_PREFIX + "{0}/server/antiAffinityRule", orgId), UriKind.Relative);
+        }
+
+        #region FirewallRule
+
+        /// <summary>Gets the list firewall rules URL.</summary>
+        /// <param name="orgId">The org Id.</param>
+        /// <returns>The URL.</returns>
+        public static Uri GetFirewallRules(Guid orgId)
+        {
+            return new Uri(string.Format(MCP2_0_PREFIX + "{0}/network/firewallRule", orgId), UriKind.Relative);
+        }
+
+        /// <summary>Gets the get firewall rule URL.</summary>
+        /// <param name="orgId">The org Id.</param>
+        /// <param name="firewallRuleId">The firewall rule Id.</param>
+        /// <returns>The URL.</returns>
+        public static Uri GetFirewallRule(Guid orgId, Guid firewallRuleId)
+        {
+            return new Uri(string.Format(MCP2_0_PREFIX + "{0}/network/firewallRule/{1}", orgId, firewallRuleId), UriKind.Relative);
+        }
+
+        /// <summary>Gets the create firewall rule URL.</summary>
+        /// <param name="orgId">The org Id.</param>
+        /// <returns>The URL.</returns>
+        public static Uri CreateFirewallRule(Guid orgId)
+        {
+            return new Uri(string.Format(MCP2_0_PREFIX + "{0}/network/createFirewallRule", orgId), UriKind.Relative);
+        }
+
+        /// <summary>Gets the edit firewall rule URL.</summary>
+        /// <param name="orgId">The org Id.</param>
+        /// <returns>The URL.</returns>
+        public static Uri EditFirewallRule(Guid orgId)
+        {
+            return new Uri(string.Format(MCP2_0_PREFIX + "{0}/network/editFirewallRule", orgId), UriKind.Relative);
+        }
+
+        /// <summary>Gets the delete firewall rule URL.</summary>
+        /// <param name="orgId">The org Id.</param>
+        /// <returns>The URL.</returns>
+        public static Uri DeleteFirewallRule(Guid orgId)
+        {
+            return new Uri(string.Format(MCP2_0_PREFIX + "{0}/network/deleteFirewallRule", orgId), UriKind.Relative);
+        }
+
+        #endregion
+
+        #region VLAN
 
         /// <summary>
         /// The get Virtual LAN.
@@ -922,24 +994,7 @@ namespace DD.CBU.Compute.Api.Client
             return new Uri(string.Format(MCP2_0_PREFIX + "{0}/network/deleteVlan", orgId), UriKind.Relative);
         }
 
-        /// <summary>	Gets MCP 2 servers. </summary>
-        /// <remarks>	Anthony, 6/17/2015. </remarks>
-        /// <param name="orgId">	The organization Id. </param>
-        /// <returns>	The MCP 2 servers. </returns>
-        public static Uri GetMcp2Servers(Guid orgId)
-        {
-            return new Uri(string.Format(MCP2_0_PREFIX + "{0}/server/server", orgId), UriKind.Relative);
-        }
-
-        /// <summary>	Gets MCP 2 server. </summary>
-        /// <remarks>	Anthony, 6/17/2015. </remarks>
-        /// <param name="orgId">   	The organization Id. </param>
-        /// <param name="serverId">	The server Id. </param>
-        /// <returns>	The MCP 2 servers. </returns>
-        public static Uri GetMcp2Server(Guid orgId, Guid serverId)
-        {
-            return new Uri(string.Format(MCP2_0_PREFIX + "{0}/server/server/{1}", orgId, serverId), UriKind.Relative);
-        }
+        #endregion
 
         #region Network API
 
@@ -2140,6 +2195,39 @@ namespace DD.CBU.Compute.Api.Client
         }
 
         /// <summary>
+        /// Returns the get default health monitor URL.
+        /// </summary>
+        /// <param name="orgId">The organization id.</param>
+        /// <param name="networkDomainId">The network domain id.</param>
+        /// <returns>The <see cref="Uri"/>.</returns>
+        public static Uri GetDefaultHealthMonitors(Guid orgId, Guid networkDomainId)
+        {
+            return new Uri(string.Format(MCP2_0_PREFIX + "{0}/networkDomainVip/defaultHealthMonitor?networkDomainId={1}", orgId, networkDomainId), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// Returns the get default persistence profile URL.
+        /// </summary>
+        /// <param name="orgId">The organization id.</param>
+        /// <param name="networkDomainId">The network domain id.</param>
+        /// <returns>The <see cref="Uri"/>.</returns>
+        public static Uri GetDefaultPersistenceProfile(Guid orgId, Guid networkDomainId)
+        {
+            return new Uri(string.Format(MCP2_0_PREFIX + "{0}/networkDomainVip/defaultPersistenceProfile?networkDomainId={1}", orgId, networkDomainId), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// Returns the get default iRule URL.
+        /// </summary>
+        /// <param name="orgId">The organization id.</param>
+        /// <param name="networkDomainId">The network domain id.</param>
+        /// <returns>The <see cref="Uri"/>.</returns>
+        public static Uri GetDefaultIrule(Guid orgId, Guid networkDomainId)
+        {
+            return new Uri(string.Format(MCP2_0_PREFIX + "{0}/networkDomainVip/defaultIrule?networkDomainId={1}", orgId, networkDomainId), UriKind.Relative);
+        }
+
+        /// <summary>
         /// Returns the relative URI of the REST request for notify private IP address change.
         /// </summary>
         /// <param name="orgId">The organization id.</param>
@@ -2166,6 +2254,14 @@ namespace DD.CBU.Compute.Api.Client
         public static Uri DeployMCP20Server(Guid orgId)
         {
             return new Uri(string.Format(MCP2_0_PREFIX + "{0}/server/deployServer", orgId), UriKind.Relative);
+        }
+
+        /// <summary>	Clean server via MCP 2.0 api </summary>
+        /// <param name="orgId">	The org Id. </param>
+        /// <returns>	An URI for the mcp2.0 clean server api. </returns>      
+        public static Uri CleanMCP20Server(Guid orgId)
+        {
+            return new Uri(string.Format(MCP2_0_PREFIX + "{0}/server/cleanServer", orgId), UriKind.Relative);
         }
     }
 }

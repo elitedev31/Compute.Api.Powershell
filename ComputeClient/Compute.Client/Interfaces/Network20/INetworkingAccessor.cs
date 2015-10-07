@@ -3,31 +3,49 @@
 	/// <summary>	Interface for networking 2.0 API. </summary>
 	public interface INetworkingAccessor
 	{
-		/// <summary>	Network Domain related operations </summary>
-		INetworkDomainAccessor NetworkDomain { get; }
-
-		/// <summary>	VLAN related opertions </summary>
-		IVlanAccessor Vlan { get; }
-
-		/// <summary>	IP address management. </summary>
-		IIpamAccessor IpAddressManagement { get; }
-
-        /// <summary>	NAT Rule management. </summary>
-		INatAccessor NatAccessor { get; }
+        /// <summary>
+        /// Gets the Network Domain Accessor
+        /// </summary>
+        INetworkDomainAccessor NetworkDomain { get; }
 
         /// <summary>
-        /// Network Domain VIP Accessor.
+        /// Gets the VLAN Accessor
         /// </summary>
-        INetworkDomainVipAccessor VipAccessor { get; }
+        IVlanAccessor Vlan { get; }
 
         /// <summary>
-        /// Network Domain VIP Node Management.
+        /// Gets the IP address Accessor.
         /// </summary>
-        IVipNodeManagement NodeManagement { get; }
+        IIpAddressAccessor IpAddress { get; }
 
         /// <summary>
-        /// VIP Virtual Listener Management.
+        /// Gets the NAT Rule Accessor.
         /// </summary>
-        IVipVirtualListenerManagement VirtualListenerManagement { get; }
+		INatAccessor Nat { get; }
+
+        /// <summary>
+        /// Gets the Firewall Rule Accessor.
+        /// </summary>
+        IFirewallRuleAccessor FirewallRule { get; }
+
+        /// <summary>
+        /// Gets the VIP Accessor.
+        /// </summary>
+        IVipAccessor Vip { get; }
+
+        /// <summary>
+        /// Gets the VIP Pool Accessor.
+        /// </summary>
+        IVipPoolAccessor VipPool { get; }
+
+        /// <summary>
+        /// Gets the VIP Node Accessor.
+        /// </summary>
+        IVipNodeAccessor VipNode { get; }
+
+        /// <summary>
+        /// Gets the VIP Virtual Listener Accessor.
+        /// </summary>
+        IVipVirtualListenerAccessor VipVirtualListener { get; }
     }
 }

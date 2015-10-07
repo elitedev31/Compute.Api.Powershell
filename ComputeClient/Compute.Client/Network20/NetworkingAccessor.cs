@@ -8,8 +8,7 @@
     public class NetworkingAccessor : INetworkingAccessor
     {
         /// <summary>
-        /// 	Initializes a new instance of the DD.CBU.Compute.Api.Client.Network20.Networking
-        /// 	class.
+        /// Initializes a new instance of the <see cref="NetworkingAccessor"/> class.
         /// </summary>
         /// <param name="apiClient">
         /// The api Client.
@@ -18,45 +17,58 @@
         {
             NetworkDomain = new NetworkDomainAccessor(apiClient);
             Vlan = new VlanAccessor(apiClient);
-            IpAddressManagement = new IpAddressManagementAccessor(apiClient);
-            NatAccessor = new NatAccessor(apiClient);
-            VipAccessor = new NetworkDomainVipAccessor(apiClient);
-            NodeManagement = new VipNodeManagement(apiClient);
-            VirtualListenerManagement = new VipVirtualListenerManagement(apiClient);
+            IpAddress = new IpAddressAccessor(apiClient);
+            Nat = new NatAccessor(apiClient);
+            FirewallRule = new FirewallRuleAccessor(apiClient);
+            Vip = new VipAccessor(apiClient);
+            VipPool = new VipPoolAccessor(apiClient);
+            VipNode = new VipNodeAccessor(apiClient);
+            VipVirtualListener = new VipVirtualListenerAccessor(apiClient);
         }
 
-        /// <summary> Gets the network domain. </summary>
-        /// <value>	The network domain. </value>
+        /// <summary>
+        /// Gets the network domain Accessor.
+        /// </summary>
         public INetworkDomainAccessor NetworkDomain { get; private set; }
 
         /// <summary>
-        /// Gets the vlan.
+        /// Gets the VLAN Accessor.
         /// </summary>
         public IVlanAccessor Vlan { get; private set; }
 
-        /// <summary> IP address management. </summary>
-        /// <value>	The IP address management. </value>
-        /// <seealso cref="P:DD.CBU.Compute.Api.Client.Interfaces.INetworking.IpAddressManagement"/>
-        public IIpamAccessor IpAddressManagement { get; private set; }
+        /// <summary>
+        /// Gets the IP address Accessor.
+        /// </summary>
+        public IIpAddressAccessor IpAddress { get; private set; }
 
         /// <summary>
         /// Gets the NAT Rule Accessor.
         /// </summary>
-        public INatAccessor NatAccessor { get; private set; }
+        public INatAccessor Nat { get; private set; }
 
         /// <summary>
-        /// Network Domain VIP Accessor.
+        /// Gets the Firewall Rule Accessor.
         /// </summary>
-        public INetworkDomainVipAccessor VipAccessor { get; private set; }
+        public IFirewallRuleAccessor FirewallRule { get; private set; }
 
         /// <summary>
-        /// Network Domain VIP Node Management.
+        /// Gets the VIP Accessor.
         /// </summary>
-        public IVipNodeManagement NodeManagement { get; private set; }
+        public IVipAccessor Vip { get; private set; }
 
         /// <summary>
-        /// VIP Virtual Listener Management.
+        /// Gets the VIP Pool Accessor.
         /// </summary>
-        public IVipVirtualListenerManagement VirtualListenerManagement { get; private set; }
+        public IVipPoolAccessor VipPool { get; private set; }
+
+        /// <summary>
+        /// Gets the VIP Node Accessor.
+        /// </summary>
+        public IVipNodeAccessor VipNode { get; private set; }
+
+        /// <summary>
+        /// Gets the VIP Virtual Listener Accessor.
+        /// </summary>
+        public IVipVirtualListenerAccessor VipVirtualListener { get; private set; }
     }
 }

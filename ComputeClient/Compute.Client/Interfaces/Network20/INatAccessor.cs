@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using DD.CBU.Compute.Api.Contracts.General;
 using DD.CBU.Compute.Api.Contracts.Network20;
 using DD.CBU.Compute.Api.Contracts.Requests;
 using DD.CBU.Compute.Api.Contracts.Requests.Network20;
@@ -18,10 +19,18 @@ namespace DD.CBU.Compute.Api.Client.Interfaces.Network20
         /// </summary>
         /// <param name="networkDomainId">  Identifier for the network domain.</param>
         /// <param name="options">          Options for filtering the operations.</param>
-        /// <param name="pagingOptions">    The paging options, null means default.</param>
         /// <returns></returns>
-        Task<natRules> GetNatRules(string networkDomainId, NatRuleListOptions options = null,
-            PageableRequest pagingOptions = null);
+        Task<IEnumerable<NatRuleType>> GetNatRules(Guid networkDomainId, NatRuleListOptions options = null);
+
+        /// <summary>
+        /// Retrieves the list of the NAT Rules on a particular Network Domain at an MCP 2.0 data center
+        /// This API requires your organization ID and the ID of the target network.
+        /// </summary>
+        /// <param name="networkDomainId">  Identifier for the network domain.</param>
+        /// <param name="options">          Options for filtering the operations.</param>
+        /// <param name="pagingOptions">    The paging options, null means default.</param>
+        /// <returns>                       The NAT Rule collection.</returns>
+        Task<PagedResponse<NatRuleType>> GetNatRulesPaginated(Guid networkDomainId, NatRuleListOptions options = null, PageableRequest pagingOptions = null);
 
         /// <summary>
         /// Creates a NAT Rule on a Network Domain in an MCP 2.0 data center location.
@@ -43,7 +52,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces.Network20
         /// <returns>
         /// 	The NAt Rule. 
         /// </returns>
-        Task<NatRuleType> GetNatRule(string natRuleId);
+        Task<NatRuleType> GetNatRule(Guid natRuleId);
 
         /// <summary>
         /// 	Deletes a NAT Rule. 
@@ -54,6 +63,6 @@ namespace DD.CBU.Compute.Api.Client.Interfaces.Network20
         /// <returns>
         /// 	The job from the API; 
         /// </returns>
-        Task<ResponseType> DeleteNatRule(string natRuleId);
+        Task<ResponseType> DeleteNatRule(Guid natRuleId);
     }
 }

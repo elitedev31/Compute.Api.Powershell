@@ -1,52 +1,66 @@
 ﻿namespace DD.CBU.Compute.Api.Client.Interfaces.Network20
 {
-	using System;
-	using System.Collections.Generic;
-	using System.Threading.Tasks;
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
 
-	using DD.CBU.Compute.Api.Contracts.Network20;
-	using DD.CBU.Compute.Api.Contracts.Requests;
-	using DD.CBU.Compute.Api.Contracts.Requests.Network20;
+    using DD.CBU.Compute.Api.Contracts.General;
+    using DD.CBU.Compute.Api.Contracts.Network20;
+    using DD.CBU.Compute.Api.Contracts.Requests;
+    using DD.CBU.Compute.Api.Contracts.Requests.Network20;
 
-	/// <summary>
-	/// The VlanAccessor interface.
-	/// </summary>
-	public interface IVlanAccessor
+    /// <summary>
+    /// The VlanAccessor interface.
+    /// </summary>
+    public interface IVlanAccessor
 	{
 		/// <summary>
 		/// 	Retrieves the list of ACL rules associated with a network. This API requires your
 		/// 	organization ID and the ID of the target network.
 		/// </summary>		
 		/// <param name="options">
-		/// 			Options for controlling the operation. 
-		/// </param>
-		/// <param name="pagingOptions">
-		/// 	Options for controlling the paging. 
+		/// 	Options for controlling the operation. 
 		/// </param>
 		/// <returns>
 		/// 	The VLAN collection. 
 		/// </returns>
-		Task<IEnumerable<VlanType>> GetVlans(VlanListOptions options = null, PageableRequest pagingOptions = null);
+		Task<IEnumerable<VlanType>> GetVlans(VlanListOptions options = null);
 
-		/// <summary>
-		/// 	The get VLAN list. 
-		/// </summary>		
-		/// <param name="id">
-		/// 			  	The id. 
-		/// </param>
-		/// <param name="vlanName">
-		/// 		  	The VLAN name. 
-		/// </param>
-		/// <param name="networkDomainId">
-		/// 	The network domain id. 
-		/// </param>
-		/// <param name="pagingOptions">
-		/// The paging Options.
-		/// </param>
-		/// <returns>
-		/// 	The <see cref="Task"/>. 
-		/// </returns>
-		Task<IEnumerable<VlanType>> GetVlans(Guid id, string vlanName, Guid networkDomainId, PageableRequest pagingOptions = null);
+        /// <summary>
+        /// 	Retrieves the list of ACL rules associated with a network. This API requires your
+        /// 	organization ID and the ID of the target network.
+        /// </summary>		
+        /// <param name="options">
+        /// 	Options for controlling the operation. 
+        /// </param>
+        /// <param name="pagingOptions">
+        /// 	Options for controlling the paging. 
+        /// </param>
+        /// <returns>
+        /// 	The VLAN collection. 
+        /// </returns>
+        Task<PagedResponse<VlanType>> GetVlansPaginated(VlanListOptions options = null, PageableRequest pagingOptions = null);
+
+        /// <summary>
+        /// 	The get VLAN list. 
+        /// </summary>		
+        /// <param name="id">
+        /// 	The id. 
+        /// </param>
+        /// <param name="vlanName">
+        /// 	The VLAN name. 
+        /// </param>
+        /// <param name="networkDomainId">
+        /// 	The network domain id. 
+        /// </param>
+        /// <param name="pagingOptions">
+        ///     The paging Options.
+        /// </param>
+        /// <returns>
+        /// 	The <see cref="Task"/>. 
+        /// </returns>
+        [Obsolete("Inconsistent: Use GetVlans(VlanOptions options) or GetVlans(GetVlansPaginated options, PageableRequest pagingOptions) instead.")]
+        Task<IEnumerable<VlanType>> GetVlans(Guid id, string vlanName, Guid networkDomainId, PageableRequest pagingOptions = null);
 
 		/// <summary>
 		/// 	An IComputeApiClient extension method that gets a VLAN. 
@@ -93,14 +107,14 @@
         Task<ResponseType> ExpandVlan(ExpandVlanType expandVlan);
 
         /// <summary>
-        /// 	An IComputeApiClient extension method that deletes the vlan. 
+        /// Delete a Virtual LAN 
         /// </summary>
         /// <param name="id">
-        /// 	 	The id of the VLAN. 
+        /// The id of the VLAN. 
         /// </param>
         /// <returns>
-        /// 	The job from the API; 
+        /// Operation status
         /// </returns>
-        Task<ResponseType> DeleteVlan(string id);
+        Task<ResponseType> DeleteVlan(Guid id);
 	}
 }

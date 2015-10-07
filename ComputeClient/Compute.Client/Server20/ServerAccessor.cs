@@ -1,10 +1,12 @@
 ﻿namespace DD.CBU.Compute.Api.Client.Server20
 {
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using DD.CBU.Compute.Api.Client.Interfaces;
     using DD.CBU.Compute.Api.Client.Interfaces.Server20;
+    using DD.CBU.Compute.Api.Contracts.General;
     using DD.CBU.Compute.Api.Contracts.Network20;
     using DD.CBU.Compute.Api.Contracts.Requests;
     using DD.CBU.Compute.Api.Contracts.Requests.Server20;
@@ -41,7 +43,8 @@
         /// </param>
         /// <returns>
         /// The <see cref="Task"/>.
-        /// </returns>	
+        /// </returns>
+        [Obsolete("Inconsistent: Use 'GetServers' or 'GetServersPaginated' instead.")]
         public async Task<ServersResponseCollection> GetMcp2DeployedServers(ServerListOptions filteringOptions = null, IPageableRequest pagingOptions = null)
         {
             ServersResponseCollection servers = await _apiClient.GetAsync<ServersResponseCollection>(
@@ -49,6 +52,50 @@
                 pagingOptions,
                 filteringOptions);
             return servers;
+        }
+
+        /// <summary>
+        /// The get mcp 2 deployed servers.
+        /// </summary>
+        /// <param name="filteringOptions">
+        /// The filtering options.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>	
+        public async Task<IEnumerable<ServerType>> GetServers(ServerListOptions filteringOptions = null)
+        {
+            var response = await GetServersPaginated(filteringOptions, null);
+            return response.items;
+        }
+
+        /// <summary>
+        /// The get mcp 2 deployed servers.
+        /// </summary>
+        /// <param name="filteringOptions">
+        /// The filtering options.
+        /// </param>
+        /// <param name="pagingOptions">
+        /// The paging options.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>	
+        public async Task<PagedResponse<ServerType>> GetServersPaginated(ServerListOptions filteringOptions = null, IPageableRequest pagingOptions = null)
+        {
+            var response = await _apiClient.GetAsync<ServersResponseCollection>(
+                ApiUris.GetMcp2Servers(_apiClient.OrganizationId),
+                pagingOptions,
+                filteringOptions);
+
+            return new PagedResponse<ServerType>
+            {
+                items = response.Server,
+                totalCount = response.totalCountSpecified ? response.totalCount : (int?)null,
+                pageCount = response.pageCountSpecified ? response.pageCount : (int?)null,
+                pageNumber = response.pageNumberSpecified ? response.pageNumber : (int?)null,
+                pageSize = response.pageSizeSpecified ? response.pageSize : (int?)null
+            };
         }
 
         /// <summary>
@@ -60,20 +107,77 @@
         /// <returns>
         /// The <see cref="Task"/>.
         /// </returns>
+        [Obsolete("Inconsistent: Use 'GetServer' instead.")]
         public async Task<ServerType> GetMcp2DeployedServer(Guid serverId)
         {
-            ServerType server =
-                await _apiClient.GetAsync<ServerType>(ApiUris.GetMcp2Server(_apiClient.OrganizationId, serverId));
-            return server;
+            return await GetServer(serverId);
+        }
+
+        /// <summary>
+        /// The get mcp 2 deployed server.
+        /// </summary>
+        /// <param name="serverId">
+        /// The server id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        public async Task<ServerType> GetServer(Guid serverId)
+        {
+            return await _apiClient.GetAsync<ServerType>(ApiUris.GetMcp2Server(_apiClient.OrganizationId, serverId));
+        }
+
+        /// <summary>
+        /// Gets the available anti affinity rules.
+        /// </summary>
+        /// <param name="filteringOptions">
+        /// The filtering options.
+        /// </param>
+        /// <returns>
+        /// Collection of <see cref="Contracts.Server.AntiAffinityRuleType"/>.
+        /// </returns>
+        public async Task<IEnumerable<AntiAffinityRuleType>> GetAntiAffinityRules(AntiAffinityRuleListOptions filteringOptions = null)
+        {
+            var response = await GetAntiAffinityRulesPaginated(filteringOptions, null);
+            return response.items;
+        }
+
+        /// <summary>
+        /// Gets the available anti affinity rules.
+        /// </summary>
+        /// <param name="filteringOptions">
+        /// The filtering options.
+        /// </param>
+        /// <param name="pagingOptions">
+        /// The paging options.
+        /// </param>
+        /// <returns>
+        /// Collection of <see cref="AntiAffinityRuleType"/>.
+        /// </returns>
+        public async Task<PagedResponse<AntiAffinityRuleType>> GetAntiAffinityRulesPaginated(AntiAffinityRuleListOptions filteringOptions = null, IPageableRequest pagingOptions = null)
+        {
+            var response = await _apiClient.GetAsync<antiAffinityRules>(
+                ApiUris.GetMcp2GetAntiAffinityRules(_apiClient.OrganizationId),
+                pagingOptions,
+                filteringOptions);
+
+            return new PagedResponse<AntiAffinityRuleType>
+            {
+                items = response.antiAffinityRule,
+                totalCount = response.totalCountSpecified ? response.totalCount : (int?)null,
+                pageCount = response.pageCountSpecified ? response.pageCount : (int?)null,
+                pageNumber = response.pageNumberSpecified ? response.pageNumber : (int?)null,
+                pageSize = response.pageSizeSpecified ? response.pageSize : (int?)null
+            };
         }
 
         /// <summary>	Deletes the server described by serverId. </summary>
         /// <param name="serverId">	The server id. </param>
         /// <returns>	A standard CaaS response. </returns>
         /// <seealso cref="M:DD.CBU.Compute.Api.Client.Interfaces.Server20.IServerAccessor.DeleteServer(Guid)"/>
-        public Task<ResponseType> DeleteServer(Guid serverId)
+        public async Task<ResponseType> DeleteServer(Guid serverId)
         {
-            return _apiClient.PostAsync<DeleteServerType, ResponseType>(ApiUris.DeleteServer(_apiClient.OrganizationId),
+            return await _apiClient.PostAsync<DeleteServerType, ResponseType>(ApiUris.DeleteServer(_apiClient.OrganizationId),
                 new DeleteServerType { id = serverId.ToString() });
         }
 
@@ -81,9 +185,9 @@
         /// <param name="serverId">	The server id. </param>
         /// <returns>	A standard CaaS response. </returns>
         /// <seealso cref="M:DD.CBU.Compute.Api.Client.Interfaces.Server20.IServerAccessor.StartServer(Guid)"/>
-        public Task<ResponseType> StartServer(Guid serverId)
+        public async Task<ResponseType> StartServer(Guid serverId)
         {
-            return _apiClient.PostAsync<StartServerType, ResponseType>(ApiUris.StartServer(_apiClient.OrganizationId),
+            return await _apiClient.PostAsync<StartServerType, ResponseType>(ApiUris.StartServer(_apiClient.OrganizationId),
                 new StartServerType { id = serverId.ToString() });
         }
 
@@ -91,9 +195,9 @@
         /// <param name="serverId">	The server id. </param>
         /// <returns>	A standard CaaS response. </returns>
         /// <seealso cref="M:DD.CBU.Compute.Api.Client.Interfaces.Server20.IServerAccessor.ShutdownServer(Guid)"/>
-        public Task<ResponseType> ShutdownServer(Guid serverId)
+        public async Task<ResponseType> ShutdownServer(Guid serverId)
         {
-            return _apiClient.PostAsync<ShutdownServerType, ResponseType>(ApiUris.ShutdownServer(_apiClient.OrganizationId),
+            return await _apiClient.PostAsync<ShutdownServerType, ResponseType>(ApiUris.ShutdownServer(_apiClient.OrganizationId),
                 new ShutdownServerType { id = serverId.ToString() });
         }
 
@@ -101,9 +205,9 @@
         /// <param name="serverId">	The server id. </param>
         /// <returns>	A standard CaaS response. </returns>
         /// <seealso cref="M:DD.CBU.Compute.Api.Client.Interfaces.Server20.IServerAccessor.RebootServer(Guid)"/>
-        public Task<ResponseType> RebootServer(Guid serverId)
+        public async Task<ResponseType> RebootServer(Guid serverId)
         {
-            return _apiClient.PostAsync<RebootServerType, ResponseType>(ApiUris.RebootServer(_apiClient.OrganizationId),
+            return await _apiClient.PostAsync<RebootServerType, ResponseType>(ApiUris.RebootServer(_apiClient.OrganizationId),
                 new RebootServerType { id = serverId.ToString() });
         }
 
@@ -111,9 +215,9 @@
         /// <param name="serverId">	The server id. </param>
         /// <returns>	A standard CaaS response. </returns>
         /// <seealso cref="M:DD.CBU.Compute.Api.Client.Interfaces.Server20.IServerAccessor.ResetServer(Guid)"/>
-        public Task<ResponseType> ResetServer(Guid serverId)
+        public async Task<ResponseType> ResetServer(Guid serverId)
         {
-            return _apiClient.PostAsync<ResetServerType, ResponseType>(ApiUris.ResetServer(_apiClient.OrganizationId),
+            return await _apiClient.PostAsync<ResetServerType, ResponseType>(ApiUris.ResetServer(_apiClient.OrganizationId),
                 new ResetServerType { id = serverId.ToString() });
         }
 
@@ -121,9 +225,9 @@
         /// <param name="serverId">	The server id. </param>
         /// <returns>	A standard CaaS response. </returns>
         /// <seealso cref="M:DD.CBU.Compute.Api.Client.Interfaces.Server20.IServerAccessor.PowerOffServer(Guid)"/>
-        public Task<ResponseType> PowerOffServer(Guid serverId)
+        public async Task<ResponseType> PowerOffServer(Guid serverId)
         {
-            return _apiClient.PostAsync<PowerOffServerType, ResponseType>(ApiUris.PowerOffServer(_apiClient.OrganizationId),
+            return await _apiClient.PostAsync<PowerOffServerType, ResponseType>(ApiUris.PowerOffServer(_apiClient.OrganizationId),
                 new PowerOffServerType { id = serverId.ToString() });
         }
 
@@ -131,10 +235,34 @@
         /// <param name="serverId">	The server id. </param>
         /// <returns>	A standard CaaS response. </returns>
         /// <seealso cref="M:DD.CBU.Compute.Api.Client.Interfaces.Server20.IServerAccessor.UpdateVmwareTools(Guid)"/>
-        public Task<ResponseType> UpdateVmwareTools(Guid serverId)
+        public async Task<ResponseType> UpdateVmwareTools(Guid serverId)
         {
-            return _apiClient.PostAsync<UpdateVmwareToolsServerType, ResponseType>(ApiUris.UpdateVmwareTools(_apiClient.OrganizationId),
+            return await _apiClient.PostAsync<UpdateVmwareToolsServerType, ResponseType>(ApiUris.UpdateVmwareTools(_apiClient.OrganizationId),
                 new UpdateVmwareToolsServerType { id = serverId.ToString() });
+        }
+
+        /// <summary>
+        /// Deploys a server to MCP1.0 or MCP 2.0 data centers 
+        /// </summary>
+        /// <param name="serverDetails">Details of the server to be deployed</param>
+        /// <returns>Response containing the server id</returns>
+        public async Task<ResponseType> DeployServer(DeployServerType serverDetails)
+        {
+            return await _apiClient.PostAsync<DeployServerType, ResponseType>(
+                ApiUris.DeployMCP20Server(_apiClient.OrganizationId),
+                serverDetails);
+        }
+
+        /// <summary>
+        /// Cleans a failed server deployment.
+        /// </summary>
+        /// <param name="serverId">The server id.</param>
+        /// <returns>	A standard CaaS response </returns>
+        public async Task<ResponseType> CleanServer(Guid serverId)
+        {
+            return await _apiClient.PostAsync<CleanServerType, ResponseType>(
+                ApiUris.CleanMCP20Server(_apiClient.OrganizationId),
+                new CleanServerType { id = serverId.ToString() });
         }
 
         /// <summary>
@@ -144,12 +272,13 @@
         /// <param name="vlanId">The VLAN id</param>
         /// <param name="privateIpv4">The Private IP v4 address</param>
         /// <returns></returns>
-        public Task<ResponseType> AddNic(Guid serverId, Guid? vlanId, string privateIpv4)
+        public async Task<ResponseType> AddNic(Guid serverId, Guid? vlanId, string privateIpv4)
         {
             if (vlanId == null && string.IsNullOrEmpty(privateIpv4))
             {
                 throw new ArgumentNullException("vlanId");
             }
+
             AddNicType addNicType = new AddNicType { serverId = serverId.ToString(), nic = new VlanIdOrPrivateIpType() };
             if (!string.IsNullOrEmpty(privateIpv4))
             {
@@ -160,7 +289,7 @@
                 addNicType.nic.vlanId = vlanId.ToString();
             }
 
-            return _apiClient.PostAsync<AddNicType, ResponseType>(ApiUris.AddNic(_apiClient.OrganizationId), addNicType);
+            return await _apiClient.PostAsync<AddNicType, ResponseType>(ApiUris.AddNic(_apiClient.OrganizationId), addNicType);
         }
 
         /// <summary>
@@ -168,14 +297,14 @@
         /// </summary>
         /// <param name="nicId">The NIC id.</param>
         /// <returns></returns>
-        public Task<ResponseType> RemoveNic(Guid nicId)
+        public async Task<ResponseType> RemoveNic(Guid nicId)
         {
             if (nicId == Guid.Empty)
             {
                 throw new ArgumentException("'nicId' cannot be empty.");
             }
 
-            return _apiClient.PostAsync<RemoveNicType, ResponseType>(
+            return await _apiClient.PostAsync<RemoveNicType, ResponseType>(
                 ApiUris.RemoveNic(_apiClient.OrganizationId),
                 new RemoveNicType { id = nicId.ToString() });
         }
@@ -191,19 +320,6 @@
                 await
                     _apiClient.PostAsync<NotifyNicIpChangeType, ResponseType>(
                         ApiUris.NotifyNicIpChange(_apiClient.OrganizationId), notifyNicIpChange);
-        }
-
-        /// <summary>
-        /// Deploys a server to MCP1.0 or MCP 2.0 data centers 
-        /// </summary>
-        /// <param name="serverDetails">Details of the server to be deployed</param>
-        /// <returns>Response containing the server id</returns>
-        public async Task<ResponseType> DeployServer(DeployServerType serverDetails)
-        {
-            return
-              await
-                  _apiClient.PostAsync<DeployServerType, ResponseType>(
-                      ApiUris.DeployMCP20Server(_apiClient.OrganizationId), serverDetails);
         }
     }
 }

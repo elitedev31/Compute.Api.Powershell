@@ -109,9 +109,10 @@
     <Compile Include="Backup\ServicePlan.cs" />
     <Compile Include="Backup\StoragePolicy.cs" />
     <Compile Include="Backup\TriggerType.cs" />
+    <Compile Include="General\PagedResponse.cs" />
     <Compile Include="General\Response.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Network2.0\Datacenter.cs" />
+    <Compile Include="Network20\Datacenter.cs" />
     <Compile Include="Datacenter\Datacenters.cs" />
     <Compile Include="Datacenter\DatacentersWithDiskSpeedDetails.cs" />
     <Compile Include="Datacenter\DatacentersWithLimits.cs" />
@@ -125,8 +126,8 @@
     <Compile Include="Directory\AccountsWithPhoneNumber.cs" />
     <Compile Include="Directory\AccountWithPhoneNumber.cs" />
     <Compile Include="Directory\RoleType.cs" />
-    <Compile Include="Network2.0\Firewall.cs" />
-    <Compile Include="Network2.0\General.cs" />
+    <Compile Include="Network20\Firewall.cs" />
+    <Compile Include="Network20\General.cs" />
     <Compile Include="General\AdditionalInformationType.cs" />
     <Compile Include="General\PropertyType.cs" />
     <Compile Include="General\ResultType.cs" />
@@ -163,9 +164,10 @@
     <Compile Include="Image\PendingDeployImageType.cs" />
     <Compile Include="Image\PendingDeployImageWithSoftwareLabelsType.cs" />
     <Compile Include="Image\ServerImage.cs" />
-    <Compile Include="Network2.0\IPAddress.cs" />
-    <Compile Include="Network2.0\NATRule.cs" />
-    <Compile Include="Network2.0\NetworkDomain.cs" />
+    <Compile Include="Network20\IPAddress.cs" />
+    <Compile Include="Network20\NatRule.cs" />
+    <Compile Include="Network20\NetworkDomain.cs" />
+    <Compile Include="Network20\PersistenceProfile.cs" />
     <Compile Include="Network\AclActionType.cs" />
     <Compile Include="Network\AclProtocolType.cs" />
     <Compile Include="Network\AclRuleListType.cs" />
@@ -187,21 +189,27 @@
     <Compile Include="Network\NewNetworkWithLocationType.cs" />
     <Compile Include="Network\PortRangeType.cs" />
     <Compile Include="Network\PortRangeTypeType.cs" />
-    <Compile Include="Network2.0\PublicIPBlock.cs" />
-    <Compile Include="Network2.0\Server.cs" />
+    <Compile Include="Network20\PublicIPBlock.cs" />
+    <Compile Include="Network20\Server.cs" />
     <Compile Include="Requests\Attributes\FilterParameterAttribute.cs" />
     <Compile Include="Requests\IFilterableRequest.cs" />
     <Compile Include="Requests\IPageableRequest.cs" />
     <Compile Include="Requests\Network20\NatRuleListOptions.cs" />
     <Compile Include="Requests\Network20\NetworkDomainListOptions.cs" />
+    <Compile Include="Requests\Network20\FirewallRuleListOptions.cs" />
+    <Compile Include="Requests\Network20\DefaultHealthMonitorListOptions.cs" />
+    <Compile Include="Requests\Network20\DefaultIruleListOptions.cs" />
+    <Compile Include="Requests\Network20\DefaultPersistenceProfileListOptions.cs" />
     <Compile Include="Requests\Network20\VlanListOptions.cs" />
     <Compile Include="Requests\PageableRequest.cs" />
+    <Compile Include="Requests\Server20\AntiAffinityRuleListOptions.cs" />
     <Compile Include="Requests\Server20\ServerListOptions.cs" />
     <Compile Include="Requests\Server\ServerListOptions.cs" />
-    <Compile Include="Requests\Vip\NodeListOptions.cs" />
-    <Compile Include="Requests\Vip\PoolListOptions.cs" />
-    <Compile Include="Requests\Vip\PoolMemberListOptions.cs" />
-    <Compile Include="Requests\Vip\VirtualListenerListOptions.cs" />
+    <Compile Include="Requests\Network20\NodeListOptions.cs" />
+    <Compile Include="Requests\Network20\PoolListOptions.cs" />
+    <Compile Include="Requests\Network20\PoolMemberListOptions.cs" />
+    <Compile Include="Requests\Network20\VirtualListenerListOptions.cs" />
+    <Compile Include="Network20\AntiAffinityRule.cs" />
     <Compile Include="Server\AntiAffinityRules.cs" />
     <Compile Include="Server\AntiAffinityRuleType.cs" />
     <Compile Include="Server\AntiAffinityRuleTypeServerSummary.cs" />
@@ -271,15 +279,17 @@
     <Compile Include="Server\ServerWithStateType.cs" />
     <Compile Include="Server\SoftwareLabelType.cs" />
     <Compile Include="Software\SoftwareLabels.cs" />
+    <Compile Include="Network20\HealthMonitor.cs" />
+    <Compile Include="Network20\Irule.cs" />
     <Compile Include="Vip\NewPersistenceProfile.cs" />
     <Compile Include="Vip\NewProbe.cs" />
     <Compile Include="Vip\NewServerFarmRealServer.cs" />
-    <Compile Include="Vip\Node.cs" />
+    <Compile Include="Network20\Node.cs" />
     <Compile Include="Vip\PersistenceProfileCookieType.cs" />
     <Compile Include="Vip\PersistenceProfileDirection.cs" />
     <Compile Include="Vip\PersistenceProfileType.cs" />
-    <Compile Include="Vip\Pool.cs" />
-    <Compile Include="Vip\PoolMember.cs" />
+    <Compile Include="Network20\Pool.cs" />
+    <Compile Include="Network20\PoolMember.cs" />
     <Compile Include="Vip\ProbeStatusCodeRange.cs" />
     <Compile Include="Vip\NewRealServer.cs" />
     <Compile Include="Vip\NewServerFarm.cs" />
@@ -302,8 +312,8 @@
     <Compile Include="Vip\Vip.cs" />
     <Compile Include="Vip\VipProtocol.cs" />
     <Compile Include="Vip\VipTargetType.cs" />
-    <Compile Include="Network2.0\Vlan.cs" />
-    <Compile Include="Vip\VirtualListener.cs" />
+    <Compile Include="Network20\Vlan.cs" />
+    <Compile Include="Network20\VirtualListener.cs" />
     <Compile Include="XmlNamespaceConstants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -314,9 +324,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Settings.StyleCop" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

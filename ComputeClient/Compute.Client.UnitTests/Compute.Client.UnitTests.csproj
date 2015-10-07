@@ -75,12 +75,15 @@
     <Compile Include="BaseApiClientTestFixture.cs" />
     <Compile Include="MCP1\BackupTests.cs" />
     <Compile Include="MCP2\NatRuleAccessorTests.cs" />
-    <Compile Include="MCP2\IpAddressManagementAccessorTests.cs" />
-    <Compile Include="MCP2\VirtualListenerTests.cs" />
-    <Compile Include="MCP2\VipNodesTests.cs" />
-    <Compile Include="MCP2\NetworkDomainTests.cs" />
-    <Compile Include="MCP2\ServerTests.cs" />
-    <Compile Include="MCP2\VlanTests.cs" />
+    <Compile Include="MCP2\IpAddressAccessorTests.cs" />
+    <Compile Include="MCP2\FirewallRuleAccessorTests.cs" />
+    <Compile Include="MCP2\VipAccessorTests.cs" />
+    <Compile Include="MCP2\VipPoolAccessorTests.cs" />
+    <Compile Include="MCP2\VirtualListenerAccessorTests.cs" />
+    <Compile Include="MCP2\VipNodeAccessorTests.cs" />
+    <Compile Include="MCP2\NetworkDomainAccessorTests.cs" />
+    <Compile Include="MCP2\ServerAccessorTests.cs" />
+    <Compile Include="MCP2\VlanAccessorTests.cs" />
     <Compile Include="RequestFileResponseType.cs" />
     <Compile Include="Utilities\PageableRequestExtensionsTests.cs" />
     <Compile Include="Utilities\FilterableRequestExtensionsTests.cs" />
@@ -100,29 +103,60 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="SampleOutputs\AddPublicIpBlockResponse.xml" />
+    <Content Include="SampleOutputs\AddPoolMemberResponse.xml" />
+    <Content Include="SampleOutputs\CreatePoolResponse.xml" />
+    <Content Include="SampleOutputs\DeleteFirewallRuleResponse.xml" />
+    <Content Include="SampleOutputs\ListDefaultHealthMonitorsResponse.xml" />
+    <Content Include="SampleOutputs\ListDefaultIrulesResponse.xml" />
+    <Content Include="SampleOutputs\ListDefaultPersistenceProfilesResponse.xml" />
+    <Content Include="SampleOutputs\RemovePoolMemberResponse.xml" />
+    <Content Include="SampleOutputs\DeletePoolResponse.xml" />
+    <Content Include="SampleOutputs\DeleteNodeResponse.xml" />
+    <Content Include="SampleOutputs\EditFirewallRuleResponse.xml" />
+    <Content Include="SampleOutputs\EditPoolMemberResponse.xml" />
+    <Content Include="SampleOutputs\EditPoolResponse.xml" />
+    <Content Include="SampleOutputs\EditNodeResponse.xml" />
+    <Content Include="SampleOutputs\GetFirewallRuleResponse.xml" />
+    <Content Include="SampleOutputs\GetPoolMemberResponse.xml" />
+    <Content Include="SampleOutputs\GetPoolResponse.xml" />
+    <Content Include="SampleOutputs\GetNodeResponse.xml" />
+    <Content Include="SampleOutputs\ListFirewallRulesResponse.xml" />
+    <Content Include="SampleOutputs\CreateFirewallRuleResponse.xml" />
     <Content Include="SampleOutputs\CreateNatRuleResponse.xml" />
-    <Content Include="SampleOutputs\CreateNetworkDomainResponse.xml" />
-    <Content Include="SampleOutputs\CreateVipNodeResponse.xml" />
+    <Content Include="SampleOutputs\DeployNetworkDomainResponse.xml" />
+    <Content Include="SampleOutputs\CreateNodeResponse.xml" />
     <Content Include="SampleOutputs\CreateVirtualListenerResponse.xml" />
     <Content Include="SampleOutputs\DeleteNatRule.xml" />
     <Content Include="SampleOutputs\DeletePublicIpBlock.xml" />
     <Content Include="SampleOutputs\DeleteSubAdministratorAccount.xml" />
     <Content Include="SampleOutputs\DeleteVirtualListener.xml" />
+    <Content Include="SampleOutputs\DeployVlanResponse.xml" />
     <Content Include="SampleOutputs\DesignatePrimaryAdministratorAccount.xml" />
+    <Content Include="SampleOutputs\DeleteNetworkDomainResponse.xml" />
+    <Content Include="SampleOutputs\ExpandVlanResponse.xml" />
+    <Content Include="SampleOutputs\DeleteVlanResponse.xml" />
+    <Content Include="SampleOutputs\EditVlanResponse.xml" />
     <Content Include="SampleOutputs\EditVirtualListener.xml" />
-    <Content Include="SampleOutputs\GetMcp2ServerResponse.xml" />
-    <Content Include="SampleOutputs\GetMcp2ServersResponse.xml" />
+    <Content Include="SampleOutputs\GetServerResponse.xml" />
+    <Content Include="SampleOutputs\GetServersResponse.xml" />
     <Content Include="SampleOutputs\GetMyAccountDetails.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="SampleOutputs\GetNatRule.xml" />
+    <Content Include="SampleOutputs\EditNetworkDomainResponse.xml" />
+    <Content Include="SampleOutputs\ListNetworkDomainsResponse.xml" />
+    <Content Include="SampleOutputs\GetNetworkDomainResponse.xml" />
     <Content Include="SampleOutputs\GetPublicIpBlockReponse.xml" />
     <Content Include="SampleOutputs\GetReservedPrivateAddresses.xml" />
     <Content Include="SampleOutputs\GetReservedPublicAddresses.xml" />
     <Content Include="SampleOutputs\GetReservedPublicAddressesForNetwork.xml" />
+    <Content Include="SampleOutputs\GetVlanResponse.xml" />
+    <Content Include="SampleOutputs\ListPoolMembersResponse.xml" />
+    <Content Include="SampleOutputs\ListPoolsResponse.xml" />
+    <Content Include="SampleOutputs\ListNodesResponse.xml" />
     <Content Include="SampleOutputs\ListPublicIpBlocksResponse.xml" />
     <Content Include="SampleOutputs\GetVirtualListener.xml" />
-    <Content Include="SampleOutputs\GetVlansResponse.xml" />
+    <Content Include="SampleOutputs\ListVlansResponse.xml" />
     <Content Include="SampleOutputs\ListAccounts.xml" />
     <Content Include="SampleOutputs\ListDataCentersWithMaintenanceStatus.xml" />
     <Content Include="SampleOutputs\ListMultiGeographyRegionsWithKey.xml" />
@@ -130,7 +164,7 @@
     <Content Include="SampleOutputs\ListVirtualListeners.xml" />
     <Content Include="SampleOutputs\RestoreBackupOutOfPlaceResponse.xml" />
     <Content Include="SampleOutputs\RestoreBackupResponse.xml" />
-    <Content Include="SampleOutputs\ServerNotFound.xml" />
+    <Content Include="SampleOutputs\GetServerNotFound.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

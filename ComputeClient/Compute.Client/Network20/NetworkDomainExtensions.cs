@@ -8,7 +8,10 @@
 	using DD.CBU.Compute.Api.Contracts.Network20;
 	using DD.CBU.Compute.Api.Contracts.Requests;
 
-	public static class NetworkDomainExtensions
+    /// <summary>
+    /// Extension methods for network domain operations.
+    /// </summary>
+    public static class NetworkDomainExtensions
 	{
 		/// <summary>	This function gets list of network domains from Cloud. </summary>
 		/// <param name="client">			The client. </param>
@@ -17,7 +20,7 @@
 		[Obsolete("Use IComputeApiClient.Networking.NetworkDomain instead")]
 		public static async Task<IEnumerable<NetworkDomainType>> GetNetworkDomains(this IComputeApiClient client, PageableRequest pagingOptions = null)
 		{
-			return await client.Networking.NetworkDomain.GetNetworkDomains(null, pagingOptions);
+			return (await client.Networking.NetworkDomain.GetNetworkDomainsPaginated(null, pagingOptions)).items;
 		}
 
 		/// <summary>	This function gets list of network domains from Cloud. </summary>
@@ -65,7 +68,7 @@
 		[Obsolete("Use IComputeApiClient.Networking.NetworkDomain instead")]
 		public static async Task<ResponseType> DeleteNetworkDomain(this IComputeApiClient client, string id)
 		{
-			return await client.Networking.NetworkDomain.DeleteNetworkDomain(id);
+			return await client.Networking.NetworkDomain.DeleteNetworkDomain(Guid.Parse(id));
 		}
 	}
 }

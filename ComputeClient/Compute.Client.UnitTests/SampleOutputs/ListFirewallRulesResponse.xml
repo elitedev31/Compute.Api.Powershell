@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<firewallRules
+xmlns="urn:didata.com:api:cloud:types" pageNumber="1" pageCount="4"
+totalCount="4" pageSize="50">
+  <firewallRule id="1aa3d0ce-d95d-4296-8338-9717e0d37ff9" datacenterId="NA9"
+  ruleType="DEFAULT_RULE">
+    <networkDomainId>
+      484174a2-ae74-4658-9e56-
+      50fc90e086cf
+    </networkDomainId>
+    <name>CCDEFAULT.BlockOutboundMailIPv6Secure</name>
+    <action>DROP</action>
+    <ipVersion>IPV6</ipVersion>
+    <protocol>TCP</protocol>
+    <source>
+      <ip address="ANY"/>
+    </source>
+    <destination>
+      <ip address="ANY"/>
+      <port begin="587"/>
+    </destination>
+    <enabled>true</enabled>
+    <state>NORMAL</state>
+  </firewallRule>
+</firewallRules>

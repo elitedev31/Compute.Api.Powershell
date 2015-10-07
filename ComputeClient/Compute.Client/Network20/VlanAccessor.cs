@@ -1,17 +1,18 @@
 ﻿namespace DD.CBU.Compute.Api.Client.Network20
 {
-	using System;
-	using System.Collections.Generic;
-	using System.Threading.Tasks;
-	using DD.CBU.Compute.Api.Client.Interfaces;
-	using DD.CBU.Compute.Api.Client.Interfaces.Network20;
-	using DD.CBU.Compute.Api.Contracts.Network20;
-	using DD.CBU.Compute.Api.Contracts.Requests;
-	using DD.CBU.Compute.Api.Contracts.Requests.Network20;
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using DD.CBU.Compute.Api.Client.Interfaces;
+    using DD.CBU.Compute.Api.Client.Interfaces.Network20;
+    using DD.CBU.Compute.Api.Contracts.General;
+    using DD.CBU.Compute.Api.Contracts.Network20;
+    using DD.CBU.Compute.Api.Contracts.Requests;
+    using DD.CBU.Compute.Api.Contracts.Requests.Network20;
 
-	/// <summary>	Access methods for VLAN Operations </summary>
-	/// <seealso cref="T:DD.CBU.Compute.Api.Client.Interfaces.IVlan"/>
-	public class VlanAccessor : IVlanAccessor
+    /// <summary>	Access methods for VLAN Operations </summary>
+    /// <seealso cref="T:DD.CBU.Compute.Api.Client.Interfaces.IVlan"/>
+    public class VlanAccessor : IVlanAccessor
 	{
 		/// <summary>
 		/// The Api.
@@ -34,43 +35,63 @@
 		/// 	organization ID and the ID of the target network.
 		/// </summary>		
 		/// <param name="options">
-		/// 			Options for controlling the operation. 
-		/// </param>
-		/// <param name="pagingOptions">
-		/// 	Options for controlling the paging. 
+		/// 	Options for controlling the operation. 
 		/// </param>
 		/// <returns>
 		/// 	The VLAN collection. 
 		/// </returns>
-		public async Task<IEnumerable<VlanType>> GetVlans(VlanListOptions options = null, PageableRequest pagingOptions = null)
+		public async Task<IEnumerable<VlanType>> GetVlans(VlanListOptions options = null)
 		{
-			var vlans =
-				await
-				_api.GetAsync<vlans>(
-					ApiUris.GetVlanByOrgId(_api.OrganizationId), pagingOptions, options);
-
-			return vlans.vlan;
+			var response = await GetVlansPaginated(options, null);
+			return response.items;
 		}
 
-		/// <summary>
-		/// 	The get VLAN list. 
-		/// </summary>		
-		/// <param name="id">
-		/// 			  	The id. 
-		/// </param>
-		/// <param name="vlanName">
-		/// 		  	The VLAN name. 
-		/// </param>
-		/// <param name="networkDomainId">
-		/// 	The network domain id. 
-		/// </param>
-		/// <param name="pagingOptions">
-		/// The paging Options.
-		/// </param>
-		/// <returns>
-		/// 	The <see cref="Task"/>. 
-		/// </returns>
-		public async Task<IEnumerable<VlanType>> GetVlans(Guid id, string vlanName, Guid networkDomainId, PageableRequest pagingOptions = null)
+        /// <summary>
+        /// 	Retrieves the list of ACL rules associated with a network. This API requires your
+        /// 	organization ID and the ID of the target network.
+        /// </summary>		
+        /// <param name="options">
+        /// 	Options for controlling the operation. 
+        /// </param>
+        /// <param name="pagingOptions">
+        /// 	Options for controlling the paging. 
+        /// </param>
+        /// <returns>
+        /// 	The VLAN collection. 
+        /// </returns>
+        public async Task<PagedResponse<VlanType>> GetVlansPaginated(VlanListOptions options = null, PageableRequest pagingOptions = null)
+        {
+            var response = await _api.GetAsync<vlans>(ApiUris.GetVlanByOrgId(_api.OrganizationId), pagingOptions, options);
+            return new PagedResponse<VlanType>
+            {
+                items = response.vlan,
+                totalCount = response.totalCountSpecified ? response.totalCount : (int?)null,
+                pageCount = response.pageCountSpecified ? response.pageCount : (int?)null,
+                pageNumber = response.pageNumberSpecified ? response.pageNumber : (int?)null,
+                pageSize = response.pageSizeSpecified ? response.pageSize : (int?)null
+            };
+        }
+
+        /// <summary>
+        /// 	The get VLAN list. 
+        /// </summary>		
+        /// <param name="id">
+        /// 			  	The id. 
+        /// </param>
+        /// <param name="vlanName">
+        /// 		  	The VLAN name. 
+        /// </param>
+        /// <param name="networkDomainId">
+        /// 	The network domain id. 
+        /// </param>
+        /// <param name="pagingOptions">
+        /// The paging Options.
+        /// </param>
+        /// <returns>
+        /// 	The <see cref="Task"/>. 
+        /// </returns>
+        [Obsolete("Inconsistent: Use GetVlans(VlanOptions options) or GetVlans(GetVlansPaginated options, PageableRequest pagingOptions) instead.")]
+        public async Task<IEnumerable<VlanType>> GetVlans(Guid id, string vlanName, Guid networkDomainId, PageableRequest pagingOptions = null)
 		{
 			var vlans =
 				await
@@ -142,21 +163,21 @@
         }
 
         /// <summary>
-        /// 	An IComputeApiClient extension method that deletes the vlan. 
+        /// Delete a Virtual LAN 
         /// </summary>
         /// <param name="id">
-        /// 	 	The id of the VLAN. 
+        /// The id of the VLAN. 
         /// </param>
         /// <returns>
-        /// 	The job from the API; 
+        /// Operation status
         /// </returns>
-        public async Task<ResponseType> DeleteVlan(string id)
+        public async Task<ResponseType> DeleteVlan(Guid id)
 		{
 			return 
 				await
 					_api.PostAsync<DeleteVlanType, ResponseType>(
 						ApiUris.DeleteVlan(_api.OrganizationId),
-						new DeleteVlanType { id = id });
+						new DeleteVlanType { id = id.ToString() });
 		}
 	}
 }
