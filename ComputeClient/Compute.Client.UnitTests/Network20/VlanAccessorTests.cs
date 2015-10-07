@@ -6,7 +6,7 @@ using DD.CBU.Compute.Api.Client.Network20;
 using DD.CBU.Compute.Api.Contracts.Network20;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Compute.Client.UnitTests.MCP2
+namespace Compute.Client.UnitTests.Network20
 {
 	[TestClass]
 	public class VlanAccessorTests : BaseApiClientTestFixture

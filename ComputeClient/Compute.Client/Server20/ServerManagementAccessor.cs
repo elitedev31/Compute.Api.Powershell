@@ -11,17 +11,29 @@
 		/// <summary>
 		/// Initialises a new instance of the <see cref="ServerManagementAccessor"/> class.
 		/// </summary>
-		/// <param name="webapi">
+		/// <param name="webApi">
 		/// The webapi.
 		/// </param>
-		public ServerManagementAccessor(IWebApi webapi)
+		public ServerManagementAccessor(IWebApi webApi)
 		{
-			Server = new ServerAccessor(webapi);
-		}
+            Server = new ServerAccessor(webApi);
+            AntiAffinityRule = new AntiAffinityRuleAccessor(webApi);
+            Monitoring = new MonitoringAccessor(webApi);
+        }
 
-		/// <summary>
-		/// Gets the server.
-		/// </summary>
-		public IServerAccessor Server { get; private set; }
-	}
+        /// <summary>
+        /// Gets the Server Accessor.
+        /// </summary>
+        public IServerAccessor Server { get; private set; }
+
+        /// <summary>
+        /// Gets the Anti Affinity Rule Accessor.
+        /// </summary>
+        public IAntiAffinityRuleAccessor AntiAffinityRule { get; private set; }
+
+        /// <summary>
+        /// Gets the Monitoring Accessor.
+        /// </summary>
+        public IMonitoringAccessor Monitoring { get; private set; }
+    }
 }

@@ -5,9 +5,19 @@
 	/// </summary>
 	public interface IServerManagementAccessor
 	{
-		/// <summary>
-		/// Gets the server.
-		/// </summary>
-		IServerAccessor Server { get; }
-	}
+        /// <summary>
+        /// Gets the Server Accessor.
+        /// </summary>
+        IServerAccessor Server { get; }
+
+        /// <summary>
+        /// Gets the Anti Affinity Rule Accessor.
+        /// </summary>
+        IAntiAffinityRuleAccessor AntiAffinityRule { get; }
+
+        /// <summary>
+        /// Gets the Monitoring Accessor.
+        /// </summary>
+        IMonitoringAccessor Monitoring { get; }
+    }
 }

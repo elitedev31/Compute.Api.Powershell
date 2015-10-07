@@ -141,9 +141,17 @@
 				if (!response.IsSuccessStatusCode)
 				{
 					await HandleApiRequestErrors(response, relativeOperationUri);		
-				}				
-				return await response.Content.ReadAsAsync<TResult>(_mediaTypeFormatters);
-			}
+				}
+
+                if (typeof(TResult) == typeof(string))
+                {
+                    return (TResult)(object)(await response.Content.ReadAsStringAsync());
+                }
+                else
+                {
+                    return await response.Content.ReadAsAsync<TResult>(_mediaTypeFormatters);
+                }
+            }
 		}
 
 		/// <summary>

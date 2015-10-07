@@ -1207,6 +1207,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
         }
     }
 
+    /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -1218,6 +1219,117 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
         private string idField;
         /// <summary>	Gets or sets the identifier of the server. </summary>
         /// <value>	The identifier of the server. </value>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string id
+        {
+            get
+            {
+                return this.idField;
+            }
+            set
+            {
+                this.idField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.81.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
+    [System.Xml.Serialization.XmlRootAttribute("enableServerMonitoring", Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
+    public partial class EnableServerMonitoringType
+    {
+
+        private string servicePlanField;
+
+        private string idField;
+
+        /// <remarks/>
+        public string servicePlan
+        {
+            get
+            {
+                return this.servicePlanField;
+            }
+            set
+            {
+                this.servicePlanField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string id
+        {
+            get
+            {
+                return this.idField;
+            }
+            set
+            {
+                this.idField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.81.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
+    [System.Xml.Serialization.XmlRootAttribute("disableServerMonitoring", Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
+    public partial class DisableServerMonitoringType
+    {
+
+        private string idField;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string id
+        {
+            get
+            {
+                return this.idField;
+            }
+            set
+            {
+                this.idField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.81.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
+    [System.Xml.Serialization.XmlRootAttribute("changeServerMonitoringPlan", Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
+    public partial class ChangeServerMonitoringPlanType
+    {
+
+        private string servicePlanField;
+
+        private string idField;
+
+        /// <remarks/>
+        public string servicePlan
+        {
+            get
+            {
+                return this.servicePlanField;
+            }
+            set
+            {
+                this.servicePlanField = value;
+            }
+        }
+
+        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string id
         {

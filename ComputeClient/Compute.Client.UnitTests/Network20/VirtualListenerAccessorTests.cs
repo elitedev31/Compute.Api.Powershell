@@ -9,7 +9,7 @@ using DD.CBU.Compute.Api.Contracts.Network20;
 using DD.CBU.Compute.Api.Contracts.Vip;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Compute.Client.UnitTests.MCP2
+namespace Compute.Client.UnitTests.Network20
 {
     [TestClass]
     public class VirtualListenerAccessorTests : BaseApiClientTestFixture

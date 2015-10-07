@@ -77,31 +77,6 @@
         /// </returns>
         Task<ServerType> GetServer(Guid serverId);
 
-        /// <summary>
-        /// Gets the available anti affinity rules.
-        /// </summary>
-        /// <param name="filteringOptions">
-        /// The filtering options.
-        /// </param>
-        /// <returns>
-        /// Collection of <see cref="AntiAffinityRuleType"/>.
-        /// </returns>
-        Task<IEnumerable<AntiAffinityRuleType>> GetAntiAffinityRules(AntiAffinityRuleListOptions filteringOptions = null);
-
-        /// <summary>
-        /// Gets the available anti affinity rules.
-        /// </summary>
-        /// <param name="filteringOptions">
-        /// The filtering options.
-        /// </param>
-        /// <param name="pagingOptions">
-        /// The paging options.
-        /// </param>
-        /// <returns>
-        /// Collection of <see cref="AntiAffinityRuleType"/>.
-        /// </returns>
-        Task<PagedResponse<AntiAffinityRuleType>> GetAntiAffinityRulesPaginated(AntiAffinityRuleListOptions filteringOptions = null, IPageableRequest pagingOptions = null);
-
         /// <summary>	Deletes the server described by serverId. </summary>
         /// <param name="serverId">	The server id. </param>
         /// <returns>	A standard CaaS response </returns>

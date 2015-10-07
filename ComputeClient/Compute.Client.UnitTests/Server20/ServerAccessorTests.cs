@@ -7,7 +7,7 @@ using DD.CBU.Compute.Api.Client.Exceptions;
 using DD.CBU.Compute.Api.Client.Server20;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Compute.Client.UnitTests.MCP2
+namespace Compute.Client.UnitTests.Server20
 {
 	[TestClass]
 	public class ServerAccessorTests : BaseApiClientTestFixture
@@ -23,10 +23,10 @@ namespace Compute.Client.UnitTests.MCP2
             var servers = await accessor.GetServers();
 
             Assert.IsNotNull(servers);
-			Assert.AreEqual(servers.Count(), 1);
-			Assert.AreEqual(servers.First().id, "d577a691-e116-4913-a440-022d2729fc84");
-			Assert.AreEqual(servers.First().datacenterId, "NA9");
-			Assert.AreEqual(servers.First().name, "Production Web Server");
+			Assert.AreEqual(1, servers.Count());
+			Assert.AreEqual("d577a691-e116-4913-a440-022d2729fc84", servers.First().id);
+            Assert.AreEqual("NA9", servers.First().datacenterId);
+            Assert.AreEqual("Production Web Server", servers.First().name);
 			Assert.IsNotNull(servers.First().networkInfo);
 		}
 
@@ -43,9 +43,9 @@ namespace Compute.Client.UnitTests.MCP2
 			var server = await accessor.GetServer(serverId);
 
             Assert.IsNotNull(server);
-			Assert.AreEqual(server.id, "d577a691-e116-4913-a440-022d2729fc84");
-			Assert.AreEqual(server.datacenterId, "NA9");
-			Assert.AreEqual(server.name, "Production Web Server");
+			Assert.AreEqual("d577a691-e116-4913-a440-022d2729fc84", server.id);
+            Assert.AreEqual("NA9", server.datacenterId);
+            Assert.AreEqual(server.name, "Production Web Server");
 			Assert.IsNotNull(server.networkInfo);
 		}
 

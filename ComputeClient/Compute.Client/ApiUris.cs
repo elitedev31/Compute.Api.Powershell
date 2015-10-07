@@ -855,10 +855,29 @@ namespace DD.CBU.Compute.Api.Client
 
         /// <summary>Gets the list anti affinity rule URL.</summary>
         /// <param name="orgId">The org Id.</param>
+        /// <param name="serverId">The server Id.</param>
         /// <returns>The URL.</returns>
-        public static Uri GetMcp2GetAntiAffinityRules(Guid orgId)
+        public static Uri GetMcp2GetAntiAffinityRulesForServer(Guid orgId, Guid serverId)
         {
-            return new Uri(string.Format(MCP2_0_PREFIX + "{0}/server/antiAffinityRule", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_0_PREFIX + "{0}/server/antiAffinityRule?serverId={1}", orgId, serverId), UriKind.Relative);
+        }
+
+        /// <summary>Gets the list anti affinity rule URL.</summary>
+        /// <param name="orgId">The org Id.</param>
+        /// <param name="networkId">The network Id.</param>
+        /// <returns>The URL.</returns>
+        public static Uri GetMcp2GetAntiAffinityRulesForNetwork(Guid orgId, Guid networkId)
+        {
+            return new Uri(string.Format(MCP2_0_PREFIX + "{0}/server/antiAffinityRule?networkId={1}", orgId, networkId), UriKind.Relative);
+        }
+
+        /// <summary>Gets the list anti affinity rule URL.</summary>
+        /// <param name="orgId">The org Id.</param>
+        /// <param name="networkDomainId">The network domain Id.</param>
+        /// <returns>The URL.</returns>
+        public static Uri GetMcp2GetAntiAffinityRulesForNetworkDomain(Guid orgId, Guid networkDomainId)
+        {
+            return new Uri(string.Format(MCP2_0_PREFIX + "{0}/server/antiAffinityRule?networkDomainId={1}", orgId, networkDomainId), UriKind.Relative);
         }
 
         #region FirewallRule
@@ -1811,6 +1830,51 @@ namespace DD.CBU.Compute.Api.Client
         public static Uri ModifyVip(Guid orgId, string networkId, string vipId)
         {
             return new Uri(string.Format(MCP1_0_PREFIX + "{0}/network/{1}/vip/{2}", orgId, networkId, vipId), UriKind.Relative);
+        }
+
+        #endregion
+
+        #region Server Monitoring
+
+        /// <summary>Gets the URL to enable server monitoring</summary>
+        /// <param name="orgId">The org Id.</param>
+        /// <returns>The URL</returns>
+        public static Uri EnableServerMonitoring(Guid orgId)
+        {
+            return new Uri(string.Format(MCP2_0_PREFIX + "{0}/server/enableServerMonitoring", orgId), UriKind.Relative);
+        }
+
+        /// <summary>Gets the URL to change the server monitoring plan</summary>
+        /// <param name="orgId">The org Id.</param>
+        /// <returns>The URL</returns>
+        public static Uri ChangeServerMonitoringPlan(Guid orgId)
+        {
+            return new Uri(string.Format(MCP2_0_PREFIX + "{0}/server/changeServerMonitoringPlan", orgId), UriKind.Relative);
+        }
+
+        /// <summary>Gets the URL to disable server monitoring</summary>
+        /// <param name="orgId">The org Id.</param>
+        /// <returns>The URL</returns>
+        public static Uri DisableServerMonitoring(Guid orgId)
+        {
+            return new Uri(string.Format(MCP2_0_PREFIX + "{0}/server/disableServerMonitoring", orgId), UriKind.Relative);
+        }
+
+        /// <summary>Gets the URL to retrieve server monitoring usage report</summary>
+        /// <param name="orgId">The org Id.</param>
+        /// <param name="startDate">The start date.</param>
+        /// <param name="endDate">The end date.</param>
+        /// <returns>The URL</returns>
+        public static Uri GetMonitoringUsageReport(Guid orgId, DateTime startDate, DateTime? endDate)
+        {
+            var url = string.Format(MCP2_0_PREFIX + "{0}/server/usageMonitoring?startDate={1}", orgId, startDate.ToString("yyyy-MM-dd"));
+
+            if (endDate.HasValue)
+            {
+                url += string.Format("&endDate={0}", endDate.Value.ToString("yyyy-MM-dd"));
+            }
+
+            return new Uri(url, UriKind.Relative);
         }
 
         #endregion

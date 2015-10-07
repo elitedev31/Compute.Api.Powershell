@@ -10,12 +10,12 @@ using DD.CBU.Compute.Api.Contracts.Backup;
 using DD.CBU.Compute.Api.Contracts.General;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Compute.Client.UnitTests.MCP1
+namespace Compute.Client.UnitTests.Backup
 {
 	/// <summary>	(Unit Test Class) a backup tests. </summary>
 	/// <seealso cref="T:Compute.Client.UnitTests.BaseApiClientTestFixture"/>
 	[TestClass]
-	public class BackupTests : BaseApiClientTestFixture
+	public class BackupAccessorTests : BaseApiClientTestFixture
 	{
 		/// <summary>	Identifier for the server. </summary>
 		private const string ServerId = "d577a691-e116-4913-a440-022d2729fc84";

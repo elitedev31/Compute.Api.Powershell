@@ -123,6 +123,8 @@
     <Compile Include="Interfaces\Network\INetworkVipAccessor.cs" />
     <Compile Include="Interfaces\Network20\IVlanAccessor.cs" />
     <Compile Include="Interfaces\ImportExportImages\IImportExportCustomerImageAccessor.cs" />
+    <Compile Include="Interfaces\Server20\IMonitoringAccessor.cs" />
+    <Compile Include="Interfaces\Server20\IAntiAffinityRuleAccessor.cs" />
     <Compile Include="Interfaces\Server20\IServerAccessor.cs" />
     <Compile Include="Interfaces\Server20\IServerManagementAccessor.cs" />
     <Compile Include="Interfaces\Server\IServerAccessor.cs" />
@@ -144,7 +146,9 @@
     <Compile Include="Network20\VlanExtensions.cs" />
     <Compile Include="Network\Network.cs" />
     <Compile Include="Network\NetworkingLegacyAccessor.cs" />
+    <Compile Include="Server20\MonitoringAccessor.cs" />
     <Compile Include="Server20\Server20Extensions.cs" />
+    <Compile Include="Server20\AntiAffinityRuleAccessor.cs" />
     <Compile Include="Server20\ServerAccessor.cs" />
     <Compile Include="Server20\ServerManagementAccessor.cs" />
     <Compile Include="ServerImageType.cs" />
