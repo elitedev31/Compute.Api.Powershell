@@ -217,7 +217,7 @@
         public async Task<ResponseType> CleanServer(Guid serverId)
         {
             return await _apiClient.PostAsync<CleanServerType, ResponseType>(
-                ApiUris.CleanMCP20Server(_apiClient.OrganizationId),
+                ApiUris.CleanServer(_apiClient.OrganizationId),
                 new CleanServerType { id = serverId.ToString() });
         }
 

@@ -1,37 +1,122 @@
-﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<servers
-xmlns="urn:didata.com:api:cloud:types" pageNumber="1" pageCount="1"
-totalCount="1" pageSize="250">
-	<Server id="d577a691-e116-4913-a440-022d2729fc84" datacenterId="NA9">
-		<name>Production Web Server</name>
-		<description>
-			This server hosts our production web
-			applications.
-		</description>
-		<operatingSystem id="REDHAT664" displayName="REDHAT6/64"
-		family="UNIX"/>
-		<cpuCount>1</cpuCount>
-		<memoryGb>2</memoryGb>
-		<disk id="338c1163-5348-4572-962d-185c97bd0d65" scsiId="0" sizeGb="10"
-		speed="STANDARD" state="NORMAL"/>
-		<networkInfo networkDomainId="484174a2-ae74-4658-9e56-50fc90e086cf">
-			<primaryNic id="4c8d5f67-c6df-421d-b8ac-45dd1b141334"
-			privateIpv4="10.0.3.11" ipv6="2607:f480:1111:1153:dee:4666:1130:7484"
-			vlanId="0e56433f-d808-4669-821d-812769517ff8" vlanName="Production VLAN"
-			state="NORMAL"/>
-		</networkInfo>
-		<sourceImageId>02250336-de2b-4e99-ab96-78511b7f8f4b</sourceImageId>
-		<createTime>2015-02-17T10:59:18.000Z</createTime>
-		<deployed>true</deployed>
-		<started>true</started>
-		<state>PENDING_CHANGE</state>
-		<progress>
-			<action>SHUTDOWN_SERVER</action>
-			<requestTime>2015-03-06T18:05:33.000Z</requestTime>
-			<userName>myuser</userName>
-		</progress>
-		<machineStatus name="vmwareToolsVersionStatus" value="CURRENT"/>
-		<machineStatus name="vmwareToolsRunningStatus" value="RUNNING"/>
-		<machineStatus name="vmwareToolsApiVersion" value="9354"/>
-	</Server>
+﻿<servers xmlns="urn:didata.com:api:cloud:types" pageNumber="1" pageCount="5" totalCount="5" pageSize="250">
+  <Server id="fc5764d8-5093-4e28-bd1b-c0b28057a908" datacenterId="NA9">
+    <name>Win2012 Std2CPU</name>
+    <description>
+      Explore keeping the UI layout the same as it is in read mode. eg. server name / description do not appear with the label. They are editable inline.If server name has no value, show Server Name as the field placeholder.This would require deleting the ser
+    </description>
+    <operatingSystem id="WIN2012S64" displayName="WIN2012S/64" family="WINDOWS"/>
+    <cpuCount>2</cpuCount>
+    <memoryGb>4</memoryGb>
+    <disk id="c3b08dee-6796-441e-a59e-3ee93356d8fc" scsiId="0" sizeGb="50" speed="STANDARD" state="NORMAL"/>
+    <disk id="9c3e3082-d2e7-4a3a-9a36-5d927c8eee38" scsiId="1" sizeGb="100" speed="STANDARD" state="NORMAL"/>
+    <networkInfo networkDomainId="edc8af2b-5ea5-4eff-acb2-824f25d13ef2">
+      <primaryNic id="78ffce4a-311e-458d-a7cf-aefb6f99e9e2" privateIpv4="192.168.5.24" ipv6="2607:f480:111:1378:3b11:76bf:a3f3:ba23" vlanId="2055721b-169f-44f7-b5c1-1119c401781b" vlanName="To Modify an IP Address, the user needs the Primary Administrator or Networ" state="NORMAL"/>
+      <additionalNic id="e30130a6-ea80-4526-9616-d7794d9fdf6c" privateIpv4="172.16.0.8" ipv6="2607:f480:111:1439:76a2:1468:27fe:98f1" vlanId="29277d00-bd6b-4c40-8b12-a26025111843" vlanName="VLAN 123" state="NORMAL"/>
+      <additionalNic id="9490675e-bf30-43c2-b159-27b9a68cd676" privateIpv4="172.16.50.17" ipv6="2607:f480:111:1379:895:b20a:8a7a:a2f5" vlanId="74124cd2-9f15-4302-9e8e-d77621d98764" vlanName="VLAN 2" state="NORMAL"/>
+      <additionalNic id="b2899271-c9d0-4c6b-b34f-a64329326a74" privateIpv4="10.0.0.251" ipv6="2607:f480:111:1395:789a:bd9d:2928:4377" vlanId="ccd42774-649c-4b51-9a79-ff887041dee6" vlanName="OneMoress" state="NORMAL"/>
+    </networkInfo>
+    <backup assetId="7c325564-75ad-4e16-803b-ba881160e268" servicePlan="Essentials" state="NORMAL"/>
+    <sourceImageId>1cdfee63-9e40-40f2-98e5-a46e9bfd742c</sourceImageId>
+    <createTime>2015-08-20T08:47:02.000Z</createTime>
+    <deployed>true</deployed>
+    <started>false</started>
+    <state>NORMAL</state>
+    <machineStatus name="vmwareToolsVersionStatus" value="CURRENT"/>
+    <machineStatus name="vmwareToolsRunningStatus" value="NOT_RUNNING"/>
+    <machineStatus name="vmwareToolsApiVersion" value="9356"/>
+  </Server>
+  <Server id="43bdcedd-81a8-4912-8ade-bc94a97a07e0" datacenterId="NA9">
+    <name>Cento64Bit</name>
+    <description/>
+    <operatingSystem id="CENTOS664" displayName="CENTOS6/64" family="UNIX"/>
+    <cpuCount>2</cpuCount>
+    <memoryGb>4</memoryGb>
+    <disk id="11b582b3-b9bc-4936-88b6-ad8ea2c8fdcf" scsiId="0" sizeGb="10" speed="STANDARD" state="NORMAL"/>
+    <disk id="06de5f45-c769-4cd1-86c7-bca975bff957" scsiId="1" sizeGb="10" speed="STANDARD" state="NORMAL"/>
+    <networkInfo networkDomainId="edc8af2b-5ea5-4eff-acb2-824f25d13ef2">
+      <primaryNic id="c891122e-f59d-467b-9318-ec2e4fd2b2ea" privateIpv4="172.16.25.12" ipv6="2607:f480:111:1381:107f:75dc:fc76:61d7" vlanId="1776b06f-a4cb-4893-aac7-5c5b6bbf112a" vlanName="VLAN-After Edit" state="NORMAL"/>
+      <additionalNic id="44016066-826a-46ab-8746-fdad737f162d" privateIpv4="172.16.50.9" ipv6="2607:f480:111:1379:9da7:5a16:2a59:cf01" vlanId="74124cd2-9f15-4302-9e8e-d77621d98764" vlanName="VLAN 2" state="NORMAL"/>
+    </networkInfo>
+    <backup assetId="14c1bdc9-6b0d-4cb9-b4a2-a6a7d0cf863b" servicePlan="Essentials" state="NORMAL"/>
+    <sourceImageId>dc4f5eac-841c-4c51-8185-f15bfaaebf39</sourceImageId>
+    <createTime>2015-08-20T08:48:00.000Z</createTime>
+    <deployed>true</deployed>
+    <started>false</started>
+    <state>NORMAL</state>
+    <progress>
+      <action>EXPAND_SERVER_DISK_SIZE</action>
+      <requestTime>2015-09-04T02:46:39.000Z</requestTime>
+      <userName>bobermayer_platcaas</userName>
+    </progress>
+    <machineStatus name="vmwareToolsVersionStatus" value="NEED_UPGRADE"/>
+    <machineStatus name="vmwareToolsRunningStatus" value="NOT_RUNNING"/>
+    <machineStatus name="vmwareToolsApiVersion" value="9354"/>
+  </Server>
+  <Server id="9bfa8e04-c568-4f6b-ad49-b384f01fbb92" datacenterId="NA12">
+    <name>QA Test Server - Do Not Delete</name>
+    <description>Used for Automation</description>
+    <operatingSystem id="UBUNTU1264" displayName="UBUNTU12/64" family="UNIX"/>
+    <cpuCount>2</cpuCount>
+    <memoryGb>4</memoryGb>
+    <disk id="f03604aa-232e-4944-a9ed-665711197715" scsiId="0" sizeGb="10" speed="STANDARD" state="NORMAL"/>
+    <disk id="238247da-bb8b-44fe-9545-866a04bebc63" scsiId="1" sizeGb="25" speed="HIGHPERFORMANCE" state="NORMAL"/>
+    <networkInfo networkDomainId="44e54d95-0a92-459e-b722-71f7fb4fc9d8">
+      <primaryNic id="4a8f3eb0-416d-4c28-9fab-da3ea34745a8" privateIpv4="172.16.0.220" ipv6="2607:f480:211:1144:423:8081:d840:24e3" vlanId="26ea2ea6-4b50-401d-a572-2d0a2338f864" vlanName="QA VLAN - Do Not Delete" state="NORMAL"/>
+      <additionalNic id="de12e24e-c2a9-4038-a710-87cc0af1e243" privateIpv4="192.168.0.9" ipv6="2607:f480:211:1145:32f4:d3ba:5464:7af" vlanId="4c65cdb3-ea43-40a3-ba69-e860e9cc783a" vlanName="QA VLAN2" state="NORMAL"/>
+      <additionalNic id="df2fc185-6985-4050-8c46-7c4bc0f76c29" privateIpv4="10.25.0.39" ipv6="2607:f480:211:1168:2b87:7f77:bfa4:3881" vlanId="4f1d60a3-46bf-4b38-83d0-129b5ed92c12" vlanName="QA VLAN3" state="NORMAL"/>
+    </networkInfo>
+    <sourceImageId>58f67195-1b0a-4b79-ae67-550896c2d22b</sourceImageId>
+    <createTime>2015-09-01T11:49:59.000Z</createTime>
+    <deployed>true</deployed>
+    <started>false</started>
+    <state>NORMAL</state>
+    <machineStatus name="vmwareToolsVersionStatus" value="CURRENT"/>
+    <machineStatus name="vmwareToolsRunningStatus" value="NOT_RUNNING"/>
+    <machineStatus name="vmwareToolsApiVersion" value="9354"/>
+  </Server>
+  <Server id="317371f1-2b8e-4059-a8a9-8fd817754c5b" datacenterId="NA9">
+    <name>MCP2 Win2012 New</name>
+    <description/>
+    <operatingSystem id="WIN2012R2S64" displayName="WIN2012R2S/64" family="WINDOWS"/>
+    <cpuCount>1</cpuCount>
+    <memoryGb>2</memoryGb>
+    <disk id="531b107d-eb1f-42a0-ad07-07a5350e7c52" scsiId="0" sizeGb="55" speed="STANDARD" state="NORMAL"/>
+    <networkInfo networkDomainId="56693ad6-6e3b-4a63-b913-4cb6c44edd5d">
+      <primaryNic id="3a5b3cb0-2954-4f80-8cb0-e2185aa2dcd8" privateIpv4="10.0.0.205" ipv6="2607:f480:111:1125:50d3:93c2:4037:a985" vlanId="b4b809e8-4ebd-4a59-9778-ba8d9f768067" vlanName="New MCP2 VLAN" state="NORMAL"/>
+      <additionalNic id="3f8f7bfa-f28e-4268-93e3-c0207092bea3" privateIpv4="172.16.45.75" ipv6="2607:f480:111:1423:3f32:731c:9063:23ca" vlanId="e86f61f0-a390-403f-89b7-31ab57a2c3a6" vlanName="VLAN14sep2-After Edit" state="NORMAL"/>
+      <additionalNic id="0adddca9-9875-4a91-91dc-2f35042d9615" privateIpv4="172.25.0.100" ipv6="2607:f480:111:1438:3ad7:bc8f:4ab8:3b94" vlanId="f9c7659b-7e78-4d13-8957-dbc18396101e" vlanName="New VLAN3 - After Edit" state="NORMAL"/>
+      <additionalNic id="3f07bd86-f963-4b0a-9955-697128502998" privateIpv4="172.25.1.15" ipv6="2607:f480:111:1441:9ec:579f:2642:63fd" vlanId="4cbd9e2d-3d0b-4919-81ef-06999a4b6ea3" vlanName="CAAS VLAN" state="NORMAL"/>
+      <additionalNic id="abde7ef4-9510-43e3-9c52-613e48ee6bc3" privateIpv4="192.168.4.30" ipv6="2607:f480:111:1418:7c18:556b:7485:ac62" vlanId="b08cd599-ed24-455b-88d0-c2275b964fc4" vlanName="New VLAN14Sep" state="NORMAL"/>
+    </networkInfo>
+    <backup assetId="f4519795-5142-4937-852c-f6c8a9646638" servicePlan="Essentials" state="NORMAL"/>
+    <sourceImageId>888efb5a-2d62-4de5-8136-c5a6479e3958</sourceImageId>
+    <createTime>2015-09-14T07:22:47.000Z</createTime>
+    <deployed>true</deployed>
+    <started>false</started>
+    <state>NORMAL</state>
+    <machineStatus name="vmwareToolsVersionStatus" value="NEED_UPGRADE"/>
+    <machineStatus name="vmwareToolsRunningStatus" value="NOT_RUNNING"/>
+    <machineStatus name="vmwareToolsApiVersion" value="9354"/>
+  </Server>
+  <Server id="03b3b183-0bb9-4cda-a62e-7bcd566ee65e" datacenterId="NA12">
+    <name>QA Win Server Do Not Delete</name>
+    <description>Used for Automation Testing</description>
+    <operatingSystem id="WIN2012S64" displayName="WIN2012S/64" family="WINDOWS"/>
+    <cpuCount>1</cpuCount>
+    <memoryGb>2</memoryGb>
+    <disk id="4047ba88-db05-49a5-8100-9fdb26f170b6" scsiId="0" sizeGb="50" speed="STANDARD" state="NORMAL"/>
+    <disk id="791d8bcc-46d3-42fa-9c38-0b2801e0de95" scsiId="1" sizeGb="10" speed="HIGHPERFORMANCE" state="NORMAL"/>
+    <networkInfo networkDomainId="44e54d95-0a92-459e-b722-71f7fb4fc9d8">
+      <primaryNic id="6e12de1b-6dcf-4bfe-b31d-892ad4ffead9" privateIpv4="192.168.0.8" ipv6="2607:f480:211:1145:4c0f:c19a:93bd:a2cb" vlanId="4c65cdb3-ea43-40a3-ba69-e860e9cc783a" vlanName="QA VLAN2" state="NORMAL"/>
+      <additionalNic id="7a5986a6-3d5a-4656-a9c1-5c72366a6ec9" privateIpv4="172.16.0.8" ipv6="2607:f480:211:1144:211b:e8e4:70fc:2812" vlanId="26ea2ea6-4b50-401d-a572-2d0a2338f864" vlanName="QA VLAN - Do Not Delete" state="NORMAL"/>
+    </networkInfo>
+    <sourceImageId>3a7a9fbe-1c9e-442f-bc58-9a15667ef244</sourceImageId>
+    <createTime>2015-09-16T09:20:26.000Z</createTime>
+    <deployed>true</deployed>
+    <started>false</started>
+    <state>NORMAL</state>
+    <machineStatus name="vmwareToolsVersionStatus" value="CURRENT"/>
+    <machineStatus name="vmwareToolsRunningStatus" value="NOT_RUNNING"/>
+    <machineStatus name="vmwareToolsApiVersion" value="9354"/>
+  </Server>
 </servers>

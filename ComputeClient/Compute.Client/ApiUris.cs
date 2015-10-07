@@ -2323,7 +2323,7 @@ namespace DD.CBU.Compute.Api.Client
         /// <summary>	Clean server via MCP 2.0 api </summary>
         /// <param name="orgId">	The org Id. </param>
         /// <returns>	An URI for the mcp2.0 clean server api. </returns>      
-        public static Uri CleanMCP20Server(Guid orgId)
+        public static Uri CleanServer(Guid orgId)
         {
             return new Uri(string.Format(MCP2_0_PREFIX + "{0}/server/cleanServer", orgId), UriKind.Relative);
         }

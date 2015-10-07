@@ -104,13 +104,25 @@
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SampleOutputs\AddNicResponse.xml" />
     <Content Include="SampleOutputs\AddPublicIpBlockResponse.xml" />
     <Content Include="SampleOutputs\AddPoolMemberResponse.xml" />
     <Content Include="SampleOutputs\ChangeServerMonitoringPlanResponse.xml" />
+    <Content Include="SampleOutputs\CleanServerResponse.xml" />
     <Content Include="SampleOutputs\CreatePoolResponse.xml" />
     <Content Include="SampleOutputs\DeleteFirewallRuleResponse.xml" />
+    <Content Include="SampleOutputs\DeployServerResponse.xml" />
+    <Content Include="SampleOutputs\NotifyNicIpChangeResponse.xml" />
+    <Content Include="SampleOutputs\PowerOffServerResponse.xml" />
+    <Content Include="SampleOutputs\RemoveNicResponse.xml" />
+    <Content Include="SampleOutputs\ResetServerResponse.xml" />
+    <Content Include="SampleOutputs\RebootServerResponse.xml" />
+    <Content Include="SampleOutputs\ShutdownServerResponse.xml" />
+    <Content Include="SampleOutputs\StartServerResponse.xml" />
+    <Content Include="SampleOutputs\DeleteServerResponse.xml" />
     <Content Include="SampleOutputs\DisableServerMonitoringResponse.xml" />
     <Content Include="SampleOutputs\EnableServerMonitoringResponse.xml" />
+    <Content Include="SampleOutputs\UpdateVmwareToolsResponse.xml" />
     <None Include="SampleOutputs\GetMonitoringUsageReportResponse.csv" />
     <Content Include="SampleOutputs\GetAntiAffinityRulesResponse.xml" />
     <Content Include="SampleOutputs\ListDefaultHealthMonitorsResponse.xml" />

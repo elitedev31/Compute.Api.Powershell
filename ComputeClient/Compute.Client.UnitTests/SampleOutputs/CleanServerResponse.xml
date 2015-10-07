@@ -1,0 +1,8 @@
+﻿<response requestId="NA9/2015-03-08T06:53:59.331-04:00/75b54fae-dedb-49ceaa7f-494c73fc45e5" xmlns="urn:didata.com:api:cloud:types">
+  <operation>CLEAN_SERVER</operation>
+  <responseCode>IN_PROGRESS</responseCode>
+  <message>
+    Request to Clean Server '1c7762ca-f379-4eef-b08e-aa526d602589' is
+    beingprocessed.
+  </message>
+</response>
