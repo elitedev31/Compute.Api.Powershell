@@ -160,6 +160,20 @@ namespace DD.CBU.Compute.Api.Client.Interfaces.Backup
         /// <param name="serverId">
         /// The server id.
         /// </param>
+        /// <param name="backupClientId">
+        /// The backup client id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>		
+        Task<Status> RemoveBackupClient(string serverId, string backupClientId);
+
+        /// <summary>
+        /// The remove backup client.
+        /// </summary>
+        /// <param name="serverId">
+        /// The server id.
+        /// </param>
         /// <param name="backupClient">
         /// The backup client.
         /// </param>
