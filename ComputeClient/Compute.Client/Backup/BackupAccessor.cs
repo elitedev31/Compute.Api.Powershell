@@ -202,19 +202,60 @@ namespace DD.CBU.Compute.Api.Client.Backup
 						});
 		}
 
-		/// <summary>
-		/// The remove backup client.
-		/// </summary>
-		/// <param name="serverId">
-		/// The server id.
-		/// </param>
-		/// <param name="backupClient">
-		/// The backup client.
-		/// </param>
-		/// <returns>
-		/// The <see cref="Task"/>.
-		/// </returns>		
-		public async Task<Status> RemoveBackupClient(string serverId, BackupClientDetailsType backupClient)
+        /// <summary>
+        /// The add backup client.
+        /// </summary>
+        /// <param name="serverId">
+        /// The server id.
+        /// </param>
+        /// <param name="clientType">
+        /// The client type.
+        /// </param>
+        /// <param name="storagePolicy">
+        /// The storage policy.
+        /// </param>
+        /// <param name="schedulePolicy">
+        /// The schedule policy.
+        /// </param>
+        /// <param name="alertingType">
+        /// The alerting type.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        public async Task<Status> AddBackupClient(
+            string serverId,
+            string clientType,
+            string storagePolicy,
+            string schedulePolicy,
+            AlertingType alertingType)
+        {
+            return
+                await
+                _apiClient.PostAsync<NewBackupClient, Status>(
+                    ApiUris.AddBackupClient(_apiClient.OrganizationId, serverId),
+                    new NewBackupClient
+                    {
+                        schedulePolicyName = schedulePolicy,
+                        storagePolicyName = storagePolicy,
+                        type = clientType,
+                        alerting = alertingType
+                    });
+        }
+
+        /// <summary>
+        /// The remove backup client.
+        /// </summary>
+        /// <param name="serverId">
+        /// The server id.
+        /// </param>
+        /// <param name="backupClient">
+        /// The backup client.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>		
+        public async Task<Status> RemoveBackupClient(string serverId, BackupClientDetailsType backupClient)
 		{
 			return
 				await _apiClient.GetAsync<Status>(ApiUris.RemoveBackupClient(_apiClient.OrganizationId, serverId, backupClient.id));
