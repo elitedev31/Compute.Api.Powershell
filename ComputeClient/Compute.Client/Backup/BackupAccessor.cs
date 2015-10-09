@@ -359,6 +359,23 @@ namespace DD.CBU.Compute.Api.Client.Backup
         /// <param name="serverId">
         /// The server id.
         /// </param>
+        /// <param name="backupClientId">
+        /// The backup client id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        public async Task<Status> InitiateBackup(string serverId, string backupClientId)
+		{
+			return await _apiClient.GetAsync<Status>(ApiUris.InitiateBackup(_apiClient.OrganizationId, serverId, backupClientId));
+		}
+
+        /// <summary>
+        /// The initiate backup.
+        /// </summary>
+        /// <param name="serverId">
+        /// The server id.
+        /// </param>
         /// <param name="backupClient">
         /// The backup client.
         /// </param>
@@ -366,36 +383,51 @@ namespace DD.CBU.Compute.Api.Client.Backup
         /// The <see cref="Task"/>.
         /// </returns>
         public async Task<Status> InitiateBackup(string serverId, BackupClientDetailsType backupClient)
-		{
-			return
-				await _apiClient.GetAsync<Status>(ApiUris.InitiateBackup(_apiClient.OrganizationId, serverId, backupClient.id));
-		}
+        {
+            return await InitiateBackup(serverId, backupClient.id);
+        }
 
-		/// <summary>
-		/// The cancel backup job.
-		/// </summary>
-		/// <param name="serverId">
-		/// The server id.
-		/// </param>
-		/// <param name="backupClient">
-		/// The backup client.
-		/// </param>
-		/// <returns>
-		/// The <see cref="Task"/>.
-		/// </returns>
-		public async Task<Status> CancelBackupJob(string serverId, BackupClientDetailsType backupClient)
-		{
-			return
-				await _apiClient.GetAsync<Status>(ApiUris.CancelBackupJobs(_apiClient.OrganizationId, serverId, backupClient.id));
-		}
+        /// <summary>
+        /// The cancel backup job.
+        /// </summary>
+        /// <param name="serverId">
+        /// The server id.
+        /// </param>
+        /// <param name="backupClientId">
+        /// The backup client id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        public async Task<Status> CancelBackupJob(string serverId, string backupClientId)
+        {
+            return await _apiClient.GetAsync<Status>(ApiUris.CancelBackupJobs(_apiClient.OrganizationId, serverId, backupClientId));
+        }
 
-		/// <summary>	In place restore. </summary>
-		/// <param name="serverId">	   	The server id. </param>
-		/// <param name="backupClient">	The backup client. </param>
-		/// <param name="asAtDate">	   	The date and time to recover to. </param>
-		/// <returns>	A Status message from the API. </returns>
-		/// <seealso cref="M:DD.CBU.Compute.Api.Client.Interfaces.Backup.IBackupAccessor.InPlaceRestore(BackupClientDetailsType,DateTime)"/>
-		public async Task<Status> InPlaceRestore(string serverId, BackupClientDetailsType backupClient, DateTime asAtDate)
+        /// <summary>
+        /// The cancel backup job.
+        /// </summary>
+        /// <param name="serverId">
+        /// The server id.
+        /// </param>
+        /// <param name="backupClient">
+        /// The backup client.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        public async Task<Status> CancelBackupJob(string serverId, BackupClientDetailsType backupClient)
+		{
+            return await CancelBackupJob(serverId, backupClient.id);
+        }
+
+        /// <summary>	In place restore. </summary>
+        /// <param name="serverId">	   	The server id. </param>
+        /// <param name="backupClient">	The backup client. </param>
+        /// <param name="asAtDate">	   	The date and time to recover to. </param>
+        /// <returns>	A Status message from the API. </returns>
+        /// <seealso cref="M:DD.CBU.Compute.Api.Client.Interfaces.Backup.IBackupAccessor.InPlaceRestore(BackupClientDetailsType,DateTime)"/>
+        public async Task<Status> InPlaceRestore(string serverId, BackupClientDetailsType backupClient, DateTime asAtDate)
 		{
 			return await InPlaceRestore(serverId, backupClient.id, asAtDate);
 		}
@@ -461,5 +493,5 @@ namespace DD.CBU.Compute.Api.Client.Backup
 		{
 			return await this.OutOfPlaceRestore(serverId, backupClient.id, asAtDate, targetServer.id);
 		}
-	}
+    }
 }

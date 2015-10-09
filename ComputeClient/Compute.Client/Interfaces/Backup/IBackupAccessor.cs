@@ -246,19 +246,47 @@ namespace DD.CBU.Compute.Api.Client.Interfaces.Backup
         /// </returns>
         Task<Status> InitiateBackup(string serverId, BackupClientDetailsType backupClient);
 
-		/// <summary>
-		/// The cancel backup job.
-		/// </summary>
-		/// <param name="serverId">
-		/// The server id.
-		/// </param>
-		/// <param name="backupClient">
-		/// The backup client.
-		/// </param>
-		/// <returns>
-		/// The <see cref="Task"/>.
-		/// </returns>
-		Task<Status> CancelBackupJob(string serverId, BackupClientDetailsType backupClient);
+        /// <summary>
+        /// The initiate backup.
+        /// </summary>
+        /// <param name="serverId">
+        /// The server id.
+        /// </param>
+        /// <param name="backupClientId">
+        /// The backup client id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        Task<Status> InitiateBackup(string serverId, string backupClientId);
+
+        /// <summary>
+        /// The cancel backup job.
+        /// </summary>
+        /// <param name="serverId">
+        /// The server id.
+        /// </param>
+        /// <param name="backupClient">
+        /// The backup client.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        Task<Status> CancelBackupJob(string serverId, BackupClientDetailsType backupClient);
+
+        /// <summary>
+        /// The cancel backup job.
+        /// </summary>
+        /// <param name="serverId">
+        /// The server id.
+        /// </param>
+        /// <param name="backupClientId">
+        /// The backup client id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        Task<Status> CancelBackupJob(string serverId, string backupClientId);
 
 		/// <summary>	In place restore. </summary>
 		/// <param name="serverId">	   	The server id. </param>
@@ -297,5 +325,5 @@ namespace DD.CBU.Compute.Api.Client.Interfaces.Backup
 		/// <param name="targetServer">	Target server. </param>
 		/// <returns>	A Status message from the API; </returns>
 		Task<Status> OutOfPlaceRestore(string serverId, BackupClientDetailsType backupClient, DateTime asAtDate, ServerType targetServer);
-	}
+    }
 }
