@@ -568,80 +568,15 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 		IsNullable = false)]
 	public partial class EditFirewallRuleType
 	{
-
-		private string actionField;
-
-		private string ipVersionField;
-
-		private string protocolField;
-
-		private IpAndPortFilterType sourceField;
-
-		private IpAndPortFilterType destinationField;
-
 		private bool enabledField;
 
-		private bool enabledFieldSpecified;
-
-		private RulePlacementType placementField;
-
 		private string idField;
-
-		/// <remarks/>
-		public string action
-		{
-			get { return this.actionField; }
-			set { this.actionField = value; }
-		}
-
-		/// <remarks/>
-		public string ipVersion
-		{
-			get { return this.ipVersionField; }
-			set { this.ipVersionField = value; }
-		}
-
-		/// <remarks/>
-		public string protocol
-		{
-			get { return this.protocolField; }
-			set { this.protocolField = value; }
-		}
-
-		/// <remarks/>
-		public IpAndPortFilterType source
-		{
-			get { return this.sourceField; }
-			set { this.sourceField = value; }
-		}
-
-		/// <remarks/>
-		public IpAndPortFilterType destination
-		{
-			get { return this.destinationField; }
-			set { this.destinationField = value; }
-		}
 
 		/// <remarks/>
 		public bool enabled
 		{
 			get { return this.enabledField; }
 			set { this.enabledField = value; }
-		}
-
-		/// <remarks/>
-		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		public bool enabledSpecified
-		{
-			get { return this.enabledFieldSpecified; }
-			set { this.enabledFieldSpecified = value; }
-		}
-
-		/// <remarks/>
-		public RulePlacementType placement
-		{
-			get { return this.placementField; }
-			set { this.placementField = value; }
 		}
 
 		/// <remarks/>
