@@ -127,6 +127,8 @@
 
         private string locationField;
 
+        private string[] softwareLabelField;
+
         /// <remarks/>
         public string name
         {
@@ -272,6 +274,20 @@
             set
             {
                 this.locationField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("softwareLabel")]
+        public string[] softwareLabel
+        {
+            get
+            {
+                return this.softwareLabelField;
+            }
+            set
+            {
+                this.softwareLabelField = value;
             }
         }
     }
