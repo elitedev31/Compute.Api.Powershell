@@ -524,7 +524,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        // [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
         public string poolId
         {
             get
@@ -538,7 +538,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        // [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
         public string clientClonePoolId
         {
             get

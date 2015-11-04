@@ -14,11 +14,11 @@
         [FilterParameter("id")]
         public Guid? Id { get; set; }
 
-        /// <summary>
-        /// Gets or sets the datacenter id filter.
-        /// </summary>
-        [FilterParameter("datacenterId")]
-        public string DatacenterId { get; set; }
+        ///// <summary>
+        ///// Gets or sets the datacenter id filter.
+        ///// </summary>
+        //[FilterParameter("datacenterId")]
+        //public string DatacenterId { get; set; }
 
         /// <summary>
         /// Gets or sets the name filter.
@@ -32,10 +32,10 @@
         [FilterParameter("state")]
         public string State { get; set; }
 
-        /// <summary>
-        /// Gets or sets the enabled filter.
-        /// </summary>
-        [FilterParameter("enabled")]
-        public bool Enabled { get; set; }
+        ///// <summary>
+        ///// Gets or sets the enabled filter.
+        ///// </summary>
+        //[FilterParameter("enabled")]
+        //public bool Enabled { get; set; }
     }
 }
