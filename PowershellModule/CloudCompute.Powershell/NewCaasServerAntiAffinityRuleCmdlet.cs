@@ -18,7 +18,9 @@ using ServerType = DD.CBU.Compute.Api.Contracts.Network20.ServerType;
 
 namespace DD.CBU.Compute.Powershell
 {
-	/// <summary>
+    using Api.Contracts.Server10;
+
+    /// <summary>
 	///     The new caas server anti affinity rule cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.New, "CaasServerAntiAffinityRule")]

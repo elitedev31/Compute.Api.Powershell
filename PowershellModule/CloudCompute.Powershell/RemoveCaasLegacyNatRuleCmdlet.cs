@@ -1,47 +1,41 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="NewCaasNatRuleCmdlet.cs" company="">
+// <copyright file="RemoveCaasNatRuleCmdlet.cs" company="">
 //   
 // </copyright>
 // <summary>
-//   The Add CaaS NAT Rule Cmdlet.
+//   The Remove NAT Rule cmdlet.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
 using System.Management.Automation;
-using System.Net;
 using DD.CBU.Compute.Api.Client;
+using DD.CBU.Compute.Api.Contracts.General;
 using DD.CBU.Compute.Api.Contracts.Network;
 
 namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
-	///     The Add CaaS NAT Rule Cmdlet.
+	///     The Remove NAT Rule cmdlet.
 	/// </summary>
-	[Cmdlet(VerbsCommon.New, "CaasNatRule")]
-	[OutputType(typeof (NatRuleType))]
-	public class NewCaasNatRuleCmdlet : PSCmdletCaasWithConnectionBase
+	[Cmdlet(VerbsCommon.Remove, "CaasLegacyNatRule")]
+	public class RemoveCaasLegacyNatRuleCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     Gets or sets the network.
 		/// </summary>
-		[Parameter(Mandatory = true, HelpMessage = "The target network to add the NAT rule into.", ValueFromPipeline = true)]
+		[Parameter(Mandatory = true, HelpMessage = "The network that the ACL Rule exists", 
+			ValueFromPipelineByPropertyName = true)]
 		public NetworkWithLocationsNetwork Network { get; set; }
 
 		/// <summary>
-		///     Gets or sets the nat rule name.
+		///     Gets or sets the nat rule.
 		/// </summary>
-		[Parameter(Mandatory = true, HelpMessage = "The NAT Rule name")]
-		public string NatRuleName { get; set; }
+		[Parameter(Mandatory = true, HelpMessage = "The ACL rule to delete", ValueFromPipeline = true)]
+		public NatRuleType NatRule { get; set; }
 
 		/// <summary>
-		///     Gets or sets the source ip address.
-		/// </summary>
-		[Parameter(HelpMessage = "The source IP Address.")]
-		public IPAddress SourceIpAddress { get; set; }
-
-		/// <summary>
-		///     Process the record
+		///     The process record method.
 		/// </summary>
 		protected override void ProcessRecord()
 		{
@@ -49,12 +43,8 @@ namespace DD.CBU.Compute.Powershell
 
 			try
 			{
-				NatRuleType natRule = CreateNatRule();
-
-				if (natRule != null)
-				{
-					WriteObject(natRule);
-				}
+				if (!ShouldProcess(NatRule.name)) return;
+				DeleteNatRule();
 			}
 			catch (AggregateException ae)
 			{
@@ -77,14 +67,21 @@ namespace DD.CBU.Compute.Powershell
 		}
 
 		/// <summary>
-		///     The create nat rule.
+		///     Removes a NAT Rule
 		/// </summary>
-		/// <returns>
-		///     The <see cref="NatRuleType" />.
-		/// </returns>
-		private NatRuleType CreateNatRule()
+		private void DeleteNatRule()
 		{
-			return Connection.ApiClient.NetworkingLegacy.Network.CreateNatRule(Network.id, NatRuleName, SourceIpAddress).Result;
+			Status status = Connection.ApiClient.NetworkingLegacy.Network.DeleteNatRule(Network.id, NatRule.id).Result;
+			if (status != null)
+			{
+				WriteDebug(
+					string.Format(
+						"{0} resulted in {1} ({2}): {3}", 
+						status.operation, 
+						status.result, 
+						status.resultCode, 
+						status.resultDetail));
+			}
 		}
 	}
 }

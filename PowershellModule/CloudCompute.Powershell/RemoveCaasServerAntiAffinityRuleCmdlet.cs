@@ -15,7 +15,9 @@ using DD.CBU.Compute.Api.Contracts.Server;
 
 namespace DD.CBU.Compute.Powershell
 {
-	/// <summary>
+    using Api.Contracts.Server10;
+
+    /// <summary>
 	///     The remove caas server anti affinity rule cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Remove, "CaasServerAntiAffinityRule", SupportsShouldProcess = true)]

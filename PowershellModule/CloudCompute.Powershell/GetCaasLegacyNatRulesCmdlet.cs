@@ -19,9 +19,9 @@ namespace DD.CBU.Compute.Powershell
 	/// <summary>
 	///     The get CaaS NAT Rules cmdlet.
 	/// </summary>
-	[Cmdlet(VerbsCommon.Get, "CaasNatRules")]
+	[Cmdlet(VerbsCommon.Get, "CaasLegacyNatRules")]
 	[OutputType(typeof (NatRuleType[]))]
-	public class GetCaasNatRulesCmdlet : PSCmdletCaasWithConnectionBase
+	public class GetCaasLegacyNatRulesCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     The network to show the NAT rules from
