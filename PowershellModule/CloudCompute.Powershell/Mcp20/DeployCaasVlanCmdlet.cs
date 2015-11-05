@@ -46,10 +46,17 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 		[Parameter(Mandatory = true, HelpMessage = "The vlan Private Ipv4BaseAddress")]
 		public IPAddress PrivateIpv4BaseAddress { get; set; }
 
-		/// <summary>
-		///     The process record method.
+
+        /// <summary>
+		///     Gets or sets the private ip v4 base address.
 		/// </summary>
-		protected override void ProcessRecord()
+		[Parameter(Mandatory = true, HelpMessage = "The vlan Private Ipv4 PrefixSize, must be between 16 and 24")]
+        public int PrivateIpv4PrefixSize { get; set; }
+
+        /// <summary>
+        ///     The process record method.
+        /// </summary>
+        protected override void ProcessRecord()
 		{
 			ResponseType response = null;
 			try
@@ -61,8 +68,9 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 							name = Name, 
 							description = Description, 
 							networkDomainId = NetworkDomainId.ToString(), 
-							privateIpv4BaseAddress = PrivateIpv4BaseAddress.MapToIPv4().ToString()
-						}).Result;
+							privateIpv4BaseAddress = PrivateIpv4BaseAddress.MapToIPv4().ToString(),
+                            privateIpv4PrefixSize = PrivateIpv4PrefixSize
+                        }).Result;
 				if (response != null)
 					WriteDebug(
 						string.Format(
