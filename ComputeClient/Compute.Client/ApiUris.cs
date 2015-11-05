@@ -420,7 +420,7 @@ namespace DD.CBU.Compute.Api.Client
         /// </returns>
         public static Uri CopyCustomerServerImage(Guid orgId)
         {
-            return new Uri(string.Format(MCP1_0_PREFIX + "/oec/0.9/{0}/copyCustomerImage", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP1_0_PREFIX + "{0}/copyCustomerImage", orgId), UriKind.Relative);
         }
 
         /// <summary>
