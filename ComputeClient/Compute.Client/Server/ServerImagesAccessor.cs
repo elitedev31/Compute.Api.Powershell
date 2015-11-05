@@ -123,17 +123,48 @@
 			return imagesWithDiskSpeed.image;
 		}
 
+	    /// <summary>
+	    /// The copy customer image
+	    /// </summary>
+	    /// <param name="imageId">
+	    /// The source image id.
+	    /// </param>
+	    /// <param name="targetImageName">Target Image Name</param>
+	    /// <param name="targetImageDescription">Target Image Description</param>
+	    /// <param name="targetLocation">Target Location</param>
+	    /// <param name="ovfPackagePrefix">OVF Package Prefix</param>
+	    /// <returns>
+	    /// The <see cref="Task"/>.
+	    /// </returns>	
+	    public async Task<ImageCopyType> CopyCustomerServerImage(
+            string imageId,
+            string targetImageName,
+            string targetImageDescription,
+            string targetLocation,
+            string ovfPackagePrefix)
+        {
+            return await _apiClient.PostAsync<NewImageCopy, ImageCopyType>(
+                                        ApiUris.CopyCustomerServerImage(_apiClient.OrganizationId),
+                                        new NewImageCopy
+                                        {
+                                            sourceImageId = imageId,
+                                            targetImageName = targetImageName,
+                                            targetImageDescription = targetImageDescription,
+                                            targetLocation = targetLocation,
+                                            ovfPackagePrefix = ovfPackagePrefix
+                                        });
+        }
 
-		/// <summary>
-		/// The remove customer server image.
-		/// </summary>
-		/// <param name="imageId">
-		/// The image Id.
-		/// </param>
-		/// <returns>
-		/// The <see cref="Task"/>.
-		/// </returns>
-		public async Task<Status> RemoveCustomerServerImage(string imageId)
+        /// <summary>
+        /// The remove customer server image.
+        /// </summary>
+        /// <param name="imageId">
+        /// The image Id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        public async Task<Status> RemoveCustomerServerImage(string imageId)
 		{
 			return await _apiClient.GetAsync<Status>(ApiUris.RemoveCustomerServerImage(_apiClient.OrganizationId, imageId));
 		}

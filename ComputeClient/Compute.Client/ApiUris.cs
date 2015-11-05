@@ -393,19 +393,34 @@ namespace DD.CBU.Compute.Api.Client
         /// <summary>
         /// Gets the relative URI for the CaaS API action that delete a customer image.
         /// </summary>
-		/// <param name="orgId">
-		/// The organization id
-		/// </param>
-		/// <param name="imageId">
-		/// The customer image id
-		/// </param>
-		/// <returns>
-		/// The <see cref="Uri"/>.
-		/// </returns>
+        /// <param name="orgId">
+        /// The organization id
+        /// </param>
+        /// <param name="imageId">
+        /// The customer image id
+        /// </param>
+        /// <returns>
+        /// The <see cref="Uri"/>.
+        /// </returns>
         public static Uri RemoveCustomerServerImage(Guid orgId, string imageId)
         {
             return new Uri(
                 string.Format(MCP1_0_PREFIX + "{0}/image/{1}?delete", orgId, imageId), UriKind.Relative);
+        }
+
+
+        /// <summary>
+        /// Gets the relative URI for the CaaS API action that copies customer source image.
+        /// </summary>
+        /// <param name="orgId">
+        /// The organization id
+        /// </param>
+        /// <returns>
+        /// The <see cref="Uri"/>.
+        /// </returns>
+        public static Uri CopyCustomerServerImage(Guid orgId)
+        {
+            return new Uri(string.Format(MCP1_0_PREFIX + "/oec/0.9/{0}/copyCustomerImage", orgId), UriKind.Relative);
         }
 
         /// <summary>
@@ -1867,7 +1882,7 @@ namespace DD.CBU.Compute.Api.Client
         /// <returns>The URL</returns>
         public static Uri GetMonitoringUsageReport(Guid orgId, DateTime startDate, DateTime? endDate)
         {
-            var url = string.Format(MCP2_0_PREFIX + "{0}/server/usageMonitoring?startDate={1}", orgId, startDate.ToString("yyyy-MM-dd"));
+            var url = string.Format(MCP2_0_PREFIX + "{0}/report/usageMonitoring?startDate={1}", orgId, startDate.ToString("yyyy-MM-dd"));
 
             if (endDate.HasValue)
             {
