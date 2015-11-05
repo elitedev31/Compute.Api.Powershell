@@ -66,16 +66,36 @@
 			string location,
 			string operatingSystemId,
 			string operatingSystemFamily);
-		
-		/// <summary>
-		/// The remove customer server image.
-		/// </summary>
-		/// <param name="imageid">
-		/// The imageid.
-		/// </param>
-		/// <returns>
-		/// The <see cref="Task"/>.
-		/// </returns>
-		Task<Status> RemoveCustomerServerImage(string imageid);		
+
+	    /// <summary>
+	    /// The copy customer image
+	    /// </summary>
+	    /// <param name="imageId">
+	    /// The source image id.
+	    /// </param>
+	    /// <param name="targetImageName">Target Image Name</param>
+	    /// <param name="targetImageDescription">Target Image Description</param>
+	    /// <param name="targetLocation">Target Location</param>
+	    /// <param name="ovfPackagePrefix">OVF Package Prefix</param>
+	    /// <returns>
+	    /// The <see cref="Task"/>.
+	    /// </returns>	
+	    Task<ImageCopyType> CopyCustomerServerImage(
+	        string imageId,
+	        string targetImageName,
+	        string targetImageDescription,
+	        string targetLocation,
+	        string ovfPackagePrefix);
+
+        /// <summary>
+        /// The remove customer server image.
+        /// </summary>
+        /// <param name="imageid">
+        /// The imageid.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        Task<Status> RemoveCustomerServerImage(string imageid);		
 	}
 }
