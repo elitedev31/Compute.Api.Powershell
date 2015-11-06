@@ -429,7 +429,11 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 
         private string poolIdField;
 
+        private bool poolIdFieldSpecified;
+
         private string clientClonePoolIdField;
+
+        private bool clientClonePoolIdFieldSpecified;
 
         private string persistenceProfileIdField;
 
@@ -524,7 +528,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
         }
 
         /// <remarks/>
-        // [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
         public string poolId
         {
             get
@@ -538,7 +542,20 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
         }
 
         /// <remarks/>
-        // [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool poolIdSpecified
+        {
+            get
+            {
+                return this.poolIdFieldSpecified;
+            }
+            set
+            {
+                this.poolIdFieldSpecified = value;
+            }
+        }
+
+        /// <remarks/>
         public string clientClonePoolId
         {
             get
@@ -548,6 +565,20 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
             set
             {
                 this.clientClonePoolIdField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool clientClonePoolIdSpecified
+        {
+            get
+            {
+                return this.clientClonePoolIdFieldSpecified;
+            }
+            set
+            {
+                this.clientClonePoolIdFieldSpecified = value;
             }
         }
 
