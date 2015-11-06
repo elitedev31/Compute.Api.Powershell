@@ -6,6 +6,7 @@ using DD.CBU.Compute.Api.Contracts.Network20;
 
 namespace DD.CBU.Compute.Powershell.Mcp20
 {
+    using System.ComponentModel;
     using Api.Contracts.Network;
 
     /// <summary>
@@ -54,14 +55,15 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         /// <summary>
         ///     Gets or sets the pool id.
         /// </summary>
+   
         [Parameter(Mandatory = false, HelpMessage = "The VIP virtual listener Pool Id")]
-        public string PoolId { get; set; }
+        public Guid? PoolId { get; set; }
 
         /// <summary>
         ///     Gets or sets the client clone pool id.
         /// </summary>
         [Parameter(Mandatory = false, HelpMessage = "The VIP virtual listener Client Clone Pool Id")]
-        public string ClientClonePoolId { get; set; }
+        public Guid? ClientClonePoolId { get; set; }
 
         /// <summary>
         ///     Gets or sets the persistence profile id.
@@ -89,7 +91,8 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
         public SetCaasVIPVirtualListenerCmdlet()
         {
-            Enabled = null;
+            PoolId = Guid.Empty;
+            ClientClonePoolId = Guid.Empty;
         }
 
         /// <summary>
@@ -110,8 +113,10 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                     connectionLimit = ConnectionLimit.ToString(),
                     connectionRateLimit = ConnectionRateLimit.ToString(),
                     sourcePortPreservation = SourcePortPreservation,
-                    poolId = PoolId,
-                    clientClonePoolId = ClientClonePoolId,
+                    poolId = PoolId.HasValue && PoolId.Value != Guid.Empty ? PoolId.Value.ToString() : null,
+                    poolIdSpecified = !PoolId.HasValue || PoolId.Value != Guid.Empty,
+                    clientClonePoolId = ClientClonePoolId.HasValue && ClientClonePoolId.Value != Guid.Empty ? ClientClonePoolId.Value.ToString() : null,
+                    clientClonePoolIdSpecified = !ClientClonePoolId.HasValue || ClientClonePoolId.Value != Guid.Empty,
                     persistenceProfileId = PersistenceProfileId,
                     fallbackPersistenceProfileId = FallbackPersistenceProfileId,
                     optimizationProfile = OptimizationProfileId,

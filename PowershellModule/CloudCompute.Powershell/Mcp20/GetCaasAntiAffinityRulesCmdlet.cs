@@ -41,14 +41,14 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
         /// <summary>
         ///     Gets or sets Anti affinity rule id.
-        /// </summary>
-        [Parameter(Mandatory = false, ParameterSetName = "Filtered", ValueFromPipeline = true, HelpMessage = "The anti-afiinity rule id")]
+        /// </summary>]
+        [Parameter(Mandatory = false, HelpMessage = "The anti-afiinity rule id")]
         public Guid RuleId { get; set; }
 
         /// <summary>
         ///     Gets or sets Anti affinity rule state.
         /// </summary>
-        [Parameter(Mandatory = false, ParameterSetName = "Filtered", ValueFromPipeline = true, HelpMessage = "The anti-afiinity rule state")]
+        [Parameter(Mandatory = false, HelpMessage = "The anti-afiinity rule state")]
         public string State { get; set; }
 
         protected override void ProcessRecord()
@@ -58,7 +58,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
             try
             {
-                var filterOptions = (ParameterSetName.Equals("Filtered")
+                var filterOptions = (RuleId != Guid.Empty || !string.IsNullOrWhiteSpace(State)
                                             ? new AntiAffinityRuleListOptions
                                             {
                                                 Id = RuleId != Guid.Empty ? RuleId : (Guid?)null,
