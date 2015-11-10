@@ -26,7 +26,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 		/// <summary>
 		///     Gets or sets the name.
 		/// </summary>
-		[Parameter(Mandatory = false, ParameterSetName = "Filtered", ValueFromPipeline = true, 
+		[Parameter(Mandatory = false, ParameterSetName = "Filtered", ValueFromPipeline = false, 
 			HelpMessage = "The virtual lan name")]
 		public string Name { get; set; }
 
@@ -40,7 +40,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 		/// <summary>
 		///     Gets or sets the network domain.
 		/// </summary>
-		[Parameter(Mandatory = false, ParameterSetName = "Filtered", ValueFromPipeline = true, 
+		[Parameter(Mandatory = false, ParameterSetName = "Filtered", ValueFromPipeline = false, 
 			HelpMessage = "The virtual lan domain")]
 		public Guid VirtualLanId { get; set; }
 

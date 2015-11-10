@@ -25,28 +25,32 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 		/// <summary>
 		///     The Virtual Server
 		/// </summary>
-		[Parameter(Mandatory = false, ValueFromPipeline = true, 
-			HelpMessage = "The server on which the nic will be deployed")]
-		public ServerType Server { get; set; }
+		[Parameter(Mandatory = true, ValueFromPipeline = true, 
+			HelpMessage = "The server on which the nic will be deployed" , ParameterSetName = "Server_PrivateIp")]
+        [Parameter(Mandatory = true, ValueFromPipeline = true,
+            HelpMessage = "The server on which the nic will be deployed", ParameterSetName = "Server_Vlan")]   
+        public ServerType Server { get; set; }
 
 		/// <summary>
 		///     Gets or sets the server id.
 		/// </summary>
-		[Parameter(Mandatory = true, HelpMessage = "The server ID")]
-		public string ServerId { get; set; }
+		[Parameter(Mandatory = true, HelpMessage = "The server ID", ParameterSetName = "ServerId_PrivateIp")]
+        [Parameter(Mandatory = true, HelpMessage = "The server ID", ParameterSetName = "ServerId_Vlan")]      
+        public string ServerId { get; set; }
 
-		/// <summary>
-		///     Gets or sets the primary network.
-		/// </summary>
-		[Parameter(Mandatory = true, ParameterSetName = "Vlan", HelpMessage = "The server's primary network")]
-		public VlanType Vlan { get; set; }
+        /// <summary>
+        ///     Gets or sets the primary network.
+        /// </summary>     
+        [Parameter(Mandatory = true, ParameterSetName = "ServerId_Vlan", HelpMessage = "The server's primary network")]
+        [Parameter(Mandatory = true, ParameterSetName = "Server_Vlan", HelpMessage = "The server's primary network")]   
+        public VlanType Vlan { get; set; }
 
-		/// <summary>
-		///     Gets or sets the primary private IP.
-		/// </summary>
-		[Parameter(Mandatory = false, ParameterSetName = "PrivateIp", 
-			HelpMessage = "The private network private IP address that will be assigned to the machine.")]
-		public string PrimaryPrivateIp { get; set; }
+        /// <summary>
+        ///     Gets or sets the primary private IP.
+        /// </summary>    
+        [Parameter(Mandatory = true, ParameterSetName = "Server_PrivateIp", HelpMessage = "The private network private IP address that will be assigned to the machine.")]
+        [Parameter(Mandatory = true, ParameterSetName = "ServerId_PrivateIp", HelpMessage = "The private network private IP address that will be assigned to the machine.")]
+        public string PrimaryPrivateIp { get; set; }
 
 		/// <summary>
 		///     The process record method.
@@ -63,7 +67,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                     nic = new VlanIdOrPrivateIpType
                     {
                         privateIpv4 = PrimaryPrivateIp,
-                        vlanId = Vlan.id
+                        vlanId = Vlan != null? Vlan.id : null
                     }
 				};
 
