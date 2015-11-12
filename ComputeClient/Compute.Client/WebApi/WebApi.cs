@@ -18,16 +18,16 @@
 	/// </summary>
 	internal class WebApi : DisposableObject, IWebApi
 	{
-		/// <summary>
-		/// Media type formatters used to serialise and deserialise data contracts when communicating with the CaaS API.
-		/// </summary>
-		readonly MediaTypeFormatterCollection _mediaTypeFormatters =
-			new MediaTypeFormatterCollection(
-				new MediaTypeFormatter[2]
-					{					
-						(MediaTypeFormatter)new XmlMediaTypeFormatter(),
-						(MediaTypeFormatter)new FormUrlEncodedMediaTypeFormatter()
-					});
+	    /// <summary>
+	    /// Media type formatters used to serialise and deserialise data contracts when communicating with the CaaS API.
+	    /// </summary>
+	    private readonly MediaTypeFormatterCollection _mediaTypeFormatters =
+	        new MediaTypeFormatterCollection(
+	            new MediaTypeFormatter[2]
+	            {
+	                (MediaTypeFormatter) new XmlMediaTypeFormatter(),
+	                (MediaTypeFormatter) new FormUrlEncodedMediaTypeFormatter()
+	            });
 
 		/// <summary>
 		/// The <see cref="HttpClient"/> used to communicate with the CaaS API.
@@ -46,6 +46,7 @@
 		{
 			_mediaTypeFormatters.XmlFormatter.UseXmlSerializer = true;
 			_mediaTypeFormatters.Add(new TextMediaTypeFormatter());
+			_mediaTypeFormatters.Add(new CsvMediaTypeFormatter());
 		}
 
 		/// <summary>
@@ -137,7 +138,7 @@
             }
 
             using (HttpResponseMessage response = await _httpClient.GetAsync(relativeOperationUri))
-			{
+            {
 				if (!response.IsSuccessStatusCode)
 				{
 					await HandleApiRequestErrors(response, relativeOperationUri);		

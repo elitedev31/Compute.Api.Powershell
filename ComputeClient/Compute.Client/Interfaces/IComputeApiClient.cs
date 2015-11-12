@@ -1,3 +1,5 @@
+using DD.CBU.Compute.Api.Client.Interfaces.Reports;
+
 namespace DD.CBU.Compute.Api.Client.Interfaces
 {
 	using System;
@@ -60,5 +62,10 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 		/// Gets the backup.
 		/// </summary>
 		IBackupAccessor Backup { get; }
+
+        /// <summary>
+        /// Gets the Reports
+        /// </summary>
+        IReportAccessor Reports { get; }
     }
 }
