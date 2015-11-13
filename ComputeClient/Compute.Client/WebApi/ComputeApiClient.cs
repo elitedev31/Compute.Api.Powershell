@@ -9,6 +9,10 @@
 
 // ReSharper disable once CheckNamespace
 // Backwards compatibility, hence not moving the NameSpace
+
+using DD.CBU.Compute.Api.Client.Interfaces.Reports;
+using DD.CBU.Compute.Api.Client.Reports;
+
 namespace DD.CBU.Compute.Api.Client
 {
 	using System;
@@ -196,6 +200,7 @@ namespace DD.CBU.Compute.Api.Client
 			ServerManagement = new ServerManagementAccessor(WebApi);
 			ImportExportCustomerImage = new ImportExportCustomerImageAccessor(WebApi);
 			Backup = new BackupAccessor(WebApi);
+            Reports = new ReportAccessor(WebApi);
 		}
 
 		#endregion
@@ -341,7 +346,12 @@ namespace DD.CBU.Compute.Api.Client
 		/// </summary>
 		public IBackupAccessor Backup { get; private set; }
 
-		#endregion Instance data
+	    /// <summary>
+	    /// Gets the Reports
+	    /// </summary>
+	    public IReportAccessor Reports { get; private set; }
+
+	    #endregion Instance data
 
 		#region Public Methods
 

@@ -125,6 +125,7 @@
     <Compile Include="Interfaces\ImportExportImages\IImportExportCustomerImageAccessor.cs" />
     <Compile Include="Interfaces\Server20\IMonitoringAccessor.cs" />
     <Compile Include="Interfaces\Server20\IAntiAffinityRuleAccessor.cs" />
+    <Compile Include="Interfaces\Reports\IReportAccessor.cs" />
     <Compile Include="Interfaces\Server20\IServerAccessor.cs" />
     <Compile Include="Interfaces\Server20\IServerManagementAccessor.cs" />
     <Compile Include="Interfaces\Server\IServerAccessor.cs" />
@@ -147,6 +148,7 @@
     <Compile Include="Network\Network.cs" />
     <Compile Include="Network\NetworkingLegacyAccessor.cs" />
     <Compile Include="Server20\MonitoringAccessor.cs" />
+    <Compile Include="Reports\ReportAccessor.cs" />
     <Compile Include="Server20\Server20Extensions.cs" />
     <Compile Include="Server20\AntiAffinityRuleAccessor.cs" />
     <Compile Include="Server20\ServerAccessor.cs" />
@@ -170,6 +172,7 @@
     <Compile Include="StringExtensions.cs" />
     <Compile Include="Interfaces\IComputeApiClient.cs" />
     <Compile Include="ImportExportImages\ComputeApiClientImportExportExtensions.cs" />
+    <Compile Include="WebApi\CsvMediaTypeFormatter.cs" />
     <Compile Include="WebApi\HttpClientAdapter.cs" />
     <Compile Include="Interfaces\IHttpClient.cs" />
     <Compile Include="Interfaces\IWebApi.cs" />

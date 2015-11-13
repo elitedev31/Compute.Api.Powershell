@@ -2342,5 +2342,66 @@ namespace DD.CBU.Compute.Api.Client
         {
             return new Uri(string.Format(MCP2_0_PREFIX + "{0}/server/cleanServer", orgId), UriKind.Relative);
         }
+
+        /// <summary>
+        /// Returns the relative URI of the REST request for usage summary.
+        /// </summary>
+        /// <param name="orgId">The organization id.</param>
+        /// <param name="startDate">The Start Date</param>
+        /// <param name="endDate">The End Date</param>
+        /// <returns> The <see cref="Uri"/>.</returns>
+        public static Uri SummaryUsageReport(Guid orgId, DateTime startDate, DateTime endDate)
+        {
+            return new Uri(string.Format(MCP1_0_PREFIX + "{0}/report/usage?startDate={1:yyyy-MM-dd}&endDate={2:yyyy-MM-dd}", orgId, startDate, endDate), UriKind.Relative);
+        }
+        
+        /// <summary>
+        /// Returns the relative URI of the REST request for detailed usage.
+        /// </summary>
+        /// <param name="orgId">The organization id.</param>
+        /// <param name="startDate">The Start Date</param>
+        /// <param name="endDate">The End Date</param>
+        /// <returns> The <see cref="Uri"/>.</returns>
+        public static Uri DetailedUsageReport(Guid orgId, DateTime startDate, DateTime endDate)
+        {
+            return new Uri(string.Format(MCP1_0_PREFIX + "{0}/report/usageDetailed?startDate={1:yyyy-MM-dd}&endDate={2:yyyy-MM-dd}", orgId, startDate, endDate), UriKind.Relative);
+        }
+        
+        /// <summary>
+        /// Returns the relative URI of the REST request for software units usage report.
+        /// </summary>
+        /// <param name="orgId">The organization id.</param>
+        /// <param name="startDate">The Start Date</param>
+        /// <param name="endDate">The End Date</param>
+        /// <returns> The <see cref="Uri"/>.</returns>
+        public static Uri SoftwareUnitsReport(Guid orgId, DateTime startDate, DateTime endDate)
+        {
+            return new Uri(string.Format(MCP1_0_PREFIX + "{0}/report/usageSoftwareUnits?startDate={1:yyyy-MM-dd}&endDate={2:yyyy-MM-dd}", orgId, startDate, endDate), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// Returns the relative URI of the REST request for backup usage report.
+        /// </summary>
+        /// <param name="orgId">The organization id.</param>
+        /// <param name="datacenterId">The datacenter Id</param>
+        /// <param name="startDate">The Start Date</param>
+        /// <param name="endDate">The End Date</param>
+        /// <returns> The <see cref="Uri"/>.</returns>
+        public static Uri BackupUsageReport(Guid orgId, string datacenterId, DateTime startDate, DateTime endDate)
+        {
+            return new Uri(string.Format(MCP1_0_PREFIX + "{0}/backup/detailedUsageReport?datacenterId={1}&fromDate={2:yyyy-MM-dd}&toDate={3:yyyy-MM-dd}", orgId, datacenterId, startDate, endDate), UriKind.Relative);
+        } 
+        
+        /// <summary>
+        /// Returns the relative URI of the REST request for administrator logs report.
+        /// </summary>
+        /// <param name="orgId">The organization id.</param>
+        /// <param name="startDate">The Start Date</param>
+        /// <param name="endDate">The End Date</param>
+        /// <returns> The <see cref="Uri"/>.</returns>
+        public static Uri AdminLogReport(Guid orgId, DateTime startDate, DateTime endDate)
+        {
+            return new Uri(string.Format(MCP1_0_PREFIX + "{0}/auditlog?startDate={1:yyyy-MM-dd}&endDate={2:yyyy-MM-dd}", orgId, startDate, endDate), UriKind.Relative);
+        }
     }
 }
