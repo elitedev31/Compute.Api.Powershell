@@ -6,50 +6,78 @@ using DD.CBU.Compute.Api.Contracts.Network20;
 
 namespace DD.CBU.Compute.Powershell.Mcp20
 {
+    using System.Net;
     using Api.Contracts.Network;
 
     /// <summary>
     ///     The new NAT Rule CmdLet
     /// </summary>
     [Cmdlet(VerbsCommon.New, "CaasNatRule")]
-    [OutputType(typeof(ResponseType))]
+    [OutputType(typeof(ResponseType), ParameterSetName = new []{ "MCP2" })]
+    [OutputType(typeof(NatRuleType), ParameterSetName = new[] { "MCP1" })]
     public class NewCaasNatRuleCmdlet : PSCmdletCaasWithConnectionBase
     {
         /// <summary>
         ///     Gets or sets the network domain.
         /// </summary>
-        [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The network domain")]
+        [Parameter(Mandatory = true, ParameterSetName = "MCP2", ValueFromPipeline = true, HelpMessage = "The network domain")]
         public NetworkDomainType NetworkDomain { get; set; }
 
         /// <summary>
 		///     Gets or sets the Internal IP Address.
 		/// </summary>
-		[Parameter(Mandatory = true, HelpMessage = "The Firewall rule name")]
+		[Parameter(Mandatory = true, ParameterSetName = "MCP2", HelpMessage = "The Firewall rule name" )]
         public string InternalIP { get; set; }
 
         /// <summary>
         ///     Gets or sets the External IP Address.
         /// </summary>
-        [Parameter(Mandatory = true, HelpMessage = "The Firewall rule name")]
+        [Parameter(Mandatory = true, ParameterSetName = "MCP2", HelpMessage = "The Firewall rule name")]
         public string ExternalIP { get; set; }
-      
+
+        /// <summary>
+        ///     Gets or sets the network.
+        /// </summary>
+        [Parameter(Mandatory = true, ParameterSetName = "MCP1", HelpMessage = "The target network to add the NAT rule into.", ValueFromPipeline = true)]
+        public NetworkWithLocationsNetwork Network { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the nat rule name.
+        /// </summary>
+        [Parameter(Mandatory = true, ParameterSetName = "MCP1", HelpMessage = "The NAT Rule name")]
+        public string NatRuleName { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the source ip address.
+        /// </summary>
+        [Parameter(ParameterSetName = "MCP1", HelpMessage = "The source IP Address.")]
+        public IPAddress SourceIpAddress { get; set; }
+
         /// <summary>
         ///     The process record method.
         /// </summary>
         protected override void ProcessRecord()
         {
-            ResponseType response = null;
+            object response = null;
             base.ProcessRecord();
             try
             {
-                var natrule = new createNatRule
+                if (ParameterSetName.Equals("MCP2"))
                 {
-                    Item = NetworkDomain.id,
-                    internalIp = InternalIP,
-                    externalIp = ExternalIP
-                };
+                    var natrule = new createNatRule
+                    {
+                        Item = NetworkDomain.id,
+                        internalIp = InternalIP,
+                        externalIp = ExternalIP
+                    };
 
-                response = Connection.ApiClient.Networking.Nat.CreateNatRule(natrule).Result;
+                    response = Connection.ApiClient.Networking.Nat.CreateNatRule(natrule)
+                                         .Result;
+                }
+                else if (ParameterSetName.Equals("MCP1"))
+                {
+                    response = Connection.ApiClient.NetworkingLegacy.Network.CreateNatRule(Network.id, NatRuleName, SourceIpAddress).Result;
+                }
             }
             catch (AggregateException ae)
             {

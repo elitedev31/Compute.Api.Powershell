@@ -5,18 +5,35 @@ using DD.CBU.Compute.Api.Contracts.Network20;
 
 namespace DD.CBU.Compute.Powershell.Mcp20
 {
+    using Api.Contracts.General;
+    using Api.Contracts.Network;
+    using Mcp1 = Api.Contracts.Network;
+    using Mcp2 = Api.Contracts.Network20;
+
     /// <summary>
     ///     The Remove NAT Rule CmdLet
     /// </summary>
     [Cmdlet(VerbsCommon.Remove, "CaasNatRule")]
-    [OutputType(typeof(ResponseType))]
+    [OutputType(typeof(ResponseType), ParameterSetName = new[] { "MCP2" })]
     public class RemoveCaasNATRuleCmdlet : PSCmdletCaasWithConnectionBase
     {
         /// <summary>
         ///     Gets or sets the NAT Rule.
-        /// </summary>
+        /// </summary>        
         [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The NAT Rule")]
-        public NatRuleType NatRule { get; set; }
+        public object NatRule { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the network.
+        /// </summary>
+        [Parameter(Mandatory = true, ParameterSetName = "MCP1", HelpMessage = "The network that the ACL Rule exists", ValueFromPipelineByPropertyName = true)]
+        public NetworkWithLocationsNetwork Network { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the network.
+        /// </summary>
+        [Parameter(Mandatory = true, ParameterSetName = "MCP2", HelpMessage = "The network domain that the NAT Rule exists", ValueFromPipelineByPropertyName = true)]
+        public NetworkDomainType NetworkDomain { get; set; }
 
         /// <summary>
         ///     The process record method.
@@ -26,8 +43,31 @@ namespace DD.CBU.Compute.Powershell.Mcp20
             ResponseType response = null;
             base.ProcessRecord();
             try
-            {    
-                response = Connection.ApiClient.Networking.Nat.DeleteNatRule(Guid.Parse(NatRule.id)).Result;
+            {
+                if (ParameterSetName.Equals("MCP1"))
+                {
+                    var natRule = (Mcp1.NatRuleType)NatRule;
+                    if (!ShouldProcess(natRule.name))
+                        return;
+
+                    Status status = Connection.ApiClient.NetworkingLegacy.Network.DeleteNatRule(Network.id, natRule.id).Result;
+
+                    if (status != null)
+                    {
+                        WriteDebug(
+                            string.Format(
+                                "{0} resulted in {1} ({2}): {3}",
+                                status.operation,
+                                status.result,
+                                status.resultCode,
+                                status.resultDetail));
+                    }                    
+                }
+                else if (ParameterSetName.Equals("MCP2"))
+                {
+                    var natRule = (Mcp2.NatRuleType)NatRule;
+                    response = Connection.ApiClient.Networking.Nat.DeleteNatRule(Guid.Parse(natRule.id)).Result;
+                }
             }
             catch (AggregateException ae)
             {
@@ -51,4 +91,6 @@ namespace DD.CBU.Compute.Powershell.Mcp20
             WriteObject(response);
         }
     }
+
+  
 }

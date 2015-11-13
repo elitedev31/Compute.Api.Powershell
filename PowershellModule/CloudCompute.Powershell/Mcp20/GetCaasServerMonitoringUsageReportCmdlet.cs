@@ -27,7 +27,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         /// <summary>
         ///     Gets or sets end date.
         /// </summary>
-        [Parameter(Mandatory = false, ValueFromPipeline = true, HelpMessage = "The end date")]
+        [Parameter(Mandatory = false, HelpMessage = "The end date")]
         public DateTime? EndDate { get; set; }
 
         protected override void ProcessRecord()

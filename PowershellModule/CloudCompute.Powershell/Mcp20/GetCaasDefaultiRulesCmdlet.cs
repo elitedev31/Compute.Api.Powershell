@@ -11,14 +11,14 @@ namespace DD.CBU.Compute.Powershell.Mcp20
     using Api.Contracts.Network20;
     using Api.Contracts.Requests.Network20;
 
-    [Cmdlet(VerbsCommon.Get, "CaasDefaultiRules")]
+    [Cmdlet(VerbsCommon.Get, "CaasDefaultIRules")]
     [OutputType(typeof(DefaultIruleType[]))]
-    public class GetCaasDefaultiRulesCmdlet : PSCmdletCaasWithConnectionBase
+    public class GetCaasDefaultIRulesCmdlet : PSCmdletCaasWithConnectionBase
     {
         /// <summary>
 		///     Gets or sets the iRule name.
 		/// </summary>
-		[Parameter(Mandatory = false, ParameterSetName = "Filtered", ValueFromPipeline = true, HelpMessage = "The iRule name")]
+		[Parameter(Mandatory = false, ParameterSetName = "Filtered", HelpMessage = "The iRule name")]
         public string Name { get; set; }
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         /// <summary>
         ///     Gets or sets iRule id.
         /// </summary>
-        [Parameter(Mandatory = false, ParameterSetName = "Filtered", ValueFromPipeline = true, HelpMessage = "The iRule id")]
+        [Parameter(Mandatory = false, ParameterSetName = "Filtered", HelpMessage = "The iRule id")]
         public Guid RuleId { get; set; }
 
         protected override void ProcessRecord()

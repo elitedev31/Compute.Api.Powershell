@@ -12,26 +12,43 @@ namespace DD.CBU.Compute.Powershell.Mcp20
     using Api.Contracts.Requests.Network20;
 
     /// <summary>
-    /// Get Caas VIP Node CmdLet
+    /// Get Caas VIP Nodes CmdLet
     /// </summary>
     [Cmdlet(VerbsCommon.Get, "CaasVipNode")]
-    [OutputType(typeof(NodeType))]
+    [OutputType(typeof(NodeType[]))]
     public class GetCaasVipNodeCmdlet : PSCmdletCaasWithConnectionBase
-    {     
+    {
+        /// <summary>
+		///     Gets or sets the VIP Node name.
+		/// </summary>
+		[Parameter(Mandatory = false, ParameterSetName = "Filtered", HelpMessage = "The VIP Node name")]
+        public string Name { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the network domain.
+        /// </summary>
+        [Parameter(Mandatory = false, ParameterSetName = "Filtered", ValueFromPipeline = true, HelpMessage = "The network domain")]
+        public NetworkDomainType NetworkDomain { get; set; }
+
         /// <summary>
         ///     Gets or sets VIP Node id.
         /// </summary>
-        [Parameter(Mandatory = false, ValueFromPipeline = true, HelpMessage = "The VIP Node Id")]
+        [Parameter(Mandatory = false, ParameterSetName = "Filtered", HelpMessage = "The VIP Node id")]
         public Guid NodeId { get; set; }
 
         protected override void ProcessRecord()
         {
-            NodeType vipNode = null;
+            IEnumerable<NodeType> vipNodes = new List<NodeType>();
             base.ProcessRecord();
 
             try
             {
-                vipNode = Connection.ApiClient.Networking.VipNode.GetNode(NodeId).Result;
+                vipNodes = Connection.ApiClient.Networking.VipNode.GetNodes((ParameterSetName.Equals("Filtered") ? new NodeListOptions 
+                                                                                        {
+                                                                                            Id = NodeId != Guid.Empty ? NodeId : (Guid?)null,
+                                                                                            Name = Name,
+                                                                                            NetworkDomainId = NetworkDomain != null ? Guid.Parse(NetworkDomain.id) : Guid.Empty
+                                                                                        } : null)).Result;
             }
             catch (AggregateException ae)
             {
@@ -52,8 +69,15 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                         return true;
                     });
             }
-     
-            WriteObject(vipNode);
+
+            if (vipNodes != null && vipNodes.Count() == 1)
+            {
+                WriteObject(vipNodes.First());
+            }
+            else
+            {
+                WriteObject(vipNodes);
+            }
         }
     }
 }

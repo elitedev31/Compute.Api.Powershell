@@ -18,7 +18,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         /// <summary>
 		///     Gets or sets the Persistence Profile name.
 		/// </summary>
-		[Parameter(Mandatory = false, ParameterSetName = "Filtered", ValueFromPipeline = true, HelpMessage = "The Persistence profile name")]
+		[Parameter(Mandatory = false, ParameterSetName = "Filtered", HelpMessage = "The Persistence profile name")]
         public string Name { get; set; }
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         /// <summary>
         ///     Gets or sets Persistence Profile id.
         /// </summary>
-        [Parameter(Mandatory = false, ParameterSetName = "Filtered", ValueFromPipeline = true, HelpMessage = "The Persistence profile id")]
+        [Parameter(Mandatory = false, ParameterSetName = "Filtered", HelpMessage = "The Persistence profile id")]
         public Guid ProfileId { get; set; }
 
         protected override void ProcessRecord()

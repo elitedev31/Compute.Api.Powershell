@@ -21,7 +21,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         /// <summary>
         ///     Gets or sets VIP virtual listener.
         /// </summary>
-        [Parameter(Mandatory = false, ValueFromPipeline = true, HelpMessage = "The VIP virtual listener")]
+        [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The VIP virtual listener")]
         public VirtualListenerType VirtualListener { get; set; }
 
         protected override void ProcessRecord()

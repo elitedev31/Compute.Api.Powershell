@@ -12,23 +12,41 @@ namespace DD.CBU.Compute.Powershell.Mcp20
     using Api.Contracts.Requests.Network20;
 
     [Cmdlet(VerbsCommon.Get, "CaasFirewallRule")]
-    [OutputType(typeof(FirewallRuleType))]
+    [OutputType(typeof(FirewallRuleType[]))]
     public class GetCaasFirewallRuleCmdlet : PSCmdletCaasWithConnectionBase
-    {        
+    {
+        /// <summary>
+		///     Gets or sets the firewall rule name.
+		/// </summary>
+		[Parameter(Mandatory = false, ParameterSetName = "Filtered", HelpMessage = "The firewall rule name")]
+        public string Name { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the network domain.
+        /// </summary>
+        [Parameter(Mandatory = true, ParameterSetName = "Filtered", ValueFromPipeline = true, HelpMessage = "The network domain")]
+        public NetworkDomainType NetworkDomain { get; set; }
+
         /// <summary>
         ///     Gets or sets firewall rule id.
         /// </summary>
-        [Parameter(Mandatory = true, ParameterSetName = "Filtered", ValueFromPipeline = true, HelpMessage = "The firewall rule id")]
+        [Parameter(Mandatory = false, ParameterSetName = "Filtered", HelpMessage = "The firewall rule id")]
         public Guid FirewallRuleId { get; set; }
 
         protected override void ProcessRecord()
         {
-            FirewallRuleType firewallRule = new FirewallRuleType();
+            IEnumerable<FirewallRuleType> firewallRules = new List<FirewallRuleType>();
             base.ProcessRecord();
 
             try
             {
-                firewallRule = Connection.ApiClient.Networking.FirewallRule.GetFirewallRule(FirewallRuleId).Result;
+                firewallRules = Connection.ApiClient.Networking.FirewallRule.GetFirewallRules(
+                                                                            (ParameterSetName.Equals("Filtered") ? new FirewallRuleListOptions
+                                                                            {
+                                                                                Id = FirewallRuleId != Guid.Empty ? FirewallRuleId : (Guid?)null,
+                                                                                Name = Name,
+                                                                                NetworkDomainId = NetworkDomain != null ? Guid.Parse(NetworkDomain.id) : Guid.Empty
+                                                                            } : null)).Result;
             }
             catch (AggregateException ae)
             {
@@ -50,7 +68,14 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                     });
             }
 
-            WriteObject(firewallRule);            
+            if (firewallRules != null && firewallRules.Count() == 1)
+            {
+                WriteObject(firewallRules.First());
+            }
+            else
+            {
+                WriteObject(firewallRules);
+            }
         }
     }
 }

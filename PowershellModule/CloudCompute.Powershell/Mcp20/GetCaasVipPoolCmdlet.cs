@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DD.CBU.Compute.Powershell.Mcp20
 {
@@ -12,23 +10,48 @@ namespace DD.CBU.Compute.Powershell.Mcp20
     using Api.Contracts.Requests.Network20;
 
     [Cmdlet(VerbsCommon.Get, "CaasVipPool")]
-    [OutputType(typeof(PoolType))]
+    [OutputType(typeof(PoolType[]))]
     public class GetCaasVipPoolCmdlet : PSCmdletCaasWithConnectionBase
-    {        
+    {
         /// <summary>
-        ///     Gets or sets VIP Pool id.
+		///     Gets or sets the VIP Pool name.
+		/// </summary>
+		[Parameter(Mandatory = false, ParameterSetName = "Filtered", HelpMessage = "The VIP Pool name")]
+        public string Name { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the network domain.
         /// </summary>
-        [Parameter(Mandatory = true, ParameterSetName = "Filtered", ValueFromPipeline = true, HelpMessage = "The VIP Pool id")]
+        [Parameter(Mandatory = false, ParameterSetName = "Filtered", ValueFromPipeline = true, HelpMessage = "The network domain")]
+        public NetworkDomainType NetworkDomain { get; set; }
+
+        /// <summary>
+        ///     Gets or sets VIP pool id.
+        /// </summary>
+        [Parameter(Mandatory = false, ParameterSetName = "Filtered", HelpMessage = "The VIP Pool id")]
         public Guid PoolId { get; set; }
+
+        /// <summary>
+        ///     Gets or sets VIP Pool State
+        /// </summary>
+        [Parameter(Mandatory = false, ParameterSetName = "Filtered", HelpMessage = "The VIP Pool state")]
+        public string State { get; set; }
 
         protected override void ProcessRecord()
         {
-            PoolType vipPool = new PoolType();
+            IEnumerable<PoolType> vipPools = new List<PoolType>();
             base.ProcessRecord();
 
             try
             {
-                vipPool = Connection.ApiClient.Networking.VipPool.GetPool(PoolId).Result;
+                vipPools = Connection.ApiClient.Networking.VipPool.GetPools(
+                                                                            (ParameterSetName.Equals("Filtered") ? new PoolListOptions
+                                                                            {
+                                                                                Id = PoolId != Guid.Empty ? PoolId : (Guid?)null,
+                                                                                Name = Name,
+                                                                                NetworkDomainId = NetworkDomain != null ? Guid.Parse(NetworkDomain.id) : Guid.Empty,
+                                                                                State = State
+                                                                            } : null)).Result;
             }
             catch (AggregateException ae)
             {
@@ -50,7 +73,14 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                     });
             }
 
-            WriteObject(vipPool);            
+            if (vipPools != null && vipPools.Count() == 1)
+            {
+                WriteObject(vipPools.First());
+            }
+            else
+            {
+                WriteObject(vipPools);
+            }
         }
     }
 }

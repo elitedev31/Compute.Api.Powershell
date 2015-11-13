@@ -9,25 +9,58 @@ namespace DD.CBU.Compute.Powershell.Mcp20
     using System.Management.Automation;
     using Api.Client;
     using Api.Contracts.Network20;
+    using Api.Contracts.Requests.Network20;
 
     [Cmdlet(VerbsCommon.Get, "CaasVipPoolMember")]
-    [OutputType(typeof(PoolMemberType))]
+    [OutputType(typeof(PoolMemberType[]))]
     public class GetCaasVipPoolMemberCmdlet : PSCmdletCaasWithConnectionBase
     {        
         /// <summary>
-        ///     Gets or sets VIP Pool Member Id
+        ///     Gets or sets the network domain.
         /// </summary>
-        [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The VIP pool member id")]
+        [Parameter(Mandatory = false, ParameterSetName = "Filtered", ValueFromPipeline = true, HelpMessage = "The network domain")]
+        public NetworkDomainType NetworkDomain { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the data center.
+        /// </summary>
+        [Parameter(Mandatory = false, ParameterSetName = "Filtered", HelpMessage = "The data center")]
+        public DatacenterType Datacenter { get; set; }
+
+        /// <summary>
+        ///     Gets or sets VIP Node.
+        /// </summary>
+        [Parameter(Mandatory = false, ParameterSetName = "Filtered", HelpMessage = "The VIP Node")]
+        public PoolType VipNode { get; set; }
+
+        /// <summary>
+        ///     Gets or sets VIP Pool.
+        /// </summary>
+        [Parameter(Mandatory = false, ParameterSetName = "Filtered", HelpMessage = "The VIP Pool")]
+        public PoolType VipPool { get; set; }
+
+        /// <summary>
+        ///     Gets or sets VIP Pool member id.
+        /// </summary>
+        [Parameter(Mandatory = false, ParameterSetName = "Filtered", HelpMessage = "The VIP pool member Id")]
         public Guid MemberId { get; set; }
 
         protected override void ProcessRecord()
         {
-            PoolMemberType poolMember = new PoolMemberType();
+            IEnumerable<PoolMemberType> poolMembers = new List<PoolMemberType>();
             base.ProcessRecord();
 
             try
             {
-                poolMember = Connection.ApiClient.Networking.VipPool.GetPoolMember(MemberId).Result;
+                poolMembers = Connection.ApiClient.Networking.VipPool.GetPoolMembers(
+                                                                            (ParameterSetName.Equals("Filtered") ? new PoolMemberListOptions
+                                                                            {
+                                                                                Id = MemberId != Guid.Empty ? MemberId : (Guid?)null,                                                                                
+                                                                                NetworkDomainId = NetworkDomain != null ? Guid.Parse(NetworkDomain.id) : Guid.Empty,
+                                                                                DatacenterId = Datacenter != null ? Guid.Parse(Datacenter.id) : Guid.Empty,
+                                                                                NodeId = VipNode != null ? Guid.Parse(VipNode.id) : Guid.Empty,
+                                                                                PoolId = VipPool != null ? Guid.Parse(VipPool.id) : Guid.Empty
+                                                                            } : null)).Result;
             }
             catch (AggregateException ae)
             {
@@ -49,7 +82,14 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                     });
             }
 
-            WriteObject(poolMember);            
+            if (poolMembers != null && poolMembers.Count() == 1)
+            {
+                WriteObject(poolMembers.First());
+            }
+            else
+            {
+                WriteObject(poolMembers);
+            }
         }
     }
 }

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DD.CBU.Compute.Powershell.Mcp20
 {
@@ -12,26 +10,43 @@ namespace DD.CBU.Compute.Powershell.Mcp20
     using Api.Contracts.Requests.Network20;
 
     /// <summary>
-    /// Get Caas VIP Virtual Listener CmdLet
+    /// Get Caas VIP Virtual Listeners CmdLet
     /// </summary>
     [Cmdlet(VerbsCommon.Get, "CaasVIPVirtualListener")]
-    [OutputType(typeof(VirtualListenerType))]
+    [OutputType(typeof(VirtualListenerType[]))]
     public class GetCaasVIPVirtualListenerCmdlet : PSCmdletCaasWithConnectionBase
     {
         /// <summary>
-        ///     Gets or sets VIP Node id.
+		///     Gets or sets the VIP VirtualListener name.
+		/// </summary>
+		[Parameter(Mandatory = false, ParameterSetName = "Filtered", HelpMessage = "The VIP virtual listener name")]
+        public string Name { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the network domain.
         /// </summary>
-        [Parameter(Mandatory = false, ValueFromPipeline = true, HelpMessage = "The VIP virtual listener Id")]
+        [Parameter(Mandatory = false, ParameterSetName = "Filtered", ValueFromPipeline = true, HelpMessage = "The network domain")]
+        public NetworkDomainType NetworkDomain { get; set; }
+
+        /// <summary>
+        ///     Gets or sets VIP VirtualListener id.
+        /// </summary>
+        [Parameter(Mandatory = false, ParameterSetName = "Filtered", HelpMessage = "The VIP virtual listener id")]
         public Guid Id { get; set; }
 
         protected override void ProcessRecord()
         {
-            VirtualListenerType vipVirtualListener = null;
+            IEnumerable<VirtualListenerType> vipVirtualListeners = new List<VirtualListenerType>();
             base.ProcessRecord();
 
             try
             {
-                vipVirtualListener = Connection.ApiClient.Networking.VipVirtualListener.GetVirtualListener(Id).Result;
+                vipVirtualListeners = Connection.ApiClient.Networking.VipVirtualListener.GetVirtualListeners((ParameterSetName.Equals("Filtered") ? new VirtualListenerListOptions
+                {
+                    Id = Id != Guid.Empty ? Id : (Guid?)null,
+                    Name = Name,
+                    NetworkDomainId = NetworkDomain != null ? Guid.Parse(NetworkDomain.id) : Guid.Empty
+                } : null)).Result;
             }
             catch (AggregateException ae)
             {
@@ -53,7 +68,14 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                     });
             }
 
-            WriteObject(vipVirtualListener);
+            if (vipVirtualListeners != null && vipVirtualListeners.Count() == 1)
+            {
+                WriteObject(vipVirtualListeners.First());
+            }
+            else
+            {
+                WriteObject(vipVirtualListeners);
+            }
         }
     }
 }

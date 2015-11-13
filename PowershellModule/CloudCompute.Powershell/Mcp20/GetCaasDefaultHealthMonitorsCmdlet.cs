@@ -18,7 +18,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         /// <summary>
 		///     Gets or sets the Health Monitor name.
 		/// </summary>
-		[Parameter(Mandatory = false, ParameterSetName = "Filtered", ValueFromPipeline = true, HelpMessage = "The health monitor name")]
+		[Parameter(Mandatory = false, ParameterSetName = "Filtered", HelpMessage = "The health monitor name")]
         public string Name { get; set; }
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         /// <summary>
         ///     Gets or sets health monitor id.
         /// </summary>
-        [Parameter(Mandatory = false, ParameterSetName = "Filtered", ValueFromPipeline = true, HelpMessage = "The health monitor id")]
+        [Parameter(Mandatory = false, ParameterSetName = "Filtered", HelpMessage = "The health monitor id")]
         public Guid MonitorId { get; set; }
 
         protected override void ProcessRecord()

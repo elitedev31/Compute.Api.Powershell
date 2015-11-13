@@ -47,7 +47,7 @@ namespace DD.CBU.Compute.Powershell
         /// <summary>
         ///     Gets or sets the network.
         /// </summary>
-        [Parameter(Mandatory = true, HelpMessage = "The target data centre location for the customer image.")]
+        [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The target data centre location for the customer image.")]
         public NetworkWithLocationsNetwork Network { get; set; }
 
         /// <summary>
