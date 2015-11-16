@@ -179,7 +179,6 @@
     <Compile Include="NewCaasAccountCmdlet.cs" />
     <Compile Include="NewCaasAccountRolesCmdLet.cs" />
     <Compile Include="NewCaasAclRuleCmdlet.cs" />
-    <Compile Include="NewCaasLegacyNatRuleCmdlet.cs" />
     <Compile Include="AddCaasServerDiskCmdlet.cs" />
     <Compile Include="GetCaasNetworkConfigurationCmdlet.cs" />
     <Compile Include="GetCaasNetworkPublicIpBlocksCmdlet.cs" />
@@ -225,8 +224,6 @@
     <Compile Include="GetCaasDataCentreCmdlet.cs" />
     <Compile Include="RemoveCaasNetworkCmdlet.cs" />
     <Compile Include="NewCaasNetworkCmdlet.cs" />
-    <Compile Include="RemoveCaasLegacyNatRuleCmdlet.cs" />
-    <Compile Include="GetCaasLegacyNatRulesCmdlet.cs" />
     <Compile Include="RemoveCaasAclRuleCmdlet.cs" />
     <Compile Include="GetCaasAclRulesCmdlet.cs" />
     <Compile Include="GetCaasCustomerImageImportsCmdlet.cs" />
