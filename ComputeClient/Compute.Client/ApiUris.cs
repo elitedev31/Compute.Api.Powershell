@@ -274,6 +274,20 @@ namespace DD.CBU.Compute.Api.Client
         /// <summary>
         /// Get the relative URI for the CaaS API action that retrieves a list of all data centres available for use by the specified organisation.
         /// </summary>
+        /// <param name="orgId">
+        /// The organisation Id
+        /// </param>
+        /// <returns>
+        /// The relative action Uri.
+        /// </returns>
+        public static Uri DataCentres(Guid orgId)
+        {
+            return new Uri(string.Format(MCP2_0_PREFIX + "{0}/infrastructure/datacenter", orgId), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// Get the relative URI for the CaaS API action that retrieves a list of all data centres available for use by the specified organisation.
+        /// </summary>
 		/// <param name="orgId">
 		/// The organisation Id
 		/// </param>

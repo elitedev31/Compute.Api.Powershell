@@ -193,6 +193,7 @@
     <Compile Include="Network20\Server.cs" />
     <Compile Include="Requests\Attributes\FilterParameterAttribute.cs" />
     <Compile Include="Requests\IFilterableRequest.cs" />
+    <Compile Include="Requests\Infrastructure\DataCenterListOptions.cs" />
     <Compile Include="Requests\IPageableRequest.cs" />
     <Compile Include="Requests\Network20\NatRuleListOptions.cs" />
     <Compile Include="Requests\Network20\NetworkDomainListOptions.cs" />

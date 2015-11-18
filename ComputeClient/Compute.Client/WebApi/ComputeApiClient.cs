@@ -10,6 +10,8 @@
 // ReSharper disable once CheckNamespace
 // Backwards compatibility, hence not moving the NameSpace
 
+using DD.CBU.Compute.Api.Client.Infrastructure;
+using DD.CBU.Compute.Api.Client.Interfaces.Infrastructure;
 using DD.CBU.Compute.Api.Client.Interfaces.Reports;
 using DD.CBU.Compute.Api.Client.Reports;
 
@@ -193,7 +195,8 @@ namespace DD.CBU.Compute.Api.Client
 		private void InitializeProperties(IHttpClient httpClient, Guid organizationId = default(Guid))
 		{
 			WebApi = new WebApi.WebApi(httpClient, organizationId);
-			Account = new AccountAccessor(WebApi);
+            Infrastructure = new InfrastructureAccessor(WebApi);
+            Account = new AccountAccessor(WebApi);
 			Networking = new NetworkingAccessor(WebApi);
 			NetworkingLegacy = new NetworkingLegacyAccessor(WebApi);
 			ServerManagementLegacy = new ServerManagementLegacyAccessor(WebApi);
@@ -319,7 +322,12 @@ namespace DD.CBU.Compute.Api.Client
 		/// </summary>
 		public IAccountAccessor Account { get; private set; }
 
-		/// <summary>	Gets the networking 2.0 methods. </summary>
+        /// <summary>
+        /// Infrastructure accessor
+        /// </summary>
+	    public IInfrastructureAccessor Infrastructure { get; private set; }
+
+	    /// <summary>	Gets the networking 2.0 methods. </summary>
 		/// <value>	The networking. </value>		
 		public INetworkingAccessor Networking { get; private set; }
 
