@@ -76,11 +76,11 @@ namespace DD.CBU.Compute.Api.Client.Reports
         /// <param name="startDate">The Start Date</param>
         /// <param name="endDate">The End Date</param>
         /// <returns>The CSV formatted result</returns>
-        public async Task<object> GetBackupUsageReport(Guid datacenterId, DateTime startDate, DateTime endDate)
+        public async Task<object> GetBackupUsageReport(string datacenterId, DateTime startDate, DateTime endDate)
         {
             var data =
                 await
-                    _apiClient.GetAsync<object>(ApiUris.BackupUsageReport(_apiClient.OrganizationId, datacenterId.ToString(), startDate, endDate));
+                    _apiClient.GetAsync<object>(ApiUris.BackupUsageReport(_apiClient.OrganizationId, datacenterId, startDate, endDate));
             return data;
         }
 
