@@ -58,7 +58,7 @@ namespace DD.CBU.Compute.Api.Client.Network20
         /// <returns>The async task of <see cref="PagedResponse{PoolType}"/></returns>
         public async Task<PagedResponse<PoolType>> GetPoolsPaginated(PoolListOptions options = null, PageableRequest pagingOptions = null)
         {
-            var response = await _api.GetAsync<pools>(ApiUris.GetPools(_api.OrganizationId));
+            var response = await _api.GetAsync<pools>(ApiUris.GetPools(_api.OrganizationId), pagingOptions, options);
             return new PagedResponse<PoolType>
             {
                 items = response.pool,
