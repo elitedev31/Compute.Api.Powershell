@@ -106,7 +106,9 @@
     <Compile Include="Exceptions\InvalidCredentialsException.cs" />
     <Compile Include="Exceptions\CaaSOrganizationNotSetException.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Infrastructure\InfrastructureAccessor.cs" />
     <Compile Include="Interfaces\Account\IAccountAccessor.cs" />
+    <Compile Include="Interfaces\Infrastructure\IInfrastructureAccessor.cs" />
     <Compile Include="Interfaces\Backup\IBackupAccessor.cs" />
     <Compile Include="Interfaces\IDeprecatedComputeApiClient.cs" />
     <Compile Include="Interfaces\Network20\IIpAddressAccessor.cs" />

@@ -45,7 +45,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces.Reports
         /// <param name="startDate">The Start Date</param>
         /// <param name="endDate">The End Date</param>
         /// <returns>The CSV formatted result</returns>
-        Task<object> GetBackupUsageReport(Guid datacenterId, DateTime startDate, DateTime endDate);
+        Task<object> GetBackupUsageReport(string datacenterId, DateTime startDate, DateTime endDate);
 
         /// <summary>
         /// Retrieves a CSV-formatted daily usage report of the administrator actions taken across the account.
