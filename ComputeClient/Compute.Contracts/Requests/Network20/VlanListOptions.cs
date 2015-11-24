@@ -6,6 +6,12 @@
     /// <summary>	A VLAN list options model. </summary>
     public class VlanListOptions : IFilterableRequest
     {
+        /// <summary>
+        /// Gets or sets the id filter.
+        /// </summary>
+        [FilterParameter("id")]
+        public Guid[] Ids { get; set; }
+
         /// <summary>	Identifies an individual VLAN.
         /// id=9a857b7c-37bd-11e2-a91c-
         /// 0030487e0302. </summary>

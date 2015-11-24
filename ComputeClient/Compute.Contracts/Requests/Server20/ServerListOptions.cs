@@ -9,6 +9,12 @@
     public sealed class ServerListOptions : IFilterableRequest
     {
         /// <summary>
+        /// Gets or sets the id filter.
+        /// </summary>
+        [FilterParameter("id")]
+        public Guid[] Ids { get; set; }
+
+        /// <summary>
         /// Gets or sets the DatacenterId filter.
         /// </summary>
         [FilterParameter("datacenterId")]

@@ -85,6 +85,12 @@
 
             var stringValue = value.ToString();
 
+            if (property.PropertyType == typeof(string[]))
+                return String.Join("&", ((string[])value).Select(v => attribute.ParameterName + "=" + v));
+
+            if (property.PropertyType == typeof(Guid[]))
+                return String.Join("&", ((Guid[])value).Select(v => attribute.ParameterName + "=" + v.ToString()));
+
             if (property.PropertyType == typeof(DateTime?))
                 stringValue = ((DateTime?)value).Value.ToString("o");
 

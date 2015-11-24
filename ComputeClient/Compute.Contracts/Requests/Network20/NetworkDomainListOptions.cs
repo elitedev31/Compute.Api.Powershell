@@ -9,6 +9,18 @@
     public sealed class NetworkDomainListOptions : IFilterableRequest
 	{
         /// <summary>
+        /// Gets or sets the id filter.
+        /// </summary>
+        [FilterParameter("id")]
+        public Guid[] Ids { get; set; }
+
+        /// <summary>
+        /// Gets or sets the id filter.
+        /// </summary>
+        [FilterParameter("id")]
+        public string Id { get; set; }
+
+        /// <summary>
         /// Gets or sets the DatacenterId filter.
         /// </summary>
         [FilterParameter("datacenterId")]
@@ -19,13 +31,6 @@
         /// </summary>
         [FilterParameter("name")]
         public string Name { get; set; }
-
-		/// <summary>
-		/// Gets or sets the Name filter.
-		/// 
-		/// </summary>
-		[FilterParameter("id")]
-		public string Id { get; set; }
 
         /// <summary>
         /// Gets or sets the Type filter.
