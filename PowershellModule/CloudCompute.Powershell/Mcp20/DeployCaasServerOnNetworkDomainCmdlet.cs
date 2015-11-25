@@ -10,6 +10,7 @@
 
 
 using System;
+using System.Linq;
 using System.Management.Automation;
 using DD.CBU.Compute.Api.Client;
 using DD.CBU.Compute.Api.Client.Network20;
@@ -22,8 +23,8 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 	///     The new CaaS Virtual Machine cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.New, "CaasServerOnNetworkDomain")]
-	[OutputType(typeof (ResponseType))]
-	public class DeployCaasServerOnNetworkDomainCmdlet : PSCmdletCaasWithConnectionBase
+    [OutputType(typeof(Api.Contracts.Network20.ServerType))]
+    public class DeployCaasServerOnNetworkDomainCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     The Network Domain deploy the VM
@@ -65,13 +66,20 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 		/// <summary>
 		///     Gets or sets the primary network.
 		/// </summary>
-		[Parameter(Mandatory = true, ParameterSetName = "VlanId", HelpMessage = "The server's primary network")]
-		public VlanType PrimaryNetwork { get; set; }
+		[Parameter(Mandatory = true, ParameterSetName = "VlanId", HelpMessage = "The server's primary vlan")]
+        [Alias("PrimaryNetwork")]
+		public VlanType PrimaryVlan { get; set; }
 
-		/// <summary>
-		///     Gets or sets the primary private IP.
+        /// <summary>
+		///     Switch to return the server object after execution
 		/// </summary>
-		[Parameter(Mandatory = true, ParameterSetName = "PrivateIp", 
+		[Parameter(Mandatory = false, HelpMessage = "Return the Server object after execution")]
+        public SwitchParameter PassThru { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the primary private IP.
+        /// </summary>
+        [Parameter(Mandatory = true, ParameterSetName = "PrivateIp", 
 			HelpMessage = "The private network private IP address that will be assigned to the machine.")]
 		public string PrimaryPrivateIp { get; set; }
 
@@ -79,17 +87,16 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 		///     The process record method.
 		/// </summary>
 		protected override void ProcessRecord()
-		{
-			ResponseType response = null;
-			base.ProcessRecord();
+		{		
+            Api.Contracts.Network20.ServerType deployedServer = null;
+            base.ProcessRecord();
 			try
 			{
 				var primaryNic = new VlanIdOrPrivateIpType
 				{
-					vlanId = PrimaryNetwork != null ? PrimaryNetwork.id : null, 
+					vlanId = PrimaryVlan != null ? PrimaryVlan.id : null, 
 					privateIpv4 = PrimaryPrivateIp
 				};
-
 
 				var server = new DeployServerType
 				{
@@ -106,10 +113,18 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 							primaryNic = primaryNic
 						}
 				};
+			    
+				var response = Connection.ApiClient.ServerManagement.Server.DeployServer(server).Result;
 
-				response = Connection.ApiClient.DeployServerOnNetworkDomain(server).Result;
-			}
-			catch (AggregateException ae)
+                // get the server id from status message
+                var serverInfo =  response.info.Single(info => info.name == "serverId");
+                if (serverInfo != null)
+                {
+                    deployedServer = Connection.ApiClient.ServerManagement.Server.GetServer(Guid.Parse(serverInfo.value)).Result;
+                }
+
+            }
+            catch (AggregateException ae)
 			{
 				ae.Handle(
 					e =>
@@ -120,7 +135,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 						}
 						else
 						{
-// if (e is HttpRequestException)
+                            // if (e is HttpRequestException)
 							ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, Connection));
 						}
 
@@ -128,7 +143,8 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 					});
 			}
 
-			WriteObject(response);
+            if (PassThru.IsPresent)
+                WriteObject(deployedServer);            
 		}
 	}
 }
