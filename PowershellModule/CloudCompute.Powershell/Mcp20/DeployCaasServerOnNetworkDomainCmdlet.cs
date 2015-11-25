@@ -24,6 +24,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 	/// </summary>
 	[Cmdlet(VerbsCommon.New, "CaasServerOnNetworkDomain")]
     [OutputType(typeof(Api.Contracts.Network20.ServerType))]
+    [Obsolete("This command is obselete, use New-CaasServer instead.")]
     public class DeployCaasServerOnNetworkDomainCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
