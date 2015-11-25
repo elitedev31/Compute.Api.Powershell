@@ -86,7 +86,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 			{
 				var primaryNic = new VlanIdOrPrivateIpType
 				{
-					vlanId = PrimaryNetwork.id, 
+					vlanId = PrimaryNetwork != null ? PrimaryNetwork.id : null, 
 					privateIpv4 = PrimaryPrivateIp
 				};
 
