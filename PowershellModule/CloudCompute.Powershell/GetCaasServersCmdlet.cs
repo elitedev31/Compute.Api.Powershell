@@ -22,7 +22,7 @@ namespace DD.CBU.Compute.Powershell
 	///     The get deployed server/s cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasServers")]
-	[OutputType(typeof (ServerType[]))]
+	[OutputType(typeof (ServerType))]
 	public class GetCaasServersCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
@@ -87,10 +87,7 @@ namespace DD.CBU.Compute.Powershell
 					GetDeployedServers(ServerId, Name, networkid, Location, networkDomainId, vlanId).Result;
 				if (servers != null)
 				{
-					if (servers.Count() == 1)
-						WriteObject(servers.First(), false);
-					else
-						WriteObject(servers, true);
+				    WriteObject(servers, true);
 				}
 				else
 					WriteError(

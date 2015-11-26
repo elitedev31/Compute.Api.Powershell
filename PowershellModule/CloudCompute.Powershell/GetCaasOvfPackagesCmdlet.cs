@@ -20,7 +20,7 @@ namespace DD.CBU.Compute.Powershell
 	///     The Get OVF Packages cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasOvfPackages")]
-	[OutputType(typeof (OvfPackageType[]))]
+	[OutputType(typeof (OvfPackageType))]
 	public class GetCaasOvfPackagesCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>

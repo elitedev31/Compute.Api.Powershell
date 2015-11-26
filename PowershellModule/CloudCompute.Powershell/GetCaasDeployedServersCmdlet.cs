@@ -22,7 +22,7 @@ namespace DD.CBU.Compute.Powershell
 	///     The get deployed server/s cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasDeployedServer")]
-	[OutputType(typeof (ServerWithBackupType[]))]
+	[OutputType(typeof (ServerWithBackupType))]
 	[Obsolete("This command is obselete, use Get-CaasServers, the response of this command will not be accepted by any other commands.")]
 	public class GetCaasDeployedServerCmdlet : PSCmdletCaasWithConnectionBase
 	{
@@ -63,10 +63,7 @@ namespace DD.CBU.Compute.Powershell
 				IEnumerable<ServerWithBackupType> servers = GetDeployedServers(ServerId, Name, networkid, Location).Result;
 				if (servers != null)
 				{
-					if (servers.Count() == 1)
-						WriteObject(servers.First(), false);
-					else
-						WriteObject(servers, true);
+					WriteObject(servers, true);
 				}
 				else
 					WriteError(

@@ -15,7 +15,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
     /// Get Caas VIP Nodes CmdLet
     /// </summary>
     [Cmdlet(VerbsCommon.Get, "CaasVipNode")]
-    [OutputType(typeof(NodeType[]))]
+    [OutputType(typeof(NodeType))]
     public class GetCaasVipNodeCmdlet : PSCmdletCaasWithConnectionBase
     {
         /// <summary>
@@ -69,15 +69,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                         return true;
                     });
             }
-
-            if (vipNodes != null && vipNodes.Count() == 1)
-            {
-                WriteObject(vipNodes.First());
-            }
-            else
-            {
-                WriteObject(vipNodes);
-            }
+            WriteObject(vipNodes, true);            
         }
     }
 }

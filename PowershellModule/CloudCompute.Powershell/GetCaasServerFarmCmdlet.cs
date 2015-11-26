@@ -21,7 +21,7 @@ namespace DD.CBU.Compute.Powershell
 	///     The get caas server farm cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasServerFarm")]
-	[OutputType(typeof (ServerFarm[]))]
+	[OutputType(typeof (ServerFarm))]
 	public class GetCaasServerFarmCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
@@ -62,10 +62,7 @@ namespace DD.CBU.Compute.Powershell
 									new ItemNotFoundException(
 										"This command cannot find a matching object with the given parameters."
 										), "ItemNotFoundException", ErrorCategory.ObjectNotFound, resultlist));
-							break;
-						case 1:
-							WriteObject(resultlist.First());
-							break;
+							break;					
 						default:
 							WriteObject(resultlist, true);
 							break;

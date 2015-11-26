@@ -12,7 +12,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
     using Api.Contracts.Requests.Network20;
 
     [Cmdlet(VerbsCommon.Get, "CaasDefaultIRules")]
-    [OutputType(typeof(DefaultIruleType[]))]
+    [OutputType(typeof(DefaultIruleType))]
     public class GetCaasDefaultIRulesCmdlet : PSCmdletCaasWithConnectionBase
     {
         /// <summary>
@@ -66,15 +66,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                         return true;
                     });
             }
-
-            if (iRules != null && iRules.Count() == 1)
-            {
-                WriteObject(iRules.First());
-            }
-            else
-            {
-                WriteObject(iRules);
-            }
+            WriteObject(iRules, true);
         }
     }
 }

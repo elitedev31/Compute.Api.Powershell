@@ -12,7 +12,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
     using Api.Contracts.Requests.Network20;
 
     [Cmdlet(VerbsCommon.Get, "CaasFirewallRule")]
-    [OutputType(typeof(FirewallRuleType[]))]
+    [OutputType(typeof(FirewallRuleType))]
     public class GetCaasFirewallRuleCmdlet : PSCmdletCaasWithConnectionBase
     {
         /// <summary>
@@ -67,15 +67,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                         return true;
                     });
             }
-
-            if (firewallRules != null && firewallRules.Count() == 1)
-            {
-                WriteObject(firewallRules.First());
-            }
-            else
-            {
-                WriteObject(firewallRules);
-            }
+            WriteObject(firewallRules, true);
         }
     }
 }
