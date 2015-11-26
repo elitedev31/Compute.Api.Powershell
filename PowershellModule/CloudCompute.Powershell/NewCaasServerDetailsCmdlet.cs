@@ -11,6 +11,7 @@
 using System.Management.Automation;
 using DD.CBU.Compute.Api.Contracts.Image;
 using DD.CBU.Compute.Api.Contracts.Network;
+using DD.CBU.Compute.Api.Contracts.Network20;
 
 namespace DD.CBU.Compute.Powershell
 {
@@ -56,15 +57,29 @@ namespace DD.CBU.Compute.Powershell
 
 		/// <summary>
 		///     The network to deploy the machine to
-		/// </summary>
-		[Parameter(Mandatory = false, HelpMessage = "The network to deploy the machine to")]
-		public NetworkWithLocationsNetwork Network { get; set; }
+		/// </summary>		
+        [Parameter(Mandatory = true, ParameterSetName = "MCP1_WithNetwork", HelpMessage = "The network to deploy the machine to.")]
+        public NetworkWithLocationsNetwork Network { get; set; }
 
-		/// <summary>
-		///     The privateIp address of the machine
-		/// </summary>
-		[Parameter(Mandatory = false, HelpMessage = "The network private IP address that will be assigned to the machine.")]
-		public string PrivateIp { get; set; }
+        /// <summary>
+        ///     Gets or sets the primary network.
+        /// </summary>
+        [Parameter(Mandatory = true, ParameterSetName = "MCP2_WithVlan", HelpMessage = "The server's primary vlan")]
+        public VlanType PrimaryVlan { get; set; }
+
+        /// <summary>
+        ///     The Network Domain deploy the VM
+        /// </summary>
+        [Parameter(Mandatory = true, ValueFromPipeline = true, ParameterSetName = "MCP2_WithVlan", HelpMessage = "The network domain in which server will be deployed")]
+        [Parameter(Mandatory = true, ValueFromPipeline = true, ParameterSetName = "MCP2_WithPrivateIp", HelpMessage = "The network domain in which server will be deployed")]
+        public NetworkDomainType NetworkDomain { get; set; }
+
+        /// <summary>
+        ///     The privateIp address of the machine
+        /// </summary>
+        [Parameter(Mandatory = true, ParameterSetName = "MCP1_WithPrivateIp", HelpMessage = "The network private IP address that will be assigned to the machine.")]
+        [Parameter(Mandatory = true, ParameterSetName = "MCP2_WithPrivateIp", HelpMessage = "The network private IP address that will be assigned to the machine.")]
+        public string PrivateIp { get; set; }
 
 		/// <summary>
 		///     The process record method.
@@ -72,17 +87,6 @@ namespace DD.CBU.Compute.Powershell
 		protected override void ProcessRecord()
 		{
 			base.ProcessRecord();
-
-			if (!string.IsNullOrEmpty(PrivateIp)
-			    && Network != null)
-				ThrowTerminatingError(new ErrorRecord(
-					new PSArgumentException("Please use Network or PrivateIP paramenter not both"), "-1", ErrorCategory.InvalidArgument, 
-					null));
-			if (string.IsNullOrEmpty(PrivateIp)
-			    && Network == null)
-				ThrowTerminatingError(
-					new ErrorRecord(new PSArgumentException("You must specify either a Network or PrivateIP paramenter"), "-1", 
-						ErrorCategory.InvalidArgument, null));
 
 			WriteObject(
 				new CaasServerDetails
@@ -92,6 +96,8 @@ namespace DD.CBU.Compute.Powershell
 					Description = Description, 
 					IsStarted = IsStarted, 
 					Network = Network, 
+                    NetworkDomain = NetworkDomain,
+                    PrimaryVlan = PrimaryVlan,
 					Image = ServerImage, 
 					PrivateIp = PrivateIp
 				});
