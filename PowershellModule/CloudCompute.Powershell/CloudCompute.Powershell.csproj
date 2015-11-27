@@ -183,13 +183,13 @@
     <Compile Include="NewCaasAclRuleCmdlet.cs" />
     <Compile Include="AddCaasServerDiskCmdlet.cs" />
     <Compile Include="GetCaasNetworkConfigurationCmdlet.cs" />
-    <Compile Include="GetCaasNetworkPublicIpBlocksCmdlet.cs" />
+    <Compile Include="Mcp20\GetCaasNetworkPublicIpBlocksCmdlet.cs" />
     <Compile Include="GetCaasProbeCmdletcs.cs" />
     <Compile Include="GetCaasRealServerCmdlet.cs" />
     <Compile Include="GetCaasServerAntiAffinityRuleCmdlet.cs" />
     <Compile Include="GetCaasServerFarmDetailsCmdlet.cs" />
     <Compile Include="GetCaasServerFarmCmdlet.cs" />
-    <Compile Include="NewCaasNetworkPublicIpBlockCmdlet.cs" />
+    <Compile Include="Mcp20\NewCaasNetworkPublicIpBlockCmdlet.cs" />
     <Compile Include="NewCaasPersistenceProfileCmdlet.cs" />
     <Compile Include="NewCaasProbeCmdlet.cs" />
     <Compile Include="NewCaasVipCmdlet.cs" />
@@ -200,7 +200,7 @@
     <Compile Include="RemoveCaasAccountCmdlet.cs" />
     <Compile Include="RemoveCaasCustomerImage.cs" />
     <Compile Include="RemoveCaasFromSeverFarmCmdlet.cs" />
-    <Compile Include="RemoveCaasNetworkPublicIpBlockCmdlet.cs" />
+    <Compile Include="Mcp20\RemoveCaasNetworkPublicIpBlockCmdlet.cs" />
     <Compile Include="RemoveCaasProbeCmdlet.cs" />
     <Compile Include="RemoveCaasPersistenceProfileCmdlet.cs" />
     <Compile Include="RemoveCaasVipCmdlet.cs" />

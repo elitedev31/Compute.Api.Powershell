@@ -48,7 +48,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         /// <summary>
 		///     Gets or sets the IP Address.
 		/// </summary>
-		[Parameter(Mandatory = true, HelpMessage = "The VIP virtual listener IP Address")]
+		[Parameter(Mandatory = false, HelpMessage = "The VIP virtual listener IP Address")]
         public string IPAddress { get; set; }
 
         /// <summary>
