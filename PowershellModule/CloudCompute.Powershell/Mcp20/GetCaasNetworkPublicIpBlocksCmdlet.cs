@@ -35,7 +35,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         /// <summary>
         ///     Filter the list based on the based public Ip block
         /// </summary>
-        [Parameter(Mandatory = false, ParameterSetName = "MCP1", HelpMessage = "Filter the list based on the based public Ip block")]
+        [Parameter(Mandatory = false,  HelpMessage = "Filter the list based on the based public Ip block")]
 		public string BaseIp { get; set; }
 
 
@@ -67,7 +67,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                 
 			    if (resultlist != null && resultlist.Any())
 				{
-					if (string.IsNullOrEmpty(BaseIp))
+					if (!string.IsNullOrEmpty(BaseIp))
                         if(ParameterSetName=="MCP1")
 						resultlist = ((IEnumerable<IpBlockType>)resultlist).Where(ip => ip.baseIp == BaseIp);
                         else
