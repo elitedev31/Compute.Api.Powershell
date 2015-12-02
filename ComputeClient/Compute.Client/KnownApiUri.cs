@@ -64,7 +64,12 @@ namespace DD.CBU.Compute.Api.Client
 		/// <summary>
 		/// India
 		/// </summary>
-        India_IN
+        India_IN,
+
+        /// <summary>
+        /// Israle
+        /// </summary>
+        Israel_IL
     }
 
 	/// <summary>
@@ -120,7 +125,12 @@ namespace DD.CBU.Compute.Api.Client
         /// <summary>
         /// PWW Cloud Connect Vendor (NA).
         /// </summary>
-        PWW_Cloud_Connect
+        PWW_Cloud_Connect,
+
+        /// <summary>
+        /// Med1
+        /// </summary>
+        Med_One
     }
 
     /// <summary>
@@ -316,6 +326,15 @@ namespace DD.CBU.Compute.Api.Client
 
             AddHostName(KnownApiVendor.PWW_Cloud_Connect, KnownApiRegion.NorthAmerica_NA, "api.pwwcloudconnect.net");
             AddFtpHostName(KnownApiVendor.PWW_Cloud_Connect, KnownApiRegion.NorthAmerica_NA, "ftps-na.cloud-vpn.net");
+
+            AddHostName(KnownApiVendor.Med_One, KnownApiRegion.Israel_IL, "api.cloud.med-1.com");
+            AddHostName(KnownApiVendor.Med_One, KnownApiRegion.NorthAmerica_NA, "api-na.cloud.med-1.com");
+            AddHostName(KnownApiVendor.Med_One, KnownApiRegion.Europe_EU, "api-eu.cloud.med-1.com");
+            AddHostName(KnownApiVendor.Med_One, KnownApiRegion.Australia_AU, "api-au.cloud.med-1.com");
+            AddHostName(KnownApiVendor.Med_One, KnownApiRegion.Africa_AF, "api-af.cloud.med-1.com");
+            AddHostName(KnownApiVendor.Med_One, KnownApiRegion.AsiaPacific_AP, "api-ap.cloud.med-1.com");
+            AddHostName(KnownApiVendor.Med_One, KnownApiRegion.SouthAmerica_SA, "api-sa.cloud.med-1.com");
+            AddHostName(KnownApiVendor.Med_One, KnownApiRegion.Canada_CA, "api-ca.cloud.med-1.com");            
         }
 
         /// <summary>	Add host name to the known endpoints. </summary>
