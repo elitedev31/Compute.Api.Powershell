@@ -21,61 +21,57 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 	///     The get caas network public ip blocks cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasNetworkPublicIpBlock")]
-	[OutputType(typeof (IpBlockType),ParameterSetName = new[] { "MCP1" })]
+    [OutputType(typeof(IpBlockType), ParameterSetName = new[] { "MCP1" })]
     [OutputType(typeof(PublicIpBlockType), ParameterSetName = new[] { "MCP2" })]
     public class GetCaasNetworkPublicIpBlocksCmdlet : PSCmdletCaasWithConnectionBase
 	{
+		/// <summary>
+		///     The network to list the public ip addresses
+		/// </summary>
+		[Parameter(Mandatory = true, ParameterSetName = "MCP1", HelpMessage = "The network to get the public ip addresses", ValueFromPipeline = true)]
+		public NetworkWithLocationsNetwork Network { get; set; }
+
         /// <summary>
-        ///     The network to add the public ip addresses
-        /// </summary>
-        [Parameter(Mandatory = true, ParameterSetName = "MCP1", HelpMessage = "The network to add the public ip addresses", ValueFromPipeline = true)]
-        public NetworkWithLocationsNetwork Network { get; set; }
-       
+		///     The network to list the public ip addresses
+		/// </summary>
+		[Parameter(Mandatory = true, ParameterSetName = "MCP2", HelpMessage = "The network domain to get the public ip addresses", ValueFromPipeline = true)]
+        public NetworkDomainType NetworkDomain { get; set; }
 
         /// <summary>
         ///     Filter the list based on the based public Ip block
         /// </summary>
-        [Parameter(Mandatory = false,  HelpMessage = "Filter the list based on the based public Ip block")]
+        [Parameter(Mandatory = false, HelpMessage = "Filter the list based on the based public Ip block")]
 		public string BaseIp { get; set; }
 
-
-        /// <summary>
-        ///     Gets or sets the network domain.
-        /// </summary>
-        [Parameter(Mandatory = true, ParameterSetName = "MCP2", ValueFromPipeline = true, HelpMessage = "The network domain")]
-        public NetworkDomainType NetworkDomain { get; set; }
-
-
-        /// <summary>
-        ///     The process record.
-        /// </summary>
-        protected override void ProcessRecord()
+		/// <summary>
+		///     The process record.
+		/// </summary>
+		protected override void ProcessRecord()
 		{
 			base.ProcessRecord();
 			try
 			{
-			    IEnumerable<object> resultlist;
-                if (ParameterSetName == "MCP1")
-			        resultlist= Connection.ApiClient.NetworkingLegacy.Network.GetNetworkPublicIpAddressBlock(Network.id).Result;
-                else
+			    IEnumerable<object> resultlist = null;
+
+			    if (ParameterSetName == "MCP1")
+			    {
+                    resultlist = Connection.ApiClient.NetworkingLegacy.Network.GetNetworkPublicIpAddressBlock(Network.id).Result;			      
+			    }
+                else if (ParameterSetName == "MCP2")
                 {
-
-                    var netdomainid = Guid.Parse(NetworkDomain.id);
-                    resultlist = Connection.ApiClient.Networking.IpAddress.GetPublicIpBlocks(netdomainid).Result;
+                    resultlist = Connection.ApiClient.Networking.IpAddress.GetPublicIpBlocks(Guid.Parse(NetworkDomain.id)).Result;              
                 }
-			    
-                
-			    if (resultlist != null && resultlist.Any())
+
+
+                if (resultlist != null && resultlist.Any())
 				{
-					if (!string.IsNullOrEmpty(BaseIp))
-                        if(ParameterSetName=="MCP1")
-						resultlist = ((IEnumerable<IpBlockType>)resultlist).Where(ip => ip.baseIp == BaseIp);
+                    if (!string.IsNullOrEmpty(BaseIp))
+                        if (ParameterSetName == "MCP1")
+                            resultlist = ((IEnumerable<IpBlockType>)resultlist).Where(ip => ip.baseIp == BaseIp);
                         else
-                        resultlist = ((IEnumerable<PublicIpBlockType>)resultlist).Where(ip => ip.baseIp == BaseIp);
+                            resultlist = ((IEnumerable<PublicIpBlockType>)resultlist).Where(ip => ip.baseIp == BaseIp);
 
-                        
-
-					switch (resultlist.Count())
+                    switch (resultlist.Count())
 					{
 						case 0:
 							WriteError(
