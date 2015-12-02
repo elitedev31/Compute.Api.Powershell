@@ -20,7 +20,7 @@ namespace DD.CBU.Compute.Powershell
 	///     The get CaaS ACL Rules cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasAclRules")]
-	[OutputType(typeof (AclRuleType[]))]
+	[OutputType(typeof (AclRuleType))]
 	public class GetCaasAclRulesCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
@@ -63,10 +63,7 @@ namespace DD.CBU.Compute.Powershell
 										), "ItemNotFoundException", ErrorCategory.ObjectNotFound, resultlist));
 
 
-							break;
-						case 1:
-							WriteObject(resultlist.First());
-							break;
+							break;						
 						default:
 							WriteObject(resultlist, true);
 							break;

@@ -12,7 +12,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
     using Api.Contracts.Requests.Network20;
 
     [Cmdlet(VerbsCommon.Get, "CaasDefaultPresistenceProfiles")]
-    [OutputType(typeof(DefaultPersistenceProfileType[]))]
+    [OutputType(typeof(DefaultPersistenceProfileType))]
     public class GetCaasDefaultPresistenceProfilesCmdlet : PSCmdletCaasWithConnectionBase
     {
         /// <summary>
@@ -66,15 +66,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                         return true;
                     });
             }
-
-            if (persistenceProfiles != null && persistenceProfiles.Count() == 1)
-            {
-                WriteObject(persistenceProfiles.First());
-            }
-            else
-            {
-                WriteObject(persistenceProfiles);
-            }
+            WriteObject(persistenceProfiles, true);
         }
     }
 }

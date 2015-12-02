@@ -12,15 +12,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Management.Automation;
 using DD.CBU.Compute.Api.Client;
-using DD.CBU.Compute.Api.Contracts.General;
-using DD.CBU.Compute.Api.Contracts.Server;
+using DD.CBU.Compute.Api.Contracts.Network20;
 
 namespace DD.CBU.Compute.Powershell
 {
-	/// <summary>
-	///     The new CaaS Virtual Machine cmdlet.
-	/// </summary>
-	[Cmdlet(VerbsCommon.New, "CaasServer")]
+    /// <summary>
+    ///     The new CaaS Virtual Machine cmdlet.
+    /// </summary>
+    [Cmdlet(VerbsCommon.New, "CaasServer")]
 	[OutputType(typeof(Api.Contracts.Network20.ServerType))]
 	public class NewCaasServerCmdlet : PSCmdletCaasWithConnectionBase
 	{
@@ -72,29 +71,51 @@ namespace DD.CBU.Compute.Powershell
 				WriteObject(server);
 		}
 
-		/// <summary>
-		///     The deploy server task.
-		/// </summary>
-		/// <returns>
-		///     The <see cref="ServerWithBackupType" />.
-		/// </returns>
-		private Api.Contracts.Network20.ServerType DeployServerTask()
+        /// <summary>
+        ///     The deploy server task.
+        /// </summary>
+        /// <returns>
+        ///     The <see cref="ServerType" />.
+        /// </returns>
+        private Api.Contracts.Network20.ServerType DeployServerTask()
 		{
-			Api.Contracts.Network20.ServerType server = null;
-			string networkid = ServerDetails.Network != null ? ServerDetails.Network.id : null;
+			Api.Contracts.Network20.ServerType deployedServer = null;
+		    DeployServerTypeNetwork networkInfo = null;
+		    DeployServerTypeNetworkInfo networkDomainInfo = null;
+
+		    if (ServerDetails.NetworkDomain != null)
+		    {              
+		        networkDomainInfo = new DeployServerTypeNetworkInfo
+		        {
+		            networkDomainId = ServerDetails.NetworkDomain.id,
+		            primaryNic = new VlanIdOrPrivateIpType
+                    {
+                        vlanId = ServerDetails.PrimaryVlan != null ? ServerDetails.PrimaryVlan.id : null,
+                        privateIpv4 = ServerDetails.PrivateIp
+                    }
+                };
+		    }
+		    else
+		    {
+                networkInfo = new DeployServerTypeNetwork
+		        {
+		            networkId = ServerDetails.Network != null ? ServerDetails.Network.id : null,
+		            privateIpv4 = ServerDetails.PrivateIp
+		        };
+		    }
 
 			// convert CaasServerDiskDetails to Disk[]
-			Disk[] diskarray = null;
+			DeployServerTypeDisk[] diskarray = null;
 			if (ServerDetails.InternalDiskDetails != null &&
 			    ServerDetails.InternalDiskDetails.Count > 0)
 			{
-				var disks = new List<Disk>();
+				var disks = new List<DeployServerTypeDisk>();
 				foreach (CaasServerDiskDetails item in ServerDetails.InternalDiskDetails)
 				{
 					var disk =
-						new Disk
-						{
-							scsiId = item.ScsiId, 
+						new DeployServerTypeDisk
+                        {
+							scsiId = ushort.Parse(item.ScsiId), 
 							speed = item.SpeedId
 						};
 					disks.Add(disk);
@@ -103,36 +124,36 @@ namespace DD.CBU.Compute.Powershell
 				diskarray = disks.ToArray();
 			}
 
-			Status status =
-				Connection.ApiClient.ServerManagementLegacy.Server.DeployServerWithDiskSpeedImageTask(
-					ServerDetails.Name, 
-					ServerDetails.Description, 
-					networkid, 
-					ServerDetails.PrivateIp, 
-					ServerDetails.Image.id, 
-					ServerDetails.AdministratorPassword, 
-					ServerDetails.IsStarted, 
-					diskarray
-					).Result;
+            var server = new DeployServerType
+            {
+                name = ServerDetails.Name,
+                description = ServerDetails.Description,
+                imageId = ServerDetails.Image.id,
+                start = ServerDetails.IsStarted,
+                administratorPassword = ServerDetails.AdministratorPassword,
+                network = networkInfo,
+                networkInfo = networkDomainInfo,
+                disk = diskarray
+            };
 
+            var response = Connection.ApiClient.ServerManagement.Server.DeployServer(server).Result;
 
-// get the server id from status message
-			AdditionalInformation statusadditionalInfo = status.additionalInformation.Single(info => info.name == "serverId");
-			if (statusadditionalInfo != null)
-			{
-				server =
-					Connection.ApiClient.ServerManagement.Server.GetMcp2DeployedServer(Guid.Parse(statusadditionalInfo.value)).Result;			
-			}
+            // get the server id from status message
+            var serverInfo = response.info.Single(info => info.name == "serverId");
+            if (serverInfo != null)
+            {
+                deployedServer = Connection.ApiClient.ServerManagement.Server.GetServer(Guid.Parse(serverInfo.value)).Result;
+            }
 
-			if (status != null)
+			if (response != null)
 				WriteDebug(
 					string.Format(
-						"{0} resulted in {1} ({2}): {3}", 
-						status.operation, 
-						status.result, 
-						status.resultCode, 
-						status.resultDetail));
-			return server;
+						"{0} resulted in {1} ({2}): requestId: {3}",
+                        response.operation,
+                        response.responseCode,
+                        response.message,
+                        response.requestId));
+			return deployedServer;
 		}
 	}
 }

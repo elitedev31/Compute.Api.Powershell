@@ -58,7 +58,7 @@ namespace DD.CBU.Compute.Api.Client.Network20
         /// <returns>The async task of <see cref="PagedResponse{PoolType}"/></returns>
         public async Task<PagedResponse<PoolType>> GetPoolsPaginated(PoolListOptions options = null, PageableRequest pagingOptions = null)
         {
-            var response = await _api.GetAsync<pools>(ApiUris.GetPools(_api.OrganizationId));
+            var response = await _api.GetAsync<pools>(ApiUris.GetPools(_api.OrganizationId), pagingOptions, options);
             return new PagedResponse<PoolType>
             {
                 items = response.pool,
@@ -86,6 +86,11 @@ namespace DD.CBU.Compute.Api.Client.Network20
         /// <returns>The async task of <see cref="ResponseType"/></returns>
         public async Task<ResponseType> EditPool(EditPoolType pool)
         {
+            if (pool.healthMonitorId == null || pool.healthMonitorId.Length == 0)
+            {
+                pool.healthMonitorId = new string[] { null };
+            }
+
             return await _api.PostAsync<EditPoolType, ResponseType>(ApiUris.EditPool(_api.OrganizationId), pool);
         }
 
@@ -133,7 +138,7 @@ namespace DD.CBU.Compute.Api.Client.Network20
         /// <returns>The async task of <see cref="PagedResponse{PoolMemberType}"/></returns>
         public async Task<PagedResponse<PoolMemberType>> GetPoolMembersPaginated(PoolMemberListOptions options = null, PageableRequest pagingOptions = null)
         {
-            var response = await _api.GetAsync<poolMembers>(ApiUris.GetPoolMembers(_api.OrganizationId));
+            var response = await _api.GetAsync<poolMembers>(ApiUris.GetPoolMembers(_api.OrganizationId), pagingOptions, options);
             return new PagedResponse<PoolMemberType>
             {
                 items = response.poolMember,

@@ -6,6 +6,10 @@
     /// <summary>A firewall rule list options model. </summary>
     public class FirewallRuleListOptions : IFilterableRequest
     {
+        /// <summary>Gets or sets the id filter.</summary>
+        [FilterParameter("id")]
+        public Guid[] Ids { get; set; }
+
         /// <summary>Filter firewall rules by identifier.</summary>
         [FilterParameter("id")]
         public Guid? Id { get; set; }

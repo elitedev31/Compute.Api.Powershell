@@ -21,7 +21,7 @@ namespace DD.CBU.Compute.Powershell
 	///     The get backup storage policies cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasBackupStoragePolicies")]
-	[OutputType(typeof (BackupStoragePolicy[]))]
+	[OutputType(typeof (BackupStoragePolicy))]
 	public class GetCaasBackupStragePoliciesCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
@@ -52,10 +52,7 @@ namespace DD.CBU.Compute.Powershell
 									new ItemNotFoundException(
 										"This command cannot find a matching object with the given parameters."
 										), "ItemNotFoundException", ErrorCategory.ObjectNotFound, resultlist));
-							break;
-						case 1:
-							WriteObject(resultlist.First());
-							break;
+							break;					
 						default:
 							WriteObject(resultlist, true);
 							break;

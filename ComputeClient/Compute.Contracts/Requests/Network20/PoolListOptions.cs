@@ -8,6 +8,12 @@ namespace DD.CBU.Compute.Api.Contracts.Requests.Network20
     /// </summary>
     public class PoolListOptions: IFilterableRequest
     {
+        /// <summary>
+        /// Gets or sets the id filter.
+        /// </summary>
+        [FilterParameter("id")]
+        public Guid[] Ids { get; set; }
+
         /// <summary>	
         /// Identifies an individual Pool.
         /// </summary>

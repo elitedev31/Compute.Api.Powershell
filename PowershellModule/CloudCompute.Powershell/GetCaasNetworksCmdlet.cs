@@ -18,9 +18,9 @@ namespace DD.CBU.Compute.Powershell
 {
 	/// <summary>
 	///     The get networks cmdlet.
-	/// </summary>
+	/// </summary>	
 	[Cmdlet(VerbsCommon.Get, "CaasNetworks")]
-	[OutputType(typeof (NetworkWithLocationsNetwork[]))]
+	[OutputType(typeof (NetworkWithLocationsNetwork))]
 	public class GetCaasNetworksCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
@@ -65,10 +65,7 @@ namespace DD.CBU.Compute.Powershell
 									new ItemNotFoundException(
 										"This command cannot find a matching object with the given parameters."
 										), "ItemNotFoundException", ErrorCategory.ObjectNotFound, resultlist));
-							break;
-						case 1:
-							WriteObject(resultlist.First());
-							break;
+							break;					
 						default:
 							WriteObject(resultlist, true);
 							break;

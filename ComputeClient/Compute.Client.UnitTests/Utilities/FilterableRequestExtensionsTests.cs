@@ -45,5 +45,22 @@
             var result = FilterableRequestExtensions.AppendToUri(options, uri);
             Assert.AreEqual("/resource?name=Test&createTime.GT=2010-10-10T10:10:10.0000000+00:00", result.ToString());
         }
+
+        [TestMethod]
+        public void AppendToUriWithArray()
+        {
+            var uri = new Uri("/resource", UriKind.Relative);
+            var options = new ServerListOptions
+            {
+                Ids = new[]
+                {
+                    new Guid("00000000-0000-0000-0000-000000000001"),
+                    new Guid("00000000-0000-0000-0000-000000000002")
+                }
+            };
+
+            var result = FilterableRequestExtensions.AppendToUri(options, uri);
+            Assert.AreEqual("/resource?id=00000000-0000-0000-0000-000000000001&id=00000000-0000-0000-0000-000000000002", result.ToString());
+        }
     }
 }

@@ -86,6 +86,11 @@ namespace DD.CBU.Compute.Api.Client.Network20
         /// <returns>The async task of <see cref="ResponseType"/></returns>
         public async Task<ResponseType> EditVirtualListener(editVirtualListener virtualListener)
         {
+            if (virtualListener.iruleId == null || virtualListener.iruleId.Length == 0)
+            {
+                virtualListener.iruleId = new string[] { null };
+            }
+
             return await _api.PostAsync<editVirtualListener, ResponseType>(ApiUris.EditVirtualListener(_api.OrganizationId), virtualListener);
         }
 

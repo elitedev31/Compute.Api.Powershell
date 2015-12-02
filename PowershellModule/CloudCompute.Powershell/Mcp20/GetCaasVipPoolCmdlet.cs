@@ -10,7 +10,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
     using Api.Contracts.Requests.Network20;
 
     [Cmdlet(VerbsCommon.Get, "CaasVipPool")]
-    [OutputType(typeof(PoolType[]))]
+    [OutputType(typeof(PoolType))]
     public class GetCaasVipPoolCmdlet : PSCmdletCaasWithConnectionBase
     {
         /// <summary>
@@ -72,15 +72,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                         return true;
                     });
             }
-
-            if (vipPools != null && vipPools.Count() == 1)
-            {
-                WriteObject(vipPools.First());
-            }
-            else
-            {
-                WriteObject(vipPools);
-            }
+            WriteObject(vipPools, true);
         }
     }
 }

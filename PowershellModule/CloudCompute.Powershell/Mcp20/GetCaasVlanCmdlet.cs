@@ -13,6 +13,7 @@ using System.Linq;
 using System.Management.Automation;
 using DD.CBU.Compute.Api.Client;
 using DD.CBU.Compute.Api.Contracts.Network20;
+using DD.CBU.Compute.Api.Contracts.Requests.Network20;
 
 namespace DD.CBU.Compute.Powershell.Mcp20
 {
@@ -20,7 +21,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 	///     The new CaaS Virtual LAN cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasVlan")]
-	[OutputType(typeof (VlanType[]))]
+	[OutputType(typeof (VlanType))]
 	public class GetCaasVlanCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
@@ -54,10 +55,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 			try
 			{
 				vlans = ParameterSetName.Equals("Filtered")
-					? Connection.ApiClient.Networking.Vlan.GetVlans(
-						VirtualLanId, 
-						Name, 
-						(NetworkDomain != null) ? Guid.Parse(NetworkDomain.id) : Guid.Empty).Result
+					? Connection.ApiClient.Networking.Vlan.GetVlans(new VlanListOptions { Id  = VirtualLanId, Name = Name, NetworkDomainId = (NetworkDomain != null) ? Guid.Parse(NetworkDomain.id) : (Guid?)null}).Result
 					: Connection.ApiClient.Networking.Vlan.GetVlans().Result;
 			}
 			catch (AggregateException ae)
@@ -79,15 +77,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 						return true;
 					});
 			}
-
-			if (vlans != null && vlans.Count() == 1)
-			{
-				WriteObject(vlans.First());
-			}
-			else
-			{
-				WriteObject(vlans);
-			}
+		    WriteObject(vlans, true);			
 		}
 	}
 }

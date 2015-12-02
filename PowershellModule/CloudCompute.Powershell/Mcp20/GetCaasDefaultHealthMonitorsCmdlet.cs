@@ -12,7 +12,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
     using Api.Contracts.Requests.Network20;
 
     [Cmdlet(VerbsCommon.Get, "CaasDefaultHealthMonitors")]
-    [OutputType(typeof(DefaultHealthMonitorType[]))]
+    [OutputType(typeof(DefaultHealthMonitorType))]
     public class GetCaasDefaultHealthMonitorsCmdlet : PSCmdletCaasWithConnectionBase
     {
         /// <summary>
@@ -66,15 +66,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                         return true;
                     });
             }
-
-            if (healthMonitors != null && healthMonitors.Count() == 1)
-            {
-                WriteObject(healthMonitors.First());
-            }
-            else
-            {
-                WriteObject(healthMonitors);
-            }
+            WriteObject(healthMonitors, true);
         }
     }
 }
