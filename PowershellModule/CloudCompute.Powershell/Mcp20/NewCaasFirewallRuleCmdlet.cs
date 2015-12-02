@@ -103,8 +103,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                     {
                         ThrowTerminatingError(
                             new ErrorRecord(
-                                new ArgumentException("For relative rule placement, please provide the RelativeRule",
-                                    "Position"), "-3", ErrorCategory.InvalidArgument, Connection));
+                                new ArgumentException("For relative rule placement, please provide the RelativeRule"), "-3", ErrorCategory.InvalidArgument, Connection));
                         return;
                     }
 
