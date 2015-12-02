@@ -328,13 +328,21 @@ namespace DD.CBU.Compute.Api.Client
             AddFtpHostName(KnownApiVendor.PWW_Cloud_Connect, KnownApiRegion.NorthAmerica_NA, "ftps-na.cloud-vpn.net");
 
             AddHostName(KnownApiVendor.Med_One, KnownApiRegion.Israel_IL, "api.cloud.med-1.com");
+            AddFtpHostName(KnownApiVendor.Med_One, KnownApiRegion.Israel_IL, "api.cloud.med-1.com");
             AddHostName(KnownApiVendor.Med_One, KnownApiRegion.NorthAmerica_NA, "api-na.cloud.med-1.com");
+            AddFtpHostName(KnownApiVendor.Med_One, KnownApiRegion.NorthAmerica_NA, "ftps-na.cloud-vpn.net");
             AddHostName(KnownApiVendor.Med_One, KnownApiRegion.Europe_EU, "api-eu.cloud.med-1.com");
+            AddFtpHostName(KnownApiVendor.Med_One, KnownApiRegion.Europe_EU, "ftps-eu.cloud-vpn.net");
             AddHostName(KnownApiVendor.Med_One, KnownApiRegion.Australia_AU, "api-au.cloud.med-1.com");
+            AddFtpHostName(KnownApiVendor.Med_One, KnownApiRegion.Australia_AU, "ftps-au.cloud-vpn.net");
             AddHostName(KnownApiVendor.Med_One, KnownApiRegion.Africa_AF, "api-af.cloud.med-1.com");
+            AddFtpHostName(KnownApiVendor.Med_One, KnownApiRegion.Africa_AF, "ftps-af.cloud-vpn.net");
             AddHostName(KnownApiVendor.Med_One, KnownApiRegion.AsiaPacific_AP, "api-ap.cloud.med-1.com");
+            AddFtpHostName(KnownApiVendor.Med_One, KnownApiRegion.AsiaPacific_AP, "ftps-ap.cloud-vpn.net");
             AddHostName(KnownApiVendor.Med_One, KnownApiRegion.SouthAmerica_SA, "api-sa.cloud.med-1.com");
-            AddHostName(KnownApiVendor.Med_One, KnownApiRegion.Canada_CA, "api-ca.cloud.med-1.com");            
+            AddFtpHostName(KnownApiVendor.Med_One, KnownApiRegion.SouthAmerica_SA, "ftps-latam.cloud-vpn.net");
+            AddHostName(KnownApiVendor.Med_One, KnownApiRegion.Canada_CA, "api-ca.cloud.med-1.com");
+            AddFtpHostName(KnownApiVendor.Med_One, KnownApiRegion.Canada_CA, "ftps-canada.cloud-vpn.net");
         }
 
         /// <summary>	Add host name to the known endpoints. </summary>
