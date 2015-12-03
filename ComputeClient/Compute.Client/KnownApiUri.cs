@@ -174,6 +174,16 @@ namespace DD.CBU.Compute.Api.Client
 		private Dictionary<string, string> KnownFtpHostNames { get; set; }
 
         /// <summary>
+		/// Private Dictionary to host all regional vpn endpoints
+		/// </summary>
+		private Dictionary<string, string> KnownVpnHostNames { get; set; }
+
+        /// <summary>
+        /// Private Dictionary to host all regional monitoring endpoints
+        /// </summary>
+        private Dictionary<string, string> KnownMonitoringHostNames { get; set; }
+
+        /// <summary>
         /// Mapping between Vendor and applicable regions
         /// </summary>
         private List<KeyValuePair<KnownApiVendor, KnownApiRegion>> KnownVendorEndPointPairs { get; set; }   
@@ -197,7 +207,6 @@ namespace DD.CBU.Compute.Api.Client
 	        if (!KnownApiHostNames.ContainsKey(key))
 		        throw new ApiHostNotFoundException(vendor, region);
 
-
             string apiurl = string.Format(urltemplate, KnownApiHostNames[key]);
             return new Uri(apiurl);
         }
@@ -219,10 +228,58 @@ namespace DD.CBU.Compute.Api.Client
 	    public string GetFtpHost(KnownApiVendor vendor, KnownApiRegion region)
 	    {
 			string key = string.Concat(vendor.ToString(), '-', region.ToString());
-			if (!KnownApiHostNames.ContainsKey(key))
+			if (!KnownFtpHostNames.ContainsKey(key))
 				throw new ApiHostNotFoundException(vendor, region);
 			return KnownFtpHostNames[key];
 	    }
+
+        /// <summary>
+		/// The get vpn host.
+		/// </summary>
+		/// <param name="vendor">
+		/// The vendor.
+		/// </param>
+		/// <param name="region">
+		/// The region.
+		/// </param>
+		/// <returns>
+		/// The <see cref="string"/>.
+		/// </returns>
+		/// <exception cref="ComputeApiException">
+		/// </exception>
+        public Uri GetVpnUrl(KnownApiVendor vendor, KnownApiRegion region)
+        {
+            const string urltemplate = "https://{0}/";
+            string key = region.ToString();
+            if (!KnownVpnHostNames.ContainsKey(key))
+                throw new ApiHostNotFoundException(vendor, region);            
+            string apiurl = string.Format(urltemplate, KnownVpnHostNames[key]);
+            return new Uri(apiurl);
+        }
+
+        /// <summary>
+        /// The get Monitoring url.
+        /// </summary>
+        /// <param name="vendor">
+        /// The vendor.
+        /// </param>
+        /// <param name="region">
+        /// The region.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        /// <exception cref="ComputeApiException">
+        /// </exception>
+        public Uri GetMonitoringUrl(KnownApiVendor vendor, KnownApiRegion region)
+        {
+            const string urltemplate = "https://{0}/";
+            string key = region.ToString();
+            if (!KnownMonitoringHostNames.ContainsKey(key))
+                throw new ApiHostNotFoundException(vendor, region);
+            string apiurl = string.Format(urltemplate, KnownMonitoringHostNames[key]);
+            return new Uri(apiurl);
+        }
 
         /// <summary>	List of Known Regions that are valid for the particular Vendor. </summary>
         /// <remarks>	Anthony, 4/24/2015. </remarks>
@@ -239,15 +296,35 @@ namespace DD.CBU.Compute.Api.Client
         private void CreateKnownApiHostNames()
         {
             // Africa
+            AddVpnHostName(KnownApiRegion.Africa_AF, "af1.cloud-vpn.net");
+            AddMonitoringHostName(KnownApiRegion.Africa_AF, "af-monitoring.mcp-services.net");
             // Asia
+            AddVpnHostName(KnownApiRegion.AsiaPacific_AP, "ap1.cloud-vpn.net");
+            AddMonitoringHostName(KnownApiRegion.AsiaPacific_AP, "ap-monitoring.mcp-services.net");
             // Australia
+            AddVpnHostName(KnownApiRegion.Australia_AU, "au1.cloud-vpn.net");
+            AddMonitoringHostName(KnownApiRegion.Australia_AU, "au-monitoring.mcp-services.net");
             // Canada
+            AddVpnHostName(KnownApiRegion.Canada_CA, "ca1.cloud-vpn.net");
+            AddMonitoringHostName(KnownApiRegion.Canada_CA, "ca-monitoring.mcp-services.net");
             // Europe
+            AddVpnHostName(KnownApiRegion.Europe_EU, "eu1.cloud-vpn.net");
+            AddMonitoringHostName(KnownApiRegion.Europe_EU, "eu-monitoring.mcp-services.net");
             // India
+            AddVpnHostName(KnownApiRegion.India_IN, "in1.cloud-vpn.net");
+            AddMonitoringHostName(KnownApiRegion.India_IN, "in-monitoring.mcp-services.net");
             // Indonesia
+            AddVpnHostName(KnownApiRegion.Indonesia_ID, "id1.cloud-vpn.net");
+            AddMonitoringHostName(KnownApiRegion.Indonesia_ID, "id-monitoring.mcp-services.net");
             // Israel
+            AddVpnHostName(KnownApiRegion.Israel_IL, "il1.cloud-vpn.net");
+            AddMonitoringHostName(KnownApiRegion.Israel_IL, "il-monitoring.mcp-services.net");
             // North America
+            AddVpnHostName(KnownApiRegion.NorthAmerica_NA, "na1.cloud-vpn.net");
+            AddMonitoringHostName(KnownApiRegion.NorthAmerica_NA, "na-monitoring.mcp-services.net");
             // South America
+            AddVpnHostName(KnownApiRegion.SouthAmerica_SA, "sa1.cloud-vpn.net");
+            AddMonitoringHostName(KnownApiRegion.SouthAmerica_SA, "sa-monitoring.mcp-services.net");
 
             #region DimensionData
             // Africa
@@ -448,8 +525,7 @@ namespace DD.CBU.Compute.Api.Client
             #endregion
         }
 
-        /// <summary>	Add host name to the known endpoints. </summary>
-        /// <remarks>	Anthony, 4/24/2015. </remarks>
+        /// <summary>	Add host name to the known endpoints. </summary>        
         /// <param name="vendor">	The Vendor. </param>
         /// <param name="region">	The Region. </param>
         /// <param name="apiUrl">	The API URL. </param>
@@ -460,8 +536,7 @@ namespace DD.CBU.Compute.Api.Client
             KnownVendorEndPointPairs.Add(new KeyValuePair<KnownApiVendor, KnownApiRegion>(vendor, region));
         }
 
-		/// <summary>	The add ftp host name. </summary>
-		/// <remarks>	Anthony, 4/24/2015. </remarks>
+		/// <summary>	The add ftp host name. </summary>	
 		/// <param name="vendor">	The vendor. </param>
 		/// <param name="region">	The region. </param>
 		/// <param name="apiUrl">	The API url. </param>
@@ -470,5 +545,21 @@ namespace DD.CBU.Compute.Api.Client
 			string key = string.Concat(vendor.ToString(), '-', region.ToString());
 			KnownFtpHostNames.Add(key, apiUrl);
 		}
+
+        /// <summary>	The add vpn host name. </summary>		
+		/// <param name="region">	The region. </param>
+		/// <param name="apiUrl">	The API url. </param>
+		private void AddVpnHostName(KnownApiRegion region, string apiUrl)
+        {            
+            KnownVpnHostNames.Add(region.ToString(), apiUrl);
+        }
+
+        /// <summary>	The add monitoring host name. </summary>		
+        /// <param name="region">	The region. </param>
+        /// <param name="apiUrl">	The API url. </param>
+        private void AddMonitoringHostName(KnownApiRegion region, string apiUrl)
+        {            
+            KnownMonitoringHostNames.Add(region.ToString(), apiUrl);
+        }
     }
 }
