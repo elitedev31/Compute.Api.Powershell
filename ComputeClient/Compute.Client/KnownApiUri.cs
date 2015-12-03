@@ -238,111 +238,214 @@ namespace DD.CBU.Compute.Api.Client
         /// </summary>
         private void CreateKnownApiHostNames()
         {
-            AddHostName(KnownApiVendor.DimensionData, KnownApiRegion.NorthAmerica_NA, "api-na.dimensiondata.com");
-			AddFtpHostName(KnownApiVendor.DimensionData, KnownApiRegion.NorthAmerica_NA, "ftps-na.cloud-vpn.net");
-            AddHostName(KnownApiVendor.DimensionData, KnownApiRegion.Europe_EU, "api-eu.dimensiondata.com");
-			AddFtpHostName(KnownApiVendor.DimensionData, KnownApiRegion.Europe_EU, "ftps-eu.cloud-vpn.net");
-            AddHostName(KnownApiVendor.DimensionData, KnownApiRegion.Australia_AU, "api-au.dimensiondata.com");
-			AddFtpHostName(KnownApiVendor.DimensionData, KnownApiRegion.Australia_AU, "ftps-au.cloud-vpn.net");
+            // Africa
+            // Asia
+            // Australia
+            // Canada
+            // Europe
+            // India
+            // Indonesia
+            // Israel
+            // North America
+            // South America
+
+            #region DimensionData
+            // Africa
             AddHostName(KnownApiVendor.DimensionData, KnownApiRegion.Africa_AF, "api-mea.dimensiondata.com");
-			AddFtpHostName(KnownApiVendor.DimensionData, KnownApiRegion.Africa_AF, "ftps-af.cloud-vpn.net");
+            AddFtpHostName(KnownApiVendor.DimensionData, KnownApiRegion.Africa_AF, "ftps-af.cloud-vpn.net");
+            // Asia
             AddHostName(KnownApiVendor.DimensionData, KnownApiRegion.AsiaPacific_AP, "api-ap.dimensiondata.com");
-			AddFtpHostName(KnownApiVendor.DimensionData, KnownApiRegion.AsiaPacific_AP, "ftps-ap.cloud-vpn.net");
-            AddHostName(KnownApiVendor.DimensionData, KnownApiRegion.SouthAmerica_SA, "api-latam.dimensiondata.com");
-			AddFtpHostName(KnownApiVendor.DimensionData, KnownApiRegion.SouthAmerica_SA, "ftps-latam.cloud-vpn.net");
+            AddFtpHostName(KnownApiVendor.DimensionData, KnownApiRegion.AsiaPacific_AP, "ftps-ap.cloud-vpn.net");
+            // Australia
+            AddHostName(KnownApiVendor.DimensionData, KnownApiRegion.Australia_AU, "api-au.dimensiondata.com");
+            AddFtpHostName(KnownApiVendor.DimensionData, KnownApiRegion.Australia_AU, "ftps-au.cloud-vpn.net");
+            // Canada
             AddHostName(KnownApiVendor.DimensionData, KnownApiRegion.Canada_CA, "api-canada.dimensiondata.com");
-			AddFtpHostName(KnownApiVendor.DimensionData, KnownApiRegion.Canada_CA, "ftps-canada.cloud-vpn.net");
+            AddFtpHostName(KnownApiVendor.DimensionData, KnownApiRegion.Canada_CA, "ftps-canada.cloud-vpn.net");
+            // Europe
+            AddHostName(KnownApiVendor.DimensionData, KnownApiRegion.Europe_EU, "api-eu.dimensiondata.com");
+            AddFtpHostName(KnownApiVendor.DimensionData, KnownApiRegion.Europe_EU, "ftps-eu.cloud-vpn.net");
+            // India
+            AddHostName(KnownApiVendor.DimensionData, KnownApiRegion.India_IN, "inapi.opsourcecloud.net");
+            AddFtpHostName(KnownApiVendor.DimensionData, KnownApiRegion.India_IN, "ftps-in.cloud-vpn.net");
+            // Indonesia
+            AddHostName(KnownApiVendor.DimensionData, KnownApiRegion.Indonesia_ID, "idapi.opsourcecloud.net");
+            AddFtpHostName(KnownApiVendor.DimensionData, KnownApiRegion.Indonesia_ID, "ftps-id.cloud-vpn.net");
+            // Israel
+            AddHostName(KnownApiVendor.DimensionData, KnownApiRegion.Israel_IL, "ilapi.opsourcecloud.net");
+            AddFtpHostName(KnownApiVendor.DimensionData, KnownApiRegion.Israel_IL, "ftps-med-1.cloud-vpn.net");
+            // North America
+            AddHostName(KnownApiVendor.DimensionData, KnownApiRegion.NorthAmerica_NA, "api-na.dimensiondata.com");
+            AddFtpHostName(KnownApiVendor.DimensionData, KnownApiRegion.NorthAmerica_NA, "ftps-na.cloud-vpn.net");
+            // South America
+            AddHostName(KnownApiVendor.DimensionData, KnownApiRegion.SouthAmerica_SA, "api-latam.dimensiondata.com");
+            AddFtpHostName(KnownApiVendor.DimensionData, KnownApiRegion.SouthAmerica_SA, "ftps-latam.cloud-vpn.net");
+            #endregion
 
+            #region DimensionData_Government
             AddHostName(KnownApiVendor.DimensionData_Government, KnownApiRegion.Australia_AU, "api-canberra.dimensiondata.com");
+            AddFtpHostName(KnownApiVendor.DimensionData_Government, KnownApiRegion.Australia_AU, "ftps-au.cloud-vpn.net");
+            #endregion
 
+            #region NTTA
+            // Africa
+            AddHostName(KnownApiVendor.NTTA, KnownApiRegion.Africa_AF, "sacloudapi.nttamerica.com");
+            AddFtpHostName(KnownApiVendor.NTTA, KnownApiRegion.Africa_AF, "ftps-af.cloud-vpn.net");
+
+            // Asia Pacific
+            AddHostName(KnownApiVendor.NTTA, KnownApiRegion.AsiaPacific_AP, "hkcloudapi.nttamerica.com");
+            AddFtpHostName(KnownApiVendor.NTTA, KnownApiRegion.AsiaPacific_AP, "ftps-ap.cloud-vpn.net");
+
+            // Asutralia
+            AddHostName(KnownApiVendor.NTTA, KnownApiRegion.Australia_AU, "aucloudapi.nttamerica.com");
+            AddFtpHostName(KnownApiVendor.NTTA, KnownApiRegion.Australia_AU, "ftps-au.cloud-vpn.net");
+
+            // Europe
+            AddHostName(KnownApiVendor.NTTA, KnownApiRegion.Europe_EU, "eucloudapi.nttamerica.com");
+            AddFtpHostName(KnownApiVendor.NTTA, KnownApiRegion.Europe_EU, "ftps-eu.cloud-vpn.net");
+
+            // North America
             AddHostName(KnownApiVendor.NTTA, KnownApiRegion.NorthAmerica_NA, "cloudapi.nttamerica.com");
 			AddFtpHostName(KnownApiVendor.NTTA, KnownApiRegion.NorthAmerica_NA, "ftps-na.cloud-vpn.net");
-            AddHostName(KnownApiVendor.NTTA, KnownApiRegion.Europe_EU, "eucloudapi.nttamerica.com");
-			AddFtpHostName(KnownApiVendor.NTTA, KnownApiRegion.Europe_EU, "ftps-eu.cloud-vpn.net");
-            AddHostName(KnownApiVendor.NTTA, KnownApiRegion.Australia_AU, "aucloudapi.nttamerica.com");
-			AddFtpHostName(KnownApiVendor.NTTA, KnownApiRegion.Australia_AU, "ftps-au.cloud-vpn.net");
-            AddHostName(KnownApiVendor.NTTA, KnownApiRegion.Africa_AF, "sacloudapi.nttamerica.com");
-			AddFtpHostName(KnownApiVendor.NTTA, KnownApiRegion.Africa_AF, "ftps-af.cloud-vpn.net");
-            AddHostName(KnownApiVendor.NTTA, KnownApiRegion.AsiaPacific_AP, "hkcloudapi.nttamerica.com");
-			AddFtpHostName(KnownApiVendor.NTTA, KnownApiRegion.AsiaPacific_AP, "ftps-ap.cloud-vpn.net");
+            #endregion
 
-            AddHostName(KnownApiVendor.Cisco, KnownApiRegion.NorthAmerica_NA, "iaas-api-na.cisco-ccs.com");
-			AddFtpHostName(KnownApiVendor.Cisco, KnownApiRegion.NorthAmerica_NA, "ftps-na.cloud-vpn.net");
-            AddHostName(KnownApiVendor.Cisco, KnownApiRegion.Europe_EU, "iaas-api-eu.cisco-ccs.com");
-			AddFtpHostName(KnownApiVendor.Cisco, KnownApiRegion.Europe_EU, "ftps-eu.cloud-vpn.net");
-            AddHostName(KnownApiVendor.Cisco, KnownApiRegion.Australia_AU, "iaas-api-au.cisco-ccs.com");
-			AddFtpHostName(KnownApiVendor.Cisco, KnownApiRegion.Australia_AU, "ftps-au.cloud-vpn.net");
+            #region Cisco
+            // Africa
             AddHostName(KnownApiVendor.Cisco, KnownApiRegion.Africa_AF, "iaas-api-mea.cisco-ccs.com");
-			AddFtpHostName(KnownApiVendor.Cisco, KnownApiRegion.Africa_AF, "ftps-af.cloud-vpn.net");
+            AddFtpHostName(KnownApiVendor.Cisco, KnownApiRegion.Africa_AF, "ftps-af.cloud-vpn.net");
+            // Asia
             AddHostName(KnownApiVendor.Cisco, KnownApiRegion.AsiaPacific_AP, "iaas-api-ap.cisco-ccs.com");
-			AddFtpHostName(KnownApiVendor.Cisco, KnownApiRegion.AsiaPacific_AP, "ftps-ap.cloud-vpn.net");
+            AddFtpHostName(KnownApiVendor.Cisco, KnownApiRegion.AsiaPacific_AP, "ftps-ap.cloud-vpn.net");
+            // Australia
+            AddHostName(KnownApiVendor.Cisco, KnownApiRegion.Australia_AU, "iaas-api-au.cisco-ccs.com");
+            AddFtpHostName(KnownApiVendor.Cisco, KnownApiRegion.Australia_AU, "ftps-au.cloud-vpn.net");
+            // Canada
             AddHostName(KnownApiVendor.Cisco, KnownApiRegion.Canada_CA, "iaas-api-ca.cisco-ccs.com");
             AddFtpHostName(KnownApiVendor.Cisco, KnownApiRegion.Canada_CA, "ftps-canada.cloud-vpn.net");
+            // Europe
+            AddHostName(KnownApiVendor.Cisco, KnownApiRegion.Europe_EU, "iaas-api-eu.cisco-ccs.com");
+            AddFtpHostName(KnownApiVendor.Cisco, KnownApiRegion.Europe_EU, "ftps-eu.cloud-vpn.net");
+            // North America            
+            AddHostName(KnownApiVendor.Cisco, KnownApiRegion.NorthAmerica_NA, "iaas-api-na.cisco-ccs.com");
+			AddFtpHostName(KnownApiVendor.Cisco, KnownApiRegion.NorthAmerica_NA, "ftps-na.cloud-vpn.net");
+            #endregion
 
-
-            AddHostName(KnownApiVendor.InternetSolutions, KnownApiRegion.NorthAmerica_NA, "usapi.cloud.is.co.za");
-			AddFtpHostName(KnownApiVendor.InternetSolutions, KnownApiRegion.NorthAmerica_NA, "ftps-na.cloud-vpn.net");
-            AddHostName(KnownApiVendor.InternetSolutions, KnownApiRegion.Europe_EU, "euapi.cloud.is.co.za");
-			AddFtpHostName(KnownApiVendor.InternetSolutions, KnownApiRegion.Europe_EU, "ftps-eu.cloud-vpn.net");
-            AddHostName(KnownApiVendor.InternetSolutions, KnownApiRegion.Australia_AU, "auapi.cloud.is.co.za");
-			AddFtpHostName(KnownApiVendor.InternetSolutions, KnownApiRegion.Australia_AU, "ftps-au.cloud-vpn.net");
+            #region InternetSolutions
+            // Africa
             AddHostName(KnownApiVendor.InternetSolutions, KnownApiRegion.Africa_AF, "meaapi.cloud.is.co.za");
-			AddFtpHostName(KnownApiVendor.InternetSolutions, KnownApiRegion.Africa_AF, "ftps-af.cloud-vpn.net");
+            AddFtpHostName(KnownApiVendor.InternetSolutions, KnownApiRegion.Africa_AF, "ftps-af.cloud-vpn.net");
+            // Asia
             AddHostName(KnownApiVendor.InternetSolutions, KnownApiRegion.AsiaPacific_AP, "apapi.cloud.is.co.za");
-			AddFtpHostName(KnownApiVendor.InternetSolutions, KnownApiRegion.AsiaPacific_AP, "ftps-ap.cloud-vpn.net");
+            AddFtpHostName(KnownApiVendor.InternetSolutions, KnownApiRegion.AsiaPacific_AP, "ftps-ap.cloud-vpn.net");
+            // Australia
+            AddHostName(KnownApiVendor.InternetSolutions, KnownApiRegion.Australia_AU, "auapi.cloud.is.co.za");
+            AddFtpHostName(KnownApiVendor.InternetSolutions, KnownApiRegion.Australia_AU, "ftps-au.cloud-vpn.net");
+            // Canada
+            AddHostName(KnownApiVendor.InternetSolutions, KnownApiRegion.Canada_CA, "canadaapi.cloud.is.co.za");
+            AddFtpHostName(KnownApiVendor.InternetSolutions, KnownApiRegion.Canada_CA, "ftps-canada.cloud-vpn.net");
+            // Europe
+            AddHostName(KnownApiVendor.InternetSolutions, KnownApiRegion.Europe_EU, "euapi.cloud.is.co.za");
+            AddFtpHostName(KnownApiVendor.InternetSolutions, KnownApiRegion.Europe_EU, "ftps-eu.cloud-vpn.net");
+            // India
+            // Indonesia
+            // Israel
+            // North America
+            AddHostName(KnownApiVendor.InternetSolutions, KnownApiRegion.NorthAmerica_NA, "usapi.cloud.is.co.za");
+            AddFtpHostName(KnownApiVendor.InternetSolutions, KnownApiRegion.NorthAmerica_NA, "ftps-na.cloud-vpn.net");
+            // South America
             AddHostName(KnownApiVendor.InternetSolutions, KnownApiRegion.SouthAmerica_SA, "latamapi.cloud.is.co.za");
 			AddFtpHostName(KnownApiVendor.InternetSolutions, KnownApiRegion.SouthAmerica_SA, "ftps-latam.cloud-vpn.net");
-            AddHostName(KnownApiVendor.InternetSolutions, KnownApiRegion.Canada_CA, "canadaapi.cloud.is.co.za");
-			AddFtpHostName(KnownApiVendor.InternetSolutions, KnownApiRegion.Canada_CA, "ftps-canada.cloud-vpn.net");
+            #endregion
 
-            AddHostName(KnownApiVendor.Indosat, KnownApiRegion.NorthAmerica_NA, "iaas-usapi.indosat.com");
-			AddFtpHostName(KnownApiVendor.Indosat, KnownApiRegion.NorthAmerica_NA, "ftps-na.cloud-vpn.net");
-            AddHostName(KnownApiVendor.Indosat, KnownApiRegion.Europe_EU, "iaas-euapi.indosat.com");
-			AddFtpHostName(KnownApiVendor.Indosat, KnownApiRegion.Europe_EU, "ftps-eu.cloud-vpn.net");
-            AddHostName(KnownApiVendor.Indosat, KnownApiRegion.Australia_AU, "iaas-auapi.indosat.com");
-			AddFtpHostName(KnownApiVendor.Indosat, KnownApiRegion.Australia_AU, "ftps-au.cloud-vpn.net");
+            #region Indosat
+            // Africa
             AddHostName(KnownApiVendor.Indosat, KnownApiRegion.Africa_AF, "iaas-afapi.indosat.com");
-			AddFtpHostName(KnownApiVendor.Indosat, KnownApiRegion.Africa_AF, "ftps-af.cloud-vpn.net");
+            AddFtpHostName(KnownApiVendor.Indosat, KnownApiRegion.Africa_AF, "ftps-af.cloud-vpn.net");
+            // Asia
+            // Australia
+            AddHostName(KnownApiVendor.Indosat, KnownApiRegion.Australia_AU, "iaas-auapi.indosat.com");
+            AddFtpHostName(KnownApiVendor.Indosat, KnownApiRegion.Australia_AU, "ftps-au.cloud-vpn.net");
+            // Canada
+            // Europe
+            AddHostName(KnownApiVendor.Indosat, KnownApiRegion.Europe_EU, "iaas-euapi.indosat.com");
+            AddFtpHostName(KnownApiVendor.Indosat, KnownApiRegion.Europe_EU, "ftps-eu.cloud-vpn.net");
+            // India
+            // Indonesia
             AddHostName(KnownApiVendor.Indosat, KnownApiRegion.Indonesia_ID, "iaas-api.indosat.com");
-			AddFtpHostName(KnownApiVendor.Indosat, KnownApiRegion.Indonesia_ID, "ftps-in.cloud-vpn.net");
+            AddFtpHostName(KnownApiVendor.Indosat, KnownApiRegion.Indonesia_ID, "ftps-in.cloud-vpn.net");
+            // Israel
+            // North America
+            AddHostName(KnownApiVendor.Indosat, KnownApiRegion.NorthAmerica_NA, "iaas-usapi.indosat.com");
+            AddFtpHostName(KnownApiVendor.Indosat, KnownApiRegion.NorthAmerica_NA, "ftps-na.cloud-vpn.net");
+            // South America
+            #endregion
 
-
-            AddHostName(KnownApiVendor.BSNL, KnownApiRegion.NorthAmerica_NA, "usapi.bsnlcloud.com");
-			AddFtpHostName(KnownApiVendor.BSNL, KnownApiRegion.NorthAmerica_NA, "ftps-na.cloud-vpn.net");
-            AddHostName(KnownApiVendor.BSNL, KnownApiRegion.Europe_EU, "euapi.bsnlcloud.com");
-			AddFtpHostName(KnownApiVendor.BSNL, KnownApiRegion.Europe_EU, "ftps-eu.cloud-vpn.net");
-            AddHostName(KnownApiVendor.BSNL, KnownApiRegion.Australia_AU, "auapi.bsnlcloud.com");
-			AddFtpHostName(KnownApiVendor.BSNL, KnownApiRegion.Australia_AU, "ftps-au.cloud-vpn.net");
+            #region BSNL
+            // Africa
             AddHostName(KnownApiVendor.BSNL, KnownApiRegion.Africa_AF, "afapi.bsnlcloud.com");
-			AddFtpHostName(KnownApiVendor.BSNL, KnownApiRegion.Africa_AF, "ftps-af.cloud-vpn.net");
+            AddFtpHostName(KnownApiVendor.BSNL, KnownApiRegion.Africa_AF, "ftps-af.cloud-vpn.net");
+            // Asia
+            // Australia
+            AddHostName(KnownApiVendor.BSNL, KnownApiRegion.Australia_AU, "auapi.bsnlcloud.com");
+            AddFtpHostName(KnownApiVendor.BSNL, KnownApiRegion.Australia_AU, "ftps-au.cloud-vpn.net");
+            // Canada
+            // Europe
+            AddHostName(KnownApiVendor.BSNL, KnownApiRegion.Europe_EU, "euapi.bsnlcloud.com");
+            AddFtpHostName(KnownApiVendor.BSNL, KnownApiRegion.Europe_EU, "ftps-eu.cloud-vpn.net");
+            // India
             AddHostName(KnownApiVendor.BSNL, KnownApiRegion.India_IN, "api.bsnlcloud.com");
-			AddFtpHostName(KnownApiVendor.BSNL, KnownApiRegion.India_IN, "ftps-in.cloud-vpn.net");
+            AddFtpHostName(KnownApiVendor.BSNL, KnownApiRegion.India_IN, "ftps-in.cloud-vpn.net");
+            // Indonesia
+            // Israel
+            // North America
+            AddHostName(KnownApiVendor.BSNL, KnownApiRegion.NorthAmerica_NA, "usapi.bsnlcloud.com");
+            AddFtpHostName(KnownApiVendor.BSNL, KnownApiRegion.NorthAmerica_NA, "ftps-na.cloud-vpn.net");
+            // South America
+            #endregion
 
+            #region RootAxcess
             AddHostName(KnownApiVendor.RootAxcess, KnownApiRegion.NorthAmerica_NA, "api.rootaxcesscloud.com");
             AddFtpHostName(KnownApiVendor.RootAxcess, KnownApiRegion.NorthAmerica_NA, "ftps-na.cloud-vpn.net");
+            #endregion
 
+            #region Tenzing_Everest
             AddHostName(KnownApiVendor.Tenzing_Everest, KnownApiRegion.NorthAmerica_NA, "api.cloud.tenzing.com");
             AddFtpHostName(KnownApiVendor.Tenzing_Everest, KnownApiRegion.NorthAmerica_NA, "ftps-na.cloud-vpn.net");
+            #endregion
 
+            #region PWW_Cloud_Connect
             AddHostName(KnownApiVendor.PWW_Cloud_Connect, KnownApiRegion.NorthAmerica_NA, "api.pwwcloudconnect.net");
             AddFtpHostName(KnownApiVendor.PWW_Cloud_Connect, KnownApiRegion.NorthAmerica_NA, "ftps-na.cloud-vpn.net");
+            #endregion
 
-            AddHostName(KnownApiVendor.Med_One, KnownApiRegion.Israel_IL, "api.cloud.med-1.com");
-            AddFtpHostName(KnownApiVendor.Med_One, KnownApiRegion.Israel_IL, "api.cloud.med-1.com");
-            AddHostName(KnownApiVendor.Med_One, KnownApiRegion.NorthAmerica_NA, "api-na.cloud.med-1.com");
-            AddFtpHostName(KnownApiVendor.Med_One, KnownApiRegion.NorthAmerica_NA, "ftps-na.cloud-vpn.net");
-            AddHostName(KnownApiVendor.Med_One, KnownApiRegion.Europe_EU, "api-eu.cloud.med-1.com");
-            AddFtpHostName(KnownApiVendor.Med_One, KnownApiRegion.Europe_EU, "ftps-eu.cloud-vpn.net");
-            AddHostName(KnownApiVendor.Med_One, KnownApiRegion.Australia_AU, "api-au.cloud.med-1.com");
-            AddFtpHostName(KnownApiVendor.Med_One, KnownApiRegion.Australia_AU, "ftps-au.cloud-vpn.net");
+            #region Med_One
+            // Africa
             AddHostName(KnownApiVendor.Med_One, KnownApiRegion.Africa_AF, "api-af.cloud.med-1.com");
             AddFtpHostName(KnownApiVendor.Med_One, KnownApiRegion.Africa_AF, "ftps-af.cloud-vpn.net");
+            // Asia
             AddHostName(KnownApiVendor.Med_One, KnownApiRegion.AsiaPacific_AP, "api-ap.cloud.med-1.com");
             AddFtpHostName(KnownApiVendor.Med_One, KnownApiRegion.AsiaPacific_AP, "ftps-ap.cloud-vpn.net");
-            AddHostName(KnownApiVendor.Med_One, KnownApiRegion.SouthAmerica_SA, "api-sa.cloud.med-1.com");
-            AddFtpHostName(KnownApiVendor.Med_One, KnownApiRegion.SouthAmerica_SA, "ftps-latam.cloud-vpn.net");
+            // Australia
+            AddHostName(KnownApiVendor.Med_One, KnownApiRegion.Australia_AU, "api-au.cloud.med-1.com");
+            AddFtpHostName(KnownApiVendor.Med_One, KnownApiRegion.Australia_AU, "ftps-au.cloud-vpn.net");
+            // Canada
             AddHostName(KnownApiVendor.Med_One, KnownApiRegion.Canada_CA, "api-ca.cloud.med-1.com");
             AddFtpHostName(KnownApiVendor.Med_One, KnownApiRegion.Canada_CA, "ftps-canada.cloud-vpn.net");
+            // Europe
+            AddHostName(KnownApiVendor.Med_One, KnownApiRegion.Europe_EU, "api-eu.cloud.med-1.com");
+            AddFtpHostName(KnownApiVendor.Med_One, KnownApiRegion.Europe_EU, "ftps-eu.cloud-vpn.net");
+            // India
+            // Indonesia
+            // Israel
+            AddHostName(KnownApiVendor.Med_One, KnownApiRegion.Israel_IL, "api.cloud.med-1.com");
+            AddFtpHostName(KnownApiVendor.Med_One, KnownApiRegion.Israel_IL, "ftps-med-1.cloud-vpn.net");
+            // North America
+            AddHostName(KnownApiVendor.Med_One, KnownApiRegion.NorthAmerica_NA, "api-na.cloud.med-1.com");
+            AddFtpHostName(KnownApiVendor.Med_One, KnownApiRegion.NorthAmerica_NA, "ftps-na.cloud-vpn.net");
+            // South America
+            AddHostName(KnownApiVendor.Med_One, KnownApiRegion.SouthAmerica_SA, "api-sa.cloud.med-1.com");
+            AddFtpHostName(KnownApiVendor.Med_One, KnownApiRegion.SouthAmerica_SA, "ftps-latam.cloud-vpn.net");      
+            #endregion
         }
 
         /// <summary>	Add host name to the known endpoints. </summary>
