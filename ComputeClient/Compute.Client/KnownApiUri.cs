@@ -150,6 +150,8 @@ namespace DD.CBU.Compute.Api.Client
         {
             KnownApiHostNames = new Dictionary<string, string>();
 			KnownFtpHostNames = new Dictionary<string, string>();
+            KnownVpnHostNames = new Dictionary<string, string>();
+            KnownMonitoringHostNames = new Dictionary<string, string>();
             KnownVendorEndPointPairs = new List<KeyValuePair<KnownApiVendor, KnownApiRegion>>();
             CreateKnownApiHostNames();
         }
