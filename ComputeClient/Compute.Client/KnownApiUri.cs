@@ -17,64 +17,64 @@ namespace DD.CBU.Compute.Api.Client
 {
 	using DD.CBU.Compute.Api.Client.Exceptions;
 
-	/// <summary>	Values that represent known API regions. </summary>
-    /// <remarks>	Anthony, 4/24/2015. </remarks>
+	/// <summary>	Values that represent known API regions. </summary> 
+	/// <remarks>GeoKey represents the geokey value returned by multigeo call</remarks>	   
     public enum KnownApiRegion
     {
-		/// <summary>
-		/// North America (NA)
-		/// </summary>
-        NorthAmerica_NA,
-
-		/// <summary>
-		/// Europe (EU)
-		/// </summary>
-        Europe_EU,
-
-		/// <summary>
-		/// Australia (AU)
-		/// </summary>
-        Australia_AU,
-
-		/// <summary>
-		/// Africa (AF)
+        /// <summary>
+		/// Africa (AF), GeoKey = africa
 		/// </summary>
         Africa_AF,
 
-		/// <summary>
-		/// Asia Pacific (AP)
-		/// </summary>
+        /// <summary>
+        /// Asia Pacific (AP) , GeoKey = asiapacific
+        /// </summary>
         AsiaPacific_AP,
 
-		/// <summary>
-		/// South America (LATAM)
+        /// <summary>
+		/// Australia (AU), GeoKey = australia
 		/// </summary>
-        SouthAmerica_SA,
+        Australia_AU,
 
-		/// <summary>
-		/// Canada (CA)
-		/// </summary>
+        /// <summary>
+        /// Canada (CA), GeoKey = canada
+        /// </summary>
         Canada_CA,
 
-		/// <summary>
-		/// Indonesia
-		/// </summary>
-        Indonesia_ID,
+        /// <summary>
+        /// Europe (EU), GeoKey = europe
+        /// </summary>
+        Europe_EU,
 
-		/// <summary>
-		/// India
-		/// </summary>
+        /// <summary>
+        /// India, GeoKey = india
+        /// </summary>
         India_IN,
 
         /// <summary>
-        /// Israle
+        /// Indonesia, GeoKey = indonesia
         /// </summary>
-        Israel_IL
+        Indonesia_ID,
+
+        /// <summary>
+        /// Israel, GeoKey = israel
+        /// </summary>
+        Israel_IL,
+
+        /// <summary>
+        /// North America (NA), GeoKey = northamerica
+        /// </summary>
+        NorthAmerica_NA,
+
+        /// <summary>
+        /// South America (LATAM), GeoKey = southamerica
+        /// </summary>
+        SouthAmerica_SA,
     }
 
-	/// <summary>
-	/// The known API vendor.
-	/// </summary>
+    /// <summary>
+    /// The known API vendor.
+    /// </summary>
     public enum KnownApiVendor
     {
 		/// <summary>
@@ -281,14 +281,25 @@ namespace DD.CBU.Compute.Api.Client
             return new Uri(apiurl);
         }
 
-        /// <summary>	List of Known Regions that are valid for the particular Vendor. </summary>
-        /// <remarks>	Anthony, 4/24/2015. </remarks>
+        /// <summary>	List of Known Regions that are valid for the particular Vendor. </summary>        
         /// <param name="vendor">	The Vendor. </param>
         /// <returns>	The list of known regions. </returns>
         public IEnumerable<KnownApiRegion> GetKnownRegionList(KnownApiVendor vendor)
         {
             return KnownVendorEndPointPairs.Where(pair => pair.Key == vendor).Select(pair => pair.Value);
-        } 
+        }
+
+        /// <summary>
+        /// Return the geokey for a known region
+        /// </summary>
+        /// <param name="region">Known Api Region</param>
+        /// <returns>Geo Key</returns>
+        public string GetKnownRegionGeoKey(KnownApiRegion region)
+        {
+            var regionName = region.ToString().ToLowerInvariant();
+            int index = regionName.IndexOf("_", StringComparison.Ordinal);
+            return regionName.Substring(0, index);
+        }
 
         /// <summary>
         /// Creates the collection of known URLs per vendor according to Cloud API Documentation
