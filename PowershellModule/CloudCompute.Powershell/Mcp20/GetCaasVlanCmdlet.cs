@@ -55,7 +55,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 			try
 			{
 				vlans = ParameterSetName.Equals("Filtered")
-					? Connection.ApiClient.Networking.Vlan.GetVlans(new VlanListOptions { Id  = VirtualLanId, Name = Name, NetworkDomainId = (NetworkDomain != null) ? Guid.Parse(NetworkDomain.id) : (Guid?)null}).Result
+					? Connection.ApiClient.Networking.Vlan.GetVlans(new VlanListOptions { Id  = VirtualLanId != Guid.Empty ? VirtualLanId : (Guid?)null, Name = Name, NetworkDomainId = (NetworkDomain != null) ? Guid.Parse(NetworkDomain.id) : (Guid?)null}).Result
 					: Connection.ApiClient.Networking.Vlan.GetVlans().Result;
 			}
 			catch (AggregateException ae)
