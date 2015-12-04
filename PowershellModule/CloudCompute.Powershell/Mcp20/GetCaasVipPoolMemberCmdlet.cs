@@ -31,7 +31,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         ///     Gets or sets VIP Node.
         /// </summary>
         [Parameter(Mandatory = false, ParameterSetName = "Filtered", HelpMessage = "The VIP Node")]
-        public PoolType VipNode { get; set; }
+        public NodeType VipNode { get; set; }
 
         /// <summary>
         ///     Gets or sets VIP Pool.
