@@ -56,10 +56,10 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                                                                             (ParameterSetName.Equals("Filtered") ? new PoolMemberListOptions
                                                                             {
                                                                                 Id = MemberId != Guid.Empty ? MemberId : (Guid?)null,                                                                                
-                                                                                NetworkDomainId = NetworkDomain != null ? Guid.Parse(NetworkDomain.id) : Guid.Empty,
-                                                                                DatacenterId = Datacenter != null ? Guid.Parse(Datacenter.id) : Guid.Empty,
-                                                                                NodeId = VipNode != null ? Guid.Parse(VipNode.id) : Guid.Empty,
-                                                                                PoolId = VipPool != null ? Guid.Parse(VipPool.id) : Guid.Empty
+                                                                                NetworkDomainId = NetworkDomain != null ? Guid.Parse(NetworkDomain.id) : (Guid?)null,
+                                                                                DatacenterId = Datacenter != null ? Guid.Parse(Datacenter.id) : (Guid?)null,
+                                                                                NodeId = VipNode != null ? Guid.Parse(VipNode.id) : (Guid?)null,
+                                                                                PoolId = VipPool != null ? Guid.Parse(VipPool.id) : (Guid?)null
                                                                             } : null)).Result;
             }
             catch (AggregateException ae)

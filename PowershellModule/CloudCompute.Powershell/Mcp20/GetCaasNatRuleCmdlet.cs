@@ -82,7 +82,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                 {
                     natRules =
                         Connection.ApiClient.Networking.Nat.GetNatRules(
-                            NetworkDomain != null ? Guid.Parse(NetworkDomain.id) : Guid.Empty,
+                            Guid.Parse(NetworkDomain.id),
                             (NatRuleId != Guid.Empty || !string.IsNullOrWhiteSpace(State) || !string.IsNullOrWhiteSpace(InternalIp) || !string.IsNullOrWhiteSpace(ExternalIp)
                                 ? new NatRuleListOptions
                                 {

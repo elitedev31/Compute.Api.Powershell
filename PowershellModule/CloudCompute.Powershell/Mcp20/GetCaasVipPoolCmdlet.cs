@@ -49,7 +49,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                                                                             {
                                                                                 Id = PoolId != Guid.Empty ? PoolId : (Guid?)null,
                                                                                 Name = Name,
-                                                                                NetworkDomainId = NetworkDomain != null ? Guid.Parse(NetworkDomain.id) : Guid.Empty,
+                                                                                NetworkDomainId = NetworkDomain != null ? Guid.Parse(NetworkDomain.id) : (Guid?)null,
                                                                                 State = State
                                                                             } : null)).Result;
             }

@@ -47,8 +47,8 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                                                                                         {
                                                                                             Id = NodeId != Guid.Empty ? NodeId : (Guid?)null,
                                                                                             Name = Name,
-                                                                                            NetworkDomainId = NetworkDomain != null ? Guid.Parse(NetworkDomain.id) : Guid.Empty
-                                                                                        } : null)).Result;
+                                                                                            NetworkDomainId = NetworkDomain != null ? Guid.Parse(NetworkDomain.id) : (Guid?)null
+                } : null)).Result;
             }
             catch (AggregateException ae)
             {
