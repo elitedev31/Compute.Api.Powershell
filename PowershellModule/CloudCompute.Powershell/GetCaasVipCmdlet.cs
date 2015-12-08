@@ -21,7 +21,7 @@ namespace DD.CBU.Compute.Powershell
 	///     The get caas vip cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasVip")]
-	[OutputType(typeof (Vip[]))]
+	[OutputType(typeof (Vip))]
 	public class GetCaasVipCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
@@ -61,10 +61,7 @@ namespace DD.CBU.Compute.Powershell
 									new ItemNotFoundException(
 										"This command cannot find a matching object with the given parameters."
 										), "ItemNotFoundException", ErrorCategory.ObjectNotFound, resultlist));
-							break;
-						case 1:
-							WriteObject(resultlist.First());
-							break;
+							break;					
 						default:
 							WriteObject(resultlist, true);
 							break;

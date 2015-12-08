@@ -24,34 +24,6 @@ function Disable-UserAccessControl {
     Set-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ConsentPromptBehaviorAdmin" -Value 00000000
     Write-Host "User Access Control (UAC) has been disabled." -ForegroundColor Green    
 }
-function Enable-AutoAdminLogon {
-    param (
-    [string]$user,
-    [string]$pass
-    )
-     
-    $autoLogonFlag = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon' -ErrorAction SilentlyContinue)
-
-    if ($autoLogonFlag.AutoAdminLogon -ne "1") {
-        Write-Host "Enabling Auto admin logon"
-        New-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon' -Name DefaultUserName -Value $user -ErrorAction SilentlyContinue
-        New-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon' -Name DefaultPassword -Value $pass -ErrorAction SilentlyContinue
-
-        Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon' -Name AutoAdminLogon -Value 1 -ErrorAction SilentlyContinue
-        Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon' -Name DefaultUserName -Value $user -ErrorAction SilentlyContinue
-        Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon' -Name DefaultPassword -Value $pass -ErrorAction SilentlyContinue
-            
-        #TODO: Make sure that SQL install is not running! Or post Caas deployment config scripts.
-
-        #Reboot - if we made a change to the settings
-        #Restart-Computer -ComputerName localhost -Force
-        return $true
-    } else {
-        Write-Verbose "AutoAdmin logon is already enabled. Skipping this step"
-        return $false
-    }
-
-}
 
 # copy and run the backup client install file to download the server
 function Install-BackupClientOnWindowsMachine($dLink, $bForceRedownload = $false, $bInstallClient = $false)
@@ -88,11 +60,10 @@ function Install-BackupClientOnWindowsMachine($dLink, $bForceRedownload = $false
 function Install-BackupClient {
 	param (
 		[string] $publicIp,
-		[string] $adminPassword,
-		[string] $windowLocalAdminUser = "administrator",
+		[System.Management.Automation.PSCredential] $credential,
 		[string] $dLink #Download link 
 		)
-		$Global:cred = New-Object System.Management.Automation.PSCredential -ArgumentList @($windowLocalAdminUser,(ConvertTo-SecureString -String $adminPassword -AsPlainText -Force))
+		$Global:cred = $credential
         $s = New-PSSession -Computername $publicIp -Credential $Global:cred -Authentication Default -ErrorAction SilentlyContinue
 
         #If starting PS session fails - Enable PS PSRemoting and rety
@@ -105,14 +76,7 @@ function Install-BackupClient {
             }
         }
 
-        #TODO: This could be modified to run parallel on all windows machines at once
-
-        $result = Invoke-Command -Session $s -ScriptBlock ${function:Enable-AutoAdminLogon} -ArgumentList $windowLocalAdminUser, $adminPassword
-
-        if($result -eq $true) {
-            Restart-Computer -ComputerName $publicIp -Wait -Credential $Global:cred -Force
-            $s = New-PSSession -Computername $publicIp -Credential $Global:cred -Authentication Default -ErrorAction SilentlyContinue
-        }
+        $s = New-PSSession -Computername $publicIp -Credential $Global:cred -Authentication Default -ErrorAction SilentlyContinue
         
         #Disable IE Enhanced security to allow download of backup client etc.
         Invoke-Command -Session $s -ScriptBlock ${function:Disable-InternetExplorerESC} -Debug

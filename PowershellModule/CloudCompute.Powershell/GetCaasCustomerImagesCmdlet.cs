@@ -12,7 +12,7 @@ namespace DD.CBU.Compute.Powershell
 	///     The get CaaS Customer Images cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasCustomerImages")]
-	[OutputType(typeof(ImagesWithDiskSpeedImage[]))]
+	[OutputType(typeof(ImagesWithDiskSpeedImage))]
 	public class GetCaasCustomerImagesCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
@@ -79,10 +79,7 @@ namespace DD.CBU.Compute.Powershell
 									"ItemNotFoundException", 
 									ErrorCategory.ObjectNotFound, 
 									resultlist));
-							break;
-						case 1:
-							WriteObject(resultlist.First());
-							break;
+							break;					
 						default:
 							WriteObject(resultlist, true);
 							break;

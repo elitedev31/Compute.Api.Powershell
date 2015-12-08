@@ -21,7 +21,7 @@ namespace DD.CBU.Compute.Powershell
 	///     The get backup schedule policies cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasBackupSchedulePolicies")]
-	[OutputType(typeof (BackupSchedulePolicy[]))]
+	[OutputType(typeof (BackupSchedulePolicy))]
 	public class GetCaasBackupSchedulePoliciesCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
@@ -52,10 +52,7 @@ namespace DD.CBU.Compute.Powershell
 									new ItemNotFoundException(
 										"This command cannot find a matching object with the given parameters."
 										), "ItemNotFoundException", ErrorCategory.ObjectNotFound, resultlist));
-							break;
-						case 1:
-							WriteObject(resultlist.First());
-							break;
+							break;					
 						default:
 							WriteObject(resultlist, true);
 							break;

@@ -12,7 +12,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
     using Api.Contracts.Requests.Network20;
 
     [Cmdlet(VerbsCommon.Get, "CaasFirewallRule")]
-    [OutputType(typeof(FirewallRuleType[]))]
+    [OutputType(typeof(FirewallRuleType))]
     public class GetCaasFirewallRuleCmdlet : PSCmdletCaasWithConnectionBase
     {
         /// <summary>
@@ -45,7 +45,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                                                                             {
                                                                                 Id = FirewallRuleId != Guid.Empty ? FirewallRuleId : (Guid?)null,
                                                                                 Name = Name,
-                                                                                NetworkDomainId = NetworkDomain != null ? Guid.Parse(NetworkDomain.id) : Guid.Empty
+                                                                                NetworkDomainId = NetworkDomain != null ? Guid.Parse(NetworkDomain.id) : (Guid?)null
                                                                             } : null)).Result;
             }
             catch (AggregateException ae)
@@ -67,15 +67,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                         return true;
                     });
             }
-
-            if (firewallRules != null && firewallRules.Count() == 1)
-            {
-                WriteObject(firewallRules.First());
-            }
-            else
-            {
-                WriteObject(firewallRules);
-            }
+            WriteObject(firewallRules, true);
         }
     }
 }

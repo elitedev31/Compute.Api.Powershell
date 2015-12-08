@@ -60,8 +60,14 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         /// <summary>
         /// Gets or sets Firewall rule position type
         /// </summary>
-        [Parameter(Mandatory = true, HelpMessage = "Is Firewall enabled?")]
+        [Parameter(Mandatory = true, HelpMessage = "Rule position")]
         public RulePositionType Position { get; set; }
+
+        /// <summary>
+        ///  Gets or Sets Firewall rule relative position
+        /// </summary>
+        [Parameter(Mandatory = false, HelpMessage = "Rule relative position")]
+        public FirewallRuleType RelativeToRule { get; set; }
 
         /// <summary>
         /// Gets or sets enabled for firewall rule
@@ -86,6 +92,24 @@ namespace DD.CBU.Compute.Powershell.Mcp20
             base.ProcessRecord();
             try
             {
+                RulePlacementType rulePlacement = new RulePlacementType
+                {
+                    position = Position
+                };
+
+                if (Position == RulePositionType.AFTER || Position == RulePositionType.BEFORE)
+                {
+                    if (RelativeToRule == null)
+                    {
+                        ThrowTerminatingError(
+                            new ErrorRecord(
+                                new ArgumentException("For relative rule placement, please provide the RelativeRule"), "-3", ErrorCategory.InvalidArgument, Connection));
+                        return;
+                    }
+
+                    rulePlacement.relativeToRule = RelativeToRule.name;
+                }               
+
                 var firewall = new CreateFirewallRuleType
                 {
                     networkDomainId = NetworkDomain.id,
@@ -95,7 +119,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                     action = FirewallAction,                    
                     source = Source,
                     destination = Destination,
-                    placement = new RulePlacementType {  position = Position },
+                    placement = rulePlacement,
                     enabled = Enabled
                 };
 

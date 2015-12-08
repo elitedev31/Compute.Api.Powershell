@@ -43,12 +43,12 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         ///     Gets or sets the protocol.
         /// </summary>
         [Parameter(Mandatory = true, HelpMessage = "The VIP virtual listener Protocol")]
-        public AclProtocolType Protocol { get; set; }
+        public string Protocol { get; set; }
 
         /// <summary>
 		///     Gets or sets the IP Address.
 		/// </summary>
-		[Parameter(Mandatory = true, HelpMessage = "The VIP virtual listener IP Address")]
+		[Parameter(Mandatory = false, HelpMessage = "The VIP virtual listener IP Address")]
         public string IPAddress { get; set; }
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         /// <summary>
         ///     Gets or sets the source port preservation.
         /// </summary>
-        [Parameter(Mandatory = false, HelpMessage = "The VIP virtual listener Source Port Preservation")]
+        [Parameter(Mandatory = true, HelpMessage = "The VIP virtual listener Source Port Preservation")]
         public string SourcePortPreservation { get; set; }
         
         /// <summary>
@@ -138,7 +138,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                         name = Name,
                         description = Description,
                         type = Type,
-                        protocol = Protocol.ToString(),
+                        protocol = Protocol,
                         listenerIpAddress = IPAddress,
                         port = Port.GetValueOrDefault(),
                         portSpecified = Port.HasValue,

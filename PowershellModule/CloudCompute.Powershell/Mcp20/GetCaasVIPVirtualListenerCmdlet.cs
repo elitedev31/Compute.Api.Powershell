@@ -13,8 +13,8 @@ namespace DD.CBU.Compute.Powershell.Mcp20
     /// Get Caas VIP Virtual Listeners CmdLet
     /// </summary>
     [Cmdlet(VerbsCommon.Get, "CaasVIPVirtualListener")]
-    [OutputType(typeof(VirtualListenerType[]))]
-    public class GetCaasVIPVirtualListenerCmdlet : PSCmdletCaasWithConnectionBase
+    [OutputType(typeof(VirtualListenerType))]
+    public class GetCaasVipVirtualListenerCmdlet : PSCmdletCaasWithConnectionBase
     {
         /// <summary>
 		///     Gets or sets the VIP VirtualListener name.
@@ -45,7 +45,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                 {
                     Id = Id != Guid.Empty ? Id : (Guid?)null,
                     Name = Name,
-                    NetworkDomainId = NetworkDomain != null ? Guid.Parse(NetworkDomain.id) : Guid.Empty
+                    NetworkDomainId = NetworkDomain != null ? Guid.Parse(NetworkDomain.id) : (Guid?)null
                 } : null)).Result;
             }
             catch (AggregateException ae)
@@ -67,15 +67,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                         return true;
                     });
             }
-
-            if (vipVirtualListeners != null && vipVirtualListeners.Count() == 1)
-            {
-                WriteObject(vipVirtualListeners.First());
-            }
-            else
-            {
-                WriteObject(vipVirtualListeners);
-            }
+            WriteObject(vipVirtualListeners, true);
         }
     }
 }

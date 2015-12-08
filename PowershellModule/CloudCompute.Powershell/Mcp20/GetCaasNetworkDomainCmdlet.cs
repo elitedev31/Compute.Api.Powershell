@@ -21,7 +21,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 	///     The new CaaS Virtual Machine cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasNetworkDomain", DefaultParameterSetName = "None")]
-	[OutputType(typeof(NetworkDomainType[]))]
+	[OutputType(typeof(NetworkDomainType))]
 	public class GetCaasNetworkDomainCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
@@ -83,15 +83,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 						return true;
 					});
 			}
-
-			if (networks != null && networks.Count() == 1)
-			{
-				WriteObject(networks.First());
-			}
-			else
-			{
-				WriteObject(networks);
-			}
+		    WriteObject(networks, true);
 		}
 	}
 }

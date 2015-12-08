@@ -17,7 +17,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
     [Cmdlet(VerbsCommon.Get, "CaasNatRule")]
     [OutputType(typeof(Mcp1.NatRuleType), ParameterSetName = new[] { "MCP1" })]
     [OutputType(typeof(Mcp2.NatRuleType), ParameterSetName = new[] { "MCP2" })]
-    public class GetCaasNATRuleCmdlet : PSCmdletCaasWithConnectionBase
+    public class GetCaasNatRuleCmdlet : PSCmdletCaasWithConnectionBase
     {
         /// <summary>
 		///     Gets or sets the Nat rule state.
@@ -82,7 +82,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                 {
                     natRules =
                         Connection.ApiClient.Networking.Nat.GetNatRules(
-                            NetworkDomain != null ? Guid.Parse(NetworkDomain.id) : Guid.Empty,
+                            Guid.Parse(NetworkDomain.id),
                             (NatRuleId != Guid.Empty || !string.IsNullOrWhiteSpace(State) || !string.IsNullOrWhiteSpace(InternalIp) || !string.IsNullOrWhiteSpace(ExternalIp)
                                 ? new NatRuleListOptions
                                 {
@@ -113,16 +113,8 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
                         return true;
                     });
-            }
-
-            if (natRules != null && natRules.Count() == 1)
-            {
-                WriteObject(natRules.First());
-            }
-            else
-            {
-                WriteObject(natRules);
-            }
+            }          
+            WriteObject(natRules, true);            
         }
     }
 }

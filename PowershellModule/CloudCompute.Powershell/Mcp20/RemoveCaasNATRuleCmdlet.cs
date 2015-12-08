@@ -21,7 +21,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         ///     Gets or sets the NAT Rule.
         /// </summary>        
         [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The NAT Rule")]
-        public object NatRule { get; set; }
+        public PSObject NatRule { get; set; }
 
         /// <summary>
         ///     Gets or sets the network.
@@ -46,7 +46,16 @@ namespace DD.CBU.Compute.Powershell.Mcp20
             {
                 if (ParameterSetName.Equals("MCP1"))
                 {
-                    var natRule = (Mcp1.NatRuleType)NatRule;
+
+                    var natRule = NatRule.BaseObject as Mcp1.NatRuleType;
+                    if (natRule == null)
+                    {
+                        ThrowTerminatingError(
+                           new ErrorRecord(new ArgumentException("NatRule type cannot be converted to " + typeof(Mcp1.NatRuleType)), "-3",
+                               ErrorCategory.InvalidArgument, Connection));
+                        return;
+                    }
+
                     if (!ShouldProcess(natRule.name))
                         return;
 
@@ -65,7 +74,14 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                 }
                 else if (ParameterSetName.Equals("MCP2"))
                 {
-                    var natRule = (Mcp2.NatRuleType)NatRule;
+                    var natRule = NatRule.BaseObject as Mcp2.NatRuleType;
+                    if (natRule == null)
+                    {
+                        ThrowTerminatingError(
+                           new ErrorRecord(new ArgumentException("NatRule type cannot be converted to " + typeof(Mcp2.NatRuleType)), "-3",
+                               ErrorCategory.InvalidArgument, Connection));
+                        return;
+                    }
                     response = Connection.ApiClient.Networking.Nat.DeleteNatRule(Guid.Parse(natRule.id)).Result;
                 }
             }

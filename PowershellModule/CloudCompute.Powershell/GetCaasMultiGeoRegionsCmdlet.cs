@@ -20,7 +20,7 @@ namespace DD.CBU.Compute.Powershell
 	///     The get caas multi geo regions cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasMultiGeoRegions")]
-	[OutputType(typeof (Geo[]))]
+	[OutputType(typeof (Geo))]
 	public class GetCaasMultiGeoRegionsCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
@@ -43,10 +43,7 @@ namespace DD.CBU.Compute.Powershell
 									new ItemNotFoundException(
 										"This command cannot find a matching object with the given parameters."
 										), "ItemNotFoundException", ErrorCategory.ObjectNotFound, resultlist));
-							break;
-						case 1:
-							WriteObject(resultlist.First());
-							break;
+							break;					
 						default:
 							WriteObject(resultlist, true);
 							break;

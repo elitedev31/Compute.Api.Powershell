@@ -12,7 +12,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
     using Api.Contracts.Requests.Network20;
 
     [Cmdlet(VerbsCommon.Get, "CaasVipPoolMember")]
-    [OutputType(typeof(PoolMemberType[]))]
+    [OutputType(typeof(PoolMemberType))]
     public class GetCaasVipPoolMemberCmdlet : PSCmdletCaasWithConnectionBase
     {        
         /// <summary>
@@ -31,7 +31,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         ///     Gets or sets VIP Node.
         /// </summary>
         [Parameter(Mandatory = false, ParameterSetName = "Filtered", HelpMessage = "The VIP Node")]
-        public PoolType VipNode { get; set; }
+        public NodeType VipNode { get; set; }
 
         /// <summary>
         ///     Gets or sets VIP Pool.
@@ -56,10 +56,10 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                                                                             (ParameterSetName.Equals("Filtered") ? new PoolMemberListOptions
                                                                             {
                                                                                 Id = MemberId != Guid.Empty ? MemberId : (Guid?)null,                                                                                
-                                                                                NetworkDomainId = NetworkDomain != null ? Guid.Parse(NetworkDomain.id) : Guid.Empty,
-                                                                                DatacenterId = Datacenter != null ? Guid.Parse(Datacenter.id) : Guid.Empty,
-                                                                                NodeId = VipNode != null ? Guid.Parse(VipNode.id) : Guid.Empty,
-                                                                                PoolId = VipPool != null ? Guid.Parse(VipPool.id) : Guid.Empty
+                                                                                NetworkDomainId = NetworkDomain != null ? Guid.Parse(NetworkDomain.id) : (Guid?)null,
+                                                                                DatacenterId = Datacenter != null ? Guid.Parse(Datacenter.id) : (Guid?)null,
+                                                                                NodeId = VipNode != null ? Guid.Parse(VipNode.id) : (Guid?)null,
+                                                                                PoolId = VipPool != null ? Guid.Parse(VipPool.id) : (Guid?)null
                                                                             } : null)).Result;
             }
             catch (AggregateException ae)
@@ -81,15 +81,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                         return true;
                     });
             }
-
-            if (poolMembers != null && poolMembers.Count() == 1)
-            {
-                WriteObject(poolMembers.First());
-            }
-            else
-            {
-                WriteObject(poolMembers);
-            }
+            WriteObject(poolMembers, true);            
         }
     }
 }

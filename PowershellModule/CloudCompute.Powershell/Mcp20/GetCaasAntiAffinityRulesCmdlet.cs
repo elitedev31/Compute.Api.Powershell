@@ -12,7 +12,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
     using Api.Contracts.Requests.Server20;
 
     [Cmdlet(VerbsCommon.Get, "CaasAntiAffinityRules")]
-    [OutputType(typeof(AntiAffinityRuleType[]))]
+    [OutputType(typeof(AntiAffinityRuleType))]
     public class GetCaasAntiAffinityRulesCmdlet : PSCmdletCaasWithConnectionBase
     {        
         /// <summary>
@@ -97,16 +97,8 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
                         return true;
                     });
-            }
-
-            if (antiAffinityRules != null && antiAffinityRules.Count() == 1)
-            {
-                WriteObject(antiAffinityRules.First());
-            }
-            else
-            {
-                WriteObject(antiAffinityRules);
-            }
+            }            
+            WriteObject(antiAffinityRules, true);            
         }
     }
 }
