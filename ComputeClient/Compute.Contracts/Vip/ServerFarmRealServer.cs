@@ -15,9 +15,9 @@ namespace DD.CBU.Compute.Api.Contracts.Vip
 
         private string ipAddressField;
 
-        private string portField;
+        private int portField;
 
-        private string inServiceField;
+        private bool inServiceField;
 
         /// <remarks/>
         public string id
@@ -59,7 +59,7 @@ namespace DD.CBU.Compute.Api.Contracts.Vip
         }
 
         /// <remarks/>
-        public string port
+        public int port
         {
             get
             {
@@ -72,7 +72,7 @@ namespace DD.CBU.Compute.Api.Contracts.Vip
         }
 
         /// <remarks/>
-        public string inService
+        public bool inService
         {
             get
             {
