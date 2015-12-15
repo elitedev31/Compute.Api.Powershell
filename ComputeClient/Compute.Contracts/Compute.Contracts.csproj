@@ -164,10 +164,14 @@
     <Compile Include="Image\PendingDeployImageType.cs" />
     <Compile Include="Image\PendingDeployImageWithSoftwareLabelsType.cs" />
     <Compile Include="Image\ServerImage.cs" />
+    <Compile Include="Network20\Image.cs" />
     <Compile Include="Network20\IPAddress.cs" />
     <Compile Include="Network20\NatRule.cs" />
     <Compile Include="Network20\NetworkDomain.cs" />
     <Compile Include="Network20\PersistenceProfile.cs" />
+    <Compile Include="Network20\PublicIPBlockOverride.cs" />
+    <Compile Include="Network20\Securitygroup.cs" />
+    <Compile Include="Network20\VirtualListenerOverride.cs" />
     <Compile Include="Network\AclActionType.cs" />
     <Compile Include="Network\AclProtocolType.cs" />
     <Compile Include="Network\AclRuleListType.cs" />
