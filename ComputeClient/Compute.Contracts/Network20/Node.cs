@@ -117,7 +117,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType = "nonNegativeInteger")]
+        /// [System.Xml.Serialization.XmlElementAttribute(DataType = "nonNegativeInteger")]
         public int connectionLimit
         {
             get { return this.connectionLimitField; }
@@ -125,7 +125,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType = "nonNegativeInteger")]
+        /// [System.Xml.Serialization.XmlElementAttribute(DataType = "nonNegativeInteger")]
         public int connectionRateLimit
         {
             get { return this.connectionRateLimitField; }
@@ -398,7 +398,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType = "nonNegativeInteger")]
+        /// [System.Xml.Serialization.XmlElementAttribute(DataType = "nonNegativeInteger")]
         public int connectionLimit
         {
             get { return this.connectionLimitField; }
@@ -406,7 +406,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType = "nonNegativeInteger")]
+        /// [System.Xml.Serialization.XmlElementAttribute(DataType = "nonNegativeInteger")]
         public int connectionRateLimit
         {
             get { return this.connectionRateLimitField; }
@@ -462,7 +462,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType = "nonNegativeInteger")]
+        /// [System.Xml.Serialization.XmlElementAttribute(DataType = "nonNegativeInteger")]
         public int connectionLimit
         {
             get { return this.connectionLimitField; }
@@ -470,7 +470,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType = "nonNegativeInteger")]
+        /// [System.Xml.Serialization.XmlElementAttribute(DataType = "nonNegativeInteger")]
         public int connectionRateLimit
         {
             get { return this.connectionRateLimitField; }

@@ -92,7 +92,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType = "nonNegativeInteger")]
+        /// [System.Xml.Serialization.XmlElementAttribute(DataType = "nonNegativeInteger")]
         public string slowRampTime
         {
             get { return this.slowRampTimeField; }
@@ -299,7 +299,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType = "nonNegativeInteger")]
+        /// [System.Xml.Serialization.XmlElementAttribute(DataType = "nonNegativeInteger")]
         public string slowRampTime
         {
             get { return this.slowRampTimeField; }
@@ -347,7 +347,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 
         private string serviceDownActionField;
 
-        private string slowRampTimeField;
+        private int slowRampTimeField;
 
         private string idField;
 
@@ -382,8 +382,8 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType = "nonNegativeInteger")]
-        public string slowRampTime
+        /// [System.Xml.Serialization.XmlElementAttribute(DataType = "nonNegativeInteger")]
+        public int slowRampTime
         {
             get { return this.slowRampTimeField; }
             set { this.slowRampTimeField = value; }

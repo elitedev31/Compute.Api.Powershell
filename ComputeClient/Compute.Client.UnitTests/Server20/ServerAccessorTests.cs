@@ -25,16 +25,16 @@ namespace Compute.Client.UnitTests.Server20
 
             Assert.IsNotNull(servers);
 			Assert.AreEqual(5, servers.Count());
-			Assert.AreEqual("fc5764d8-5093-4e28-bd1b-c0b28057a908", servers.First().id);
-            Assert.AreEqual("NA9", servers.First().datacenterId);
-            Assert.AreEqual("78ffce4a-311e-458d-a7cf-aefb6f99e9e2", servers.First().networkInfo.primaryNic.id);
-            Assert.AreEqual("e30130a6-ea80-4526-9616-d7794d9fdf6c", servers.First().networkInfo.additionalNic.First().id);
+			Assert.AreEqual("0fad8eeb-83d7-4703-b450-171c33a79682", servers.First().id);
+            Assert.AreEqual("AU10", servers.First().datacenterId);
+            Assert.AreEqual("6ac5f462-f611-4590-bd3a-b3f66ea93815", servers.First().networkInfo.primaryNic.id);
+            Assert.AreEqual("ecf85a96-e753-429f-a7b7-a455767ac1bd", servers.First().networkInfo.additionalNic.First().id);
         }
 
         [TestMethod]
 		public async Task GetServer_ReturnsResponse()
 		{
-			Guid serverId = new Guid("d577a691-e116-4913-a440-022d2729fc84");
+			Guid serverId = new Guid("0fad8eeb-83d7-4703-b450-171c33a79682");
 
             requestsAndResponses.Add(ApiUris.MyAccount, RequestFileResponseType.AsGoodResponse("GetMyAccountDetails.xml"));
 			requestsAndResponses.Add(ApiUris.GetMcp2Server(accountId, serverId), RequestFileResponseType.AsGoodResponse("GetServerResponse.xml"));
@@ -44,10 +44,10 @@ namespace Compute.Client.UnitTests.Server20
 			var server = await accessor.GetServer(serverId);
 
             Assert.IsNotNull(server);
-            Assert.AreEqual("fc5764d8-5093-4e28-bd1b-c0b28057a908", server.id);
-            Assert.AreEqual("NA9", server.datacenterId);
-            Assert.AreEqual("78ffce4a-311e-458d-a7cf-aefb6f99e9e2", server.networkInfo.primaryNic.id);
-            Assert.AreEqual("e30130a6-ea80-4526-9616-d7794d9fdf6c", server.networkInfo.additionalNic.First().id);
+            Assert.AreEqual("0fad8eeb-83d7-4703-b450-171c33a79682", server.id);
+            Assert.AreEqual("AU10", server.datacenterId);
+            Assert.AreEqual("6ac5f462-f611-4590-bd3a-b3f66ea93815", server.networkInfo.primaryNic.id);
+            Assert.AreEqual("ecf85a96-e753-429f-a7b7-a455767ac1bd", server.networkInfo.additionalNic.First().id);
         }
 
         [TestMethod]

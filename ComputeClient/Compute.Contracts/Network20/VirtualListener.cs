@@ -29,7 +29,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 
         private string serviceDownActionField;
 
-        private string slowRampTimeField;
+        private int slowRampTimeField;
 
         private IdAndNameType[] healthMonitorField;
 
@@ -52,8 +52,8 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType = "nonNegativeInteger")]
-        public string slowRampTime
+        /// [System.Xml.Serialization.XmlElementAttribute(DataType = "nonNegativeInteger")]
+        public int slowRampTime
         {
             get { return this.slowRampTimeField; }
             set { this.slowRampTimeField = value; }
@@ -112,9 +112,9 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 
         private bool enabledField;
 
-        private string connectionLimitField;
+        private int connectionLimitField;
 
-        private string connectionRateLimitField;
+        private int connectionRateLimitField;
 
         private string sourcePortPreservationField;
 
@@ -195,16 +195,16 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType = "nonNegativeInteger")]
-        public string connectionLimit
+        /// [System.Xml.Serialization.XmlElementAttribute(DataType = "nonNegativeInteger")]
+        public int connectionLimit
         {
             get { return this.connectionLimitField; }
             set { this.connectionLimitField = value; }
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType = "nonNegativeInteger")]
-        public string connectionRateLimit
+        /// [System.Xml.Serialization.XmlElementAttribute(DataType = "nonNegativeInteger")]
+        public int connectionRateLimit
         {
             get { return this.connectionRateLimitField; }
             set { this.connectionRateLimitField = value; }
@@ -277,9 +277,9 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 
         private bool enabledFieldSpecified;
 
-        private string connectionLimitField;
+        private int connectionLimitField;
 
-        private string connectionRateLimitField;
+        private int connectionRateLimitField;
 
         private string sourcePortPreservationField;
 
@@ -321,16 +321,16 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType = "nonNegativeInteger")]
-        public string connectionLimit
+        /// [System.Xml.Serialization.XmlElementAttribute(DataType = "nonNegativeInteger")]
+        public int connectionLimit
         {
             get { return this.connectionLimitField; }
             set { this.connectionLimitField = value; }
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType = "nonNegativeInteger")]
-        public string connectionRateLimit
+        /// [System.Xml.Serialization.XmlElementAttribute(DataType = "nonNegativeInteger")]
+        public int connectionRateLimit
         {
             get { return this.connectionRateLimitField; }
             set { this.connectionRateLimitField = value; }
@@ -534,9 +534,9 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 
         private bool enabledField;
 
-        private string connectionLimitField;
+        private int connectionLimitField;
 
-        private string connectionRateLimitField;
+        private int connectionRateLimitField;
 
         private string sourcePortPreservationField;
 
@@ -635,16 +635,16 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType = "nonNegativeInteger")]
-        public string connectionLimit
+        /// [System.Xml.Serialization.XmlElementAttribute(DataType = "nonNegativeInteger")]
+        public int connectionLimit
         {
             get { return this.connectionLimitField; }
             set { this.connectionLimitField = value; }
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType = "nonNegativeInteger")]
-        public string connectionRateLimit
+        /// [System.Xml.Serialization.XmlElementAttribute(DataType = "nonNegativeInteger")]
+        public int connectionRateLimit
         {
             get { return this.connectionRateLimitField; }
             set { this.connectionRateLimitField = value; }

@@ -25,8 +25,8 @@ namespace Compute.Client.UnitTests.Network20
                 networkDomainId = Guid.NewGuid().ToString(),
                 name = "NetworkNodeTest",
                 description = "Descrioption",
-                connectionLimit = "100",
-                connectionRateLimit = "100"
+                connectionLimit = 100,
+                connectionRateLimit = 100
             };
 
             var virtualListener = new VipVirtualListenerAccessor(webApi);
