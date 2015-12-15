@@ -1,26 +1,19 @@
-﻿<server xmlns="urn:didata.com:api:cloud:types" id="fc5764d8-5093-4e28-bd1b-c0b28057a908" datacenterId="NA9">
-  <name>Win2012 Std2CPU</name>
-  <description>
-    Explore keeping the UI layout the same as it is in read mode. eg. server name / description do not appear with the label. They are editable inline.If server name has no value, show Server Name as the field placeholder.This would require deleting the ser
-  </description>
+﻿<server xmlns="urn:didata.com:api:cloud:types" id="0fad8eeb-83d7-4703-b450-171c33a79682" datacenterId="AU10">
+  <name>AUMELWEB021</name>
+  <description>Web Application dsfas</description>
   <operatingSystem id="WIN2012S64" displayName="WIN2012S/64" family="WINDOWS"/>
-  <cpuCount>2</cpuCount>
-  <memoryGb>4</memoryGb>
-  <disk id="c3b08dee-6796-441e-a59e-3ee93356d8fc" scsiId="0" sizeGb="50" speed="STANDARD" state="NORMAL"/>
-  <disk id="9c3e3082-d2e7-4a3a-9a36-5d927c8eee38" scsiId="1" sizeGb="100" speed="STANDARD" state="NORMAL"/>
-  <networkInfo networkDomainId="edc8af2b-5ea5-4eff-acb2-824f25d13ef2">
-    <primaryNic id="78ffce4a-311e-458d-a7cf-aefb6f99e9e2" privateIpv4="192.168.5.24" ipv6="2607:f480:111:1378:3b11:76bf:a3f3:ba23" vlanId="2055721b-169f-44f7-b5c1-1119c401781b" vlanName="To Modify an IP Address, the user needs the Primary Administrator or Networ" state="NORMAL"/>
-    <additionalNic id="e30130a6-ea80-4526-9616-d7794d9fdf6c" privateIpv4="172.16.0.8" ipv6="2607:f480:111:1439:76a2:1468:27fe:98f1" vlanId="29277d00-bd6b-4c40-8b12-a26025111843" vlanName="VLAN 123" state="NORMAL"/>
-    <additionalNic id="9490675e-bf30-43c2-b159-27b9a68cd676" privateIpv4="172.16.50.17" ipv6="2607:f480:111:1379:895:b20a:8a7a:a2f5" vlanId="74124cd2-9f15-4302-9e8e-d77621d98764" vlanName="VLAN 2" state="NORMAL"/>
-    <additionalNic id="b2899271-c9d0-4c6b-b34f-a64329326a74" privateIpv4="10.0.0.251" ipv6="2607:f480:111:1395:789a:bd9d:2928:4377" vlanId="ccd42774-649c-4b51-9a79-ff887041dee6" vlanName="OneMoress" state="NORMAL"/>
+  <cpu count="1" speed="STANDARD" coresPerSocket="1"/>
+  <memoryGb>1</memoryGb>
+  <disk id="50e7886a-d0c4-4033-bba5-e0d61b6f1919" scsiId="0" sizeGb="50" speed="STANDARD" state="NORMAL"/>
+  <networkInfo networkDomainId="e71d10b1-2b39-454b-ac27-e6fcb366fcd3">
+    <primaryNic id="6ac5f462-f611-4590-bd3a-b3f66ea93815" privateIpv4="10.0.0.11" ipv6="2402:9900:211:1106:70cb:7eba:5248:86e0" vlanId="ce8ecac8-9015-4761-a8c3-54c0263cc29c" vlanName="MyVLAN1" state="NORMAL"/>
+    <additionalNic id="ecf85a96-e753-429f-a7b7-a455767ac1bd" privateIpv4="192.168.0.12" ipv6="2402:9900:211:1102:33f2:d8e4:c1cd:83b5" vlanId="cf5feb10-e9fa-46fc-93cb-d20650992c30" vlanName="MyVLAN2" state="NORMAL"/>
   </networkInfo>
-  <backup assetId="7c325564-75ad-4e16-803b-ba881160e268" servicePlan="Essentials" state="NORMAL"/>
-  <sourceImageId>1cdfee63-9e40-40f2-98e5-a46e9bfd742c</sourceImageId>
-  <createTime>2015-08-20T08:47:02.000Z</createTime>
+  <sourceImageId>e990c991-fefb-4c89-9c37-0be859d209a2</sourceImageId>
+  <createTime>2015-12-01T05:59:00.000Z</createTime>
   <deployed>true</deployed>
-  <started>false</started>
+  <started>true</started>
   <state>NORMAL</state>
-  <machineStatus name="vmwareToolsVersionStatus" value="CURRENT"/>
-  <machineStatus name="vmwareToolsRunningStatus" value="NOT_RUNNING"/>
-  <machineStatus name="vmwareToolsApiVersion" value="9356"/>
+  <vmwareTools versionStatus="NEED_UPGRADE" runningStatus="RUNNING" apiVersion="9354"/>
+  <virtualHardware version="vmx-08" upToDate="false"/>
 </server>
