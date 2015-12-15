@@ -129,7 +129,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 
         private string itemField;
 
-        private ItemChoiceType itemElementNameField;
+        private NetworkDomainIdOrNetworkIdChoiceType itemElementNameField;
 
         private string internalIpField;
 
@@ -155,7 +155,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public ItemChoiceType ItemElementName
+        public NetworkDomainIdOrNetworkIdChoiceType ItemElementName
         {
             get { return this.itemElementNameField; }
             set { this.itemElementNameField = value; }
@@ -210,7 +210,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.81.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types", IncludeInSchema = false)]
-    public enum ItemChoiceType
+    public enum NetworkDomainIdOrNetworkIdChoiceType
     {
 
         /// <remarks/>
@@ -232,7 +232,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 
         private string itemField;
 
-        private ItemChoiceType1 itemElementNameField;
+        private NetworkDomainIdOrNetworkIdChoiceType itemElementNameField;
 
         private string internalIpField;
 
@@ -250,7 +250,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public ItemChoiceType1 ItemElementName
+        public NetworkDomainIdOrNetworkIdChoiceType ItemElementName
         {
             get { return this.itemElementNameField; }
             set { this.itemElementNameField = value; }
@@ -269,20 +269,6 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
             get { return this.externalIpField; }
             set { this.externalIpField = value; }
         }
-    }
-
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.81.0")]
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types", IncludeInSchema = false)]
-    public enum ItemChoiceType1
-    {
-
-        /// <remarks/>
-        networkDomainId,
-
-        /// <remarks/>
-        networkId,
     }
 
     /// <remarks/>

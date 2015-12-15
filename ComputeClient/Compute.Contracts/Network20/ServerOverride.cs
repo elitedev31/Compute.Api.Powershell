@@ -1,0 +1,73 @@
+﻿namespace DD.CBU.Compute.Api.Contracts.Network20
+{
+    public partial class VlanIdOrPrivateIpType
+    {
+        /// Note Only PrivaleIpv4 Or VlanId is valid,  dont specify both
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public string vlanId
+        {
+            get { return ItemElementName == PrivateIpv4OrVlanIdChoiceType.vlanId ? Item : string.Empty; }
+            set
+            {
+                Item = value;
+                ItemElementName = PrivateIpv4OrVlanIdChoiceType.vlanId;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public string privateIpv4
+        {
+            get { return ItemElementName == PrivateIpv4OrVlanIdChoiceType.privateIpv4 ? Item : string.Empty; }
+            set
+            {
+                Item = value;
+                ItemElementName = PrivateIpv4OrVlanIdChoiceType.privateIpv4;
+            }
+        }
+    }
+
+    public partial class ServerType
+    {
+        /// Note, server will have either nic or NetworkInfo
+        /// <summary>	Gets or sets the NIC. </summary>
+        /// <value>	The NIC. </value>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public ServerTypeNic nic
+        {
+            get { return Item as ServerTypeNic; }
+            set { Item = value; }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public ServerTypeNetworkInfo networkInfo
+        {
+            get { return Item as ServerTypeNetworkInfo; }
+            set { Item = value; }
+        }
+
+    }
+
+    public partial class DeployServerType
+    {
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public DeployServerTypeNetwork network
+        {
+            get { return Item as DeployServerTypeNetwork; }
+            set { Item = value; }
+        }
+
+        /// <summary>	Gets or sets information describing the network. </summary>
+        /// <value>	Information describing the network. </value>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public DeployServerTypeNetworkInfo networkInfo
+        {
+            get { return Item as DeployServerTypeNetworkInfo; }
+            set { Item = value; }
+        }
+
+    }
+}

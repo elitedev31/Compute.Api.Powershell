@@ -21,36 +21,6 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
-    public partial class IdAndNameType
-    {
-
-        private string idField;
-
-        private string nameField;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string id
-        {
-            get { return this.idField; }
-            set { this.idField = value; }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string name
-        {
-            get { return this.nameField; }
-            set { this.nameField = value; }
-        }
-    }
-
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.81.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
     [System.Xml.Serialization.XmlRootAttribute("pool", Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)
     ]
     public partial class PoolType
@@ -365,7 +335,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "urn:didata.com:api:cloud:types")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
+    [System.Xml.Serialization.XmlRootAttribute("editPool", Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
     public partial class EditPoolType
     {
 

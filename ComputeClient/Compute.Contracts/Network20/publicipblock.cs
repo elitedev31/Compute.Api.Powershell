@@ -24,7 +24,12 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
     [System.Xml.Serialization.XmlRootAttribute("publicIpBlock", Namespace = "urn:didata.com:api:cloud:types",
         IsNullable = false)]
     public partial class PublicIpBlockType
-    {       
+    {
+
+        private object[] itemsField;
+
+        private NetworkDomainIdOrNetworkIdIpBlockChoiceType[] itemsElementNameField;
+
         private string baseIpField;
 
         private int sizeField;
@@ -37,24 +42,26 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 
         private string datacenterIdField;
 
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("networkDefault", typeof (bool))]
+        [System.Xml.Serialization.XmlElementAttribute("networkDomainId", typeof (string))]
+        [System.Xml.Serialization.XmlElementAttribute("networkId", typeof (string))]
+        [System.Xml.Serialization.XmlElementAttribute("serverToVipConnectivity", typeof (bool))]
+        [System.Xml.Serialization.XmlChoiceIdentifierAttribute("ItemsElementName")]
+        public object[] Items
+        {
+            get { return this.itemsField; }
+            set { this.itemsField = value; }
+        }
 
-	/// <summary>
-		/// 	Gets or sets a value indicating whether the server to vip connectivity.
-		/// </summary>
-		/// <value>	true if server to vip connectivity, false if not. </value>
-		public bool serverToVipConnectivity { get; set; }
-
-		/// <summary>	Gets or sets the identifier of the network domain. </summary>
-		/// <value>	The identifier of the network domain. </value>
-		public string networkDomainId { get; set; }
-
-		/// <summary>	Gets or sets the identifier of the network. </summary>
-		/// <value>	The identifier of the network. </value>
-		public string networkId { get; set; }
-
-		/// <summary>	Gets or sets a value indicating whether the network default. </summary>
-		/// <value>	true if network default, false if not. </value>
-		public bool networkDefault { get; set; }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("ItemsElementName")]
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public NetworkDomainIdOrNetworkIdIpBlockChoiceType[] ItemsElementName
+        {
+            get { return this.itemsElementNameField; }
+            set { this.itemsElementNameField = value; }
+        }
 
         /// <remarks/>
         public string baseIp
@@ -101,6 +108,25 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
         }
     }
 
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.81.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types", IncludeInSchema = false)]
+    public enum NetworkDomainIdOrNetworkIdIpBlockChoiceType
+    {
+
+        /// <remarks/>
+        networkDefault,
+
+        /// <remarks/>
+        networkDomainId,
+
+        /// <remarks/>
+        networkId,
+
+        /// <remarks/>
+        serverToVipConnectivity,
+    }
 
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.81.0")]
@@ -235,20 +261,6 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
             get { return this.itemElementNameField; }
             set { this.itemElementNameField = value; }
         }
-    }
-
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.81.0")]
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types", IncludeInSchema = false)]
-    public enum NetworkDomainIdOrNetworkIdChoiceType
-    {
-
-        /// <remarks/>
-        networkDomainId,
-
-        /// <remarks/>
-        networkId,
     }
 
     /// <remarks/>

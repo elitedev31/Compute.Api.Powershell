@@ -452,7 +452,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 		public string id
 		{
 			get { return this.idField; }
-			set { this.idField = value.Replace(" ", String.Empty); }
+			set { this.idField = value; }
 		}
 	}
 }

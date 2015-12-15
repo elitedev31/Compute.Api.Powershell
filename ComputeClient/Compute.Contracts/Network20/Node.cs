@@ -13,19 +13,7 @@
 // 
 namespace DD.CBU.Compute.Api.Contracts.Network20
 {
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.81.0")]
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types", IncludeInSchema = false)]
-    public enum IpItemChoiceType
-    {
 
-        /// <remarks/>
-        ipv4Address,
-
-        /// <remarks/>
-        ipv6Address,
-    }
 
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.81.0")]
@@ -33,7 +21,8 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
-    [System.Xml.Serialization.XmlRootAttribute("node", Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
+    [System.Xml.Serialization.XmlRootAttribute("node", Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)
+    ]
     public partial class NodeType
     {
 
@@ -128,6 +117,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
         }
 
         /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType = "nonNegativeInteger")]
         public int connectionLimit
         {
             get { return this.connectionLimitField; }
@@ -135,6 +125,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
         }
 
         /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType = "nonNegativeInteger")]
         public int connectionRateLimit
         {
             get { return this.connectionRateLimitField; }
@@ -179,7 +170,20 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
             set { this.datacenterIdField = value; }
         }
     }
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.81.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types", IncludeInSchema = false)]
+    public enum IpItemChoiceType
+    {
 
+        /// <remarks/>
+        ipv4Address,
+
+        /// <remarks/>
+        ipv6Address,
+    }
+	
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.81.0")]
     [System.SerializableAttribute()]
@@ -394,6 +398,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
         }
 
         /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType = "nonNegativeInteger")]
         public int connectionLimit
         {
             get { return this.connectionLimitField; }
@@ -401,6 +406,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
         }
 
         /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType = "nonNegativeInteger")]
         public int connectionRateLimit
         {
             get { return this.connectionRateLimitField; }
@@ -408,7 +414,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
         }
     }
 
-
+  
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.81.0")]
     [System.SerializableAttribute()]
@@ -456,6 +462,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
         }
 
         /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType = "nonNegativeInteger")]
         public int connectionLimit
         {
             get { return this.connectionLimitField; }
@@ -463,6 +470,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
         }
 
         /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType = "nonNegativeInteger")]
         public int connectionRateLimit
         {
             get { return this.connectionRateLimitField; }

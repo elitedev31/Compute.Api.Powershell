@@ -22,15 +22,43 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
     public partial class VlanIdOrPrivateIpType
-    {        
-        /// Note Only PrivaleIpv4 Or VlanId is valid,  dont specify both
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("vlanId", typeof(string))]
-        public string VlanId { get; set; }
+    {
+
+        private string itemField;
+
+        private PrivateIpv4OrVlanIdChoiceType itemElementNameField;
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("privateIpv4", typeof(string))]
-        public string PrivateIpv4 { get; set; }       
+        [System.Xml.Serialization.XmlElementAttribute("privateIpv4", typeof (string))]
+        [System.Xml.Serialization.XmlElementAttribute("vlanId", typeof (string))]
+        [System.Xml.Serialization.XmlChoiceIdentifierAttribute("ItemElementName")]
+        public string Item
+        {
+            get { return this.itemField; }
+            set { this.itemField = value; }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public PrivateIpv4OrVlanIdChoiceType ItemElementName
+        {
+            get { return this.itemElementNameField; }
+            set { this.itemElementNameField = value; }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.81.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types", IncludeInSchema = false)]
+    public enum PrivateIpv4OrVlanIdChoiceType
+    {
+
+        /// <remarks/>
+        privateIpv4,
+
+        /// <remarks/>
+        vlanId,
     }
 
     /// <remarks/>
@@ -164,7 +192,6 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 
         private string datacenterIdField;
 
-		private ServerTypeNic nicField;
         /// <remarks/>
         public string name
         {
@@ -208,22 +235,16 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
             set { this.diskField = value; }
         }
 
-       
-		
-		/// <summary>	Gets or sets the NIC. </summary>
-		/// <value>	The NIC. </value>
-		[System.Xml.Serialization.XmlElementAttribute("nic")]
-		public ServerTypeNic nic
-		{
-			get { return this.nicField; }
-			set { this.nicField = value; }
-		}
-		
-		/// <remarks/>
-		[System.Xml.Serialization.XmlElementAttribute("networkInfo", typeof (ServerTypeNetworkInfo))]
-		public ServerTypeNetworkInfo networkInfo { get; set; }
-        
-		/// <remarks/>
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("networkInfo", typeof (ServerTypeNetworkInfo))]
+        [System.Xml.Serialization.XmlElementAttribute("nic", typeof (ServerTypeNic))]
+        public object Item
+        {
+            get { return this.itemField; }
+            set { this.itemField = value; }
+        }
+
+        /// <remarks/>
         public ServerTypeBackup backup
         {
             get { return this.backupField; }
@@ -573,8 +594,8 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "urn:didata.com:api:cloud:types")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
-    public partial class servers
+    [System.Xml.Serialization.XmlRootAttribute("servers", Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
+    public partial class ServersResponseCollection
     {
 
         private ServerType[] serverField;
@@ -597,7 +618,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("server")]
-        public ServerType[] server
+        public ServerType[] Server
         {
             get { return this.serverField; }
             set { this.serverField = value; }
@@ -762,15 +783,14 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
             set { this.memoryGbFieldSpecified = value; }
         }
 
-
-	    /// <remarks/>
-		[System.Xml.Serialization.XmlElementAttribute("network", typeof (DeployServerTypeNetwork))]
-		public DeployServerTypeNetwork network { get; set; }
-
-		/// <summary>	Gets or sets information describing the network. </summary>
-		/// <value>	Information describing the network. </value>
-		[System.Xml.Serialization.XmlElementAttribute("networkInfo", typeof (DeployServerTypeNetworkInfo))]
-		public DeployServerTypeNetworkInfo networkInfo { get; set; }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("network", typeof (DeployServerTypeNetwork))]
+        [System.Xml.Serialization.XmlElementAttribute("networkInfo", typeof (DeployServerTypeNetworkInfo))]
+        public object Item
+        {
+            get { return this.itemField; }
+            set { this.itemField = value; }
+        }
 
         /// <remarks/>
         public string primaryDns
@@ -1016,6 +1036,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
             set { this.nicIdField = value; }
         }
     }
+	 
 
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.81.0")]
@@ -1339,7 +1360,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
             }
         }
     }
-
+	
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.81.0")]
     [System.SerializableAttribute()]

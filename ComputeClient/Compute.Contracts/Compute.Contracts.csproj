@@ -171,6 +171,7 @@
     <Compile Include="Network20\PersistenceProfile.cs" />
     <Compile Include="Network20\PublicIPBlockOverride.cs" />
     <Compile Include="Network20\Securitygroup.cs" />
+    <Compile Include="Network20\ServerOverride.cs" />
     <Compile Include="Network20\VirtualListenerOverride.cs" />
     <Compile Include="Network\AclActionType.cs" />
     <Compile Include="Network\AclProtocolType.cs" />
