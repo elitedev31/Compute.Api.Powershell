@@ -304,6 +304,27 @@ namespace DD.CBU.Compute.Api.Client
         }
 
         /// <summary>
+        /// Returns the KnownRegion from geoKey
+        /// </summary>
+        /// <param name="geoKey">Geo Key</param>
+        /// <returns>Known Region</returns>
+        public static KnownApiRegion GetKnownRegionFromGeoKey(string geoKey)
+        {
+            if (String.IsNullOrWhiteSpace(geoKey))
+                throw new ArgumentNullException("geoKey");
+
+            foreach (var knownApiRegion in Enum.GetValues(typeof(KnownApiRegion)).Cast<KnownApiRegion>())
+            {
+                var region = knownApiRegion.ToString().ToLowerInvariant();
+                if (region.StartsWith(geoKey.ToLowerInvariant() + "_"))
+                {
+                    return knownApiRegion;
+                }
+            }
+
+            throw new ArgumentException("Unknown geoKey '" + geoKey + "'.");
+        }
+        /// <summary>
         /// Creates the collection of known URLs per vendor according to Cloud API Documentation
         /// </summary>
         private void CreateKnownApiHostNames()
