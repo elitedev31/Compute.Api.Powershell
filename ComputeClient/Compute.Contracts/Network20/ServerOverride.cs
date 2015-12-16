@@ -68,6 +68,39 @@
             get { return Item as DeployServerTypeNetworkInfo; }
             set { Item = value; }
         }
+    }
 
+
+    public partial class DeployServerTypeNetwork
+    {
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public string networkId
+        {
+            get
+            {
+                return ItemElementName == NetworkIdOrPrivateIpv4ChoiceType.networkId ? Item : string.Empty;                 
+            }
+            set
+            {
+                Item = value;
+                ItemElementName = NetworkIdOrPrivateIpv4ChoiceType.networkId;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public string privateIpv4
+        {
+            get
+            {
+                return ItemElementName == NetworkIdOrPrivateIpv4ChoiceType.privateIpv4 ? Item : string.Empty;
+            }
+            set
+            {
+                Item = value;
+                ItemElementName = NetworkIdOrPrivateIpv4ChoiceType.privateIpv4;
+            }
+        }
     }
 }
