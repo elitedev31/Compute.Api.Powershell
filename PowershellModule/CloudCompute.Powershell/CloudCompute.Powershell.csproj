@@ -223,7 +223,7 @@
     <Compile Include="RemoveCaasBackupJobCmdlet.cs" />
     <Compile Include="NewCaasBackupJobCmdlet.cs" />
     <Compile Include="RemoveCaasServerCmdlet.cs" />
-    <Compile Include="GetCaasDataCentreCmdlet.cs" />
+    <Compile Include="Mcp20\GetCaasDataCentreCmdlet.cs" />
     <Compile Include="RemoveCaasNetworkCmdlet.cs" />
     <Compile Include="NewCaasNetworkCmdlet.cs" />
     <Compile Include="RemoveCaasAclRuleCmdlet.cs" />

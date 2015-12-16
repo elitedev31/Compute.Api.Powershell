@@ -12,15 +12,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Management.Automation;
 using DD.CBU.Compute.Api.Client;
-using DD.CBU.Compute.Api.Contracts.Datacenter;
+using DD.CBU.Compute.Api.Contracts.Network20;
 
-namespace DD.CBU.Compute.Powershell
+namespace DD.CBU.Compute.Powershell.Mcp20
 {
 	/// <summary>
 	///     The Get-CaasDataCentre cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasDataCentre")]
-	[OutputType(typeof (DatacenterWithMaintenanceStatusType))]
+	[OutputType(typeof (DatacenterType))]
 	public class GetCaasDataCentreCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
@@ -32,8 +32,8 @@ namespace DD.CBU.Compute.Powershell
 
 			try
 			{
-				IEnumerable<DatacenterWithMaintenanceStatusType> resultlist =
-					Connection.ApiClient.Account.GetDataCentersWithMaintenanceStatuses().Result;
+				IEnumerable<DatacenterType> resultlist =
+					Connection.ApiClient.Infrastructure.GetDataCenters().Result;
 
 				if (resultlist != null && resultlist.Any())
 				{

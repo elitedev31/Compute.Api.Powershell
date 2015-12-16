@@ -35,7 +35,8 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                 var firewall = new EditFirewallRuleType
                                 {
                                     id = FirewallRule.id,
-                                    enabled = Enabled
+                                    enabled = Enabled,
+                                    enabledSpecified = true
                                 };
 
                 response = Connection.ApiClient.Networking.FirewallRule.EditFirewallRule(firewall).Result;
