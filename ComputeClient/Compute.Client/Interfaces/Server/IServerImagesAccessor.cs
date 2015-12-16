@@ -88,6 +88,12 @@
 	        string ovfPackagePrefix);
 
         /// <summary>
+        /// Returns all the customer images being copied.
+        /// </summary>
+        /// <returns>list of images being copied</returns>
+        Task<IReadOnlyList<ImageCopyType>> GetCustomerServerImageBeingCopied();
+
+        /// <summary>
         /// The remove customer server image.
         /// </summary>
         /// <param name="imageid">

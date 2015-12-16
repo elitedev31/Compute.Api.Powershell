@@ -155,6 +155,17 @@
                                         });
         }
 
+
+        /// <summary>
+        /// Returns all the customer images being copied.
+        /// </summary>
+        /// <returns>list of images being copied</returns>
+        public async Task<IReadOnlyList<ImageCopyType>> GetCustomerServerImageBeingCopied()
+        {
+            return (await _apiClient.GetAsync<ImageCopies>(
+                ApiUris.CopyCustomerServerImage(_apiClient.OrganizationId))).imageCopy;
+        }
+
         /// <summary>
         /// The remove customer server image.
         /// </summary>
