@@ -143,15 +143,16 @@ namespace DD.CBU.Compute.Powershell
 		private async Task<IEnumerable<ServerType>> GetDeployedServers(string serverId, string name, 
 			string networkId, string location, string networkDomainId, string vlanId)
 		{
-			ServersResponseCollection serverResponse =
-				await Connection.ApiClient.ServerManagement.Server.GetMcp2DeployedServers();
+            IEnumerable<ServerType> servers =
+				await Connection.ApiClient.ServerManagement.Server.GetServers();
 
-			IEnumerable<ServerType> servers = serverResponse.Server;
+		    if (servers == null)
+		        return null;
 
 			// Filter by server id
 			if (!string.IsNullOrWhiteSpace(serverId))
 			{
-				servers = serverResponse.Server.Where(server => server.id == serverId);
+				servers = servers.Where(server => server.id == serverId);
 			}
 
 			// Filter by name
@@ -163,7 +164,7 @@ namespace DD.CBU.Compute.Powershell
 			// Filter by network ID
 			if (!string.IsNullOrWhiteSpace(networkId))
 			{
-				servers = servers.Where(server => server.nic != null).Where(server => server.nic.First().networkId == networkId);
+				servers = servers.Where(server => server.nic != null).Where(server => server.nic.networkId == networkId);
 			}
 
 			// Filter by datacenter ID

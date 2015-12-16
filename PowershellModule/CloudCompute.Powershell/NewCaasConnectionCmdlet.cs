@@ -57,15 +57,20 @@ namespace DD.CBU.Compute.Powershell
 
 		/// <summary>
 		///     The base uri of the REST API
-		/// </summary>
-		[Obsolete("Use Vendor and Region instead")]
+		/// </summary>		
 		[Parameter(Mandatory = true, ParameterSetName = "ApiDomainName", HelpMessage = "The domain name for the REST API")]
 		public string ApiDomainName { get; set; }
 
-		/// <summary>
-		///     Process the record
-		/// </summary>
-		protected override void ProcessRecord()
+        /// <summary>
+		///     The base uri of the FTP domain
+		/// </summary>		
+		[Parameter(Mandatory = false, ParameterSetName = "ApiDomainName", HelpMessage = "The domain name for the FTP, default is the api domain name")]
+        public string FtpDomainName { get; set; }
+
+        /// <summary>
+        ///     Process the record
+        /// </summary>
+        protected override void ProcessRecord()
 		{
 			base.ProcessRecord();
 
@@ -128,10 +133,31 @@ namespace DD.CBU.Compute.Powershell
 
 			if (ParameterSetName == "ApiDomainName")
 			{
-				var baseUri = new Uri(ApiDomainName);
-				WriteWarning("This parameter is obselete and will not work for MCP2.0 commands, use Vendor and Region");
-				apiClient = ComputeApiClient.GetComputeApiClient(baseUri, ApiCredentials.GetNetworkCredential());
-				ftpHost = ApiDomainName;
+                Uri baseUri;
+                // Support ApiDomainName containing https://
+			    if (Uri.TryCreate(ApiDomainName, UriKind.Absolute, out baseUri))
+			    {
+                    ftpHost = baseUri.Host;
+                }
+                else
+                { 
+                    // Support ApiDomainName as in just the domainName
+			        baseUri = new Uri(string.Format("https://{0}/", ApiDomainName));
+                    ftpHost = ApiDomainName;
+                }
+
+                // Handle explicit FTP host name
+			    if (!String.IsNullOrWhiteSpace(FtpDomainName))
+			    {
+                    ftpHost = FtpDomainName;
+                    Uri ftpUri;
+			        if (Uri.TryCreate(FtpDomainName, UriKind.Absolute, out ftpUri))
+			        {
+			            ftpHost = ftpUri.Host;
+			        }
+			    }
+
+			    apiClient = ComputeApiClient.GetComputeApiClient(baseUri, ApiCredentials.GetNetworkCredential());				
 			}
 
 			var newCloudComputeConnection = new ComputeServiceConnection(apiClient);

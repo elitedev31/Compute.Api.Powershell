@@ -81,7 +81,7 @@ namespace DD.CBU.Compute.Powershell
 							inService = InService.ToString().ToLower(), 
 							serverName = Server.name, 
 							serverId = Server.id, 
-							serverIp = Server.nic != null ? Server.nic[0].privateIpv4 : Server.networkInfo.primaryNic.privateIpv4
+							serverIp = Server.nic != null ? Server.nic.privateIpv4 : Server.networkInfo.primaryNic.privateIpv4
 						};
 						WriteObject(rserver);
 					}

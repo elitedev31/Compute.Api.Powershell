@@ -48,7 +48,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 		///     Gets or sets the slow ramp time.
 		/// </summary>
 		[Parameter(Mandatory = false, HelpMessage = "The VIP Pool Slow ramp time")]
-        public string SlowRampTime { get; set; }
+        public int SlowRampTime { get; set; }
 
         /// <summary>
         ///     The process record method.
