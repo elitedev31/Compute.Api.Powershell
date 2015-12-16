@@ -81,14 +81,47 @@ namespace DD.CBU.Compute.Powershell
         [Parameter(Mandatory = true, ParameterSetName = "MCP2_WithPrivateIp", HelpMessage = "The network private IP address that will be assigned to the machine.")]
         public string PrivateIp { get; set; }
 
-		/// <summary>
-		///     The process record method.
-		/// </summary>
-		protected override void ProcessRecord()
+        /// <summary>
+        ///     The Cpu speed of the machine
+        /// </summary>
+        [Parameter(Mandatory = false, ParameterSetName = "MCP2_WithPrivateIp", HelpMessage = "The cpu speed for the machine.")]
+        [Parameter(Mandatory = false, ParameterSetName = "MCP2_WithVlan", HelpMessage = "The cpu speed for the machine.")]
+        [Parameter(Mandatory = true, ParameterSetName = "MCP2_WithCpu", HelpMessage = "The cpu cores per socker for the machine.")]
+        public string CpuSpeed { get; set; }
+
+        /// <summary>
+        ///     The Cpu speed of the machine
+        /// </summary>
+        [Parameter(Mandatory = false, ParameterSetName = "MCP2_WithPrivateIp", HelpMessage = "The cpu count for the machine.")]
+        [Parameter(Mandatory = false, ParameterSetName = "MCP2_WithVlan", HelpMessage = "The cpu count for the machine.")]
+        [Parameter(Mandatory = true, ParameterSetName = "MCP2_WithCpu", HelpMessage = "The cpu cores per socker for the machine.")]
+        public uint CpuCount { get; set; }
+
+        /// <summary>
+        ///     The Cpu speed of the machine
+        /// </summary>
+        [Parameter(Mandatory = false, ParameterSetName = "MCP2_WithPrivateIp", HelpMessage = "The cpu cores per socker for the machine.")]
+        [Parameter(Mandatory = false, ParameterSetName = "MCP2_WithVlan", HelpMessage = "The cpu cores per socker for the machine.")]
+        [Parameter(Mandatory = true, ParameterSetName = "MCP2_WithCpu", HelpMessage = "The cpu cores per socker for the machine.")]
+        public uint CpuCoresPerSocket { get; set; }
+
+        /// <summary>
+        ///     The process record method.
+        /// </summary>
+        protected override void ProcessRecord()
 		{
 			base.ProcessRecord();
 
-			WriteObject(
+            var cpuType = new DeployServerTypeCpu
+            {
+                speed = CpuSpeed,
+                coresPerSocket = CpuCoresPerSocket,
+                coresPerSocketSpecified = CpuCoresPerSocket > 0,
+                count = CpuCount,
+                countSpecified = CpuCount > 0
+            };
+
+            WriteObject(
 				new CaasServerDetails
 				{
 					AdministratorPassword = AdminPassword, 
@@ -99,7 +132,8 @@ namespace DD.CBU.Compute.Powershell
                     NetworkDomain = NetworkDomain,
                     PrimaryVlan = PrimaryVlan,
 					Image = ServerImage, 
-					PrivateIp = PrivateIp
+					PrivateIp = PrivateIp,
+                    CpuDetails = (!string.IsNullOrWhiteSpace(CpuSpeed) || CpuCoresPerSocket > 0 || CpuCount > 0)? cpuType : null
 				});
 		}
 	}

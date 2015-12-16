@@ -133,7 +133,8 @@ namespace DD.CBU.Compute.Powershell
                 administratorPassword = ServerDetails.AdministratorPassword,
                 network = networkInfo,
                 networkInfo = networkDomainInfo,
-                disk = diskarray
+                disk = diskarray,
+                cpu = ServerDetails.CpuDetails,
             };
 
             var response = Connection.ApiClient.ServerManagement.Server.DeployServer(server).Result;

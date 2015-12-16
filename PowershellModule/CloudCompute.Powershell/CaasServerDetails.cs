@@ -64,6 +64,12 @@ namespace DD.CBU.Compute.Powershell
         /// </summary>
         public VlanType PrimaryVlan { get; set; }
 
+
+        /// <summary>
+        /// Cpu details
+        /// </summary>
+        public DeployServerTypeCpu CpuDetails { get; set; }
+
         /// <summary>
         ///     Gets or sets the internal disk details.
         /// </summary>
