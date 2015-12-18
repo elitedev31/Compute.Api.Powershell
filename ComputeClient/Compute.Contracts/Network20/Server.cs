@@ -1277,6 +1277,32 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
         }
     }
 
+    /// <content>	An update vmware tools server type. </content>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
+    [System.Xml.Serialization.XmlRootAttribute("upgradeVirtualHardware", Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
+    public partial class UpgradeVirtualHardware
+    {
+        private string idField;
+        /// <summary>	Gets or sets the identifier of the server. </summary>
+        /// <value>	The identifier of the server. </value>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string id
+        {
+            get
+            {
+                return this.idField;
+            }
+            set
+            {
+                this.idField = value;
+            }
+        }
+    }
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
     [System.SerializableAttribute()]

@@ -112,6 +112,11 @@
         /// <returns>	A standard CaaS response </returns>
         Task<ResponseType> UpdateVmwareTools(Guid serverId);
 
+        /// <summary>	Updates the vistual hardware for serverId. </summary>
+        /// <param name="serverId">	The server id. </param>
+        /// <returns>	A standard CaaS response </returns>
+        Task<ResponseType> UpgradeVirtualHardware(Guid serverId);
+
         /// <summary>
         /// Deploys a server to MCP1.0 or MCP 2.0 data centers 
         /// </summary>

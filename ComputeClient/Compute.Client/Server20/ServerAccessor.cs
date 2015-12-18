@@ -197,6 +197,15 @@
                 new UpdateVmwareToolsServerType { id = serverId.ToString() });
         }
 
+        /// <summary>	Upgrade virtual hardware for the server. </summary>
+        /// <param name="serverId">	The server id. </param>
+        /// <returns>	A standard CaaS response. </returns>
+        public async Task<ResponseType> UpgradeVirtualHardware(Guid serverId)
+        {
+            return await _apiClient.PostAsync<UpgradeVirtualHardware, ResponseType>(ApiUris.UpgradeVirtualHardware(_apiClient.OrganizationId),
+              new UpgradeVirtualHardware { id = serverId.ToString() });
+        }
+
         /// <summary>
         /// Deploys a server to MCP1.0 or MCP 2.0 data centers 
         /// </summary>

@@ -2021,6 +2021,15 @@ namespace DD.CBU.Compute.Api.Client
         {
             return new Uri(string.Format(MCP2_1_PREFIX + "{0}/server/updateVmwareTools", orgId), UriKind.Relative);
         }
+
+        /// <summary>	upgrade virtual hardware for the server. </summary>
+        /// <param name="orgId">	The org Id. </param>
+        /// <returns>	An URI. </returns>
+        public static Uri UpgradeVirtualHardware(Guid orgId)
+        {
+            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/server/upgradeVirtualHardware", orgId), UriKind.Relative);
+        }
+
         /// <summary>
         /// Gets all the NAT rules for a specified network.
         /// </summary>
