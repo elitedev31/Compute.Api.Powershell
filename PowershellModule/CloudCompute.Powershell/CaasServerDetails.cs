@@ -64,11 +64,30 @@ namespace DD.CBU.Compute.Powershell
         /// </summary>
         public VlanType PrimaryVlan { get; set; }
 
-
         /// <summary>
         /// Cpu details
         /// </summary>
         public DeployServerTypeCpu CpuDetails { get; set; }
+
+        /// <summary>
+        ///     The Primary DNS for the machine
+        /// </summary>
+        public string PrimaryDns { get; set; }
+
+        /// <summary>
+        ///     The Secondary DNS for the machine
+        /// </summary>
+        public string SecondaryDns { get; set; }
+
+        /// <summary>
+        /// Memory of the machine in GB
+        /// </summary>
+        public uint MemoryGb { get; set; }
+
+        /// <summary>
+        ///     The  Microsoft time zone for windows machine
+        /// </summary>
+        public string MicrosoftTimeZone { get; set; }
 
         /// <summary>
         ///     Gets or sets the internal disk details.

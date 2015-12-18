@@ -86,7 +86,6 @@ namespace DD.CBU.Compute.Powershell
         /// </summary>
         [Parameter(Mandatory = false, ParameterSetName = "MCP2_WithPrivateIp", HelpMessage = "The cpu speed for the machine.")]
         [Parameter(Mandatory = false, ParameterSetName = "MCP2_WithVlan", HelpMessage = "The cpu speed for the machine.")]
-        [Parameter(Mandatory = true, ParameterSetName = "MCP2_WithCpu", HelpMessage = "The cpu cores per socker for the machine.")]
         public string CpuSpeed { get; set; }
 
         /// <summary>
@@ -94,7 +93,6 @@ namespace DD.CBU.Compute.Powershell
         /// </summary>
         [Parameter(Mandatory = false, ParameterSetName = "MCP2_WithPrivateIp", HelpMessage = "The cpu count for the machine.")]
         [Parameter(Mandatory = false, ParameterSetName = "MCP2_WithVlan", HelpMessage = "The cpu count for the machine.")]
-        [Parameter(Mandatory = true, ParameterSetName = "MCP2_WithCpu", HelpMessage = "The cpu cores per socker for the machine.")]
         public uint CpuCount { get; set; }
 
         /// <summary>
@@ -102,8 +100,35 @@ namespace DD.CBU.Compute.Powershell
         /// </summary>
         [Parameter(Mandatory = false, ParameterSetName = "MCP2_WithPrivateIp", HelpMessage = "The cpu cores per socker for the machine.")]
         [Parameter(Mandatory = false, ParameterSetName = "MCP2_WithVlan", HelpMessage = "The cpu cores per socker for the machine.")]
-        [Parameter(Mandatory = true, ParameterSetName = "MCP2_WithCpu", HelpMessage = "The cpu cores per socker for the machine.")]
         public uint CpuCoresPerSocket { get; set; }
+
+        /// <summary>
+        ///     The The memory size in GB for the machine
+        /// </summary>
+        [Parameter(Mandatory = false, ParameterSetName = "MCP2_WithPrivateIp", HelpMessage = "The memory size in GB for the machine.")]
+        [Parameter(Mandatory = false, ParameterSetName = "MCP2_WithVlan", HelpMessage = "The memory size in GB for the machine.")]
+        public uint MemoryGb { get; set; }
+
+        /// <summary>
+        ///     The Primary DNS for the machine
+        /// </summary>
+        [Parameter(Mandatory = false, ParameterSetName = "MCP2_WithPrivateIp", HelpMessage = "The Primary DNS for the machine.")]
+        [Parameter(Mandatory = false, ParameterSetName = "MCP2_WithVlan", HelpMessage = "The Primary DNS for the machine.")]
+        public string PrimaryDns { get; set; }
+
+        /// <summary>
+        ///     The Secondary DNS for the machine
+        /// </summary>
+        [Parameter(Mandatory = false, ParameterSetName = "MCP2_WithPrivateIp", HelpMessage = "The Secondary DNS for the machine.")]
+        [Parameter(Mandatory = false, ParameterSetName = "MCP2_WithVlan", HelpMessage = "The Secondary DNS for the machine.")]
+        public string SecondaryDns { get; set; }
+
+        /// <summary>
+        ///     The  Microsoft time zone for windows machine
+        /// </summary>
+        [Parameter(Mandatory = false, ParameterSetName = "MCP2_WithPrivateIp", HelpMessage = "The  Microsoft time zone for windows machine.")]
+        [Parameter(Mandatory = false, ParameterSetName = "MCP2_WithVlan", HelpMessage = "The  Microsoft time zone for windows machine.")]
+        public string MicrosoftTimeZone { get; set; }
 
         /// <summary>
         ///     The process record method.
@@ -133,7 +158,11 @@ namespace DD.CBU.Compute.Powershell
                     PrimaryVlan = PrimaryVlan,
 					Image = ServerImage, 
 					PrivateIp = PrivateIp,
-                    CpuDetails = (!string.IsNullOrWhiteSpace(CpuSpeed) || CpuCoresPerSocket > 0 || CpuCount > 0)? cpuType : null
+                    CpuDetails = (!string.IsNullOrWhiteSpace(CpuSpeed) || CpuCoresPerSocket > 0 || CpuCount > 0)? cpuType : null,
+                    MicrosoftTimeZone = MicrosoftTimeZone,
+                    PrimaryDns = PrimaryDns,
+                    SecondaryDns = SecondaryDns,
+                    MemoryGb = MemoryGb,                    
 				});
 		}
 	}

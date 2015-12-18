@@ -135,6 +135,11 @@ namespace DD.CBU.Compute.Powershell
                 networkInfo = networkDomainInfo,
                 disk = diskarray,
                 cpu = ServerDetails.CpuDetails,
+                primaryDns = ServerDetails.PrimaryDns,
+                secondaryDns = ServerDetails.SecondaryDns,
+                microsoftTimeZone = ServerDetails.MicrosoftTimeZone,
+                memoryGb = ServerDetails.MemoryGb,
+                memoryGbSpecified = (ServerDetails.MemoryGb > 0)
             };
 
             var response = Connection.ApiClient.ServerManagement.Server.DeployServer(server).Result;
