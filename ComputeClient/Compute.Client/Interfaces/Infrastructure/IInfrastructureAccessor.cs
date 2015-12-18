@@ -1,4 +1,6 @@
-﻿namespace DD.CBU.Compute.Api.Client.Interfaces.Infrastructure
+﻿using DD.CBU.Compute.Api.Contracts.General;
+
+namespace DD.CBU.Compute.Api.Client.Interfaces.Infrastructure
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -24,5 +26,36 @@
         /// The <see cref="Task"/>.
         /// </returns>
         Task<IEnumerable<DatacenterType>> GetDataCenters(IPageableRequest pagingOptions = null, DataCenterListOptions filterOptions = null);
-	}
+
+        /// <summary>
+        /// The get os images for a data center
+        /// </summary>
+        /// <param name="dataCenterId">
+        /// Data center id
+        /// </param>
+        /// <param name="pagingOptions">
+        /// The paging options.
+        /// </param>
+        /// <param name="filterOptions">
+        /// The Filter options
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        Task<PagedResponse<OperatingSystemType>> GetOperatingSystems(string dataCenterId, IPageableRequest pagingOptions = null, OperatingSystemListOptions filterOptions = null);
+
+        /// <summary>
+        /// The get os images for a data center
+        /// </summary>
+        /// <param name="dataCenterId">
+        /// Data center id
+        /// </param>       
+        /// <param name="filterOptions">
+        /// The Filter options
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        Task<IEnumerable<OperatingSystemType>> GetOperatingSystems(string dataCenterId, OperatingSystemListOptions filterOptions = null);
+    }
 }
