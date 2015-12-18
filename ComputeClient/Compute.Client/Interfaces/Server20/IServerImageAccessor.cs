@@ -12,18 +12,7 @@
     /// The ServerAccessor interface.
     /// </summary>
     public interface IServerImageAccessor
-    {      
-        /// <summary>
-        /// The get OS images supported on this data center
-        /// </summary>
-        /// <param name="filteringOptions">
-        /// The filtering options.
-        /// </param>
-        /// <returns>
-        /// The <see cref="Task"/>.
-        /// </returns>	
-        Task<IEnumerable<OsImageType>> GetOsImages(ServerOsImageListOptions filteringOptions = null);
-
+    {          
         /// <summary>
         /// Get the OS images supported on this data center
         /// </summary>
@@ -47,18 +36,7 @@
         /// <returns>
         /// The <see cref="Task"/>.
         /// </returns>	
-        Task<PagedResponse<OsImageType>> GetOsImagesPaginated(ServerOsImageListOptions filteringOptions = null, IPageableRequest pagingOptions = null);
-
-        /// <summary>
-        /// The get customer images supported on this data center
-        /// </summary>
-        /// <param name="filteringOptions">
-        /// The filtering options.
-        /// </param>
-        /// <returns>
-        /// The <see cref="Task"/>.
-        /// </returns>	
-        Task<IEnumerable<CustomerImageType>> GetCustomerImages(ServerOsImageListOptions filteringOptions = null);
+        Task<PagedResponse<OsImageType>> GetOsImages(ServerOsImageListOptions filteringOptions = null, IPageableRequest pagingOptions = null);
 
         /// <summary>
         /// Get the customer images supported on this data center
@@ -83,7 +61,7 @@
         /// <returns>
         /// The <see cref="Task"/>.
         /// </returns>	
-        Task<PagedResponse<CustomerImageType>> GetCustomerImagesPaginated(ServerOsImageListOptions filteringOptions = null, IPageableRequest pagingOptions = null);
+        Task<PagedResponse<CustomerImageType>> GetCustomerImages(ServerCustomerImageListOptions filteringOptions = null, IPageableRequest pagingOptions = null);
 
         /// <summary>
         /// Edit the customer image metadata

@@ -33,17 +33,6 @@
         }
 
         /// <summary>
-        /// Get OS Images
-        /// </summary>
-        /// <param name="filteringOptions">Filtering options</param>
-        /// <returns>OS Images</returns>
-        public async Task<IEnumerable<OsImageType>> GetOsImages(ServerOsImageListOptions filteringOptions = null)
-        {
-            var response = await GetOsImagesPaginated(filteringOptions, null);
-            return response.items;
-        }
-
-        /// <summary>
         /// Get OS Image
         /// </summary>
         /// <param name="imageId">Image Identifier</param>
@@ -59,7 +48,7 @@
         /// </summary>
         /// <param name="filteringOptions">Filtering options</param>
         /// <returns>OS Images</returns>
-        public async Task<PagedResponse<OsImageType>> GetOsImagesPaginated(ServerOsImageListOptions filteringOptions = null, IPageableRequest pagingOptions = null)
+        public async Task<PagedResponse<OsImageType>> GetOsImages(ServerOsImageListOptions filteringOptions = null, IPageableRequest pagingOptions = null)
         {
             var response = await _apiClient.GetAsync<osImages>(
                  ApiUris.GetMcp2OsImages(_apiClient.OrganizationId),
@@ -75,18 +64,7 @@
                 pageSize = response.pageSizeSpecified ? response.pageSize : (int?)null
             };
         }
-
-        /// <summary>
-        /// Get Customer Images
-        /// </summary>
-        /// <param name="filteringOptions">Filtering options</param>
-        /// <returns>Customer Images</returns>
-        public async Task<IEnumerable<CustomerImageType>> GetCustomerImages(ServerOsImageListOptions filteringOptions = null)
-        {
-            var response = await GetCustomerImagesPaginated(filteringOptions, null);
-            return response.items;
-        }
-
+      
         /// <summary>
         /// Get Customer Image
         /// </summary>
@@ -104,7 +82,7 @@
         /// <param name="filteringOptions">Filtering options</param>
         /// <param name="pagingOptions">Paging options</param>
         /// <returns>Customer Images</returns>
-        public async Task<PagedResponse<CustomerImageType>> GetCustomerImagesPaginated(ServerOsImageListOptions filteringOptions = null, IPageableRequest pagingOptions = null)
+        public async Task<PagedResponse<CustomerImageType>> GetCustomerImages(ServerCustomerImageListOptions filteringOptions = null, IPageableRequest pagingOptions = null)
         {
             var response = await _apiClient.GetAsync<customerImages>(
                 ApiUris.GetMcp2CustomerImages(_apiClient.OrganizationId),
