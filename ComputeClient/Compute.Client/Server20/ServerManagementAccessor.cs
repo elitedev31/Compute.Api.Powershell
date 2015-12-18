@@ -17,6 +17,7 @@
 		public ServerManagementAccessor(IWebApi webApi)
 		{
             Server = new ServerAccessor(webApi);
+            ServerImage = new ServerImageAccessor(webApi);
             AntiAffinityRule = new AntiAffinityRuleAccessor(webApi);
             Monitoring = new MonitoringAccessor(webApi);
         }
@@ -27,6 +28,11 @@
         public IServerAccessor Server { get; private set; }
 
         /// <summary>
+        /// Gets the Server Images Accessor
+        /// </summary>
+	    public IServerImageAccessor ServerImage { get; }
+
+	    /// <summary>
         /// Gets the Anti Affinity Rule Accessor.
         /// </summary>
         public IAntiAffinityRuleAccessor AntiAffinityRule { get; private set; }

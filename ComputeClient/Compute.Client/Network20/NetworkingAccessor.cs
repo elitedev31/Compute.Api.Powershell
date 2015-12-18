@@ -18,6 +18,7 @@
         {
             NetworkDomain = new NetworkDomainAccessor(apiClient);
             Vlan = new VlanAccessor(apiClient);
+            SecurityGroup = new SecurityGroupAccessor(apiClient);
             IpAddress = new IpAddressAccessor(apiClient);
             Nat = new NatAccessor(apiClient);
             FirewallRule = new FirewallRuleAccessor(apiClient);
@@ -36,6 +37,11 @@
         /// Gets the VLAN Accessor.
         /// </summary>
         public IVlanAccessor Vlan { get; private set; }
+
+        /// <summary>
+        /// Gets the Vlan Security group accessor
+        /// </summary>
+        public IVlanSecurityGroupAccessor SecurityGroup { get; private set; }
 
         /// <summary>
         /// Gets the IP address Accessor.

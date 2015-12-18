@@ -14,6 +14,11 @@
         IVlanAccessor Vlan { get; }
 
         /// <summary>
+        /// Gets the Vlan Security Group Accessor
+        /// </summary>
+        IVlanSecurityGroupAccessor SecurityGroup { get; }
+
+        /// <summary>
         /// Gets the IP address Accessor.
         /// </summary>
         IIpAddressAccessor IpAddress { get; }

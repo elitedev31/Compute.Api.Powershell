@@ -11,6 +11,11 @@
         IServerAccessor Server { get; }
 
         /// <summary>
+        /// Gets the Server Images Accessor.
+        /// </summary>
+        IServerImageAccessor ServerImage { get; }
+
+        /// <summary>
         /// Gets the Anti Affinity Rule Accessor.
         /// </summary>
         IAntiAffinityRuleAccessor AntiAffinityRule { get; }
