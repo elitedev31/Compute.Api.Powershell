@@ -30,7 +30,7 @@
         /// <summary>
         /// Gets the Server Images Accessor
         /// </summary>
-	    public IServerImageAccessor ServerImage { get; }
+	    public IServerImageAccessor ServerImage { get; private set; }
 
 	    /// <summary>
         /// Gets the Anti Affinity Rule Accessor.
