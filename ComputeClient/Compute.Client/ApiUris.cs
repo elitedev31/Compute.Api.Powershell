@@ -2459,5 +2459,77 @@ namespace DD.CBU.Compute.Api.Client
         {
             return new Uri(string.Format(MCP2_1_PREFIX + "{0}/image/editImageMetadata", orgId), UriKind.Relative);
         }
+
+        /// <summary>	Get MCP 2 operating systems</summary>
+        /// <param name="orgId">	The organization Id. </param>      
+        /// <param name="dataCenterId">	The data center Id. </param>       
+        /// <returns>	Url endpoint </returns>
+        public static Uri GetMcp2OperatingSystems(Guid orgId, string dataCenterId)
+        {
+            return
+                new Uri(
+                    string.Format(MCP2_1_PREFIX + "{0}/infrastructure/operatingSystem?datacenterId={1}", orgId,
+                        dataCenterId), UriKind.Relative);
+
+        }
+
+        /// <summary>	Create security group</summary>
+        /// <param name="orgId">	The organization Id. </param>      
+        /// <returns>	Url endpoint </returns>
+        public static Uri CreateSecurityGroup(Guid orgId)
+        {
+            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/securityGroup/createSecurityGroup", orgId), UriKind.Relative);
+        }
+
+        /// <summary>	Edit security group</summary>
+        /// <param name="orgId">	The organization Id. </param>      
+        /// <returns>	Url endpoint </returns>
+        public static Uri EditSecurityGroup(Guid orgId)
+        {
+            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/securityGroup/editSecurityGroup", orgId), UriKind.Relative);
+        }
+
+        /// <summary>	Delete security group</summary>
+        /// <param name="orgId">	The organization Id. </param>      
+        /// <returns>	Url endpoint </returns>
+        public static Uri DeleteSecurityGroup(Guid orgId)
+        {
+            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/securityGroup/deleteSecurityGroup", orgId), UriKind.Relative);
+        }
+
+        /// <summary>	Add nic to security group</summary>
+        /// <param name="orgId">	The organization Id. </param>      
+        /// <returns>	Url endpoint </returns>
+        public static Uri AddNicToSecurityGroup(Guid orgId)
+        {
+            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/securityGroup/addNicToSecurityGroup", orgId), UriKind.Relative);
+        }
+
+        /// <summary>	Remove Nic from security group</summary>
+        /// <param name="orgId">	The organization Id. </param>      
+        /// <returns>	Url endpoint </returns>
+        public static Uri RemoveNicFromSecurityGroup(Guid orgId)
+        {
+            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/securityGroup/removeNicFromSecurityGroup", orgId), UriKind.Relative);
+        }
+
+        /// <summary>	Get security group</summary>
+        /// <param name="orgId">	The organization Id. </param>      
+        /// <param name="vlanId">VLan Id</param>
+        /// <returns>	Url endpoint </returns>
+        public static Uri GetSecurityGroupForVlan(Guid orgId, Guid vlanId)
+        {
+            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/securityGroup/createSecurityGroup?vlanId={1}", orgId, vlanId),
+                UriKind.Relative);
+        }
+
+        /// <summary>	Get security group</summary>
+        /// <param name="orgId">	The organization Id. </param>
+        /// <param name="serverId">Server Id</param>
+        /// <returns>	Url endpoint </returns>
+        public static Uri GetSecurityGroupForServer(Guid orgId, Guid serverId)
+        {
+            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/securityGroup/createSecurityGroup?serverId={1}", orgId,serverId), UriKind.Relative);
+        }
     }
 }

@@ -206,6 +206,7 @@
     <Compile Include="Requests\Network20\DefaultHealthMonitorListOptions.cs" />
     <Compile Include="Requests\Network20\DefaultIruleListOptions.cs" />
     <Compile Include="Requests\Network20\DefaultPersistenceProfileListOptions.cs" />
+    <Compile Include="Requests\Network20\SecurityGroupListOptions.cs" />
     <Compile Include="Requests\Network20\VlanListOptions.cs" />
     <Compile Include="Requests\PageableRequest.cs" />
     <Compile Include="Requests\Server20\AntiAffinityRuleListOptions.cs" />

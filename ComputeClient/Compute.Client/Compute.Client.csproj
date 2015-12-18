@@ -117,6 +117,7 @@
     <Compile Include="Interfaces\Network20\IVipVirtualListenerAccessor.cs" />
     <Compile Include="Interfaces\Network20\IVipNodeAccessor.cs" />
     <Compile Include="Interfaces\Network20\IFirewallRuleAccessor.cs" />
+    <Compile Include="Interfaces\Network20\IVlanSecurityGroupAccessor.cs" />
     <Compile Include="Interfaces\Network\INetworkAccessor.cs" />
     <Compile Include="Interfaces\Network20\INetworkDomainAccessor.cs" />
     <Compile Include="Interfaces\Network20\IVipPoolAccessor.cs" />
@@ -146,6 +147,7 @@
     <Compile Include="Network20\VipNodeAccessor.cs" />
     <Compile Include="Network20\VipVirtualListenerAccessor.cs" />
     <Compile Include="Network20\FirewallRuleAccessor.cs" />
+    <Compile Include="Network20\SecurityGroupAccessor.cs" />
     <Compile Include="Network20\VlanAccessor.cs" />
     <Compile Include="Network20\VlanExtensions.cs" />
     <Compile Include="Network\Network.cs" />

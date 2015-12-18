@@ -59,7 +59,7 @@
         public async Task<PagedResponse<OperatingSystemType>> GetOperatingSystems(string dataCenterId, IPageableRequest pagingOptions = null, OperatingSystemListOptions filterOptions = null)
         {
             var response = await _apiClient.GetAsync<operatingSystems>(
-              ApiUris.GetMcp2CustomerImages(_apiClient.OrganizationId),
+              ApiUris.GetMcp2OperatingSystems(_apiClient.OrganizationId, dataCenterId),
               pagingOptions,
               filterOptions);
 
@@ -80,7 +80,7 @@
         /// <param name="filterOptions">Filtering options</param>
         /// <returns>Operating Systems</returns>
         public async Task<IEnumerable<OperatingSystemType>> GetOperatingSystems(string dataCenterId, OperatingSystemListOptions filterOptions = null)
-        {
+        {           
             return (await GetOperatingSystems(dataCenterId, null, filterOptions)).items;
         }
     }
