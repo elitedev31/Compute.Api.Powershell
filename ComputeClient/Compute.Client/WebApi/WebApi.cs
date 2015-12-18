@@ -1,4 +1,6 @@
-﻿namespace DD.CBU.Compute.Api.Client.WebApi
+﻿using DD.CBU.Compute.Api.Contracts.Network20;
+
+namespace DD.CBU.Compute.Api.Client.WebApi
 {
 	using System;
 	using System.Net;
@@ -277,7 +279,7 @@
 							Status status = await response.Content.ReadAsAsync<Status>(_mediaTypeFormatters);
 							throw new BadRequestException(status, uri);
 						}
-						Response responseMessage = await response.Content.ReadAsAsync<Response>(_mediaTypeFormatters);
+                        ResponseType responseMessage = await response.Content.ReadAsAsync<ResponseType>(_mediaTypeFormatters);
 						throw new BadRequestException(responseMessage, uri);
 					}
 

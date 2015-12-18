@@ -1,4 +1,6 @@
-﻿namespace DD.CBU.Compute.Api.Client.Exceptions
+﻿using DD.CBU.Compute.Api.Contracts.Network20;
+
+namespace DD.CBU.Compute.Api.Client.Exceptions
 {
 	using System;
 	using System.Runtime.Serialization;
@@ -22,7 +24,7 @@
 		/// <summary>
 		/// Gets or sets the caas operation response. for MCP 2.0 operations
 		/// </summary>
-		public Response CaaSOperationResponse { get; set; }
+		public ResponseType CaaSOperationResponse { get; set; }
 
 		/// <summary>
 		/// Initialises a new instance of the <see cref="BadRequestException"/> class.
@@ -48,7 +50,7 @@
 		/// <param name="uri">
 		/// The uri.
 		/// </param>
-		public BadRequestException(Response caasOperationResponse, Uri uri)
+		public BadRequestException(ResponseType caasOperationResponse, Uri uri)
 			: base(ComputeApiError.BadRequest, uri, String.Empty)
 		{
 			CaaSOperationResponse = caasOperationResponse;
@@ -77,7 +79,7 @@
 				throw new ArgumentNullException("info");
 
 			CaaSOperationStatus = (Status)info.GetValue("CaaSOperationStatus", typeof(Status));
-			CaaSOperationResponse = (Response)info.GetValue("CaaSOperationResponse", typeof(Response));
+			CaaSOperationResponse = (ResponseType)info.GetValue("CaaSOperationResponse", typeof(ResponseType));
 		}
 		
 		/// <summary>

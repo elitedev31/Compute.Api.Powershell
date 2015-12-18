@@ -128,6 +128,7 @@
     <Compile Include="Interfaces\Server20\IMonitoringAccessor.cs" />
     <Compile Include="Interfaces\Server20\IAntiAffinityRuleAccessor.cs" />
     <Compile Include="Interfaces\Reports\IReportAccessor.cs" />
+    <Compile Include="Interfaces\Server20\IServerImageAccessor.cs" />
     <Compile Include="Interfaces\Server20\IServerAccessor.cs" />
     <Compile Include="Interfaces\Server20\IServerManagementAccessor.cs" />
     <Compile Include="Interfaces\Server\IServerAccessor.cs" />
@@ -153,6 +154,7 @@
     <Compile Include="Reports\ReportAccessor.cs" />
     <Compile Include="Server20\Server20Extensions.cs" />
     <Compile Include="Server20\AntiAffinityRuleAccessor.cs" />
+    <Compile Include="Server20\ServerImageAccessor.cs" />
     <Compile Include="Server20\ServerAccessor.cs" />
     <Compile Include="Server20\ServerManagementAccessor.cs" />
     <Compile Include="ServerImageType.cs" />
