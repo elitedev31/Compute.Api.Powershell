@@ -17,7 +17,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
     [Cmdlet(VerbsCommon.Get, "CaasNatRule")]
     [OutputType(typeof(Mcp1.NatRuleType), ParameterSetName = new[] { "MCP1" })]
     [OutputType(typeof(Mcp2.NatRuleType), ParameterSetName = new[] { "MCP2" })]
-    public class GetCaasNatRuleCmdlet : PSCmdletCaasWithConnectionBase
+    public class GetCaasNatRuleCmdlet : PsCmdletCaasPagedWithConnectionBase
     {
         /// <summary>
 		///     Gets or sets the Nat rule state.
@@ -63,7 +63,6 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
         protected override void ProcessRecord()
         {
-            IEnumerable<Object> natRules = null;
             base.ProcessRecord();
 
             try
@@ -75,24 +74,25 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                     if (!string.IsNullOrEmpty(Name))
                         resultlist = resultlist.Where(
                                 net => string.Equals(net.name, Name, StringComparison.CurrentCultureIgnoreCase));
-
-                    natRules = resultlist;
+                    
+                    WriteObject(resultlist, true);
                 }
                 else if (ParameterSetName.Equals("MCP2"))
                 {
-                    natRules =
-                        Connection.ApiClient.Networking.Nat.GetNatRules(
-                            Guid.Parse(NetworkDomain.id),
-                            (NatRuleId != Guid.Empty || !string.IsNullOrWhiteSpace(State) || !string.IsNullOrWhiteSpace(InternalIp) || !string.IsNullOrWhiteSpace(ExternalIp)
-                                ? new NatRuleListOptions
-                                {
-                                    Id = NatRuleId != Guid.Empty ? NatRuleId : (Guid?)null,
-                                    State = State,
-                                    InternalIp = InternalIp,
-                                    ExternalIp = ExternalIp
-                                }
-                                : null))
-                                  .Result;
+                    this.WritePagedObject(Connection.ApiClient.Networking.Nat.GetNatRulesPaginated(
+                        Guid.Parse(NetworkDomain.id),
+                        (NatRuleId != Guid.Empty || !string.IsNullOrWhiteSpace(State) ||
+                         !string.IsNullOrWhiteSpace(InternalIp) || !string.IsNullOrWhiteSpace(ExternalIp)
+                            ? new NatRuleListOptions
+                            {
+                                Id = NatRuleId != Guid.Empty ? NatRuleId : (Guid?) null,
+                                State = State,
+                                InternalIp = InternalIp,
+                                ExternalIp = ExternalIp
+                            }
+                            : null),
+                        PageableRequest)
+                        .Result);
                 }
             }
             catch (AggregateException ae)
@@ -113,8 +113,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
                         return true;
                     });
-            }          
-            WriteObject(natRules, true);            
+            }                         
         }
     }
 }

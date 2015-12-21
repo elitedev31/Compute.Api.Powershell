@@ -13,7 +13,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
     [Cmdlet(VerbsCommon.Get, "CaasDefaultIRules")]
     [OutputType(typeof(DefaultIruleType))]
-    public class GetCaasDefaultIRulesCmdlet : PSCmdletCaasWithConnectionBase
+    public class GetCaasDefaultIRulesCmdlet : PsCmdletCaasPagedWithConnectionBase
     {
         /// <summary>
 		///     Gets or sets the iRule name.
@@ -35,17 +35,20 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
         protected override void ProcessRecord()
         {
-            IEnumerable<DefaultIruleType> iRules = new List<DefaultIruleType>();
             base.ProcessRecord();
-
             try
             {
-                iRules = Connection.ApiClient.Networking.VipSupport.GetDefaultIrules(NetworkDomain != null ? Guid.Parse(NetworkDomain.id) : Guid.Empty,
-                                                                            (ParameterSetName.Equals("Filtered") ? new DefaultIruleListOptions
-                                                                                {
-                                                                                    Id = RuleId != Guid.Empty ? RuleId : (Guid?)null,
-                                                                                    Name = Name,
-                                                                                } : null)).Result;
+                this.WritePagedObject(
+                    Connection.ApiClient.Networking.VipSupport.GetDefaultIrulesPaginated(
+                        NetworkDomain != null ? Guid.Parse(NetworkDomain.id) : Guid.Empty,
+                        ParameterSetName.Equals("Filtered")
+                            ? new DefaultIruleListOptions
+                            {
+                                Id = RuleId != Guid.Empty ? RuleId : (Guid?) null,
+                                Name = Name,
+                            }
+                            : null,
+                        PageableRequest).Result);
             }
             catch (AggregateException ae)
             {
@@ -65,8 +68,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
                         return true;
                     });
-            }
-            WriteObject(iRules, true);
+            }            
         }
     }
 }

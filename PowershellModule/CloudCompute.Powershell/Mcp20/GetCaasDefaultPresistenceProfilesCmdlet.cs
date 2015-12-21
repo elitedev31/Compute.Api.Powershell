@@ -13,7 +13,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
     [Cmdlet(VerbsCommon.Get, "CaasDefaultPresistenceProfiles")]
     [OutputType(typeof(DefaultPersistenceProfileType))]
-    public class GetCaasDefaultPresistenceProfilesCmdlet : PSCmdletCaasWithConnectionBase
+    public class GetCaasDefaultPresistenceProfilesCmdlet : PsCmdletCaasPagedWithConnectionBase
     {
         /// <summary>
 		///     Gets or sets the Persistence Profile name.
@@ -35,17 +35,21 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
         protected override void ProcessRecord()
         {
-            IEnumerable<DefaultPersistenceProfileType> persistenceProfiles = new List<DefaultPersistenceProfileType>();
             base.ProcessRecord();
 
             try
             {
-                persistenceProfiles = Connection.ApiClient.Networking.VipSupport.GetDefaultPersistenceProfiles(NetworkDomain != null ? Guid.Parse(NetworkDomain.id) : Guid.Empty,
-                                                                            (ParameterSetName.Equals("Filtered") ? new DefaultPersistenceProfileListOptions
-                                                                                {
-                                                                                    Id = ProfileId != Guid.Empty ? ProfileId : (Guid?)null,
-                                                                                    Name = Name,
-                                                                                } : null)).Result;
+                this.WritePagedObject(
+                    Connection.ApiClient.Networking.VipSupport.GetDefaultPersistenceProfilesPaginated(
+                        NetworkDomain != null ? Guid.Parse(NetworkDomain.id) : Guid.Empty,
+                        (ParameterSetName.Equals("Filtered")
+                            ? new DefaultPersistenceProfileListOptions
+                            {
+                                Id = ProfileId != Guid.Empty ? ProfileId : (Guid?) null,
+                                Name = Name,
+                            }
+                            : null),
+                        PageableRequest).Result);
             }
             catch (AggregateException ae)
             {
@@ -65,8 +69,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
                         return true;
                     });
-            }
-            WriteObject(persistenceProfiles, true);
+            }            
         }
     }
 }

@@ -22,8 +22,8 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasNetworkDomain", DefaultParameterSetName = "None")]
 	[OutputType(typeof(NetworkDomainType))]
-	public class GetCaasNetworkDomainCmdlet : PSCmdletCaasWithConnectionBase
-	{
+	public class GetCaasNetworkDomainCmdlet : PsCmdletCaasPagedWithConnectionBase
+    {
 		/// <summary>
 		///     Get a CaaS network domain by NetworkDomain Id
 		/// </summary>
@@ -40,8 +40,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 		///     The process record method.
 		/// </summary>
 		protected override void ProcessRecord()
-		{
-			IEnumerable<NetworkDomainType> networks = new List<NetworkDomainType>();
+		{		
 			base.ProcessRecord();
 			try
 			{
@@ -61,8 +60,9 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 								};
 				}
 
-				networks = Connection.ApiClient.Networking.NetworkDomain.GetNetworkDomains(options)
-										.Result;
+			    this.WritePagedObject(
+			        Connection.ApiClient.Networking.NetworkDomain.GetNetworkDomainsPaginated(options, PageableRequest)
+			            .Result);
 			}
 			catch (AggregateException ae)
 			{
@@ -82,8 +82,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
 						return true;
 					});
-			}
-		    WriteObject(networks, true);
+			}		 
 		}
 	}
 }

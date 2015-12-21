@@ -13,6 +13,7 @@ using System.Linq;
 using System.Management.Automation;
 using DD.CBU.Compute.Api.Client;
 using DD.CBU.Compute.Api.Contracts.Network20;
+using DD.CBU.Compute.Api.Contracts.Requests.Infrastructure;
 
 namespace DD.CBU.Compute.Powershell.Mcp20
 {
@@ -21,8 +22,10 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasDataCentre")]
 	[OutputType(typeof (DatacenterType))]
-	public class GetCaasDataCentreCmdlet : PSCmdletCaasWithConnectionBase
-	{
+	public class GetCaasDataCentreCmdlet : PsCmdletCaasPagedWithConnectionBase
+    {
+        [Parameter(Mandatory = false, ParameterSetName = "Filtered", HelpMessage = "The data center Id")]
+        public string Id { get; set; }
 		/// <summary>
 		///     The process record method.
 		/// </summary>
@@ -32,25 +35,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
 			try
 			{
-				IEnumerable<DatacenterType> resultlist =
-					Connection.ApiClient.Infrastructure.GetDataCenters().Result;
-
-				if (resultlist != null && resultlist.Any())
-				{
-					switch (resultlist.Count())
-					{
-						case 0:
-							WriteError(
-								new ErrorRecord(
-									new ItemNotFoundException(
-										"This command cannot find a matching object with the given parameters."
-										), "ItemNotFoundException", ErrorCategory.ObjectNotFound, resultlist));
-							break;						
-						default:
-							WriteObject(resultlist, true);
-							break;
-					}
-				}
+                this.WritePagedObject(Connection.ApiClient.Infrastructure.GetDataCentersPaginated(PageableRequest, new DataCenterListOptions {Id = Id}).Result);								
 			}
 			catch (AggregateException ae)
 			{

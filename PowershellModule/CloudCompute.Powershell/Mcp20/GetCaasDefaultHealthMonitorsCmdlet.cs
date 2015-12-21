@@ -13,7 +13,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
     [Cmdlet(VerbsCommon.Get, "CaasDefaultHealthMonitors")]
     [OutputType(typeof(DefaultHealthMonitorType))]
-    public class GetCaasDefaultHealthMonitorsCmdlet : PSCmdletCaasWithConnectionBase
+    public class GetCaasDefaultHealthMonitorsCmdlet : PsCmdletCaasPagedWithConnectionBase
     {
         /// <summary>
 		///     Gets or sets the Health Monitor name.
@@ -35,17 +35,21 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
         protected override void ProcessRecord()
         {
-            IEnumerable<DefaultHealthMonitorType> healthMonitors = new List<DefaultHealthMonitorType>();
             base.ProcessRecord();
 
             try
             {
-                healthMonitors = Connection.ApiClient.Networking.VipSupport.GetDefaultHealthMonitors(NetworkDomain != null ? Guid.Parse(NetworkDomain.id) : Guid.Empty,
-                                                                            (ParameterSetName.Equals("Filtered") ? new DefaultHealthMonitorListOptions
-                                                                                {
-                                                                                    Id = MonitorId != Guid.Empty ? MonitorId : (Guid?)null,
-                                                                                    Name = Name,
-                                                                                } : null)).Result;
+                this.WritePagedObject(
+                    Connection.ApiClient.Networking.VipSupport.GetDefaultHealthMonitorsPaginated(
+                        NetworkDomain != null ? Guid.Parse(NetworkDomain.id) : Guid.Empty,
+                        ParameterSetName.Equals("Filtered")
+                            ? new DefaultHealthMonitorListOptions
+                            {
+                                Id = MonitorId != Guid.Empty ? MonitorId : (Guid?) null,
+                                Name = Name,
+                            }
+                            : null,
+                        PageableRequest).Result);
             }
             catch (AggregateException ae)
             {
@@ -65,8 +69,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
                         return true;
                     });
-            }
-            WriteObject(healthMonitors, true);
+            }           
         }
     }
 }

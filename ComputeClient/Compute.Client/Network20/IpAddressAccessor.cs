@@ -1,4 +1,5 @@
 ﻿using System;
+using DD.CBU.Compute.Api.Contracts.Requests.Network20;
 
 namespace DD.CBU.Compute.Api.Client.Network20
 {
@@ -57,10 +58,11 @@ namespace DD.CBU.Compute.Api.Client.Network20
         /// <summary>	Gets public IP blocks. </summary>
         /// <param name="networkDomainId">	Identifier for the network domain. </param>
         /// <param name="pagingOptions">	The paging options, null means default. </param>
+        /// <param name="filterOptions">Paging option</param>
         /// <returns>	The public IP blocks. </returns>
-        public async Task<PagedResponse<PublicIpBlockType>> GetPublicIpBlocksPaginated(Guid networkDomainId, IPageableRequest pagingOptions = null)
+        public async Task<PagedResponse<PublicIpBlockType>> GetPublicIpBlocksPaginated(Guid networkDomainId, IPageableRequest pagingOptions = null, PublicIpListOptions filterOptions = null)
         {
-            var response = await _apiClient.GetAsync<publicIpBlocks>(ApiUris.GetPublicIpBlocks(_apiClient.OrganizationId, networkDomainId.ToString()), pagingOptions);
+            var response = await _apiClient.GetAsync<publicIpBlocks>(ApiUris.GetPublicIpBlocks(_apiClient.OrganizationId, networkDomainId.ToString()), pagingOptions, filterOptions);
             return new PagedResponse<PublicIpBlockType>
             {
                 items = response.publicIpBlock,

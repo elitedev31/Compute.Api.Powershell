@@ -19,13 +19,18 @@ namespace DD.CBU.Compute.Powershell
         /// <param name="pagedResponse">Paged Response</param>        
         public static void WritePagedObject<T>(this PsCmdletCaasPagedWithConnectionBase cmdLet, PagedResponse<T> pagedResponse)
         {
-            if (pagedResponse == null && pagedResponse.items == null && !pagedResponse.items.Any())
+            if (cmdLet == null)
+                return;
+
+            if (pagedResponse == null || pagedResponse.items == null || !pagedResponse.items.Any())
+            {
                 cmdLet.WriteWarning("No items found with the specified criteria");
+                return;
+            }
 
             cmdLet.WriteObject(pagedResponse.items, true);
 
             // Add warning after writing out the results, else the warning is lost
-
             decimal totalCount = pagedResponse.totalCount.HasValue ? (decimal)pagedResponse.totalCount : 1;
             decimal pageSize = pagedResponse.pageSize.HasValue ? (decimal)pagedResponse.pageSize : 1;
             var numberOfPages = (int)Math.Ceiling(totalCount/pageSize);

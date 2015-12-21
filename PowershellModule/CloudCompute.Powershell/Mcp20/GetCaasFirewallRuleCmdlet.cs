@@ -13,7 +13,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
     [Cmdlet(VerbsCommon.Get, "CaasFirewallRule")]
     [OutputType(typeof(FirewallRuleType))]
-    public class GetCaasFirewallRuleCmdlet : PSCmdletCaasWithConnectionBase
+    public class GetCaasFirewallRuleCmdlet : PsCmdletCaasPagedWithConnectionBase
     {
         /// <summary>
 		///     Gets or sets the firewall rule name.
@@ -35,18 +35,19 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
         protected override void ProcessRecord()
         {
-            IEnumerable<FirewallRuleType> firewallRules = new List<FirewallRuleType>();
             base.ProcessRecord();
 
             try
             {
-                firewallRules = Connection.ApiClient.Networking.FirewallRule.GetFirewallRules(
-                                                                            (ParameterSetName.Equals("Filtered") ? new FirewallRuleListOptions
-                                                                            {
-                                                                                Id = FirewallRuleId != Guid.Empty ? FirewallRuleId : (Guid?)null,
-                                                                                Name = Name,
-                                                                                NetworkDomainId = NetworkDomain != null ? Guid.Parse(NetworkDomain.id) : (Guid?)null
-                                                                            } : null)).Result;
+                this.WritePagedObject(Connection.ApiClient.Networking.FirewallRule.GetFirewallRulesPaginated(
+                    (ParameterSetName.Equals("Filtered")
+                        ? new FirewallRuleListOptions
+                        {
+                            Id = FirewallRuleId != Guid.Empty ? FirewallRuleId : (Guid?) null,
+                            Name = Name,
+                            NetworkDomainId = NetworkDomain != null ? Guid.Parse(NetworkDomain.id) : (Guid?) null
+                        }
+                        : null), PageableRequest).Result);
             }
             catch (AggregateException ae)
             {
@@ -66,8 +67,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
                         return true;
                     });
-            }
-            WriteObject(firewallRules, true);
+            }            
         }
     }
 }

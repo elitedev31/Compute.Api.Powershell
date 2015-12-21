@@ -25,8 +25,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces.Infrastructure
         /// </param>
         /// <returns>
         /// The <see cref="Task"/>.
-        /// </returns>
-        [Obsolete("Use GetDataCentersPaginated instead")]
+        /// </returns>        
         Task<IEnumerable<DatacenterType>> GetDataCenters(IPageableRequest pagingOptions = null, DataCenterListOptions filterOptions = null);
 
         /// <summary>

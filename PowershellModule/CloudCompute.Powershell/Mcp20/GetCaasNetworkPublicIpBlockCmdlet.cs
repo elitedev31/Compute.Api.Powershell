@@ -23,8 +23,8 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 	[Cmdlet(VerbsCommon.Get, "CaasNetworkPublicIpBlock")]
     [OutputType(typeof(IpBlockType), ParameterSetName = new[] { "MCP1" })]
     [OutputType(typeof(PublicIpBlockType), ParameterSetName = new[] { "MCP2" })]
-    public class GetCaasNetworkPublicIpBlockCmdlet : PSCmdletCaasWithConnectionBase
-	{
+    public class GetCaasNetworkPublicIpBlockCmdlet : PsCmdletCaasPagedWithConnectionBase
+    {
 		/// <summary>
 		///     The network to list the public ip addresses
 		/// </summary>
@@ -50,41 +50,26 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 		{
 			base.ProcessRecord();
 			try
-			{
-			    IEnumerable<object> resultlist = null;
-
+			{			    
 			    if (ParameterSetName == "MCP1")
 			    {
-                    resultlist = Connection.ApiClient.NetworkingLegacy.Network.GetNetworkPublicIpAddressBlock(Network.id).Result;			      
-			    }
+                    var resultlist = Connection.ApiClient.NetworkingLegacy.Network.GetNetworkPublicIpAddressBlock(Network.id).Result;
+			        if (!string.IsNullOrEmpty(BaseIp))
+			            resultlist = resultlist.Where(ip => ip.baseIp == BaseIp);
+                    WriteObject(resultlist, true);
+                    if(!resultlist.Any())
+                        WriteError(
+                                new ErrorRecord(
+                                    new ItemNotFoundException(
+                                        "This command cannot find a matching object with the given parameters."
+                                        ), "ItemNotFoundException", ErrorCategory.ObjectNotFound, resultlist));
+                }
                 else if (ParameterSetName == "MCP2")
                 {
-                    resultlist = Connection.ApiClient.Networking.IpAddress.GetPublicIpBlocks(Guid.Parse(NetworkDomain.id)).Result;              
+                    this.WritePagedObject(
+                        Connection.ApiClient.Networking.IpAddress.GetPublicIpBlocksPaginated(
+                            Guid.Parse(NetworkDomain.id), PageableRequest).Result);
                 }
-
-
-                if (resultlist != null && resultlist.Any())
-				{
-                    if (!string.IsNullOrEmpty(BaseIp))
-                        if (ParameterSetName == "MCP1")
-                            resultlist = ((IEnumerable<IpBlockType>)resultlist).Where(ip => ip.baseIp == BaseIp);
-                        else
-                            resultlist = ((IEnumerable<PublicIpBlockType>)resultlist).Where(ip => ip.baseIp == BaseIp);
-
-                    switch (resultlist.Count())
-					{
-						case 0:
-							WriteError(
-								new ErrorRecord(
-									new ItemNotFoundException(
-										"This command cannot find a matching object with the given parameters."
-										), "ItemNotFoundException", ErrorCategory.ObjectNotFound, resultlist));
-							break;					
-						default:
-							WriteObject(resultlist, true);
-							break;
-					}
-				}
 			}
 			catch (AggregateException ae)
 			{

@@ -67,7 +67,6 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
 			try
 			{
-
                 if (Mcp1.IsPresent)
                 {
                     if (Network != null && string.IsNullOrEmpty(DataCenterId))
