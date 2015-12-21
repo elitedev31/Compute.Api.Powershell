@@ -9,9 +9,13 @@
         {
             get { return ItemElementName == PrivateIpv4OrVlanIdChoiceType.vlanId ? Item : string.Empty; }
             set
-            {
-                Item = value;
-                ItemElementName = PrivateIpv4OrVlanIdChoiceType.vlanId;
+            {               
+                // value not null or its vlan id
+                if (!string.IsNullOrWhiteSpace(value) || ItemElementName == PrivateIpv4OrVlanIdChoiceType.vlanId)
+                {
+                    Item = value;
+                    ItemElementName = PrivateIpv4OrVlanIdChoiceType.vlanId;
+                }
             }
         }
 
@@ -21,9 +25,13 @@
         {
             get { return ItemElementName == PrivateIpv4OrVlanIdChoiceType.privateIpv4 ? Item : string.Empty; }
             set
-            {
-                Item = value;
-                ItemElementName = PrivateIpv4OrVlanIdChoiceType.privateIpv4;
+            {              
+                // value not null or its private ipv4
+                if (!string.IsNullOrWhiteSpace(value) || ItemElementName == PrivateIpv4OrVlanIdChoiceType.privateIpv4)
+                {
+                    Item = value;
+                    ItemElementName = PrivateIpv4OrVlanIdChoiceType.privateIpv4;
+                }
             }
         }
     }
@@ -82,9 +90,13 @@
                 return ItemElementName == NetworkIdOrPrivateIpv4ChoiceType.networkId ? Item : string.Empty;                 
             }
             set
-            {
-                Item = value;
-                ItemElementName = NetworkIdOrPrivateIpv4ChoiceType.networkId;
+            {               
+                // value not null or its networkId
+                if (!string.IsNullOrWhiteSpace(value) || ItemElementName == NetworkIdOrPrivateIpv4ChoiceType.networkId)
+                {
+                    Item = value;
+                    ItemElementName = NetworkIdOrPrivateIpv4ChoiceType.networkId;
+                }
             }
         }
 
@@ -98,8 +110,12 @@
             }
             set
             {
-                Item = value;
-                ItemElementName = NetworkIdOrPrivateIpv4ChoiceType.privateIpv4;
+                // value not null or its private ipv4
+                if (!string.IsNullOrWhiteSpace(value) || ItemElementName == NetworkIdOrPrivateIpv4ChoiceType.privateIpv4)
+                {
+                    Item = value;
+                    ItemElementName = NetworkIdOrPrivateIpv4ChoiceType.privateIpv4;
+                }  
             }
         }
     }

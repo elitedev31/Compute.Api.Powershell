@@ -66,9 +66,12 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
                 return ItemElementName == NetworkDomainIdOrNetworkIdChoiceType.networkDomainId ? Item : string.Empty;
             }
             set
-            {
-                Item = value;
-                ItemElementName = NetworkDomainIdOrNetworkIdChoiceType.networkDomainId;
+            {               
+                if (!string.IsNullOrWhiteSpace(value) || ItemElementName == NetworkDomainIdOrNetworkIdChoiceType.networkDomainId)
+                {
+                    Item = value;
+                    ItemElementName = NetworkDomainIdOrNetworkIdChoiceType.networkDomainId;
+                }
             }
         }
 
@@ -83,9 +86,12 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
                 return ItemElementName == NetworkDomainIdOrNetworkIdChoiceType.networkId ? Item : string.Empty;
             }
             set
-            {
-                Item = value;
-                ItemElementName = NetworkDomainIdOrNetworkIdChoiceType.networkId;
+            {               
+                if (!string.IsNullOrWhiteSpace(value) || ItemElementName == NetworkDomainIdOrNetworkIdChoiceType.networkId)
+                {
+                    Item = value;
+                    ItemElementName = NetworkDomainIdOrNetworkIdChoiceType.networkId;
+                }
             }
         }
     }
