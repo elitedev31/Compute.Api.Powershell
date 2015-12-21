@@ -25,8 +25,12 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
         [Parameter(Mandatory = true, ParameterSetName = "CustomerImage", ValueFromPipeline = true,HelpMessage = "The customer image")]
         public CustomerImageType CustomerImage
-	    {	        
-	        set { this.ImageId = Guid.Parse(value.id); }
+	    {
+            set
+            {
+                if(value != null)
+                    ImageId = Guid.Parse(value.id);
+            }
 	    }
 
 	    [Parameter(Mandatory = true, ParameterSetName = "CustomerImageId", HelpMessage = "The id of the customer image")]
