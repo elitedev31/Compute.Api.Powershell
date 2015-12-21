@@ -3,10 +3,10 @@
 	public class PageableRequest : IPageableRequest
 	{
 		/// <summary>	The size of the paged results required. </summary>
-		public int PageSize { get; set; }
+		public int? PageSize { get; set; }
 
 		/// <summary>	The page number. </summary>
-		public int PageNumber { get; set; }
+		public int? PageNumber { get; set; }
 
 		/// <summary>	Comma separated list of
 		/// fieldNames, each with an optional,

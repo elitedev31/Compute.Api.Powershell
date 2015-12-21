@@ -1,4 +1,6 @@
-﻿namespace DD.CBU.Compute.Api.Client.Utilities
+﻿using System.Collections.Generic;
+
+namespace DD.CBU.Compute.Api.Client.Utilities
 {
     using System;
     using DD.CBU.Compute.Api.Contracts.Requests;
@@ -30,9 +32,17 @@
                 return uri;
             }
 
-            var queryString = String.IsNullOrEmpty(pagingOptions.Order)
-                ? String.Format("pageSize={0}&pageNumber={1}", pagingOptions.PageSize, pagingOptions.PageNumber)
-                : String.Format("pageSize={0}&pageNumber={1}&orderBy={2}", pagingOptions.PageSize, pagingOptions.PageNumber, pagingOptions.Order);
+            var filters = new List<string>();
+            if(pagingOptions.PageSize.HasValue)
+                filters.Add(string.Format("pageSize={0}", pagingOptions.PageSize.Value));
+
+            if (pagingOptions.PageNumber.HasValue)
+                filters.Add(string.Format("pageNumber={0}", pagingOptions.PageNumber.Value));
+
+            if (!String.IsNullOrEmpty(pagingOptions.Order))
+                filters.Add(string.Format("orderBy={0}", pagingOptions.Order));
+           
+            var queryString = String.Join("&", filters);
 
             return uri.ToString().Contains("?")
                 ? new Uri(uri + "&" + queryString, UriKind.Relative)
