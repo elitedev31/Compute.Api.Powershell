@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using DD.CBU.Compute.Api.Contracts.General;
 
 namespace DD.CBU.Compute.Powershell.Mcp20
 {
@@ -13,7 +14,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
     [Cmdlet(VerbsCommon.Get, "CaasAntiAffinityRules")]
     [OutputType(typeof(AntiAffinityRuleType))]
-    public class GetCaasAntiAffinityRulesCmdlet : PSCmdletCaasWithConnectionBase
+    public class GetCaasAntiAffinityRulesCmdlet : PsCmdletCaasPagedWithConnectionBase
     {        
         /// <summary>
         ///     Gets or sets the network domain.
@@ -53,7 +54,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
         protected override void ProcessRecord()
         {
-            IEnumerable<AntiAffinityRuleType> antiAffinityRules = new List<AntiAffinityRuleType>();
+            PagedResponse<AntiAffinityRuleType> antiAffinityRules = null;
             base.ProcessRecord();
 
             try
@@ -68,16 +69,17 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
                 if (ParameterSetName.Equals("ServerFilter"))
                 {
-                    antiAffinityRules = Connection.ApiClient.ServerManagement.AntiAffinityRule.GetAntiAffinityRulesForServer(Guid.Parse(Server.id), filterOptions).Result;
+                    antiAffinityRules = Connection.ApiClient.ServerManagement.AntiAffinityRule.GetAntiAffinityRulesForServerPaginated(Guid.Parse(Server.id), filterOptions, PageableRequest).Result;
                 }
                 else if (ParameterSetName.Equals("NetworkDomainFilter"))
                 {
-                    antiAffinityRules = Connection.ApiClient.ServerManagement.AntiAffinityRule.GetAntiAffinityRulesForNetworkDomain(Guid.Parse(NetworkDomain.id), filterOptions).Result;
+                    antiAffinityRules = Connection.ApiClient.ServerManagement.AntiAffinityRule.GetAntiAffinityRulesForNetworkDomainPaginated(Guid.Parse(NetworkDomain.id), filterOptions, PageableRequest).Result;
                 }
                 else if (ParameterSetName.Equals("NetworkFilter"))
                 {
-                    antiAffinityRules = Connection.ApiClient.ServerManagement.AntiAffinityRule.GetAntiAffinityRulesForNetwork(Guid.Parse(Network.id), filterOptions).Result;
-                }              
+                    antiAffinityRules = Connection.ApiClient.ServerManagement.AntiAffinityRule.GetAntiAffinityRulesForNetworkPaginated(Guid.Parse(Network.id), filterOptions, PageableRequest).Result;
+                }
+                this.WritePagedObject(antiAffinityRules);                
             }
             catch (AggregateException ae)
             {
@@ -98,7 +100,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                         return true;
                     });
             }            
-            WriteObject(antiAffinityRules, true);            
+                       
         }
     }
 }

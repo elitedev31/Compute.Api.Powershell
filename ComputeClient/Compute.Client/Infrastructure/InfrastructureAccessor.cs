@@ -50,6 +50,32 @@
         }
 
         /// <summary>
+        /// The get data centers with maintenance statuses.
+        /// </summary>
+        /// <param name="pagingOptions">
+        /// The paging options.
+        /// </param>
+        /// <param name="filterOptions">
+        /// The Filter options
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        public async Task<PagedResponse<DatacenterType>> GetDataCentersPaginated(IPageableRequest pagingOptions = null, DataCenterListOptions filterOptions = null)
+        {
+            datacenters dataCenters = await _apiClient.GetAsync<datacenters>(
+                ApiUris.DataCentres(_apiClient.OrganizationId), pagingOptions, filterOptions);           
+            return new PagedResponse<DatacenterType>
+            {
+                items = dataCenters.datacenter,
+                totalCount = dataCenters.totalCountSpecified ? dataCenters.totalCount : (int?)null,
+                pageCount = dataCenters.pageCountSpecified ? dataCenters.pageCount : (int?)null,
+                pageNumber = dataCenters.pageNumberSpecified ? dataCenters.pageNumber : (int?)null,
+                pageSize = dataCenters.pageSizeSpecified ? dataCenters.pageSize : (int?)null
+            };
+        }
+
+        /// <summary>
         /// Get Operating systems supported at the data center level
         /// </summary>
         /// <param name="dataCenterId">Data center id</param>
@@ -71,17 +97,6 @@
                 pageNumber = response.pageNumberSpecified ? response.pageNumber : (int?)null,
                 pageSize = response.pageSizeSpecified ? response.pageSize : (int?)null
             };
-        }
-
-        /// <summary>
-        /// Get Operating systems supported at the data center level
-        /// </summary>
-        /// <param name="dataCenterId">Data center id</param>
-        /// <param name="filterOptions">Filtering options</param>
-        /// <returns>Operating Systems</returns>
-        public async Task<IEnumerable<OperatingSystemType>> GetOperatingSystems(string dataCenterId, OperatingSystemListOptions filterOptions = null)
-        {           
-            return (await GetOperatingSystems(dataCenterId, null, filterOptions)).items;
         }
     }
 }

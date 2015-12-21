@@ -16,8 +16,8 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 	[Cmdlet(VerbsCommon.Get, "CaasCustomerImage")]
 	[OutputType(typeof(CustomerImageType))]
     [OutputType(typeof(ImagesWithDiskSpeedImage), ParameterSetName = new []{ "MCP10" })]
-    public class GetCaasCustomerImageCmdlet : PSCmdletCaasWithConnectionBase
-	{
+    public class GetCaasCustomerImageCmdlet : PsCmdletCaasPagedWithConnectionBase
+    {
 		/// <summary>
 		///     The network to show the images from
 		/// </summary>
@@ -66,26 +66,31 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 			base.ProcessRecord();
 
 			try
-			{				
-				IEnumerable<object> resultlist = GetCustomerImages();
+			{
 
-				if (resultlist != null && resultlist.Any())
-				{
-					switch (resultlist.Count())
-					{
-						case 0:
-							WriteError(
-								new ErrorRecord(
-									new ItemNotFoundException("This command cannot find a matching object with the given parameters."), 
-									"ItemNotFoundException", 
-									ErrorCategory.ObjectNotFound, 
-									resultlist));
-							break;					
-						default:
-							WriteObject(resultlist, true);
-							break;
-					}
-				}
+                if (Mcp1.IsPresent)
+                {
+                    if (Network != null && string.IsNullOrEmpty(DataCenterId))
+                    {
+                        DataCenterId = Network.location;
+                    }
+
+                    IEnumerable<ImagesWithDiskSpeedImage> resultlist =
+                        Connection.ApiClient.GetCustomerServerImages(ImageId == Guid.Empty ? null : ImageId.ToString(), Name, DataCenterId, OperatingSystemId,
+                            OperatingSystemFamily).Result;
+                    WriteObject(resultlist, true);
+                }
+
+                ServerCustomerImageListOptions options = new ServerCustomerImageListOptions
+                {
+                    Ids = ImageId == Guid.Empty ? null : new Guid[] { ImageId },
+                    DatacenterId = DataCenterId,
+                    Name = Name,
+                    OperatingSystemId = OperatingSystemId,
+                    OperatingSystemFamily = OperatingSystemFamily
+                };
+
+                this.WritePagedObject(Connection.ApiClient.ServerManagement.ServerImage.GetCustomerImages(options, PageableRequest).Result);               
 			}
 			catch (AggregateException ae)
 			{
@@ -105,37 +110,5 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 					});
 			}
 		}
-
-	    /// <summary>
-	    ///     Gets the customer images in the network
-	    /// </summary>
-	    /// <returns>
-	    ///     The images
-	    /// </returns>
-	    private IEnumerable<object> GetCustomerImages()
-	    {
-	        if (Mcp1.IsPresent)
-	        {
-	            if (Network != null && string.IsNullOrEmpty(DataCenterId))
-	            {
-	                DataCenterId = Network.location;
-	            }
-
-	            return
-	                Connection.ApiClient.GetCustomerServerImages(ImageId == Guid.Empty ? null : ImageId.ToString(), Name, DataCenterId, OperatingSystemId,
-	                    OperatingSystemFamily).Result;
-	        }
-
-	        ServerCustomerImageListOptions options = new ServerCustomerImageListOptions
-	        {
-	            Ids = ImageId == Guid.Empty ? null : new Guid[] {ImageId},
-	            DatacenterId = DataCenterId,
-	            Name = Name,
-	            OperatingSystemId = OperatingSystemId,
-	            OperatingSystemFamily = OperatingSystemFamily
-	        };
-
-	        return Connection.ApiClient.ServerManagement.ServerImage.GetCustomerImages(options).Result.items;
-	    }
 	}
 }

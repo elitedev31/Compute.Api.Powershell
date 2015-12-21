@@ -22,8 +22,8 @@ namespace DD.CBU.Compute.Powershell.Mcp20
     /// </summary>
     [Cmdlet(VerbsCommon.Get, "CaasOsImage")]
 	[OutputType(typeof (DatacenterType))]
-	public class GetCaasOsImageCmdlet : PSCmdletCaasWithConnectionBase
-	{
+	public class GetCaasOsImageCmdlet : PsCmdletCaasPagedWithConnectionBase
+    {
         /// <summary>
         /// Gets or sets the id.        
         /// </summary>                
@@ -78,23 +78,13 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 			            State = State,
 			            OperatingSystemId = OperatingSystemId,
 			            OperatingSystemFamily = OperatingSystemFamily
-			        };			      
-			   
-			    IEnumerable<OsImageType> resultlist = Connection.ApiClient.ServerManagement.ServerImage.GetOsImages(options).Result.items;
+			        };
 
-			    if (resultlist == null || !resultlist.Any())
-			    {
-			        if (ParameterSetName == "Filtered")
-			            WriteError(
-			                new ErrorRecord(
-			                    new ItemNotFoundException(
-			                        "This command cannot find a matching object with the given parameters."
-			                        ), "ItemNotFoundException", ErrorCategory.ObjectNotFound, resultlist));
-			    }
+			    var pagedResult = Connection.ApiClient.ServerManagement.ServerImage.GetOsImages(options, PageableRequest).Result;
 
-			    WriteObject(resultlist, true);
+			    this.WritePagedObject(pagedResult);
             }
-			catch (AggregateException ae)
+            catch (AggregateException ae)
 			{
 				ae.Handle(
 					e =>
