@@ -20,23 +20,17 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         ///     Gets or sets the network domain.
         /// </summary>
         [Parameter(Mandatory = true, ValueFromPipeline = true, ParameterSetName = "NetworkDomainFilter", HelpMessage = "The network domain")]
-        [Parameter(Mandatory = false, ValueFromPipeline = true, ParameterSetName = "NetworkFilter", HelpMessage = "The network domain")]
-        [Parameter(Mandatory = false, ValueFromPipeline = true, ParameterSetName = "ServerFilter", HelpMessage = "The network domain")]
         public NetworkDomainType NetworkDomain { get; set; }
 
         /// <summary>
         ///     Gets or sets the network.
         /// </summary>
-        [Parameter(Mandatory = false, ValueFromPipeline = true, ParameterSetName = "NetworkDomainFilter", HelpMessage = "The network")]
         [Parameter(Mandatory = true, ValueFromPipeline = true, ParameterSetName = "NetworkFilter", HelpMessage = "The network")]
-        [Parameter(Mandatory = false, ValueFromPipeline = true, ParameterSetName = "ServerFilter", HelpMessage = "The network")]
         public NetworkWithLocationsNetwork Network { get; set; }
 
         /// <summary>
         ///     Gets or sets Server.
         /// </summary>
-        [Parameter(Mandatory = false, ValueFromPipeline = true, ParameterSetName = "NetworkDomainFilter", HelpMessage = "The Server")]
-        [Parameter(Mandatory = false, ValueFromPipeline = true, ParameterSetName = "NetworkFilter", HelpMessage = "The Server")]
         [Parameter(Mandatory = true, ValueFromPipeline = true, ParameterSetName = "ServerFilter", HelpMessage = "The Server")]
         public ServerType Server { get; set; }
 

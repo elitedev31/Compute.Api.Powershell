@@ -38,38 +38,38 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         /// Gets or sets the id.        
         /// </summary>    
         [Alias("ImageId")]            
-        [Parameter(Mandatory = false, ValueFromPipeline = true, ParameterSetName = "Filtered", HelpMessage = "The Os Image Id")]
+        [Parameter(Mandatory = false, ValueFromPipeline = true, HelpMessage = "The Os Image Id")]
         public Guid? Id { get; set; }
 
         /// <summary>
         /// Gets or sets the Datacenter Id.        
         /// </summary>        
         [Alias("Location")]
-        [Parameter(Mandatory = false, ValueFromPipeline = true, ParameterSetName = "Filtered", HelpMessage = "The Data center Id")]
+        [Parameter(Mandatory = false, ValueFromPipeline = true, HelpMessage = "The Data center Id")]
         public string DataCenterId { get; set; }
 
         /// <summary>
         /// Gets or sets the Name of the OS Image.
         /// </summary>     
-        [Parameter(Mandatory = false, ValueFromPipeline = true, ParameterSetName = "Filtered", HelpMessage = "The Os image name")]   
+        [Parameter(Mandatory = false, ValueFromPipeline = true, HelpMessage = "The Os image name")]   
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or sets the State.        
         /// </summary>        
-        [Parameter(Mandatory = false, ValueFromPipeline = true, ParameterSetName = "Filtered", HelpMessage = "The Os image State")]   
+        [Parameter(Mandatory = false, ValueFromPipeline = true, HelpMessage = "The Os image State")]   
         public string State { get; set; }
 
         /// <summary>
         /// Gets or sets the Operating SystemId filter like REDHAT664.
         /// </summary>        
-        [Parameter(Mandatory = false, ValueFromPipeline = true, ParameterSetName = "Filtered", HelpMessage = "The Os id")]
+        [Parameter(Mandatory = false, ValueFromPipeline = true, HelpMessage = "The Os id")]
         public string OperatingSystemId { get; set; }
 
         /// <summary>
         /// Gets or sets the Operating System Family filter. eg : UNIX
         /// </summary>        
-        [Parameter(Mandatory = false, ValueFromPipeline = true, ParameterSetName = "Filtered", HelpMessage = "The Os family like : Unix")]
+        [Parameter(Mandatory = false, ValueFromPipeline = true, HelpMessage = "The Os family like : Unix")]
         public string OperatingSystemFamily { get; set; }
 
 
