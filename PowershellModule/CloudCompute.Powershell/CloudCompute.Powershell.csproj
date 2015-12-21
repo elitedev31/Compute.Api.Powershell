@@ -73,12 +73,12 @@
     <DocumentationFile>bin\Release\DD.CBU.Compute.Powershell.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DD.CBU.Compute.Api.Client, Version=3.0.170.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
-      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.0.170-develop\lib\net45\DD.CBU.Compute.Api.Client.dll</HintPath>
+    <Reference Include="DD.CBU.Compute.Api.Client, Version=3.0.182.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
+      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.0.182-develop\lib\net45\DD.CBU.Compute.Api.Client.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="DD.CBU.Compute.Api.Contracts, Version=3.0.170.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
-      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.0.170-develop\lib\net45\DD.CBU.Compute.Api.Contracts.dll</HintPath>
+    <Reference Include="DD.CBU.Compute.Api.Contracts, Version=3.0.182.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
+      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.0.182-develop\lib\net45\DD.CBU.Compute.Api.Contracts.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
@@ -127,6 +127,8 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Mcp20\DeployCaasNetworkDomainCmdlet.cs" />
     <Compile Include="Mcp20\DisableCaasServerMonitoringCmdlet.cs" />
+    <Compile Include="Mcp20\GetCaasOperatingSystemCmdlet.cs" />
+    <Compile Include="Mcp20\GetCaasOsImageCmdlet.cs" />
     <Compile Include="Mcp20\GetCaasDefaultIRulesCmdlet.cs" />
     <Compile Include="Mcp20\GetCaasDefaultPresistenceProfilesCmdlet.cs" />
     <Compile Include="Mcp20\GetCaasDefaultHealthMonitorsCmdlet.cs" />
@@ -165,6 +167,8 @@
     <Compile Include="Mcp20\SetCaasVipNodeCmdlet.cs" />
     <Compile Include="Mcp20\SetCaasVIPPoolMemberCmdlet.cs" />
     <Compile Include="Mcp20\SetCaasVIPVirtualListenerCmdlet.cs" />
+    <Compile Include="Mcp20\UpdateCaasCustomerImageMetadataCmdlet.cs" />
+    <Compile Include="Mcp20\UpdateCaasServerVirtualHardwareCmdlet.cs" />
     <Compile Include="NewCaasBackupRestoreJob.cs" />
     <Compile Include="CopyCaasCustomerServerImageCmdlet.cs" />
     <Compile Include="NewCaasExportCustomerImageCmdlet.cs" />
@@ -183,7 +187,7 @@
     <Compile Include="NewCaasAclRuleCmdlet.cs" />
     <Compile Include="AddCaasServerDiskCmdlet.cs" />
     <Compile Include="GetCaasNetworkConfigurationCmdlet.cs" />
-    <Compile Include="Mcp20\GetCaasNetworkPublicIpBlocksCmdlet.cs" />
+    <Compile Include="Mcp20\GetCaasNetworkPublicIpBlockCmdlet.cs" />
     <Compile Include="GetCaasProbeCmdletcs.cs" />
     <Compile Include="GetCaasRealServerCmdlet.cs" />
     <Compile Include="GetCaasServerAntiAffinityRuleCmdlet.cs" />
@@ -231,7 +235,7 @@
     <Compile Include="GetCaasCustomerImageImportsCmdlet.cs" />
     <Compile Include="NewCaasImportCustomerImageCmdlet.cs" />
     <Compile Include="GetCaasOvfPackagesCmdlet.cs" />
-    <Compile Include="GetCaasCustomerImagesCmdlet.cs" />
+    <Compile Include="Mcp20\GetCaasCustomerImageCmdlet.cs" />
     <Compile Include="RemoveCaasServerDiskCmdlet.cs" />
     <Compile Include="SetCaasServerDiskSpeedCmdlet.cs" />
     <Compile Include="SetCaasBackupClientCmdlet.cs" />

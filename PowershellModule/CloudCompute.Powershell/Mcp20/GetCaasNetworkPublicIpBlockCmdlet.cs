@@ -23,7 +23,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 	[Cmdlet(VerbsCommon.Get, "CaasNetworkPublicIpBlock")]
     [OutputType(typeof(IpBlockType), ParameterSetName = new[] { "MCP1" })]
     [OutputType(typeof(PublicIpBlockType), ParameterSetName = new[] { "MCP2" })]
-    public class GetCaasNetworkPublicIpBlocksCmdlet : PSCmdletCaasWithConnectionBase
+    public class GetCaasNetworkPublicIpBlockCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     The network to list the public ip addresses
