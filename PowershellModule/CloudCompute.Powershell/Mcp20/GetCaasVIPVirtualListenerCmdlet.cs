@@ -14,7 +14,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
     /// </summary>
     [Cmdlet(VerbsCommon.Get, "CaasVIPVirtualListener")]
     [OutputType(typeof(VirtualListenerType))]
-    public class GetCaasVipVirtualListenerCmdlet : PSCmdletCaasWithConnectionBase
+    public class GetCaasVipVirtualListenerCmdlet : PsCmdletCaasPagedWithConnectionBase
     {
         /// <summary>
 		///     Gets or sets the VIP VirtualListener name.
@@ -36,17 +36,21 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
         protected override void ProcessRecord()
         {
-            IEnumerable<VirtualListenerType> vipVirtualListeners = new List<VirtualListenerType>();
             base.ProcessRecord();
 
             try
             {
-                vipVirtualListeners = Connection.ApiClient.Networking.VipVirtualListener.GetVirtualListeners((ParameterSetName.Equals("Filtered") ? new VirtualListenerListOptions
-                {
-                    Id = Id != Guid.Empty ? Id : (Guid?)null,
-                    Name = Name,
-                    NetworkDomainId = NetworkDomain != null ? Guid.Parse(NetworkDomain.id) : (Guid?)null
-                } : null)).Result;
+                this.WritePagedObject(
+                    Connection.ApiClient.Networking.VipVirtualListener.GetVirtualListenersPaginated(
+                        (ParameterSetName.Equals("Filtered")
+                            ? new VirtualListenerListOptions
+                            {
+                                Id = Id != Guid.Empty ? Id : (Guid?) null,
+                                Name = Name,
+                                NetworkDomainId = NetworkDomain != null ? Guid.Parse(NetworkDomain.id) : (Guid?) null
+                            }
+                            : null),
+                        PageableRequest).Result);
             }
             catch (AggregateException ae)
             {
@@ -66,8 +70,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
                         return true;
                     });
-            }
-            WriteObject(vipVirtualListeners, true);
+            }            
         }
     }
 }

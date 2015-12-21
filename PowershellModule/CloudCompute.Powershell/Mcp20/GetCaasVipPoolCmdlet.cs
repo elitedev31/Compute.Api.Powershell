@@ -11,7 +11,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
     [Cmdlet(VerbsCommon.Get, "CaasVipPool")]
     [OutputType(typeof(PoolType))]
-    public class GetCaasVipPoolCmdlet : PSCmdletCaasWithConnectionBase
+    public class GetCaasVipPoolCmdlet : PsCmdletCaasPagedWithConnectionBase
     {
         /// <summary>
 		///     Gets or sets the VIP Pool name.
@@ -39,19 +39,22 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
         protected override void ProcessRecord()
         {
-            IEnumerable<PoolType> vipPools = new List<PoolType>();
             base.ProcessRecord();
 
             try
             {
-                vipPools = Connection.ApiClient.Networking.VipPool.GetPools(
-                                                                            (ParameterSetName.Equals("Filtered") ? new PoolListOptions
-                                                                            {
-                                                                                Id = PoolId != Guid.Empty ? PoolId : (Guid?)null,
-                                                                                Name = Name,
-                                                                                NetworkDomainId = NetworkDomain != null ? Guid.Parse(NetworkDomain.id) : (Guid?)null,
-                                                                                State = State
-                                                                            } : null)).Result;
+                this.WritePagedObject(
+                    Connection.ApiClient.Networking.VipPool.GetPoolsPaginated(
+                        (ParameterSetName.Equals("Filtered")
+                            ? new PoolListOptions
+                            {
+                                Id = PoolId != Guid.Empty ? PoolId : (Guid?) null,
+                                Name = Name,
+                                NetworkDomainId = NetworkDomain != null ? Guid.Parse(NetworkDomain.id) : (Guid?) null,
+                                State = State
+                            }
+                            : null),
+                        PageableRequest).Result);
             }
             catch (AggregateException ae)
             {
@@ -71,8 +74,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
                         return true;
                     });
-            }
-            WriteObject(vipPools, true);
+            }          
         }
     }
 }

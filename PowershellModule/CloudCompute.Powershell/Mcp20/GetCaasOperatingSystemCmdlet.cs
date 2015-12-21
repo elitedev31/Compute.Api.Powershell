@@ -22,8 +22,8 @@ namespace DD.CBU.Compute.Powershell.Mcp20
     /// </summary>
     [Cmdlet(VerbsCommon.Get, "CaasOperatingSystem")]
 	[OutputType(typeof (OperatingSystemType))]
-	public class GetCaasOperatingSystemCmdlet : PSCmdletCaasWithConnectionBase
-	{   
+	public class GetCaasOperatingSystemCmdlet : PsCmdletCaasPagedWithConnectionBase
+    {   
         /// <summary>
         /// Gets or sets the Datacenter Id.        
         /// </summary>        
@@ -65,20 +65,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 			            Family = OperatingSystemFamily
 			        };
 
-			    IEnumerable<OperatingSystemType> resultlist =
-			        Connection.ApiClient.Infrastructure.GetOperatingSystems(DataCenterId, null, options).Result.items;
-
-			    if (resultlist == null || !resultlist.Any())
-			    {
-			        if (ParameterSetName == "Filtered")
-			            WriteError(
-			                new ErrorRecord(
-			                    new ItemNotFoundException(
-			                        "This command cannot find a matching object with the given parameters."
-			                        ), "ItemNotFoundException", ErrorCategory.ObjectNotFound, resultlist));
-			    }
-
-			    WriteObject(resultlist, true);
+			    this.WritePagedObject(Connection.ApiClient.Infrastructure.GetOperatingSystems(DataCenterId, PageableRequest, options).Result);
             }
 			catch (AggregateException ae)
 			{

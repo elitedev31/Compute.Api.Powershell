@@ -16,7 +16,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
     /// </summary>
     [Cmdlet(VerbsCommon.Get, "CaasVipNode")]
     [OutputType(typeof(NodeType))]
-    public class GetCaasVipNodeCmdlet : PSCmdletCaasWithConnectionBase
+    public class GetCaasVipNodeCmdlet : PsCmdletCaasPagedWithConnectionBase
     {
         /// <summary>
 		///     Gets or sets the VIP Node name.
@@ -37,18 +37,22 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         public Guid NodeId { get; set; }
 
         protected override void ProcessRecord()
-        {
-            IEnumerable<NodeType> vipNodes = new List<NodeType>();
+        {        
             base.ProcessRecord();
 
             try
             {
-                vipNodes = Connection.ApiClient.Networking.VipNode.GetNodes((ParameterSetName.Equals("Filtered") ? new NodeListOptions 
-                                                                                        {
-                                                                                            Id = NodeId != Guid.Empty ? NodeId : (Guid?)null,
-                                                                                            Name = Name,
-                                                                                            NetworkDomainId = NetworkDomain != null ? Guid.Parse(NetworkDomain.id) : (Guid?)null
-                } : null)).Result;
+                this.WritePagedObject(
+                    Connection.ApiClient.Networking.VipNode.GetNodesPaginated(
+                        (ParameterSetName.Equals("Filtered")
+                            ? new NodeListOptions
+                            {
+                                Id = NodeId != Guid.Empty ? NodeId : (Guid?) null,
+                                Name = Name,
+                                NetworkDomainId = NetworkDomain != null ? Guid.Parse(NetworkDomain.id) : (Guid?) null
+                            }
+                            : null),
+                        PageableRequest).Result);
             }
             catch (AggregateException ae)
             {
@@ -68,8 +72,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
                         return true;
                     });
-            }
-            WriteObject(vipNodes, true);            
+            }      
         }
     }
 }

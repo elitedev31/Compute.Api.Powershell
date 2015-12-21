@@ -73,12 +73,12 @@
     <DocumentationFile>bin\Release\DD.CBU.Compute.Powershell.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DD.CBU.Compute.Api.Client, Version=3.0.186.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
-      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.0.186-develop\lib\net45\DD.CBU.Compute.Api.Client.dll</HintPath>
+    <Reference Include="DD.CBU.Compute.Api.Client, Version=3.0.187.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
+      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.0.187-develop\lib\net45\DD.CBU.Compute.Api.Client.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="DD.CBU.Compute.Api.Contracts, Version=3.0.186.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
-      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.0.186-develop\lib\net45\DD.CBU.Compute.Api.Contracts.dll</HintPath>
+    <Reference Include="DD.CBU.Compute.Api.Contracts, Version=3.0.187.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
+      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.0.187-develop\lib\net45\DD.CBU.Compute.Api.Contracts.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
@@ -123,7 +123,7 @@
     <Compile Include="GetCaasCustomerImageExportHistoryCmdlet.cs" />
     <Compile Include="GetCaasCustomerImageExportsCmdlet.cs" />
     <Compile Include="GetCaasExportedImageCmdlet.cs" />
-    <Compile Include="GetCaasServersCmdlet.cs" />
+    <Compile Include="Mcp20\GetCaasServerCmdlet.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Mcp20\DeployCaasNetworkDomainCmdlet.cs" />
     <Compile Include="Mcp20\DisableCaasServerMonitoringCmdlet.cs" />
@@ -255,7 +255,7 @@
     <Compile Include="SetCaasServerCmdlet.cs" />
     <Compile Include="SetCaasServerActionCmdlet.cs" />
     <Compile Include="GetCaasDeployedServersCmdlet.cs" />
-    <Compile Include="GetCaasNetworksCmdlet.cs" />
+    <Compile Include="GetCaasNetworkCmdlet.cs" />
     <Compile Include="NewCaasServerCmdlet.cs" />
     <Compile Include="NewCaasConnectionCmdlet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -12,6 +12,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Management.Automation;
 using DD.CBU.Compute.Api.Client;
+using DD.CBU.Compute.Api.Contracts.Image;
+using DD.CBU.Compute.Api.Contracts.Network;
 using DD.CBU.Compute.Api.Contracts.Network20;
 using DD.CBU.Compute.Api.Contracts.Requests.Server20;
 
@@ -22,19 +24,29 @@ namespace DD.CBU.Compute.Powershell.Mcp20
     /// </summary>
     [Cmdlet(VerbsCommon.Get, "CaasOsImage")]
 	[OutputType(typeof (DatacenterType))]
-	public class GetCaasOsImageCmdlet : PsCmdletCaasPagedWithConnectionBase
+    [OutputType(typeof(ImagesWithDiskSpeedImage), ParameterSetName = new string[] { "Mcp1"})]
+    public class GetCaasOsImageCmdlet : PsCmdletCaasPagedWithConnectionBase
     {
         /// <summary>
+        ///     The network to show the images from
+        /// </summary>
+        [Obsolete("Use DataCenterId instead")]
+        [Parameter(Mandatory = false, ParameterSetName = "MCP10", HelpMessage = "The network to show the images from")]
+        public NetworkWithLocationsNetwork Network { get; set; }
+
+        /// <summary>
         /// Gets or sets the id.        
-        /// </summary>                
+        /// </summary>    
+        [Alias("ImageId")]            
         [Parameter(Mandatory = false, ValueFromPipeline = true, ParameterSetName = "Filtered", HelpMessage = "The Os Image Id")]
         public Guid? Id { get; set; }
 
         /// <summary>
         /// Gets or sets the Datacenter Id.        
         /// </summary>        
+        [Alias("Location")]
         [Parameter(Mandatory = false, ValueFromPipeline = true, ParameterSetName = "Filtered", HelpMessage = "The Data center Id")]
-        public string DatacenterId { get; set; }
+        public string DataCenterId { get; set; }
 
         /// <summary>
         /// Gets or sets the Name of the OS Image.
@@ -59,6 +71,14 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         /// </summary>        
         [Parameter(Mandatory = false, ValueFromPipeline = true, ParameterSetName = "Filtered", HelpMessage = "The Os family like : Unix")]
         public string OperatingSystemFamily { get; set; }
+
+
+        /// <summary>
+        /// Specifies if MCP 1.0 contracts should be returned
+        /// </summary>
+        [Parameter(Mandatory = false, ParameterSetName = "MCP10", HelpMessage = "Explicitly calling MCP 1.0 Api")]
+        public SwitchParameter Mcp1 { get; set; }
+
         /// <summary>
         ///     The process record method.
         /// </summary>
@@ -68,21 +88,33 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
 			try
 			{
-			    ServerOsImageListOptions options = null;
+                if (Mcp1.IsPresent)
+                {
+                    if (Network != null && string.IsNullOrEmpty(DataCenterId))
+                    {
+                        DataCenterId = Network.location;
+                    }
+
+                    IEnumerable<ImagesWithDiskSpeedImage> resultlist = Connection.ApiClient.ServerManagementLegacy.ServerImage.GetImages(
+                            Id.HasValue ? Id.ToString() : null, Name, DataCenterId, OperatingSystemId,
+                            OperatingSystemFamily).Result;
+                                        
+                    WriteObject(resultlist, true);
+                }
+
+                ServerOsImageListOptions options = null;
 			    if (ParameterSetName == "Filtered")
 			        options = new ServerOsImageListOptions()
 			        {
 			            Ids = Id.HasValue ? new Guid[] {Id.Value} : null,
-			            DatacenterId = DatacenterId,
+			            DatacenterId = DataCenterId,
 			            Name = Name,
 			            State = State,
 			            OperatingSystemId = OperatingSystemId,
 			            OperatingSystemFamily = OperatingSystemFamily
 			        };
 
-			    var pagedResult = Connection.ApiClient.ServerManagement.ServerImage.GetOsImages(options, PageableRequest).Result;
-
-			    this.WritePagedObject(pagedResult);
+			    this.WritePagedObject(Connection.ApiClient.ServerManagement.ServerImage.GetOsImages(options, PageableRequest).Result);
             }
             catch (AggregateException ae)
 			{

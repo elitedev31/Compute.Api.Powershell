@@ -128,7 +128,7 @@ namespace DD.CBU.Compute.Powershell
             {
                 name = ServerDetails.Name,
                 description = ServerDetails.Description,
-                imageId = ServerDetails.Image.id,
+                imageId = ServerDetails.Mcp1Image != null? ServerDetails.Mcp1Image.id : ServerDetails.Mcp2Image.id,
                 start = ServerDetails.IsStarted,
                 administratorPassword = ServerDetails.AdministratorPassword,
                 network = networkInfo,

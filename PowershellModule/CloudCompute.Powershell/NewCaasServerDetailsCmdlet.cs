@@ -8,6 +8,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
 using System.Management.Automation;
 using DD.CBU.Compute.Api.Contracts.Image;
 using DD.CBU.Compute.Api.Contracts.Network;
@@ -53,7 +54,7 @@ namespace DD.CBU.Compute.Powershell
 		/// </summary>
 		[Alias("OsServerImage")]
 		[Parameter(Mandatory = true, HelpMessage = "The OS or Customer Server Image to use for deployment")]
-		public ImagesWithDiskSpeedImage ServerImage { get; set; }
+		public PSObject ServerImage { get; set; }
 
 		/// <summary>
 		///     The network to deploy the machine to
@@ -146,6 +147,18 @@ namespace DD.CBU.Compute.Powershell
                 countSpecified = CpuCount > 0
             };
 
+            var mcp1OsImage = ServerImage.BaseObject as ImagesWithDiskSpeedImage;
+            var mcp2OsImage = ServerImage.BaseObject as OsImageType;
+
+            if (mcp2OsImage == null && mcp1OsImage == null)
+            {
+                ThrowTerminatingError(
+                    new ErrorRecord(
+                        new ArgumentException("ServerImage type cannot be converted to " +
+                                              typeof (ImagesWithDiskSpeedImage) + "or to" + typeof (OsImageType)), "-3",
+                        ErrorCategory.InvalidArgument, null));
+            }
+                
             WriteObject(
 				new CaasServerDetails
 				{
@@ -156,8 +169,9 @@ namespace DD.CBU.Compute.Powershell
 					Network = Network, 
                     NetworkDomain = NetworkDomain,
                     PrimaryVlan = PrimaryVlan,
-					Image = ServerImage, 
-					PrivateIp = PrivateIp,
+					Mcp1Image = mcp1OsImage, 
+                    Mcp2Image = mcp2OsImage,
+                    PrivateIp = PrivateIp,
                     CpuDetails = (!string.IsNullOrWhiteSpace(CpuSpeed) || CpuCoresPerSocket > 0 || CpuCount > 0)? cpuType : null,
                     MicrosoftTimeZone = MicrosoftTimeZone,
                     PrimaryDns = PrimaryDns,

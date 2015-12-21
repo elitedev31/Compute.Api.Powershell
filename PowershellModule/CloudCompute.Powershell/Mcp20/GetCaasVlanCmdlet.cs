@@ -22,8 +22,8 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasVlan")]
 	[OutputType(typeof (VlanType))]
-	public class GetCaasVlanCmdlet : PSCmdletCaasWithConnectionBase
-	{
+	public class GetCaasVlanCmdlet : PsCmdletCaasPagedWithConnectionBase
+    {
 		/// <summary>
 		///     Gets or sets the name.
 		/// </summary>
@@ -49,19 +49,19 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 		///     The process record method.
 		/// </summary>
 		protected override void ProcessRecord()
-		{
-			IEnumerable<VlanType> vlans = new List<VlanType>();
+		{			
 			base.ProcessRecord();
 			try
 			{
-				vlans = ParameterSetName.Equals("Filtered")
-					? Connection.ApiClient.Networking.Vlan.GetVlans(new VlanListOptions
-                                                                        {
-                                                                            Id  = VirtualLanId != Guid.Empty ? VirtualLanId : (Guid?)null,
-                                                                            Name = Name,
-                                                                            NetworkDomainId = (NetworkDomain != null) ? Guid.Parse(NetworkDomain.id) : (Guid?)null
-                                                                        }).Result
-					: Connection.ApiClient.Networking.Vlan.GetVlans().Result;
+			    this.WritePagedObject(Connection.ApiClient.Networking.Vlan.GetVlansPaginated(
+			        ParameterSetName.Equals("Filtered")
+			            ? new VlanListOptions
+			            {
+			                Id = VirtualLanId != Guid.Empty ? VirtualLanId : (Guid?) null,
+			                Name = Name,
+			                NetworkDomainId = (NetworkDomain != null) ? Guid.Parse(NetworkDomain.id) : (Guid?) null
+			            }
+			            : null, PageableRequest).Result);
 			}
 			catch (AggregateException ae)
 			{
@@ -81,8 +81,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
 						return true;
 					});
-			}
-		    WriteObject(vlans, true);			
+			}		    		
 		}
 	}
 }

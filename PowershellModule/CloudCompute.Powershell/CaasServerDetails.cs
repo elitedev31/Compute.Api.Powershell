@@ -47,12 +47,17 @@ namespace DD.CBU.Compute.Powershell
         /// <summary>
         ///     Gets or sets the image.
         /// </summary>
-        public ImagesWithDiskSpeedImage Image { get; set; }
+        public ImagesWithDiskSpeedImage Mcp1Image { get; set; }
 
-		/// <summary>
-		///     Gets or sets the private ip.
-		/// </summary>
-		public string PrivateIp { get; set; }
+        /// <summary>
+        ///     Gets or sets the image.
+        /// </summary>
+        public OsImageType Mcp2Image { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the private ip.
+        /// </summary>
+        public string PrivateIp { get; set; }
 
         /// <summary>
         ///     Gets or sets the network domain.

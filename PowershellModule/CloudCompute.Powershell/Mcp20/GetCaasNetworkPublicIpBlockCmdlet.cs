@@ -14,6 +14,7 @@ using System.Management.Automation;
 using DD.CBU.Compute.Api.Client;
 using DD.CBU.Compute.Api.Contracts.Network;
 using DD.CBU.Compute.Api.Contracts.Network20;
+using DD.CBU.Compute.Api.Contracts.Requests.Network20;
 
 namespace DD.CBU.Compute.Powershell.Mcp20
 {
@@ -43,10 +44,16 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         [Parameter(Mandatory = false, HelpMessage = "Filter the list based on the based public Ip block")]
 		public string BaseIp { get; set; }
 
-		/// <summary>
-		///     The process record.
-		/// </summary>
-		protected override void ProcessRecord()
+        /// <summary>
+        ///  Public Ip block id
+        /// </summary>
+        [Parameter(Mandatory = false, ParameterSetName = "MCP2", HelpMessage = "Public Ip block id")]
+        public Guid? Id { get; set; }
+
+        /// <summary>
+        ///     The process record.
+        /// </summary>
+        protected override void ProcessRecord()
 		{
 			base.ProcessRecord();
 			try
@@ -68,7 +75,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                 {
                     this.WritePagedObject(
                         Connection.ApiClient.Networking.IpAddress.GetPublicIpBlocksPaginated(
-                            Guid.Parse(NetworkDomain.id), PageableRequest).Result);
+                            Guid.Parse(NetworkDomain.id), PageableRequest, new PublicIpListOptions { BaseIp = BaseIp, Ids = Id.HasValue ? new Guid[] { Id.Value }: null }).Result);
                 }
 			}
 			catch (AggregateException ae)

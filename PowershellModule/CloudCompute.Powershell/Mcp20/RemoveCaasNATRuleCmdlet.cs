@@ -46,7 +46,6 @@ namespace DD.CBU.Compute.Powershell.Mcp20
             {
                 if (ParameterSetName.Equals("MCP1"))
                 {
-
                     var natRule = NatRule.BaseObject as Mcp1.NatRuleType;
                     if (natRule == null)
                     {

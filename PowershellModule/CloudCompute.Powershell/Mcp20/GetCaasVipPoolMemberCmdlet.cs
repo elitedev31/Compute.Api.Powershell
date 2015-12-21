@@ -13,7 +13,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
     [Cmdlet(VerbsCommon.Get, "CaasVipPoolMember")]
     [OutputType(typeof(PoolMemberType))]
-    public class GetCaasVipPoolMemberCmdlet : PSCmdletCaasWithConnectionBase
+    public class GetCaasVipPoolMemberCmdlet : PsCmdletCaasPagedWithConnectionBase
     {        
         /// <summary>
         ///     Gets or sets the network domain.
@@ -47,20 +47,23 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
         protected override void ProcessRecord()
         {
-            IEnumerable<PoolMemberType> poolMembers = new List<PoolMemberType>();
             base.ProcessRecord();
 
             try
             {
-                poolMembers = Connection.ApiClient.Networking.VipPool.GetPoolMembers(
-                                                                            (ParameterSetName.Equals("Filtered") ? new PoolMemberListOptions
-                                                                            {
-                                                                                Id = MemberId != Guid.Empty ? MemberId : (Guid?)null,                                                                                
-                                                                                NetworkDomainId = NetworkDomain != null ? Guid.Parse(NetworkDomain.id) : (Guid?)null,
-                                                                                DatacenterId = Datacenter != null ? Guid.Parse(Datacenter.id) : (Guid?)null,
-                                                                                NodeId = VipNode != null ? Guid.Parse(VipNode.id) : (Guid?)null,
-                                                                                PoolId = VipPool != null ? Guid.Parse(VipPool.id) : (Guid?)null
-                                                                            } : null)).Result;
+                this.WritePagedObject(
+                    Connection.ApiClient.Networking.VipPool.GetPoolMembersPaginated(
+                        (ParameterSetName.Equals("Filtered")
+                            ? new PoolMemberListOptions
+                            {
+                                Id = MemberId != Guid.Empty ? MemberId : (Guid?) null,
+                                NetworkDomainId = NetworkDomain != null ? Guid.Parse(NetworkDomain.id) : (Guid?) null,
+                                DatacenterId = Datacenter != null ? Guid.Parse(Datacenter.id) : (Guid?) null,
+                                NodeId = VipNode != null ? Guid.Parse(VipNode.id) : (Guid?) null,
+                                PoolId = VipPool != null ? Guid.Parse(VipPool.id) : (Guid?) null
+                            }
+                            : null),
+                        PageableRequest).Result);
             }
             catch (AggregateException ae)
             {
@@ -80,8 +83,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
                         return true;
                     });
-            }
-            WriteObject(poolMembers, true);            
+            }                      
         }
     }
 }

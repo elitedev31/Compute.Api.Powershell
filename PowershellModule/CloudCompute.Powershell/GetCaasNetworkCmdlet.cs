@@ -19,9 +19,9 @@ namespace DD.CBU.Compute.Powershell
 	/// <summary>
 	///     The get networks cmdlet.
 	/// </summary>	
-	[Cmdlet(VerbsCommon.Get, "CaasNetworks")]
+	[Cmdlet(VerbsCommon.Get, "CaasNetwork")]
 	[OutputType(typeof (NetworkWithLocationsNetwork))]
-	public class GetCaasNetworksCmdlet : PSCmdletCaasWithConnectionBase
+	public class GetCaasNetworkCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>
 		///     Get a CaaS network by name
