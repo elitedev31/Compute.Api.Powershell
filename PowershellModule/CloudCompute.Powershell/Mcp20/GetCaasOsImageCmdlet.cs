@@ -102,17 +102,15 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                     WriteObject(resultlist, true);
                 }
 
-                ServerOsImageListOptions options = null;
-			    if (ParameterSetName == "Filtered")
-			        options = new ServerOsImageListOptions()
-			        {
-			            Ids = Id.HasValue ? new Guid[] {Id.Value} : null,
-			            DatacenterId = DataCenterId,
-			            Name = Name,
-			            State = State,
-			            OperatingSystemId = OperatingSystemId,
-			            OperatingSystemFamily = OperatingSystemFamily
-			        };
+			    ServerOsImageListOptions options = new ServerOsImageListOptions()
+			    {
+			        Ids = Id.HasValue ? new Guid[] {Id.Value} : null,
+			        DatacenterId = DataCenterId,
+			        Name = Name,
+			        State = State,
+			        OperatingSystemId = OperatingSystemId,
+			        OperatingSystemFamily = OperatingSystemFamily
+			    };
 
 			    this.WritePagedObject(Connection.ApiClient.ServerManagement.ServerImage.GetOsImages(options, PageableRequest).Result);
             }
