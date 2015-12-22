@@ -125,10 +125,11 @@ namespace DD.CBU.Compute.Powershell
         public string SecondaryDns { get; set; }
 
         /// <summary>
-        ///     The  Microsoft time zone for windows machine
+        ///     The  Microsoft time zone index for windows machine (Microsoft Time Zone Index Values) 
+        /// eg : '035' for	"(GMT-05:00) Eastern Time (US and Canada)"
         /// </summary>
-        [Parameter(Mandatory = false, ParameterSetName = "MCP2_WithPrivateIp", HelpMessage = "The  Microsoft time zone for windows machine.")]
-        [Parameter(Mandatory = false, ParameterSetName = "MCP2_WithVlan", HelpMessage = "The  Microsoft time zone for windows machine.")]
+        [Parameter(Mandatory = false, ParameterSetName = "MCP2_WithPrivateIp", HelpMessage = "The  Microsoft time zone indec for windows machine.")]
+        [Parameter(Mandatory = false, ParameterSetName = "MCP2_WithVlan", HelpMessage = "The  Microsoft time zone index for windows machine.")]
         public string MicrosoftTimeZone { get; set; }
 
         /// <summary>
