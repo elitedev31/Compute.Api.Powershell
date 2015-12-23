@@ -4,7 +4,7 @@
 	using System.Runtime.Serialization;
 
     /// <summary>
-    /// The caa s organization not set exception.
+    /// The CaaS organization not set exception.
     /// </summary>	
     [Serializable]
     public class InvalidCredentialsException : ComputeApiException
