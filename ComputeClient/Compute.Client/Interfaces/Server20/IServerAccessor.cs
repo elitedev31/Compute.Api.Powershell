@@ -153,5 +153,12 @@
         /// <param name="notifyNicIpChange">The Notify NIC IP change model.</param>
         /// <returns>	A standard CaaS response </returns>
         Task<ResponseType> NotifyNicIpChange(NotifyNicIpChangeType notifyNicIpChange);
+
+        /// <summary>
+        /// Updates compute resource properties of a Server 
+        /// </summary>
+        /// <param name="reconfigureServer">Details of the server to be updated</param>
+        /// <returns>	A standard CaaS response </returns>
+        Task<ResponseType> ReconfigureServer(ReconfigureServerType reconfigureServer);
     }
 }

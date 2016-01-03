@@ -286,5 +286,17 @@
                     _apiClient.PostAsync<NotifyNicIpChangeType, ResponseType>(
                         ApiUris.NotifyNicIpChange(_apiClient.OrganizationId), notifyNicIpChange);
         }
+
+        /// <summary>
+        /// Updates compute resource properties of a Server 
+        /// </summary>
+        /// <param name="reconfigureServer">Details of the server to be updated</param>
+        /// <returns>	A standard CaaS response </returns>
+        public async Task<ResponseType> ReconfigureServer(ReconfigureServerType reconfigureServer)
+        {
+            return await _apiClient.PostAsync<ReconfigureServerType, ResponseType>(
+                ApiUris.ReconfigureServer(_apiClient.OrganizationId),
+                reconfigureServer);
+        }
     }
 }
