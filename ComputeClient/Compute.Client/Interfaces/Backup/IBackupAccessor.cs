@@ -325,5 +325,13 @@ namespace DD.CBU.Compute.Api.Client.Interfaces.Backup
 		/// <param name="targetServer">	Target server. </param>
 		/// <returns>	A Status message from the API; </returns>
 		Task<Status> OutOfPlaceRestore(string serverId, BackupClientDetailsType backupClient, DateTime asAtDate, ServerType targetServer);
+
+        /// <summary>
+        /// Retrieves a list of compatible target Servers for an Out of Place given a specific deployed Server and Backup Client Type as input.
+        /// </summary>
+        /// <param name="serverId"></param>
+        /// <param name="backupClientType"></param>
+        /// <returns></returns>
+        Task<RestoreTargetServers> GetSystemRestoreTargets(Guid serverId, string backupClientType);
     }
 }

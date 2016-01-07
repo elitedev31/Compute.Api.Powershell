@@ -493,5 +493,16 @@ namespace DD.CBU.Compute.Api.Client.Backup
 		{
 			return await this.OutOfPlaceRestore(serverId, backupClient.id, asAtDate, targetServer.id);
 		}
-    }
+
+	    /// <summary>
+	    /// Retrieves a list of compatible target Servers for an Out of Place given a specific deployed Server and Backup Client Type as input.
+	    /// </summary>
+	    /// <param name="serverId"></param>
+	    /// <param name="backupClientType"></param>
+	    /// <returns></returns>
+	    public async Task<RestoreTargetServers> GetSystemRestoreTargets(Guid serverId, string backupClientType)
+	    {
+            return await _apiClient.GetAsync<RestoreTargetServers>(ApiUris.ListofTargetServers(_apiClient.OrganizationId, serverId, backupClientType));
+        }
+	}
 }

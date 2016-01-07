@@ -2550,5 +2550,27 @@ namespace DD.CBU.Compute.Api.Client
         {
             return new Uri(string.Format(MCP2_1_PREFIX + "{0}/server/reconfigureServer", orgId), UriKind.Relative);
         }
+
+        /// <summary>
+        /// Retrieves a list of compatible target Servers for an Out of Place given a specific deployed Server and Backup Client Type as input.
+        /// </summary>
+        /// <param name="organizationId">
+        /// The organization id
+        /// </param>
+        /// <param name="serverId">
+        /// The server id
+        /// </param>
+        /// <param name="backupClientType">
+        /// The backup client id
+        /// </param>
+        /// <returns>
+        /// Returns the relative URI of the REST request for initiating a backup on the client
+        /// </returns>
+        public static Uri ListofTargetServers(Guid organizationId, Guid serverId, string backupClientType)
+        {
+            return new Uri(
+                string.Format(MCP1_0_PREFIX + "{0}/server/{1}/backup/client/{2}/systemRestoreTarget", organizationId, serverId.ToString(), backupClientType),
+                UriKind.Relative);
+        }
     }
 }
