@@ -22,16 +22,24 @@
 		/// </returns>
 		Task<IEnumerable<Account>> GetAccounts();
 
-		/// <summary>
-		/// The get administrator account.
+        /// <summary>
+		/// The get accounts with phone number.
 		/// </summary>
-		/// <param name="username">
-		/// The username.
-		/// </param>
 		/// <returns>
 		/// The <see cref="Task"/>.
 		/// </returns>
-		Task<AccountWithPhoneNumber> GetAdministratorAccount(string username);
+		Task<IEnumerable<AccountWithPhoneNumber>> GetAccountsWithPhoneNumber();
+
+        /// <summary>
+        /// The get administrator account.
+        /// </summary>
+        /// <param name="username">
+        /// The username.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        Task<AccountWithPhoneNumber> GetAdministratorAccount(string username);
 
 		/// <summary>
 		/// The add sub administrator account.

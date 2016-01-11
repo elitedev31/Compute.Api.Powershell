@@ -45,7 +45,19 @@
 			return accounts.Items;
 		}
 
-		/// <summary>
+        /// <summary>
+        /// The get accounts with phone number.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        public async Task<IEnumerable<AccountWithPhoneNumber>> GetAccountsWithPhoneNumber()
+        {
+            AccountsWithPhoneNumber accounts = await _apiClient.GetAsync<AccountsWithPhoneNumber>(ApiUris.AccountWithPhoneNumber(_apiClient.OrganizationId));
+            return accounts.Items;
+        }
+
+        /// <summary>
 		/// The get administrator account.
 		/// </summary>
 		/// <param name="username">
