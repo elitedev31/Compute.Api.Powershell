@@ -3,6 +3,7 @@
 	using System.Collections.Generic;
 	using System.Threading.Tasks;
 
+    using DD.CBU.Compute.Api.Contracts.General;
 	using DD.CBU.Compute.Api.Contracts.Image;
 	using DD.CBU.Compute.Api.Contracts.Server;
 
@@ -99,5 +100,35 @@
         /// The <see cref="Task"/>.
 		/// </returns>
         Task<ImageExportType> ExportCustomerImage(string imageId, string ovfPrefix);
-    }
+
+        /// <summary>
+        /// Copies an OVF package from a remote geo.
+        /// </summary>
+        /// <param name="newRemoteOvfCopy">
+        /// The copy request.
+        /// </param>
+		/// <returns>
+		/// The <see cref="Task"/>.
+		/// </returns>
+        Task<Status> CopyOvfPackageFromRemoteGeo(NewRemoteOvfCopy newRemoteOvfCopy);
+
+        /// <summary>
+        /// Gets OVF package copies currently in progress.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        Task<IEnumerable<OvfRemoteCopyType>> GetRemoteOvfPackageCopyInProgress();
+
+        /// <summary>
+        /// Gets OVF package copy history.
+        /// </summary>
+        /// <param name="count">
+        /// The count.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        Task<IEnumerable<CopyRemoteOvfPackageRecordType>> GetRemoteOvfPackageCopyHistory(int count = 20);
+	}
 }

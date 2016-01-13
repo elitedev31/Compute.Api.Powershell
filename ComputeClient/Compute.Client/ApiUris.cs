@@ -1589,6 +1589,51 @@ namespace DD.CBU.Compute.Api.Client
         }
 
         /// <summary>
+        /// Gets the relative URI for the CaaS API action that copy an OVF package from a remote geo.
+        /// </summary>
+		/// <param name="orgId">
+		/// The organization id
+		/// </param>
+		/// <returns>
+		/// Returns the relative URI.
+		/// </returns>
+        public static Uri RemoteOvfPackageCopy(Guid orgId)
+        {
+            return new Uri(string.Format(MCP1_0_PREFIX + "{0}/remoteOvfPackageCopy", orgId), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// Gets the relative URI for the CaaS API action to get the OVF package copies in progress.
+        /// </summary>
+		/// <param name="orgId">
+		/// The organization id
+		/// </param>
+		/// <returns>
+		/// Returns the relative URI.
+		/// </returns>
+        public static Uri GetRemoteOvfPackageCopyInProgress(Guid orgId)
+        {
+            return new Uri(string.Format(MCP1_0_PREFIX + "{0}/remoteOvfPackageCopy", orgId), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// Gets the relative URI for the CaaS API action to get the OVF package copy history.
+        /// </summary>
+		/// <param name="orgId">
+		/// The organization id
+		/// </param>
+        /// <param name="count">
+        /// The maximum number of items to return.
+        /// </param>
+		/// <returns>
+		/// Returns the relative URI.
+		/// </returns>
+        public static Uri GetRemoteOvfPackageCopyHistory(Guid orgId, int count)
+        {
+            return new Uri(string.Format(MCP1_0_PREFIX + "{0}/remoteOvfPackageCopyHistory?pageSize={1}&orderBy=startDate.DESCENDING", orgId, count), UriKind.Relative);
+        }
+
+        /// <summary>
         /// Gets the relative URI for the CaaS API action that POST a request to export a customer image
         /// </summary>
         /// <param name="orgId">
