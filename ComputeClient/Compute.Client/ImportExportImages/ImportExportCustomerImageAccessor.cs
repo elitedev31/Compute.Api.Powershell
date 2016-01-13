@@ -1,17 +1,18 @@
 ﻿namespace DD.CBU.Compute.Api.Client.ImportExportImages
 {
-	using System.Collections.Generic;
-	using System.Threading.Tasks;
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
 
-	using DD.CBU.Compute.Api.Client.Interfaces;
-	using DD.CBU.Compute.Api.Client.Interfaces.ImportExportImages;
-	using DD.CBU.Compute.Api.Contracts.Image;
-	using DD.CBU.Compute.Api.Contracts.Server;
+    using DD.CBU.Compute.Api.Client.Interfaces;
+    using DD.CBU.Compute.Api.Client.Interfaces.ImportExportImages;
+    using DD.CBU.Compute.Api.Contracts.Image;
+    using DD.CBU.Compute.Api.Contracts.Server;
 
-	/// <summary>
-	/// The import export customer image accessor.
-	/// </summary>
-	public class ImportExportCustomerImageAccessor : IImportExportCustomerImageAccessor
+    /// <summary>
+    /// The import export customer image accessor.
+    /// </summary>
+    public class ImportExportCustomerImageAccessor : IImportExportCustomerImageAccessor
 	{
 		/// <summary>
 		/// The _api client.
@@ -151,5 +152,28 @@
 							imageId = image.id
 						});
 		}
-	}
+
+        /// <summary>
+        /// The export customer image.
+        /// </summary>
+        /// <param name="imageId">
+        /// The image id.
+        /// </param>
+        /// <param name="ovfPrefix">
+        /// The ovf prefix.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        /// <exception cref="NotImplementedException">
+        /// </exception>
+        public async Task<ImageExportType> ExportCustomerImage(string imageId, string ovfPrefix)
+        {
+            return
+                await
+                _apiClient.PostAsync<NewImageExport, ImageExportType>(
+                    ApiUris.ExportCustomerImage(_apiClient.OrganizationId),
+                    new NewImageExport { ovfPackagePrefix = ovfPrefix, imageId = imageId });
+        }
+    }
 }

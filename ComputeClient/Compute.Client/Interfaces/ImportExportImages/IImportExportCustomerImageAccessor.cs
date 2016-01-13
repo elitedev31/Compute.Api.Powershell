@@ -85,5 +85,19 @@
 		Task<ImageExportType> ExportCustomerImage(
 			ImagesWithDiskSpeedImage image,
 			string ovfPrefix);
-	}
+
+        /// <summary>
+        /// The import customer image.
+        /// </summary>
+        /// <param name="imageId">
+        /// The customer image id.
+        /// </param>
+        /// <param name="ovfPrefix">
+        /// The ovf package name.
+        /// </param>
+        /// <returns>		
+        /// The <see cref="Task"/>.
+		/// </returns>
+        Task<ImageExportType> ExportCustomerImage(string imageId, string ovfPrefix);
+    }
 }
