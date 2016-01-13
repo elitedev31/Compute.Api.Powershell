@@ -1622,12 +1622,15 @@ namespace DD.CBU.Compute.Api.Client
 		/// <param name="orgId">
 		/// The organization id
 		/// </param>
+        /// <param name="count">
+        /// The maximum number of items to return.
+        /// </param>
 		/// <returns>
 		/// Returns the relative URI.
 		/// </returns>
-        public static Uri GetRemoteOvfPackageCopyHistory(Guid orgId)
+        public static Uri GetRemoteOvfPackageCopyHistory(Guid orgId, int count)
         {
-            return new Uri(string.Format(MCP1_0_PREFIX + "{0}/remoteOvfPackageCopyHistory", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP1_0_PREFIX + "{0}/remoteOvfPackageCopyHistory?pageSize={1}&orderBy=startDate.DESCENDING", orgId, count), UriKind.Relative);
         }
 
         /// <summary>

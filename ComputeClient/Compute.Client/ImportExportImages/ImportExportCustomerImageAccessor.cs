@@ -195,7 +195,7 @@
         public async Task<IEnumerable<CopyRemoteOvfPackageRecordType>> GetRemoteOvfPackageCopyHistory(int count = 20)
         {
             var result = await _apiClient.GetAsync<CopyRemoteOvfPackageHistory>(
-                ApiUris.GetRemoteOvfPackageCopyHistory(_apiClient.OrganizationId));
+                ApiUris.GetRemoteOvfPackageCopyHistory(_apiClient.OrganizationId, count));
             return result.copyRemoteOvfPackageRecord ?? new CopyRemoteOvfPackageRecordType[0];
         }
     }
