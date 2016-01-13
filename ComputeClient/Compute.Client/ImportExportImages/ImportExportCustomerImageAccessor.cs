@@ -1,17 +1,18 @@
 ﻿namespace DD.CBU.Compute.Api.Client.ImportExportImages
 {
-	using System.Collections.Generic;
-	using System.Threading.Tasks;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
 
-	using DD.CBU.Compute.Api.Client.Interfaces;
-	using DD.CBU.Compute.Api.Client.Interfaces.ImportExportImages;
-	using DD.CBU.Compute.Api.Contracts.Image;
-	using DD.CBU.Compute.Api.Contracts.Server;
+    using DD.CBU.Compute.Api.Client.Interfaces;
+    using DD.CBU.Compute.Api.Client.Interfaces.ImportExportImages;
+    using DD.CBU.Compute.Api.Contracts.General;
+    using DD.CBU.Compute.Api.Contracts.Image;
+    using DD.CBU.Compute.Api.Contracts.Server;
 
-	/// <summary>
-	/// The import export customer image accessor.
-	/// </summary>
-	public class ImportExportCustomerImageAccessor : IImportExportCustomerImageAccessor
+    /// <summary>
+    /// The import export customer image accessor.
+    /// </summary>
+    public class ImportExportCustomerImageAccessor : IImportExportCustomerImageAccessor
 	{
 		/// <summary>
 		/// The _api client.
@@ -150,6 +151,23 @@
 							ovfPackagePrefix = ovfPrefix,
 							imageId = image.id
 						});
-		}
-	}
+        }
+
+        /// <summary>
+        /// Copies an OVP package from a remote geo.
+        /// </summary>
+        /// <param name="newRemoteOvfCopy">
+        /// The copy request.
+        /// </param>
+		/// <returns>
+		/// The <see cref="Task"/>.
+		/// </returns>
+        public async Task<Status> RemoteOvfPackageCopy(NewRemoteOvfCopy newRemoteOvfCopy)
+        {
+            return await
+                this._apiClient.PostAsync<NewRemoteOvfCopy, Status>(
+                    ApiUris.RemoteOvfPackageCopy(this._apiClient.OrganizationId),
+                    newRemoteOvfCopy);
+        }
+    }
 }

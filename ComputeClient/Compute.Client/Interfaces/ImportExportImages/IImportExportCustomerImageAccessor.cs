@@ -1,15 +1,16 @@
 ﻿namespace DD.CBU.Compute.Api.Client.Interfaces.ImportExportImages
 {
-	using System.Collections.Generic;
-	using System.Threading.Tasks;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
 
-	using DD.CBU.Compute.Api.Contracts.Image;
-	using DD.CBU.Compute.Api.Contracts.Server;
+    using DD.CBU.Compute.Api.Contracts.General;
+    using DD.CBU.Compute.Api.Contracts.Image;
+    using DD.CBU.Compute.Api.Contracts.Server;
 
-	/// <summary>
-	/// The ImportExportCustomerImageAccessor interface.
-	/// </summary>
-	public interface IImportExportCustomerImageAccessor
+    /// <summary>
+    /// The ImportExportCustomerImageAccessor interface.
+    /// </summary>
+    public interface IImportExportCustomerImageAccessor
 	{
 		/// <summary>
 		/// The get ovf packages.
@@ -85,5 +86,16 @@
 		Task<ImageExportType> ExportCustomerImage(
 			ImagesWithDiskSpeedImage image,
 			string ovfPrefix);
-	}
+
+        /// <summary>
+        /// Copies an OVP package from a remote geo.
+        /// </summary>
+        /// <param name="newRemoteOvfCopy">
+        /// The copy request.
+        /// </param>
+		/// <returns>
+		/// The <see cref="Task"/>.
+		/// </returns>
+        Task<Status> RemoteOvfPackageCopy(NewRemoteOvfCopy newRemoteOvfCopy);
+    }
 }
