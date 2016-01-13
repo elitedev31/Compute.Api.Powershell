@@ -88,7 +88,7 @@
 			string ovfPrefix);
 
         /// <summary>
-        /// Copies an OVP package from a remote geo.
+        /// Copies an OVF package from a remote geo.
         /// </summary>
         /// <param name="newRemoteOvfCopy">
         /// The copy request.
@@ -96,6 +96,25 @@
 		/// <returns>
 		/// The <see cref="Task"/>.
 		/// </returns>
-        Task<Status> RemoteOvfPackageCopy(NewRemoteOvfCopy newRemoteOvfCopy);
+        Task<Status> CopyOvfPackageFromRemoteGeo(NewRemoteOvfCopy newRemoteOvfCopy);
+
+        /// <summary>
+        /// Gets OVF package copies currently in progress.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        Task<IEnumerable<OvfRemoteCopyType>> GetRemoteOvfPackageCopyInProgress();
+
+        /// <summary>
+        /// Gets OVF package copy history.
+        /// </summary>
+        /// <param name="count">
+        /// The count.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        Task<IEnumerable<CopyRemoteOvfPackageRecordType>> GetRemoteOvfPackageCopyHistory(int count = 20);
     }
 }
