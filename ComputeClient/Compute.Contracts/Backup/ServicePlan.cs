@@ -7,7 +7,7 @@ namespace DD.CBU.Compute.Api.Contracts.Backup
     public enum ServicePlan {
     
         /// <remarks/>
-        Essentials,
+        Essentials = 1,
     
         /// <remarks/>
         Advanced,
