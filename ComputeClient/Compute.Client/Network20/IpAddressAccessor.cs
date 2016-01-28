@@ -91,7 +91,7 @@ namespace DD.CBU.Compute.Api.Client.Network20
 		/// <returns>	The reserved public addresses. </returns>
 		public async Task<IEnumerable<ReservedPublicIpv4AddressType>> GetReservedPublicAddressesForNetworkDomain(Guid networkDomainId)
 		{
-			return await GetReservedPublicAddressesForNetworkDomainPaginated(networkDomainId, null);
+			return (await GetReservedPublicAddressesForNetworkDomainPaginated(networkDomainId, null)).items;
         }
 
         /// <summary>	Gets reserved public IP addresses for a network domain. </summary>
@@ -131,7 +131,7 @@ namespace DD.CBU.Compute.Api.Client.Network20
         /// <returns>	The reserved private addresses. </returns>
         public async Task<IEnumerable<ReservedPrivateIpv4AddressType>> GetReservedPrivateAddressesForVlan(Guid vlanId)
 		{
-            return await GetReservedPrivateAddressesForVlanPaginated(vlanId, null);
+            return (await GetReservedPrivateAddressesForVlanPaginated(vlanId, null)).items;
         }
 
         /// <summary>	Gets reserved private addresses. </summary>
