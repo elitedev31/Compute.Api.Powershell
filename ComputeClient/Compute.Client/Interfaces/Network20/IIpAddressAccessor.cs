@@ -50,7 +50,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces.Network20
         /// <param name="networkDomainId">	Identifier for the network domain. </param>
         /// <param name="pagingOptions">	The paging options, null means default. </param>
         /// <returns>	The reserved public addresses. </returns>
-        Task<IEnumerable<ReservedPublicIpv4AddressType>> GetReservedPublicAddressesForNetworkDomainPaginated(Guid networkDomainId, IPageableRequest pagingOptions = null);
+        Task<PagedResponse<ReservedPublicIpv4AddressType>> GetReservedPublicAddressesForNetworkDomainPaginated(Guid networkDomainId, IPageableRequest pagingOptions = null);
 
         /// <summary>	Gets reserved private addresses. </summary>
         /// <param name="vlanId">The VLAN Id.</param>
@@ -61,7 +61,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces.Network20
         /// <param name="vlanId">The VLAN Id.</param>
         /// <param name="pagingOptions">	The paging options, null means default. </param>
         /// <returns>	The reserved private addresses. </returns>
-        Task<IEnumerable<ReservedPrivateIpv4AddressType>> GetReservedPrivateAddressesForVlanPaginated(Guid vlanId, IPageableRequest pagingOptions = null);
+        Task<PagedResponse<ReservedPrivateIpv4AddressType>> GetReservedPrivateAddressesForVlanPaginated(Guid vlanId, IPageableRequest pagingOptions = null);
 
         /// <summary>	Deletes the public IP block. </summary>
         /// <param name="networkDomainId">	Identifier for the network domain. </param>

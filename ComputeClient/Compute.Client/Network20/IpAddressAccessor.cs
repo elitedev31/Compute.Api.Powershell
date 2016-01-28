@@ -98,14 +98,21 @@ namespace DD.CBU.Compute.Api.Client.Network20
         /// <param name="networkDomainId">	Identifier for the network domain. </param>
         /// <param name="pagingOptions">	The paging options, null means default. </param>
         /// <returns>	The reserved public addresses. </returns>
-        public async Task<IEnumerable<ReservedPublicIpv4AddressType>> GetReservedPublicAddressesForNetworkDomainPaginated(Guid networkDomainId, IPageableRequest pagingOptions = null)
+        public async Task<PagedResponse<ReservedPublicIpv4AddressType>> GetReservedPublicAddressesForNetworkDomainPaginated(Guid networkDomainId, IPageableRequest pagingOptions = null)
         {
             var response = await _apiClient.GetAsync<reservedPublicIpv4Addresses>(
                 ApiUris.GetReservedPublicAddresses(_apiClient.OrganizationId,
                 networkDomainId.ToString()),
                 pagingOptions);
 
-            return response.ip;
+            return new PagedResponse<ReservedPublicIpv4AddressType>
+            {
+                items = response.ip,
+                totalCount = response.totalCountSpecified ? response.totalCount : (int?)null,
+                pageCount = response.pageCountSpecified ? response.pageCount : (int?)null,
+                pageNumber = response.pageNumberSpecified ? response.pageNumber : (int?)null,
+                pageSize = response.pageSizeSpecified ? response.pageSize : (int?)null
+            };
         }
 
         /// <summary>	Gets reserved public addresses for an MCP 1.0 network. </summary>
@@ -131,13 +138,20 @@ namespace DD.CBU.Compute.Api.Client.Network20
         /// <param name="vlanId">The VLAN Id.</param>
         /// <param name="pagingOptions">	The paging options, null means default. </param>
         /// <returns>	The reserved private addresses. </returns>
-        public async Task<IEnumerable<ReservedPrivateIpv4AddressType>> GetReservedPrivateAddressesForVlanPaginated(Guid vlanId, IPageableRequest pagingOptions = null)
+        public async Task<PagedResponse<ReservedPrivateIpv4AddressType>> GetReservedPrivateAddressesForVlanPaginated(Guid vlanId, IPageableRequest pagingOptions = null)
         {
             var response = await _apiClient.GetAsync<reservedPrivateIpv4Addresses>(
                 ApiUris.GetReservedPrivateAddresses(_apiClient.OrganizationId, vlanId.ToString()),
                 pagingOptions);
 
-            return response.ipv4;
+            return new PagedResponse<ReservedPrivateIpv4AddressType>
+            {
+                items = response.ipv4,
+                totalCount = response.totalCountSpecified ? response.totalCount : (int?)null,
+                pageCount = response.pageCountSpecified ? response.pageCount : (int?)null,
+                pageNumber = response.pageNumberSpecified ? response.pageNumber : (int?)null,
+                pageSize = response.pageSizeSpecified ? response.pageSize : (int?)null
+            };
         }
 
         /// <summary>	Deletes the public IP block. </summary>
