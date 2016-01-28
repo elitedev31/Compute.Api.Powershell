@@ -91,9 +91,19 @@ namespace DD.CBU.Compute.Api.Client.Network20
 		/// <returns>	The reserved public addresses. </returns>
 		public async Task<IEnumerable<ReservedPublicIpv4AddressType>> GetReservedPublicAddressesForNetworkDomain(Guid networkDomainId)
 		{
-			var response = await _apiClient.GetAsync<reservedPublicIpv4Addresses>(
+			return await GetReservedPublicAddressesForNetworkDomainPaginated(networkDomainId, null);
+        }
+
+        /// <summary>	Gets reserved public IP addresses for a network domain. </summary>
+        /// <param name="networkDomainId">	Identifier for the network domain. </param>
+        /// <param name="pagingOptions">	The paging options, null means default. </param>
+        /// <returns>	The reserved public addresses. </returns>
+        public async Task<IEnumerable<ReservedPublicIpv4AddressType>> GetReservedPublicAddressesForNetworkDomainPaginated(Guid networkDomainId, IPageableRequest pagingOptions = null)
+        {
+            var response = await _apiClient.GetAsync<reservedPublicIpv4Addresses>(
                 ApiUris.GetReservedPublicAddresses(_apiClient.OrganizationId,
-                networkDomainId.ToString()));
+                networkDomainId.ToString()),
+                pagingOptions);
 
             return response.ip;
         }
@@ -114,8 +124,18 @@ namespace DD.CBU.Compute.Api.Client.Network20
         /// <returns>	The reserved private addresses. </returns>
         public async Task<IEnumerable<ReservedPrivateIpv4AddressType>> GetReservedPrivateAddressesForVlan(Guid vlanId)
 		{
+            return await GetReservedPrivateAddressesForVlanPaginated(vlanId, null);
+        }
+
+        /// <summary>	Gets reserved private addresses. </summary>
+        /// <param name="vlanId">The VLAN Id.</param>
+        /// <param name="pagingOptions">	The paging options, null means default. </param>
+        /// <returns>	The reserved private addresses. </returns>
+        public async Task<IEnumerable<ReservedPrivateIpv4AddressType>> GetReservedPrivateAddressesForVlanPaginated(Guid vlanId, IPageableRequest pagingOptions = null)
+        {
             var response = await _apiClient.GetAsync<reservedPrivateIpv4Addresses>(
-                ApiUris.GetReservedPrivateAddresses(_apiClient.OrganizationId, vlanId.ToString()));
+                ApiUris.GetReservedPrivateAddresses(_apiClient.OrganizationId, vlanId.ToString()),
+                pagingOptions);
 
             return response.ipv4;
         }
