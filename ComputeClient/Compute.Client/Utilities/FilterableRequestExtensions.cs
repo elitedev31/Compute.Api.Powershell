@@ -27,13 +27,14 @@
 	        if (uri == null)
 		        throw new ArgumentNullException("uri");
 
-            if (filterableRequest == null)
+            if (filterableRequest == null || filterableRequest.Filters == null)
             {
                 return uri;
             }
 
             var parameters = filterableRequest.Filters
                 .Select(filter => filter.ToString())
+                .Where(filter => !string.IsNullOrEmpty(filter))
                 .ToArray();
 
             if (parameters.Length == 0)
@@ -41,7 +42,7 @@
                 return uri;
             }
 
-            var queryString = String.Join("&", parameters);
+            var queryString = string.Join("&", parameters);
 
             return uri.ToString().Contains("?")
                 ? new Uri(uri + "&" + queryString, UriKind.Relative)

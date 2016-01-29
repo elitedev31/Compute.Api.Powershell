@@ -30,6 +30,11 @@ namespace DD.CBU.Compute.Api.Contracts.Requests
         /// </returns>
         public override string ToString()
         {
+            if (string.IsNullOrWhiteSpace(Field) || Value == null)
+            {
+                return string.Empty;
+            }
+
             string operatorString;
 
             switch (Operator)
