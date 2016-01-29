@@ -1,25 +1,47 @@
 ﻿namespace DD.CBU.Compute.Api.Contracts.Requests.Network20
 {
     using System;
-    using DD.CBU.Compute.Api.Contracts.Requests.Attributes;
 
     /// <summary>	A VLAN list options model. </summary>
-    public class SecurityGroupListOptions : IFilterableRequest
+    public class SecurityGroupListOptions : FilterableRequest
     {
+        /// <summary>
+        /// The "id" field name.
+        /// </summary>
+        public const string IdField = "id";
+
+        /// <summary>
+        /// The "name" field name.
+        /// </summary>
+        public const string NameField = "name";
+
+        /// <summary>
+        /// The "createTime" field name.
+        /// </summary>
+        public const string CreateTimeField = "createTime";
+
+        /// <summary>
+        /// The "state" field name.
+        /// </summary>
+        public const string StateField = "state";
+
         /// <summary>
         /// Gets or sets the id filter.
         /// </summary>
-        [FilterParameter("id")]
-        public Guid[] Ids { get; set; }      
-       
-        /// <summary>	Identifies VLANs by their name.
-        /// name=ProductionVLAN
-        /// Supports the use of the LIKE
-        /// comparator defined in the Paging
-        /// and Filtering for List API
-        /// Functions overview. </summary>
-        [FilterParameter("name")]
-        public string Name { get; set; }
+        public Guid? Id
+        {
+            get { return GetFilter<Guid?>(IdField); }
+            set { SetFilter(IdField, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets the Name filter.
+        /// </summary>
+        public string Name
+        {
+            get { return GetFilter<string>(NameField); }
+            set { SetFilter(NameField, value); }
+        }
 
         /// <summary>	Identifies VLANs by their state.
         /// Case insensitive. The initial possible
@@ -35,39 +57,46 @@
         /// This set of values should not be
         /// assumed to be static and can
         /// increase at any time. </summary>
-        [FilterParameter("state")]
-        public string State { get; set; }
+        public string State
+        {
+            get { return GetFilter<string>(StateField); }
+            set { SetFilter(StateField, value); }
+        }
 
-        /// <summary>	Identifies the date of creation of
-        /// Security group.
-        /// Supports MIN, MAX, LT and GT.
-        /// Refer to samples in Paging and
-        /// Filtering for List API Functions. </summary>
-        [FilterParameter("createTime", ".LT=")]
-        public DateTimeOffset? CreateTimeBefore { get; set; }
+        /// <summary>
+        /// Gets or sets the CreateTimeBefore filter.
+        /// </summary>
+        public DateTimeOffset? CreateTimeBefore
+        {
+            get { return GetFilter<DateTimeOffset?>(CreateTimeField, FilterOperator.LessThan); }
+            set { SetFilter(CreateTimeField, FilterOperator.LessThan, value); }
+        }
 
-        /// <summary>	Identifies the date of creation of
-        /// Security group.
-        /// Supports MIN, MAX, LT and GT.
-        /// Refer to samples in Paging and
-        /// Filtering for List API Functions. </summary>
-        [FilterParameter("createTime", ".GT=")]
-        public DateTimeOffset? CreateTimeAfter { get; set; }
+        /// <summary>
+        /// Gets or sets the CreateTimeAfter filter.
+        /// </summary>
+        public DateTimeOffset? CreateTimeAfter
+        {
+            get { return GetFilter<DateTimeOffset?>(CreateTimeField, FilterOperator.GreaterThan); }
+            set { SetFilter(CreateTimeField, FilterOperator.GreaterThan, value); }
+        }
 
-        /// <summary>	Identifies the date of creation of
-        /// Security group.
-        /// Supports MIN, MAX, LT and GT.
-        /// Refer to samples in Paging and
-        /// Filtering for List API Functions. </summary>
-        [FilterParameter("createTime", ".MIN=")]
-        public DateTimeOffset? CreateTimeMin { get; set; }
+        /// <summary>
+        /// Gets or sets the CreateTimeAfter Inclusive filter.
+        /// </summary>
+        public DateTimeOffset? CreateTimeMin
+        {
+            get { return GetFilter<DateTimeOffset?>(CreateTimeField, FilterOperator.LessOrEqual); }
+            set { SetFilter(CreateTimeField, FilterOperator.LessOrEqual, value); }
+        }
 
-        /// <summary>	Identifies the date of creation of
-        /// Security group.
-        /// Supports MIN, MAX, LT and GT.
-        /// Refer to samples in Paging and
-        /// Filtering for List API Functions. </summary>
-        [FilterParameter("createTime", ".MAX=")]
-        public DateTimeOffset? CreateTimeMax { get; set; }
+        /// <summary>
+        /// Gets or sets the CreateTimeMax filter.
+        /// </summary>
+        public DateTimeOffset? CreateTimeMax
+        {
+            get { return GetFilter<DateTimeOffset?>(CreateTimeField, FilterOperator.GreaterOrEqual); }
+            set { SetFilter(CreateTimeField, FilterOperator.GreaterOrEqual, value); }
+        }
     }
 }

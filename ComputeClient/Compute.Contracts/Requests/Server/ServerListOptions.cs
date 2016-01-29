@@ -1,71 +1,145 @@
 ﻿namespace DD.CBU.Compute.Api.Contracts.Requests.Server
 {
     using System;
-    using DD.CBU.Compute.Api.Contracts.Requests.Attributes;
 
     /// <summary>
     /// Filtering options for the server request.
     /// </summary>
-    public sealed class ServerListOptions : IFilterableRequest
+    public sealed class ServerListOptions : FilterableRequest
 	{
+        /// <summary>
+        /// The "id" field name.
+        /// </summary>
+        public const string IdField = "id";
+
+        /// <summary>
+        /// The "location" field name.
+        /// </summary>
+        public const string LocationField = "location";
+
+        /// <summary>
+        /// The "name" field name.
+        /// </summary>
+        public const string NameField = "name";
+
+        /// <summary>
+        /// The "machineName" field name.
+        /// </summary>
+        public const string MachineNameField = "machineName";
+
+        /// <summary>
+        /// The "networkId" field name.
+        /// </summary>
+        public const string NetworkIdField = "networkId";
+
+        /// <summary>
+        /// The "sourceImageId" field name.
+        /// </summary>
+        public const string SourceImageIdField = "sourceImageId";
+
+        /// <summary>
+        /// The "deployed" field name.
+        /// </summary>
+        public const string DeployedField = "deployed";
+
+        /// <summary>
+        /// The "createTime" field name.
+        /// </summary>
+        public const string CreateTimeField = "createTime";
+
+        /// <summary>
+        /// The "privateIp" field name.
+        /// </summary>
+        public const string PrivateIpField = "privateIp";
+
         /// <summary>
         /// Gets or sets the Id filter.
         /// </summary>
-        [FilterParameter("id")]
-		public Guid? Id { get; set; }
+        public Guid? Id
+        {
+            get { return GetFilter<Guid?>(IdField); }
+            set { SetFilter(IdField, value); }
+        }
 
         /// <summary>
         /// Gets or sets the Location filter.
         /// </summary>
-        [FilterParameter("location")]
-        public string Location { get; set; }
+        public string Location
+        {
+            get { return GetFilter<string>(LocationField); }
+            set { SetFilter(LocationField, value); }
+        }
 
         /// <summary>
         /// Gets or sets the Name filter.
         /// </summary>
-        [FilterParameter("name")]
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return GetFilter<string>(NameField); }
+            set { SetFilter(NameField, value); }
+        }
 
         /// <summary>
         /// Gets or sets the MachineName filter.
         /// </summary>
-        [FilterParameter("machineName")]
-        public string MachineName { get; set; }
+        public string MachineName
+        {
+            get { return GetFilter<string>(MachineNameField); }
+            set { SetFilter(MachineNameField, value); }
+        }
 
         /// <summary>
         /// Gets or sets the NetworkId filter.
         /// </summary>
-        [FilterParameter("networkId")]
-        public Guid? NetworkId { get; set; }
+        public Guid? NetworkId
+        {
+            get { return GetFilter<Guid?>(NetworkIdField); }
+            set { SetFilter(NetworkIdField, value); }
+        }
 
         /// <summary>
         /// Gets or sets the SourceImageId filter.
         /// </summary>
-        [FilterParameter("sourceImageId")]
-        public Guid? SourceImageId { get; set; }
+        public Guid? SourceImageId
+        {
+            get { return GetFilter<Guid?>(SourceImageIdField); }
+            set { SetFilter(SourceImageIdField, value); }
+        }
 
         /// <summary>
         /// Gets or sets the Deployed filter.
         /// </summary>
-        [FilterParameter("deployed")]
-        public string Deployed { get; set; }
+        public bool? Deployed
+        {
+            get { return GetFilter<bool?>(DeployedField); }
+            set { SetFilter(DeployedField, value); }
+        }
 
         /// <summary>
         /// Gets or sets the CreateTimeBefore filter.
         /// </summary>
-        [FilterParameter("createTime", ".LT=")]
-        public DateTimeOffset? CreateTimeBefore { get; set; }
+        public DateTimeOffset? CreateTimeBefore
+        {
+            get { return GetFilter<DateTimeOffset?>(CreateTimeField, FilterOperator.LessThan); }
+            set { SetFilter(CreateTimeField, FilterOperator.LessThan, value); }
+        }
 
         /// <summary>
         /// Gets or sets the CreateTimeAfter filter.
         /// </summary>
-        [FilterParameter("createTime", ".GT=")]
-        public DateTimeOffset? CreateTimeAfter { get; set; }
+        public DateTimeOffset? CreateTimeAfter
+        {
+            get { return GetFilter<DateTimeOffset?>(CreateTimeField, FilterOperator.GreaterThan); }
+            set { SetFilter(CreateTimeField, FilterOperator.LessThan, value); }
+        }
 
         /// <summary>
         /// Gets or sets the PrivateIp filter.
         /// </summary>
-        [FilterParameter("privateIp")]
-        public string PrivateIp { get; set; }
-	}
+        public string PrivateIp
+        {
+            get { return GetFilter<string>(PrivateIpField); }
+            set { SetFilter(PrivateIpField, value); }
+        }
+    }
 }

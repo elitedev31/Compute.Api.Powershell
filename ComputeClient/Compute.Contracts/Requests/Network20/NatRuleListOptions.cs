@@ -1,23 +1,40 @@
 ﻿using System;
-using DD.CBU.Compute.Api.Contracts.Requests.Attributes;
 
 namespace DD.CBU.Compute.Api.Contracts.Requests.Network20
 {
     /// <summary>
     /// The NAT Rule list options type.
     /// </summary>
-    public class NatRuleListOptions : IFilterableRequest
+    public class NatRuleListOptions : FilterableRequest
     {
         /// <summary>
-        /// Gets or sets the id filter.
+        /// The "id" field name.
         /// </summary>
-        [FilterParameter("id")]
-        public Guid[] Ids { get; set; }
+        public const string IdField = "id";
+
+        /// <summary>
+        /// The "state" field name.
+        /// </summary>
+        public const string StateField = "state";
+
+        /// <summary>
+        /// The "internalIp" field name.
+        /// </summary>
+        public const string InternalIpField = "internalIp";
+
+        /// <summary>
+        /// The "externalIp" field name.
+        /// </summary>
+        public const string ExternalIpField = "externalIp";
+
+        /// <summary>
+        /// The "nodeIdField" field name.
+        /// </summary>
+        public const string NodeIdField = "nodeId";
 
         /// <summary>
         /// Identifies an individual NAT Rule.
         /// </summary>
-        [FilterParameter("id")]
         public Guid? Id { get; set; }
 
         /// <summary>	
@@ -33,34 +50,37 @@ namespace DD.CBU.Compute.Api.Contracts.Requests.Network20
         /// "FAILED_DELETE" and
         /// "REQUIRES_SUPPORT".
         /// </summary>
-        [FilterParameter("state")]
-        public string State { get; set; }
-
-        /// <summary>	
-        /// Identifies the date of creation of NAT Rules.
-        /// Supports MIN, MAX, LT and GT.
-        /// Refer to samples in Paging and
-        /// Filtering for List API Functions. 
-        /// </summary>
-        [FilterParameter("createTime")]
-        public DateTime? CreateTime { get; set; }
+        public string State
+        {
+            get { return GetFilter<string>(StateField); }
+            set { SetFilter(StateField, value); }
+        }
 
         /// <summary>	
         /// Identifies internal IPv4 address addresses.
         /// </summary>
-        [FilterParameter("internalIp")]
-        public string InternalIp { get; set; }
+        public string InternalIp
+        {
+            get { return GetFilter<string>(InternalIpField); }
+            set { SetFilter(InternalIpField, value); }
+        }
 
         /// <summary>	
         /// Identifies external IPv4 addresses.
         /// </summary>
-        [FilterParameter("externalIp")]
-        public string ExternalIp { get; set; }
+        public string ExternalIp
+        {
+            get { return GetFilter<string>(ExternalIpField); }
+            set { SetFilter(ExternalIpField, value); }
+        }
 
         /// <summary>	
         /// Identifies NAT Rule by node id.
         /// </summary>
-        [FilterParameter("nodeId")]
-        public Guid? NodeId { get; set; }
+        public Guid? NodeId
+        {
+            get { return GetFilter<Guid?>(NodeIdField); }
+            set { SetFilter(NodeIdField, value); }
+        }
     }
 }

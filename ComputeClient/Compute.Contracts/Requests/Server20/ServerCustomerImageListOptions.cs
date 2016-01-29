@@ -1,71 +1,135 @@
 ﻿namespace DD.CBU.Compute.Api.Contracts.Requests.Server20
 {
     using System;
-    using DD.CBU.Compute.Api.Contracts.Requests.Attributes;
 
     /// <summary>
     /// Filtering options for the server request.
     /// </summary>
-    public sealed class ServerCustomerImageListOptions : IFilterableRequest
+    public sealed class ServerCustomerImageListOptions : FilterableRequest
     {
+        /// <summary>
+        /// The "id" field name.
+        /// </summary>
+        public const string IdField = "id";
+
+        /// <summary>
+        /// The "datacenterId" field name.
+        /// </summary>
+        public const string DatacenterIdField = "datacenterId";
+
+        /// <summary>
+        /// The "name" field name.
+        /// </summary>
+        public const string NameField = "name";
+
+        /// <summary>
+        /// The "createTime" field name.
+        /// </summary>
+        public const string CreateTimeField = "createTime";
+
+        /// <summary>
+        /// The "state" field name.
+        /// </summary>
+        public const string StateField = "state";
+
+        /// <summary>
+        /// The "operatingSystemId" field name.
+        /// </summary>
+        public const string OperatingSystemIdField = "operatingSystemId";
+
+        /// <summary>
+        /// The "operatingSystemFamily" field name.
+        /// </summary>
+        public const string OperatingSystemFamilyField = "operatingSystemFamily";
+
         /// <summary>
         /// Gets or sets the id filter.
         /// </summary>
-        [FilterParameter("id")]
-        public Guid[] Ids { get; set; }
+        public Guid? Id
+        {
+            get { return GetFilter<Guid?>(IdField); }
+            set { SetFilter(IdField, value); }
+        }
 
         /// <summary>
         /// Gets or sets the DatacenterId filter.
         /// </summary>
-        [FilterParameter("datacenterId")]
-        public string DatacenterId { get; set; }     
+        public string DatacenterId
+        {
+            get { return GetFilter<string>(DatacenterIdField); }
+            set { SetFilter(DatacenterIdField, value); }
+        }
 
         /// <summary>
         /// Gets or sets the Name filter.
         /// </summary>
-        [FilterParameter("name")]
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return GetFilter<string>(NameField); }
+            set { SetFilter(NameField, value); }
+        }
 
         /// <summary>
         /// Gets or sets the CreateTimeBefore filter.
         /// </summary>
-        [FilterParameter("createTime", ".LT=")]
-        public DateTimeOffset? CreateTimeBefore { get; set; }
+        public DateTimeOffset? CreateTimeBefore
+        {
+            get { return GetFilter<DateTimeOffset?>(CreateTimeField, FilterOperator.LessThan); }
+            set { SetFilter(CreateTimeField, FilterOperator.LessThan, value); }
+        }
 
         /// <summary>
         /// Gets or sets the CreateTimeAfter filter.
         /// </summary>
-        [FilterParameter("createTime", ".GT=")]
-        public DateTimeOffset? CreateTimeAfter { get; set; }
+        public DateTimeOffset? CreateTimeAfter
+        {
+            get { return GetFilter<DateTimeOffset?>(CreateTimeField, FilterOperator.GreaterThan); }
+            set { SetFilter(CreateTimeField, FilterOperator.GreaterThan, value); }
+        }
 
         /// <summary>
         /// Gets or sets the CreateTimeAfter Inclusive filter.
         /// </summary>
-        [FilterParameter("createTime", ".MIN=")]
-        public DateTimeOffset? CreateTimeMin { get; set; }
+        public DateTimeOffset? CreateTimeMin
+        {
+            get { return GetFilter<DateTimeOffset?>(CreateTimeField, FilterOperator.LessOrEqual); }
+            set { SetFilter(CreateTimeField, FilterOperator.LessOrEqual, value); }
+        }
 
         /// <summary>
         /// Gets or sets the CreateTimeMax filter.
         /// </summary>
-        [FilterParameter("createTime", ".MAX=")]
-        public DateTimeOffset? CreateTimeMax { get; set; }
+        public DateTimeOffset? CreateTimeMax
+        {
+            get { return GetFilter<DateTimeOffset?>(CreateTimeField, FilterOperator.GreaterOrEqual); }
+            set { SetFilter(CreateTimeField, FilterOperator.GreaterOrEqual, value); }
+        }
 
         /// <summary>
         /// Gets or sets the State filter.
         /// </summary>
-        [FilterParameter("state")]
-        public string State { get; set; }
+        public string State
+        {
+            get { return GetFilter<string>(StateField); }
+            set { SetFilter(StateField, value); }
+        }
 
         /// <summary>
         /// Gets or sets the Operating SystemId filter like REDHAT664.
         /// </summary>
-        [FilterParameter("operatingSystemId")]
-        public string OperatingSystemId { get; set; }
+        public string OperatingSystemId
+        {
+            get { return GetFilter<string>(OperatingSystemIdField); }
+            set { SetFilter(OperatingSystemIdField, value); }
+        }
 
         /// <summary>
         /// Gets or sets the Operating System Family filter. eg : UNIX
         /// </summary>
-        [FilterParameter("operatingSystemFamily")]
-        public string OperatingSystemFamily { get; set; }
-	}
+        public string OperatingSystemFamily
+        {
+            get { return GetFilter<string>(OperatingSystemFamilyField); }
+            set { SetFilter(OperatingSystemFamilyField, value); }
+        }
+    }
 }

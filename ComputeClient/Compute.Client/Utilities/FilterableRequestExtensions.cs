@@ -2,10 +2,8 @@
 {
     using System;
     using System.Linq;
-    using System.Reflection;
 
     using DD.CBU.Compute.Api.Contracts.Requests;
-    using DD.CBU.Compute.Api.Contracts.Requests.Attributes;
 
     /// <summary>
     /// Provides utility methods to append filtering options to URIs.
@@ -34,11 +32,8 @@
                 return uri;
             }
 
-            var parameters = filterableRequest
-                .GetType()
-                .GetProperties()
-                .Select(property => FormatFilterProperty(filterableRequest, property))
-                .Where(property => property != null)
+            var parameters = filterableRequest.Filters
+                .Select(filter => filter.ToString())
                 .ToArray();
 
             if (parameters.Length == 0)
@@ -51,64 +46,6 @@
             return uri.ToString().Contains("?")
                 ? new Uri(uri + "&" + queryString, UriKind.Relative)
                 : new Uri(uri + "?" + queryString, UriKind.Relative);
-        }
-
-        /// <summary>
-        /// Formats the supplied property as a API request filter query parameter.
-        /// </summary>
-        /// <param name="listOptions">
-        /// The list options object.
-        /// </param>
-        /// <param name="property">
-        /// The property information.
-        /// </param>
-        /// <returns>
-        /// The formatted parameter query string or null.
-        /// </returns>
-        private static string FormatFilterProperty(object listOptions, PropertyInfo property)
-        {
-            // Get the attribute with the filter metadata.
-            var attribute = property.GetCustomAttributes(typeof(FilterParameterAttribute), true)
-                .Cast<FilterParameterAttribute>()
-                .FirstOrDefault();
-            if (attribute == null)
-            {
-                return null;
-            }
-
-            // Get the value.
-            var value = property.GetValue(listOptions);
-            if (value == null)
-            {
-                return null;
-            }
-
-            var stringValue = value.ToString();
-
-            if (property.PropertyType == typeof(string[]))
-                return String.Join("&", ((string[])value).Select(v => attribute.ParameterName + "=" + v));
-
-            if (property.PropertyType == typeof(Guid[]))
-                return String.Join("&", ((Guid[])value).Select(v => attribute.ParameterName + "=" + v.ToString()));
-
-            if (property.PropertyType == typeof(DateTime?))
-                stringValue = ((DateTime?)value).Value.ToString("o");
-
-            if (property.PropertyType == typeof(DateTimeOffset?))
-                stringValue = ((DateTimeOffset?)value).Value.ToString("o");
-
-            if (property.PropertyType == typeof(bool?))
-                stringValue = stringValue.ToLower();
-
-            // Get the operator.
-            var op = attribute.Operator;
-            if (String.IsNullOrEmpty(op))
-            {
-                op = stringValue.Contains("*") ? ".LIKE=" : "=";
-            }
-
-            // Format the query string.
-            return attribute.ParameterName + op + stringValue;
         }
     }
 }

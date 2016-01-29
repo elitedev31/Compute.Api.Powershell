@@ -195,7 +195,9 @@
     <Compile Include="Network\PortRangeTypeType.cs" />
     <Compile Include="Network20\PublicIPBlock.cs" />
     <Compile Include="Network20\Server.cs" />
-    <Compile Include="Requests\Attributes\FilterParameterAttribute.cs" />
+    <Compile Include="Requests\Filter.cs" />
+    <Compile Include="Requests\FilterOperator.cs" />
+    <Compile Include="Requests\FilterableRequest.cs" />
     <Compile Include="Requests\IFilterableRequest.cs" />
     <Compile Include="Requests\Infrastructure\OperatingSystemListOptions.cs" />
     <Compile Include="Requests\Infrastructure\DataCenterListOptions.cs" />

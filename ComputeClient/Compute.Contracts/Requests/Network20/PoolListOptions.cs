@@ -1,42 +1,87 @@
 ﻿using System;
-using DD.CBU.Compute.Api.Contracts.Requests.Attributes;
 
 namespace DD.CBU.Compute.Api.Contracts.Requests.Network20
 {
     /// <summary>
     /// The pool list options.
     /// </summary>
-    public class PoolListOptions: IFilterableRequest
+    public class PoolListOptions: FilterableRequest
     {
+        /// <summary>
+        /// The "id" field name.
+        /// </summary>
+        public const string IdField = "id";
+
+        /// <summary>
+        /// The "networkDomainId" field name.
+        /// </summary>
+        public const string NetworkDomainIdField = "networkDomainId";
+
+        /// <summary>
+        /// The "datacenterId" field name.
+        /// </summary>
+        public const string DatacenterIdField = "datacenterId";
+
+        /// <summary>
+        /// The "name" field name.
+        /// </summary>
+        public const string NameField = "name";
+
+        /// <summary>
+        /// The "state" field name.
+        /// </summary>
+        public const string StateField = "state";
+
+        /// <summary>
+        /// The "loadBalancedMethod" field name.
+        /// </summary>
+        public const string LoadBalancedMethodField = "loadBalancedMethod";
+
+        /// <summary>
+        /// The "serviceDownAction" field name.
+        /// </summary>
+        public const string ServiceDownActionField = "serviceDownAction";
+
+        /// <summary>
+        /// The "slowRampTime" field name.
+        /// </summary>
+        public const string SlowRampTimeField = "slowRampTime";
+
         /// <summary>
         /// Gets or sets the id filter.
         /// </summary>
-        [FilterParameter("id")]
-        public Guid[] Ids { get; set; }
-
-        /// <summary>	
-        /// Identifies an individual Pool.
-        /// </summary>
-        [FilterParameter("id")]
-        public Guid? Id { get; set; }
+        public Guid? Id
+        {
+            get { return GetFilter<Guid?>(IdField); }
+            set { SetFilter(IdField, value); }
+        }
 
         /// <summary>	
         /// Identifies an individual Network Domain.
         /// </summary>
-        [FilterParameter("networkDomainId")]
-        public Guid? NetworkDomainId { get; set; }
+        public Guid? NetworkDomainId
+        {
+            get { return GetFilter<Guid?>(NetworkDomainIdField); }
+            set { SetFilter(NetworkDomainIdField, value); }
+        }
 
         /// <summary>	
         /// Identifies an individual Data Center.
         /// </summary>
-        [FilterParameter("datacenterId")]
-        public Guid? DatacenterId { get; set; }
+        public string DatacenterId
+        {
+            get { return GetFilter<string>(DatacenterIdField); }
+            set { SetFilter(DatacenterIdField, value); }
+        }
 
         /// <summary>	
         /// Identifies Pools by their name.
         /// </summary>
-        [FilterParameter("name")]
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return GetFilter<string>(NameField); }
+            set { SetFilter(NameField, value); }
+        }
 
         /// <summary>	
         /// Identifies Pools by their state.
@@ -50,38 +95,39 @@ namespace DD.CBU.Compute.Api.Contracts.Requests.Network20
         /// "FAILED_DELETE" and
         /// "REQUIRES_SUPPORT".
         /// </summary>
-        [FilterParameter("state")]
-        public string State { get; set; }
-
-        /// <summary>	
-        /// Identifies the date of creation of Pools.
-        /// Supports MIN, MAX, LT and GT.
-        /// Refer to samples in Paging and
-        /// Filtering for List API Functions. 
-        /// </summary>
-        [FilterParameter("createTime")]
-        public DateTime? CreateTime { get; set; }
+        public string State
+        {
+            get { return GetFilter<string>(StateField); }
+            set { SetFilter(StateField, value); }
+        }
 
         /// <summary>	
         /// Identifies Pools with the supplied loadBalanceMethod(s).
         /// loadBalanceMethod=ROUND_ROBIN
         /// </summary>
-        [FilterParameter("loadBalancedMethod")]
-        public string LoadBalancedMethod { get; set; }
+        public string LoadBalancedMethod
+        {
+            get { return GetFilter<string>(LoadBalancedMethodField); }
+            set { SetFilter(LoadBalancedMethodField, value); }
+        }
 
         /// <summary>	
         /// Filters the list to Pools with the supplied serviceDownAction(s).
         /// serviceDownAction=DROP
         /// </summary>
-        [FilterParameter("serviceDownAction")]
-        public string ServiceDownAction { get; set; }
+        public string ServiceDownAction
+        {
+            get { return GetFilter<string>(ServiceDownActionField); }
+            set { SetFilter(ServiceDownActionField, value); }
+        }
 
         /// <summary>	
         /// Filters the list to Pools with the supplied slowRampTime(s).
-        /// Supports MIN, MAX, LT and GT. 
-        /// slowRampTime.GT=10
         /// </summary>
-        [FilterParameter("slowRampTime")]
-        public int? SlowRampTime { get; set; }
+        public int? SlowRampTime
+        {
+            get { return GetFilter<int?>(SlowRampTimeField); }
+            set { SetFilter(SlowRampTimeField, value); }
+        }
     }
 }
