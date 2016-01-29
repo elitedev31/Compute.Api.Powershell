@@ -59,9 +59,9 @@
         /// <summary>	
         /// Identifies an individual Data Center.
         /// </summary>
-        public Guid? DatacenterId
+        public string DatacenterId
         {
-            get { return GetFilter<Guid?>(DatacenterIdField); }
+            get { return GetFilter<string>(DatacenterIdField); }
             set { SetFilter(DatacenterIdField, value); }
         }
 
