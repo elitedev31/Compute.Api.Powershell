@@ -772,31 +772,46 @@ namespace DD.CBU.Compute.Api.Client
 			return await ServerManagementLegacy.ServerImage.RemoveCustomerServerImage(imageId);
 		}
 
-		/// <summary>
-		/// The deploy server image task.
-		/// </summary>
-		/// <param name="name">
-		/// The name.
-		/// </param>
-		/// <param name="description">
-		/// The description.
-		/// </param>
-		/// <param name="networkId">
-		/// The network id.
-		/// </param>
-		/// <param name="imageId">
-		/// The image id.
-		/// </param>
-		/// <param name="adminPassword">
-		/// The admin password.
-		/// </param>
-		/// <param name="isStarted">
-		/// The is started.
-		/// </param>
-		/// <returns>
-		/// The <see cref="Task"/>.
-		/// </returns>
-		[Obsolete("This method is deprecated, please use DeployServerWithDiskSpeedImageTask instead.")]
+	    /// <summary>
+	    /// Clean failed customer server image.
+	    /// </summary>
+	    /// <param name="imageId">
+	    /// The image id.
+	    /// </param>
+	    /// <returns>
+	    /// The <see cref="Task"/>.
+	    /// </returns>
+	    [Obsolete("Use IComputeApiClient.ServerManagementLegacy.ServerImage instead")]
+        public async Task<Status> CleanFailedCustomerServerImage(string imageId)
+        {
+            return await ServerManagementLegacy.ServerImage.CleanFailedCustomerServerImage(imageId);
+        }
+
+        /// <summary>
+        /// The deploy server image task.
+        /// </summary>
+        /// <param name="name">
+        /// The name.
+        /// </param>
+        /// <param name="description">
+        /// The description.
+        /// </param>
+        /// <param name="networkId">
+        /// The network id.
+        /// </param>
+        /// <param name="imageId">
+        /// The image id.
+        /// </param>
+        /// <param name="adminPassword">
+        /// The admin password.
+        /// </param>
+        /// <param name="isStarted">
+        /// The is started.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        [Obsolete("This method is deprecated, please use DeployServerWithDiskSpeedImageTask instead.")]
 		public async Task<Status> DeployServerImageTask(
 			string name,
 			string description,

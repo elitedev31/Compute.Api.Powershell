@@ -234,6 +234,17 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 
 
         /// <summary>
+        /// Clean failed customer image
+        /// </summary>
+        /// <param name="imageid">
+        /// The image id</param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        [Obsolete]
+        Task<Status> CleanFailedCustomerServerImage(string imageid);
+
+        /// <summary>
         /// Deploy a server using an image in a specified network.
         /// </summary>
 		/// <param name="name">
