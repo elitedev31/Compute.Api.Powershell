@@ -772,21 +772,6 @@ namespace DD.CBU.Compute.Api.Client
 			return await ServerManagementLegacy.ServerImage.RemoveCustomerServerImage(imageId);
 		}
 
-	    /// <summary>
-	    /// Clean failed customer server image.
-	    /// </summary>
-	    /// <param name="imageId">
-	    /// The image id.
-	    /// </param>
-	    /// <returns>
-	    /// The <see cref="Task"/>.
-	    /// </returns>
-	    [Obsolete("Use IComputeApiClient.ServerManagementLegacy.ServerImage instead")]
-        public async Task<Status> CleanFailedCustomerServerImage(string imageId)
-        {
-            return await ServerManagementLegacy.ServerImage.CleanFailedCustomerServerImage(imageId);
-        }
-
         /// <summary>
         /// The deploy server image task.
         /// </summary>
