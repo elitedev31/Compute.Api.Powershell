@@ -232,7 +232,6 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 		[Obsolete]
         Task<Status> RemoveCustomerServerImage(string imageid);
 
-
         /// <summary>
         /// Deploy a server using an image in a specified network.
         /// </summary>

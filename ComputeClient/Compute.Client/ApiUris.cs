@@ -422,6 +422,23 @@ namespace DD.CBU.Compute.Api.Client
                 string.Format(MCP1_0_PREFIX + "{0}/image/{1}?delete", orgId, imageId), UriKind.Relative);
         }
 
+        /// <summary>
+        /// Gets the relative URI for the CaaS API action that clean a failed customer image.
+        /// </summary>
+        /// <param name="orgId">
+        /// The organization id
+        /// </param>
+        /// <param name="imageId">
+        /// The customer image id
+        /// </param>
+        /// <returns>
+        /// The <see cref="Uri"/>.
+        /// </returns>
+        public static Uri CleanFailedCustomerServerImage(Guid orgId, string imageId)
+        {
+            return new Uri(
+                string.Format(MCP1_0_PREFIX + "{0}/image/{1}?clean", orgId, imageId), UriKind.Relative);
+        }
 
         /// <summary>
         /// Gets the relative URI for the CaaS API action that copies customer source image.
