@@ -64,7 +64,8 @@
         /// <param name="value">The value.</param>
         protected void SetFilter(string field, object value)
         {
-            SetFilter(field, (value is string && value.ToString().Contains("*")) ? FilterOperator.Like : FilterOperator.Equals, value);
+            var op = (value is string && value.ToString().Contains("*")) ? FilterOperator.Like : FilterOperator.Equals;
+            SetFilter(field, op, value);
         }
 
         /// <summary>
@@ -90,13 +91,13 @@
                 {
                     filter = new Filter
                     {
-                        Field = field,
-                        Operator = @operator
+                        Field = field
                     };
 
                     Filters.Add(filter);
                 }
 
+                filter.Operator = @operator;
                 filter.Value = value;
             }
         }
