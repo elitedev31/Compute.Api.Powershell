@@ -1,4 +1,6 @@
-﻿using DD.CBU.Compute.Api.Contracts.Network20;
+﻿using System.Linq;
+using System.Text;
+using DD.CBU.Compute.Api.Contracts.Network20;
 
 namespace DD.CBU.Compute.Api.Client.WebApi
 {
@@ -23,13 +25,7 @@ namespace DD.CBU.Compute.Api.Client.WebApi
 	    /// <summary>
 	    /// Media type formatters used to serialise and deserialise data contracts when communicating with the CaaS API.
 	    /// </summary>
-	    private readonly MediaTypeFormatterCollection _mediaTypeFormatters =
-	        new MediaTypeFormatterCollection(
-	            new MediaTypeFormatter[2]
-	            {
-	                (MediaTypeFormatter) new XmlMediaTypeFormatter(),
-	                (MediaTypeFormatter) new FormUrlEncodedMediaTypeFormatter()
-	            });
+	    private readonly MediaTypeFormatterCollection _mediaTypeFormatters;	     
 
 		/// <summary>
 		/// The <see cref="HttpClient"/> used to communicate with the CaaS API.
@@ -41,17 +37,30 @@ namespace DD.CBU.Compute.Api.Client.WebApi
 		/// </summary>
 		Guid _organizationId;
 
-		/// <summary>
-		/// Initialises a new instance of the <see cref="WebApi"/> class.
-		/// </summary>
-		private WebApi()
-		{
-			_mediaTypeFormatters.XmlFormatter.UseXmlSerializer = true;
-			_mediaTypeFormatters.Add(new TextMediaTypeFormatter());
-			_mediaTypeFormatters.Add(new CsvMediaTypeFormatter());
-		}
+	    /// <summary>
+	    /// Initialises a new instance of the <see cref="WebApi"/> class.
+	    /// </summary>
+	    private WebApi()
+	    {
+            // Work around for handling cases where Cloud control api returns non utf-8 characters 
+            // in the xml response marked as utf-8
+	        var xmlFormatter = new XmlMediaTypeFormatter();
+            xmlFormatter.SupportedEncodings.Clear();
+            xmlFormatter.SupportedEncodings.Add((Encoding)new UTF8Encoding(false, false));
+            xmlFormatter.SupportedEncodings.Add((Encoding)new UnicodeEncoding(false, true, false));
 
-		/// <summary>
+            _mediaTypeFormatters = new MediaTypeFormatterCollection(
+	            new MediaTypeFormatter[4]
+	            {
+	                (MediaTypeFormatter) xmlFormatter,
+                    (MediaTypeFormatter) new FormUrlEncodedMediaTypeFormatter(),
+	                (MediaTypeFormatter) new TextMediaTypeFormatter(),
+	                (MediaTypeFormatter) new CsvMediaTypeFormatter()
+	            });
+	        _mediaTypeFormatters.XmlFormatter.UseXmlSerializer = true;
+	    }
+
+	    /// <summary>
 		/// Initialises a new instance of the <see cref="WebApi"/> class.
 		/// </summary>
 		/// <param name="client">
