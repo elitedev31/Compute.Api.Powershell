@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.IO;
+using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using DD.CBU.Compute.Api.Contracts.Network20;
 
@@ -161,7 +163,38 @@ namespace DD.CBU.Compute.Api.Client.WebApi
                 }
                 else
                 {
-                    return await response.Content.ReadAsAsync<TResult>(_mediaTypeFormatters);
+                    try
+                    {
+                        return await response.Content.ReadAsAsync<TResult>(_mediaTypeFormatters);
+                    }
+                    catch (Exception ex)
+                    {
+                        var decoderException = ex.InnerException?.InnerException as System.Text.DecoderFallbackException;
+                        if (decoderException != null)
+                        {
+                            // This is work-around for handling Unicode characters being passed as ansi in utf-8 stream.
+                            // eg: \xE8 = 'è' but the utf-8 encoding should be \xc3a8, this causes the ut8 parser to fail
+                            // but string parser handles it well and replaces it with "\xFFFD"
+                            MediaTypeHeaderValue mediaType = response.Content.Headers.ContentType != null
+                                ? response.Content.Headers.ContentType
+                                : new MediaTypeHeaderValue("text/xml");
+                            MediaTypeFormatter formatter = new MediaTypeFormatterCollection(_mediaTypeFormatters).FindReader(typeof(TResult), mediaType);
+
+                            if (formatter == null)
+                                throw;
+
+                            var contentText = await response.Content.ReadAsStringAsync();
+                            MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(contentText));
+                            return
+                                (TResult)
+                                    (object)
+                                        (await
+                                            formatter.ReadFromStreamAsync(typeof (TResult), ms, response.Content, null));                            
+                        }
+
+                        throw;
+                    }
+                    
                 }
             }
 		}
