@@ -21,7 +21,9 @@
   <files>
     <file src="bin\Release\DD.CBU.Compute.Api.Client.dll" target="lib\net45\DD.CBU.Compute.Api.Client.dll" />
     <file src="bin\Release\DD.CBU.Compute.Api.Client.xml" target="lib\net45\DD.CBU.Compute.Api.Client.xml" />
+    <file src="bin\Release\DD.CBU.Compute.Api.Client.xml" target="lib\net45\DD.CBU.Compute.Api.Client.pdb" />
     <file src="bin\Release\DD.CBU.Compute.Api.Contracts.dll" target="lib\net45\DD.CBU.Compute.Api.Contracts.dll" />
     <file src="bin\Release\DD.CBU.Compute.Api.Contracts.xml" target="lib\net45\DD.CBU.Compute.Api.Contracts.xml" />
+    <file src="bin\Release\DD.CBU.Compute.Api.Contracts.xml" target="lib\net45\DD.CBU.Compute.Api.Contracts.pdb" />
   </files>
 </package>
