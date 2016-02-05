@@ -169,7 +169,7 @@ namespace DD.CBU.Compute.Api.Client.WebApi
                     }
                     catch (Exception ex)
                     {
-                        var decoderException = ex.InnerException?.InnerException as System.Text.DecoderFallbackException;
+                        var decoderException = ex.InnerException != null ? ex.InnerException.InnerException as System.Text.DecoderFallbackException : null;
                         if (decoderException != null)
                         {
                             // This is work-around for handling Unicode characters being passed as ansi in utf-8 stream.
