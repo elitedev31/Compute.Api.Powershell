@@ -75,7 +75,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                 {
                     this.WritePagedObject(
                         Connection.ApiClient.Networking.IpAddress.GetPublicIpBlocksPaginated(
-                            Guid.Parse(NetworkDomain.id), PageableRequest, new PublicIpListOptions { BaseIp = BaseIp, Ids = Id.HasValue ? new Guid[] { Id.Value }: null }).Result);
+                            Guid.Parse(NetworkDomain.id), PageableRequest, new PublicIpListOptions { BaseIp = BaseIp, Id = Id }).Result);
                 }
 			}
 			catch (AggregateException ae)
