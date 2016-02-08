@@ -104,7 +104,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
 			    ServerOsImageListOptions options = new ServerOsImageListOptions()
 			    {
-			        Ids = Id.HasValue ? new Guid[] {Id.Value} : null,
+			        Id = Id,
 			        DatacenterId = DataCenterId,
 			        Name = Name,
 			        State = State,
