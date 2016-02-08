@@ -1,4 +1,6 @@
-﻿namespace DD.CBU.Compute.Api.Client.Account
+﻿using DD.CBU.Compute.Api.Contracts.Organization;
+
+namespace DD.CBU.Compute.Api.Client.Account
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -225,6 +227,17 @@
         public async Task<Status> DesignatePrimaryAdministratorAccount(string username)
 		{
 			return await _apiClient.GetAsync<Status>(ApiUris.SetPrimaryAdministrator(_apiClient.OrganizationId, username));
-		}	
+		}
+
+        /// <summary>
+        /// The get two factor authentication status.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        public async Task<TwoFactorAuthentication> GetTwoFactorAuthenticationStatus()
+        {
+            return await _apiClient.GetAsync<TwoFactorAuthentication>(ApiUris.GetTwoFactorAuthenicationStatus(_apiClient.OrganizationId));
+        }
 	}
 }

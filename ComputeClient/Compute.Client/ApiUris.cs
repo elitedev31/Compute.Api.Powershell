@@ -2634,5 +2634,15 @@ namespace DD.CBU.Compute.Api.Client
                 string.Format(MCP1_0_PREFIX + "{0}/server/{1}/backup/client/{2}/systemRestoreTarget", organizationId, serverId.ToString(), backupClientType),
                 UriKind.Relative);
         }
+
+        /// <summary>
+        /// Returns the relative URI of the REST request for two factor authentication status.
+        /// </summary>
+        /// <param name="orgId">The organization id.</param>
+        /// <returns> The <see cref="Uri"/>.</returns>
+        public static Uri GetTwoFactorAuthenicationStatus(Guid orgId)
+        {
+            return new Uri(string.Format(MCP1_0_PREFIX + "{0}/twoFactorAuth", orgId), UriKind.Relative);
+        }
     }
 }

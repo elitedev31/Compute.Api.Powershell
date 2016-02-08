@@ -1,4 +1,7 @@
-﻿namespace DD.CBU.Compute.Api.Client.Interfaces.Account
+﻿using System;
+using DD.CBU.Compute.Api.Contracts.Organization;
+
+namespace DD.CBU.Compute.Api.Client.Interfaces.Account
 {
 	using System.Collections.Generic;
 	using System.Threading.Tasks;
@@ -122,5 +125,13 @@
         /// The <see cref="Task"/>.
         /// </returns>
         Task<Status> DesignatePrimaryAdministratorAccount(string username);
-	}
+
+        /// <summary>
+        /// The get two factor authentication status.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        Task<TwoFactorAuthentication> GetTwoFactorAuthenticationStatus();
+    }
 }
