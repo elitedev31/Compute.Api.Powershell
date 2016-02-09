@@ -901,6 +901,14 @@ namespace DD.CBU.Compute.Api.Client
 
         /// <summary>Gets the list anti affinity rule URL.</summary>
         /// <param name="orgId">The org Id.</param>
+        /// <returns>The URL.</returns>
+        public static Uri GetMcp2GetAntiAffinityRules(Guid orgId)
+        {
+            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/server/antiAffinityRule", orgId), UriKind.Relative);
+        }
+
+        /// <summary>Gets the list anti affinity rule URL.</summary>
+        /// <param name="orgId">The org Id.</param>
         /// <param name="serverId">The server Id.</param>
         /// <returns>The URL.</returns>
         public static Uri GetMcp2GetAntiAffinityRulesForServer(Guid orgId, Guid serverId)

@@ -33,6 +33,35 @@
         }
 
         /// <summary>
+        /// Gets the available anti affinity rules.
+        /// </summary>
+        /// <param name="filteringOptions">
+        /// The filtering options.
+        /// </param>
+        /// <param name="pagingOptions">
+        /// The paging options.
+        /// </param>
+        /// <returns>
+        /// Collection of <see cref="AntiAffinityRuleType"/>.
+        /// </returns>
+        public async Task<PagedResponse<AntiAffinityRuleType>> GetAntiAffinityRulesForServerPaginated(AntiAffinityRuleListOptions filteringOptions, IPageableRequest pagingOptions = null)
+        {
+            var response = await _apiClient.GetAsync<antiAffinityRules>(
+                ApiUris.GetMcp2GetAntiAffinityRules(_apiClient.OrganizationId),
+                pagingOptions,
+                filteringOptions);
+
+            return new PagedResponse<AntiAffinityRuleType>
+            {
+                items = response.antiAffinityRule,
+                totalCount = response.totalCountSpecified ? response.totalCount : (int?)null,
+                pageCount = response.pageCountSpecified ? response.pageCount : (int?)null,
+                pageNumber = response.pageNumberSpecified ? response.pageNumber : (int?)null,
+                pageSize = response.pageSizeSpecified ? response.pageSize : (int?)null
+            };
+        }
+
+        /// <summary>
         /// Gets the available anti affinity rules for a specific server.
         /// </summary>
         /// <param name="serverId">
