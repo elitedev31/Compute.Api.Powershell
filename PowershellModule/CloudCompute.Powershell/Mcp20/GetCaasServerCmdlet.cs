@@ -82,7 +82,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 			{
 			    this.WritePagedObject(Connection.ApiClient.ServerManagement.Server.GetServersPaginated(new ServerListOptions()
 			    {
-			        Ids = ServerId.HasValue ? new Guid[] {ServerId.Value} : null,
+			        Id = ServerId,
 			        Name = Name,
 			        NetworkId = Network != null ? Guid.Parse(Network.id) : (Guid?) null,
 			        NetworkDomainId = NetworkDomain != null ? Guid.Parse(NetworkDomain.id) : (Guid?) null,

@@ -87,6 +87,7 @@
     <Compile Include="..\SolutionAssemblyInfo.cs">
       <Link>Properties\SolutionAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Organization\TwoFactorAuthentication.cs" />
     <Compile Include="Backup\AlertingType.cs" />
     <Compile Include="Backup\BackupClientDetailsType.cs" />
     <Compile Include="Backup\BackupClientType.cs" />

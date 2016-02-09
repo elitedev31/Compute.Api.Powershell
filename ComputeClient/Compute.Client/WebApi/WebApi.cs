@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Linq;
 using System.Net.Http.Headers;
+using System.Runtime.ExceptionServices;
 using System.Text;
 using DD.CBU.Compute.Api.Contracts.Network20;
 
@@ -157,44 +158,13 @@ namespace DD.CBU.Compute.Api.Client.WebApi
 					await HandleApiRequestErrors(response, relativeOperationUri);		
 				}
 
-                if (typeof(TResult) == typeof(string))
+                if (typeof (TResult) == typeof (string))
                 {
-                    return (TResult)(object)(await response.Content.ReadAsStringAsync());
+                    return (TResult) (object) (await response.Content.ReadAsStringAsync());
                 }
                 else
                 {
-                    try
-                    {
-                        return await response.Content.ReadAsAsync<TResult>(_mediaTypeFormatters);
-                    }
-                    catch (Exception ex)
-                    {
-                        var decoderException = ex.InnerException != null ? ex.InnerException.InnerException as System.Text.DecoderFallbackException : null;
-                        if (decoderException != null)
-                        {
-                            // This is work-around for handling Unicode characters being passed as ansi in utf-8 stream.
-                            // eg: \xE8 = 'è' but the utf-8 encoding should be \xc3a8, this causes the ut8 parser to fail
-                            // but string parser handles it well and replaces it with "\xFFFD"
-                            MediaTypeHeaderValue mediaType = response.Content.Headers.ContentType != null
-                                ? response.Content.Headers.ContentType
-                                : new MediaTypeHeaderValue("text/xml");
-                            MediaTypeFormatter formatter = new MediaTypeFormatterCollection(_mediaTypeFormatters).FindReader(typeof(TResult), mediaType);
-
-                            if (formatter == null)
-                                throw;
-
-                            var contentText = await response.Content.ReadAsStringAsync();
-                            MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(contentText));
-                            return
-                                (TResult)
-                                    (object)
-                                        (await
-                                            formatter.ReadFromStreamAsync(typeof (TResult), ms, response.Content, null));                            
-                        }
-
-                        throw;
-                    }
-                    
+                    return await ReadResponseAsync<TResult>(response.Content);
                 }
             }
 		}
@@ -230,7 +200,7 @@ namespace DD.CBU.Compute.Api.Client.WebApi
 					await HandleApiRequestErrors(response, relativeOperationUri);
 				}
 				
-				return await response.Content.ReadAsAsync<TResult>(_mediaTypeFormatters);
+				return await ReadResponseAsync<TResult>(response.Content);
 			}
 		}
 
@@ -264,7 +234,7 @@ namespace DD.CBU.Compute.Api.Client.WebApi
 				if (!response.IsSuccessStatusCode)
 					await HandleApiRequestErrors(response, relativeOperationUri);
 				
-				return await response.Content.ReadAsAsync<TResult>(_mediaTypeFormatters);
+				return await ReadResponseAsync<TResult>(response.Content);
 			}
 		}
 
@@ -321,7 +291,7 @@ namespace DD.CBU.Compute.Api.Client.WebApi
 							Status status = await response.Content.ReadAsAsync<Status>(_mediaTypeFormatters);
 							throw new BadRequestException(status, uri);
 						}
-                        ResponseType responseMessage = await response.Content.ReadAsAsync<ResponseType>(_mediaTypeFormatters);
+					    ResponseType responseMessage = await ReadResponseAsync<ResponseType>(response.Content);                        
 						throw new BadRequestException(responseMessage, uri);
 					}
 
@@ -338,5 +308,79 @@ namespace DD.CBU.Compute.Api.Client.WebApi
 					}
 			}
 		}
+
+        /// <summary>
+        /// Read response with utf-8 encoding workaround
+        /// </summary>
+        /// <typeparam name="TResult">Result type</typeparam>
+        /// <param name="content">Http content</param>
+        /// <returns>Response task</returns>
+	    private async Task<TResult> ReadResponseAsync<TResult>(HttpContent content)
+	    {
+            Exception originalException = null;
+            try
+            {
+                return await content.ReadAsAsync<TResult>(_mediaTypeFormatters);
+            }
+            catch (Exception ex)
+            {
+                originalException = ex;              
+            }
+
+	        try
+	        {
+	            var decoderException = originalException.InnerException != null
+	                ? originalException.InnerException.InnerException as System.Text.DecoderFallbackException
+	                : null;
+	            // This is only a work-around the utf-8 encoding error   
+	            if (decoderException == null || !decoderException.StackTrace.Contains("UTF8Encoding"))
+	                ExceptionDispatchInfo.Capture(originalException).Throw();
+
+	            return await ReadResponseUtf8WorkAroundAsync<TResult>(content);
+
+	        }
+	        catch (Exception)
+	        {
+	            // ignoring any exceptions that happen while the workaround is running
+	        }
+
+	        ExceptionDispatchInfo.Capture(originalException).Throw();
+            // this is just dummy
+            return await Task.FromResult(default(TResult));
+	    }
+
+        /// <summary>
+        /// Read response as string then convert to type, utf-8 encoding error work around
+        /// </summary>
+        /// <typeparam name="TResult">Result type</typeparam>
+        /// <param name="content">Http content</param>
+        /// <returns>Response task</returns>
+        private async Task<TResult> ReadResponseUtf8WorkAroundAsync<TResult>(HttpContent content)
+	    {
+	        // This is work-around for handling Unicode characters being passed as ansi in utf-8 stream.
+	        // eg: \xE8 = 'è' but the utf-8 encoding should be \xc3a8, this causes the ut8 parser to fail
+	        // but string parser handles it well and replaces it with "\xFFFD"
+	        MediaTypeHeaderValue mediaType = content.Headers.ContentType != null
+	            ? content.Headers.ContentType
+	            : new MediaTypeHeaderValue("text/xml");
+
+	        var formatter = new MediaTypeFormatterCollection(_mediaTypeFormatters).FindReader(typeof (TResult),
+	            mediaType);
+
+	        if (formatter == null && !(formatter is XmlMediaTypeFormatter))
+	            throw new InvalidOperationException("Do not support non XMLMediaTypeFormatter");
+
+	        var contentText = await content.ReadAsStringAsync();
+	        if (string.IsNullOrEmpty(contentText))
+                throw new InvalidOperationException("Do not support work around on empty content");
+
+            // this is only supporting Utf-8 encoding
+            MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(contentText));
+	        return
+	            (TResult)
+	                (object)
+	                    (await
+	                        formatter.ReadFromStreamAsync(typeof (TResult), ms, content, null));
+	    }
 	}
 }

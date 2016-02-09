@@ -9,6 +9,7 @@
     using DD.CBU.Compute.Api.Contracts.Datacenter;
     using DD.CBU.Compute.Api.Contracts.Directory;
     using DD.CBU.Compute.Api.Contracts.General;
+    using DD.CBU.Compute.Api.Contracts.Organization;
     using DD.CBU.Compute.Api.Contracts.Requests;
     using DD.CBU.Compute.Api.Contracts.Software;
 
@@ -225,6 +226,28 @@
         public async Task<Status> DesignatePrimaryAdministratorAccount(string username)
 		{
 			return await _apiClient.GetAsync<Status>(ApiUris.SetPrimaryAdministrator(_apiClient.OrganizationId, username));
-		}	
+		}
+
+        /// <summary>
+        /// The get two factor authentication status.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        public async Task<TwoFactorAuthentication> GetTwoFactorAuthenticationStatus()
+        {
+            return await _apiClient.GetAsync<TwoFactorAuthentication>(ApiUris.TwoFactorAuthenicationStatus(_apiClient.OrganizationId));
+        }
+
+        /// <summary>
+        /// The set two factor authentication status.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        public async Task<Status> SetTwoFactorAuthenticationStatus(TwoFactorAuthentication status)
+        {
+            return await _apiClient.PostAsync<Status>(ApiUris.TwoFactorAuthenicationStatus(_apiClient.OrganizationId), status.Enabled ? "true" : "false");
+        }
 	}
 }

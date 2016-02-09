@@ -151,10 +151,10 @@ namespace DD.CBU.Compute.Powershell
                 deployedServer = Connection.ApiClient.ServerManagement.Server.GetServer(Guid.Parse(serverInfo.value)).Result;
             }
 
-			if (response != null)
-				WriteDebug(
-					string.Format(
-						"{0} resulted in {1} ({2}): requestId: {3}",
+            if (response != null)
+                WriteDebug(
+                    string.Format(
+                        "{0} resulted in {1} ({2}): requestId: {3}",
                         response.operation,
                         response.responseCode,
                         response.message,
