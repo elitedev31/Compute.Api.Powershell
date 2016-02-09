@@ -26,7 +26,7 @@
         /// <returns>
         /// Collection of <see cref="AntiAffinityRuleType"/>.
         /// </returns>
-        Task<PagedResponse<AntiAffinityRuleType>> GetAntiAffinityRulesForServerPaginated(AntiAffinityRuleListOptions filteringOptions, IPageableRequest pagingOptions = null);
+        Task<PagedResponse<AntiAffinityRuleType>> GetAntiAffinityRulesPaginated(AntiAffinityRuleListOptions filteringOptions, IPageableRequest pagingOptions = null);
 
         /// <summary>
         /// Gets the available anti affinity rules for a specific server.

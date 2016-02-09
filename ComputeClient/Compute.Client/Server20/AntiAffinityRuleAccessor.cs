@@ -44,7 +44,7 @@
         /// <returns>
         /// Collection of <see cref="AntiAffinityRuleType"/>.
         /// </returns>
-        public async Task<PagedResponse<AntiAffinityRuleType>> GetAntiAffinityRulesForServerPaginated(AntiAffinityRuleListOptions filteringOptions, IPageableRequest pagingOptions = null)
+        public async Task<PagedResponse<AntiAffinityRuleType>> GetAntiAffinityRulesPaginated(AntiAffinityRuleListOptions filteringOptions, IPageableRequest pagingOptions = null)
         {
             var response = await _apiClient.GetAsync<antiAffinityRules>(
                 ApiUris.GetMcp2GetAntiAffinityRules(_apiClient.OrganizationId),
