@@ -2640,7 +2640,7 @@ namespace DD.CBU.Compute.Api.Client
         /// </summary>
         /// <param name="orgId">The organization id.</param>
         /// <returns> The <see cref="Uri"/>.</returns>
-        public static Uri GetTwoFactorAuthenicationStatus(Guid orgId)
+        public static Uri TwoFactorAuthenicationStatus(Guid orgId)
         {
             return new Uri(string.Format(MCP1_0_PREFIX + "{0}/twoFactorAuth", orgId), UriKind.Relative);
         }

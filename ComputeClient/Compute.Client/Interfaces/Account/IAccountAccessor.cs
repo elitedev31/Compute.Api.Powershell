@@ -1,7 +1,4 @@
-﻿using System;
-using DD.CBU.Compute.Api.Contracts.Organization;
-
-namespace DD.CBU.Compute.Api.Client.Interfaces.Account
+﻿namespace DD.CBU.Compute.Api.Client.Interfaces.Account
 {
 	using System.Collections.Generic;
 	using System.Threading.Tasks;
@@ -9,6 +6,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces.Account
 	using DD.CBU.Compute.Api.Contracts.Datacenter;
 	using DD.CBU.Compute.Api.Contracts.Directory;
 	using DD.CBU.Compute.Api.Contracts.General;
+    using DD.CBU.Compute.Api.Contracts.Organization;
     using DD.CBU.Compute.Api.Contracts.Requests;
     using DD.CBU.Compute.Api.Contracts.Software;
 
@@ -133,5 +131,13 @@ namespace DD.CBU.Compute.Api.Client.Interfaces.Account
         /// The <see cref="Task"/>.
         /// </returns>
         Task<TwoFactorAuthentication> GetTwoFactorAuthenticationStatus();
+        
+        /// <summary>
+        /// The set two factor authentication status.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        Task<Status> SetTwoFactorAuthenticationStatus(TwoFactorAuthentication status);
     }
 }
