@@ -135,10 +135,8 @@
 				parameters["customDefined1"] = account.customDefined1;
 			if (!string.IsNullOrEmpty(account.customDefined2))
 				parameters["customDefined2"] = account.customDefined2;
-			if (!string.IsNullOrEmpty(account.phoneCountryCode))
-				parameters["phoneCountryCode"] = account.phoneCountryCode;
-			if (!string.IsNullOrEmpty(account.phoneNumber))
-				parameters["phoneNumber"] = account.phoneNumber;
+            parameters["phoneCountryCode"] = account.phoneCountryCode;
+			parameters["phoneNumber"] = account.phoneNumber;
 
 			string postBody = parameters.ToQueryString();
 
