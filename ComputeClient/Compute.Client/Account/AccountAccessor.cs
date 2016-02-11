@@ -118,11 +118,9 @@
         /// </returns>
         public async Task<Status> UpdateAdministratorPhoneNumber(string userName, string phoneCountryCode, string phoneNumber)
         {
-            var parameters = new Dictionary<string, string>
-            {
-                ["phoneCountryCode"] = phoneCountryCode,
-                ["phoneNumber"] = phoneNumber
-            };
+            var parameters = new Dictionary<string, string>();
+            parameters["phoneCountryCode"] = phoneCountryCode;
+            parameters["phoneNumber"] = phoneNumber;
 
             string postBody = parameters.ToQueryStringWithEmpty();
 
