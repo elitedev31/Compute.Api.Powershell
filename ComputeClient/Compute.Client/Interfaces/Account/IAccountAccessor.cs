@@ -64,16 +64,37 @@
 		/// </returns>
 		Task<Status> DeleteSubAdministratorAccount(string username);
 
-		/// <summary>
-		/// The update administrator account.
-		/// </summary>
-		/// <param name="account">
-		/// The account.
-		/// </param>
-		/// <returns>
-		/// The <see cref="Task"/>.
-		/// </returns>
-		Task<Status> UpdateAdministratorAccount(AccountWithPhoneNumber account);
+	    /// <summary>
+	    /// The update administrator password.
+	    /// </summary>
+	    /// <param name="userName">The User Name</param>
+	    /// <param name="password">The Password</param>
+	    /// <returns>
+	    /// The <see cref="Task"/>.
+	    /// </returns>
+	    Task<Status> ChangePassword(string userName, string password);
+
+	    /// <summary>
+	    /// The update administrator phone number.
+	    /// </summary>
+	    /// <param name="userName">The User Name</param>
+	    /// <param name="phoneCountryCode">The Phone Country Code</param>
+	    /// <param name="phoneNumber">The Phone Number</param>
+	    /// <returns>
+	    /// The <see cref="Task"/>.
+	    /// </returns>
+	    Task<Status> UpdateAdministratorPhoneNumber(string userName, string phoneCountryCode, string phoneNumber);
+
+        /// <summary>
+        /// The update administrator account.
+        /// </summary>
+        /// <param name="account">
+        /// The account.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        Task<Status> UpdateAdministratorAccount(AccountWithPhoneNumber account);
 
 		/// <summary>
 		/// The get list of multi geography regions.

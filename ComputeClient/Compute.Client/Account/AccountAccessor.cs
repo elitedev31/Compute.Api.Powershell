@@ -107,16 +107,61 @@
 			return await _apiClient.GetAsync<Status>(ApiUris.DeleteSubAdministrator(_apiClient.OrganizationId, username));
 		}
 
-		/// <summary>
-		/// The update administrator account.
-		/// </summary>
-		/// <param name="account">
-		/// The account.
-		/// </param>
-		/// <returns>
-		/// The <see cref="Task"/>.
-		/// </returns>
-		public async Task<Status> UpdateAdministratorAccount(AccountWithPhoneNumber account)
+        /// <summary>
+        /// The update administrator phone number.
+        /// </summary>
+        /// <param name="userName">The User Name</param>
+        /// <param name="phoneCountryCode">The Phone Country Code</param>
+        /// <param name="phoneNumber">The Phone Number</param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        public async Task<Status> UpdateAdministratorPhoneNumber(string userName, string phoneCountryCode, string phoneNumber)
+        {
+            var parameters = new Dictionary<string, string>
+            {
+                ["phoneCountryCode"] = phoneCountryCode,
+                ["phoneNumber"] = phoneNumber
+            };
+
+            string postBody = parameters.ToQueryStringWithEmpty();
+
+            return
+                await
+                _apiClient.PostAsync<Status>(ApiUris.UpdateAdministrator(_apiClient.OrganizationId, userName), postBody);
+        }
+
+        /// <summary>
+        /// The update administrator password.
+        /// </summary>
+        /// <param name="userName">The User Name</param>
+        /// <param name="password">The Password</param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        public async Task<Status> ChangePassword(string userName, string password)
+        {
+            var parameters = new Dictionary<string, string>();
+            if (!string.IsNullOrEmpty(password))
+                parameters["password"] = password;
+
+            string postBody = parameters.ToQueryString();
+
+            return
+                await
+                _apiClient.PostAsync<Status>(ApiUris.UpdateAdministrator(_apiClient.OrganizationId, userName), postBody);
+        }
+
+        /// <summary>
+        /// The update administrator account.
+        /// </summary>
+        /// <param name="account">
+        /// The account.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        public async Task<Status> UpdateAdministratorAccount(AccountWithPhoneNumber account)
 		{
 			var parameters = new Dictionary<string, string>();
 			if (!string.IsNullOrEmpty(account.password))
@@ -138,7 +183,7 @@
             parameters["phoneCountryCode"] = account.phoneCountryCode;
 			parameters["phoneNumber"] = account.phoneNumber;
 
-			string postBody = parameters.ToQueryString();
+			string postBody = parameters.ToQueryStringWithEmpty();
 
 			if (account.MemberOfRoles.Any())
 			{
