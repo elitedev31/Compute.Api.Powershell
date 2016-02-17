@@ -401,7 +401,7 @@ namespace DD.CBU.Compute.Api.Client
             // Australia
             AddHostName(KnownApiVendor.DimensionData, KnownApiRegion.Australia_AU, "api-au.dimensiondata.com");
             AddFtpHostName(KnownApiVendor.DimensionData, KnownApiRegion.Australia_AU, "ftps-au.cloud-vpn.net");
-            AddHostUiUrl(KnownApiVendor.DimensionData, KnownApiRegion.Australia_AU, "faucloud-au.dimensiondata.com");
+            AddHostUiUrl(KnownApiVendor.DimensionData, KnownApiRegion.Australia_AU, "aucloud-au.dimensiondata.com");
             // Canada
             AddHostName(KnownApiVendor.DimensionData, KnownApiRegion.Canada_CA, "api-canada.dimensiondata.com");
             AddFtpHostName(KnownApiVendor.DimensionData, KnownApiRegion.Canada_CA, "ftps-canada.cloud-vpn.net");
