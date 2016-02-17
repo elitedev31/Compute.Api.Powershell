@@ -190,6 +190,10 @@
 
 				postBody = string.Join("&", postBody, roleParameters);
 			}
+			else
+			{
+                postBody = string.Join("&", postBody, "role=");
+            }
 
 			return
 				await
