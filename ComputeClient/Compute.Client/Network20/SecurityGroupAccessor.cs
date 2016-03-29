@@ -92,7 +92,7 @@
         /// <returns>Response Data</returns>
         public async Task<ResponseType> AddNicToSecurityGroup(addNicToSecurityGroup nicSecurityGroup)
         {
-            return await _api.PostAsync<addNicToSecurityGroup, ResponseType>(ApiUris.DeleteSecurityGroup(_api.OrganizationId), nicSecurityGroup);
+            return await _api.PostAsync<addNicToSecurityGroup, ResponseType>(ApiUris.AddNicToSecurityGroup(_api.OrganizationId), nicSecurityGroup);
         }
 
         /// <summary>
@@ -102,7 +102,7 @@
         /// <returns>Response Data</returns>
         public async Task<ResponseType> RemoveNicFromSecurityGroup(removeNicFromSecurityGroup nicSecurityGroup)
         {
-            return await _api.PostAsync<removeNicFromSecurityGroup, ResponseType>(ApiUris.DeleteSecurityGroup(_api.OrganizationId), nicSecurityGroup);
+            return await _api.PostAsync<removeNicFromSecurityGroup, ResponseType>(ApiUris.RemoveNicFromSecurityGroup(_api.OrganizationId), nicSecurityGroup);
         }
     }
 }
