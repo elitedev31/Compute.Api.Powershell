@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web;
 
 namespace DD.CBU.Compute.Api.Contracts.Requests
 {
@@ -71,8 +72,8 @@ namespace DD.CBU.Compute.Api.Contracts.Requests
 
             if (Value.GetType() == typeof(bool))
                 valueString = valueString.ToLower();
-
-            return Field + operatorString + valueString;
+            
+            return Field + operatorString + HttpUtility.UrlEncode(valueString);
         }
     }
 }
