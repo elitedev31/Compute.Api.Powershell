@@ -217,6 +217,16 @@ namespace DD.CBU.Compute.Api.Client
             return new Uri(string.Format(MCP2_1_PREFIX + "{0}/server/removeNic", orgId), UriKind.Relative);
         }
 
+
+        /// <summary>	Lists Nics under a VLAN </summary>
+        /// <param name="orgId">	The org Id. </param>
+        /// <param name="vlanId">The VLAN Id</param>
+        /// <returns>	An URI. </returns>
+        public static Uri ListNics(Guid orgId, Guid vlanId)
+        {
+            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/server/nic?vlanId={1}", orgId, vlanId), UriKind.Relative);
+        }
+
         /// <summary>
         /// Returns the relative URI of the REST request for Botify NIC IP change.
         /// </summary>

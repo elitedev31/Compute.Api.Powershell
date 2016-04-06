@@ -216,6 +216,7 @@
     <Compile Include="Requests\PageableRequest.cs" />
     <Compile Include="Requests\Server20\AntiAffinityRuleListOptions.cs" />
     <Compile Include="Requests\Server20\ServerCustomerImageListOptions.cs" />
+    <Compile Include="Requests\Server20\ListNicsListOptions.cs" />
     <Compile Include="Requests\Server20\ServerOSImageListOptions.cs" />
     <Compile Include="Requests\Server20\ServerListOptions.cs" />
     <Compile Include="Requests\Server\ServerListOptions.cs" />

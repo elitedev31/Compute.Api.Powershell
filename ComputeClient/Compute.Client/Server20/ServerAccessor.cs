@@ -3,13 +3,14 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-
+    using Contracts.Server;
     using DD.CBU.Compute.Api.Client.Interfaces;
     using DD.CBU.Compute.Api.Client.Interfaces.Server20;
     using DD.CBU.Compute.Api.Contracts.General;
     using DD.CBU.Compute.Api.Contracts.Network20;
     using DD.CBU.Compute.Api.Contracts.Requests;
     using DD.CBU.Compute.Api.Contracts.Requests.Server20;
+    using ServerType = Contracts.Network20.ServerType;
 
     /// <summary>
     /// The server 2.0 accessor.
@@ -272,6 +273,29 @@
             return await _apiClient.PostAsync<RemoveNicType, ResponseType>(
                 ApiUris.RemoveNic(_apiClient.OrganizationId),
                 new RemoveNicType { id = nicId.ToString() });
+        }
+
+        /// <summary>The list nics.</summary>
+        /// <param name="vlanId">The vlan id.</param>
+        /// <param name="filteringOptions">The filtering options.</param>
+        /// <param name="pagingOptions">The paging options.</param>
+        /// <returns>The <see cref="Task"/>.</returns>
+        public async Task<PagedResponse<NicWithSecurityGroupType>> ListNics(Guid vlanId, ListNicsOptions filteringOptions = null, IPageableRequest pagingOptions = null)
+        {
+            if (vlanId == Guid.Empty)
+            {
+                throw new ArgumentException("'vlanId' cannot be empty.");
+            }
+
+            var response = await _apiClient.GetAsync<nics>(ApiUris.ListNics(_apiClient.OrganizationId, vlanId), pagingOptions, filteringOptions);
+            return new PagedResponse<NicWithSecurityGroupType>
+            {
+                items = response.nic,
+                totalCount = response.totalCountSpecified ? response.totalCount : (int?)null,
+                pageCount = response.pageCountSpecified ? response.pageCount : (int?)null,
+                pageNumber = response.pageNumberSpecified ? response.pageNumber : (int?)null,
+                pageSize = response.pageSizeSpecified ? response.pageSize : (int?)null
+            };
         }
 
         /// <summary>
