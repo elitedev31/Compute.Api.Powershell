@@ -123,7 +123,7 @@
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "urn:didata.com:api:cloud:types")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
-    public partial class createIpAddressList
+    public partial class CreateIpAddressList
     {
 
         private string networkDomainIdField;
@@ -360,7 +360,7 @@
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "urn:didata.com:api:cloud:types")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
-    public partial class ipAddressLists
+    public partial class IpAddressLists
     {
 
         private IpAddressListType[] ipAddressListField;
@@ -515,7 +515,7 @@
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
     [System.Xml.Serialization.XmlRootAttribute("deleteIpAddressList", Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
-    public partial class IdType
+    public partial class DeleteIpAddressListType
     {
 
         private string idField;
@@ -542,7 +542,7 @@
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "urn:didata.com:api:cloud:types")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
-    public partial class editIpAddressList
+    public partial class EditIpAddressList
     {
 
         private string descriptionField;

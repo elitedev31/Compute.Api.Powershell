@@ -88,6 +88,8 @@
     <Compile Include="..\SolutionAssemblyInfo.cs">
       <Link>Properties\SolutionAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Network20\IpAddressList.cs" />
+    <Compile Include="Network20\PortList.cs" />
     <Compile Include="Organization\TwoFactorAuthentication.cs" />
     <Compile Include="Backup\AlertingType.cs" />
     <Compile Include="Backup\BackupClientDetailsType.cs" />
@@ -204,6 +206,8 @@
     <Compile Include="Requests\Infrastructure\OperatingSystemListOptions.cs" />
     <Compile Include="Requests\Infrastructure\DataCenterListOptions.cs" />
     <Compile Include="Requests\IPageableRequest.cs" />
+    <Compile Include="Requests\Network20\PortListOptions.cs" />
+    <Compile Include="Requests\Network20\IpAddressListOptions.cs" />
     <Compile Include="Requests\Network20\PublicIpListOptions.cs" />
     <Compile Include="Requests\Network20\NatRuleListOptions.cs" />
     <Compile Include="Requests\Network20\NetworkDomainListOptions.cs" />

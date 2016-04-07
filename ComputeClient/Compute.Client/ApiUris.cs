@@ -2715,5 +2715,58 @@ namespace DD.CBU.Compute.Api.Client
         {
             return new Uri(string.Format(MCP1_0_PREFIX + "{0}/deleteIpAddressList", orgId), UriKind.Relative);
         }
+
+        /// <summary>
+        /// Returns the relative URI of the REST request for create port list.
+        /// </summary>
+        /// <param name="orgId">The organization id.</param>
+        /// <returns> The <see cref="Uri"/>.</returns>
+        public static Uri CreatePortList(Guid orgId)
+        {
+            return new Uri(string.Format(MCP1_0_PREFIX + "{0}/createPortList", orgId), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// Returns the relative URI of the REST request for list port list.
+        /// </summary>
+        /// <param name="orgId">The organization id.</param>
+        /// <param name="networkDomainId">The network domain id.</param>
+        /// <returns> The <see cref="Uri"/>.</returns>
+        public static Uri ListPortList(Guid orgId, Guid networkDomainId)
+        {
+            return new Uri(string.Format(MCP1_0_PREFIX + "{0}/portList?networkDomainId={1}", orgId, networkDomainId), UriKind.Relative);
+        }
+
+
+        /// <summary>
+        /// Returns the relative URI of the REST request for get port list.
+        /// </summary>
+        /// <param name="orgId">The organization id.</param>
+        /// <param name="portListId">The Ip address list id.</param>
+        /// <returns> The <see cref="Uri"/>.</returns>
+        public static Uri GetPortList(Guid orgId, Guid portListId)
+        {
+            return new Uri(string.Format(MCP1_0_PREFIX + "{0}/portList/{1}", orgId, portListId), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// Returns the relative URI of the REST request for edit port list.
+        /// </summary>
+        /// <param name="orgId">The organization id.</param>
+        /// <returns> The <see cref="Uri"/>.</returns>
+        public static Uri EditPortList(Guid orgId)
+        {
+            return new Uri(string.Format(MCP1_0_PREFIX + "{0}/editPortList", orgId), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// Returns the relative URI of the REST request for delete port list.
+        /// </summary>
+        /// <param name="orgId">The organization id.</param>
+        /// <returns> The <see cref="Uri"/>.</returns>
+        public static Uri DeletePortList(Guid orgId)
+        {
+            return new Uri(string.Format(MCP1_0_PREFIX + "{0}/deletePortList", orgId), UriKind.Relative);
+        }
     }
 }

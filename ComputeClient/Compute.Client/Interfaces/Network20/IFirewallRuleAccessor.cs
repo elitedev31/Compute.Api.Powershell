@@ -61,7 +61,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces.Network20
         /// </summary>
         /// <param name="createIpAddressList">The ip address list details.</param>
         /// <returns>The response details.</returns>
-        Task<ResponseType> CreateIpAddressList(createIpAddressList createIpAddressList);
+        Task<ResponseType> CreateIpAddressList(CreateIpAddressList createIpAddressList);
 
         /// <summary>
         /// Lists all ip address list.
@@ -92,13 +92,13 @@ namespace DD.CBU.Compute.Api.Client.Interfaces.Network20
         /// </summary>
         /// <param name="editIpAddressList">The ip address list details.</param>
         /// <returns>The response details.</returns>
-        Task<ResponseType> EditIpAddressList(editIpAddressList editIpAddressList);
+        Task<ResponseType> EditIpAddressList(EditIpAddressList editIpAddressList);
 
         /// <summary>
         /// Deletes an ip address list.
         /// </summary>
         /// <param name="deleteIpAddressList">The ip address list id to be deleted.</param>
         /// <returns>The response details.</returns>
-        Task<ResponseType> DeleteIpAddressList(IdType deleteIpAddressList);
+        Task<ResponseType> DeleteIpAddressList(DeleteIpAddressListType deleteIpAddressList);
     }
 }
