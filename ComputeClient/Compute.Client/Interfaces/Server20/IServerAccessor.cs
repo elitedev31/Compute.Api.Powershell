@@ -122,5 +122,16 @@
         /// <param name="reconfigureServer">Details of the server to be updated</param>
         /// <returns>	A standard CaaS response </returns>
         Task<ResponseType> ReconfigureServer(ReconfigureServerType reconfigureServer);
+
+
+        /// <summary>The add disk.</summary>
+        /// <param name="addDisk">The add disk.</param>
+        /// <returns>The <see cref="Task"/>.</returns>
+        Task<ResponseType> AddDisk(AddDiskType addDisk);
+
+        /// <summary>The remove disk.</summary>
+        /// <param name="removeDisk">The remove disk.</param>
+        /// <returns>The <see cref="Task"/>.</returns>
+        Task<ResponseType> RemoveDisk(RemoveDiskType removeDisk);
     }
 }

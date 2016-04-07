@@ -15,6 +15,9 @@ namespace DD.CBU.Compute.Api.Client
         /// <summary>	The MCP 2.0 prefix. </summary>
         public const string MCP2_1_PREFIX = "caas/2.1/";
 
+        /// <summary>	The MCP 2.2 prefix. </summary>
+        public const string MCP2_2_PREFIX = "caas/2.2/";
+
         /// <summary>
 		/// The path (relative to the base API URL) of the My Account action.
         /// </summary>
@@ -2670,7 +2673,7 @@ namespace DD.CBU.Compute.Api.Client
         /// <returns> The <see cref="Uri"/>.</returns>
         public static Uri CreateIpAddressList(Guid orgId)
         {
-            return new Uri(string.Format(MCP1_0_PREFIX + "{0}/createIpAddressList", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/createIpAddressList", orgId), UriKind.Relative);
         }
 
         /// <summary>
@@ -2681,7 +2684,7 @@ namespace DD.CBU.Compute.Api.Client
         /// <returns> The <see cref="Uri"/>.</returns>
         public static Uri ListIpAddressList(Guid orgId, Guid networkDomainId)
         {
-            return new Uri(string.Format(MCP1_0_PREFIX + "{0}/ipAddressList?networkDomainId={1}", orgId, networkDomainId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/ipAddressList?networkDomainId={1}", orgId, networkDomainId), UriKind.Relative);
         }
 
 
@@ -2693,7 +2696,7 @@ namespace DD.CBU.Compute.Api.Client
         /// <returns> The <see cref="Uri"/>.</returns>
         public static Uri GetIpAddressList(Guid orgId, Guid ipAddressListId)
         {
-            return new Uri(string.Format(MCP1_0_PREFIX + "{0}/ipAddressList/{1}", orgId, ipAddressListId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/ipAddressList/{1}", orgId, ipAddressListId), UriKind.Relative);
         } 
         
         /// <summary>
@@ -2703,7 +2706,7 @@ namespace DD.CBU.Compute.Api.Client
         /// <returns> The <see cref="Uri"/>.</returns>
         public static Uri EditIpAddressList(Guid orgId)
         {
-            return new Uri(string.Format(MCP1_0_PREFIX + "{0}/editIpAddressList", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/editIpAddressList", orgId), UriKind.Relative);
         }
         
         /// <summary>
@@ -2713,7 +2716,7 @@ namespace DD.CBU.Compute.Api.Client
         /// <returns> The <see cref="Uri"/>.</returns>
         public static Uri DeleteIpAddressList(Guid orgId)
         {
-            return new Uri(string.Format(MCP1_0_PREFIX + "{0}/deleteIpAddressList", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/deleteIpAddressList", orgId), UriKind.Relative);
         }
 
         /// <summary>
@@ -2723,7 +2726,7 @@ namespace DD.CBU.Compute.Api.Client
         /// <returns> The <see cref="Uri"/>.</returns>
         public static Uri CreatePortList(Guid orgId)
         {
-            return new Uri(string.Format(MCP1_0_PREFIX + "{0}/createPortList", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/createPortList", orgId), UriKind.Relative);
         }
 
         /// <summary>
@@ -2734,7 +2737,7 @@ namespace DD.CBU.Compute.Api.Client
         /// <returns> The <see cref="Uri"/>.</returns>
         public static Uri ListPortList(Guid orgId, Guid networkDomainId)
         {
-            return new Uri(string.Format(MCP1_0_PREFIX + "{0}/portList?networkDomainId={1}", orgId, networkDomainId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/portList?networkDomainId={1}", orgId, networkDomainId), UriKind.Relative);
         }
 
 
@@ -2746,7 +2749,7 @@ namespace DD.CBU.Compute.Api.Client
         /// <returns> The <see cref="Uri"/>.</returns>
         public static Uri GetPortList(Guid orgId, Guid portListId)
         {
-            return new Uri(string.Format(MCP1_0_PREFIX + "{0}/portList/{1}", orgId, portListId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/portList/{1}", orgId, portListId), UriKind.Relative);
         }
 
         /// <summary>
@@ -2756,7 +2759,7 @@ namespace DD.CBU.Compute.Api.Client
         /// <returns> The <see cref="Uri"/>.</returns>
         public static Uri EditPortList(Guid orgId)
         {
-            return new Uri(string.Format(MCP1_0_PREFIX + "{0}/editPortList", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/editPortList", orgId), UriKind.Relative);
         }
 
         /// <summary>
@@ -2766,7 +2769,27 @@ namespace DD.CBU.Compute.Api.Client
         /// <returns> The <see cref="Uri"/>.</returns>
         public static Uri DeletePortList(Guid orgId)
         {
-            return new Uri(string.Format(MCP1_0_PREFIX + "{0}/deletePortList", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/deletePortList", orgId), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// Returns the relative URI of the REST request for adding disk to server.
+        /// </summary>
+        /// <param name="orgId">The organization id.</param>
+        /// <returns> The <see cref="Uri"/>.</returns>
+        public static Uri AddDisk(Guid orgId)
+        {
+            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/server/addDisk", orgId), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// Returns the relative URI of the REST request for removing disk from server.
+        /// </summary>
+        /// <param name="orgId">The organization id.</param>
+        /// <returns> The <see cref="Uri"/>.</returns>
+        public static Uri RemoveDisk(Guid orgId)
+        {
+            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/server/removeDisk", orgId), UriKind.Relative);
         }
     }
 }
