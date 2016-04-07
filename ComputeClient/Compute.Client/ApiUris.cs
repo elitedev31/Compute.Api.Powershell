@@ -2662,5 +2662,58 @@ namespace DD.CBU.Compute.Api.Client
         {
             return new Uri(string.Format(MCP1_0_PREFIX + "{0}/twoFactorAuth", orgId), UriKind.Relative);
         }
+
+        /// <summary>
+        /// Returns the relative URI of the REST request for create ip address list.
+        /// </summary>
+        /// <param name="orgId">The organization id.</param>
+        /// <returns> The <see cref="Uri"/>.</returns>
+        public static Uri CreateIpAddressList(Guid orgId)
+        {
+            return new Uri(string.Format(MCP1_0_PREFIX + "{0}/createIpAddressList", orgId), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// Returns the relative URI of the REST request for list ip address list.
+        /// </summary>
+        /// <param name="orgId">The organization id.</param>
+        /// <param name="networkDomainId">The network domain id.</param>
+        /// <returns> The <see cref="Uri"/>.</returns>
+        public static Uri ListIpAddressList(Guid orgId, Guid networkDomainId)
+        {
+            return new Uri(string.Format(MCP1_0_PREFIX + "{0}/ipAddressList?networkDomainId={1}", orgId, networkDomainId), UriKind.Relative);
+        }
+
+
+        /// <summary>
+        /// Returns the relative URI of the REST request for get ip address list.
+        /// </summary>
+        /// <param name="orgId">The organization id.</param>
+        /// <param name="ipAddressListId">The Ip address list id.</param>
+        /// <returns> The <see cref="Uri"/>.</returns>
+        public static Uri GetIpAddressList(Guid orgId, Guid ipAddressListId)
+        {
+            return new Uri(string.Format(MCP1_0_PREFIX + "{0}/ipAddressList/{1}", orgId, ipAddressListId), UriKind.Relative);
+        } 
+        
+        /// <summary>
+        /// Returns the relative URI of the REST request for edit ip address list.
+        /// </summary>
+        /// <param name="orgId">The organization id.</param>
+        /// <returns> The <see cref="Uri"/>.</returns>
+        public static Uri EditIpAddressList(Guid orgId)
+        {
+            return new Uri(string.Format(MCP1_0_PREFIX + "{0}/editIpAddressList", orgId), UriKind.Relative);
+        }
+        
+        /// <summary>
+        /// Returns the relative URI of the REST request for delete ip address list.
+        /// </summary>
+        /// <param name="orgId">The organization id.</param>
+        /// <returns> The <see cref="Uri"/>.</returns>
+        public static Uri DeleteIpAddressList(Guid orgId)
+        {
+            return new Uri(string.Format(MCP1_0_PREFIX + "{0}/deleteIpAddressList", orgId), UriKind.Relative);
+        }
     }
 }

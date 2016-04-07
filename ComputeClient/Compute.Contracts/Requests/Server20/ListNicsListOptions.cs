@@ -13,19 +13,19 @@
         public const string IdField = "id";
 
         /// <summary>
-        /// The "datacenterId" field name.
+        /// The "serverId" field name.
         /// </summary>
         public const string ServerIdField = "serverId";
 
         /// <summary>
-        /// The "networkDomainId" field name.
+        /// The "securityGroupId" field name.
         /// </summary>
         public const string SecurityGroupIdField = "securityGroupId";
 
         /// <summary>
-        /// The "networkId" field name.
+        /// The "securitygroup" field name.
         /// </summary>
-        public const string NetworkIdField = "networkId";
+        public const string SecurituGroupField = "SecurityGroup";
 
 
         /// <summary>	
@@ -56,12 +56,12 @@
         }
 
         /// <summary>
-        /// Gets or sets the NetworkId filter.
+        /// Identifies an individual security group.
         /// </summary>
-        public Guid? NetworkId
+        public string SecurityGroup
         {
-            get { return GetFilter<Guid?>(NetworkIdField); }
-            set { SetFilter(NetworkIdField, value); }
+            get { return GetFilter<string>(SecurituGroupField); }
+            set { SetFilter(SecurituGroupField, value); }
         }
     }
 }
