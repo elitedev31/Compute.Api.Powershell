@@ -1964,7 +1964,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri CreateIpAddressList(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/createIpAddressList", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/network/createIpAddressList", orgId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for list ip address list.</summary>
@@ -1973,7 +1973,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri ListIpAddressList(Guid orgId, Guid networkDomainId)
         {
-            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/ipAddressList?networkDomainId={1}", orgId, networkDomainId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/network/ipAddressList?networkDomainId={1}", orgId, networkDomainId), UriKind.Relative);
         }
 
 
@@ -1983,7 +1983,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri GetIpAddressList(Guid orgId, Guid ipAddressListId)
         {
-            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/ipAddressList/{1}", orgId, ipAddressListId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/network/ipAddressList/{1}", orgId, ipAddressListId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for edit ip address list.</summary>
@@ -1991,7 +1991,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri EditIpAddressList(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/editIpAddressList", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/network/editIpAddressList", orgId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for delete ip address list.</summary>
@@ -1999,7 +1999,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri DeleteIpAddressList(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/deleteIpAddressList", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/network/deleteIpAddressList", orgId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for create port list.</summary>
@@ -2007,7 +2007,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri CreatePortList(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/createPortList", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/network/createPortList", orgId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for list port list.</summary>
@@ -2016,7 +2016,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri ListPortList(Guid orgId, Guid networkDomainId)
         {
-            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/portList?networkDomainId={1}", orgId, networkDomainId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/network/portList?networkDomainId={1}", orgId, networkDomainId), UriKind.Relative);
         }
 
 
@@ -2026,7 +2026,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri GetPortList(Guid orgId, Guid portListId)
         {
-            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/portList/{1}", orgId, portListId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/network/portList/{1}", orgId, portListId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for edit port list.</summary>
@@ -2034,7 +2034,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri EditPortList(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/editPortList", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/network/editPortList", orgId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for delete port list.</summary>
@@ -2042,7 +2042,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri DeletePortList(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/deletePortList", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/network/deletePortList", orgId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for adding disk to server.</summary>
@@ -2107,6 +2107,73 @@
         public static Uri GetReservedPrivateIpv4Addresses(Guid orgId)
         {
             return new Uri(string.Format(MCP2_2_PREFIX + "{0}/network/reservedPrivateIpv4Address", orgId), UriKind.Relative);
+        }
+
+        /// <summary>Returns the relative URI of the REST request for create tag key.</summary>
+        /// <param name="orgId">The organization id.</param>
+        /// <returns>The <see cref="Uri"/>.</returns>
+        public static Uri CreateTagKey(Guid orgId)
+        {
+            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/tag/createTagKey", orgId), UriKind.Relative);
+        }
+
+        /// <summary>Returns the relative URI of the REST request for list tag key.</summary>
+        /// <param name="orgId">The organization id.</param>
+        /// <returns>The <see cref="Uri"/>.</returns>
+        public static Uri ListTagKeys(Guid orgId)
+        {
+            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/tag/TagKey", orgId), UriKind.Relative);
+        }
+
+
+        /// <summary>Returns the relative URI of the REST request for get tag key.</summary>
+        /// <param name="orgId">The organization id.</param>
+        /// <param name="tagKeyId">The tag key id.</param>
+        /// <returns>The <see cref="Uri"/>.</returns>
+        public static Uri GetTagKey(Guid orgId, Guid tagKeyId)
+        {
+            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/tag/TagKey/{1}", orgId, tagKeyId), UriKind.Relative);
+        }
+
+        /// <summary>Returns the relative URI of the REST request for edit tag key.</summary>
+        /// <param name="orgId">The organization id.</param>
+        /// <returns>The <see cref="Uri"/>.</returns>
+        public static Uri EditTagKey(Guid orgId)
+        {
+            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/tag/editTagKey", orgId), UriKind.Relative);
+        }
+
+        /// <summary>Returns the relative URI of the REST request for delete tag key.</summary>
+        /// <param name="orgId">The organization id.</param>
+        /// <returns>The <see cref="Uri"/>.</returns>
+        public static Uri DeleteTagKey(Guid orgId)
+        {
+            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/tag/deleteTagKey", orgId), UriKind.Relative);
+        }
+
+
+        /// <summary>The apply tags.</summary>
+        /// <param name="orgId">The org id.</param>
+        /// <returns>The <see cref="Uri"/>.</returns>
+        public static Uri ApplyTags(Guid orgId)
+        {
+            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/tag/applyTags", orgId), UriKind.Relative);
+        }
+
+        /// <summary>The get tags.</summary>
+        /// <param name="orgId">The org id.</param>
+        /// <returns>The <see cref="Uri"/>.</returns>
+        public static Uri GetTags(Guid orgId)
+        {
+            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/tag/tag", orgId), UriKind.Relative);
+        }
+
+        /// <summary>The remove tag.</summary>
+        /// <param name="orgId">The org id.</param>
+        /// <returns>The <see cref="Uri"/>.</returns>
+        public static Uri RemoveTag(Guid orgId)
+        {
+            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/tag/removeTag", orgId), UriKind.Relative);
         }
     }
 }

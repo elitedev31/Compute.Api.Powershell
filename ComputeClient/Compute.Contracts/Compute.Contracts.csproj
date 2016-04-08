@@ -90,6 +90,7 @@
     </Compile>
     <Compile Include="Network20\IpAddressList.cs" />
     <Compile Include="Network20\PortList.cs" />
+    <Compile Include="Network20\Tag.cs" />
     <Compile Include="Organization\TwoFactorAuthentication.cs" />
     <Compile Include="Backup\AlertingType.cs" />
     <Compile Include="Backup\BackupClientDetailsType.cs" />
@@ -231,6 +232,8 @@
     <Compile Include="Requests\Network20\PoolMemberListOptions.cs" />
     <Compile Include="Requests\Network20\VirtualListenerListOptions.cs" />
     <Compile Include="Network20\AntiAffinityRule.cs" />
+    <Compile Include="Requests\Tagging\TagListOptions.cs" />
+    <Compile Include="Requests\Tagging\TagKeyListOptions.cs" />
     <Compile Include="Server10\AntiAffinityRules.cs" />
     <Compile Include="Server10\AntiAffinityRuleType.cs" />
     <Compile Include="Server10\AntiAffinityRuleTypeServerSummary.cs" />
@@ -351,6 +354,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Reports\" />
+    <Folder Include="Tagging\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
