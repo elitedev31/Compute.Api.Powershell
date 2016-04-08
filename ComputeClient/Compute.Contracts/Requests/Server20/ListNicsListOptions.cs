@@ -25,7 +25,7 @@
         /// <summary>
         /// The "securitygroup" field name.
         /// </summary>
-        public const string SecurituGroupField = "SecurityGroup";
+        public const string SecurituGroupField = "securityGroup";
 
 
         /// <summary>	
@@ -58,9 +58,9 @@
         /// <summary>
         /// Identifies an individual security group.
         /// </summary>
-        public string SecurityGroup
+        public NullFilterOptions? SecurityGroup
         {
-            get { return GetFilter<string>(SecurituGroupField); }
+            get { return GetFilter<NullFilterOptions?>(SecurituGroupField); }
             set { SetFilter(SecurituGroupField, value); }
         }
     }

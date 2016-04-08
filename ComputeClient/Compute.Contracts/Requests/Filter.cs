@@ -58,19 +58,25 @@ namespace DD.CBU.Compute.Api.Contracts.Requests
                 case FilterOperator.LessOrEqual:
                     operatorString = ".LE=";
                     break;
+                case FilterOperator.Null:
+                    operatorString = ".NULL";
+                    break;
+                case FilterOperator.NotNull:
+                    operatorString = ".NOT_NULL";
+                    break;
                 default:
                     throw new NotSupportedException("Unknown filter operator type.");
             }
 
             var valueString = Value.ToString();
 
-            if (Value.GetType() == typeof(DateTime))
+            if (Value is DateTime)
                 valueString = ((DateTime)Value).ToString("o");
 
-            if (Value.GetType() == typeof(DateTimeOffset))
+            if (Value is DateTimeOffset)
                 valueString = ((DateTimeOffset)Value).ToString("o");
 
-            if (Value.GetType() == typeof(bool))
+            if (Value is bool)
                 valueString = valueString.ToLower();
             
             return Field + operatorString + HttpUtility.UrlEncode(valueString);

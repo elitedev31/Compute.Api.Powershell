@@ -42,9 +42,9 @@
         /// <summary>	
         /// Filter by Network Domain.
         /// </summary>
-        public Guid? NetworkDomainId
+        public Guid NetworkDomainId
         {
-            get { return GetFilter<Guid?>(NetworkDomainIdField); }
+            get { return GetFilter<Guid>(NetworkDomainIdField); }
             set { SetFilter(NetworkDomainIdField, value); }
         }
 

@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Server20;
 
     /// <summary>
     /// The interface need to be implemented by requests which support filtering options.
@@ -64,8 +65,16 @@
         /// <param name="value">The value.</param>
         protected void SetFilter(string field, object value)
         {
-            var op = (value is string && value.ToString().Contains("*")) ? FilterOperator.Like : FilterOperator.Equals;
-            SetFilter(field, op, value);
+            if (value is NullFilterOptions)
+            {
+                var op = ((NullFilterOptions)value == NullFilterOptions.NULL) ? FilterOperator.Null : FilterOperator.NotNull;
+                SetFilter(field, op, string.Empty);
+            }
+            else
+            {
+                var op = (value is string && value.ToString().Contains("*")) ? FilterOperator.Like : FilterOperator.Equals;
+                SetFilter(field, op, value);
+            }
         }
 
         /// <summary>

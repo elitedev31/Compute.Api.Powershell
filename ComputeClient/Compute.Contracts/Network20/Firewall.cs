@@ -130,12 +130,12 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("ip", typeof(IpAndPortFilterTypeIP))]
         [System.Xml.Serialization.XmlElementAttribute("ipAddressList", typeof(IpAddressListSummaryType))]
-        public object Item;
+        public object ip;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("port", typeof(PortRangeType))]
         [System.Xml.Serialization.XmlElementAttribute("portList", typeof(PortListSummaryType))]
-        public object Item1;
+        public object port;
     }
 
     /// <remarks/>

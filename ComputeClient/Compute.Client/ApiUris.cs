@@ -164,7 +164,7 @@
         /// <returns>	An URI. </returns>
         public static Uri ListNics(Guid orgId, Guid vlanId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/server/nic?vlanId={1}", orgId, vlanId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/server/nic?vlanId={1}", orgId, vlanId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for Botify NIC IP change.</summary>
