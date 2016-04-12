@@ -1,13 +1,16 @@
-﻿Param(
-	[ValidateNotNullOrEmpty()]
-	[Parameter(Mandatory = $true)]
-	[String] $ReleaseVersion
-)
+﻿If (-not (Test-Path Env:\BUILD_BUILDNUMBER))
+{
+    Write-Host 'BUILD_BUILDNUMBER environment variable is not defined.';
 
-Write-Host "Updating solution versions to $ReleaseVersion";
+    Return;
+}
+
+$buildVersion = [System.Uri](Get-Content Env:\BUILD_BUILDNUMBER)
+Write-Host "Updating solution versions to $buildVersion";
 
 Function UpdateAssemblyInfoWithBuildNumber([string] $solutionAssemblyInfoFile, [string] $version)
 {
+    Write-Host "Updating solution versions to $version";
     $solutionAssemblyInfo = Get-Content $solutionAssemblyInfoFile
     $updatedVersionInfo = $solutionAssemblyInfo -replace "Version\(`"(\d+)\.(\d+)\.(\d+)\.\d+`"\)\]`$", "Version(`"$version`")]"
 
@@ -16,7 +19,7 @@ Function UpdateAssemblyInfoWithBuildNumber([string] $solutionAssemblyInfoFile, [
 
 Function UpdateNuSpecWithBuildNumber([string] $nuSpecFile, [string] $version)
 {
-    Write-Host "Updating nuget versions for $nuSpecFile to $majorVersion.$minorVersion.$buildId.0";
+    Write-Host "Updating nuget versions for $nuSpecFile to $version";
     $nuSpec = Get-Content $nuSpecFile
     $nuSpec = $nuSpec -replace "\<version\>(\d+)\.(\d+)\.(\d+).(\d+)\<\/version\>", "<version>$version</version>"
     $nuSpec = $nuSpec -replace "[\$]version\$", "$version"
@@ -25,6 +28,6 @@ Function UpdateNuSpecWithBuildNumber([string] $nuSpecFile, [string] $version)
 }
 
 $currentDir = (Get-Location).Path
-UpdateAssemblyInfoWithBuildNumber(Join-Path $currentDir "SolutionAssemblyInfo.cs")
-UpdateNuSpecWithBuildNumber(Join-Path $currentDir "Compute.Client\Compute.Client.nuspec")
+UpdateAssemblyInfoWithBuildNumber (Join-Path $currentDir "SolutionAssemblyInfo.cs") $buildVersion
+UpdateNuSpecWithBuildNumber (Join-Path $currentDir "Compute.Client\Compute.Client.nuspec") $buildVersion
 
