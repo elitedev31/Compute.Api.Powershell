@@ -1,17 +1,14 @@
 ﻿Param(
+    [Parameter(Mandatory=$True)]
+    [ValidateNotNullOrEmpty()]
+    [string] $ProductVersion,
+
 	[ValidateNotNullOrEmpty()]
 	[Parameter(Mandatory = $true)]
 	[String] $ReleaseTag
 )
 
-If (-not (Test-Path Env:\BUILD_BUILDNUMBER))
-{
-    Write-Host 'BUILD_BUILDNUMBER environment variable is not defined.';
-
-    Return;
-}
-
-$buildVersion = [System.Uri](Get-Content Env:\BUILD_BUILDNUMBER)
+$buildVersion = Get-BuildVersion $ProductVersion
 Write-Host "Updating solution versions to $buildVersion";
 
 Function UpdateAssemblyInfoWithBuildNumber([string] $solutionAssemblyInfoFile, [string] $version)
@@ -31,6 +28,35 @@ Function UpdateNuSpecWithBuildNumber([string] $nuSpecFile, [string] $version)
     $nuSpec = $nuSpec -replace "[\$]version\$", "$version"
 
     Set-Content $nuSpecFile -Value $nuSpec
+}
+
+Function Get-BuildVersion()
+{
+    Param(
+        # ProductVersion is Major.Minor eg 1.2
+        [Parameter(Mandatory=$True)]
+        [ValidateNotNullOrEmpty()]
+        [string] $ProductVersion
+    )
+    
+    # Expecting BUILD_BUILDURI be something like vstfs:///Build/Build/35
+    If (-not (Test-Path Env:\BUILD_BUILDURI))
+    {
+        throw 'BUILD_BUILDURI environment variable is not defined.';    
+    }
+    
+    $parsedVersion = [Version]::Parse($ProductVersion)
+    
+    $buildUri = [System.Uri](Get-Content Env:\BUILD_BUILDURI)
+    $buildId = Split-Path -Leaf $buildUri.LocalPath
+    
+    $buildVersionProperties = @{};
+    $buildVersionProperties["Major"] = $parsedVersion.Major
+    $buildVersionProperties["Minor"] = $parsedVersion.Minor
+    $buildVersionProperties["Build"] = $buildId
+    
+    $buildVersion = New-Object PSObject -Property $buildVersionProperties
+    return $buildVersion
 }
 
 $currentDir = (Get-Location).Path
