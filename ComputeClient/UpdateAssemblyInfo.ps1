@@ -8,26 +8,44 @@
 	[String] $ReleaseTag
 )
 
-$buildVersion = Get-BuildVersion $ProductVersion
-Write-Host "Updating solution versions to $buildVersion";
 
-Function UpdateAssemblyInfoWithBuildNumber([string] $solutionAssemblyInfoFile, [string] $version)
+Function UpdateAssemblyInfoWithBuildNumber
 {
-    Write-Host "Updating solution versions to $version";
-    $solutionAssemblyInfo = Get-Content $solutionAssemblyInfoFile
-    $updatedVersionInfo = $solutionAssemblyInfo -replace "Version\(`"(\d+)\.(\d+)\.(\d+)\.\d+`"\)\]`$", "Version(`"$version`")]"
+Param(       
+        [Parameter(Mandatory=$True)]
+        [ValidateNotNullOrEmpty()]
+        [string] $SolutionAssemblyInfoFile,
+        
+        [Parameter(Mandatory=$True)]
+        [ValidateNotNullOrEmpty()]
+        [string] $Version
+    ) 
 
-    $updatedVersionInfo | Out-File $solutionAssemblyInfoFile
+    Write-Host "Updating solution versions to $Version";
+    $solutionAssemblyInfo = Get-Content $SolutionAssemblyInfoFile
+    $updatedVersionInfo = $SolutionAssemblyInfoFile -replace "Version\(`"(\d+)\.(\d+)\.(\d+)\.\d+`"\)\]`$", "Version(`"$Version`")]"
+
+    $updatedVersionInfo | Out-File $SolutionAssemblyInfoFile
 }
 
-Function UpdateNuSpecWithBuildNumber([string] $nuSpecFile, [string] $version)
+Function UpdateNuSpecWithBuildNumber
 {
-    Write-Host "Updating nuget versions for $nuSpecFile to $version";
-    $nuSpec = Get-Content $nuSpecFile
-    $nuSpec = $nuSpec -replace "\<version\>(\d+)\.(\d+)\.(\d+).(\d+)\<\/version\>", "<version>$version</version>"
-    $nuSpec = $nuSpec -replace "[\$]version\$", "$version"
+ Param(       
+        [Parameter(Mandatory=$True)]
+        [ValidateNotNullOrEmpty()]
+        [string] $NuSpecFile,
+        
+        [Parameter(Mandatory=$True)]
+        [ValidateNotNullOrEmpty()]
+        [string] $Version
+    ) 
 
-    Set-Content $nuSpecFile -Value $nuSpec
+    Write-Host "Updating nuget versions for $NuSpecFile to $Version";
+    $nuSpec = Get-Content $NuSpecFile
+    $nuSpec = $nuSpec -replace "\<version\>(\d+)\.(\d+)\.(\d+).(\d+)\<\/version\>", "<version>$Version</version>"
+    $nuSpec = $nuSpec -replace "[\$]version\$", "$Version"
+
+    Set-Content $NuSpecFile -Value $nuSpec
 }
 
 Function Get-BuildVersion()
@@ -59,7 +77,10 @@ Function Get-BuildVersion()
     return $buildVersion
 }
 
+$buildVersion = Get-BuildVersion -ProductVersion $ProductVersion
+Write-Host "Updating solution versions to $buildVersion";
+
 $currentDir = (Get-Location).Path
-UpdateAssemblyInfoWithBuildNumber (Join-Path $currentDir "SolutionAssemblyInfo.cs") $buildVersion
-UpdateNuSpecWithBuildNumber (Join-Path $currentDir "Compute.Client\Compute.Client.nuspec") "$buildVersion-$ReleaseTag"
+UpdateAssemblyInfoWithBuildNumber -SolutionAssemblyInfoFile (Join-Path $currentDir "SolutionAssemblyInfo.cs") $buildVersion
+UpdateNuSpecWithBuildNumber -NuSpecFile (Join-Path $currentDir "Compute.Client\Compute.Client.nuspec") "$buildVersion-$ReleaseTag"
 
