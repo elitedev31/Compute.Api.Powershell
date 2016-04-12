@@ -70,13 +70,7 @@ Function Get-BuildVersion()
     Write-Host "BuildUri : $buildUri";
     $buildId = Split-Path -Leaf $buildUri.LocalPath
     Write-Host "buildId : $($buildUri.LocalPath)";
-    $buildVersionProperties = @{};
-    $buildVersionProperties["Major"] = $parsedVersion.Major
-    $buildVersionProperties["Minor"] = $parsedVersion.Minor
-    $buildVersionProperties["Build"] = $buildId
-    
-    $buildVersion = New-Object PSObject -Property $buildVersionProperties
-    return $buildVersion.ToString()
+    return "$($parsedVersion.Major).$($parsedVersion.Minor).$($buildId).0"
 }
 
 $buildVersion = Get-BuildVersion -ProductVersion $ProductVersion
