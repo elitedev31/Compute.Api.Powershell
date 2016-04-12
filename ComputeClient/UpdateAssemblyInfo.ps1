@@ -23,7 +23,7 @@ Param(
 
     Write-Host "Updating solution versions to $Version";
     $solutionAssemblyInfo = Get-Content $SolutionAssemblyInfoFile
-    $updatedVersionInfo = $SolutionAssemblyInfoFile -replace "Version\(`"(\d+)\.(\d+)\.(\d+)\.\d+`"\)\]`$", "Version(`"$Version`")]"
+    $updatedVersionInfo = $solutionAssemblyInfo -replace "Version\(`"(\d+)\.(\d+)\.(\d+)\.\d+`"\)\]`$", "Version(`"$Version`")]"
 
     $updatedVersionInfo | Out-File $SolutionAssemblyInfoFile
 }
