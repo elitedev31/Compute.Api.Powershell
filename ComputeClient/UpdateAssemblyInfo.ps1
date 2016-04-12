@@ -74,7 +74,7 @@ Function Get-BuildVersion()
     $buildVersionProperties["Build"] = $buildId
     
     $buildVersion = New-Object PSObject -Property $buildVersionProperties
-    return $buildVersion
+    return $buildVersion.ToString()
 }
 
 $buildVersion = Get-BuildVersion -ProductVersion $ProductVersion
