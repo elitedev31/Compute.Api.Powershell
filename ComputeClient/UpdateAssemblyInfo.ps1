@@ -1,4 +1,10 @@
-﻿If (-not (Test-Path Env:\BUILD_BUILDNUMBER))
+﻿Param(
+	[ValidateNotNullOrEmpty()]
+	[Parameter(Mandatory = $true)]
+	[String] $ReleaseTag
+)
+
+If (-not (Test-Path Env:\BUILD_BUILDNUMBER))
 {
     Write-Host 'BUILD_BUILDNUMBER environment variable is not defined.';
 
@@ -29,5 +35,5 @@ Function UpdateNuSpecWithBuildNumber([string] $nuSpecFile, [string] $version)
 
 $currentDir = (Get-Location).Path
 UpdateAssemblyInfoWithBuildNumber (Join-Path $currentDir "SolutionAssemblyInfo.cs") $buildVersion
-UpdateNuSpecWithBuildNumber (Join-Path $currentDir "Compute.Client\Compute.Client.nuspec") $buildVersion
+UpdateNuSpecWithBuildNumber (Join-Path $currentDir "Compute.Client\Compute.Client.nuspec") "$buildVersion-$ReleaseTag"
 
