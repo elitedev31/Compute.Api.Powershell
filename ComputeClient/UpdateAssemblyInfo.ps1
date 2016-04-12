@@ -66,8 +66,10 @@ Function Get-BuildVersion()
     $parsedVersion = [Version]::Parse($ProductVersion)
     
     $buildUri = [System.Uri](Get-Content Env:\BUILD_BUILDURI)
+
+    Write-Host "BuildUri : $buildUri";
     $buildId = Split-Path -Leaf $buildUri.LocalPath
-    
+    Write-Host "buildId : $($buildUri.LocalPath)";
     $buildVersionProperties = @{};
     $buildVersionProperties["Major"] = $parsedVersion.Major
     $buildVersionProperties["Minor"] = $parsedVersion.Minor
@@ -81,6 +83,6 @@ $buildVersion = Get-BuildVersion -ProductVersion $ProductVersion
 Write-Host "Updating solution versions to $buildVersion";
 
 $currentDir = (Get-Location).Path
-UpdateAssemblyInfoWithBuildNumber -SolutionAssemblyInfoFile (Join-Path $currentDir "SolutionAssemblyInfo.cs") $buildVersion
-UpdateNuSpecWithBuildNumber -NuSpecFile (Join-Path $currentDir "Compute.Client\Compute.Client.nuspec") "$buildVersion-$ReleaseTag"
+UpdateAssemblyInfoWithBuildNumber -SolutionAssemblyInfoFile (Join-Path $currentDir "SolutionAssemblyInfo.cs") -Version $buildVersion
+UpdateNuSpecWithBuildNumber -NuSpecFile (Join-Path $currentDir "Compute.Client\Compute.Client.nuspec") -Version "$buildVersion-$ReleaseTag"
 
