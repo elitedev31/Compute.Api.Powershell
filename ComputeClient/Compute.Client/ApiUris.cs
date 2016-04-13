@@ -2122,7 +2122,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri ListTagKeys(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/tag/TagKey", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/tag/tagKey", orgId), UriKind.Relative);
         }
 
 
@@ -2132,7 +2132,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri GetTagKey(Guid orgId, Guid tagKeyId)
         {
-            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/tag/TagKey/{1}", orgId, tagKeyId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/tag/tagKey/{1}", orgId, tagKeyId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for edit tag key.</summary>
