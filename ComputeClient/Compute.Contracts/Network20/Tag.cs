@@ -39,7 +39,7 @@
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
     [System.Xml.Serialization.XmlRootAttribute("createTagKey", Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
-    public partial class CreateTagKeyType
+    public partial class createTagKeyType
     {
 
         /// <remarks/>
@@ -66,7 +66,7 @@
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
     [System.Xml.Serialization.XmlRootAttribute("deleteTagKey", Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
-    public partial class DeleteTagKeyType
+    public partial class deleteTagKeyType
     {
 
         /// <remarks/>
@@ -108,7 +108,7 @@
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "urn:didata.com:api:cloud:types")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
-    public partial class TagKeys
+    public partial class tagKeys
     {
 
         /// <remarks/>
@@ -233,7 +233,7 @@
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "urn:didata.com:api:cloud:types")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
-    public partial class ApplyTags
+    public partial class applyTags
     {
 
         /// <remarks/>
@@ -293,7 +293,7 @@
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "urn:didata.com:api:cloud:types")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
-    public partial class Tags
+    public partial class tags
     {
 
         /// <remarks/>

@@ -28,9 +28,9 @@
         /// <summary>The create tag key.</summary>
         /// <param name="createTagKey">The create tag key.</param>
         /// <returns>The <see cref="Task"/>.</returns>
-        public async Task<ResponseType> CreateTagKey(CreateTagKeyType createTagKey)
+        public async Task<ResponseType> CreateTagKey(createTagKeyType createTagKey)
         {
-            return await _apiClient.PostAsync<CreateTagKeyType, ResponseType>(ApiUris.CreateTagKey(_apiClient.OrganizationId), createTagKey);
+            return await _apiClient.PostAsync<createTagKeyType, ResponseType>(ApiUris.CreateTagKey(_apiClient.OrganizationId), createTagKey);
         }
 
         /// <summary>The get tag keys.</summary>
@@ -48,7 +48,7 @@
         /// <returns>The <see cref="Task"/>.</returns>
         public async Task<PagedResponse<TagKeyType>> GetTagKeysPaginated(TagKeyListOptions tagKeyListOptions = null, IPageableRequest paginngOptions = null)
         {
-            var response = await _apiClient.GetAsync<TagKeys>(ApiUris.ListTagKeys(_apiClient.OrganizationId));
+            var response = await _apiClient.GetAsync<tagKeys>(ApiUris.ListTagKeys(_apiClient.OrganizationId), paginngOptions, tagKeyListOptions);
             return new PagedResponse<TagKeyType>
             {
                 items = response.tagKey, 
@@ -78,17 +78,17 @@
         /// <summary>The delete tag key.</summary>
         /// <param name="deleteTagKey">The delete tag key.</param>
         /// <returns>The <see cref="Task"/>.</returns>
-        public async Task<ResponseType> DeleteTagKey(DeleteTagKeyType deleteTagKey)
+        public async Task<ResponseType> DeleteTagKey(deleteTagKeyType deleteTagKey)
         {
-            return await _apiClient.PostAsync<DeleteTagKeyType, ResponseType>(ApiUris.DeleteTagKey(_apiClient.OrganizationId), deleteTagKey);
+            return await _apiClient.PostAsync<deleteTagKeyType, ResponseType>(ApiUris.DeleteTagKey(_apiClient.OrganizationId), deleteTagKey);
         }
 
         /// <summary>The apply tags.</summary>
         /// <param name="applyTags">The apply tags.</param>
         /// <returns>The <see cref="Task"/>.</returns>
-        public async Task<ResponseType> ApplyTags(ApplyTags applyTags)
+        public async Task<ResponseType> ApplyTags(applyTags applyTags)
         {
-            return await _apiClient.PostAsync<ApplyTags, ResponseType>(ApiUris.ApplyTags(_apiClient.OrganizationId), applyTags);
+            return await _apiClient.PostAsync<applyTags, ResponseType>(ApiUris.ApplyTags(_apiClient.OrganizationId), applyTags);
         }
 
         /// <summary>The get tags.</summary>
@@ -106,7 +106,7 @@
         /// <returns>The <see cref="Task"/>.</returns>
         public async Task<PagedResponse<TagType>> GetTagsPaginated(TagListOptions tagListOptions = null, IPageableRequest paginngOptions = null)
         {
-            var response = await _apiClient.GetAsync<Tags>(ApiUris.ListTagKeys(_apiClient.OrganizationId));
+            var response = await _apiClient.GetAsync<tags>(ApiUris.ListTagKeys(_apiClient.OrganizationId), paginngOptions, tagListOptions);
             return new PagedResponse<TagType>
             {
                 items = response.tag, 

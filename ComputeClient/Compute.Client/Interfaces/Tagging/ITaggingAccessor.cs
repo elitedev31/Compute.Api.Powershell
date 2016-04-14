@@ -14,7 +14,7 @@
         /// <summary>The create tag key.</summary>
         /// <param name="createTagKey">The create tag key.</param>
         /// <returns>The <see cref="Task"/>.</returns>
-        Task<ResponseType> CreateTagKey(CreateTagKeyType createTagKey);
+        Task<ResponseType> CreateTagKey(createTagKeyType createTagKey);
 
         /// <summary>The get tag keys.</summary>
         /// <param name="tagKeyListOptions">The tag key list options.</param>
@@ -40,12 +40,12 @@
         /// <summary>The delete tag key.</summary>
         /// <param name="deleteTagKey">The delete tag key.</param>
         /// <returns>The <see cref="Task"/>.</returns>
-        Task<ResponseType> DeleteTagKey(DeleteTagKeyType deleteTagKey);
+        Task<ResponseType> DeleteTagKey(deleteTagKeyType deleteTagKey);
 
         /// <summary>The apply tags.</summary>
         /// <param name="applyTags">The apply tags.</param>
         /// <returns>The <see cref="Task"/>.</returns>
-        Task<ResponseType> ApplyTags(ApplyTags applyTags);
+        Task<ResponseType> ApplyTags(applyTags applyTags);
 
         /// <summary>The get tags.</summary>
         /// <param name="tagListOptions">The tag list options.</param>
