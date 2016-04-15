@@ -229,10 +229,7 @@
         /// </summary>
         /// <param name="pagingOptions">
         /// The paging options.
-        /// </param>
-        /// <param name="filteringOptions">
-        /// The filtering options.
-        /// </param>
+        /// </param>     
         /// <returns>
         /// The <see cref="Task"/>.
         /// </returns>
