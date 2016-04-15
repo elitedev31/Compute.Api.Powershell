@@ -3,10 +3,11 @@
 	using System;
 	using System.Runtime.Serialization;
 
-	/// <summary>
-	/// The caa s organization not set exception.
-	/// </summary>	
-	public class InvalidCredentialsException : ComputeApiException
+    /// <summary>
+    /// The CaaS organization not set exception.
+    /// </summary>	
+    [Serializable]
+    public class InvalidCredentialsException : ComputeApiException
 	{
 		/// <summary>
 		/// The error message.
