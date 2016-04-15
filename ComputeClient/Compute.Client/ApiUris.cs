@@ -85,7 +85,7 @@
             if (string.IsNullOrWhiteSpace(targetRegionName))
                 throw new ArgumentException(
                     "Argument cannot be null, empty, or composed entirely of whitespace: 'targetRegionName'.", 
-                    nameof(targetRegionName));
+                    "targetRegionName");
 
             return new Uri(string.Format("https://api-{0}.dimensiondata.com/oec/0.9/", targetRegionName.ToLower()));
         }
@@ -115,7 +115,7 @@
         public static Uri DatacentersWithDiskSpeedDetails(Guid organizationId)
         {
             if (organizationId == Guid.Empty)
-                throw new ArgumentException("GUID cannot be empty: 'organizationId'.", nameof(organizationId));
+                throw new ArgumentException("GUID cannot be empty: 'organizationId'.", "organizationId");
 
             return new Uri(string.Format(MCP1_0_PREFIX + "{0}/datacenterWithDiskSpeed", organizationId), UriKind.Relative);
         }
@@ -241,7 +241,7 @@
             if (string.IsNullOrWhiteSpace(locationName))
                 throw new ArgumentException(
                     "Argument cannot be null, empty, or composed entirely of whitespace: 'locationName'.", 
-                    nameof(locationName));
+                    "locationName");
 
             return new Uri(string.Format(MCP1_0_PREFIX + "base/image/deployedWithSoftwareLabels/{0}", locationName), UriKind.Relative);
         }
