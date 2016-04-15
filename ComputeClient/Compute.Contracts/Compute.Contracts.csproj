@@ -88,6 +88,9 @@
     <Compile Include="..\SolutionAssemblyInfo.cs">
       <Link>Properties\SolutionAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Network20\IpAddressList.cs" />
+    <Compile Include="Network20\PortList.cs" />
+    <Compile Include="Network20\Tag.cs" />
     <Compile Include="Organization\TwoFactorAuthentication.cs" />
     <Compile Include="Backup\AlertingType.cs" />
     <Compile Include="Backup\BackupClientDetailsType.cs" />
@@ -204,6 +207,10 @@
     <Compile Include="Requests\Infrastructure\OperatingSystemListOptions.cs" />
     <Compile Include="Requests\Infrastructure\DataCenterListOptions.cs" />
     <Compile Include="Requests\IPageableRequest.cs" />
+    <Compile Include="Requests\Network20\ReservedIpv6ListOptions.cs" />
+    <Compile Include="Requests\Network20\ReservedPrivateIpv4ListOptions.cs" />
+    <Compile Include="Requests\Network20\PortListOptions.cs" />
+    <Compile Include="Requests\Network20\IpAddressListOptions.cs" />
     <Compile Include="Requests\Network20\PublicIpListOptions.cs" />
     <Compile Include="Requests\Network20\NatRuleListOptions.cs" />
     <Compile Include="Requests\Network20\NetworkDomainListOptions.cs" />
@@ -215,7 +222,9 @@
     <Compile Include="Requests\Network20\VlanListOptions.cs" />
     <Compile Include="Requests\PageableRequest.cs" />
     <Compile Include="Requests\Server20\AntiAffinityRuleListOptions.cs" />
+    <Compile Include="Requests\NullFilterOptions.cs" />
     <Compile Include="Requests\Server20\ServerCustomerImageListOptions.cs" />
+    <Compile Include="Requests\Server20\ListNicsListOptions.cs" />
     <Compile Include="Requests\Server20\ServerOSImageListOptions.cs" />
     <Compile Include="Requests\Server20\ServerListOptions.cs" />
     <Compile Include="Requests\Server\ServerListOptions.cs" />
@@ -224,6 +233,8 @@
     <Compile Include="Requests\Network20\PoolMemberListOptions.cs" />
     <Compile Include="Requests\Network20\VirtualListenerListOptions.cs" />
     <Compile Include="Network20\AntiAffinityRule.cs" />
+    <Compile Include="Requests\Tagging\TagListOptions.cs" />
+    <Compile Include="Requests\Tagging\TagKeyListOptions.cs" />
     <Compile Include="Server10\AntiAffinityRules.cs" />
     <Compile Include="Server10\AntiAffinityRuleType.cs" />
     <Compile Include="Server10\AntiAffinityRuleTypeServerSummary.cs" />
@@ -344,6 +355,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Reports\" />
+    <Folder Include="Tagging\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -48,8 +48,10 @@ namespace DD.CBU.Compute.Api.Client
 	using DD.CBU.Compute.Api.Contracts.Server;
     using DD.CBU.Compute.Api.Contracts.Server10;
     using DD.CBU.Compute.Api.Contracts.Software;
+	using Interfaces.Tagging;
+	using Tagging;
 
-	/// <summary>
+    /// <summary>
 	/// A client for the Dimension Data Compute-as-a-Service (CaaS) API.
 	/// </summary>
 	public sealed class ComputeApiClient
@@ -204,6 +206,7 @@ namespace DD.CBU.Compute.Api.Client
 			ImportExportCustomerImage = new ImportExportCustomerImageAccessor(WebApi);
 			Backup = new BackupAccessor(WebApi);
             Reports = new ReportAccessor(WebApi);
+            Tagging = new TaggingAccessor(WebApi);
 		}
 
 		#endregion
@@ -359,7 +362,10 @@ namespace DD.CBU.Compute.Api.Client
 	    /// </summary>
 	    public IReportAccessor Reports { get; private set; }
 
-	    #endregion Instance data
+        /// <summary>Gets the tagging.</summary>
+        public ITaggingAccessor Tagging { get; private set; }
+
+        #endregion Instance data
 
 		#region Public Methods
 
