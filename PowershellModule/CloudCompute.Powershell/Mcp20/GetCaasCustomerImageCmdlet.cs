@@ -82,7 +82,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
                 ServerCustomerImageListOptions options = new ServerCustomerImageListOptions
                 {
-                    Ids = ImageId == Guid.Empty ? null : new Guid[] { ImageId },
+                    Id = ImageId,
                     DatacenterId = DataCenterId,
                     Name = Name,
                     OperatingSystemId = OperatingSystemId,

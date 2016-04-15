@@ -153,6 +153,7 @@ namespace DD.CBU.Compute.Api.Client
             KnownVpnHostNames = new Dictionary<string, string>();
             KnownMonitoringHostNames = new Dictionary<string, string>();
             KnownVendorEndPointPairs = new List<KeyValuePair<KnownApiVendor, KnownApiRegion>>();
+            KnownApiHostUiNames = new Dictionary<string, string>();
             CreateKnownApiHostNames();
         }
 
@@ -188,20 +189,26 @@ namespace DD.CBU.Compute.Api.Client
         /// <summary>
         /// Mapping between Vendor and applicable regions
         /// </summary>
-        private List<KeyValuePair<KnownApiVendor, KnownApiRegion>> KnownVendorEndPointPairs { get; set; }   
-        
+        private List<KeyValuePair<KnownApiVendor, KnownApiRegion>> KnownVendorEndPointPairs { get; set; }
+
+        /// <summary>
+        /// Private Dictionary to host all regional password reset endpoints
+        /// </summary>
+        private Dictionary<string, string> KnownApiHostUiNames { get; set; }
+
+
         /// <summary>
         /// Return an known CaaS URI based on vendor and region
         /// </summary>
-		/// <param name="vendor">
-		/// The vendor
-		/// </param>
-		/// <param name="region">
-		/// The region
-		/// </param>
-		/// <returns>
-		/// The <see cref="Uri"/>.
-		/// </returns>
+        /// <param name="vendor">
+        /// The vendor
+        /// </param>
+        /// <param name="region">
+        /// The region
+        /// </param>
+        /// <returns>
+        /// The <see cref="Uri"/>.
+        /// </returns>
         public Uri GetBaseUri(KnownApiVendor vendor, KnownApiRegion region)
         {
             const string urltemplate = "https://{0}/";
@@ -281,6 +288,28 @@ namespace DD.CBU.Compute.Api.Client
                 throw new ApiHostNotFoundException(vendor, region);
             string apiurl = string.Format(urltemplate, KnownMonitoringHostNames[key]);
             return new Uri(apiurl);
+        }
+
+        /// <summary>
+        /// The get password reset url.
+        /// </summary>
+        /// <param name="vendor">
+        /// The vendor.
+        /// </param>
+        /// <param name="region">
+        /// The region.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Uri"/>.
+        /// </returns>
+        /// <exception cref="ApiHostNotFoundException">
+        /// </exception>
+        public string GetRegionHostUiUrl(KnownApiVendor vendor, KnownApiRegion region)
+        {
+            string key = string.Concat(vendor.ToString(), '-', region.ToString());
+            if (!KnownApiHostUiNames.ContainsKey(key))
+                throw new ApiHostNotFoundException(vendor, region);
+            return KnownApiHostUiNames[key];
         }
 
         /// <summary>	List of Known Regions that are valid for the particular Vendor. </summary>        
@@ -364,33 +393,43 @@ namespace DD.CBU.Compute.Api.Client
             // Africa
             AddHostName(KnownApiVendor.DimensionData, KnownApiRegion.Africa_AF, "api-mea.dimensiondata.com");
             AddFtpHostName(KnownApiVendor.DimensionData, KnownApiRegion.Africa_AF, "ftps-af.cloud-vpn.net");
+            AddHostUiUrl(KnownApiVendor.DimensionData, KnownApiRegion.Africa_AF, "cloud-mea.dimensiondata.com");
             // Asia
             AddHostName(KnownApiVendor.DimensionData, KnownApiRegion.AsiaPacific_AP, "api-ap.dimensiondata.com");
             AddFtpHostName(KnownApiVendor.DimensionData, KnownApiRegion.AsiaPacific_AP, "ftps-ap.cloud-vpn.net");
+            AddHostUiUrl(KnownApiVendor.DimensionData, KnownApiRegion.AsiaPacific_AP, "apcloud-ap.dimensiondata.com");
             // Australia
             AddHostName(KnownApiVendor.DimensionData, KnownApiRegion.Australia_AU, "api-au.dimensiondata.com");
             AddFtpHostName(KnownApiVendor.DimensionData, KnownApiRegion.Australia_AU, "ftps-au.cloud-vpn.net");
+            AddHostUiUrl(KnownApiVendor.DimensionData, KnownApiRegion.Australia_AU, "aucloud-au.dimensiondata.com");
             // Canada
             AddHostName(KnownApiVendor.DimensionData, KnownApiRegion.Canada_CA, "api-canada.dimensiondata.com");
             AddFtpHostName(KnownApiVendor.DimensionData, KnownApiRegion.Canada_CA, "ftps-canada.cloud-vpn.net");
+            AddHostUiUrl(KnownApiVendor.DimensionData, KnownApiRegion.Canada_CA, "aucloud-canada.dimensiondata.com");
             // Europe
             AddHostName(KnownApiVendor.DimensionData, KnownApiRegion.Europe_EU, "api-eu.dimensiondata.com");
             AddFtpHostName(KnownApiVendor.DimensionData, KnownApiRegion.Europe_EU, "ftps-eu.cloud-vpn.net");
+            AddHostUiUrl(KnownApiVendor.DimensionData, KnownApiRegion.Europe_EU, "aucloud-eu.dimensiondata.com");
             // India
             AddHostName(KnownApiVendor.DimensionData, KnownApiRegion.India_IN, "inapi.opsourcecloud.net");
             AddFtpHostName(KnownApiVendor.DimensionData, KnownApiRegion.India_IN, "ftps-in.cloud-vpn.net");
+            AddHostUiUrl(KnownApiVendor.DimensionData, KnownApiRegion.India_IN, "inadmintest.opsourcecloud.net");
             // Indonesia
             AddHostName(KnownApiVendor.DimensionData, KnownApiRegion.Indonesia_ID, "idapi.opsourcecloud.net");
             AddFtpHostName(KnownApiVendor.DimensionData, KnownApiRegion.Indonesia_ID, "ftps-id.cloud-vpn.net");
+            AddHostUiUrl(KnownApiVendor.DimensionData, KnownApiRegion.Indonesia_ID, "idadmintest.opsourcecloud.net");
             // Israel
             AddHostName(KnownApiVendor.DimensionData, KnownApiRegion.Israel_IL, "ilapi.opsourcecloud.net");
             AddFtpHostName(KnownApiVendor.DimensionData, KnownApiRegion.Israel_IL, "ftps-med-1.cloud-vpn.net");
+            AddHostUiUrl(KnownApiVendor.DimensionData, KnownApiRegion.Israel_IL, "iladmintest.opsourcecloud.net");
             // North America
             AddHostName(KnownApiVendor.DimensionData, KnownApiRegion.NorthAmerica_NA, "api-na.dimensiondata.com");
             AddFtpHostName(KnownApiVendor.DimensionData, KnownApiRegion.NorthAmerica_NA, "ftps-na.cloud-vpn.net");
+            AddHostUiUrl(KnownApiVendor.DimensionData, KnownApiRegion.NorthAmerica_NA, "nacloud-na.dimensiondata.com");
             // South America
             AddHostName(KnownApiVendor.DimensionData, KnownApiRegion.SouthAmerica_SA, "api-latam.dimensiondata.com");
             AddFtpHostName(KnownApiVendor.DimensionData, KnownApiRegion.SouthAmerica_SA, "ftps-latam.cloud-vpn.net");
+            AddHostUiUrl(KnownApiVendor.DimensionData, KnownApiRegion.SouthAmerica_SA, "latamcloud-latam.dimensiondata.com");
             #endregion
 
             #region DimensionData_Government
@@ -594,6 +633,24 @@ namespace DD.CBU.Compute.Api.Client
         private void AddMonitoringHostName(KnownApiRegion region, string apiUrl)
         {            
             KnownMonitoringHostNames.Add(region.ToString(), apiUrl);
+        }
+
+        /// <summary>
+        /// The add password reset host name.
+        /// </summary>
+        /// <param name="vendor">
+        /// The vendor.
+        /// </param>
+        /// <param name="region">
+        /// The region.
+        /// </param>
+        /// <param name="apiUrl">
+        /// The api url.
+        /// </param>
+        private void AddHostUiUrl(KnownApiVendor vendor, KnownApiRegion region, string apiUrl)
+        {
+            string key = string.Concat(vendor.ToString(), '-', region.ToString());
+            KnownApiHostUiNames.Add(key, apiUrl);
         }
     }
 }

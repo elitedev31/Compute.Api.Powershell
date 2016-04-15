@@ -9,7 +9,7 @@
         {
             get { return ItemElementName == PrivateIpv4OrVlanIdChoiceType.vlanId ? Item : string.Empty; }
             set
-            {               
+            {
                 // value not null or its vlan id
                 if (!string.IsNullOrWhiteSpace(value) || ItemElementName == PrivateIpv4OrVlanIdChoiceType.vlanId)
                 {
@@ -25,7 +25,7 @@
         {
             get { return ItemElementName == PrivateIpv4OrVlanIdChoiceType.privateIpv4 ? Item : string.Empty; }
             set
-            {              
+            {
                 // value not null or its private ipv4
                 if (!string.IsNullOrWhiteSpace(value) || ItemElementName == PrivateIpv4OrVlanIdChoiceType.privateIpv4)
                 {
@@ -65,7 +65,11 @@
         public DeployServerTypeNetwork network
         {
             get { return Item as DeployServerTypeNetwork; }
-            set { Item = value; }
+            set
+            {
+                if (value != null || Item is DeployServerTypeNetwork)
+                    Item = value;
+            }
         }
 
         /// <summary>	Gets or sets information describing the network. </summary>
@@ -74,7 +78,11 @@
         public DeployServerTypeNetworkInfo networkInfo
         {
             get { return Item as DeployServerTypeNetworkInfo; }
-            set { Item = value; }
+            set
+            {
+                if (value != null || Item is DeployServerTypeNetworkInfo)
+                    Item = value;
+            }
         }
     }
 
@@ -87,10 +95,10 @@
         {
             get
             {
-                return ItemElementName == NetworkIdOrPrivateIpv4ChoiceType.networkId ? Item : string.Empty;                 
+                return ItemElementName == NetworkIdOrPrivateIpv4ChoiceType.networkId ? Item : string.Empty;
             }
             set
-            {               
+            {
                 // value not null or its networkId
                 if (!string.IsNullOrWhiteSpace(value) || ItemElementName == NetworkIdOrPrivateIpv4ChoiceType.networkId)
                 {
@@ -115,7 +123,7 @@
                 {
                     Item = value;
                     ItemElementName = NetworkIdOrPrivateIpv4ChoiceType.privateIpv4;
-                }  
+                }
             }
         }
     }

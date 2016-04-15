@@ -1,101 +1,215 @@
 ﻿namespace DD.CBU.Compute.Api.Contracts.Requests.Server20
 {
     using System;
-    using DD.CBU.Compute.Api.Contracts.Requests.Attributes;
 
     /// <summary>
     /// Filtering options for the server request.
     /// </summary>
-    public sealed class ServerListOptions : IFilterableRequest
+    public sealed class ServerListOptions : FilterableRequest
     {
         /// <summary>
-        /// Gets or sets the id filter.
+        /// The "id" field name.
         /// </summary>
-        [FilterParameter("id")]
-        public Guid[] Ids { get; set; }
+        public const string IdField = "id";
 
         /// <summary>
-        /// Gets or sets the DatacenterId filter.
+        /// The "datacenterId" field name.
         /// </summary>
-        [FilterParameter("datacenterId")]
-        public string DatacenterId { get; set; }
+        public const string DatacenterIdField = "datacenterId";
 
         /// <summary>
-        /// Gets or sets the NetworkDomainId filter.
+        /// The "networkDomainId" field name.
         /// </summary>
-        [FilterParameter("networkDomainId")]
-        public Guid? NetworkDomainId { get; set; }
+        public const string NetworkDomainIdField = "networkDomainId";
+
+        /// <summary>
+        /// The "networkId" field name.
+        /// </summary>
+        public const string NetworkIdField = "networkId";
+
+        /// <summary>
+        /// The "vlanId" field name.
+        /// </summary>
+        public const string VlanIdField = "vlanId";
+
+        /// <summary>
+        /// The "sourceImageId" field name.
+        /// </summary>
+        public const string SourceImageIdField = "sourceImageId";
+
+        /// <summary>
+        /// The "deployed" field name.
+        /// </summary>
+        public const string DeployedField = "deployed";
+
+        /// <summary>
+        /// The "name" field name.
+        /// </summary>
+        public const string NameField = "name";
+
+        /// <summary>
+        /// The "createTime" field name.
+        /// </summary>
+        public const string CreateTimeField = "createTime";
+
+        /// <summary>
+        /// The "state" field name.
+        /// </summary>
+        public const string StateField = "state";
+
+        /// <summary>
+        /// The "started" field name.
+        /// </summary>
+        public const string StartedField = "started";
+
+        /// <summary>
+        /// The "operatingSystemId" field name.
+        /// </summary>
+        public const string OperatingSystemIdField = "operatingSystemId";
+
+        /// <summary>
+        /// The "ipv6" field name.
+        /// </summary>
+        public const string Ipv6Field = "ipv6";
+
+        /// <summary>
+        /// The "privateIpv4" field name.
+        /// </summary>
+        public const string PrivateIpv4Field = "privateIpv4";
+
+        /// <summary>	
+        /// Identifies an individual Virtual Listener.
+        /// </summary>
+        public Guid? Id
+        {
+            get { return GetFilter<Guid?>(IdField); }
+            set { SetFilter(IdField, value); }
+        }
+
+        /// <summary>	
+        /// Identifies an individual Network Domain.
+        /// </summary>
+        public Guid? NetworkDomainId
+        {
+            get { return GetFilter<Guid?>(NetworkDomainIdField); }
+            set { SetFilter(NetworkDomainIdField, value); }
+        }
+
+        /// <summary>	
+        /// Identifies an individual Data Center.
+        /// </summary>
+        public string DatacenterId
+        {
+            get { return GetFilter<string>(DatacenterIdField); }
+            set { SetFilter(DatacenterIdField, value); }
+        }
 
         /// <summary>
         /// Gets or sets the NetworkId filter.
         /// </summary>
-        [FilterParameter("networkId")]
-        public Guid? NetworkId { get; set; }
+        public Guid? NetworkId
+        {
+            get { return GetFilter<Guid?>(NetworkIdField); }
+            set { SetFilter(NetworkIdField, value); }
+        }
 
         /// <summary>
         /// Gets or sets the VlanId filter.
         /// </summary>
-        [FilterParameter("vlanId")]
-        public Guid? VlanId { get; set; }
+        public Guid? VlanId
+        {
+            get { return GetFilter<Guid?>(VlanIdField); }
+            set { SetFilter(VlanIdField, value); }
+        }
 
         /// <summary>
         /// Gets or sets the SourceImageId filter.
         /// </summary>
-        [FilterParameter("sourceImageId")]
-        public Guid? SourceImageId { get; set; }
+        public Guid? SourceImageId
+        {
+            get { return GetFilter<Guid?>(SourceImageIdField); }
+            set { SetFilter(SourceImageIdField, value); }
+        }
 
         /// <summary>
         /// Gets or sets the Deployed filter.
         /// </summary>
-        [FilterParameter("deployed")]
-        public string Deployed { get; set; }
+        public bool? Deployed
+        {
+            get { return GetFilter<bool?>(DeployedField); }
+            set { SetFilter(DeployedField, value); }
+        }
 
-        /// <summary>
-        /// Gets or sets the Name filter.
+        /// <summary>	
+        /// Identifies Virtual Listeners by their name.
         /// </summary>
-        [FilterParameter("name")]
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return GetFilter<string>(NameField); }
+            set { SetFilter(NameField, value); }
+        }
 
         /// <summary>
         /// Gets or sets the CreateTimeBefore filter.
         /// </summary>
-        [FilterParameter("createTime", ".LT=")]
-        public DateTimeOffset? CreateTimeBefore { get; set; }
+        public DateTimeOffset? CreateTimeBefore
+        {
+            get { return GetFilter<DateTimeOffset?>(CreateTimeField, FilterOperator.LessThan); }
+            set { SetFilter(CreateTimeField, FilterOperator.LessThan, value); }
+        }
 
         /// <summary>
         /// Gets or sets the CreateTimeAfter filter.
         /// </summary>
-        [FilterParameter("createTime", ".GT=")]
-        public DateTimeOffset? CreateTimeAfter { get; set; }
+        public DateTimeOffset? CreateTimeAfter
+        {
+            get { return GetFilter<DateTimeOffset?>(CreateTimeField, FilterOperator.GreaterThan); }
+            set { SetFilter(CreateTimeField, FilterOperator.GreaterThan, value); }
+        }
 
         /// <summary>
         /// Gets or sets the State filter.
         /// </summary>
-        [FilterParameter("state")]
-        public string State { get; set; }
+        public string State
+        {
+            get { return GetFilter<string>(StateField); }
+            set { SetFilter(StateField, value); }
+        }
 
         /// <summary>
         /// Gets or sets the Started filter.
         /// </summary>
-        [FilterParameter("started")]
-        public bool? Started { get; set; }
+        public bool? Started
+        {
+            get { return GetFilter<bool?>(StartedField); }
+            set { SetFilter(StartedField, value); }
+        }
 
         /// <summary>
         /// Gets or sets the OperatingSystemId filter.
         /// </summary>
-        [FilterParameter("operatingSystemId")]
-        public Guid? OperatingSystemId { get; set; }
+        public Guid? OperatingSystemId
+        {
+            get { return GetFilter<Guid?>(OperatingSystemIdField); }
+            set { SetFilter(OperatingSystemIdField, value); }
+        }
 
         /// <summary>
         /// Gets or sets the Ipv6 filter.
         /// </summary>
-        [FilterParameter("ipv6")]
-        public string Ipv6 { get; set; }
+        public string Ipv6
+        {
+            get { return GetFilter<string>(Ipv6Field); }
+            set { SetFilter(Ipv6Field, value); }
+        }
 
         /// <summary>
         /// Gets or sets the PrivateIpv4 filter.
         /// </summary>
-        [FilterParameter("privateIpv4")]
-        public string PrivateIpv4 { get; set; }
-	}
+        public string PrivateIpv4
+        {
+            get { return GetFilter<string>(PrivateIpv4Field); }
+            set { SetFilter(PrivateIpv4Field, value); }
+        }
+    }
 }

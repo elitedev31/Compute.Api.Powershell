@@ -1564,4 +1564,421 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
             set { this.idField = value; }
         }
     }
+
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
+    [System.Xml.Serialization.XmlRootAttribute("nic", Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
+    public partial class NicWithSecurityGroupType
+    {
+
+        private string typeField;
+
+        private string ipv4AddressField;
+
+        private string ipv6AddressField;
+
+        private string stateField;
+
+        private string serverIdField;
+
+        private string serverNameField;
+
+        private string serverDescriptionField;
+
+        private NicWithSecurityGroupTypeSecurityGroup securityGroupField;
+
+        private string idField;
+
+        /// <remarks/>
+        public string type
+        {
+            get
+            {
+                return this.typeField;
+            }
+            set
+            {
+                this.typeField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string ipv4Address
+        {
+            get
+            {
+                return this.ipv4AddressField;
+            }
+            set
+            {
+                this.ipv4AddressField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string ipv6Address
+        {
+            get
+            {
+                return this.ipv6AddressField;
+            }
+            set
+            {
+                this.ipv6AddressField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string state
+        {
+            get
+            {
+                return this.stateField;
+            }
+            set
+            {
+                this.stateField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string serverId
+        {
+            get
+            {
+                return this.serverIdField;
+            }
+            set
+            {
+                this.serverIdField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string serverName
+        {
+            get
+            {
+                return this.serverNameField;
+            }
+            set
+            {
+                this.serverNameField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string serverDescription
+        {
+            get
+            {
+                return this.serverDescriptionField;
+            }
+            set
+            {
+                this.serverDescriptionField = value;
+            }
+        }
+
+        /// <remarks/>
+        public NicWithSecurityGroupTypeSecurityGroup securityGroup
+        {
+            get
+            {
+                return this.securityGroupField;
+            }
+            set
+            {
+                this.securityGroupField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string id
+        {
+            get
+            {
+                return this.idField;
+            }
+            set
+            {
+                this.idField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "urn:didata.com:api:cloud:types")]
+    public partial class NicWithSecurityGroupTypeSecurityGroup
+    {
+
+        private string nameField;
+
+        private string descriptionField;
+
+        private string stateField;
+
+        private string idField;
+
+        /// <remarks/>
+        public string name
+        {
+            get
+            {
+                return this.nameField;
+            }
+            set
+            {
+                this.nameField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string description
+        {
+            get
+            {
+                return this.descriptionField;
+            }
+            set
+            {
+                this.descriptionField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string state
+        {
+            get
+            {
+                return this.stateField;
+            }
+            set
+            {
+                this.stateField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string id
+        {
+            get
+            {
+                return this.idField;
+            }
+            set
+            {
+                this.idField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "urn:didata.com:api:cloud:types")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
+    public partial class nics
+    {
+
+        private NicWithSecurityGroupType[] nicField;
+
+        private int pageNumberField;
+
+        private bool pageNumberFieldSpecified;
+
+        private int pageCountField;
+
+        private bool pageCountFieldSpecified;
+
+        private int totalCountField;
+
+        private bool totalCountFieldSpecified;
+
+        private int pageSizeField;
+
+        private bool pageSizeFieldSpecified;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("nic")]
+        public NicWithSecurityGroupType[] nic
+        {
+            get
+            {
+                return this.nicField;
+            }
+            set
+            {
+                this.nicField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public int pageNumber
+        {
+            get
+            {
+                return this.pageNumberField;
+            }
+            set
+            {
+                this.pageNumberField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool pageNumberSpecified
+        {
+            get
+            {
+                return this.pageNumberFieldSpecified;
+            }
+            set
+            {
+                this.pageNumberFieldSpecified = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public int pageCount
+        {
+            get
+            {
+                return this.pageCountField;
+            }
+            set
+            {
+                this.pageCountField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool pageCountSpecified
+        {
+            get
+            {
+                return this.pageCountFieldSpecified;
+            }
+            set
+            {
+                this.pageCountFieldSpecified = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public int totalCount
+        {
+            get
+            {
+                return this.totalCountField;
+            }
+            set
+            {
+                this.totalCountField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool totalCountSpecified
+        {
+            get
+            {
+                return this.totalCountFieldSpecified;
+            }
+            set
+            {
+                this.totalCountFieldSpecified = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public int pageSize
+        {
+            get
+            {
+                return this.pageSizeField;
+            }
+            set
+            {
+                this.pageSizeField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool pageSizeSpecified
+        {
+            get
+            {
+                return this.pageSizeFieldSpecified;
+            }
+            set
+            {
+                this.pageSizeFieldSpecified = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
+    [System.Xml.Serialization.XmlRootAttribute("addDisk", Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
+    public partial class AddDiskType
+    {
+
+        /// <remarks/>
+        public int sizeGb;
+
+        /// <remarks/>
+        public string speed;
+
+        /// <remarks/>
+        public int scsiId;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool scsiIdSpecified;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string id;
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
+    [System.Xml.Serialization.XmlRootAttribute("removeDisk", Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
+    public partial class RemoveDiskType
+    {
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string id;
+    }
 }

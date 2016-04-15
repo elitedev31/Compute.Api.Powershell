@@ -1,9 +1,12 @@
-﻿namespace Compute.Client.UnitTests.Utilities
+﻿using System.Web;
+
+namespace Compute.Client.UnitTests.Utilities
 {
     using System;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+    using DD.CBU.Compute.Api.Contracts.Requests;
     using DD.CBU.Compute.Api.Contracts.Requests.Server20;
     using DD.CBU.Compute.Api.Client.Utilities;
 
@@ -24,8 +27,8 @@
             var uri = new Uri("/resource?id=12", UriKind.Relative);
             var options = new ServerListOptions
             {
-                Name = "Test",
-                DatacenterId = "XY12"
+                DatacenterId = "XY12",
+                Name = "Test"
             };
 
             var result = FilterableRequestExtensions.AppendToUri(options, uri);
@@ -43,7 +46,7 @@
             };
 
             var result = FilterableRequestExtensions.AppendToUri(options, uri);
-            Assert.AreEqual("/resource?name=Test&createTime.GT=2010-10-10T10:10:10.0000000+00:00", result.ToString());
+            Assert.AreEqual("/resource?name=Test&createTime.GT=" + HttpUtility.UrlEncode("2010-10-10T10:10:10.0000000+00:00"), result.ToString());
         }
 
         [TestMethod]
@@ -52,10 +55,10 @@
             var uri = new Uri("/resource", UriKind.Relative);
             var options = new ServerListOptions
             {
-                Ids = new[]
+                Filters =
                 {
-                    new Guid("00000000-0000-0000-0000-000000000001"),
-                    new Guid("00000000-0000-0000-0000-000000000002")
+                    new Filter { Field = ServerListOptions.IdField, Value = new Guid("00000000-0000-0000-0000-000000000001") },
+                    new Filter { Field = ServerListOptions.IdField, Value = new Guid("00000000-0000-0000-0000-000000000002") }
                 }
             };
 

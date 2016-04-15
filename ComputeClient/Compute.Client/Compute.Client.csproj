@@ -135,6 +135,7 @@
     <Compile Include="Interfaces\Server\IServerAccessor.cs" />
     <Compile Include="Interfaces\Server\IServerImagesAccessor.cs" />
     <Compile Include="Interfaces\Server\IServerManagementLegacyAccessor.cs" />
+    <Compile Include="Interfaces\Tagging\ITaggingAccessor.cs" />
     <Compile Include="KnownApiUri.cs" />
     <Compile Include="Network20\ComputeApiClientNetworkExtensions.cs" />
     <Compile Include="Network20\IpAddressAccessor.cs" />
@@ -168,6 +169,7 @@
     <Compile Include="Server\ServerImagesAccessor.cs" />
     <Compile Include="Server\ServerManagementLegacyAccessor.cs" />
     <Compile Include="StatusExtensions.cs" />
+    <Compile Include="Tagging\TaggingAccessor.cs" />
     <Compile Include="Utilities\PageableRequestExtensions.cs" />
     <Compile Include="Utilities\FilterableRequestExtensions.cs" />
     <Compile Include="WebApi\ComputeApiClient.cs">

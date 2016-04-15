@@ -1,10 +1,12 @@
 ﻿namespace DD.CBU.Compute.Api.Client.ImportExportImages
 {
+    using System;
 	using System.Collections.Generic;
 	using System.Threading.Tasks;
 
 	using DD.CBU.Compute.Api.Client.Interfaces;
 	using DD.CBU.Compute.Api.Client.Interfaces.ImportExportImages;
+    using DD.CBU.Compute.Api.Contracts.General;
 	using DD.CBU.Compute.Api.Contracts.Image;
 	using DD.CBU.Compute.Api.Contracts.Server;
 
@@ -151,5 +153,74 @@
 							imageId = image.id
 						});
 		}
+
+        /// <summary>
+        /// The export customer image.
+        /// </summary>
+        /// <param name="imageId">
+        /// The image id.
+        /// </param>
+        /// <param name="ovfPrefix">
+        /// The ovf prefix.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        /// <exception cref="NotImplementedException">
+        /// </exception>
+        public async Task<ImageExportType> ExportCustomerImage(string imageId, string ovfPrefix)
+        {
+            return
+                await
+                _apiClient.PostAsync<NewImageExport, ImageExportType>(
+                    ApiUris.ExportCustomerImage(_apiClient.OrganizationId),
+                    new NewImageExport { ovfPackagePrefix = ovfPrefix, imageId = imageId });
+        }
+
+        /// <summary>
+        /// Copies an OVF package from a remote geo.
+        /// </summary>
+        /// <param name="newRemoteOvfCopy">
+        /// The copy request.
+        /// </param>
+		/// <returns>
+		/// The <see cref="Task"/>.
+		/// </returns>
+        public async Task<Status> CopyOvfPackageFromRemoteGeo(NewRemoteOvfCopy newRemoteOvfCopy)
+        {
+            return await
+                this._apiClient.PostAsync<NewRemoteOvfCopy, Status>(
+                    ApiUris.RemoteOvfPackageCopy(this._apiClient.OrganizationId),
+                    newRemoteOvfCopy);
+        }
+
+        /// <summary>
+        /// Gets OVF package copies currently in progress.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        public async Task<IEnumerable<OvfRemoteCopyType>> GetRemoteOvfPackageCopyInProgress()
+        {
+            var result = await _apiClient.GetAsync<OvfRemoteCopies>(
+                ApiUris.GetRemoteOvfPackageCopyInProgress(_apiClient.OrganizationId));
+            return result.ovfCopy ?? new OvfRemoteCopyType[0];
+        }
+
+        /// <summary>
+        /// Gets OVF package copy history.
+        /// </summary>
+        /// <param name="count">
+        /// The count.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        public async Task<IEnumerable<CopyRemoteOvfPackageRecordType>> GetRemoteOvfPackageCopyHistory(int count = 20)
+        {
+            var result = await _apiClient.GetAsync<CopyRemoteOvfPackageHistory>(
+                ApiUris.GetRemoteOvfPackageCopyHistory(_apiClient.OrganizationId, count));
+            return result.copyRemoteOvfPackageRecord ?? new CopyRemoteOvfPackageRecordType[0];
+        }
 	}
 }

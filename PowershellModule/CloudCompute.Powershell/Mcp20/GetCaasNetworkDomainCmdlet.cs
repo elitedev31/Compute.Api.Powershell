@@ -56,7 +56,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 				{
 					options = new NetworkDomainListOptions
 								{
-									Id = NetworkDomainId.ToString()
+									Id = NetworkDomainId
 								};
 				}
 

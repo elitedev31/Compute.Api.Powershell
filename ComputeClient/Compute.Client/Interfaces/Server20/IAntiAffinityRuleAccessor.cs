@@ -15,6 +15,20 @@
     public interface IAntiAffinityRuleAccessor
     {
         /// <summary>
+        /// Gets the available anti affinity rules.
+        /// </summary>
+        /// <param name="filteringOptions">
+        /// The filtering options.
+        /// </param>
+        /// <param name="pagingOptions">
+        /// The paging options.
+        /// </param>
+        /// <returns>
+        /// Collection of <see cref="AntiAffinityRuleType"/>.
+        /// </returns>
+        Task<PagedResponse<AntiAffinityRuleType>> GetAntiAffinityRulesPaginated(AntiAffinityRuleListOptions filteringOptions, IPageableRequest pagingOptions = null);
+
+        /// <summary>
         /// Gets the available anti affinity rules for a specific server.
         /// </summary>
         /// <param name="serverId">

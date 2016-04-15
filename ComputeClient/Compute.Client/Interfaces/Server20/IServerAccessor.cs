@@ -3,78 +3,45 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-
-    using DD.CBU.Compute.Api.Contracts.General;
-    using DD.CBU.Compute.Api.Contracts.Network20;
-    using DD.CBU.Compute.Api.Contracts.Requests;
-    using DD.CBU.Compute.Api.Contracts.Requests.Server20;
+    using Contracts.General;
+    using Contracts.Network20;
+    using Contracts.Requests;
+    using Contracts.Requests.Server20;
+    using Contracts.Server;
+    using ServerType = Contracts.Network20.ServerType;
 
     /// <summary>
     /// The ServerAccessor interface.
     /// </summary>
     public interface IServerAccessor
     {
-        /// <summary>
-        /// The get mcp 2 deployed servers.
-        /// </summary>
-        /// <param name="filteringOptions">
-        /// The filtering options.
-        /// </param>
-        /// <param name="pagingOptions">
-        /// The paging options.
-        /// </param>
-        /// <returns>
-        /// The <see cref="Task"/>.
-        /// </returns>
+        /// <summary>The get mcp 2 deployed servers.</summary>
+        /// <param name="filteringOptions">The filtering options.</param>
+        /// <param name="pagingOptions">The paging options.</param>
+        /// <returns>The <see cref="Task"/>.</returns>
         [Obsolete("Inconsistent: Use 'GetServers' or 'GetServersPaginated' instead.")]
         Task<ServersResponseCollection> GetMcp2DeployedServers(ServerListOptions filteringOptions = null, IPageableRequest pagingOptions = null);
 
-        /// <summary>
-        /// The get mcp 2 deployed servers.
-        /// </summary>
-        /// <param name="filteringOptions">
-        /// The filtering options.
-        /// </param>
-        /// <returns>
-        /// The <see cref="Task"/>.
-        /// </returns>	
+        /// <summary>The get mcp 2 deployed servers.</summary>
+        /// <param name="filteringOptions">The filtering options.</param>
+        /// <returns>The <see cref="Task"/>.</returns>
         Task<IEnumerable<ServerType>> GetServers(ServerListOptions filteringOptions = null);
 
-        /// <summary>
-        /// The get mcp 2 deployed servers.
-        /// </summary>
-        /// <param name="filteringOptions">
-        /// The filtering options.
-        /// </param>
-        /// <param name="pagingOptions">
-        /// The paging options.
-        /// </param>
-        /// <returns>
-        /// The <see cref="Task"/>.
-        /// </returns>	
+        /// <summary>The get mcp 2 deployed servers.</summary>
+        /// <param name="filteringOptions">The filtering options.</param>
+        /// <param name="pagingOptions">The paging options.</param>
+        /// <returns>The <see cref="Task"/>.</returns>
         Task<PagedResponse<ServerType>> GetServersPaginated(ServerListOptions filteringOptions = null, IPageableRequest pagingOptions = null);
 
-        /// <summary>
-        /// The get mcp 2 deployed server.
-        /// </summary>
-        /// <param name="serverId">
-        /// The server id.
-        /// </param>
-        /// <returns>
-        /// The <see cref="Task"/>.
-        /// </returns>
+        /// <summary>The get mcp 2 deployed server.</summary>
+        /// <param name="serverId">The server id.</param>
+        /// <returns>The <see cref="Task"/>.</returns>
         [Obsolete("Inconsistent: Use 'GetServer' instead.")]
         Task<ServerType> GetMcp2DeployedServer(Guid serverId);
 
-        /// <summary>
-        /// The get mcp 2 deployed server.
-        /// </summary>
-        /// <param name="serverId">
-        /// The server id.
-        /// </param>
-        /// <returns>
-        /// The <see cref="Task"/>.
-        /// </returns>
+        /// <summary>The get mcp 2 deployed server.</summary>
+        /// <param name="serverId">The server id.</param>
+        /// <returns>The <see cref="Task"/>.</returns>
         Task<ServerType> GetServer(Guid serverId);
 
         /// <summary>	Deletes the server described by serverId. </summary>
@@ -117,41 +84,54 @@
         /// <returns>	A standard CaaS response </returns>
         Task<ResponseType> UpgradeVirtualHardware(Guid serverId);
 
-        /// <summary>
-        /// Deploys a server to MCP1.0 or MCP 2.0 data centers 
-        /// </summary>
+        /// <summary>Deploys a server to MCP1.0 or MCP 2.0 data centers </summary>
         /// <param name="serverDetails">Details of the server to be deployed</param>
         /// <returns>	A standard CaaS response </returns>
         Task<ResponseType> DeployServer(DeployServerType serverDetails);
 
-        /// <summary>
-        /// Cleans a failed server deployment.
-        /// </summary>
+        /// <summary>Cleans a failed server deployment.</summary>
         /// <param name="serverId">The server id.</param>
         /// <returns>	A standard CaaS response </returns>
         Task<ResponseType> CleanServer(Guid serverId);
 
-        /// <summary>
-        /// Adds an additional NIC to a server.
-        /// </summary>
+        /// <summary>Adds an additional NIC to a server.</summary>
         /// <param name="serverId">The server id.</param>
         /// <param name="vlanId">The VLAN id</param>
         /// <param name="privateIpv4">The Private IP v4 address</param>
         /// <returns>	A standard CaaS response </returns>
         Task<ResponseType> AddNic(Guid serverId, Guid? vlanId, string privateIpv4);
 
-        /// <summary>
-        /// Removes an additional NIC from a server.
-        /// </summary>
+        /// <summary>Removes an additional NIC from a server.</summary>
         /// <param name="nicId">The NIC id.</param>
         /// <returns>	A standard CaaS response </returns>
         Task<ResponseType> RemoveNic(Guid nicId);
 
-        /// <summary>
-        /// Updates the Cloud record to match the value set on the deployed server.
-        /// </summary>
+        /// <summary>The list nics.</summary>
+        /// <param name="vlanId">The vlan id.</param>
+        /// <param name="filteringOptions">The filtering options.</param>
+        /// <param name="pagingOptions">The paging options.</param>
+        /// <returns>The <see cref="Task"/>.</returns>
+        Task<PagedResponse<NicWithSecurityGroupType>> ListNics(Guid vlanId, ListNicsOptions filteringOptions = null, IPageableRequest pagingOptions = null);
+
+        /// <summary>Updates the Cloud record to match the value set on the deployed server.</summary>
         /// <param name="notifyNicIpChange">The Notify NIC IP change model.</param>
         /// <returns>	A standard CaaS response </returns>
         Task<ResponseType> NotifyNicIpChange(NotifyNicIpChangeType notifyNicIpChange);
+
+        /// <summary>Updates compute resource properties of a Server </summary>
+        /// <param name="reconfigureServer">Details of the server to be updated</param>
+        /// <returns>	A standard CaaS response </returns>
+        Task<ResponseType> ReconfigureServer(ReconfigureServerType reconfigureServer);
+
+
+        /// <summary>The add disk.</summary>
+        /// <param name="addDisk">The add disk.</param>
+        /// <returns>The <see cref="Task"/>.</returns>
+        Task<ResponseType> AddDisk(AddDiskType addDisk);
+
+        /// <summary>The remove disk.</summary>
+        /// <param name="removeDisk">The remove disk.</param>
+        /// <returns>The <see cref="Task"/>.</returns>
+        Task<ResponseType> RemoveDisk(RemoveDiskType removeDisk);
     }
 }

@@ -9,6 +9,7 @@
     using DD.CBU.Compute.Api.Contracts.Datacenter;
     using DD.CBU.Compute.Api.Contracts.Directory;
     using DD.CBU.Compute.Api.Contracts.General;
+    using DD.CBU.Compute.Api.Contracts.Organization;
     using DD.CBU.Compute.Api.Contracts.Requests;
     using DD.CBU.Compute.Api.Contracts.Software;
 
@@ -45,7 +46,19 @@
 			return accounts.Items;
 		}
 
-		/// <summary>
+        /// <summary>
+        /// The get accounts with phone number.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        public async Task<IEnumerable<AccountWithPhoneNumber>> GetAccountsWithPhoneNumber()
+        {
+            AccountsWithPhoneNumber accounts = await _apiClient.GetAsync<AccountsWithPhoneNumber>(ApiUris.AccountWithPhoneNumber(_apiClient.OrganizationId));
+            return accounts.Items;
+        }
+
+        /// <summary>
 		/// The get administrator account.
 		/// </summary>
 		/// <param name="username">
@@ -94,16 +107,59 @@
 			return await _apiClient.GetAsync<Status>(ApiUris.DeleteSubAdministrator(_apiClient.OrganizationId, username));
 		}
 
-		/// <summary>
-		/// The update administrator account.
-		/// </summary>
-		/// <param name="account">
-		/// The account.
-		/// </param>
-		/// <returns>
-		/// The <see cref="Task"/>.
-		/// </returns>
-		public async Task<Status> UpdateAdministratorAccount(AccountWithPhoneNumber account)
+        /// <summary>
+        /// The update administrator phone number.
+        /// </summary>
+        /// <param name="userName">The User Name</param>
+        /// <param name="phoneCountryCode">The Phone Country Code</param>
+        /// <param name="phoneNumber">The Phone Number</param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        public async Task<Status> UpdateAdministratorPhoneNumber(string userName, string phoneCountryCode, string phoneNumber)
+        {
+            var parameters = new Dictionary<string, string>();
+            parameters["phoneCountryCode"] = phoneCountryCode;
+            parameters["phoneNumber"] = phoneNumber;
+
+            string postBody = parameters.ToQueryStringWithEmpty();
+
+            return
+                await
+                _apiClient.PostAsync<Status>(ApiUris.UpdateAdministrator(_apiClient.OrganizationId, userName), postBody);
+        }
+
+        /// <summary>
+        /// The update administrator password.
+        /// </summary>
+        /// <param name="userName">The User Name</param>
+        /// <param name="password">The Password</param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        public async Task<Status> ChangePassword(string userName, string password)
+        {
+            var parameters = new Dictionary<string, string>();
+            if (!string.IsNullOrEmpty(password))
+                parameters["password"] = password;
+
+            string postBody = parameters.ToQueryString();
+
+            return
+                await
+                _apiClient.PostAsync<Status>(ApiUris.UpdateAdministrator(_apiClient.OrganizationId, userName), postBody);
+        }
+
+        /// <summary>
+        /// The update administrator account.
+        /// </summary>
+        /// <param name="account">
+        /// The account.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        public async Task<Status> UpdateAdministratorAccount(AccountWithPhoneNumber account)
 		{
 			var parameters = new Dictionary<string, string>();
 			if (!string.IsNullOrEmpty(account.password))
@@ -122,12 +178,10 @@
 				parameters["customDefined1"] = account.customDefined1;
 			if (!string.IsNullOrEmpty(account.customDefined2))
 				parameters["customDefined2"] = account.customDefined2;
-			if (!string.IsNullOrEmpty(account.phoneCountryCode))
-				parameters["phoneCountryCode"] = account.phoneCountryCode;
-			if (!string.IsNullOrEmpty(account.phoneNumber))
-				parameters["phoneNumber"] = account.phoneNumber;
+            parameters["phoneCountryCode"] = account.phoneCountryCode;
+			parameters["phoneNumber"] = account.phoneNumber;
 
-			string postBody = parameters.ToQueryString();
+			string postBody = parameters.ToQueryStringWithEmpty();
 
 			if (account.MemberOfRoles.Any())
 			{
@@ -136,6 +190,10 @@
 
 				postBody = string.Join("&", postBody, roleParameters);
 			}
+			else
+			{
+                postBody = string.Join("&", postBody, "role=");
+            }
 
 			return
 				await
@@ -213,6 +271,28 @@
         public async Task<Status> DesignatePrimaryAdministratorAccount(string username)
 		{
 			return await _apiClient.GetAsync<Status>(ApiUris.SetPrimaryAdministrator(_apiClient.OrganizationId, username));
-		}	
+		}
+
+        /// <summary>
+        /// The get two factor authentication status.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        public async Task<TwoFactorAuthentication> GetTwoFactorAuthenticationStatus()
+        {
+            return await _apiClient.GetAsync<TwoFactorAuthentication>(ApiUris.TwoFactorAuthenicationStatus(_apiClient.OrganizationId));
+        }
+
+        /// <summary>
+        /// The set two factor authentication status.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        public async Task<Status> SetTwoFactorAuthenticationStatus(TwoFactorAuthentication status)
+        {
+            return await _apiClient.PostAsync<Status>(ApiUris.TwoFactorAuthenicationStatus(_apiClient.OrganizationId), status.Enabled ? "true" : "false");
+        }
 	}
 }

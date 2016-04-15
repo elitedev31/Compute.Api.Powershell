@@ -1,59 +1,85 @@
 ﻿namespace DD.CBU.Compute.Api.Contracts.Requests.Network20
 {
     using System;
-    using DD.CBU.Compute.Api.Contracts.Requests.Attributes;
 
     /// <summary>
     /// Filtering options for the network request.
     /// </summary>
-    public sealed class NetworkDomainListOptions : IFilterableRequest
+    public sealed class NetworkDomainListOptions : FilterableRequest
 	{
         /// <summary>
-        /// Gets or sets the id filter.
+        /// The "id" field name.
         /// </summary>
-        [FilterParameter("id")]
-        public Guid[] Ids { get; set; }
+        public const string IdField = "id";
+
+        /// <summary>
+        /// The "datacenterId" field name.
+        /// </summary>
+        public const string DatacenterIdField = "datacenterId";
+
+        /// <summary>
+        /// The "name" field name.
+        /// </summary>
+        public const string NameField = "name";
+
+        /// <summary>
+        /// The "type" field name.
+        /// </summary>
+        public const string TypeField = "type";
+
+        /// <summary>
+        /// The "state" field name.
+        /// </summary>
+        public const string StateField = "state";
+
+        /// <summary>
+        /// The "createTime" field name.
+        /// </summary>
+        public const string CreateTimeField = "createTime";
 
         /// <summary>
         /// Gets or sets the id filter.
         /// </summary>
-        [FilterParameter("id")]
-        public string Id { get; set; }
+        public Guid? Id
+        {
+            get { return GetFilter<Guid?>(IdField); }
+            set { SetFilter(IdField, value); }
+        }
 
-        /// <summary>
-        /// Gets or sets the DatacenterId filter.
+        /// <summary>	
+        /// Identifies an individual Data Center.
         /// </summary>
-        [FilterParameter("datacenterId")]
-        public string DatacenterId { get; set; }
+        public string DatacenterId
+        {
+            get { return GetFilter<string>(DatacenterIdField); }
+            set { SetFilter(DatacenterIdField, value); }
+        }
 
-        /// <summary>
-        /// Gets or sets the Name filter.
+        /// <summary>	
+        /// Identifies Virtual Listeners by their name.
         /// </summary>
-        [FilterParameter("name")]
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return GetFilter<string>(NameField); }
+            set { SetFilter(NameField, value); }
+        }
 
         /// <summary>
         /// Gets or sets the Type filter.
         /// </summary>
-        [FilterParameter("type")]
-        public string Type { get; set; }
+        public string Type
+        {
+            get { return GetFilter<string>(TypeField); }
+            set { SetFilter(TypeField, value); }
+        }
 
         /// <summary>
         /// Gets or sets the State filter.
         /// </summary>
-        [FilterParameter("state")]
-        public string State { get; set; }
-
-        /// <summary>
-        /// Gets or sets the CreateTimeBefore filter.
-        /// </summary>
-        [FilterParameter("createTime", ".LT=")]
-        public DateTimeOffset? CreateTimeBefore { get; set; }
-
-        /// <summary>
-        /// Gets or sets the CreateTimeAfter filter.
-        /// </summary>
-        [FilterParameter("createTime", ".GT=")]
-        public DateTimeOffset? CreateTimeAfter { get; set; }
-	}
+        public string State
+        {
+            get { return GetFilter<string>(StateField); }
+            set { SetFilter(StateField, value); }
+        }
+    }
 }

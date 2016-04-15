@@ -179,5 +179,19 @@
 		{
 			return await _apiClient.GetAsync<Status>(ApiUris.RemoveCustomerServerImage(_apiClient.OrganizationId, imageId));
 		}
-	}
+
+	    /// <summary>
+	    /// The clean failed customer server image.
+	    /// </summary>
+	    /// <param name="imageId">
+	    /// The image id.
+	    /// </param>
+	    /// <returns>
+	    /// The <see cref="Task"/>.
+	    /// </returns>
+	    public async Task<Status> CleanFailedCustomerServerImage(string imageId)
+        {
+            return await _apiClient.GetAsync<Status>(ApiUris.CleanFailedCustomerServerImage(_apiClient.OrganizationId, imageId));
+        }
+    }
 }

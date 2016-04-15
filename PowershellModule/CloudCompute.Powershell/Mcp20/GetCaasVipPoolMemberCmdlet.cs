@@ -58,7 +58,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                             {
                                 Id = MemberId != Guid.Empty ? MemberId : (Guid?) null,
                                 NetworkDomainId = NetworkDomain != null ? Guid.Parse(NetworkDomain.id) : (Guid?) null,
-                                DatacenterId = Datacenter != null ? Guid.Parse(Datacenter.id) : (Guid?) null,
+                                DatacenterId = Datacenter != null ? Datacenter.id : null,
                                 NodeId = VipNode != null ? Guid.Parse(VipNode.id) : (Guid?) null,
                                 PoolId = VipPool != null ? Guid.Parse(VipPool.id) : (Guid?) null
                             }

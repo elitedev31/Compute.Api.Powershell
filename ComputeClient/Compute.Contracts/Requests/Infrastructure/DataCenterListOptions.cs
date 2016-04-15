@@ -1,19 +1,24 @@
 ﻿namespace DD.CBU.Compute.Api.Contracts.Requests.Infrastructure
 {
     using System;
-    using DD.CBU.Compute.Api.Contracts.Requests.Attributes;
 
     /// <summary>
     /// Filtering options for the data center request.
-    /// 
     /// </summary>
-    public sealed class DataCenterListOptions : IFilterableRequest
+    public sealed class DataCenterListOptions : FilterableRequest
     {
         /// <summary>
-        /// Gets or sets the data center id filter.
-        /// 
+        /// The "id" field name.
         /// </summary>
-        [FilterParameter("id")]
-        public string Id { get; set; }
+        public const string IdField = "id";
+
+        /// <summary>	
+        /// Filter by identifier.
+        /// </summary>
+        public string Id
+        {
+            get { return GetFilter<string>(IdField); }
+            set { SetFilter(IdField, value); }
+        }
     }
 }

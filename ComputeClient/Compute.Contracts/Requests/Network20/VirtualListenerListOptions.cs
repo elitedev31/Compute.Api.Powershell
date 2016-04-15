@@ -1,48 +1,131 @@
 ﻿using System;
-using DD.CBU.Compute.Api.Contracts.Requests.Attributes;
 
 namespace DD.CBU.Compute.Api.Contracts.Requests.Network20
 {
     /// <summary>
     /// The Virtal Listener List Options type.
     /// </summary>
-    public class VirtualListenerListOptions: IFilterableRequest
+    public class VirtualListenerListOptions: FilterableRequest
     {
         /// <summary>
-        /// Gets or sets the id filter.
+        /// The "id" field name.
         /// </summary>
-        [FilterParameter("id")]
-        public Guid[] Ids { get; set; }
+        public const string IdField = "id";
+
+        /// <summary>
+        /// The "networkDomainId" field name.
+        /// </summary>
+        public const string NetworkDomainIdField = "networkDomainId";
+
+        /// <summary>
+        /// The "datacenterId" field name.
+        /// </summary>
+        public const string DatacenterIdField = "datacenterId";
+
+        /// <summary>
+        /// The "name" field name.
+        /// </summary>
+        public const string NameField = "name";
+
+        /// <summary>
+        /// The "enabled" field name.
+        /// </summary>
+        public const string EnabledField = "enabled";
+
+        /// <summary>
+        /// The "state" field name.
+        /// </summary>
+        public const string StateField = "state";
+
+        /// <summary>
+        /// The "createTime" field name.
+        /// </summary>
+        public const string CreateTimeField = "createTime";
+
+        /// <summary>
+        /// The "type" field name.
+        /// </summary>
+        public const string TypeField = "type";
+
+        /// <summary>
+        /// The "protocol" field name.
+        /// </summary>
+        public const string ProtocolField = "protocol";
+
+        /// <summary>
+        /// The "listenerIpAddress" field name.
+        /// </summary>
+        public const string ListenerIpAddressField = "listenerIpAddress";
+
+        /// <summary>
+        /// The "port" field name.
+        /// </summary>
+        public const string PortField = "port";
+
+        /// <summary>
+        /// The "poolId" field name.
+        /// </summary>
+        public const string PoolIdField = "poolId";
+
+        /// <summary>
+        /// The "clientClonePoolId" field name.
+        /// </summary>
+        public const string ClientClonePoolIdField = "clientClonePoolId";
+
+        /// <summary>
+        /// The "persistenceProfileId" field name.
+        /// </summary>
+        public const string PersistenceProfileIdField = "persistenceProfileId";
+
+        /// <summary>
+        /// The "fallbackPersistenceProfileId" field name.
+        /// </summary>
+        public const string FallbackPersistenceProfileIdField = "fallbackPersistenceProfileId";
 
         /// <summary>	
         /// Identifies an individual Virtual Listener.
         /// </summary>
-        [FilterParameter("id")]
-        public Guid? Id { get; set; }
+        public Guid? Id
+        {
+            get { return GetFilter<Guid?>(IdField); }
+            set { SetFilter(IdField, value); }
+        }
 
         /// <summary>	
         /// Identifies an individual Network Domain.
         /// </summary>
-        [FilterParameter("networkDomainId")]
-        public Guid? NetworkDomainId { get; set; }
+        public Guid? NetworkDomainId
+        {
+            get { return GetFilter<Guid?>(NetworkDomainIdField); }
+            set { SetFilter(NetworkDomainIdField, value); }
+        }
 
         /// <summary>	
         /// Identifies an individual Data Center.
         /// </summary>
-        [FilterParameter("datacenterId")]
-        public Guid? DatacenterId { get; set; }
+        public string DatacenterId
+        {
+            get { return GetFilter<string>(DatacenterIdField); }
+            set { SetFilter(DatacenterIdField, value); }
+        }
 
         /// <summary>	
         /// Identifies Virtual Listeners by their name.
         /// </summary>
-        [FilterParameter("name")]
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return GetFilter<string>(NameField); }
+            set { SetFilter(NameField, value); }
+        }
 
         /// <summary>	
         /// Identifies Virtual Listeners by whether or not they are enabled.
         /// </summary>
-        [FilterParameter("enabled")]
-        public bool? Enabled { get; set; }
+        public bool? Enabled
+        {
+            get { return GetFilter<bool?>(EnabledField); }
+            set { SetFilter(EnabledField, value); }
+        }
 
         /// <summary>	
         /// Identifies Virtual Listeners by their state.
@@ -56,64 +139,82 @@ namespace DD.CBU.Compute.Api.Contracts.Requests.Network20
         /// "FAILED_DELETE" and
         /// "REQUIRES_SUPPORT".
         /// </summary>
-        [FilterParameter("state")]
-        public string State { get; set; }
-
-        /// <summary>	
-        /// Identifies the date of creation of Pools.
-        /// Supports MIN, MAX, LT and GT.
-        /// Refer to samples in Paging and
-        /// Filtering for List API Functions. 
-        /// </summary>
-        [FilterParameter("createTime")]
-        public DateTime? CreateTime { get; set; }
+        public string State
+        {
+            get { return GetFilter<string>(StateField); }
+            set { SetFilter(StateField, value); }
+        }
 
         /// <summary>	
         /// Identifies Virtual Listeners by their type.
         /// </summary>
-        [FilterParameter("type")]
-        public string Type { get; set; }
+        public string Type
+        {
+            get { return GetFilter<string>(TypeField); }
+            set { SetFilter(TypeField, value); }
+        }
 
         /// <summary>	
         /// Identifies Virtual Listeners by their protocol.
         /// </summary>
-        [FilterParameter("protocol")]
-        public string Protocol { get; set; }
+        public string Protocol
+        {
+            get { return GetFilter<string>(ProtocolField); }
+            set { SetFilter(ProtocolField, value); }
+        }
 
         /// <summary>	
         /// Identifies Virtual Listeners by their Listener IP Address.
         /// </summary>
-        [FilterParameter("listenerIpAddress")]
-        public string ListenerIpAddress { get; set; }
+        public string ListenerIpAddress
+        {
+            get { return GetFilter<string>(ListenerIpAddressField); }
+            set { SetFilter(ListenerIpAddressField, value); }
+        }
 
         /// <summary>	
         /// Identifies Virtual Listeners by their virtual listener port.
         /// </summary>
-        [FilterParameter("port")]
-        public int? Port { get; set; }
+        public int? Port
+        {
+            get { return GetFilter<int?>(PortField); }
+            set { SetFilter(PortField, value); }
+        }
 
         /// <summary>	
         /// Identifies Virtual Listeners by their Pool Id.
         /// </summary>
-        [FilterParameter("poolId")]
-        public string PoolId { get; set; }
+        public string PoolId
+        {
+            get { return GetFilter<string>(PoolIdField); }
+            set { SetFilter(PoolIdField, value); }
+        }
 
         /// <summary>	
         /// Identifies Virtual Listeners by their Client Pool Id.
         /// </summary>
-        [FilterParameter("clientClonePoolId")]
-        public string ClientClonePoolId { get; set; }
+        public string ClientClonePoolId
+        {
+            get { return GetFilter<string>(ClientClonePoolIdField); }
+            set { SetFilter(ClientClonePoolIdField, value); }
+        }
 
         /// <summary>	
         /// Identifies Virtual Listeners by their default Persistence profile Id.
         /// </summary>
-        [FilterParameter("persistenceProfileId")]
-        public string PersistenceProfileId { get; set; }
+        public string PersistenceProfileId
+        {
+            get { return GetFilter<string>(PersistenceProfileIdField); }
+            set { SetFilter(PersistenceProfileIdField, value); }
+        }
 
         /// <summary>	
         /// Identifies Virtual Listeners by their Fallback Persistence Profile Id.
         /// </summary>
-        [FilterParameter("fallbaclPersistenceProfileId")]
-        public string FallbaclPersistenceProfileId { get; set; }
+        public string FallbacKPersistenceProfileId
+        {
+            get { return GetFilter<string>(FallbackPersistenceProfileIdField); }
+            set { SetFilter(FallbackPersistenceProfileIdField, value); }
+        }
     }
 }

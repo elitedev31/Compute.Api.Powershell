@@ -144,10 +144,13 @@ namespace DD.CBU.Compute.Powershell
 		/// </returns>
 		private Status CreateAccount()
 		{
-			var roles = new List<Role>();
-			roles.AddRange(Roles);
+		    var roles = new List<Role>();
+		    if (Roles != null)
+		    {
+		        roles.AddRange(Roles);
+		    }
 
-			var account = new AccountWithPhoneNumber
+		    var account = new AccountWithPhoneNumber
 			{
 				orgId = Connection.Account.OrganizationId.ToString(), 
 				userName = Username, 

@@ -1,42 +1,87 @@
 ﻿using System;
-using DD.CBU.Compute.Api.Contracts.Requests.Attributes;
 
 namespace DD.CBU.Compute.Api.Contracts.Requests.Network20
 {
     /// <summary>
     /// The Node list options.
     /// </summary>
-    public class NodeListOptions: IFilterableRequest
+    public class NodeListOptions: FilterableRequest
     {
         /// <summary>
-        /// Gets or sets the id filter.
+        /// The "id" field name.
         /// </summary>
-        [FilterParameter("id")]
-        public Guid[] Ids { get; set; }
+        public const string IdField = "id";
 
         /// <summary>
-        /// Identifies an individual Node.
+        /// The "networkDomainId" field name.
         /// </summary>
-        [FilterParameter("id")]
-        public Guid? Id { get; set; }
+        public const string NetworkDomainIdField = "networkDomainId";
+
+        /// <summary>
+        /// The "datacenterId" field name.
+        /// </summary>
+        public const string DatacenterIdField = "datacenterId";
+
+        /// <summary>
+        /// The "name" field name.
+        /// </summary>
+        public const string NameField = "name";
+
+        /// <summary>
+        /// The "state" field name.
+        /// </summary>
+        public const string StateField = "state";
+
+        /// <summary>
+        /// The "createTime" field name.
+        /// </summary>
+        public const string CreateTimeField = "createTime";
+
+        /// <summary>
+        /// The "ipv4Address" field name.
+        /// </summary>
+        public const string Ipv4AddressField = "ipv4Address";
+
+        /// <summary>
+        /// The "ipv6Address" field name.
+        /// </summary>
+        public const string Ipv6AddressField = "ipv6Address";
+
+        /// <summary>	
+        /// Identifies an individual Virtual Listener.
+        /// </summary>
+        public Guid? Id
+        {
+            get { return GetFilter<Guid?>(IdField); }
+            set { SetFilter(IdField, value); }
+        }
 
         /// <summary>	
         /// Identifies an individual Network Domain.
         /// </summary>
-        [FilterParameter("networkDomainId")]
-        public Guid? NetworkDomainId { get; set; }
+        public Guid? NetworkDomainId
+        {
+            get { return GetFilter<Guid?>(NetworkDomainIdField); }
+            set { SetFilter(NetworkDomainIdField, value); }
+        }
 
         /// <summary>	
         /// Identifies an individual Data Center.
         /// </summary>
-        [FilterParameter("datacenterId")]
-        public Guid? DatacenterId { get; set; }
+        public string DatacenterId
+        {
+            get { return GetFilter<string>(DatacenterIdField); }
+            set { SetFilter(DatacenterIdField, value); }
+        }
 
         /// <summary>	
-        /// Identifies Nodes by their name.
+        /// Identifies Virtual Listeners by their name.
         /// </summary>
-        [FilterParameter("name")]
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return GetFilter<string>(NameField); }
+            set { SetFilter(NameField, value); }
+        }
 
         /// <summary>	
         /// Identifies Nodes by their state.
@@ -50,30 +95,28 @@ namespace DD.CBU.Compute.Api.Contracts.Requests.Network20
         /// "FAILED_DELETE" and
         /// "REQUIRES_SUPPORT".
         /// </summary>
-        [FilterParameter("state")]
-        public string State { get; set; }
-
-        /// <summary>	
-        /// Identifies the date of creation of Pools.
-        /// Supports MIN, MAX, LT and GT.
-        /// Refer to samples in Paging and
-        /// Filtering for List API Functions. 
-        /// </summary>
-        [FilterParameter("createTime")]
-        public DateTime? CreateTime { get; set; }
+        public string State
+        {
+            get { return GetFilter<string>(StateField); }
+            set { SetFilter(StateField, value); }
+        }
 
         /// <summary>	
         /// Identifies Nodes by their specific Ipv4Address.
-        /// loadBalanceMethod=ROUND_ROBIN
         /// </summary>
-        [FilterParameter("ipv4Address")]
-        public string Ipv4Address { get; set; }
+        public string Ipv4Address
+        {
+            get { return GetFilter<string>(Ipv4AddressField); }
+            set { SetFilter(Ipv4AddressField, value); }
+        }
 
         /// <summary>	
         /// Identifies Nodes by their specific Ipv6Address.
-        /// loadBalanceMethod=ROUND_ROBIN
         /// </summary>
-        [FilterParameter("ipv6Address")]
-        public string Ipv6Address { get; set; }
+        public string Ipv6Address
+        {
+            get { return GetFilter<string>(Ipv6AddressField); }
+            set { SetFilter(Ipv6AddressField, value); }
+        }
     }
 }

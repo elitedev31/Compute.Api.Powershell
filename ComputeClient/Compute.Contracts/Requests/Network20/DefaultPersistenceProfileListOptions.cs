@@ -1,41 +1,61 @@
 ﻿namespace DD.CBU.Compute.Api.Contracts.Requests.Network20
 {
     using System;
-    using DD.CBU.Compute.Api.Contracts.Requests.Attributes;
 
     /// <summary>
     /// A persistence profile list options model.
     /// </summary>
-    public class DefaultPersistenceProfileListOptions : IFilterableRequest
+    public class DefaultPersistenceProfileListOptions : FilterableRequest
     {
         /// <summary>
-        /// Gets or sets the id filter.
+        /// The "id" field name.
         /// </summary>
-        [FilterParameter("id")]
-        public Guid? Id { get; set; }
-
-        ///// <summary>
-        ///// Gets or sets the datacenter id filter.
-        ///// </summary>
-        //[FilterParameter("datacenterId")]
-        //public string DatacenterId { get; set; }
+        public const string IdField = "id";
 
         /// <summary>
-        /// Gets or sets the name filter.
+        /// The "name" field name.
         /// </summary>
-        [FilterParameter("name")]
-        public string Name { get; set; }
+        public const string NameField = "name";
 
         /// <summary>
-        /// Gets or sets the state filter.
+        /// The "state" field name.
         /// </summary>
-        [FilterParameter("state")]
-        public string State { get; set; }
+        public const string StateField = "state";
 
-        ///// <summary>
-        ///// Gets or sets the enabled filter.
-        ///// </summary>
-        //[FilterParameter("enabled")]
-        //public bool Enabled { get; set; }
+        /// <summary>	
+        /// Filter by identifier.
+        /// </summary>
+        public Guid? Id
+        {
+            get { return GetFilter<Guid?>(IdField); }
+            set { SetFilter(IdField, value); }
+        }
+
+        /// <summary>	
+        /// Filter by their name.
+        /// </summary>
+        public string Name
+        {
+            get { return GetFilter<string>(NameField); }
+            set { SetFilter(NameField, value); }
+        }
+
+        /// <summary>	
+        /// Filter by their state.
+        /// Case insensitive. The initial possible set of values for state are:
+        /// "NORMAL",
+        /// "PENDING_ADD",
+        /// "PENDING_CHANGE",
+        /// "PENDING_DELETE",
+        /// "FAILED_ADD",
+        /// "FAILED_CHANGE",
+        /// "FAILED_DELETE" and
+        /// "REQUIRES_SUPPORT".
+        /// </summary>
+        public string State
+        {
+            get { return GetFilter<string>(StateField); }
+            set { SetFilter(StateField, value); }
+        }
     }
 }

@@ -1,35 +1,52 @@
 ﻿namespace DD.CBU.Compute.Api.Contracts.Requests.Server20
 {
     using System;
-    using DD.CBU.Compute.Api.Contracts.Requests.Attributes;
 
     /// <summary>
     /// Filtering options for the anti affinity rule request.
     /// </summary>
-    public sealed class AntiAffinityRuleListOptions : IFilterableRequest
+    public sealed class AntiAffinityRuleListOptions : FilterableRequest
     {
         /// <summary>
-        /// Gets or sets the anti affinity rule id filter.
+        /// The "id" field name.
         /// </summary>
-        [FilterParameter("id")]
-        public Guid? Id { get; set; }
+        public const string IdField = "id";
 
         /// <summary>
-        /// Gets or sets the create time before filter.
+        /// The "state" field name.
         /// </summary>
-        [FilterParameter("createTime", ".LT=")]
-        public DateTimeOffset? CreateTimeBefore { get; set; }
+        public const string StateField = "state";
 
         /// <summary>
-        /// Gets or sets the create time after filter.
+        /// The "createTime" field name.
         /// </summary>
-        [FilterParameter("createTime", ".GT=")]
-        public DateTimeOffset? CreateTimeAfter { get; set; }
+        public const string CreateTimeField = "createTime";
 
-        /// <summary>
-        /// Gets or sets the state filter.
+        /// <summary>	
+        /// Filter by identifier.
         /// </summary>
-        [FilterParameter("state")]
-        public string State { get; set; }
-	}
+        public Guid? Id
+        {
+            get { return GetFilter<Guid?>(IdField); }
+            set { SetFilter(IdField, value); }
+        }
+
+        /// <summary>	
+        /// Filter by their state.
+        /// Case insensitive. The initial possible set of values for state are:
+        /// "NORMAL",
+        /// "PENDING_ADD",
+        /// "PENDING_CHANGE",
+        /// "PENDING_DELETE",
+        /// "FAILED_ADD",
+        /// "FAILED_CHANGE",
+        /// "FAILED_DELETE" and
+        /// "REQUIRES_SUPPORT".
+        /// </summary>
+        public string State
+        {
+            get { return GetFilter<string>(StateField); }
+            set { SetFilter(StateField, value); }
+        }
+    }
 }

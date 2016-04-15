@@ -102,6 +102,17 @@
         /// <returns>
         /// The <see cref="Task"/>.
         /// </returns>
-        Task<Status> RemoveCustomerServerImage(string imageid);		
-	}
+        Task<Status> RemoveCustomerServerImage(string imageid);
+
+	    /// <summary>
+	    /// The clean failed customer server image.
+	    /// </summary>
+	    /// <param name="imageid">
+	    /// The imageid.
+	    /// </param>
+	    /// <returns>
+	    /// The <see cref="Task"/>.
+	    /// </returns>
+	    Task<Status> CleanFailedCustomerServerImage(string imageid);
+    }
 }

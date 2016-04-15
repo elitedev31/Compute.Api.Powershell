@@ -48,8 +48,10 @@ namespace DD.CBU.Compute.Api.Client
 	using DD.CBU.Compute.Api.Contracts.Server;
     using DD.CBU.Compute.Api.Contracts.Server10;
     using DD.CBU.Compute.Api.Contracts.Software;
+	using Interfaces.Tagging;
+	using Tagging;
 
-	/// <summary>
+    /// <summary>
 	/// A client for the Dimension Data Compute-as-a-Service (CaaS) API.
 	/// </summary>
 	public sealed class ComputeApiClient
@@ -204,6 +206,7 @@ namespace DD.CBU.Compute.Api.Client
 			ImportExportCustomerImage = new ImportExportCustomerImageAccessor(WebApi);
 			Backup = new BackupAccessor(WebApi);
             Reports = new ReportAccessor(WebApi);
+            Tagging = new TaggingAccessor(WebApi);
 		}
 
 		#endregion
@@ -359,7 +362,10 @@ namespace DD.CBU.Compute.Api.Client
 	    /// </summary>
 	    public IReportAccessor Reports { get; private set; }
 
-	    #endregion Instance data
+        /// <summary>Gets the tagging.</summary>
+        public ITaggingAccessor Tagging { get; private set; }
+
+        #endregion Instance data
 
 		#region Public Methods
 
@@ -772,31 +778,31 @@ namespace DD.CBU.Compute.Api.Client
 			return await ServerManagementLegacy.ServerImage.RemoveCustomerServerImage(imageId);
 		}
 
-		/// <summary>
-		/// The deploy server image task.
-		/// </summary>
-		/// <param name="name">
-		/// The name.
-		/// </param>
-		/// <param name="description">
-		/// The description.
-		/// </param>
-		/// <param name="networkId">
-		/// The network id.
-		/// </param>
-		/// <param name="imageId">
-		/// The image id.
-		/// </param>
-		/// <param name="adminPassword">
-		/// The admin password.
-		/// </param>
-		/// <param name="isStarted">
-		/// The is started.
-		/// </param>
-		/// <returns>
-		/// The <see cref="Task"/>.
-		/// </returns>
-		[Obsolete("This method is deprecated, please use DeployServerWithDiskSpeedImageTask instead.")]
+        /// <summary>
+        /// The deploy server image task.
+        /// </summary>
+        /// <param name="name">
+        /// The name.
+        /// </param>
+        /// <param name="description">
+        /// The description.
+        /// </param>
+        /// <param name="networkId">
+        /// The network id.
+        /// </param>
+        /// <param name="imageId">
+        /// The image id.
+        /// </param>
+        /// <param name="adminPassword">
+        /// The admin password.
+        /// </param>
+        /// <param name="isStarted">
+        /// The is started.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        [Obsolete("This method is deprecated, please use DeployServerWithDiskSpeedImageTask instead.")]
 		public async Task<Status> DeployServerImageTask(
 			string name,
 			string description,
