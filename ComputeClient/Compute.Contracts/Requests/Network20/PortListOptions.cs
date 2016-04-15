@@ -2,18 +2,13 @@
 {
     using System;
 
-    /// <summary>A firewall rule list options model. </summary>
-    public class FirewallRuleListOptions : FilterableRequest
+    /// <summary>An ip address list options model. </summary>
+    public class PortListOptions : FilterableRequest
     {
         /// <summary>
         /// The "id" field name.
         /// </summary>
         public const string IdField = "id";
-
-        /// <summary>
-        /// The "networkDomainId" field name.
-        /// </summary>
-        public const string NetworkDomainIdField = "networkDomainId";
 
         /// <summary>
         /// The "name" field name.
@@ -37,15 +32,6 @@
         {
             get { return GetFilter<Guid?>(IdField); }
             set { SetFilter(IdField, value); }
-        }
-
-        /// <summary>	
-        /// Filter by Network Domain.
-        /// </summary>
-        public Guid NetworkDomainId
-        {
-            get { return GetFilter<Guid>(NetworkDomainIdField); }
-            set { SetFilter(NetworkDomainIdField, value); }
         }
 
         /// <summary>	

@@ -105,5 +105,163 @@
 			    ApiUris.DeleteFirewallRule(_api.OrganizationId),
 				new DeleteFirewallRuleType { id = firewallRuleId.ToString() });
 		}
-	}
+
+	    /// <summary>
+	    /// Creates an ip address list.
+	    /// </summary>
+	    /// <param name="createIpAddressList">The ip address list details.</param>
+	    /// <returns>The response details.</returns>
+	    public async Task<ResponseType> CreateIpAddressList(CreateIpAddressList createIpAddressList)
+	    {
+            return await _api.PostAsync<CreateIpAddressList, ResponseType>(
+                ApiUris.CreateIpAddressList(_api.OrganizationId),
+                createIpAddressList);
+        }
+
+
+        /// <summary>
+        /// Lists all ip address list.
+        /// </summary>
+        /// <param name="networkDomainId">The network domain id.</param>
+        /// <param name="options">The filter options.</param>
+        /// <returns>The collection of matching ip address list.</returns>
+        public async Task<IEnumerable<IpAddressListType>> GetIpAddressLists(Guid networkDomainId, IpAddressListOptions options = null)
+        {
+            var response = await GetIpAddressListsPaginated(networkDomainId, options, null);
+            return response.items;
+        }
+
+	    /// <summary>
+	    /// Lists all ip address list.
+	    /// </summary>
+	    /// <param name="networkDomainId">The Network domain id.</param>
+	    /// <param name="options">The filter options.</param>
+	    /// <param name="pagingOptions">The paging options.</param>
+	    /// <returns>The async task of <see cref="PagedResponse{IpAddressListType}"/></returns>
+	    public async Task<PagedResponse<IpAddressListType>> GetIpAddressListsPaginated(Guid networkDomainId, IpAddressListOptions options = null, PageableRequest pagingOptions = null)
+        {
+            var response = await _api.GetAsync<IpAddressLists>(ApiUris.ListIpAddressList(_api.OrganizationId, networkDomainId), pagingOptions, options);
+            return new PagedResponse<IpAddressListType>
+            {
+                items = response.ipAddressList,
+                totalCount = response.totalCountSpecified ? response.totalCount : (int?)null,
+                pageCount = response.pageCountSpecified ? response.pageCount : (int?)null,
+                pageNumber = response.pageNumberSpecified ? response.pageNumber : (int?)null,
+                pageSize = response.pageSizeSpecified ? response.pageSize : (int?)null
+            };
+        }
+
+        /// <summary>
+        /// Gets the ip address list.
+        /// </summary>
+        /// <param name="ipAddressListId">The ip address list id.</param>
+        /// <returns>The collection of matching ip address list.</returns>
+        public async Task<IpAddressListType> GetIpAddressList(Guid ipAddressListId)
+        {
+            return await _api.GetAsync<IpAddressListType>(ApiUris.GetIpAddressList(_api.OrganizationId, ipAddressListId));
+        }
+
+        /// <summary>
+	    /// Edits an ip address list.
+	    /// </summary>
+	    /// <param name="editIpAddressList">The ip address list details.</param>
+	    /// <returns>The response details.</returns>
+	    public async Task<ResponseType> EditIpAddressList(EditIpAddressList editIpAddressList)
+        {
+            return await _api.PostAsync<EditIpAddressList, ResponseType>(
+                ApiUris.EditIpAddressList(_api.OrganizationId),
+                editIpAddressList);
+        }
+
+	    /// <summary>
+	    /// Deletes an ip address list.
+	    /// </summary>
+	    /// <param name="deleteIpAddressList">The ip address list id to be deleted.</param>
+	    /// <returns>The response details.</returns>
+	    public async Task<ResponseType> DeleteIpAddressList(DeleteIpAddressListType deleteIpAddressList)
+        {
+            return await _api.PostAsync<DeleteIpAddressListType, ResponseType>(
+                ApiUris.DeleteIpAddressList(_api.OrganizationId),
+                deleteIpAddressList);
+        }
+
+        /// <summary>
+	    /// Creates an ip address list.
+	    /// </summary>
+	    /// <param name="createPortList">The ip address list details.</param>
+	    /// <returns>The response details.</returns>
+	    public async Task<ResponseType> CreatePortList(CreatePortList createPortList)
+        {
+            return await _api.PostAsync<CreatePortList, ResponseType>(
+                ApiUris.CreatePortList(_api.OrganizationId),
+                createPortList);
+        }
+
+
+        /// <summary>
+        /// Lists all ip address list.
+        /// </summary>
+        /// <param name="networkDomainId">The network domain id.</param>
+        /// <param name="options">The filter options.</param>
+        /// <returns>The collection of matching ip address list.</returns>
+        public async Task<IEnumerable<PortListType>> GetPortLists(Guid networkDomainId, PortListOptions options = null)
+        {
+            var response = await GetPortListsPaginated(networkDomainId, options, null);
+            return response.items;
+        }
+
+        /// <summary>
+        /// Lists all ip address list.
+        /// </summary>
+        /// <param name="networkDomainId">The Network domain id.</param>
+        /// <param name="options">The filter options.</param>
+        /// <param name="pagingOptions">The paging options.</param>
+        /// <returns>The async task of <see cref="PagedResponse{PortListType}"/></returns>
+        public async Task<PagedResponse<PortListType>> GetPortListsPaginated(Guid networkDomainId, PortListOptions options = null, PageableRequest pagingOptions = null)
+        {
+            var response = await _api.GetAsync<PortLists>(ApiUris.ListPortList(_api.OrganizationId, networkDomainId), pagingOptions, options);
+            return new PagedResponse<PortListType>
+            {
+                items = response.portList,
+                totalCount = response.totalCountSpecified ? response.totalCount : (int?)null,
+                pageCount = response.pageCountSpecified ? response.pageCount : (int?)null,
+                pageNumber = response.pageNumberSpecified ? response.pageNumber : (int?)null,
+                pageSize = response.pageSizeSpecified ? response.pageSize : (int?)null
+            };
+        }
+
+        /// <summary>
+        /// Gets the ip address list.
+        /// </summary>
+        /// <param name="PortListId">The ip address list id.</param>
+        /// <returns>The collection of matching ip address list.</returns>
+        public async Task<PortListType> GetPortList(Guid PortListId)
+        {
+            return await _api.GetAsync<PortListType>(ApiUris.GetPortList(_api.OrganizationId, PortListId));
+        }
+
+        /// <summary>
+	    /// Edits an ip address list.
+	    /// </summary>
+	    /// <param name="editPortList">The ip address list details.</param>
+	    /// <returns>The response details.</returns>
+	    public async Task<ResponseType> EditPortList(EditPortList editPortList)
+        {
+            return await _api.PostAsync<EditPortList, ResponseType>(
+                ApiUris.EditPortList(_api.OrganizationId),
+                editPortList);
+        }
+
+        /// <summary>
+        /// Deletes an ip address list.
+        /// </summary>
+        /// <param name="deletePortList">The ip address list id to be deleted.</param>
+        /// <returns>The response details.</returns>
+        public async Task<ResponseType> DeletePortList(DeletePortListType deletePortList)
+        {
+            return await _api.PostAsync<DeletePortListType, ResponseType>(
+                ApiUris.DeletePortList(_api.OrganizationId),
+                deletePortList);
+        }
+    }
 }

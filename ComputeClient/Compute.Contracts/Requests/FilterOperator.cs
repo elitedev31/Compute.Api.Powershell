@@ -8,31 +8,37 @@
         /// <summary>
         /// The equals
         /// </summary>
-        Equals,
+        Equals, 
 
         /// <summary>
         /// The like
         /// </summary>
-        Like,
+        Like, 
 
         /// <summary>
         /// The greater than
         /// </summary>
-        GreaterThan,
+        GreaterThan, 
 
         /// <summary>
         /// The greater or equal
         /// </summary>
-        GreaterOrEqual,
+        GreaterOrEqual, 
 
         /// <summary>
         /// The less than
         /// </summary>
-        LessThan,
+        LessThan, 
 
         /// <summary>
         /// The less or equal
         /// </summary>
-        LessOrEqual
+        LessOrEqual, 
+
+        /// <summary>The null.</summary>
+        Null, 
+
+        /// <summary>The not null.</summary>
+        NotNull
     }
 }

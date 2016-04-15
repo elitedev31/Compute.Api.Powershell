@@ -2,8 +2,8 @@
 {
     using System;
 
-    /// <summary>A firewall rule list options model. </summary>
-    public class FirewallRuleListOptions : FilterableRequest
+    /// <summary>An ip address list options model. </summary>
+    public class IpAddressListOptions : FilterableRequest
     {
         /// <summary>
         /// The "id" field name.
@@ -11,14 +11,14 @@
         public const string IdField = "id";
 
         /// <summary>
-        /// The "networkDomainId" field name.
-        /// </summary>
-        public const string NetworkDomainIdField = "networkDomainId";
-
-        /// <summary>
         /// The "name" field name.
         /// </summary>
         public const string NameField = "name";
+
+        /// <summary>
+        /// The "ipVersion" field name.
+        /// </summary>
+        public const string IpVersionField = "ipVersion";
 
         /// <summary>
         /// The "state" field name.
@@ -40,12 +40,12 @@
         }
 
         /// <summary>	
-        /// Filter by Network Domain.
+        /// Filter by Ip version.
         /// </summary>
-        public Guid NetworkDomainId
+        public string IpVersion
         {
-            get { return GetFilter<Guid>(NetworkDomainIdField); }
-            set { SetFilter(NetworkDomainIdField, value); }
+            get { return GetFilter<string>(IpVersionField); }
+            set { SetFilter(IpVersionField, value); }
         }
 
         /// <summary>	

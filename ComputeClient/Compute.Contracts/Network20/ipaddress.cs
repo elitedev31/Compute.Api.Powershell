@@ -14,9 +14,8 @@
 namespace DD.CBU.Compute.Api.Contracts.Network20
 {
     using System.Xml.Serialization;
-
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.81.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -24,59 +23,51 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
     public partial class ReservedPublicIpv4AddressType
     {
 
-        private string datacenterIdField;
-
-        private string ipBlockIdField;
-
-        private string networkDomainIdField;
-
-        private string networkIdField;
-
-        private string valueField;
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string datacenterId;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string datacenterId
-        {
-            get { return this.datacenterIdField; }
-            set { this.datacenterIdField = value; }
-        }
+        public string ipBlockId;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string ipBlockId
-        {
-            get { return this.ipBlockIdField; }
-            set { this.ipBlockIdField = value; }
-        }
+        public string networkDomainId;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string networkDomainId
-        {
-            get { return this.networkDomainIdField; }
-            set { this.networkDomainIdField = value; }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string networkId
-        {
-            get { return this.networkIdField; }
-            set { this.networkIdField = value; }
-        }
+        public string networkId;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        public string Value
-        {
-            get { return this.valueField; }
-            set { this.valueField = value; }
-        }
+        public string Value;
     }
 
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.81.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
+    public partial class ReservedIpv6AddressType
+    {
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string datacenterId;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string vlanId;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public string Value;
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -84,49 +75,25 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
     public partial class ReservedPrivateIpv4AddressType
     {
 
-        private string datacenterIdField;
-
-        private string networkIdField;
-
-        private string vlanIdField;
-
-        private string valueField;
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string datacenterId;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string datacenterId
-        {
-            get { return this.datacenterIdField; }
-            set { this.datacenterIdField = value; }
-        }
+        public string networkId;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string networkId
-        {
-            get { return this.networkIdField; }
-            set { this.networkIdField = value; }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string vlanId
-        {
-            get { return this.vlanIdField; }
-            set { this.vlanIdField = value; }
-        }
+        public string vlanId;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        public string Value
-        {
-            get { return this.valueField; }
-            set { this.valueField = value; }
-        }
+        public string Value;
     }
 
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.81.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -135,99 +102,92 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
     public partial class reservedPrivateIpv4Addresses
     {
 
-        private ReservedPrivateIpv4AddressType[] ipv4Field;
-
-        private int pageNumberField;
-
-        private bool pageNumberFieldSpecified;
-
-        private int pageCountField;
-
-        private bool pageCountFieldSpecified;
-
-        private int totalCountField;
-
-        private bool totalCountFieldSpecified;
-
-        private int pageSizeField;
-
-        private bool pageSizeFieldSpecified;
-
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("ipv4")]
-        public ReservedPrivateIpv4AddressType[] ipv4
-        {
-            get { return this.ipv4Field; }
-            set { this.ipv4Field = value; }
-        }
+        public ReservedPrivateIpv4AddressType[] ipv4;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int pageNumber
-        {
-            get { return this.pageNumberField; }
-            set { this.pageNumberField = value; }
-        }
+        public int pageNumber;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool pageNumberSpecified
-        {
-            get { return this.pageNumberFieldSpecified; }
-            set { this.pageNumberFieldSpecified = value; }
-        }
+        public bool pageNumberSpecified;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int pageCount
-        {
-            get { return this.pageCountField; }
-            set { this.pageCountField = value; }
-        }
+        public int pageCount;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool pageCountSpecified
-        {
-            get { return this.pageCountFieldSpecified; }
-            set { this.pageCountFieldSpecified = value; }
-        }
+        public bool pageCountSpecified;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int totalCount
-        {
-            get { return this.totalCountField; }
-            set { this.totalCountField = value; }
-        }
+        public int totalCount;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool totalCountSpecified
-        {
-            get { return this.totalCountFieldSpecified; }
-            set { this.totalCountFieldSpecified = value; }
-        }
+        public bool totalCountSpecified;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int pageSize
-        {
-            get { return this.pageSizeField; }
-            set { this.pageSizeField = value; }
-        }
+        public int pageSize;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool pageSizeSpecified
-        {
-            get { return this.pageSizeFieldSpecified; }
-            set { this.pageSizeFieldSpecified = value; }
-        }
+        public bool pageSizeSpecified;
     }
 
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.81.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "urn:didata.com:api:cloud:types")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
+    public partial class reservedIpv6Addresses
+    {
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("reservedIpv6Address")]
+        public ReservedIpv6AddressType[] reservedIpv6Address;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public int pageNumber;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool pageNumberSpecified;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public int pageCount;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool pageCountSpecified;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public int totalCount;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool totalCountSpecified;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public int pageSize;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool pageSizeSpecified;
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -236,142 +196,69 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
     public partial class reservedPublicIpv4Addresses
     {
 
-        private ReservedPublicIpv4AddressType[] ipField;
-
-        private int pageNumberField;
-
-        private bool pageNumberFieldSpecified;
-
-        private int pageCountField;
-
-        private bool pageCountFieldSpecified;
-
-        private int totalCountField;
-
-        private bool totalCountFieldSpecified;
-
-        private int pageSizeField;
-
-        private bool pageSizeFieldSpecified;
-
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("ip")]
-        public ReservedPublicIpv4AddressType[] ip
-        {
-            get { return this.ipField; }
-            set { this.ipField = value; }
-        }
+        public ReservedPublicIpv4AddressType[] ip;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int pageNumber
-        {
-            get { return this.pageNumberField; }
-            set { this.pageNumberField = value; }
-        }
+        public int pageNumber;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool pageNumberSpecified
-        {
-            get { return this.pageNumberFieldSpecified; }
-            set { this.pageNumberFieldSpecified = value; }
-        }
+        public bool pageNumberSpecified;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int pageCount
-        {
-            get { return this.pageCountField; }
-            set { this.pageCountField = value; }
-        }
+        public int pageCount;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool pageCountSpecified
-        {
-            get { return this.pageCountFieldSpecified; }
-            set { this.pageCountFieldSpecified = value; }
-        }
+        public bool pageCountSpecified;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int totalCount
-        {
-            get { return this.totalCountField; }
-            set { this.totalCountField = value; }
-        }
+        public int totalCount;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool totalCountSpecified
-        {
-            get { return this.totalCountFieldSpecified; }
-            set { this.totalCountFieldSpecified = value; }
-        }
+        public bool totalCountSpecified;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int pageSize
-        {
-            get { return this.pageSizeField; }
-            set { this.pageSizeField = value; }
-        }
+        public int pageSize;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool pageSizeSpecified
-        {
-            get { return this.pageSizeFieldSpecified; }
-            set { this.pageSizeFieldSpecified = value; }
-        }
+        public bool pageSizeSpecified;
     }
 
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.81.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
-    [System.Xml.Serialization.XmlRootAttribute("reservePrivateIpv4Address", Namespace = "urn:didata.com:api:cloud:types",
-        IsNullable = false)]
+    [System.Xml.Serialization.XmlRootAttribute("reservePrivateIpv4Address", Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
     public partial class ReservePrivateIpv4AddressType
     {
 
-        private string itemField;
-
-        private NetworkIdOrVlanIdChoiceType itemElementNameField;
-
-        private string ipAddressField;
-
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("networkId", typeof (string))]
-        [System.Xml.Serialization.XmlElementAttribute("vlanId", typeof (string))]
+        [System.Xml.Serialization.XmlElementAttribute("networkId", typeof(string))]
+        [System.Xml.Serialization.XmlElementAttribute("vlanId", typeof(string))]
         [System.Xml.Serialization.XmlChoiceIdentifierAttribute("ItemElementName")]
-        public string Item
-        {
-            get { return this.itemField; }
-            set { this.itemField = value; }
-        }
+        public string Item;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public NetworkIdOrVlanIdChoiceType ItemElementName
-        {
-            get { return this.itemElementNameField; }
-            set { this.itemElementNameField = value; }
-        }
+        public NetworkIdOrVlanIdChoiceType ItemElementName;
 
         /// <remarks/>
-        public string ipAddress
-        {
-            get { return this.ipAddressField; }
-            set { this.ipAddressField = value; }
-        }
+        public string ipAddress;
     }
 
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.81.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types", IncludeInSchema = false)]
     public enum NetworkIdOrVlanIdChoiceType
@@ -385,32 +272,60 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
     }
 
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.81.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
-    [System.Xml.Serialization.XmlRootAttribute("reserveIpv6Address", Namespace = "urn:didata.com:api:cloud:types",
-        IsNullable = false)]
+    [System.Xml.Serialization.XmlRootAttribute("reserveIpv6Address", Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
     public partial class ReserveIpv6AddressType
     {
 
-        private string vlanIdField;
-
-        private string ipAddressField;
+        /// <remarks/>
+        public string vlanId;
 
         /// <remarks/>
-        public string vlanId
-        {
-            get { return this.vlanIdField; }
-            set { this.vlanIdField = value; }
-        }
+        public string ipAddress;
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
+    [System.Xml.Serialization.XmlRootAttribute("unreservePrivateIpv4Address", Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
+    public partial class UnreservePrivateIpv4AddressType
+    {
 
         /// <remarks/>
-        public string ipAddress
-        {
-            get { return this.ipAddressField; }
-            set { this.ipAddressField = value; }
-        }
+        [System.Xml.Serialization.XmlElementAttribute("networkId", typeof(string))]
+        [System.Xml.Serialization.XmlElementAttribute("vlanId", typeof(string))]
+        [System.Xml.Serialization.XmlChoiceIdentifierAttribute("ItemElementName")]
+        public string Item;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public NetworkIdOrVlanIdChoiceType ItemElementName;
+
+        /// <remarks/>
+        public string ipAddress;
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
+    [System.Xml.Serialization.XmlRootAttribute("unreserveIpv6Address", Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
+    public partial class UnreserveIpv6AddressType
+    {
+
+        /// <remarks/>
+        public string vlanId;
+
+        /// <remarks/>
+        public string ipAddress;
     }
 }
