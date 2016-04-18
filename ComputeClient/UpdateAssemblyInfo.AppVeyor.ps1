@@ -13,14 +13,12 @@
 
     return "$postfix"
 }
-
-$currentDir = (Get-Location).Path
+$currentDir = $PSScriptRoot
 import-module (Join-Path $currentDir "UpdateAssemblyInfo.psm1")
 $buildVersion = $env:APPVEYOR_BUILD_VERSION
 $releaseTag = Get-BuildPostFix
 Write-Host "Updating solution versions to $buildVersion , releaseTag : $releaseTag";
 
-$currentDir = (Get-Location).Path
 Update-AssemblyInfoWithBuildNumber -SolutionAssemblyInfoFile (Join-Path $currentDir "SolutionAssemblyInfo.cs") -Version $buildVersion
 Update-NuSpecWithBuildNumber -NuSpecFile (Join-Path $currentDir "Compute.Client\Compute.Client.nuspec") -Version "$buildVersion-$releaseTag"
 
