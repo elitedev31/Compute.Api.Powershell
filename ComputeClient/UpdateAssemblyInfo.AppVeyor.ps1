@@ -3,12 +3,12 @@
      $postfix = $env:COMPUTEAPI_BUILD_POSTFIX
 
      if ($env:APPVEYOR_REPO_BRANCH -eq "master") {
-         $postfix = ""
+         $postfix = $null
      }
      elseif ($env:APPVEYOR_REPO_BRANCH -ne "develop") {
-         $postfix = "-develop"
+         $postfix = "develop"
      }else {
-         $postfix = "-feature"
+         $postfix = "feature"
      }
 
     return "$postfix"
@@ -20,5 +20,12 @@ $releaseTag = Get-BuildPostFix
 Write-Host "Updating solution versions to $buildVersion , releaseTag : $releaseTag";
 
 Update-AssemblyInfoWithBuildNumber -SolutionAssemblyInfoFile (Join-Path $currentDir "SolutionAssemblyInfo.cs") -Version $buildVersion
-Update-NuSpecWithBuildNumber -NuSpecFile (Join-Path $currentDir "Compute.Client\Compute.Client.nuspec") -Version "$buildVersion-$releaseTag"
+
+$nugetVersion = "$buildVersion"
+if($postfix -ne $null)
+{
+    $nugetVersion = "$buildVersion-$releaseTag"
+}
+
+Update-NuSpecWithBuildNumber -NuSpecFile (Join-Path $currentDir "Compute.Client\Compute.Client.nuspec") -Version "$nugetVersion"
 
