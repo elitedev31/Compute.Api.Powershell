@@ -14,11 +14,15 @@
          Write-Host "Branch specific environment variable are $branchMajorMinorVersionVariableName and $branchPostFixVariableName";
          $branchMajorMinorVersion = [Environment]::GetEnvironmentVariable($branchMajorMinorVersionVariableName)
          $branchPostFix = [Environment]::GetEnvironmentVariable($branchPostFixVariableName)
-         if($branchMajorMinorVersion -ne $null) {
+
+         # Validate if the variable is present or not
+         $envVariables = [Environment]::GetEnvironmentVariables()         
+
+         if($envVariables.Contains($branchMajorMinorVersionVariableName)) {
             $majorMinorVersion = $branchMajorMinorVersion
          }
              
-         if($branchPostFix -ne $null) {
+         if($envVariables.Contains($branchPostFixVariableName)) {
             $postFix = $branchPostFix
          }             
      }      
