@@ -10,7 +10,7 @@
      if (-Not [string]::IsNullOrEmpty($branchName)) {
 
          $branchMajorMinorVersionVariableName = "$($branchName)_BUILD_VERSION"
-         $branchPostFixVariableName = "$($branchName)_VERSION_POSTFIX"
+         $branchPostFixVariableName = "$($branchName)_BUILD_VERSION_POSTFIX"
          Write-Host "Branch specific environment variable are $branchMajorMinorVersionVariableName and $branchPostFixVariableName";
          $branchMajorMinorVersion = [Environment]::GetEnvironmentVariable($branchMajorMinorVersionVariableName)
          $branchPostFix = [Environment]::GetEnvironmentVariable($branchPostFixVariableName)
