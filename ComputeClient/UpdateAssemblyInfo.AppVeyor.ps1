@@ -1,31 +1,42 @@
-﻿Function Get-BuildPostFix()
-{   
-     $postfix = $env:COMPUTEAPI_BUILD_POSTFIX
+﻿Function Get-BuildVersion()
+{     
+     $postFix = $env:BUILD_VERSION_POSTFIX
+     $majorMinorVersion = $env:BUILD_VERSION
+     $branchName = $env:APPVEYOR_REPO_BRANCH
+     $buildNumber = $env:APPVEYOR_BUILD_NUMBER
+     # Assumes if there is an environment variable set, then use it to override the build version and the version tag
+     $branchName = ($branchName -replace "/", "").ToUpper()
 
-     if ($env:APPVEYOR_REPO_BRANCH -eq "master") {
-         $postfix = $null
-     }
-     elseif ($env:APPVEYOR_REPO_BRANCH -ne "develop") {
-         $postfix = "develop"
-     }else {
-         $postfix = "feature"
-     }
+     if (-Not [string]::IsNullOrEmpty($branchName)) {
+         $branchMajorMinorVersion = [Environment]::GetEnvironmentVariable("$branchName_BUILD_VERSION")
+         $branchPostFix = [Environment]::GetEnvironmentVariable("$branchName_VERSION_POSTFIX")
+         if($branchMajorMinorVersion -ne $null) {
+            $majorMinorVersion = $branchMajorMinorVersion
+         }
+             
+         if($branchPostFix -ne $null) {
+            $postFix = $branchPostFix
+         }             
+     }      
 
-    return "$postfix"
+    Update-AppveyorBuild -Version "$($majorMinorVersion).$($buildNumber)"
+    return @{ BuildVersion = "$($majorMinorVersion).$($buildNumber)" ; PostFix = $postFix ; };
 }
+
 $currentDir = $PSScriptRoot
 import-module (Join-Path $currentDir "UpdateAssemblyInfo.psm1")
-$buildVersion = $env:APPVEYOR_BUILD_VERSION
-$releaseTag = Get-BuildPostFix
-Write-Host "Updating solution versions to $buildVersion , releaseTag : $releaseTag";
 
-Update-AssemblyInfoWithBuildNumber -SolutionAssemblyInfoFile (Join-Path $currentDir "SolutionAssemblyInfo.cs") -Version $buildVersion
+$buildVersion = Get-BuildVersion
+Write-Host "Updating solution versions to $($buildVersion.BuildVersion).0 , releaseTag : $($buildVersion.PostFix)";
 
-$nugetVersion = "$buildVersion"
-if($postfix -ne $null)
+Update-AssemblyInfoWithBuildNumber -SolutionAssemblyInfoFile (Join-Path $currentDir "SolutionAssemblyInfo.cs") -Version "$($buildVersion.BuildVersion).0"
+
+$nugetVersion = "$($buildVersion.BuildVersion)"
+if(-Not [string]::IsNullOrEmpty($buildVersion.PostFix))
 {
-    $nugetVersion = "$buildVersion-$releaseTag"
+    $nugetVersion = "$($buildVersion.BuildVersion)-$($buildVersion.PostFix)"
 }
 
-Update-NuSpecWithBuildNumber -NuSpecFile (Join-Path $currentDir "Compute.Client\Compute.Client.nuspec") -Version "$nugetVersion"
+Write-Host "Updating Nuget package versions to $nugetVersion";
+Update-NuSpecWithBuildNumber -NuSpecFile (Join-Path $currentDir "Compute.Client\Compute.Client.nuspec") -Version $nugetVersion
 
