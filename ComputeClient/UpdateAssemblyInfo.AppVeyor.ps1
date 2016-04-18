@@ -27,12 +27,14 @@
          }             
     }
      
-    # workaround for not being able to set empty value in AppVeyor environment config
+    # workaround for not being able to set empty value in AppVeyor environment config    
     if($postFix -eq "none") {
         $postFix = $null
     }
 
-    Update-AppveyorBuild -Version "$($majorMinorVersion).$($buildNumber)"
+    #To Support Clashing build number
+    Update-AppveyorBuild -Version "$($majorMinorVersion).$($buildNumber)-$branchName"
+
     return @{ BuildVersion = "$($majorMinorVersion).$($buildNumber)" ; PostFix = $postFix ; };
 }
 
