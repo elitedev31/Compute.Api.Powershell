@@ -25,7 +25,12 @@
          if($envVariables.Contains($branchPostFixVariableName)) {
             $postFix = $branchPostFix
          }             
-     }      
+    }
+     
+    # workaround for not being able to set empty value in AppVeyor environment config
+    if($postFix -eq "none") {
+        $postFix = $null
+    }
 
     Update-AppveyorBuild -Version "$($majorMinorVersion).$($buildNumber)"
     return @{ BuildVersion = "$($majorMinorVersion).$($buildNumber)" ; PostFix = $postFix ; };
