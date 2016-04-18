@@ -8,8 +8,12 @@
      $branchName = ($branchName -replace "/", "").ToUpper()
 
      if (-Not [string]::IsNullOrEmpty($branchName)) {
-         $branchMajorMinorVersion = [Environment]::GetEnvironmentVariable("$branchName_BUILD_VERSION")
-         $branchPostFix = [Environment]::GetEnvironmentVariable("$branchName_VERSION_POSTFIX")
+
+         $branchMajorMinorVersionVariableName = "$branchName_BUILD_VERSION"
+         $branchPostFixVariableName = "$branchName_VERSION_POSTFIX"
+         Write-Host "Branch specific environment variable are $branchMajorMinorVersionVariableName and $branchPostFixVariableName";
+         $branchMajorMinorVersion = [Environment]::GetEnvironmentVariable($branchMajorMinorVersionVariableName)
+         $branchPostFix = [Environment]::GetEnvironmentVariable($branchPostFixVariableName)
          if($branchMajorMinorVersion -ne $null) {
             $majorMinorVersion = $branchMajorMinorVersion
          }
