@@ -14,7 +14,8 @@
     return "$postfix"
 }
 
-import-module .\UpdateAssemblyInfo.psm1
+$currentDir = (Get-Location).Path
+import-module (Join-Path $currentDir "UpdateAssemblyInfo.psm1")
 $buildVersion = $env:APPVEYOR_BUILD_VERSION
 $releaseTag = Get-BuildPostFix
 Write-Host "Updating solution versions to $buildVersion , releaseTag : $releaseTag";
