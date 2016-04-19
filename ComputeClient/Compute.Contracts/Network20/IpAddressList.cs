@@ -123,7 +123,7 @@
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "urn:didata.com:api:cloud:types")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
-    public partial class CreateIpAddressList
+    public partial class createIpAddressList
     {
 
         private string networkDomainIdField;
@@ -217,6 +217,18 @@
                 this.childIpAddressListIdField = value;
             }
         }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool descriptionSpecified;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool ipAddressSpecified;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool childIpAddressListIdSpecified;
     }
 
     /// <remarks/>
@@ -351,6 +363,18 @@
                 this.idField = value;
             }
         }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool descriptionSpecified;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool ipAddressSpecified;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool childIpAddressListIdSpecified;
     }
 
     /// <remarks/>
@@ -608,6 +632,18 @@
                 this.idField = value;
             }
         }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool descriptionSpecified;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool ipAddressSpecified;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool childIpAddressListIdSpecified;
     }
 
     /// <remarks/>

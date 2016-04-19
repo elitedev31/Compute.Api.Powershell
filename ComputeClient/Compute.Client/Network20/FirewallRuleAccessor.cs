@@ -111,9 +111,9 @@
 	    /// </summary>
 	    /// <param name="createIpAddressList">The ip address list details.</param>
 	    /// <returns>The response details.</returns>
-	    public async Task<ResponseType> CreateIpAddressList(CreateIpAddressList createIpAddressList)
+	    public async Task<ResponseType> CreateIpAddressList(createIpAddressList createIpAddressList)
 	    {
-            return await _api.PostAsync<CreateIpAddressList, ResponseType>(
+            return await _api.PostAsync<createIpAddressList, ResponseType>(
                 ApiUris.CreateIpAddressList(_api.OrganizationId),
                 createIpAddressList);
         }

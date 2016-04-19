@@ -61,7 +61,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces.Network20
         /// </summary>
         /// <param name="createIpAddressList">The ip address list details.</param>
         /// <returns>The response details.</returns>
-        Task<ResponseType> CreateIpAddressList(CreateIpAddressList createIpAddressList);
+        Task<ResponseType> CreateIpAddressList(createIpAddressList createIpAddressList);
 
         /// <summary>
         /// Lists all ip address list.

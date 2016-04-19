@@ -14,6 +14,10 @@
 
         /// <remarks/>
         public string value;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool valueSpecified;
     }
 
     /// <remarks/>
@@ -30,6 +34,10 @@
 
         /// <remarks/>
         public string value;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool valueSpecified;
     }
 
     /// <remarks/>
@@ -46,6 +54,7 @@
         public string name;
 
         /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
         public string description;
 
         /// <remarks/>
@@ -57,6 +66,10 @@
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string id;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool descriptionSpecified;
     }
 
     /// <remarks/>
@@ -99,6 +112,10 @@
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string id;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool descriptionSpecified;
     }
 
     /// <remarks/>
@@ -182,6 +199,14 @@
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string id;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool nameSpecified;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool descriptionSpecified;        
     }
 
     /// <remarks/>
@@ -284,6 +309,10 @@
 
         /// <remarks/>
         public bool valueRequired;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool valueSpecified;
     }
 
     /// <remarks/>
