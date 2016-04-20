@@ -282,8 +282,11 @@ namespace DD.CBU.Compute.Api.Client.WebApi
 					{
 						throw new InvalidCredentialsException(uri);
 					}
-
-				case HttpStatusCode.BadRequest:
+                case HttpStatusCode.Forbidden:
+                    {
+                        throw new PermissionDeniedException(uri);
+                    }
+                case HttpStatusCode.BadRequest:
 					{
 						// Handle specific CaaS Status response when posting a bad request
 						if (uri.ToString().StartsWith(ApiUris.MCP1_0_PREFIX))
@@ -294,17 +297,29 @@ namespace DD.CBU.Compute.Api.Client.WebApi
 					    ResponseType responseMessage = await ReadResponseAsync<ResponseType>(response.Content);                        
 						throw new BadRequestException(responseMessage, uri);
 					}
-
-				default:
+                // Maintenance Window Exception                
+                case HttpStatusCode.ServiceUnavailable:
+                    {
+                        // Handle specific CaaS Status response when posting a bad request
+                        if (uri.ToString().StartsWith(ApiUris.MCP1_0_PREFIX))
+                        {
+                            Status status = await response.Content.ReadAsAsync<Status>(_mediaTypeFormatters);
+                            throw new ServiceUnavailableException(status, uri);
+                        }
+                        ResponseType responseMessage = await ReadResponseAsync<ResponseType>(response.Content);
+                        throw new ServiceUnavailableException(responseMessage, uri);
+                    }
+                // Compute Api should handle Internal Server Error
+                case HttpStatusCode.InternalServerError:
+                    {
+                        var respone = await response.Content.ReadAsStringAsync();
+                        throw new InternalServerErrorException(uri, respone);
+                    }
+                // Getting rid of HttpException, instead throwing ComputeApiHttpException, as the consumer can distinctly figure out the error came from Compute Api
+                default:
 					{
-						throw new HttpRequestException(
-							string.Format(
-								"CaaS API returned HTTP status code {0} ({1}) when performing {2} {3} on '{4}'.",
-								(int)response.StatusCode,
-								response.StatusCode,
-                                response.RequestMessage.RequestUri.Scheme,
-                                response.RequestMessage.Method,
-								response.RequestMessage.RequestUri));
+                        var respone = await response.Content.ReadAsStringAsync();
+					    throw new ComputeApiHttpException(uri, response.RequestMessage.Method, response.StatusCode, respone);
 					}
 			}
 		}
