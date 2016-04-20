@@ -155,7 +155,7 @@ namespace DD.CBU.Compute.Api.Client.WebApi
             {
 				if (!response.IsSuccessStatusCode)
 				{
-					await HandleApiRequestErrors(response, relativeOperationUri);		
+					await HandleApiRequestErrors(response);		
 				}
 
                 if (typeof (TResult) == typeof (string))
@@ -197,7 +197,7 @@ namespace DD.CBU.Compute.Api.Client.WebApi
 			{				
 				if (!response.IsSuccessStatusCode)
 				{
-					await HandleApiRequestErrors(response, relativeOperationUri);
+					await HandleApiRequestErrors(response);
 				}
 				
 				return await ReadResponseAsync<TResult>(response.Content);
@@ -232,7 +232,7 @@ namespace DD.CBU.Compute.Api.Client.WebApi
 						_httpClient.PostAsync(relativeOperationUri, objectContent))
 			{
 				if (!response.IsSuccessStatusCode)
-					await HandleApiRequestErrors(response, relativeOperationUri);
+					await HandleApiRequestErrors(response);
 				
 				return await ReadResponseAsync<TResult>(response.Content);
 			}
@@ -261,10 +261,7 @@ namespace DD.CBU.Compute.Api.Client.WebApi
 		/// </summary>
 		/// <param name="response">
 		/// The response.
-		/// </param>
-		/// <param name="uri">
-		/// The uri.
-		/// </param>
+		/// </param>		
 		/// <returns>
 		/// The <see cref="Task"/>.
 		/// </returns>
@@ -274,57 +271,88 @@ namespace DD.CBU.Compute.Api.Client.WebApi
 		/// </exception>
 		/// <exception cref="HttpRequestException">
 		/// </exception>
-		private async Task HandleApiRequestErrors(HttpResponseMessage response, Uri uri)
+		private async Task HandleApiRequestErrors(HttpResponseMessage response)
 		{
-			switch (response.StatusCode)
-			{
-				case HttpStatusCode.Unauthorized:
-					{
-						throw new InvalidCredentialsException(uri);
-					}
-                case HttpStatusCode.Forbidden:
-                    {
-                        throw new PermissionDeniedException(uri);
-                    }
-                case HttpStatusCode.BadRequest:
-					{
-						// Handle specific CaaS Status response when posting a bad request
-						if (uri.ToString().StartsWith(ApiUris.MCP1_0_PREFIX))
-						{
-							Status status = await response.Content.ReadAsAsync<Status>(_mediaTypeFormatters);
-							throw new BadRequestException(status, uri);
-						}
-					    ResponseType responseMessage = await ReadResponseAsync<ResponseType>(response.Content);                        
-						throw new BadRequestException(responseMessage, uri);
-					}
-                // Maintenance Window Exception                
-                case HttpStatusCode.ServiceUnavailable:
-                    {
-                        // Handle specific CaaS Status response when posting a bad request
-                        if (uri.ToString().StartsWith(ApiUris.MCP1_0_PREFIX))
-                        {
-                            Status status = await response.Content.ReadAsAsync<Status>(_mediaTypeFormatters);
-                            throw new ServiceUnavailableException(status, uri);
-                        }
-                        ResponseType responseMessage = await ReadResponseAsync<ResponseType>(response.Content);
-                        throw new ServiceUnavailableException(responseMessage, uri);
-                    }
-                // Compute Api should handle Internal Server Error
-                case HttpStatusCode.InternalServerError:
-                    {
-                        var respone = await response.Content.ReadAsStringAsync();
-                        throw new InternalServerErrorException(uri, respone);
-                    }
-                // Getting rid of HttpException, instead throwing ComputeApiHttpException, as the consumer can distinctly figure out the error came from Compute Api
-                default:
-					{
-                        var respone = await response.Content.ReadAsStringAsync();
-					    throw new ComputeApiHttpException(uri, response.RequestMessage.Method, response.StatusCode, respone);
-					}
-			}
+		    switch (response.StatusCode)
+		    {
+		        case HttpStatusCode.Unauthorized:
+		        {
+		            throw new InvalidCredentialsException(response.RequestMessage.RequestUri);
+		        }
+		        case HttpStatusCode.Forbidden:
+		        case HttpStatusCode.BadRequest:
+		        // Maintenance Window Exception                
+		        case HttpStatusCode.ServiceUnavailable:
+		        {
+                    throw await HandleApiRequestErrorsWithResponse(response, response.RequestMessage.RequestUri);
+		        }
+		        // Compute Api should handle Internal Server Error
+		        case HttpStatusCode.InternalServerError:
+		        {
+		            var respone = await response.Content.ReadAsStringAsync();
+		            throw new InternalServerErrorException(response.RequestMessage.RequestUri, respone);
+		        }
+		        // Getting rid of HttpException, instead throwing ComputeApiHttpException, as the consumer can distinctly figure out the error came from Compute Api
+		        default:
+		        {
+		            var respone = await response.Content.ReadAsStringAsync();
+		            throw new ComputeApiHttpException(response.RequestMessage.RequestUri, response.RequestMessage.Method, response.StatusCode, respone);
+		        }
+		    }
 		}
 
+
         /// <summary>
+        /// Handle Http Exceptions with Response details
+        /// </summary>
+        /// <param name="response">Http Response</param>
+        /// <param name="uri">Request Uri</param>
+        /// <returns></returns>
+	    private async Task<ComputeApiException> HandleApiRequestErrorsWithResponse(HttpResponseMessage response, Uri uri)
+	    {
+	        Status status = null;
+	        ResponseType responseMessage = null;
+	        if (uri.ToString().StartsWith(ApiUris.MCP1_0_PREFIX))
+	        {
+	            status = await response.Content.ReadAsAsync<Status>(_mediaTypeFormatters);
+	        }
+	        else
+	        {
+	            responseMessage = await ReadResponseAsync<ResponseType>(response.Content);
+	        }
+
+	        switch (response.StatusCode)
+	        {
+	            case HttpStatusCode.Forbidden:
+	            {
+	                if (uri.ToString().StartsWith(ApiUris.MCP1_0_PREFIX))
+	                    return new PermissionDeniedException(status, uri);
+                        return new PermissionDeniedException(responseMessage, uri);
+	            }
+	            case HttpStatusCode.BadRequest:
+	            {
+	                // Handle specific CaaS Status response when posting a bad request
+	                if (uri.ToString().StartsWith(ApiUris.MCP1_0_PREFIX))
+                            return new BadRequestException(status, uri);
+                        return new BadRequestException(responseMessage, uri);
+	            }
+	            // Maintenance Window Exception                
+	            case HttpStatusCode.ServiceUnavailable:
+	            {
+	                // Handle specific CaaS Status response when posting a bad request
+	                if (uri.ToString().StartsWith(ApiUris.MCP1_0_PREFIX))
+                            return new ServiceUnavailableException(status, uri);
+                        return new ServiceUnavailableException(responseMessage, uri);
+	            }
+                default:
+	            {
+	                var respone = await response.Content.ReadAsStringAsync();
+	                return new ComputeApiHttpException(uri, response.RequestMessage.Method, response.StatusCode, respone);
+	            }
+	        }
+	    }
+
+	    /// <summary>
         /// Read response with utf-8 encoding workaround
         /// </summary>
         /// <typeparam name="TResult">Result type</typeparam>

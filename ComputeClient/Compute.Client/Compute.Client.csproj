@@ -167,7 +167,6 @@
     <Compile Include="Server20\ServerManagementAccessor.cs" />
     <Compile Include="ServerImageType.cs" />
     <Compile Include="Backup\ComputeApiClientBackupExtensions.cs" />
-    <Compile Include="ClientError.cs" />
     <Compile Include="Network\NetworkVipAccessor.cs" />
     <Compile Include="ImportExportImages\ImportExportCustomerImageAccessor.cs" />
     <Compile Include="Server\ServerAccessor.cs" />
@@ -180,7 +179,6 @@
     <Compile Include="WebApi\ComputeApiClient.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="Exceptions\ComputeApiClientException.cs" />
     <Compile Include="Exceptions\ComputeApiException.cs" />
     <Compile Include="StringExtensions.cs" />
     <Compile Include="Interfaces\IComputeApiClient.cs" />
