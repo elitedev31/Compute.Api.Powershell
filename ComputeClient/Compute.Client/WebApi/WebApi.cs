@@ -312,7 +312,7 @@ namespace DD.CBU.Compute.Api.Client.WebApi
 	    {
 	        Status status = null;
 	        ResponseType responseMessage = null;
-	        if (uri.ToString().StartsWith(ApiUris.MCP1_0_PREFIX))
+	        if (uri.ToString().Contains(ApiUris.MCP1_0_PREFIX))
 	        {
 	            status = await response.Content.ReadAsAsync<Status>(_mediaTypeFormatters);
 	        }
@@ -325,14 +325,14 @@ namespace DD.CBU.Compute.Api.Client.WebApi
 	        {
 	            case HttpStatusCode.Forbidden:
 	            {
-	                if (uri.ToString().StartsWith(ApiUris.MCP1_0_PREFIX))
+	                if (uri.ToString().Contains(ApiUris.MCP1_0_PREFIX))
 	                    return new PermissionDeniedException(status, uri);
                         return new PermissionDeniedException(responseMessage, uri);
 	            }
 	            case HttpStatusCode.BadRequest:
 	            {
 	                // Handle specific CaaS Status response when posting a bad request
-	                if (uri.ToString().StartsWith(ApiUris.MCP1_0_PREFIX))
+	                if (uri.ToString().Contains(ApiUris.MCP1_0_PREFIX))
                             return new BadRequestException(status, uri);
                         return new BadRequestException(responseMessage, uri);
 	            }
@@ -340,7 +340,7 @@ namespace DD.CBU.Compute.Api.Client.WebApi
 	            case HttpStatusCode.ServiceUnavailable:
 	            {
 	                // Handle specific CaaS Status response when posting a bad request
-	                if (uri.ToString().StartsWith(ApiUris.MCP1_0_PREFIX))
+	                if (uri.ToString().Contains(ApiUris.MCP1_0_PREFIX))
                             return new ServiceUnavailableException(status, uri);
                         return new ServiceUnavailableException(responseMessage, uri);
 	            }
