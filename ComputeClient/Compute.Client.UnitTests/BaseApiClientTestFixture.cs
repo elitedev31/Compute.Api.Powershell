@@ -59,7 +59,8 @@ namespace Compute.Client.UnitTests
 		    {
 			    var message = new HttpResponseMessage(item.Value.Status)
 			    {
-				    Content = new StringContent(GetContentsOfTestFile(item.Value.ResponseFile), Encoding.UTF8, "text/xml")
+				    Content = new StringContent(GetContentsOfTestFile(item.Value.ResponseFile), Encoding.UTF8, "text/xml"),
+                    RequestMessage = new HttpRequestMessage(HttpMethod.Get, new Uri("http://localhost/"))
 			    };
 
 			    fakeClient.Setup(f => f.GetAsync(item.Key)).ReturnsAsync(message);
