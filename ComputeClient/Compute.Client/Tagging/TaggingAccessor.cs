@@ -106,7 +106,7 @@
         /// <returns>The <see cref="Task"/>.</returns>
         public async Task<PagedResponse<TagType>> GetTagsPaginated(TagListOptions tagListOptions = null, IPageableRequest paginngOptions = null)
         {
-            var response = await _apiClient.GetAsync<tags>(ApiUris.ListTagKeys(_apiClient.OrganizationId), paginngOptions, tagListOptions);
+			var response = await _apiClient.GetAsync<tags>(ApiUris.GetTags(_apiClient.OrganizationId), paginngOptions, tagListOptions);
             return new PagedResponse<TagType>
             {
                 items = response.tag, 
