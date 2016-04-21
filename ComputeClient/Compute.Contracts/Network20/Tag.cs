@@ -271,6 +271,30 @@
         [System.Xml.Serialization.XmlElementAttribute("tag", typeof(ApplyTagType))]
         [System.Xml.Serialization.XmlElementAttribute("tagById", typeof(ApplyTagByIdType))]
         public object[] Items;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public ApplyTagType[] tag
+        {
+            get { return Items as ApplyTagType[]; }
+            set
+            {
+                if (value != null || Items is ApplyTagType[])
+                    Items = value as ApplyTagType[];
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public ApplyTagByIdType[] tagById
+        {
+            get { return Items as ApplyTagByIdType[]; }
+            set
+            {
+                if (value != null || Items is ApplyTagByIdType[])
+                    Items = value as ApplyTagByIdType[];
+            }
+        }
     }
 
     /// <remarks/>
