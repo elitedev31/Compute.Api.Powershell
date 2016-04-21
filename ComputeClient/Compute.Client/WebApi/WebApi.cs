@@ -292,6 +292,11 @@ namespace DD.CBU.Compute.Api.Client.WebApi
 		            var respone = await response.Content.ReadAsStringAsync();
 		            throw new InternalServerErrorException(response.RequestMessage.RequestUri, respone);
 		        }
+                // Typically this happens when the Region is undergoing maintenance
+                case HttpStatusCode.NotFound:
+		        {
+		            throw new ComputeApiMethodNotFoundException(response.RequestMessage.RequestUri);
+		        }
 		        // Getting rid of HttpException, instead throwing ComputeApiHttpException, as the consumer can distinctly figure out the error came from Compute Api
 		        default:
 		        {

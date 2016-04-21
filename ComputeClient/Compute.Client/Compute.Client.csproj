@@ -105,6 +105,7 @@
     <Compile Include="Exceptions\ComputeApiHttpException.cs" />
     <Compile Include="Exceptions\InternalServerErrorException.cs" />
     <Compile Include="Exceptions\PermissionDeniedException.cs" />
+    <Compile Include="Exceptions\ComputeApiMethodNotFoundException.cs" />
     <Compile Include="Exceptions\ServiceUnavailableException.cs" />
     <Compile Include="Exceptions\BadRequestException.cs" />
     <Compile Include="Exceptions\ComputeApiError.cs" />

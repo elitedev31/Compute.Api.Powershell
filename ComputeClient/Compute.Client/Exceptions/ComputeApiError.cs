@@ -48,8 +48,13 @@ namespace DD.CBU.Compute.Api.Client
         InternalServerError = 5,
 
         /// <summary>
+        /// The CaaS API endpoint not found, typically happens during maintenance
+        /// </summary>
+        ApiMethodNotFoundError = 6,
+
+        /// <summary>
         /// The CaaS API indicates unhandled Http
         /// </summary>
-        HttpException = 6
+        HttpException = 7
     }
 }
