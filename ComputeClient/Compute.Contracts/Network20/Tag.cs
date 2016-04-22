@@ -54,7 +54,6 @@
         public string name;
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
         public string description;
 
         /// <remarks/>
