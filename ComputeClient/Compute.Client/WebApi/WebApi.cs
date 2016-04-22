@@ -289,8 +289,8 @@ namespace DD.CBU.Compute.Api.Client.WebApi
 		        // Compute Api should handle Internal Server Error
 		        case HttpStatusCode.InternalServerError:
 		        {
-		            var respone = await response.Content.ReadAsStringAsync();
-		            throw new InternalServerErrorException(response.RequestMessage.RequestUri, respone);
+		            var respone = await SafeReadContentAsync(response);
+                    throw new InternalServerErrorException(response.RequestMessage.RequestUri, respone);
 		        }
                 // Typically this happens when the Region is undergoing maintenance
                 case HttpStatusCode.NotFound:
@@ -300,12 +300,31 @@ namespace DD.CBU.Compute.Api.Client.WebApi
 		        // Getting rid of HttpException, instead throwing ComputeApiHttpException, as the consumer can distinctly figure out the error came from Compute Api
 		        default:
 		        {
-		            var respone = await response.Content.ReadAsStringAsync();
+		            var respone = await SafeReadContentAsync(response);
 		            throw new ComputeApiHttpException(response.RequestMessage.RequestUri, response.RequestMessage.Method, response.StatusCode, respone);
 		        }
 		    }
 		}
 
+        /// <summary>
+        /// ReadContent From Response
+        /// </summary>     
+        /// <param name="response">Http Response Object</param>        
+        /// <returns>Task for writing the log</returns>
+        private static async Task<string> SafeReadContentAsync(HttpResponseMessage response)
+        {
+            try
+            {
+                return response != null &&  response.Content != null
+                    ? await response.Content.ReadAsStringAsync()
+                    : string.Empty;
+            }
+            catch
+            {
+                // ignored
+            }
+            return string.Empty;
+        }
 
         /// <summary>
         /// Handle Http Exceptions with Response details
@@ -318,9 +337,9 @@ namespace DD.CBU.Compute.Api.Client.WebApi
 	        Status status = null;
 	        ResponseType responseMessage = null;
 	        if (uri.ToString().Contains(ApiUris.MCP1_0_PREFIX))
-	        {
-	            status = await response.Content.ReadAsAsync<Status>(_mediaTypeFormatters);
-	        }
+	        {	         
+                status = await ReadResponseAsync<Status>(response.Content);
+            }
 	        else
 	        {
 	            responseMessage = await ReadResponseAsync<ResponseType>(response.Content);
@@ -351,7 +370,7 @@ namespace DD.CBU.Compute.Api.Client.WebApi
 	            }
                 default:
 	            {
-	                var respone = await response.Content.ReadAsStringAsync();
+	                var respone = await SafeReadContentAsync(response); ;
 	                return new ComputeApiHttpException(uri, response.RequestMessage.Method, response.StatusCode, respone);
 	            }
 	        }
