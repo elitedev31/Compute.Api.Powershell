@@ -26,8 +26,8 @@
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "urn:didata.com:api:cloud:types")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
-    public partial class CreatePortList
-    {
+    public partial class createPortList
+	{
 
         /// <remarks/>
         public string networkDomainId;
@@ -54,8 +54,8 @@
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "urn:didata.com:api:cloud:types")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
-    public partial class EditPortList
-    {
+    public partial class editPortList
+	{
 
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
@@ -142,7 +142,7 @@
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "urn:didata.com:api:cloud:types")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
-    public partial class PortLists
+    public partial class portLists
     {
 
         /// <remarks/>

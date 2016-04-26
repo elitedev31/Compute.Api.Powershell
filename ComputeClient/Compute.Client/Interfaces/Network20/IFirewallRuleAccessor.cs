@@ -92,13 +92,13 @@ namespace DD.CBU.Compute.Api.Client.Interfaces.Network20
         /// </summary>
         /// <param name="editIpAddressList">The ip address list details.</param>
         /// <returns>The response details.</returns>
-        Task<ResponseType> EditIpAddressList(EditIpAddressList editIpAddressList);
+        Task<ResponseType> EditIpAddressList(editIpAddressList editIpAddressList);
 
         /// <summary>
         /// Deletes an ip address list.
         /// </summary>
         /// <param name="deleteIpAddressList">The ip address list id to be deleted.</param>
         /// <returns>The response details.</returns>
-        Task<ResponseType> DeleteIpAddressList(DeleteIpAddressListType deleteIpAddressList);
+        Task<ResponseType> DeleteIpAddressList(deleteIpAddressList deleteIpAddressList);
     }
 }

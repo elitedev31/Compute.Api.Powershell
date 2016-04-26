@@ -217,18 +217,6 @@
                 this.childIpAddressListIdField = value;
             }
         }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool descriptionSpecified;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ipAddressSpecified;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool childIpAddressListIdSpecified;
     }
 
     /// <remarks/>
@@ -363,18 +351,6 @@
                 this.idField = value;
             }
         }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool descriptionSpecified;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ipAddressSpecified;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool childIpAddressListIdSpecified;
     }
 
     /// <remarks/>
@@ -384,8 +360,8 @@
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "urn:didata.com:api:cloud:types")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
-    public partial class IpAddressLists
-    {
+    public partial class ipAddressLists
+	{
 
         private IpAddressListType[] ipAddressListField;
 
@@ -538,9 +514,9 @@
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
-    [System.Xml.Serialization.XmlRootAttribute("deleteIpAddressList", Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
-    public partial class DeleteIpAddressListType
-    {
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
+    public partial class deleteIpAddressList
+	{
 
         private string idField;
 
@@ -566,7 +542,7 @@
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "urn:didata.com:api:cloud:types")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
-    public partial class EditIpAddressList
+    public partial class editIpAddressList
     {
 
         private string descriptionField;
