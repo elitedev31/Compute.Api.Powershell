@@ -49,13 +49,13 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         /// Gets or sets Source IP and Port
         /// </summary>
         [Parameter(Mandatory = true, HelpMessage = "The source IP and Port")]
-        public IpAndPortFilterType Source { get; set; }
+        public IpAndPortType Source { get; set; }
 
         /// <summary>
         /// Gets or sets Destination IP and Port
         /// </summary>
         [Parameter(Mandatory = true, HelpMessage = "The destination IP and Port")]
-        public IpAndPortFilterType Destination { get; set; }
+        public IpAndPortType Destination { get; set; }
 
         /// <summary>
         /// Gets or sets Firewall rule position type
