@@ -1,34 +1,31 @@
-﻿using System;
-using System.Management.Automation;
-using DD.CBU.Compute.Api.Client;
-using DD.CBU.Compute.Api.Contracts.Network20;
-
-namespace DD.CBU.Compute.Powershell.Mcp20
+﻿namespace DD.CBU.Compute.Powershell.Mcp20
 {
+    using System;
+    using System.Management.Automation;
+    using DD.CBU.Compute.Api.Client;
+    using DD.CBU.Compute.Api.Contracts.Network20;
+
     /// <summary>
-    ///     The new IP Address List CMD Let
+    ///     The new Port List CMD Let
     /// </summary>
-    [Cmdlet(VerbsCommon.New, "CaasIpAddressList")]
+    [Cmdlet(VerbsCommon.New, "CaasPortList")]
     [OutputType(typeof(ResponseType))]
-    public class NewCaasIpAddressListCmdlet : PSCmdletCaasWithConnectionBase
+    public class NewCaasPortListCmdlet : PSCmdletCaasWithConnectionBase
     {
         [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The network domain id")]
         public string NetworkDomainId { get; set; }
 
-        [Parameter(Mandatory = true, HelpMessage = "The IP Address List name")]
+        [Parameter(Mandatory = true, HelpMessage = "The Port List name")]
         public string Name { get; set; }
 
-        [Parameter(Mandatory = false, HelpMessage = "The IP Address List description")]
+        [Parameter(Mandatory = false, HelpMessage = "The Port List description")]
         public string Description { get; set; }
 
-        [Parameter(Mandatory = true, HelpMessage = "The IP version (IPv4 / IPv6)")]
-        public string IPVersion { get; set; }
+        [Parameter(Mandatory = false, HelpMessage = "Define one or more individual Portes or ranges of Portes")]
+        public PortRangeType[] Port { get; set; }
 
-        [Parameter(Mandatory = false, HelpMessage = "Define one or more individual IP addresses or ranges of IP addresses")]
-        public IpAddressRangeType[] IpAddress { get; set; }
-
-        [Parameter(Mandatory = false, HelpMessage = "Define one or more individual IP Address Lists on the same Network Domain")]
-        public string[] ChildIpAddressListId { get; set; }
+        [Parameter(Mandatory = false, HelpMessage = "Define one or more individual Port Lists on the same Network Domain")]
+        public string[] ChildPortListId { get; set; }
 
         /// <summary>
         ///     The process record method.
@@ -39,17 +36,16 @@ namespace DD.CBU.Compute.Powershell.Mcp20
             base.ProcessRecord();
             try
             {
-                var ipAddressList = new createIpAddressList
+                var portList = new createPortList
                 {
                     networkDomainId = NetworkDomainId,
                     name = Name,
                     description = Description,
-                    ipVersion = IPVersion,
-                    childIpAddressListId = ChildIpAddressListId,
-                    ipAddress = IpAddress,
+                    childPortListId = ChildPortListId,
+                    port = Port,
                 };
 
-                response = Connection.ApiClient.Networking.FirewallRule.CreateIpAddressList(ipAddressList).Result;
+                response = Connection.ApiClient.Networking.FirewallRule.CreatePortList(portList).Result;
             }
             catch (AggregateException ae)
             {

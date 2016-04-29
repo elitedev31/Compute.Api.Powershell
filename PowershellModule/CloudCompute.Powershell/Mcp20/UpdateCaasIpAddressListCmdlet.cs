@@ -58,7 +58,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                         })
                         .ToArray();
 
-                var ipAddressList = new EditIpAddressList
+                var ipAddressList = new editIpAddressList
                 {
                     id = Id.ToString(),
                     description = Description,

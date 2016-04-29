@@ -6,13 +6,13 @@ using DD.CBU.Compute.Api.Contracts.Network20;
 namespace DD.CBU.Compute.Powershell.Mcp20
 {
     /// <summary>
-    ///     The remove IP Address List CMDLET
+    ///     The remove Port List CMDLET
     /// </summary>
-    [Cmdlet(VerbsCommon.Remove, "CaasIpAddressList")]
+    [Cmdlet(VerbsCommon.Remove, "CaasPortList")]
     [OutputType(typeof(ResponseType))]
-    public class RemoveCaasIpAddressListCmdlet : PSCmdletCaasWithConnectionBase
+    public class RemoveCaasPortListCmdlet : PSCmdletCaasWithConnectionBase
     {
-        [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The id of IP Address List")]
+        [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The id of Port List")]
         public string Id { get; set; }
 
         protected override void ProcessRecord()
@@ -21,7 +21,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
             base.ProcessRecord();
             try
             {
-                response = Connection.ApiClient.Networking.FirewallRule.DeleteIpAddressList(new deleteIpAddressList { id = Id }).Result;
+                response = Connection.ApiClient.Networking.FirewallRule.DeletePortList(new DeletePortListType { id = Id }).Result;
             }
             catch (AggregateException ae)
             {
