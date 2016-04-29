@@ -68,17 +68,24 @@
             };
         }
 
+		/// <summary>	Gets public IP block. </summary>
+		/// <param name="publicIpBlockId">	Identifier for the public IP block. </param>
+		/// <returns>	The public IP block. </returns>
+		public async Task<PublicIpBlockType> GetPublicIpBlock(Guid publicIpBlockId)
+		{
+			return
+				await
+					_apiClient.GetAsync<PublicIpBlockType>(
+						ApiUris.GetPublicIpBlock(_apiClient.OrganizationId, publicIpBlockId.ToString()));
+		}
+
         /// <summary>	Gets public IP block. </summary>
         /// <param name="networkDomainId">	Identifier for the network domain. </param>
         /// <param name="publicIpBlockId">	Identifier for the public IP block. </param>
         /// <returns>	The public IP block. </returns>
-        /// <seealso cref="M:DD.CBU.Compute.Api.Client.Interfaces.IIpam.GetPublicIpBlock(string,string)"/>
         public async Task<PublicIpBlockType> GetPublicIpBlock(Guid networkDomainId, Guid publicIpBlockId)
         {
-            return
-                await
-                    _apiClient.GetAsync<PublicIpBlockType>(
-                        ApiUris.GetPublicIpBlock(_apiClient.OrganizationId, publicIpBlockId.ToString()));
+			return await GetPublicIpBlock(publicIpBlockId);
         }
 
         /// <summary>	Gets reserved public IP addresses for a network domain. </summary>
