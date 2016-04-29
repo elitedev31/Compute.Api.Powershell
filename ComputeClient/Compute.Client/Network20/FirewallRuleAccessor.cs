@@ -233,11 +233,11 @@
         /// <summary>
         /// Gets the ip address list.
         /// </summary>
-        /// <param name="PortListId">The ip address list id.</param>
+        /// <param name="portListId">The ip address list id.</param>
         /// <returns>The collection of matching ip address list.</returns>
-        public async Task<PortListType> GetPortList(Guid PortListId)
+        public async Task<PortListType> GetPortList(Guid portListId)
         {
-            return await _api.GetAsync<PortListType>(ApiUris.GetPortList(_api.OrganizationId, PortListId));
+            return await _api.GetAsync<PortListType>(ApiUris.GetPortList(_api.OrganizationId, portListId));
         }
 
         /// <summary>
