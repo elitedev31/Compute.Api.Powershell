@@ -2173,7 +2173,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri RemoveTag(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/tag/removeTag", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/tag/removeTags", orgId), UriKind.Relative);
         }
     }
 }

@@ -73,12 +73,12 @@
     <DocumentationFile>bin\Release\DD.CBU.Compute.Powershell.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DD.CBU.Compute.Api.Client, Version=3.0.235.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
-      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.0.235-develop\lib\net45\DD.CBU.Compute.Api.Client.dll</HintPath>
+    <Reference Include="DD.CBU.Compute.Api.Client, Version=3.1.304.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
+      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.1.304-develop\lib\net45\DD.CBU.Compute.Api.Client.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="DD.CBU.Compute.Api.Contracts, Version=3.0.235.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
-      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.0.235-develop\lib\net45\DD.CBU.Compute.Api.Contracts.dll</HintPath>
+    <Reference Include="DD.CBU.Compute.Api.Contracts, Version=3.1.304.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
+      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.1.304-develop\lib\net45\DD.CBU.Compute.Api.Contracts.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
@@ -123,6 +123,9 @@
     <Compile Include="GetCaasCustomerImageExportHistoryCmdlet.cs" />
     <Compile Include="GetCaasCustomerImageExportsCmdlet.cs" />
     <Compile Include="GetCaasExportedImageCmdlet.cs" />
+    <Compile Include="Mcp20\GetCaasPortListCmdlet.cs" />
+    <Compile Include="Mcp20\Model\AssetType.cs" />
+    <Compile Include="Mcp20\GetCaasIpAddressCmdlet.cs" />
     <Compile Include="Mcp20\GetCaasServerCmdlet.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Mcp20\DeployCaasNetworkDomainCmdlet.cs" />
@@ -134,6 +137,17 @@
     <Compile Include="Mcp20\GetCaasDefaultHealthMonitorsCmdlet.cs" />
     <Compile Include="Mcp20\GetCaasAntiAffinityRulesCmdlet.cs" />
     <Compile Include="Mcp20\GetCaasServerMonitoringUsageReportCmdlet.cs" />
+    <Compile Include="Mcp20\GetCaasTagCmdlet.cs" />
+    <Compile Include="Mcp20\Model\PortListPort.cs" />
+    <Compile Include="Mcp20\Model\IpAddressListIpAddress.cs" />
+    <Compile Include="Mcp20\NewCaasPortListCmdlet.cs" />
+    <Compile Include="Mcp20\RemoveCaasPortListCmdlet.cs" />
+    <Compile Include="Mcp20\RemoveCaasIpAddressListCmdlet.cs" />
+    <Compile Include="Mcp20\UpdateCaasPortListCmdlet.cs" />
+    <Compile Include="Mcp20\UpdateCaasIpAddressListCmdlet.cs" />
+    <Compile Include="Mcp20\NewCaasIpAddressListCmdlet.cs" />
+    <Compile Include="Mcp20\RemoveCaasTagCmdlet.cs" />
+    <Compile Include="Mcp20\SetCaasTagCmdlet.cs" />
     <Compile Include="Mcp20\GetCaasVipPoolMemberCmdlet.cs" />
     <Compile Include="Mcp20\GetCaasVipPoolCmdlet.cs" />
     <Compile Include="Mcp20\GetCaasNatRuleCmdlet.cs" />
@@ -145,6 +159,11 @@
     <Compile Include="Mcp20\GetCaasVlanCmdlet.cs" />
     <Compile Include="Mcp20\NetworkDomainType.cs" />
     <Compile Include="Mcp20\DeployCaasServerOnNetworkDomainCmdlet.cs" />
+    <Compile Include="Mcp20\GetCaasTagKeyCmdlet.cs" />
+    <Compile Include="Mcp20\RemoveCaasTagKeyCmdlet.cs" />
+    <Compile Include="Mcp20\Model\TagKeyNameIdElement.cs" />
+    <Compile Include="Mcp20\UpdateCaasTagKeyCmdlet.cs" />
+    <Compile Include="Mcp20\NewCaasTagKeyCmdlet.cs" />
     <Compile Include="Mcp20\NewVipPoolMemberCmdlet.cs" />
     <Compile Include="Mcp20\NewCaasVipPoolCmdlet.cs" />
     <Compile Include="Mcp20\NewCaasNATRuleCmdlet.cs" />
