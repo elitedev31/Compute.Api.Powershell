@@ -7,7 +7,7 @@
     using Api.Contracts.Requests.Network20;
 
     [Cmdlet(VerbsCommon.Get, "CaasPortList")]
-    [OutputType(typeof(FirewallRuleType))]
+    [OutputType(typeof(PortListType))]
     public class GetCaasPortCmdlet : PsCmdletCaasPagedWithConnectionBase
     {
         [Parameter(Mandatory = true, ParameterSetName = "Filtered", HelpMessage = "The network domain id")]

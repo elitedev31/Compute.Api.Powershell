@@ -12,7 +12,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
     using Api.Contracts.Requests.Network20;
 
     [Cmdlet(VerbsCommon.Get, "CaasIpAddressList")]
-    [OutputType(typeof(FirewallRuleType))]
+    [OutputType(typeof(IpAddressListType))]
     public class GetCaasIpAddressCmdlet : PsCmdletCaasPagedWithConnectionBase
     {
         [Parameter(Mandatory = true, ParameterSetName = "Filtered", HelpMessage = "The network domain id")]
