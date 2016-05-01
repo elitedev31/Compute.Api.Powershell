@@ -46,7 +46,7 @@ namespace Compute.Client.UnitTests.Utilities
             };
 
             var result = FilterableRequestExtensions.AppendToUri(options, uri);
-            Assert.AreEqual("/resource?name=Test&createTime.GT=" + HttpUtility.UrlEncode("2010-10-10T10:10:10.0000000+00:00"), result.ToString());
+            Assert.AreEqual("/resource?name=Test&createTime.GT=" + HttpUtility.UrlEncode("2010-10-10T10:10:10Z"), result.ToString());
         }
 
         [TestMethod]

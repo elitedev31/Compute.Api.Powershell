@@ -31,7 +31,7 @@ namespace DD.CBU.Compute.Api.Contracts.Requests
         /// </returns>
         public override string ToString()
         {
-            if (string.IsNullOrWhiteSpace(Field) || Value == null)
+            if (string.IsNullOrWhiteSpace(Field))
             {
                 return string.Empty;
             }
@@ -68,13 +68,13 @@ namespace DD.CBU.Compute.Api.Contracts.Requests
                     throw new NotSupportedException("Unknown filter operator type.");
             }
 
-            var valueString = Value.ToString();
+            var valueString = (Value != null) ? Value.ToString() : string.Empty;
 
             if (Value is DateTime)
-                valueString = ((DateTime)Value).ToString("o");
+                valueString = ((DateTime)Value).ToUniversalTime().ToString("yyyy-MM-ddTHH\\:mm\\:ssZ");
 
             if (Value is DateTimeOffset)
-                valueString = ((DateTimeOffset)Value).ToString("o");
+                valueString = ((DateTimeOffset)Value).ToUniversalTime().ToString("yyyy-MM-ddThh\\:mm\\:ssZ");
 
             if (Value is bool)
                 valueString = valueString.ToLower();
