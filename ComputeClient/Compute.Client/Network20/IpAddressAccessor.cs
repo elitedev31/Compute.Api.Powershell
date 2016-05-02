@@ -53,7 +53,7 @@
         /// <summary>	Gets public IP blocks. </summary>
         /// <param name="networkDomainId">	Identifier for the network domain. </param>
         /// <param name="pagingOptions">	The paging options, null means default. </param>
-        /// <param name="filterOptions">Paging option</param>
+        /// <param name="filterOptions">Filtering option</param>
         /// <returns>	The public IP blocks. </returns>
         public async Task<PagedResponse<PublicIpBlockType>> GetPublicIpBlocksPaginated(Guid networkDomainId, IPageableRequest pagingOptions = null, PublicIpListOptions filterOptions = null)
         {
@@ -99,20 +99,21 @@
         /// <summary>	Gets reserved public IP addresses for a network domain. </summary>
         /// <param name="networkDomainId">	Identifier for the network domain. </param>
         /// <param name="pagingOptions">	The paging options, null means default. </param>
+        /// <param name="filterOptions">Filtering option</param>
         /// <returns>	The reserved public addresses. </returns>
-        public async Task<PagedResponse<ReservedPublicIpv4AddressType>> GetReservedPublicAddressesForNetworkDomainPaginated(Guid networkDomainId, IPageableRequest pagingOptions = null)
+        public async Task<PagedResponse<ReservedPublicIpv4AddressType>> GetReservedPublicAddressesForNetworkDomainPaginated(Guid networkDomainId, IPageableRequest pagingOptions = null, ReservedPublicIpv4ListOptions filterOptions = null)
         {
             var response = await _apiClient.GetAsync<reservedPublicIpv4Addresses>(
-                ApiUris.GetReservedPublicAddresses(_apiClient.OrganizationId, 
-                    networkDomainId.ToString()), 
-                pagingOptions);
+                ApiUris.GetReservedPublicAddresses(_apiClient.OrganizationId, networkDomainId.ToString()),
+                pagingOptions,
+                filterOptions);
 
             return new PagedResponse<ReservedPublicIpv4AddressType>
             {
                 items = response.ip, 
-                totalCount = response.totalCountSpecified ? response.totalCount : (int?) null, 
-                pageCount = response.pageCountSpecified ? response.pageCount : (int?) null, 
-                pageNumber = response.pageNumberSpecified ? response.pageNumber : (int?) null, 
+                totalCount = response.totalCountSpecified ? response.totalCount : (int?) null,
+                pageCount = response.pageCountSpecified ? response.pageCount : (int?) null,
+                pageNumber = response.pageNumberSpecified ? response.pageNumber : (int?) null,
                 pageSize = response.pageSizeSpecified ? response.pageSize : (int?) null
             };
         }

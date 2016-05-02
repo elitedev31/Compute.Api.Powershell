@@ -208,6 +208,7 @@
     <Compile Include="Requests\Infrastructure\DataCenterListOptions.cs" />
     <Compile Include="Requests\IPageableRequest.cs" />
     <Compile Include="Requests\Network20\ReservedIpv6ListOptions.cs" />
+    <Compile Include="Requests\Network20\ReservedPublicIpv4ListOptions.cs" />
     <Compile Include="Requests\Network20\ReservedPrivateIpv4ListOptions.cs" />
     <Compile Include="Requests\Network20\PortListOptions.cs" />
     <Compile Include="Requests\Network20\IpAddressListOptions.cs" />

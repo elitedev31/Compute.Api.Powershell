@@ -55,8 +55,9 @@ namespace DD.CBU.Compute.Api.Client.Interfaces.Network20
         /// <summary>	Gets reserved public IP addresses for a network domain. </summary>
         /// <param name="networkDomainId">	Identifier for the network domain. </param>
         /// <param name="pagingOptions">	The paging options, null means default. </param>
+        /// <param name="filterOptions">Filtering option</param>
         /// <returns>	The reserved public addresses. </returns>
-        Task<PagedResponse<ReservedPublicIpv4AddressType>> GetReservedPublicAddressesForNetworkDomainPaginated(Guid networkDomainId, IPageableRequest pagingOptions = null);
+        Task<PagedResponse<ReservedPublicIpv4AddressType>> GetReservedPublicAddressesForNetworkDomainPaginated(Guid networkDomainId, IPageableRequest pagingOptions = null, ReservedPublicIpv4ListOptions filterOptions = null);
 
         /// <summary>	Gets reserved private addresses. </summary>
         /// <param name="vlanId">The VLAN Id.</param>
