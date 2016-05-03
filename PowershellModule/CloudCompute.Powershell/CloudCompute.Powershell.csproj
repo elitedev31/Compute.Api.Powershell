@@ -123,6 +123,7 @@
     <Compile Include="GetCaasCustomerImageExportHistoryCmdlet.cs" />
     <Compile Include="GetCaasCustomerImageExportsCmdlet.cs" />
     <Compile Include="GetCaasExportedImageCmdlet.cs" />
+    <Compile Include="Mcp20\GetCaasNicsCmdlet.cs" />
     <Compile Include="Mcp20\GetCaasPortListCmdlet.cs" />
     <Compile Include="Mcp20\GetCaasReservePrivateIpv4AddressCmdlet.cs" />
     <Compile Include="Mcp20\Model\AssetType.cs" />
