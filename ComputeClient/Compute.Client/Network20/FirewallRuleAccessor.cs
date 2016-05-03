@@ -197,7 +197,6 @@
                 createPortList);
         }
 
-
         /// <summary>
         /// Lists all ip address list.
         /// </summary>
@@ -247,6 +246,16 @@
 	    /// <returns>The response details.</returns>
 	    public async Task<ResponseType> EditPortList(editPortList editPortList)
         {
+            if (editPortList.port == null || editPortList.port.Length == 0)
+            {
+                editPortList.port = new EditPortListPort[] { null };
+            }
+
+            if (editPortList.childPortListId == null || editPortList.childPortListId.Length == 0)
+            {
+                editPortList.childPortListId = new string[] { null };
+            }
+
             return await _api.PostAsync<editPortList, ResponseType>(
                 ApiUris.EditPortList(_api.OrganizationId),
                 editPortList);
