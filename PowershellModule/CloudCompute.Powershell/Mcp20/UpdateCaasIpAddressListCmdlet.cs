@@ -5,6 +5,7 @@ using DD.CBU.Compute.Api.Contracts.Network20;
 
 namespace DD.CBU.Compute.Powershell.Mcp20
 {
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
     using DD.CBU.Compute.Powershell.Mcp20.Model;
@@ -26,7 +27,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         public string Description { get; set; }
 
         [Parameter(Mandatory = false, HelpMessage = "Define one or more individual IP addresses or ranges of IP addresses")]
-        public IpAddressListIpAddress[] IpAddress { get; set; }
+        public IpAddressListRangeType[] IpAddress { get; set; }
 
         [Parameter(Mandatory = false, HelpMessage = "Define one or more individual IP Address Lists on the same Network Domain")]
         public string[] ChildIpAddressListId { get; set; }
@@ -48,28 +49,34 @@ namespace DD.CBU.Compute.Powershell.Mcp20
             base.ProcessRecord();
             try
             {
-                var ipAddress = IpAddress.Select(x =>
-                        new editIpAddressListIpAddress
-                        {
-                            begin = x.Begin,
-                            end = x.End,
-                            prefixSize = x.PrefixSize ?? 0,
-                            prefixSizeSpecified = x.PrefixSize.HasValue
-                        })
-                        .ToArray();
+                var addresses = new editIpAddressListIpAddress[0];
 
-                var ipAddressList = new editIpAddressList
+                if (IpAddress != null)
+                {
+                    addresses =
+                        IpAddress.Select(
+                            x =>
+                            new editIpAddressListIpAddress
+                                {
+                                    begin = x.Begin,
+                                    end = x.End,
+                                    prefixSize = x.PrefixSize ?? 0,
+                                    prefixSizeSpecified = x.PrefixSize.HasValue
+                                }).ToArray();
+                }
+
+                var editIpAddressList = new editIpAddressList
                 {
                     id = Id.ToString(),
                     description = Description,
                     descriptionSpecified = Description != dummyText,
                     childIpAddressListId = ChildIpAddressListId,
-                    childIpAddressListIdSpecified = ChildIpAddressListId.Length > 0,
-                    ipAddress = ipAddress.Length > 0 ? ipAddress : null,
-                    ipAddressSpecified = ipAddress.Length > 0
+                    childIpAddressListIdSpecified = ChildIpAddressListId != null && ChildIpAddressListId.Length > 0,
+                    ipAddress = addresses.Length > 0 ? addresses : null,
+                    ipAddressSpecified = addresses.Length > 0
                 };
 
-                response = Connection.ApiClient.Networking.FirewallRule.EditIpAddressList(ipAddressList).Result;
+                response = Connection.ApiClient.Networking.FirewallRule.EditIpAddressList(editIpAddressList).Result;
             }
             catch (AggregateException ae)
             {

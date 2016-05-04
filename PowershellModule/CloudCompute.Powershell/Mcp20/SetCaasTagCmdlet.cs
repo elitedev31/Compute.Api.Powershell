@@ -14,17 +14,14 @@ namespace DD.CBU.Compute.Powershell.Mcp20
     [OutputType(typeof(ResponseType))]
     public class SetCaasTagKeyCmdlet : PsCmdletCaasPagedWithConnectionBase
     {
-        [Parameter(Mandatory = true, HelpMessage = "The Asset type")]
+        [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The Asset type")]
         public AssetType AssetType { get; set; }
 
-        [Parameter(Mandatory = true, HelpMessage = "The UUID of the asset")]
+        [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The UUID of the asset")]
         public string AssetId { get; set; }
 
-        [Parameter(Mandatory = true, HelpMessage = "Tag Key name to identify the Tag Key being applied to the asset.")]
-        public ApplyTagType[] Tag { get; set; }
-
-        [Parameter(Mandatory = true, HelpMessage = "Tag Key id to identify the Tag Key being applied to the asset.")]
-        public ApplyTagByIdType[] TagById { get; set; }
+        [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "Tag Key name or Id value to the Tag Key being applied to the asset.")]
+        public TagKeyValue TagKeyValue { get; set; }
 
         protected override void ProcessRecord()
         {
@@ -32,15 +29,34 @@ namespace DD.CBU.Compute.Powershell.Mcp20
             base.ProcessRecord();
             try
             {
-                response =
-                    Connection.ApiClient.Tagging.ApplyTags(
-                        new applyTags
-                            {
-                                assetType = AssetType.ToString().ToUpperInvariant(),
-                                assetId = AssetId,
-                                tag = Tag,
-                                tagById = TagById,
-                            }).Result;
+                var applyTag = new applyTags
+                {
+                    assetType = AssetType.ToString().ToUpperInvariant(),
+                    assetId = AssetId,
+                };
+
+                if (TagKeyValue.IdentificationType == TagKeyNameIdType.TagKeyName)
+                {
+                    var applyByName = new ApplyTagType
+                                          {
+                                              tagKeyName = TagKeyValue.Identification,
+                                              value = TagKeyValue.Value,
+                                              valueSpecified = !string.IsNullOrEmpty(TagKeyValue.Value)
+                                          };
+                    applyTag.tag = new[] { applyByName };
+                }
+                else
+                {
+                    var applyById = new ApplyTagByIdType
+                    {
+                        tagKeyId = TagKeyValue.Identification,
+                        value = TagKeyValue.Value,
+                        valueSpecified = !string.IsNullOrEmpty(TagKeyValue.Value)
+                    };
+                    applyTag.tagById = new[] { applyById };
+                }
+
+                response = Connection.ApiClient.Tagging.ApplyTags(applyTag).Result;
             }
             catch (AggregateException ae)
             {

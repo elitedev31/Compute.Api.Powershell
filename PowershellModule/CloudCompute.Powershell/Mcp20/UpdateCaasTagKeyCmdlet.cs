@@ -48,6 +48,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                                  {
                                      id = Id,
                                      name = Name,
+                                     nameSpecified = !string.IsNullOrEmpty(Name),
                                      description = Description,
                                      descriptionSpecified = Description != dummyText,
                                      displayOnReport = DisplayOnReport ?? false,

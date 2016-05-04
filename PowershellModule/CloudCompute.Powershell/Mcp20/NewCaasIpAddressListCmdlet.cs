@@ -5,6 +5,10 @@ using DD.CBU.Compute.Api.Contracts.Network20;
 
 namespace DD.CBU.Compute.Powershell.Mcp20
 {
+    using System.Linq;
+
+    using DD.CBU.Compute.Powershell.Mcp20.Model;
+
     /// <summary>
     ///     The new IP Address List CMD Let
     /// </summary>
@@ -15,19 +19,19 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The network domain id")]
         public string NetworkDomainId { get; set; }
 
-        [Parameter(Mandatory = true, HelpMessage = "The IP Address List name")]
+        [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The IP Address List name")]
         public string Name { get; set; }
 
-        [Parameter(Mandatory = false, HelpMessage = "The IP Address List description")]
+        [Parameter(Mandatory = false, ValueFromPipeline = true, HelpMessage = "The IP Address List description")]
         public string Description { get; set; }
 
-        [Parameter(Mandatory = true, HelpMessage = "The IP version (IPv4 / IPv6)")]
+        [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The IP version (IPv4 / IPv6)")]
         public string IPVersion { get; set; }
 
-        [Parameter(Mandatory = false, HelpMessage = "Define one or more individual IP addresses or ranges of IP addresses")]
-        public IpAddressRangeType[] IpAddress { get; set; }
+        [Parameter(Mandatory = false, ValueFromPipeline = true, HelpMessage = "Define one or more individual IP addresses or ranges of IP addresses")]
+        public IpAddressListRangeType[] IpAddress { get; set; }
 
-        [Parameter(Mandatory = false, HelpMessage = "Define one or more individual IP Address Lists on the same Network Domain")]
+        [Parameter(Mandatory = false, ValueFromPipeline = true, HelpMessage = "Define one or more individual IP Address Lists on the same Network Domain")]
         public string[] ChildIpAddressListId { get; set; }
 
         /// <summary>
@@ -46,7 +50,14 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                     description = Description,
                     ipVersion = IPVersion,
                     childIpAddressListId = ChildIpAddressListId,
-                    ipAddress = IpAddress,
+                    ipAddress = IpAddress
+                        .Select(x => new IpAddressRangeType
+                        {
+                            begin = x.Begin,
+                            end = x.End,
+                            prefixSize = x.PrefixSize ?? 0,
+                            prefixSizeSpecified = x.PrefixSize.HasValue
+                        }).ToArray(),
                 };
 
                 response = Connection.ApiClient.Networking.FirewallRule.CreateIpAddressList(ipAddressList).Result;

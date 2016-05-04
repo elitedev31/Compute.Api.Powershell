@@ -1,6 +1,6 @@
 ﻿namespace DD.CBU.Compute.Powershell.Mcp20.Model
 {
-    public class IpAddressListIpAddress
+    public class IpAddressListRangeType
     {
         public string Begin { get; set; }
 

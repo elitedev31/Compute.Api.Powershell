@@ -16,14 +16,18 @@ namespace DD.CBU.Compute.Powershell.Mcp20
     [OutputType(typeof(ResponseType))]
     public class RemoveCaasTagCmdlet : PSCmdletCaasWithConnectionBase
     {
-        [Parameter(Mandatory = true, HelpMessage = "The Asset type")]
+        [Parameter(Mandatory = true, ValueFromPipeline = true,  HelpMessage = "The Asset type")]
         public AssetType AssetType { get; set; }
 
-        [Parameter(Mandatory = true, HelpMessage = "The UUID of the asset")]
+        [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The UUID of the asset")]
         public string AssetId { get; set; }
 
-        [Parameter(Mandatory = true, HelpMessage = "A set of tagKeyId or tagKeyName elements.")]
-        public TagKeyNameIdElement[] TagKeyNameIdElements { get; set; }
+        [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "Type of tagKey Id or Name elements.")]
+
+        public TagKeyNameIdType TagKeyNameIdType { get; set; }
+
+        [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "Value of tagKey Id or Name elements.")]
+        public string TagKeyNameIdValue { get; set; }
 
         protected override void ProcessRecord()
         {
@@ -37,10 +41,8 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                             {
                                 assetId = AssetId,
                                 assetType = AssetType.ToString().ToUpperInvariant(),
-                                Items = TagKeyNameIdElements.Select(x => x.Item).ToArray(),
-                                ItemsElementName =
-                                    TagKeyNameIdElements.Select(
-                                        x => (TagKeyNameIdChoice)x.TagKeyNameIdType).ToArray()
+                                Items = new[] { TagKeyNameIdValue },
+                                ItemsElementName = new[] { (TagKeyNameIdChoice)TagKeyNameIdType }
                             }).Result;
             }
             catch (AggregateException ae)
