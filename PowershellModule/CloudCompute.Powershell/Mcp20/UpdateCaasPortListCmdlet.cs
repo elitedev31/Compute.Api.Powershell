@@ -16,16 +16,16 @@ namespace DD.CBU.Compute.Powershell.Mcp20
     [OutputType(typeof(ResponseType))]
     public class UpdateCaasPortListCmdlet : PSCmdletCaasWithConnectionBase
     {
-        [Parameter(Mandatory = false, ParameterSetName = "Filtered", HelpMessage = "The Port list id")]
+        [Parameter(Mandatory = true, ValueFromPipeline = true, ParameterSetName = "Filtered", HelpMessage = "The Port list id")]
         public Guid Id { get; set; }
 
-        [Parameter(Mandatory = false, HelpMessage = "The Port List description")]
+        [Parameter(Mandatory = false, ValueFromPipeline = true, HelpMessage = "The Port List description")]
         public string Description { get; set; }
 
-        [Parameter(Mandatory = false, HelpMessage = "Define one or more individual Ports or ranges of Ports")]
+        [Parameter(Mandatory = false, ValueFromPipeline = true, HelpMessage = "Define one or more individual Ports or ranges of Ports. Use New-CaasPortRangeType command to create type")]
         public PortListPort[] Port { get; set; }
 
-        [Parameter(Mandatory = false, HelpMessage = "Define one or more individual Port Lists on the same Network Domain")]
+        [Parameter(Mandatory = false, ValueFromPipeline = true, HelpMessage = "Define one or more individual Port Lists on the same Network Domain")]
         public string[] ChildPortListId { get; set; }
 
         /// <summary>
@@ -37,15 +37,15 @@ namespace DD.CBU.Compute.Powershell.Mcp20
             base.ProcessRecord();
             try
             {
-                var port = Port.Select(x =>
-                        new EditPortListPort
-                        {
-                            begin = x.Begin ?? 0,
-                            end = x.End ?? 0,
-                            beginSpecified = x.Begin.HasValue,
-                            endSpecified = x.End.HasValue,
-                        })
-                        .ToArray();
+                var port = Port?
+                    .Select(x => new EditPortListPort
+                    {
+                        begin = x.Begin ?? 0,
+                        end = x.End ?? 0,
+                        beginSpecified = x.Begin.HasValue,
+                        endSpecified = x.End.HasValue,
+                    })
+                    .ToArray();
 
                 var portList = new editPortList
                 {

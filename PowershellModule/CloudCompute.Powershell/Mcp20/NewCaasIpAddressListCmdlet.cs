@@ -28,7 +28,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The IP version (IPv4 / IPv6)")]
         public string IPVersion { get; set; }
 
-        [Parameter(Mandatory = false, ValueFromPipeline = true, HelpMessage = "Define one or more individual IP addresses or ranges of IP addresses")]
+        [Parameter(Mandatory = false, ValueFromPipeline = true, HelpMessage = "Define one or more individual IP addresses or ranges of IP addresses. Use New-CaasIpAddressRangeType to create type")]
         public IpAddressListRangeType[] IpAddress { get; set; }
 
         [Parameter(Mandatory = false, ValueFromPipeline = true, HelpMessage = "Define one or more individual IP Address Lists on the same Network Domain")]
@@ -50,7 +50,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                     description = Description,
                     ipVersion = IPVersion,
                     childIpAddressListId = ChildIpAddressListId,
-                    ipAddress = IpAddress
+                    ipAddress = IpAddress?
                         .Select(x => new IpAddressRangeType
                         {
                             begin = x.Begin,
