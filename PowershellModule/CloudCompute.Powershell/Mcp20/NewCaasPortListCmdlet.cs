@@ -22,7 +22,7 @@
         [Parameter(Mandatory = false, ValueFromPipeline = true, HelpMessage = "The Port List description")]
         public string Description { get; set; }
 
-        [Parameter(Mandatory = false, ValueFromPipeline = true, HelpMessage = "Define one or more individual Portes or ranges of Portes. Use New-CaasPortRangeType command to create type")]
+        [Parameter(Mandatory = false, ValueFromPipeline = true, HelpMessage = "Define one or more individual Portes or ranges of Portes. Use New CaasPortRangeType command to create type")]
         public PortListPort[] Port { get; set; }
 
         [Parameter(Mandatory = false, ValueFromPipeline = true, HelpMessage = "Define one or more individual Port Lists on the same Network Domain")]

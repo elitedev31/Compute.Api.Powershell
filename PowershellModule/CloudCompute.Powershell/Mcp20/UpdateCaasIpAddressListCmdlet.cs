@@ -26,7 +26,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         [Parameter(Mandatory = false, HelpMessage = "The IP Address List description")]
         public string Description { get; set; }
 
-        [Parameter(Mandatory = false, HelpMessage = "Define one or more individual IP addresses or ranges of IP addresses. Use New-CaasIpAddressRangeType create to create type")]
+        [Parameter(Mandatory = false, HelpMessage = "Define one or more individual IP addresses or ranges of IP addresses. Use New CaasIpAddressRangeType create to create type")]
         public IpAddressListRangeType[] IpAddress { get; set; }
 
         [Parameter(Mandatory = false, HelpMessage = "Define one or more individual IP Address Lists on the same Network Domain")]

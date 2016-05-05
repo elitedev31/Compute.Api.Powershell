@@ -14,7 +14,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
     [OutputType(typeof(ResponseType))]
     public class RemoveCaasReservePrivateIpv4AddressCmdlet : PSCmdletCaasWithConnectionBase
     {
-        [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The unique identifier of either an MCP 1.0 Cloud Network or an MCP 2.0 VLAN. Use New-CaasReservePrivateIpv4AddressType command to create the type")]
+        [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The unique identifier of either an MCP 1.0 Cloud Network or an MCP 2.0 VLAN. Use New CaasReservePrivateIpv4AddressType command to create the type")]
         public ReservePrivateIpv4Address UnReservePrivateIpv4AddressElement { get; set; }
 
         [Parameter(Mandatory = false, ValueFromPipeline = true, HelpMessage = "The IPv4 address")]

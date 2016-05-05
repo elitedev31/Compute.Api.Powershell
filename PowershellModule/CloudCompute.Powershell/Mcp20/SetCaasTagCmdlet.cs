@@ -20,7 +20,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The UUID of the asset")]
         public string AssetId { get; set; }
 
-        [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "Tag Key name or Id value to the Tag Key being applied to the asset. Use New-CaasTagKeyValueToApply command to create type")]
+        [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "Tag Key name or Id value to the Tag Key being applied to the asset. Use New CaasTagKeyValueToApply command to create type")]
         public TagKeyValue TagKeyValue { get; set; }
 
         protected override void ProcessRecord()
