@@ -50,14 +50,15 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                     description = Description,
                     ipVersion = IPVersion,
                     childIpAddressListId = ChildIpAddressListId,
-                    ipAddress = IpAddress?
-                        .Select(x => new IpAddressRangeType
+                    ipAddress = IpAddress != null
+                        ? IpAddress.Select(x => new IpAddressRangeType
                         {
                             begin = x.Begin,
                             end = x.End,
                             prefixSize = x.PrefixSize ?? 0,
                             prefixSizeSpecified = x.PrefixSize.HasValue
-                        }).ToArray(),
+                        }).ToArray()
+                        : null,
                 };
 
                 response = Connection.ApiClient.Networking.FirewallRule.CreateIpAddressList(ipAddressList).Result;

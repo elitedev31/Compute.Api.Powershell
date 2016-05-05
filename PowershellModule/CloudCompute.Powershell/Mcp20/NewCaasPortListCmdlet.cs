@@ -43,13 +43,14 @@
                     name = Name,
                     description = Description,
                     childPortListId = ChildPortListId,
-                    port = Port?
-                        .Select(x => new PortRangeType
+                    port = Port != null ? 
+                        Port.Select(x => new PortRangeType
                         {
                             begin = x.Begin.Value,
                             end = x.End.HasValue ? x.End.Value : (ushort)0,
                             endSpecified = x.End.HasValue
-                        }).ToArray(),
+                        }).ToArray()
+                        : null,
                 };
 
                 response = Connection.ApiClient.Networking.FirewallRule.CreatePortList(portList).Result;

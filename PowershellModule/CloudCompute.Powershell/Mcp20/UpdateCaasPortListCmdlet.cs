@@ -37,15 +37,15 @@ namespace DD.CBU.Compute.Powershell.Mcp20
             base.ProcessRecord();
             try
             {
-                var port = Port?
-                    .Select(x => new EditPortListPort
+                var port = Port != null
+                    ? Port.Select(x => new EditPortListPort
                     {
                         begin = x.Begin ?? 0,
                         end = x.End ?? 0,
                         beginSpecified = x.Begin.HasValue,
                         endSpecified = x.End.HasValue,
-                    })
-                    .ToArray();
+                    }).ToArray()
+                    : null;
 
                 var portList = new editPortList
                 {
