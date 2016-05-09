@@ -168,7 +168,17 @@
 	    /// <returns>The response details.</returns>
 	    public async Task<ResponseType> EditIpAddressList(editIpAddressList editIpAddressList)
         {
-            return await _api.PostAsync<editIpAddressList, ResponseType>(
+			if (editIpAddressList.childIpAddressListId == null || editIpAddressList.childIpAddressListId.Length == 0)
+			{
+				editIpAddressList.childIpAddressListId = new string[] { null };
+			}
+
+			if (editIpAddressList.ipAddress == null || editIpAddressList.ipAddress.Length == 0)
+			{
+				editIpAddressList.ipAddress = new editIpAddressListIpAddress[] { null };
+			}
+
+			return await _api.PostAsync<editIpAddressList, ResponseType>(
                 ApiUris.EditIpAddressList(_api.OrganizationId),
                 editIpAddressList);
         }
