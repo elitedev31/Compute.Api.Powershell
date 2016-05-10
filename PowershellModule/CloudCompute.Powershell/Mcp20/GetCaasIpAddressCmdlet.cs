@@ -15,7 +15,8 @@ namespace DD.CBU.Compute.Powershell.Mcp20
     [OutputType(typeof(IpAddressListType))]
     public class GetCaasIpAddressCmdlet : PsCmdletCaasPagedWithConnectionBase
     {
-        [Parameter(Mandatory = true, ParameterSetName = "Filtered", HelpMessage = "The network domain id")]
+        [Parameter(Mandatory = true, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, ParameterSetName = "Filtered", HelpMessage = "The network domain id")]
+        [Alias("id")]
         public Guid NetworkDomainId { get; set; }
 
         [Parameter(Mandatory = false, ParameterSetName = "Filtered", HelpMessage = "The IP address list id")]

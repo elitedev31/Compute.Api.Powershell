@@ -17,10 +17,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
     [OutputType(typeof(ResponseType))]
     public class UpdateCaasIpAddressListCmdlet : PSCmdletCaasWithConnectionBase
     {
-        [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The network domain id")]
-        public string NetworkDomainId { get; set; }
-
-        [Parameter(Mandatory = false, ParameterSetName = "Filtered", HelpMessage = "The IP address list id")]
+        [Parameter(Mandatory = false, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, HelpMessage = "The IP address list id")]
         public Guid Id { get; set; }
 
         [Parameter(Mandatory = false, HelpMessage = "The IP Address List description")]

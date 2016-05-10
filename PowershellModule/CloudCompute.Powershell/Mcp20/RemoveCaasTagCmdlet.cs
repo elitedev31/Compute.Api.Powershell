@@ -24,10 +24,11 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
         [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "Type of tagKey Id or Name elements.")]
 
-        public TagKeyNameIdType TagKeyNameIdType { get; set; }
+        [Parameter(Mandatory = true, ParameterSetName = "With_TagKeyName", ValueFromPipeline = true, HelpMessage = "Value of tagKey Name elements.")]
+        public string TagKeyNameValue { get; set; }
 
-        [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "Value of tagKey Id or Name elements.")]
-        public string TagKeyNameIdValue { get; set; }
+        [Parameter(Mandatory = true, ParameterSetName = "With_TagKeyId", ValueFromPipeline = true, HelpMessage = "Value of tagKey Id elements.")]
+        public string TagKeyIdValue { get; set; }
 
         protected override void ProcessRecord()
         {
@@ -41,8 +42,8 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                             {
                                 assetId = AssetId,
                                 assetType = AssetType.ToString().ToUpperInvariant(),
-                                Items = new[] { TagKeyNameIdValue },
-                                ItemsElementName = new[] { (TagKeyNameIdChoice)TagKeyNameIdType }
+                                Items = new[] { ParameterSetName.Equals("With_TagKeyName") ? TagKeyNameValue : TagKeyIdValue },
+                                ItemsElementName = new[] { ParameterSetName.Equals("With_TagKeyName") ? TagKeyNameIdChoice.tagKeyName : TagKeyNameIdChoice.tagKeyId }
                             }).Result;
             }
             catch (AggregateException ae)

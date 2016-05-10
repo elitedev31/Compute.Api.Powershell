@@ -10,7 +10,8 @@
     [OutputType(typeof(PortListType))]
     public class GetCaasPortCmdlet : PsCmdletCaasPagedWithConnectionBase
     {
-        [Parameter(Mandatory = true, ParameterSetName = "Filtered", HelpMessage = "The network domain id")]
+        [Parameter(Mandatory = true, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, ParameterSetName = "Filtered", HelpMessage = "The network domain id")]
+        [Alias("id")]
         public Guid NetworkDomainId { get; set; }
 
         [Parameter(Mandatory = false, ParameterSetName = "Filtered", HelpMessage = "The Port list id")]

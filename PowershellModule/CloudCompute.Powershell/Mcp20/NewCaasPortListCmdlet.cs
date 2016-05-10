@@ -13,19 +13,20 @@
     [OutputType(typeof(ResponseType))]
     public class NewCaasPortListCmdlet : PSCmdletCaasWithConnectionBase
     {
-        [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The network domain id")]
+        [Parameter(Mandatory = true, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, HelpMessage = "The network domain id")]
+        [Alias("id")]
         public string NetworkDomainId { get; set; }
 
-        [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The Port List name")]
+        [Parameter(Mandatory = true, HelpMessage = "The Port List name")]
         public string Name { get; set; }
 
-        [Parameter(Mandatory = false, ValueFromPipeline = true, HelpMessage = "The Port List description")]
+        [Parameter(Mandatory = false, HelpMessage = "The Port List description")]
         public string Description { get; set; }
 
-        [Parameter(Mandatory = false, ValueFromPipeline = true, HelpMessage = "Define one or more individual Portes or ranges of Portes. Use New CaasPortRangeType command to create type")]
+        [Parameter(Mandatory = false, HelpMessage = "Define one or more individual Portes or ranges of Portes. Use New CaasPortRangeType command to create type")]
         public PortListPort[] Port { get; set; }
 
-        [Parameter(Mandatory = false, ValueFromPipeline = true, HelpMessage = "Define one or more individual Port Lists on the same Network Domain")]
+        [Parameter(Mandatory = false, HelpMessage = "Define one or more individual Port Lists on the same Network Domain")]
         public string[] ChildPortListId { get; set; }
 
         /// <summary>

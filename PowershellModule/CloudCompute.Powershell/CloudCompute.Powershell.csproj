@@ -145,10 +145,8 @@
     <Compile Include="Mcp20\Model\ReservePrivateIpv4Address.cs" />
     <Compile Include="Mcp20\Model\TagKeyValue.cs" />
     <Compile Include="Mcp20\Model\TagKeyNameIdType.cs" />
-    <Compile Include="Mcp20\NewCaasReservePrivateIpv4AddressTypeCmdlet.cs" />
     <Compile Include="Mcp20\NewCaasPortRangeTypeCmdlet.cs" />
     <Compile Include="Mcp20\NewCaasIpAddressRangeTypeCmdlet.cs" />
-    <Compile Include="Mcp20\NewCaasTagKeyValueToApplyCmdlet.cs" />
     <Compile Include="Mcp20\RemoveCaasReservePrivateIpv4AddressCmdlet.cs" />
     <Compile Include="Mcp20\RemoveCaasReserveIPv6AddressCmdlet.cs" />
     <Compile Include="Mcp20\GetCaasReserveIPv6AddressCmdlet.cs" />

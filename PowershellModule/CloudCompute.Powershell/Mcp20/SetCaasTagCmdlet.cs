@@ -20,8 +20,14 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The UUID of the asset")]
         public string AssetId { get; set; }
 
-        [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "Tag Key name or Id value to the Tag Key being applied to the asset. Use New CaasTagKeyValueToApply command to create type")]
-        public TagKeyValue TagKeyValue { get; set; }
+        [Parameter(Mandatory = true, ParameterSetName = "With_TagKeyName", HelpMessage = "The Identification of tag key")]
+        public string TagKeyName { get; set; }
+
+        [Parameter(Mandatory = true, ParameterSetName = "With_TagKeyId", HelpMessage = "The Identification of tag key")]
+        public string TagKeyId { get; set; }
+
+        [Parameter(Mandatory = true, HelpMessage = "The value of tag key")]
+        public string Value { get; set; }
 
         protected override void ProcessRecord()
         {
@@ -35,23 +41,23 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                     assetId = AssetId,
                 };
 
-                if (TagKeyValue.IdentificationType == TagKeyNameIdType.TagKeyName)
+                if (ParameterSetName.Equals("With_TagKeyName"))
                 {
                     var applyByName = new ApplyTagType
-                                          {
-                                              tagKeyName = TagKeyValue.Identification,
-                                              value = TagKeyValue.Value,
-                                              valueSpecified = !string.IsNullOrEmpty(TagKeyValue.Value)
-                                          };
+                    {
+                        tagKeyName = TagKeyName,
+                        value = Value,
+                        valueSpecified = !string.IsNullOrEmpty(Value)
+                    };
                     applyTag.tag = new[] { applyByName };
                 }
                 else
                 {
                     var applyById = new ApplyTagByIdType
                     {
-                        tagKeyId = TagKeyValue.Identification,
-                        value = TagKeyValue.Value,
-                        valueSpecified = !string.IsNullOrEmpty(TagKeyValue.Value)
+                        tagKeyId = TagKeyId,
+                        value = Value,
+                        valueSpecified = !string.IsNullOrEmpty(Value)
                     };
                     applyTag.tagById = new[] { applyById };
                 }

@@ -14,13 +14,16 @@ namespace DD.CBU.Compute.Powershell.Mcp20
     [OutputType(typeof(IpAddressListRangeType))]
     public class NewCaasIpAddressRangeTypeCmdlet : PSCmdletCaasWithConnectionBase
     {
-        [Parameter(Mandatory = true, HelpMessage = "The IP Address Begin of the Range")]
+        [Parameter(Mandatory = true, ParameterSetName = "Ip_Address", HelpMessage = "The IP Address")]
+        public string IpAddress { get; set; }
+
+        [Parameter(Mandatory = true, ParameterSetName = "Range_Ip_Address", HelpMessage = "The IP Address Begin of the Range")]
         public string Begin { get; set; }
 
-        [Parameter(Mandatory = true, HelpMessage = "The IP Address End of the Range")]
+        [Parameter(Mandatory = true, ParameterSetName = "Range_Ip_Address", HelpMessage = "The IP Address End of the Range")]
         public string End { get; set; }
 
-        [Parameter(Mandatory = false, HelpMessage = "The IP Address Range Prefix")]
+        [Parameter(Mandatory = false, ParameterSetName = "Ip_Address", HelpMessage = "The IP Address Range Prefix")]
         public int? PrefixSize { get; set; }
 
         /// <summary>
@@ -32,7 +35,12 @@ namespace DD.CBU.Compute.Powershell.Mcp20
             IpAddressListRangeType response = null;
             try
             {
-                response = new IpAddressListRangeType { Begin = Begin, End = End, PrefixSize = PrefixSize };
+                response = new IpAddressListRangeType
+                {
+                    Begin = ParameterSetName.Equals("Range_Ip_Address") ? Begin : IpAddress,
+                    End = End,
+                    PrefixSize = PrefixSize
+                };
             }
             catch (AggregateException ae)
             {
