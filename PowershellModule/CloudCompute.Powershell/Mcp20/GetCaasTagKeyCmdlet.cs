@@ -12,7 +12,8 @@ namespace DD.CBU.Compute.Powershell.Mcp20
     [OutputType(typeof(ResponseType))]
     public class GetCaasTagKeyCmdlet : PsCmdletCaasPagedWithConnectionBase
     {
-        [Parameter(Mandatory = false, ParameterSetName = "Filtered", HelpMessage = "The tag key id to filter")]
+        [Alias("Id")]
+        [Parameter(Mandatory = false, ValueFromPipeline = true, ParameterSetName = "Filtered", HelpMessage = "The tag key id to filter")]
         public Guid TagKeyId { get; set; }
 
         [Parameter(Mandatory = false, ParameterSetName = "Filtered", HelpMessage = "The tag key name to filter")]

@@ -12,16 +12,16 @@ namespace DD.CBU.Compute.Powershell.Mcp20
     [OutputType(typeof(ResponseType))]
     public class NewCaasTagKeyCmdlet : PSCmdletCaasWithConnectionBase
     {
-        [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The name of tag key")]
+        [Parameter(Mandatory = true, HelpMessage = "The name of tag key")]
         public string Name { get; set; }
 
-        [Parameter(Mandatory = false, ValueFromPipeline = true, HelpMessage = "The description of tag key")]
+        [Parameter(Mandatory = false, HelpMessage = "The description of tag key")]
         public string Description { get; set; }
 
-        [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "Whether value can be considered optional when the Tag Key is applied to a Cloud asset")]
+        [Parameter(Mandatory = true, HelpMessage = "Whether value can be considered optional when the Tag Key is applied to a Cloud asset")]
         public bool ValueRequired { get; set; }
 
-        [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "Whether the Tag Key will be displayed on reports")]
+        [Parameter(Mandatory = true, HelpMessage = "Whether the Tag Key will be displayed on reports")]
         public bool DisplayOnReport { get; set; }
         
         protected override void ProcessRecord()

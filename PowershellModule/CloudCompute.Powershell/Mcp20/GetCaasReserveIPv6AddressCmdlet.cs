@@ -12,7 +12,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
     [OutputType(typeof(ReservedIpv6AddressType))]
     public class GetCaasReserveIPv6AddressCmdlet : PsCmdletCaasPagedWithConnectionBase
     {
-        [Parameter(Mandatory = false, ParameterSetName = "Filtered", HelpMessage = "The unique identifier of MCP 2.0 VLAN")]
+        [Alias("Id"), Parameter(Mandatory = false, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, ParameterSetName = "Filtered", HelpMessage = "The unique identifier of MCP 2.0 VLAN")]
         public Guid? VlanId { get; set; }
 
         [Parameter(Mandatory = false, ParameterSetName = "Filtered", HelpMessage = "The IPv6 address")]

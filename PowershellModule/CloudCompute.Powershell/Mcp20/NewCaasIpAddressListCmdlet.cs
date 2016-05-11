@@ -20,19 +20,19 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         [Alias("id")]
         public string NetworkDomainId { get; set; }
 
-        [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The IP Address List name")]
+        [Parameter(Mandatory = true, HelpMessage = "The IP Address List name")]
         public string Name { get; set; }
 
-        [Parameter(Mandatory = false, ValueFromPipeline = true, HelpMessage = "The IP Address List description")]
+        [Parameter(Mandatory = false, HelpMessage = "The IP Address List description")]
         public string Description { get; set; }
 
-        [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The IP version (IPv4 / IPv6)")]
-        public string IPVersion { get; set; }
+        [Parameter(Mandatory = true, HelpMessage = "The IP version (IPv4 / IPv6)")]
+        public IpVersion IpVersion { get; set; }
 
-        [Parameter(Mandatory = false, ValueFromPipeline = true, HelpMessage = "Define one or more individual IP addresses or ranges of IP addresses. Use New CaasIpAddressRangeType to create type")]
+        [Parameter(Mandatory = false, HelpMessage = "Define one or more individual IP addresses or ranges of IP addresses. Use New CaasIpAddressRangeType to create type")]
         public IpAddressListRangeType[] IpAddress { get; set; }
 
-        [Parameter(Mandatory = false, ValueFromPipeline = true, HelpMessage = "Define one or more individual IP Address Lists on the same Network Domain")]
+        [Parameter(Mandatory = false, HelpMessage = "Define one or more individual IP Address Lists on the same Network Domain")]
         public string[] ChildIpAddressIdList { get; set; }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                     networkDomainId = NetworkDomainId,
                     name = Name,
                     description = Description,
-                    ipVersion = IPVersion,
+                    ipVersion = IpVersion.ToString(),
                     childIpAddressListId = ChildIpAddressIdList,
                     ipAddress = IpAddress != null
                         ? IpAddress.Select(x => new IpAddressRangeType

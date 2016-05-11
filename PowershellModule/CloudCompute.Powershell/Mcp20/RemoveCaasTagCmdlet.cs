@@ -19,16 +19,15 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         [Parameter(Mandatory = true, ValueFromPipeline = true,  HelpMessage = "The Asset type")]
         public AssetType AssetType { get; set; }
 
-        [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The UUID of the asset")]
+        [Alias("Id")]
+        [Parameter(Mandatory = true, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, HelpMessage = "The UUID of the asset")]
         public string AssetId { get; set; }
 
-        [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "Type of tagKey Id or Name elements.")]
-
         [Parameter(Mandatory = true, ParameterSetName = "With_TagKeyName", ValueFromPipeline = true, HelpMessage = "Value of tagKey Name elements.")]
-        public string TagKeyNameValue { get; set; }
+        public string TagKeyName { get; set; }
 
         [Parameter(Mandatory = true, ParameterSetName = "With_TagKeyId", ValueFromPipeline = true, HelpMessage = "Value of tagKey Id elements.")]
-        public string TagKeyIdValue { get; set; }
+        public string TagKeyId { get; set; }
 
         protected override void ProcessRecord()
         {
@@ -42,7 +41,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                             {
                                 assetId = AssetId,
                                 assetType = AssetType.ToString().ToUpperInvariant(),
-                                Items = new[] { ParameterSetName.Equals("With_TagKeyName") ? TagKeyNameValue : TagKeyIdValue },
+                                Items = new[] { ParameterSetName.Equals("With_TagKeyName") ? TagKeyName : TagKeyId },
                                 ItemsElementName = new[] { ParameterSetName.Equals("With_TagKeyName") ? TagKeyNameIdChoice.tagKeyName : TagKeyNameIdChoice.tagKeyId }
                             }).Result;
             }

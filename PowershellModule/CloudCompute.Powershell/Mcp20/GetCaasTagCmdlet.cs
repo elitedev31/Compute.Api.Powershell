@@ -5,6 +5,8 @@ using DD.CBU.Compute.Api.Contracts.Network20;
 
 namespace DD.CBU.Compute.Powershell.Mcp20
 {
+    using DD.CBU.Compute.Powershell.Mcp20.Model;
+
     /// <summary>
     ///     The get Tag CMDLET
     /// </summary>
@@ -12,11 +14,12 @@ namespace DD.CBU.Compute.Powershell.Mcp20
     [OutputType(typeof(ResponseType))]
     public class GetCaasTagCmdlet : PsCmdletCaasPagedWithConnectionBase
     {
-        [Parameter(Mandatory = false, ParameterSetName = "Filtered", HelpMessage = "The asset id to filter")]
+        [Alias("Id")]
+        [Parameter(Mandatory = false, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, ParameterSetName = "Filtered", HelpMessage = "The asset id to filter")]
         public string AssetId { get; set; }
 
         [Parameter(Mandatory = false, ParameterSetName = "Filtered", HelpMessage = "The asset type to filter")]
-        public string AssetType { get; set; }
+        public AssetType AssetType { get; set; }
 
         [Alias("Location")]
         [Parameter(Mandatory = false, ParameterSetName = "Filtered", HelpMessage = "Data Center Id/ Location to filter")]
@@ -49,7 +52,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                              ? new Api.Contracts.Requests.Tagging.TagListOptions
                                    {
                                        AssetId = AssetId,
-                                       AssetType = AssetType,
+                                       AssetType = AssetType.ToString(),
                                        DatecenterId = DataCenterId,
                                        TagKeyId = TagKeyId,
                                        TagKeyName = TagKeyName,

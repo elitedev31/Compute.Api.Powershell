@@ -5,6 +5,7 @@ using DD.CBU.Compute.Api.Contracts.Network20;
 
 namespace DD.CBU.Compute.Powershell.Mcp20
 {
+    using DD.CBU.Compute.Api.Contracts.Network;
     using DD.CBU.Compute.Powershell.Mcp20.Model;
 
     /// <summary>
@@ -14,13 +15,19 @@ namespace DD.CBU.Compute.Powershell.Mcp20
     [OutputType(typeof(ResponseType))]
     public class SetCaasReservePrivateIpv4AddressCmdlet : PSCmdletCaasWithConnectionBase
     {
-        [Parameter(Mandatory = true, ParameterSetName = "With_MCP2", ValueFromPipeline = true, HelpMessage = "The unique identifier of MCP 2.0 VLAN")]
+        [Parameter(Mandatory = true, ParameterSetName = "With_MCP2_VlanId", ValueFromPipeline = true, HelpMessage = "The unique identifier of MCP 2.0 VLAN")]
         public string VlanId { get; set; }
 
-        [Parameter(Mandatory = true, ParameterSetName = "With_MCP1", ValueFromPipeline = true, HelpMessage = "The unique identifier of an MCP 1.0 Cloud Network")]
+        [Parameter(Mandatory = true, ParameterSetName = "With_MCP1_NetworkId", ValueFromPipeline = true, HelpMessage = "The unique identifier of an MCP 1.0 Cloud Network")]
         public string NetworkId { get; set; }
 
-        [Parameter(Mandatory = false, ValueFromPipeline = true, HelpMessage = "The IPv4 address")]
+        [Parameter(Mandatory = false, ValueFromPipeline = true, ParameterSetName = "With_MCP2_Vlan", HelpMessage = "Identifies VLAN (MCP 2.0)")]
+        public VlanType Vlan { get; set; }
+
+        [Parameter(Mandatory = false, ValueFromPipeline = true, ParameterSetName = "With_MCP1_Network", HelpMessage = "Identifies Cloud Network (MCP 1.0)")]
+        public NetworkWithLocationsNetwork Network { get; set; }
+
+        [Parameter(Mandatory = false, HelpMessage = "The IPv4 address")]
         public string IpAddress { get; set; }
 
         /// <summary>
@@ -32,12 +39,29 @@ namespace DD.CBU.Compute.Powershell.Mcp20
             base.ProcessRecord();
             try
             {
+                var item = string.Empty;
+                switch (ParameterSetName)
+                {
+                    case "With_MCP2_VlanId":
+                        item = VlanId;
+                        break;
+                    case "With_MCP2_Vlan":
+                        item = Vlan != null ? Vlan.id : string.Empty;
+                        break;
+                    case "With_MCP1_NetworkId":
+                        item = NetworkId;
+                        break;
+                    case "With_MCP1_Networ":
+                        item = Network != null ? Network.id : string.Empty;
+                        break;
+                }
+
                 response =
                     Connection.ApiClient.Networking.IpAddress.ReservePrivateIpv4Address(
                         new ReservePrivateIpv4AddressType
                         {
-                            Item = ParameterSetName.Equals("With_MCP2") ? VlanId : NetworkId,
-                            ItemElementName = ParameterSetName.Equals("With_MCP2") ? NetworkIdOrVlanIdChoiceType.vlanId : NetworkIdOrVlanIdChoiceType.networkId,
+                            Item = item,
+                            ItemElementName = ParameterSetName.Equals("With_MCP2_VlanId") || ParameterSetName.Equals("With_MCP2_Vlan") ? NetworkIdOrVlanIdChoiceType.vlanId : NetworkIdOrVlanIdChoiceType.networkId,
                             ipAddress = IpAddress
                         }).Result;
             }

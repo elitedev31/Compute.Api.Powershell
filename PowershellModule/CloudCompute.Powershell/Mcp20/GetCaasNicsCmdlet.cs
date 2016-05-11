@@ -7,7 +7,7 @@
 
     using DD.CBU.Compute.Api.Contracts.Requests;
 
-    [Cmdlet(VerbsCommon.Get, "CaasNicsList")]
+    [Cmdlet(VerbsCommon.Get, "CaasNic")]
     [OutputType(typeof(NicWithSecurityGroupType))]
     public class GetCaasNicsCmdlet : PsCmdletCaasPagedWithConnectionBase
     {

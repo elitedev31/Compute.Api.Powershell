@@ -12,7 +12,8 @@ namespace DD.CBU.Compute.Powershell.Mcp20
     [OutputType(typeof(ResponseType))]
     public class RemoveCaasReserveIPv6AddressCmdlet : PSCmdletCaasWithConnectionBase
     {
-        [Parameter(Mandatory = true, HelpMessage = "The unique identifier of MCP 2.0 VLAN")]
+        [Alias("Id")]
+        [Parameter(Mandatory = true, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, HelpMessage = "The unique identifier of MCP 2.0 VLAN")]
         public Guid VlanId { get; set; }
 
         [Parameter(Mandatory = false, HelpMessage = "The IPv6 address")]

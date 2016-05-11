@@ -12,12 +12,14 @@ namespace DD.CBU.Compute.Powershell.Mcp20
     /// </summary>
     [Cmdlet(VerbsCommon.Set, "CaasTag")]
     [OutputType(typeof(ResponseType))]
-    public class SetCaasTagKeyCmdlet : PsCmdletCaasPagedWithConnectionBase
+    public class SetCaasTagKeyCmdlet : PSCmdletCaasWithConnectionBase
     {
-        [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The Asset type")]
+        
+        [Parameter(Mandatory = true, HelpMessage = "The Asset type")]
         public AssetType AssetType { get; set; }
 
-        [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The UUID of the asset")]
+        [Alias("Id")]
+        [Parameter(Mandatory = true, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, HelpMessage = "The UUID of the asset")]
         public string AssetId { get; set; }
 
         [Parameter(Mandatory = true, ParameterSetName = "With_TagKeyName", HelpMessage = "The Identification of tag key")]
@@ -26,7 +28,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         [Parameter(Mandatory = true, ParameterSetName = "With_TagKeyId", HelpMessage = "The Identification of tag key")]
         public string TagKeyId { get; set; }
 
-        [Parameter(Mandatory = true, HelpMessage = "The value of tag key")]
+        [Parameter(Mandatory = false, HelpMessage = "The value of tag key")]
         public string Value { get; set; }
 
         protected override void ProcessRecord()

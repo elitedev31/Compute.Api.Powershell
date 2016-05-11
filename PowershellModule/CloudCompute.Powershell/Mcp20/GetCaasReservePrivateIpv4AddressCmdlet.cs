@@ -5,6 +5,8 @@ using DD.CBU.Compute.Api.Contracts.Network20;
 
 namespace DD.CBU.Compute.Powershell.Mcp20
 {
+    using DD.CBU.Compute.Api.Contracts.Network;
+
     /// <summary>
     /// List Reserved Private IPV4 Addresses CMD Let
     /// </summary>
@@ -12,10 +14,16 @@ namespace DD.CBU.Compute.Powershell.Mcp20
     [OutputType(typeof(ReservedPrivateIpv4AddressType))]
     public class GetCaasReservePrivateIpv4AddressCmdlet : PsCmdletCaasPagedWithConnectionBase
     {
-        [Parameter(Mandatory = false, ParameterSetName = "Filtered", HelpMessage = "Identifies VLAN (MCP 2.0)")]
+        [Parameter(Mandatory = false, ValueFromPipeline = true, ParameterSetName = "Filtered, With_Vlan", HelpMessage = "Identifies VLAN (MCP 2.0)")]
+        public VlanType Vlan { get; set; }
+
+        [Parameter(Mandatory = false, ParameterSetName = "Filtered, With_VlanId", HelpMessage = "Identifies VLAN (MCP 2.0)")]
         public Guid? VlanId { get; set; }
 
-        [Parameter(Mandatory = false, ParameterSetName = "Filtered", HelpMessage = "Identifies Cloud Network (MCP 1.0)")]
+        [Parameter(Mandatory = false, ValueFromPipeline = true, ParameterSetName = "Filtered, With_Network", HelpMessage = "Identifies Cloud Network (MCP 1.0)")]
+        public NetworkWithLocationsNetwork Network { get; set; }
+
+        [Parameter(Mandatory = false, ParameterSetName = "Filtered, With_NetworkId", HelpMessage = "Identifies Cloud Network (MCP 1.0)")]
         public string NetworkId { get; set; }
 
         [Parameter(Mandatory = false, ParameterSetName = "Filtered", HelpMessage = "Identifies an individual Private IPV4")]
@@ -34,8 +42,8 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                         ParameterSetName.Equals("Filtered")
                             ? new Api.Contracts.Requests.Network20.ReservedPrivateIpv4ListOptions
                             {
-                                VlanId = VlanId,
-                                NetworkId = NetworkId,
+                                VlanId = Vlan != null ? Guid.Parse(Vlan.id) : VlanId,
+                                NetworkId = Network != null ? Network.id : NetworkId,
                                 IpAddress = IpAddress
                             }
                             : null,
