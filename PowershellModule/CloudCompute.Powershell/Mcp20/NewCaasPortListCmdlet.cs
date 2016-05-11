@@ -29,6 +29,9 @@
         [Parameter(Mandatory = false, HelpMessage = "Define one or more individual Port Lists on the same Network Domain")]
         public string[] ChildPortListId { get; set; }
 
+        [Parameter(Mandatory = false, ValueFromPipeline = true, HelpMessage = "Define one or more individual Port Lists on the same Network Domain")]
+        public PortListType[] ChildPortList { get; set; }
+
         /// <summary>
         ///     The process record method.
         /// </summary>
@@ -38,6 +41,11 @@
             base.ProcessRecord();
             try
             {
+                if (ChildPortList != null && ChildPortList.Length > 0)
+                {
+                    ChildPortListId = ChildPortList.Select(x => x.id).ToArray();
+                }
+
                 var portList = new createPortList
                 {
                     networkDomainId = NetworkDomainId,

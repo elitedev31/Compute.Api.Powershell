@@ -16,7 +16,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
     [OutputType(typeof(ResponseType))]
     public class NewCaasIpAddressListCmdlet : PSCmdletCaasWithConnectionBase
     {
-        [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The network domain id")]
+        [Parameter(Mandatory = true, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, HelpMessage = "The network domain id")]
         [Alias("id")]
         public string NetworkDomainId { get; set; }
 
@@ -35,6 +35,9 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         [Parameter(Mandatory = false, HelpMessage = "Define one or more individual IP Address Lists on the same Network Domain")]
         public string[] ChildIpAddressIdList { get; set; }
 
+        [Parameter(Mandatory = false, ValueFromPipeline = true, HelpMessage = "Define one or more individual IP Address Lists on the same Network Domain")]
+        public IpAddressListType[] ChildIpAddressList { get; set; }
+
         /// <summary>
         ///     The process record method.
         /// </summary>
@@ -44,6 +47,11 @@ namespace DD.CBU.Compute.Powershell.Mcp20
             base.ProcessRecord();
             try
             {
+                if (ChildIpAddressList != null && ChildIpAddressList.Length > 0)
+                {
+                    ChildIpAddressIdList = ChildIpAddressList.Select(x => x.id).ToArray();
+                }
+
                 var ipAddressList = new createIpAddressList
                 {
                     networkDomainId = NetworkDomainId,

@@ -27,7 +27,10 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         public IpAddressListRangeType[] IpAddress { get; set; }
 
         [Parameter(Mandatory = false, HelpMessage = "Define one or more individual IP Address Lists on the same Network Domain")]
-        public string[] ChildIpAddressListId { get; set; }
+        public string[] ChildIpAddressIdList { get; set; }
+
+        [Parameter(Mandatory = false, ValueFromPipeline = true, HelpMessage = "Define one or more individual IP Address Lists on the same Network Domain")]
+        public IpAddressListType[] ChildIpAddressList { get; set; }
 
         private readonly string dummyText = "EmptyValue!!";
 
@@ -62,13 +65,18 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                                 }).ToArray();
                 }
 
+                if (ChildIpAddressList != null && ChildIpAddressList.Length > 0)
+                {
+                    ChildIpAddressIdList = ChildIpAddressList.Select(x => x.id).ToArray();
+                }
+
                 var editIpAddressList = new editIpAddressList
                 {
                     id = Id.ToString(),
                     description = Description,
                     descriptionSpecified = Description != dummyText,
-                    childIpAddressListId = ChildIpAddressListId,
-                    childIpAddressListIdSpecified = ChildIpAddressListId != null && ChildIpAddressListId.Length > 0,
+                    childIpAddressListId = ChildIpAddressIdList,
+                    childIpAddressListIdSpecified = ChildIpAddressIdList != null && ChildIpAddressIdList.Length > 0,
                     ipAddress = addresses.Length > 0 ? addresses : null,
                     ipAddressSpecified = addresses.Length > 0
                 };
