@@ -11,19 +11,22 @@
     [OutputType(typeof(NicWithSecurityGroupType))]
     public class GetCaasNicsCmdlet : PsCmdletCaasPagedWithConnectionBase
     {
-        [Parameter(Mandatory = true, ParameterSetName = "Filtered", HelpMessage = "Identifies NICs on an individual VLAN")]
+        [Parameter(Mandatory = true, ValueFromPipeline = true, ParameterSetName = "With_VLan", HelpMessage = "Identifies NICs on an individual VLAN")]
+        public VlanType Vlan { get; set; }
+
+        [Parameter(Mandatory = true, ParameterSetName = "With_VLanId", HelpMessage = "Identifies NICs on an individual VLAN")]
         public Guid VlanId { get; set; }
 
-        [Parameter(Mandatory = false, ParameterSetName = "Filtered", HelpMessage = "Identifies an individual NIC")]
+        [Parameter(Mandatory = false, HelpMessage = "Identifies an individual NIC")]
         public Guid? Id { get; set; }
 
-        [Parameter(Mandatory = false, ParameterSetName = "Filtered", HelpMessage = "Identifies NICs on an individual Server")]
+        [Parameter(Mandatory = false, HelpMessage = "Identifies NICs on an individual Server")]
         public Guid? ServerId { get; set; }
 
-        [Parameter(Mandatory = false, ParameterSetName = "Filtered", HelpMessage = "Identifies NICs in an individual Security Group")]
+        [Parameter(Mandatory = false, HelpMessage = "Identifies NICs in an individual Security Group")]
         public Guid? SecurityGroupId { get; set; }
 
-        [Parameter(Mandatory = false, ParameterSetName = "Filtered", HelpMessage = "Indicates whether or not the given NIC is or is not part of a Security Group")]
+        [Parameter(Mandatory = false, HelpMessage = "Indicates whether or not the given NIC is or is not part of a Security Group")]
         public bool? IsPartOfSecurityGroup { get; set; }
 
         protected override void ProcessRecord()
@@ -32,11 +35,15 @@
 
             try
             {
+                if (Vlan != null)
+                {
+                    VlanId = Guid.Parse(Vlan.id);
+                }
+
                 this.WritePagedObject(
                     Connection.ApiClient.ServerManagement.Server.ListNics(
                         VlanId,
-                        ParameterSetName.Equals("Filtered")
-                            ? new Api.Contracts.Requests.Server20.ListNicsOptions
+                            new Api.Contracts.Requests.Server20.ListNicsOptions
                             {
                                 Id = Id,
                                 ServerId = ServerId,
@@ -45,8 +52,7 @@
                                           IsPartOfSecurityGroup.HasValue
                                               ? IsPartOfSecurityGroup.Value ? NullFilterOptions.NOT_NULL : NullFilterOptions.NULL
                                               : (NullFilterOptions?)null
-                            }
-                            : null,
+                            },
                         PageableRequest).Result);
             }
             catch (AggregateException ae)

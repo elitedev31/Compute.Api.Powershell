@@ -22,7 +22,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         [Parameter(Mandatory = true, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, HelpMessage = "The UUID of the asset")]
         public string AssetId { get; set; }
 
-        [Parameter(Mandatory = true, ParameterSetName = "With_TagKeyName", HelpMessage = "The Identification of tag key")]
+        [Parameter(Mandatory = true,  ParameterSetName = "With_TagKeyName", HelpMessage = "The Identification of tag key")]
         public string TagKeyName { get; set; }
 
         [Parameter(Mandatory = true, ParameterSetName = "With_TagKeyId", HelpMessage = "The Identification of tag key")]

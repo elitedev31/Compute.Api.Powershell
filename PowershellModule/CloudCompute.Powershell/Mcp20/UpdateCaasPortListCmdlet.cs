@@ -16,8 +16,11 @@ namespace DD.CBU.Compute.Powershell.Mcp20
     [OutputType(typeof(ResponseType))]
     public class UpdateCaasPortListCmdlet : PSCmdletCaasWithConnectionBase
     {
-        [Parameter(Mandatory = true, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, ParameterSetName = "Filtered", HelpMessage = "The Port list id")]
+        [Parameter(Mandatory = true, ParameterSetName = "With_PortListId", HelpMessage = "The Port list id")]
         public Guid Id { get; set; }
+
+        [Parameter(Mandatory = true, ValueFromPipeline = true, ParameterSetName = "With_PortList", HelpMessage = "The Port list id")]
+        public PortListType PortList { get; set; }
 
         [Parameter(Mandatory = false, HelpMessage = "The Port List description")]
         public string Description { get; set; }
@@ -28,7 +31,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         [Parameter(Mandatory = false, HelpMessage = "Define one or more individual Port Lists on the same Network Domain")]
         public string[] ChildPortListId { get; set; }
 
-        [Parameter(Mandatory = false, ValueFromPipeline = true, HelpMessage = "Define one or more individual Port Lists on the same Network Domain")]
+        [Parameter(Mandatory = false, HelpMessage = "Define one or more individual Port Lists on the same Network Domain")]
         public PortListType[] ChildPortList { get; set; }
 
         /// <summary>

@@ -14,19 +14,19 @@ namespace DD.CBU.Compute.Powershell.Mcp20
     [OutputType(typeof(ReservedPrivateIpv4AddressType))]
     public class GetCaasReservePrivateIpv4AddressCmdlet : PsCmdletCaasPagedWithConnectionBase
     {
-        [Parameter(Mandatory = false, ValueFromPipeline = true, ParameterSetName = "Filtered, With_Vlan", HelpMessage = "Identifies VLAN (MCP 2.0)")]
+        [Parameter(Mandatory = false, ValueFromPipeline = true, ParameterSetName = "With_Vlan", HelpMessage = "Identifies VLAN (MCP 2.0)")]
         public VlanType Vlan { get; set; }
 
-        [Parameter(Mandatory = false, ParameterSetName = "Filtered, With_VlanId", HelpMessage = "Identifies VLAN (MCP 2.0)")]
+        [Parameter(Mandatory = false, ParameterSetName = "With_Vlan", HelpMessage = "Identifies VLAN (MCP 2.0)")]
         public Guid? VlanId { get; set; }
 
-        [Parameter(Mandatory = false, ValueFromPipeline = true, ParameterSetName = "Filtered, With_Network", HelpMessage = "Identifies Cloud Network (MCP 1.0)")]
+        [Parameter(Mandatory = false, ValueFromPipeline = true, ParameterSetName = "With_Network", HelpMessage = "Identifies Cloud Network (MCP 1.0)")]
         public NetworkWithLocationsNetwork Network { get; set; }
 
-        [Parameter(Mandatory = false, ParameterSetName = "Filtered, With_NetworkId", HelpMessage = "Identifies Cloud Network (MCP 1.0)")]
-        public string NetworkId { get; set; }
+        [Parameter(Mandatory = false, ParameterSetName = "With_Network", HelpMessage = "Identifies Cloud Network (MCP 1.0)")]
+        public Guid? NetworkId { get; set; }
 
-        [Parameter(Mandatory = false, ParameterSetName = "Filtered", HelpMessage = "Identifies an individual Private IPV4")]
+        [Parameter(Mandatory = false, HelpMessage = "Identifies an individual Private IPV4")]
         public string IpAddress { get; set; }
 
         /// <summary>
@@ -39,14 +39,12 @@ namespace DD.CBU.Compute.Powershell.Mcp20
             {
                 this.WritePagedObject(
                     Connection.ApiClient.Networking.IpAddress.GetReservedPrivateIpv4AddressesPaginated(
-                        ParameterSetName.Equals("Filtered")
-                            ? new Api.Contracts.Requests.Network20.ReservedPrivateIpv4ListOptions
+                            new Api.Contracts.Requests.Network20.ReservedPrivateIpv4ListOptions
                             {
                                 VlanId = Vlan != null ? Guid.Parse(Vlan.id) : VlanId,
-                                NetworkId = Network != null ? Network.id : NetworkId,
+                                NetworkId = Network != null ? Network.id : (NetworkId.HasValue? NetworkId.Value.ToString() : null),
                                 IpAddress = IpAddress
-                            }
-                            : null,
+                            },
                         PageableRequest).Result);
             }
             catch (AggregateException ae)

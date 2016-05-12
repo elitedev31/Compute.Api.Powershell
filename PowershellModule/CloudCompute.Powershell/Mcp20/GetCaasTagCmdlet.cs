@@ -19,7 +19,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         public string AssetId { get; set; }
 
         [Parameter(Mandatory = false, ParameterSetName = "Filtered", HelpMessage = "The asset type to filter")]
-        public AssetType AssetType { get; set; }
+        public AssetType? AssetType { get; set; }
 
         [Alias("Location")]
         [Parameter(Mandatory = false, ParameterSetName = "Filtered", HelpMessage = "Data Center Id/ Location to filter")]
@@ -52,7 +52,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                              ? new Api.Contracts.Requests.Tagging.TagListOptions
                                    {
                                        AssetId = AssetId,
-                                       AssetType = AssetType.ToString(),
+                                       AssetType = AssetType.HasValue ? AssetType.Value.ToString() : null,
                                        DatecenterId = DataCenterId,
                                        TagKeyId = TagKeyId,
                                        TagKeyName = TagKeyName,

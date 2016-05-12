@@ -16,9 +16,11 @@ namespace DD.CBU.Compute.Powershell.Mcp20
     [OutputType(typeof(ResponseType))]
     public class NewCaasIpAddressListCmdlet : PSCmdletCaasWithConnectionBase
     {
-        [Parameter(Mandatory = true, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, HelpMessage = "The network domain id")]
-        [Alias("id")]
+        [Parameter(Mandatory = true, ParameterSetName = "With_NetworkDomainId", HelpMessage = "The network domain id")]
         public string NetworkDomainId { get; set; }
+        
+        [Parameter(Mandatory = true, ValueFromPipeline = true, ParameterSetName = "With_NetworkDomain", HelpMessage = "The network domain")]
+        public NetworkDomainType NetworkDomain { get; set; }
 
         [Parameter(Mandatory = true, HelpMessage = "The IP Address List name")]
         public string Name { get; set; }
@@ -33,9 +35,9 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         public IpAddressListRangeType[] IpAddress { get; set; }
 
         [Parameter(Mandatory = false, HelpMessage = "Define one or more individual IP Address Lists on the same Network Domain")]
-        public string[] ChildIpAddressIdList { get; set; }
+        public string[] ChildIpAddressListId { get; set; }
 
-        [Parameter(Mandatory = false, ValueFromPipeline = true, HelpMessage = "Define one or more individual IP Address Lists on the same Network Domain")]
+        [Parameter(Mandatory = false, HelpMessage = "The network domain id")]
         public IpAddressListType[] ChildIpAddressList { get; set; }
 
         /// <summary>
@@ -47,9 +49,14 @@ namespace DD.CBU.Compute.Powershell.Mcp20
             base.ProcessRecord();
             try
             {
+                if (NetworkDomain != null)
+                {
+                    NetworkDomainId = NetworkDomain.id;
+                }
+
                 if (ChildIpAddressList != null && ChildIpAddressList.Length > 0)
                 {
-                    ChildIpAddressIdList = ChildIpAddressList.Select(x => x.id).ToArray();
+                    ChildIpAddressListId = ChildIpAddressList.Select(x => x.id).ToArray();
                 }
 
                 var ipAddressList = new createIpAddressList
@@ -58,7 +65,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                     name = Name,
                     description = Description,
                     ipVersion = IpVersion.ToString(),
-                    childIpAddressListId = ChildIpAddressIdList,
+                    childIpAddressListId = ChildIpAddressListId,
                     ipAddress = IpAddress != null
                         ? IpAddress.Select(x => new IpAddressRangeType
                         {

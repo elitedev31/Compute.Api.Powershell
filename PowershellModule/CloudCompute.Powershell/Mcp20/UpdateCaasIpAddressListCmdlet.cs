@@ -17,28 +17,41 @@ namespace DD.CBU.Compute.Powershell.Mcp20
     [OutputType(typeof(ResponseType))]
     public class UpdateCaasIpAddressListCmdlet : PSCmdletCaasWithConnectionBase
     {
-        [Parameter(Mandatory = false, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, HelpMessage = "The IP address list id")]
+        [Parameter(Mandatory = true, ParameterSetName = "With_IpAddressListId", HelpMessage = "The IP address list id")]
         public Guid Id { get; set; }
 
+        [Parameter(Mandatory = true, ValueFromPipeline = true, ParameterSetName = "With_IpAddressList", HelpMessage = "The IP address list")]
+        public IpAddressListType IpAddressList { get; set; }
+
         [Parameter(Mandatory = false, HelpMessage = "The IP Address List description")]
-        public string Description { get; set; }
+        public string Description
+        {
+            get { return _description; }
+            set
+            {
+                _description = value;
+                _descriptionSpecified = true;
+            }
+        }
 
         [Parameter(Mandatory = false, HelpMessage = "Define one or more individual IP addresses or ranges of IP addresses. Use New CaasIpAddressRangeType create to create type")]
         public IpAddressListRangeType[] IpAddress { get; set; }
 
         [Parameter(Mandatory = false, HelpMessage = "Define one or more individual IP Address Lists on the same Network Domain")]
-        public string[] ChildIpAddressIdList { get; set; }
+        public string[] ChildIpAddressListId { get; set; }
 
-        [Parameter(Mandatory = false, ValueFromPipeline = true, HelpMessage = "Define one or more individual IP Address Lists on the same Network Domain")]
-        public IpAddressListType[] ChildIpAddressList { get; set; }
+        [Parameter(Mandatory = false, HelpMessage = "Define one or more individual IP Address Lists on the same Network Domain")]
+        public IpAddressListType[] ChildIpAddressList { get; set; }        
 
-        private readonly string dummyText = "EmptyValue!!";
+        /// <summary>
+        /// Inner description value
+        /// </summary>
+        private string _description;
 
-        public UpdateCaasIpAddressListCmdlet()
-        {
-            // assigned a dummy value to description to determine is modified or not
-            this.Description = dummyText;
-        }
+        /// <summary>
+        /// Description changed
+        /// </summary>
+        private bool _descriptionSpecified;
 
         /// <summary>
         ///     The process record method.
@@ -49,6 +62,11 @@ namespace DD.CBU.Compute.Powershell.Mcp20
             base.ProcessRecord();
             try
             {
+                if (IpAddressList != null)
+                {
+                    Id = Guid.Parse(IpAddressList.id);
+                }
+
                 var addresses = new editIpAddressListIpAddress[0];
 
                 if (IpAddress != null)
@@ -67,16 +85,16 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
                 if (ChildIpAddressList != null && ChildIpAddressList.Length > 0)
                 {
-                    ChildIpAddressIdList = ChildIpAddressList.Select(x => x.id).ToArray();
+                    ChildIpAddressListId = ChildIpAddressList.Select(x => x.id).ToArray();
                 }
 
                 var editIpAddressList = new editIpAddressList
                 {
                     id = Id.ToString(),
-                    description = Description,
-                    descriptionSpecified = Description != dummyText,
-                    childIpAddressListId = ChildIpAddressIdList,
-                    childIpAddressListIdSpecified = ChildIpAddressIdList != null && ChildIpAddressIdList.Length > 0,
+                    description = _description,
+                    descriptionSpecified = _descriptionSpecified,
+                    childIpAddressListId = ChildIpAddressListId,
+                    childIpAddressListIdSpecified = ChildIpAddressListId != null && ChildIpAddressListId.Length > 0,
                     ipAddress = addresses.Length > 0 ? addresses : null,
                     ipAddressSpecified = addresses.Length > 0
                 };

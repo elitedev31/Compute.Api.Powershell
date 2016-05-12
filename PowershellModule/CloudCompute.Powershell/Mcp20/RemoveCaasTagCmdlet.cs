@@ -16,17 +16,17 @@ namespace DD.CBU.Compute.Powershell.Mcp20
     [OutputType(typeof(ResponseType))]
     public class RemoveCaasTagCmdlet : PSCmdletCaasWithConnectionBase
     {
-        [Parameter(Mandatory = true, ValueFromPipeline = true,  HelpMessage = "The Asset type")]
+        [Parameter(Mandatory = true, HelpMessage = "The Asset type")]
         public AssetType AssetType { get; set; }
 
         [Alias("Id")]
         [Parameter(Mandatory = true, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, HelpMessage = "The UUID of the asset")]
         public string AssetId { get; set; }
 
-        [Parameter(Mandatory = true, ParameterSetName = "With_TagKeyName", ValueFromPipeline = true, HelpMessage = "Value of tagKey Name elements.")]
+        [Parameter(Mandatory = true, ParameterSetName = "With_TagKeyName", HelpMessage = "Value of tagKey Name elements.")]
         public string TagKeyName { get; set; }
 
-        [Parameter(Mandatory = true, ParameterSetName = "With_TagKeyId", ValueFromPipeline = true, HelpMessage = "Value of tagKey Id elements.")]
+        [Parameter(Mandatory = true, ParameterSetName = "With_TagKeyId", HelpMessage = "Value of tagKey Id elements.")]
         public string TagKeyId { get; set; }
 
         protected override void ProcessRecord()

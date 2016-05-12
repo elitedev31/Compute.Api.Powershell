@@ -13,9 +13,11 @@
     [OutputType(typeof(ResponseType))]
     public class NewCaasPortListCmdlet : PSCmdletCaasWithConnectionBase
     {
-        [Parameter(Mandatory = true, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, HelpMessage = "The network domain id")]
-        [Alias("id")]
+        [Parameter(Mandatory = true, ParameterSetName = "With_NetworkDomainId", HelpMessage = "The network domain id")]
         public string NetworkDomainId { get; set; }
+
+        [Parameter(Mandatory = true, ValueFromPipeline = true, ParameterSetName = "With_NetworkDomain", HelpMessage = "The network domain")]
+        public NetworkDomainType NetworkDomain { get; set; }
 
         [Parameter(Mandatory = true, HelpMessage = "The Port List name")]
         public string Name { get; set; }
@@ -29,7 +31,7 @@
         [Parameter(Mandatory = false, HelpMessage = "Define one or more individual Port Lists on the same Network Domain")]
         public string[] ChildPortListId { get; set; }
 
-        [Parameter(Mandatory = false, ValueFromPipeline = true, HelpMessage = "Define one or more individual Port Lists on the same Network Domain")]
+        [Parameter(Mandatory = false, HelpMessage = "Define one or more individual Port Lists on the same Network Domain")]
         public PortListType[] ChildPortList { get; set; }
 
         /// <summary>
@@ -41,6 +43,11 @@
             base.ProcessRecord();
             try
             {
+                if (NetworkDomain != null)
+                {
+                    NetworkDomainId = NetworkDomain.id;
+                }
+
                 if (ChildPortList != null && ChildPortList.Length > 0)
                 {
                     ChildPortListId = ChildPortList.Select(x => x.id).ToArray();
