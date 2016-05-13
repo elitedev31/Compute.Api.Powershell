@@ -73,12 +73,12 @@
     <DocumentationFile>bin\Release\DD.CBU.Compute.Powershell.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DD.CBU.Compute.Api.Client, Version=3.1.304.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
-      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.1.304-develop\lib\net45\DD.CBU.Compute.Api.Client.dll</HintPath>
+    <Reference Include="DD.CBU.Compute.Api.Client, Version=3.1.320.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
+      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.1.320-develop\lib\net45\DD.CBU.Compute.Api.Client.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="DD.CBU.Compute.Api.Contracts, Version=3.1.304.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
-      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.1.304-develop\lib\net45\DD.CBU.Compute.Api.Contracts.dll</HintPath>
+    <Reference Include="DD.CBU.Compute.Api.Contracts, Version=3.1.320.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
+      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.1.320-develop\lib\net45\DD.CBU.Compute.Api.Contracts.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
@@ -146,6 +146,7 @@
     <Compile Include="Mcp20\Model\ReservePrivateIpv4Address.cs" />
     <Compile Include="Mcp20\Model\TagKeyValue.cs" />
     <Compile Include="Mcp20\Model\TagKeyNameIdType.cs" />
+    <Compile Include="Mcp20\NewCaasIpAndPortTypeCmdlet.cs" />
     <Compile Include="Mcp20\NewCaasPortRangeTypeCmdlet.cs" />
     <Compile Include="Mcp20\NewCaasIpAddressRangeTypeCmdlet.cs" />
     <Compile Include="Mcp20\RemoveCaasReservePrivateIpv4AddressCmdlet.cs" />
