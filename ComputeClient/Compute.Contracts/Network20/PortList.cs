@@ -61,13 +61,24 @@
         [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
         public string description;
 
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool descriptionSpecified;
+
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("port", IsNullable = true)]
         public EditPortListPort[] port;
 
         /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool portSpecified;
+
+        /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("childPortListId", IsNullable = true)]
         public string[] childPortListId;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool childPortListIdSpecified;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]

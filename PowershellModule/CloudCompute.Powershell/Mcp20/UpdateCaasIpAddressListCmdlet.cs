@@ -37,11 +37,44 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         [Parameter(Mandatory = false, HelpMessage = "Define one or more individual IP addresses or ranges of IP addresses. Use New-CaasIpAddressRangeType create to create type")]
         public IpAddressListRangeType[] IpAddress { get; set; }
 
-        [Parameter(Mandatory = false, HelpMessage = "Define one or more individual IP Address Lists on the same Network Domain")]
-        public string[] ChildIpAddressListId { get; set; }
+        [Parameter(Mandatory = false,
+            HelpMessage = "Define one or more individual IP Address Lists on the same Network Domain")]
+        public string[] ChildIpAddressListId
+        {
+            get { return _childIpAddressListId; }
+            set
+            {
+                _childIpAddressListId = value;
+                _childIpAddressListIdSpecified = true;
+            }
+        }
 
-        [Parameter(Mandatory = false, HelpMessage = "Define one or more individual IP Address Lists on the same Network Domain")]
-        public IpAddressListType[] ChildIpAddressList { get; set; }        
+        [Parameter(Mandatory = false,
+            HelpMessage = "Define one or more individual IP Address Lists on the same Network Domain")]
+        public IpAddressListType[] ChildIpAddressList
+        {
+            get { return _childIpAddressList; }
+            set
+            {
+                _childIpAddressList = value;
+                _childIpAddressListIdSpecified = true;
+            }
+        }
+
+        /// <summary>
+        /// Inner Child Ip Address List
+        /// </summary>
+        private IpAddressListType[] _childIpAddressList;
+
+        /// <summary>
+        /// Inner Child Ip Address List
+        /// </summary>
+        private string[] _childIpAddressListId;
+
+        /// <summary>
+        /// Child Ip Address List Specified
+        /// </summary>
+        private bool _childIpAddressListIdSpecified;
 
         /// <summary>
         /// Inner description value
@@ -94,7 +127,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                     description = _description,
                     descriptionSpecified = _descriptionSpecified,
                     childIpAddressListId = ChildIpAddressListId,
-                    childIpAddressListIdSpecified = ChildIpAddressListId != null && ChildIpAddressListId.Length > 0,
+                    childIpAddressListIdSpecified = _childIpAddressListIdSpecified,
                     ipAddress = addresses.Length > 0 ? addresses : null,
                     ipAddressSpecified = addresses.Length > 0
                 };
