@@ -30,11 +30,17 @@ namespace DD.CBU.Compute.Api.Client.Interfaces.Network20
         /// <returns>	The public IP blocks. </returns>
         Task<PagedResponse<PublicIpBlockType>> GetPublicIpBlocksPaginated(Guid networkDomainId, IPageableRequest pagingOptions = null, PublicIpListOptions options = null);
 
+		/// <summary>	Gets public IP block. </summary>
+		/// <param name="publicIpBlockId">	Identifier for the public IP block. </param>
+		/// <returns>	The public IP block. </returns>
+		Task<PublicIpBlockType> GetPublicIpBlock(Guid publicIpBlockId);
+
         /// <summary>	Gets public IP block. </summary>
         /// <param name="networkDomainId">	Identifier for the network domain. </param>
         /// <param name="publicIpBlockId">	Identifier for the public IP block. </param>
         /// <returns>	The public IP block. </returns>
-        Task<PublicIpBlockType> GetPublicIpBlock(Guid networkDomainId, Guid publicIpBlockId);
+		[Obsolete("Use overload without unnecessary networkDomainId argument.")]
+		Task<PublicIpBlockType> GetPublicIpBlock(Guid networkDomainId, Guid publicIpBlockId);
 
 		/// <summary>	Gets reserved public addresses. </summary>
 		/// <param name="networkDomainId">	Identifier for the network domain. </param>
@@ -49,8 +55,9 @@ namespace DD.CBU.Compute.Api.Client.Interfaces.Network20
         /// <summary>	Gets reserved public IP addresses for a network domain. </summary>
         /// <param name="networkDomainId">	Identifier for the network domain. </param>
         /// <param name="pagingOptions">	The paging options, null means default. </param>
+        /// <param name="filterOptions">Filtering option</param>
         /// <returns>	The reserved public addresses. </returns>
-        Task<PagedResponse<ReservedPublicIpv4AddressType>> GetReservedPublicAddressesForNetworkDomainPaginated(Guid networkDomainId, IPageableRequest pagingOptions = null);
+        Task<PagedResponse<ReservedPublicIpv4AddressType>> GetReservedPublicAddressesForNetworkDomainPaginated(Guid networkDomainId, IPageableRequest pagingOptions = null, ReservedPublicIpv4ListOptions filterOptions = null);
 
         /// <summary>	Gets reserved private addresses. </summary>
         /// <param name="vlanId">The VLAN Id.</param>

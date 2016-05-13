@@ -4,28 +4,14 @@ namespace DD.CBU.Compute.Api.Client.Exceptions
 {
 	using System;
 	using System.Runtime.Serialization;
-	using System.Text;
+	using Contracts.General;
 
-	using DD.CBU.Compute.Api.Contracts.General;
-
-	using Newtonsoft.Json;
-
-	/// <summary>
+    /// <summary>
 	/// The bad request exception.
 	/// </summary>
 	[Serializable]
-	public class BadRequestException : ComputeApiException
-	{		
-		/// <summary>
-		/// Gets or sets the caas operation status. for MCP 1.0 operations
-		/// </summary>
-		public Status CaaSOperationStatus { get; set; }
-
-		/// <summary>
-		/// Gets or sets the caas operation response. for MCP 2.0 operations
-		/// </summary>
-		public ResponseType CaaSOperationResponse { get; set; }
-
+	public class BadRequestException : ComputeApiWithStatusException
+    {				
 		/// <summary>
 		/// Initialises a new instance of the <see cref="BadRequestException"/> class.
 		/// </summary>
@@ -36,9 +22,8 @@ namespace DD.CBU.Compute.Api.Client.Exceptions
 		/// The uri.
 		/// </param>
 		public BadRequestException(Status caasOperationStatus, Uri uri)
-			: base(ComputeApiError.BadRequest, uri, String.Empty)
-		{
-			CaaSOperationStatus = caasOperationStatus;
+			: base(ComputeApiError.BadRequest, caasOperationStatus, uri)
+		{			
 		}
 
 		/// <summary>
@@ -51,9 +36,8 @@ namespace DD.CBU.Compute.Api.Client.Exceptions
 		/// The uri.
 		/// </param>
 		public BadRequestException(ResponseType caasOperationResponse, Uri uri)
-			: base(ComputeApiError.BadRequest, uri, String.Empty)
-		{
-			CaaSOperationResponse = caasOperationResponse;
+            : base(ComputeApiError.BadRequest, caasOperationResponse, uri)
+        {			
 		}
 
 				/// <summary>
@@ -74,58 +58,7 @@ namespace DD.CBU.Compute.Api.Client.Exceptions
 		/// </exception>
 		protected BadRequestException(SerializationInfo info, StreamingContext context)
 			: base(info, context)
-		{
-			if (info == null)
-				throw new ArgumentNullException("info");
-
-			CaaSOperationStatus = (Status)info.GetValue("CaaSOperationStatus", typeof(Status));
-			CaaSOperationResponse = (ResponseType)info.GetValue("CaaSOperationResponse", typeof(ResponseType));
-		}
-		
-		/// <summary>
-		/// Get exception data for serialisation.
-		/// </summary>
-		/// <param name="info">
-		/// A <see cref="SerializationInfo"/> serialisation data store that will hold the serialized exception data.
-		/// </param>
-		/// <param name="context">
-		/// A <see cref="StreamingContext"/> value that indicates the source of the serialised data.
-		/// </param>
-		/// <exception cref="ArgumentNullException">
-		/// The <paramref name="info"/> parameter is null.
-		/// </exception>
-		/// <exception cref="SerializationException">
-		/// The class name is <c>null</c> or <see cref="Exception.HResult"/> is zero (0).
-		/// </exception>
-		public override void GetObjectData(SerializationInfo info, StreamingContext context)
-		{
-			if (info == null)
-				throw new ArgumentNullException("info");
-
-			base.GetObjectData(info, context);
-			info.AddValue("CaaSOperationStatus", CaaSOperationStatus);
-			info.AddValue("CaaSOperationResponse", CaaSOperationResponse);
-		}
-
-		/// <summary>
-		/// Gets the message.
-		/// </summary>
-		public override string Message
-		{
-			get
-			{
-				StringBuilder sb = new StringBuilder(base.Message);
-
-				if (CaaSOperationStatus != null)
-				{
-					sb.AppendFormat("CaaSOperationStatus: {0}", JsonConvert.SerializeObject(CaaSOperationStatus));
-				}
-				if (CaaSOperationResponse != null)
-				{
-					sb.AppendFormat("CaaSOperationResponse: {0}", JsonConvert.SerializeObject(CaaSOperationResponse));
-				}
-				return sb.ToString();
-			}
-		}
+		{			
+		}				
 	}
 }

@@ -88,6 +88,7 @@
     <Compile Include="..\SolutionAssemblyInfo.cs">
       <Link>Properties\SolutionAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Network20\FirewallOverride.cs" />
     <Compile Include="Network20\IpAddressList.cs" />
     <Compile Include="Network20\PortList.cs" />
     <Compile Include="Network20\Tag.cs" />
@@ -208,6 +209,7 @@
     <Compile Include="Requests\Infrastructure\DataCenterListOptions.cs" />
     <Compile Include="Requests\IPageableRequest.cs" />
     <Compile Include="Requests\Network20\ReservedIpv6ListOptions.cs" />
+    <Compile Include="Requests\Network20\ReservedPublicIpv4ListOptions.cs" />
     <Compile Include="Requests\Network20\ReservedPrivateIpv4ListOptions.cs" />
     <Compile Include="Requests\Network20\PortListOptions.cs" />
     <Compile Include="Requests\Network20\IpAddressListOptions.cs" />

@@ -101,6 +101,12 @@
     <Compile Include="Exceptions\ApiClientException.cs" />
     <Compile Include="ApiUris.cs" />
     <Compile Include="Exceptions\ApiHostNotFoundException.cs" />
+    <Compile Include="Exceptions\ComputeApiWithStatusException.cs" />
+    <Compile Include="Exceptions\ComputeApiHttpException.cs" />
+    <Compile Include="Exceptions\InternalServerErrorException.cs" />
+    <Compile Include="Exceptions\PermissionDeniedException.cs" />
+    <Compile Include="Exceptions\ComputeApiMethodNotFoundException.cs" />
+    <Compile Include="Exceptions\ServiceUnavailableException.cs" />
     <Compile Include="Exceptions\BadRequestException.cs" />
     <Compile Include="Exceptions\ComputeApiError.cs" />
     <Compile Include="Exceptions\InvalidCredentialsException.cs" />
@@ -162,7 +168,6 @@
     <Compile Include="Server20\ServerManagementAccessor.cs" />
     <Compile Include="ServerImageType.cs" />
     <Compile Include="Backup\ComputeApiClientBackupExtensions.cs" />
-    <Compile Include="ClientError.cs" />
     <Compile Include="Network\NetworkVipAccessor.cs" />
     <Compile Include="ImportExportImages\ImportExportCustomerImageAccessor.cs" />
     <Compile Include="Server\ServerAccessor.cs" />
@@ -175,7 +180,6 @@
     <Compile Include="WebApi\ComputeApiClient.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="Exceptions\ComputeApiClientException.cs" />
     <Compile Include="Exceptions\ComputeApiException.cs" />
     <Compile Include="StringExtensions.cs" />
     <Compile Include="Interfaces\IComputeApiClient.cs" />

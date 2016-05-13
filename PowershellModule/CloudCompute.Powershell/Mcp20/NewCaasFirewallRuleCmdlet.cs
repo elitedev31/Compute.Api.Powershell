@@ -3,6 +3,7 @@ using System.Management.Automation;
 using DD.CBU.Compute.Api.Client;
 using DD.CBU.Compute.Api.Client.Network20;
 using DD.CBU.Compute.Api.Contracts.Network20;
+using DD.CBU.Compute.Powershell.Mcp20.Model;
 
 namespace DD.CBU.Compute.Powershell.Mcp20
 {
@@ -36,8 +37,9 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         /// <summary>
         ///     Gets or sets the IP Version.
         /// </summary>
+        [Alias("IPVersion")]
         [Parameter(Mandatory = true, HelpMessage = "The IP version (IPv4 / IPv6)")]
-        public string IPVersion { get; set; }
+        public IpVersion IpVersion { get; set; }
 
         /// <summary>
         ///     Gets or sets the IP Version.
@@ -48,14 +50,14 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         /// <summary>
         /// Gets or sets Source IP and Port
         /// </summary>
-        [Parameter(Mandatory = true, HelpMessage = "The source IP and Port")]
-        public IpAndPortFilterType Source { get; set; }
+        [Parameter(Mandatory = true, HelpMessage = "The source IP and Port , use New-CaasIpAndPortType")]
+        public IpAndPortType Source { get; set; }
 
         /// <summary>
         /// Gets or sets Destination IP and Port
         /// </summary>
-        [Parameter(Mandatory = true, HelpMessage = "The destination IP and Port")]
-        public IpAndPortFilterType Destination { get; set; }
+        [Parameter(Mandatory = true, HelpMessage = "The destination IP and Port , use New-CaasIpAndPortType")]
+        public IpAndPortType Destination { get; set; }
 
         /// <summary>
         /// Gets or sets Firewall rule position type
@@ -114,7 +116,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                 {
                     networkDomainId = NetworkDomain.id,
                     name = FirewallRuleName,
-                    ipVersion = IPVersion,
+                    ipVersion = IpVersion.ToString(),
                     protocol = Protocol.ToString(),
                     action = FirewallAction,                    
                     source = Source,

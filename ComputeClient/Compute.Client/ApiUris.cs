@@ -655,7 +655,7 @@
         /// <returns>The URL.</returns>
         public static Uri GetFirewallRules(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/network/firewallRule", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/network/firewallRule", orgId), UriKind.Relative);
         }
 
         /// <summary>Gets the get firewall rule URL.</summary>
@@ -664,7 +664,7 @@
         /// <returns>The URL.</returns>
         public static Uri GetFirewallRule(Guid orgId, Guid firewallRuleId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/network/firewallRule/{1}", orgId, firewallRuleId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/network/firewallRule/{1}", orgId, firewallRuleId), UriKind.Relative);
         }
 
         /// <summary>Gets the create firewall rule URL.</summary>
@@ -672,7 +672,7 @@
         /// <returns>The URL.</returns>
         public static Uri CreateFirewallRule(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/network/createFirewallRule", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/network/createFirewallRule", orgId), UriKind.Relative);
         }
 
         /// <summary>Gets the edit firewall rule URL.</summary>
@@ -680,7 +680,7 @@
         /// <returns>The URL.</returns>
         public static Uri EditFirewallRule(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/network/editFirewallRule", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/network/editFirewallRule", orgId), UriKind.Relative);
         }
 
         /// <summary>Gets the delete firewall rule URL.</summary>
@@ -688,7 +688,7 @@
         /// <returns>The URL.</returns>
         public static Uri DeleteFirewallRule(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/network/deleteFirewallRule", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/network/deleteFirewallRule", orgId), UriKind.Relative);
         }
 
         #endregion
@@ -2173,7 +2173,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri RemoveTag(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/tag/removeTag", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/tag/removeTags", orgId), UriKind.Relative);
         }
     }
 }

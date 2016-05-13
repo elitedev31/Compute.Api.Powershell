@@ -1,25 +1,28 @@
 namespace DD.CBU.Compute.Api.Contracts.Directory
 {
     /// <summary>	Sub-Administrator role type. </summary>
-    public enum RoleType 
-	{
+    public enum RoleType
+    {
         /// <summary>	An enum constant representing the network option. </summary>
-        Network,
+        Network, 
 
         /// <summary>	An enum constant representing the backup option. </summary>
-        Backup,
+        Backup, 
 
         /// <summary>	An enum constant representing the server option. </summary>
-        Server,
+        Server, 
 
         /// <summary>	An enum constant representing the create image option. </summary>
-        CreateImage,
+        CreateImage, 
 
         /// <summary>	An enum constant representing the storage option. </summary>
-        Storage,
+        Storage, 
 
         /// <summary>	An enum constant representing the reports option. </summary>
         Reports,
+
+        /// <summary>An enum constant representing the tag option.</summary>
+        Tag, 
 
         /// <summary>	An enum constant representing the read only option. </summary>
         ReadOnly

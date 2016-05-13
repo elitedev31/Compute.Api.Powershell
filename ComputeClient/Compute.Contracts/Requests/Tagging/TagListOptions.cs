@@ -47,9 +47,9 @@
 
 
         /// <summary>Gets or sets the asset id.</summary>
-        public Guid? AssetId
+        public string AssetId
         {
-            get { return GetFilter<Guid?>(AssetIdField); }
+			get { return GetFilter<string>(AssetIdField); }
             set { SetFilter(AssetIdField, value); }
         }
 

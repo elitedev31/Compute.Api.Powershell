@@ -30,14 +30,8 @@
         /// <param name="field">The field name.</param>
         protected T GetFilter<T>(string field)
         {
-            var filter = Filters.FirstOrDefault(f => f.Field == field);
-
-            if (filter != null)
-            {
-                return (T)Convert.ChangeType(filter.Value, typeof(T));
-            }
-
-            return default(T);
+            var filter = Filters.FirstOrDefault(f => f.Field == field);            
+            return GetFilter<T>(filter);
         }
 
         /// <summary>
@@ -49,10 +43,34 @@
         protected T GetFilter<T>(string field, FilterOperator @operator)
         {
             var filter = Filters.FirstOrDefault(f => f.Field == field && f.Operator == @operator);
+            return GetFilter<T>(filter);
+        }
 
+        /// <summary>
+        /// Gets the filter value.
+        /// </summary>
+        /// <typeparam name="T">The value type</typeparam>
+        /// <param name="filter">The filter.</param>
+        private T GetFilter<T>(Filter filter)
+        {
             if (filter != null)
             {
-                return (T)Convert.ChangeType(filter.Value, typeof(T));
+                Type requestedType = typeof(T);
+                Type valueType = filter.Value.GetType();
+                if (valueType == requestedType)
+                    return (T)filter.Value;
+
+                if (filter.Value is IConvertible)
+                    return (T)Convert.ChangeType(filter.Value, typeof(T));
+
+                if (requestedType.IsGenericType && requestedType.GetGenericTypeDefinition() == typeof (Nullable<>))
+                {
+                    if (valueType == Nullable.GetUnderlyingType(requestedType))
+                        return (T)filter.Value;
+
+                    if (filter.Value is IConvertible)
+                        return (T)Convert.ChangeType(filter.Value, typeof(T));
+                }              
             }
 
             return default(T);

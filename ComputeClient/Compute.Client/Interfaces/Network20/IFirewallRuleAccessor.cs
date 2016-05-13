@@ -61,7 +61,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces.Network20
         /// </summary>
         /// <param name="createIpAddressList">The ip address list details.</param>
         /// <returns>The response details.</returns>
-        Task<ResponseType> CreateIpAddressList(CreateIpAddressList createIpAddressList);
+        Task<ResponseType> CreateIpAddressList(createIpAddressList createIpAddressList);
 
         /// <summary>
         /// Lists all ip address list.
@@ -92,13 +92,58 @@ namespace DD.CBU.Compute.Api.Client.Interfaces.Network20
         /// </summary>
         /// <param name="editIpAddressList">The ip address list details.</param>
         /// <returns>The response details.</returns>
-        Task<ResponseType> EditIpAddressList(EditIpAddressList editIpAddressList);
+        Task<ResponseType> EditIpAddressList(editIpAddressList editIpAddressList);
 
         /// <summary>
         /// Deletes an ip address list.
         /// </summary>
         /// <param name="deleteIpAddressList">The ip address list id to be deleted.</param>
         /// <returns>The response details.</returns>
-        Task<ResponseType> DeleteIpAddressList(DeleteIpAddressListType deleteIpAddressList);
+        Task<ResponseType> DeleteIpAddressList(deleteIpAddressList deleteIpAddressList);
+
+        /// <summary>
+        /// Creates an ip address list.
+        /// </summary>
+        /// <param name="createPortList">The ip address list details.</param>
+        /// <returns>The response details.</returns>
+        Task<ResponseType> CreatePortList(createPortList createPortList);
+
+        /// <summary>
+        /// Lists all ip address list.
+        /// </summary>
+        /// <param name="networkDomainId">The network domain id.</param>
+        /// <param name="options">The filter options.</param>
+        /// <returns>The collection of matching ip address list.</returns>
+        Task<IEnumerable<PortListType>> GetPortLists(Guid networkDomainId, PortListOptions options = null);
+
+        /// <summary>
+        /// Lists all ip address list.
+        /// </summary>
+        /// <param name="networkDomainId">The Network domain id.</param>
+        /// <param name="options">The filter options.</param>
+        /// <param name="pagingOptions">The paging options.</param>
+        /// <returns>The async task of <see cref="PagedResponse{PortListType}"/></returns>
+        Task<PagedResponse<PortListType>> GetPortListsPaginated(Guid networkDomainId, PortListOptions options = null, PageableRequest pagingOptions = null);
+
+        /// <summary>
+        /// Gets the ip address list.
+        /// </summary>
+        /// <param name="portListId">The ip address list id.</param>
+        /// <returns>The collection of matching ip address list.</returns>
+        Task<PortListType> GetPortList(Guid portListId);
+
+        /// <summary>
+        /// Edits an ip address list.
+        /// </summary>
+        /// <param name="editPortList">The ip address list details.</param>
+        /// <returns>The response details.</returns>
+        Task<ResponseType> EditPortList(editPortList editPortList);
+
+        /// <summary>
+        /// Deletes an ip address list.
+        /// </summary>
+        /// <param name="deletePortList">The ip address list id to be deleted.</param>
+        /// <returns>The response details.</returns>
+        Task<ResponseType> DeletePortList(DeletePortListType deletePortList);
     }
 }

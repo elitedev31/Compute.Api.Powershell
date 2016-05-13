@@ -25,11 +25,36 @@ namespace DD.CBU.Compute.Api.Client
 		/// <summary>
 		/// The CaaS API indicates that the supplied credentials are invalid.
 		/// </summary>
-		InvalidCredentials = 1, 
+		InvalidCredentials = 1,      
 
-		/// <summary>
-		/// The CaaS API indicates a bad request and return a descriptive (Status) error
+        /// <summary>
+        /// The CaaS API indicates a bad request and return a descriptive (Status) error
+        /// </summary>
+        BadRequest = 2,
+
+        /// <summary>
+		/// The CaaS API indicates that the supplied credentials are invalid for this org or doesnt have appropriate Role.
 		/// </summary>
-		BadRequest
-	}
+		PermissionDenied = 3,
+
+        /// <summary>
+        /// The CaaS API indicates a service unavailable and return a descriptive (Status) error
+        /// </summary>
+        ServiceUnavailable = 4,
+
+        /// <summary>
+        /// The CaaS API indicates unhandled internal server error
+        /// </summary>
+        InternalServerError = 5,
+
+        /// <summary>
+        /// The CaaS API endpoint not found, typically happens during maintenance
+        /// </summary>
+        ApiMethodNotFoundError = 6,
+
+        /// <summary>
+        /// The CaaS API indicates unhandled Http
+        /// </summary>
+        HttpException = 7
+    }
 }
