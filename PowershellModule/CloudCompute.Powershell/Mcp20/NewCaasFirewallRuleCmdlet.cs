@@ -36,8 +36,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
         /// <summary>
         ///     Gets or sets the IP Version.
-        /// </summary>
-        [Alias("IPVersion")]
+        /// </summary>        
         [Parameter(Mandatory = true, HelpMessage = "The IP version (IPv4 / IPv6)")]
         public IpVersion IpVersion { get; set; }
 

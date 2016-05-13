@@ -23,17 +23,80 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         public PortListType PortList { get; set; }
 
         [Parameter(Mandatory = false, HelpMessage = "The Port List description")]
-        public string Description { get; set; }
+        public string Description
+        {
+            get { return _description; }
+            set
+            {
+                _description = value;
+                _descriptionSpecified = true;
+            }
+        }
 
         [Parameter(Mandatory = false, HelpMessage = "Define one or more individual Ports or ranges of Ports. Use New CaasPortRangeType command to create type")]
-        public PortListPort[] Port { get; set; }
+        public PortListPort[] Port
+        {
+            get { return _port; }
+            set
+            {
+                _port = value;
+                _portSpecified = true;
+            }
+        }
+
+        [Parameter(Mandatory = false,
+            HelpMessage = "Define one or more individual Port Lists on the same Network Domain")]
+        public string[] ChildPortListId
+        {
+            get { return _childPortIdList; }
+            set
+            {
+                _childPortIdList = value;
+                _childPortListIdSpecified = true;
+            }
+        }
 
         [Parameter(Mandatory = false, HelpMessage = "Define one or more individual Port Lists on the same Network Domain")]
-        public string[] ChildPortListId { get; set; }
+        public PortListType[] ChildPortList
+        {
+            get { return _childPortList; }
+            set
+            {
+                _childPortList = value;
+                _childPortListIdSpecified = true;
+            }
+        }
 
-        [Parameter(Mandatory = false, HelpMessage = "Define one or more individual Port Lists on the same Network Domain")]
-        public PortListType[] ChildPortList { get; set; }
+        private PortListType[] _childPortList;
+        /// <summary>
+        /// Inner description value
+        /// </summary>
+        private string _description;
 
+        /// <summary>
+        /// Description changed
+        /// </summary>
+        private bool _descriptionSpecified;
+
+        /// <summary>
+        /// Inner Port List
+        /// </summary>
+        private string[] _childPortIdList;
+
+        /// <summary>
+        /// Port List specified
+        /// </summary>
+        private bool _childPortListIdSpecified;
+
+        /// <summary>
+        /// Inner Port
+        /// </summary>
+        private PortListPort[] _port;
+
+        /// <summary>
+        /// Inner Port specified
+        /// </summary>
+        private bool _portSpecified;
         /// <summary>
         ///     The process record method.
         /// </summary>
@@ -43,6 +106,11 @@ namespace DD.CBU.Compute.Powershell.Mcp20
             base.ProcessRecord();
             try
             {
+                if (PortList != null)
+                {
+                    Id = Guid.Parse(PortList.id);
+                }
+
                 var port = Port != null
                     ? Port.Select(x => new EditPortListPort
                     {
@@ -62,8 +130,11 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                 {
                     id = Id.ToString(),
                     description = Description,
+                    descriptionSpecified = _descriptionSpecified,
                     port = port,
+                    portSpecified = _portSpecified,
                     childPortListId = ChildPortListId,
+                    childPortListIdSpecified = _childPortListIdSpecified,
                 };
 
                 response = Connection.ApiClient.Networking.FirewallRule.EditPortList(portList).Result;
