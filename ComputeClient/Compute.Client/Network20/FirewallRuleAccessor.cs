@@ -168,17 +168,20 @@
 	    /// <returns>The response details.</returns>
 	    public async Task<ResponseType> EditIpAddressList(editIpAddressList editIpAddressList)
         {
-			if (editIpAddressList.childIpAddressListId == null || editIpAddressList.childIpAddressListId.Length == 0)
+			if (editIpAddressList.childIpAddressListIdSpecified && (editIpAddressList.childIpAddressListId == null || editIpAddressList.childIpAddressListId.Length == 0))
 			{
 				editIpAddressList.childIpAddressListId = new string[] { null };
 			}
 
-			if (editIpAddressList.ipAddress == null || editIpAddressList.ipAddress.Length == 0)
+			if (editIpAddressList.ipAddressSpecified && (editIpAddressList.ipAddress == null || editIpAddressList.ipAddress.Length == 0))
 			{
 				editIpAddressList.ipAddress = new editIpAddressListIpAddress[] { null };
 			}
 
-			return await _api.PostAsync<editIpAddressList, ResponseType>(
+            if (!string.IsNullOrWhiteSpace(editIpAddressList.description))
+                editIpAddressList.descriptionSpecified = true;
+
+            return await _api.PostAsync<editIpAddressList, ResponseType>(
                 ApiUris.EditIpAddressList(_api.OrganizationId),
                 editIpAddressList);
         }
@@ -256,15 +259,18 @@
 	    /// <returns>The response details.</returns>
 	    public async Task<ResponseType> EditPortList(editPortList editPortList)
         {
-            if (editPortList.port == null || editPortList.port.Length == 0)
+            if (editPortList.portSpecified && (editPortList.port == null || editPortList.port.Length == 0))
             {
                 editPortList.port = new EditPortListPort[] { null };
             }
 
-            if (editPortList.childPortListId == null || editPortList.childPortListId.Length == 0)
+            if (editPortList.childPortListIdSpecified && (editPortList.childPortListId == null || editPortList.childPortListId.Length == 0))
             {
                 editPortList.childPortListId = new string[] { null };
             }
+
+            if (!string.IsNullOrWhiteSpace(editPortList.description))
+                editPortList.descriptionSpecified = true;
 
             return await _api.PostAsync<editPortList, ResponseType>(
                 ApiUris.EditPortList(_api.OrganizationId),
