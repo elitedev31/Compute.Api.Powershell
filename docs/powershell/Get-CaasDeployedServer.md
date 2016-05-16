@@ -74,7 +74,7 @@ DD.CBU.Compute.Powershell.ComputeServiceConnection
 
 
 ## OUTPUTS
-DD.CBU.Compute.Api.Contracts.Server.ServerWithBackupType[]
+DD.CBU.Compute.Api.Contracts.Server.ServerWithBackupType
 
 
 ## NOTES

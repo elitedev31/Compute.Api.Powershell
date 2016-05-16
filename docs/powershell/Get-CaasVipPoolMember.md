@@ -3,7 +3,7 @@
 
 ## SYNOPSIS
 
-Get-CaasVipPoolMember [-NetworkDomain <NetworkDomainType>] [-Datacenter <DatacenterType>] [-VipNode <PoolType>] [-VipPool <PoolType>] [-MemberId <guid>] [-Connection <ComputeServiceConnection>] [<CommonParameters>]
+Get-CaasVipPoolMember [-NetworkDomain <NetworkDomainType>] [-Datacenter <DatacenterType>] [-VipNode <NodeType>] [-VipPool <PoolType>] [-MemberId <guid>] [-PageNumber <int>] [-PageSize <int>] [-OrderBy <string>] [-Connection <ComputeServiceConnection>] [<CommonParameters>]
 
 
 ## SYNTAX
@@ -59,7 +59,37 @@ Aliases                      None
 Dynamic?                     false
 ```
  
-### -VipNode &lt;PoolType&gt;
+### -OrderBy &lt;string&gt;
+The Order By of the results, only supported for MCP2
+```
+Position?                    Named
+Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false
+```
+ 
+### -PageNumber &lt;int&gt;
+The Page Number of the result page, only supported for MCP2
+```
+Position?                    Named
+Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false
+```
+ 
+### -PageSize &lt;int&gt;
+The Page Size of the result page, only supported for MCP2
+```
+Position?                    Named
+Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false
+```
+ 
+### -VipNode &lt;NodeType&gt;
 The VIP Node
 ```
 Position?                    Named
@@ -85,7 +115,7 @@ DD.CBU.Compute.Powershell.ComputeServiceConnection
 
 
 ## OUTPUTS
-DD.CBU.Compute.Api.Contracts.Network20.PoolMemberType[]
+DD.CBU.Compute.Api.Contracts.Network20.PoolMemberType
 
 
 ## NOTES

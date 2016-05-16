@@ -3,9 +3,9 @@
 
 ## SYNOPSIS
 
-Remove-CaasNatRule -NatRule <Object> -Network <NetworkWithLocationsNetwork> [-Connection <ComputeServiceConnection>] [<CommonParameters>]
+Remove-CaasNatRule -NatRule <psobject> -Network <NetworkWithLocationsNetwork> [-Connection <ComputeServiceConnection>] [<CommonParameters>]
 
-Remove-CaasNatRule -NatRule <Object> -NetworkDomain <NetworkDomainType> [-Connection <ComputeServiceConnection>] [<CommonParameters>]
+Remove-CaasNatRule -NatRule <psobject> -NetworkDomain <NetworkDomainType> [-Connection <ComputeServiceConnection>] [<CommonParameters>]
 
 
 ## SYNTAX
@@ -31,7 +31,7 @@ Aliases                      None
 Dynamic?                     false
 ```
  
-### -NatRule &lt;Object&gt;
+### -NatRule &lt;psobject&gt;
 The NAT Rule
 ```
 Position?                    Named
@@ -62,7 +62,7 @@ Dynamic?                     false
 ```
 
 ## INPUTS
-System.Object
+System.Management.Automation.PSObject
 DD.CBU.Compute.Api.Contracts.Network.NetworkWithLocationsNetwork
 DD.CBU.Compute.Api.Contracts.Network20.NetworkDomainType
 DD.CBU.Compute.Powershell.ComputeServiceConnection

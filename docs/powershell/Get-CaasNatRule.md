@@ -3,9 +3,9 @@
 
 ## SYNOPSIS
 
-Get-CaasNatRule -NetworkDomain <NetworkDomainType> [-State <string>] [-InternalIp <string>] [-ExternalIp <string>] [-NatRuleId <guid>] [-Connection <ComputeServiceConnection>] [<CommonParameters>]
+Get-CaasNatRule -NetworkDomain <NetworkDomainType> [-State <string>] [-InternalIp <string>] [-ExternalIp <string>] [-NatRuleId <guid>] [-PageNumber <int>] [-PageSize <int>] [-OrderBy <string>] [-Connection <ComputeServiceConnection>] [<CommonParameters>]
 
-Get-CaasNatRule -Network <NetworkWithLocationsNetwork> [-Name <string>] [-Connection <ComputeServiceConnection>] [<CommonParameters>]
+Get-CaasNatRule -Network <NetworkWithLocationsNetwork> [-Name <string>] [-PageNumber <int>] [-PageSize <int>] [-OrderBy <string>] [-Connection <ComputeServiceConnection>] [<CommonParameters>]
 
 
 ## SYNTAX
@@ -91,6 +91,36 @@ Aliases                      None
 Dynamic?                     false
 ```
  
+### -OrderBy &lt;string&gt;
+The Order By of the results, only supported for MCP2
+```
+Position?                    Named
+Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false
+```
+ 
+### -PageNumber &lt;int&gt;
+The Page Number of the result page, only supported for MCP2
+```
+Position?                    Named
+Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false
+```
+ 
+### -PageSize &lt;int&gt;
+The Page Size of the result page, only supported for MCP2
+```
+Position?                    Named
+Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false
+```
+ 
 ### -State &lt;string&gt;
 The NAT rule state
 ```
@@ -108,8 +138,8 @@ DD.CBU.Compute.Powershell.ComputeServiceConnection
 
 
 ## OUTPUTS
-DD.CBU.Compute.Api.Contracts.Network20.NatRuleType
 DD.CBU.Compute.Api.Contracts.Network.NatRuleType
+DD.CBU.Compute.Api.Contracts.Network20.NatRuleType
 
 
 ## NOTES

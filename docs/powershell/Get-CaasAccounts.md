@@ -44,7 +44,7 @@ DD.CBU.Compute.Powershell.ComputeServiceConnection
 
 
 ## OUTPUTS
-DD.CBU.Compute.Api.Contracts.Directory.AccountWithPhoneNumber[]
+DD.CBU.Compute.Api.Contracts.Directory.AccountWithPhoneNumber
 
 
 ## NOTES

@@ -3,7 +3,7 @@
 
 ## SYNOPSIS
 
-Set-CaasVipPool -VipPool <PoolType> [-Description <string>] [-LoadBalanceMethod <string>] [-HealthMonitorId <string[]>] [-ServiceDownAction <string>] [-SlowRampTime <string>] [-Connection <ComputeServiceConnection>] [<CommonParameters>]
+Set-CaasVipPool -VipPool <PoolType> [-Description <string>] [-LoadBalanceMethod <string>] [-HealthMonitorId <string[]>] [-ServiceDownAction <string>] [-SlowRampTime <int>] [-Connection <ComputeServiceConnection>] [<CommonParameters>]
 
 
 ## SYNTAX
@@ -69,7 +69,7 @@ Aliases                      None
 Dynamic?                     false
 ```
  
-### -SlowRampTime &lt;string&gt;
+### -SlowRampTime &lt;int&gt;
 The VIP Pool Slow ramp time
 ```
 Position?                    Named

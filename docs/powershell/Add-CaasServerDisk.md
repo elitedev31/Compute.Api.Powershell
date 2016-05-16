@@ -7,14 +7,16 @@ Add-CaasServerDisk -SizeInGB <int> -Server <ServerType> [-SpeedId <string>] [-Pa
 
 Add-CaasServerDisk -SizeInGB <int> -Server <ServerType> [-Speed <DiskSpeedType>] [-PassThru] [-Connection <ComputeServiceConnection>] [<CommonParameters>]
 
+Add-CaasServerDisk -SizeInGB <int> -Server <ServerType> [-ScsiId <int>] [-PassThru] [-Connection <ComputeServiceConnection>] [<CommonParameters>]
+
 
 ## SYNTAX
 ```powershell
-syntaxItem                                                                                                                                                                                                                  
+syntaxItem                                                                                                                                                                                                                                                                                                                                
 
-----------                                                                                                                                                                                                                  
+----------                                                                                                                                                                                                                                                                                                                                
 
-{@{name=Add-CaasServerDisk; CommonParameters=True; WorkflowCommonParameters=False; parameter=System.Object[]}, @{name=Add-CaasServerDisk; CommonParameters=True; WorkflowCommonParameters=False; parameter=System.Object[]}}
+{@{name=Add-CaasServerDisk; CommonParameters=True; WorkflowCommonParameters=False; parameter=System.Object[]}, @{name=Add-CaasServerDisk; CommonParameters=True; WorkflowCommonParameters=False; parameter=System.Object[]}, @{name=Add-CaasServerDisk; CommonParameters=True; WorkflowCommonParameters=False; parameter=System.Object[]}}
 ```
 
 ## DESCRIPTION
@@ -37,6 +39,16 @@ Return the Server object after execution
 Position?                    Named
 Accept pipeline input?       false
 Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false
+```
+ 
+### -ScsiId &lt;int&gt;
+The Scsi Id
+```
+Position?                    Named
+Accept pipeline input?       false
+Parameter set name           ScsiId
 Aliases                      None
 Dynamic?                     false
 ```

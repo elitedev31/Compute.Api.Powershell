@@ -3,16 +3,18 @@
 
 ## SYNOPSIS
 
-Remove-CaasNetworkPublicIpBlock -Network <NetworkWithLocationsNetwork> -PublicIpBlock <IpBlockType> [-Connection <ComputeServiceConnection>] [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-CaasNetworkPublicIpBlock -Network <NetworkWithLocationsNetwork> -PublicIpBlock <psobject> [-Connection <ComputeServiceConnection>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Remove-CaasNetworkPublicIpBlock -PublicIpBlock <psobject> -NetworkDomain <NetworkDomainType> [-Connection <ComputeServiceConnection>] [-WhatIf] [-Confirm] [<CommonParameters>]
 
 
 ## SYNTAX
 ```powershell
-syntaxItem                                                                                                                 
+syntaxItem                                                                                                                                                                                                                                            
 
-----------                                                                                                                 
+----------                                                                                                                                                                                                                                            
 
-{@{name=Remove-CaasNetworkPublicIpBlock; CommonParameters=True; WorkflowCommonParameters=False; parameter=System.Object[]}}
+{@{name=Remove-CaasNetworkPublicIpBlock; CommonParameters=True; WorkflowCommonParameters=False; parameter=System.Object[]}, @{name=Remove-CaasNetworkPublicIpBlock; CommonParameters=True; WorkflowCommonParameters=False; parameter=System.Object[]}}
 ```
 
 ## DESCRIPTION
@@ -44,12 +46,22 @@ The network to release the public ip addresses
 ```
 Position?                    Named
 Accept pipeline input?       true (ByPropertyName)
-Parameter set name           (All)
+Parameter set name           MCP1
 Aliases                      None
 Dynamic?                     false
 ```
  
-### -PublicIpBlock &lt;IpBlockType&gt;
+### -NetworkDomain &lt;NetworkDomainType&gt;
+The network domain to release the public ip addresses
+```
+Position?                    Named
+Accept pipeline input?       true (ByPropertyName)
+Parameter set name           MCP2
+Aliases                      None
+Dynamic?                     false
+```
+ 
+### -PublicIpBlock &lt;psobject&gt;
 The public ip block to be released
 ```
 Position?                    Named
@@ -71,12 +83,15 @@ Dynamic?                     false
 
 ## INPUTS
 DD.CBU.Compute.Api.Contracts.Network.NetworkWithLocationsNetwork
-DD.CBU.Compute.Api.Contracts.Network.IpBlockType
+System.Management.Automation.PSObject
+DD.CBU.Compute.Api.Contracts.Network20.NetworkDomainType
 DD.CBU.Compute.Powershell.ComputeServiceConnection
 
 
 ## OUTPUTS
-System.Object
+DD.CBU.Compute.Api.Contracts.General.Status
+DD.CBU.Compute.Api.Contracts.Network20.ResponseType
+
 
 ## NOTES
 
