@@ -3,7 +3,7 @@
 
 ## SYNOPSIS
 
-New-CaasFirewallRule -NetworkDomain <NetworkDomainType> -FirewallRuleName <string> -FirewallAction <string> -IPVersion <string> -Protocol <AclProtocolType> -Source <IpAndPortFilterType> -Destination <IpAndPortFilterType> -Position <RulePositionType> [-Enabled <bool>] [-Connection <ComputeServiceConnection>] [<CommonParameters>]
+New-CaasFirewallRule -NetworkDomain <NetworkDomainType> -FirewallRuleName <string> -FirewallAction <string> -IpVersion <IpVersion> -Protocol <AclProtocolType> -Source <IpAndPortType> -Destination <IpAndPortType> -Position <RulePositionType> [-RelativeToRule <FirewallRuleType>] [-Enabled <bool>] [-Connection <ComputeServiceConnection>] [<CommonParameters>]
 
 
 ## SYNTAX
@@ -29,8 +29,8 @@ Aliases                      None
 Dynamic?                     false
 ```
  
-### -Destination &lt;IpAndPortFilterType&gt;
-The destination IP and Port
+### -Destination &lt;IpAndPortType&gt;
+The destination IP and Port , use New-CaasIpAndPortType
 ```
 Position?                    Named
 Accept pipeline input?       false
@@ -69,7 +69,7 @@ Aliases                      None
 Dynamic?                     false
 ```
  
-### -IPVersion &lt;string&gt;
+### -IpVersion &lt;IpVersion&gt;
 The IP version (IPv4 / IPv6)
 ```
 Position?                    Named
@@ -90,7 +90,7 @@ Dynamic?                     false
 ```
  
 ### -Position &lt;RulePositionType&gt;
-Is Firewall enabled?
+Rule position
 ```
 Position?                    Named
 Accept pipeline input?       false
@@ -109,8 +109,18 @@ Aliases                      None
 Dynamic?                     false
 ```
  
-### -Source &lt;IpAndPortFilterType&gt;
-The source IP and Port
+### -RelativeToRule &lt;FirewallRuleType&gt;
+Rule relative position
+```
+Position?                    Named
+Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false
+```
+ 
+### -Source &lt;IpAndPortType&gt;
+The source IP and Port , use New-CaasIpAndPortType
 ```
 Position?                    Named
 Accept pipeline input?       false

@@ -55,7 +55,7 @@ DD.CBU.Compute.Powershell.ComputeServiceConnection
 
 
 ## OUTPUTS
-DD.CBU.Compute.Api.Contracts.Vip.RealServer[]
+DD.CBU.Compute.Api.Contracts.Vip.RealServer
 
 
 ## NOTES

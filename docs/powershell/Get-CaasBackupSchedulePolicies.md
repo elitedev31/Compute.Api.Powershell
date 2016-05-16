@@ -45,7 +45,7 @@ DD.CBU.Compute.Powershell.ComputeServiceConnection
 
 
 ## OUTPUTS
-DD.CBU.Compute.Api.Contracts.Backup.BackupSchedulePolicy[]
+DD.CBU.Compute.Api.Contracts.Backup.BackupSchedulePolicy
 
 
 ## NOTES

@@ -3,13 +3,13 @@
 
 ## SYNOPSIS
 
-New-CaasServerDetails -Name <string> -AdminPassword <string> -IsStarted <bool> -ServerImage <ImagesWithDiskSpeedImage> -Network <NetworkWithLocationsNetwork> [-Description <string>] [<CommonParameters>]
+New-CaasServerDetails -Name <string> -AdminPassword <string> -IsStarted <bool> -ServerImage <psobject> -Network <NetworkWithLocationsNetwork> [-Description <string>] [<CommonParameters>]
 
-New-CaasServerDetails -Name <string> -AdminPassword <string> -IsStarted <bool> -ServerImage <ImagesWithDiskSpeedImage> -PrimaryVlan <VlanType> -NetworkDomain <NetworkDomainType> [-Description <string>] [<CommonParameters>]
+New-CaasServerDetails -Name <string> -AdminPassword <string> -IsStarted <bool> -ServerImage <psobject> -PrimaryVlan <VlanType> -NetworkDomain <NetworkDomainType> [-Description <string>] [-CpuSpeed <string>] [-CpuCount <uint32>] [-CpuCoresPerSocket <uint32>] [-MemoryGb <uint32>] [-PrimaryDns <string>] [-SecondaryDns <string>] [-MicrosoftTimeZone <string>] [<CommonParameters>]
 
-New-CaasServerDetails -Name <string> -AdminPassword <string> -IsStarted <bool> -ServerImage <ImagesWithDiskSpeedImage> -NetworkDomain <NetworkDomainType> -PrivateIp <string> [-Description <string>] [<CommonParameters>]
+New-CaasServerDetails -Name <string> -AdminPassword <string> -IsStarted <bool> -ServerImage <psobject> -NetworkDomain <NetworkDomainType> -PrivateIp <string> [-Description <string>] [-CpuSpeed <string>] [-CpuCount <uint32>] [-CpuCoresPerSocket <uint32>] [-MemoryGb <uint32>] [-PrimaryDns <string>] [-SecondaryDns <string>] [-MicrosoftTimeZone <string>] [<CommonParameters>]
 
-New-CaasServerDetails -Name <string> -AdminPassword <string> -IsStarted <bool> -ServerImage <ImagesWithDiskSpeedImage> -PrivateIp <string> [-Description <string>] [<CommonParameters>]
+New-CaasServerDetails -Name <string> -AdminPassword <string> -IsStarted <bool> -ServerImage <psobject> -PrivateIp <string> [-Description <string>] [<CommonParameters>]
 
 
 ## SYNTAX
@@ -35,6 +35,36 @@ Aliases                      None
 Dynamic?                     false
 ```
  
+### -CpuCoresPerSocket &lt;uint32&gt;
+The cpu cores per socker for the machine.
+```
+Position?                    Named
+Accept pipeline input?       false
+Parameter set name           MCP2_WithVlan, MCP2_WithPrivateIp
+Aliases                      None
+Dynamic?                     false
+```
+ 
+### -CpuCount &lt;uint32&gt;
+The cpu count for the machine.
+```
+Position?                    Named
+Accept pipeline input?       false
+Parameter set name           MCP2_WithVlan, MCP2_WithPrivateIp
+Aliases                      None
+Dynamic?                     false
+```
+ 
+### -CpuSpeed &lt;string&gt;
+The cpu speed for the machine.
+```
+Position?                    Named
+Accept pipeline input?       false
+Parameter set name           MCP2_WithPrivateIp, MCP2_WithVlan
+Aliases                      None
+Dynamic?                     false
+```
+ 
 ### -Description &lt;string&gt;
 The description of the VM
 ```
@@ -51,6 +81,26 @@ Will the VM be started after deployment (true|false)
 Position?                    Named
 Accept pipeline input?       false
 Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false
+```
+ 
+### -MemoryGb &lt;uint32&gt;
+The memory size in GB for the machine.
+```
+Position?                    Named
+Accept pipeline input?       false
+Parameter set name           MCP2_WithVlan, MCP2_WithPrivateIp
+Aliases                      None
+Dynamic?                     false
+```
+ 
+### -MicrosoftTimeZone &lt;string&gt;
+The  Microsoft time zone index for windows machine.
+```
+Position?                    Named
+Accept pipeline input?       false
+Parameter set name           MCP2_WithVlan, MCP2_WithPrivateIp
 Aliases                      None
 Dynamic?                     false
 ```
@@ -80,6 +130,16 @@ The network domain in which server will be deployed
 ```
 Position?                    Named
 Accept pipeline input?       true (ByValue)
+Parameter set name           MCP2_WithPrivateIp, MCP2_WithVlan
+Aliases                      None
+Dynamic?                     false
+```
+ 
+### -PrimaryDns &lt;string&gt;
+The Primary DNS for the machine.
+```
+Position?                    Named
+Accept pipeline input?       false
 Parameter set name           MCP2_WithVlan, MCP2_WithPrivateIp
 Aliases                      None
 Dynamic?                     false
@@ -105,7 +165,17 @@ Aliases                      None
 Dynamic?                     false
 ```
  
-### -ServerImage &lt;ImagesWithDiskSpeedImage&gt;
+### -SecondaryDns &lt;string&gt;
+The Secondary DNS for the machine.
+```
+Position?                    Named
+Accept pipeline input?       false
+Parameter set name           MCP2_WithPrivateIp, MCP2_WithVlan
+Aliases                      None
+Dynamic?                     false
+```
+ 
+### -ServerImage &lt;psobject&gt;
 The OS or Customer Server Image to use for deployment
 ```
 Position?                    Named

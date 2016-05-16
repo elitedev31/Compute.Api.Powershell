@@ -5,7 +5,7 @@
 
 New-CaasConnection -ApiCredentials <pscredential> -Region <KnownApiRegion> [-Name <string>] [-Vendor <KnownApiVendor>] [<CommonParameters>]
 
-New-CaasConnection -ApiCredentials <pscredential> -ApiDomainName <string> [-Name <string>] [<CommonParameters>]
+New-CaasConnection -ApiCredentials <pscredential> -ApiDomainName <string> [-Name <string>] [-FtpDomainName <string>] [<CommonParameters>]
 
 
 ## SYNTAX
@@ -33,6 +33,16 @@ Dynamic?                     false
  
 ### -ApiDomainName &lt;string&gt;
 The domain name for the REST API
+```
+Position?                    Named
+Accept pipeline input?       false
+Parameter set name           ApiDomainName
+Aliases                      None
+Dynamic?                     false
+```
+ 
+### -FtpDomainName &lt;string&gt;
+The domain name for the FTP, default is the api domain name
 ```
 Position?                    Named
 Accept pipeline input?       false

@@ -5,14 +5,16 @@
 
 Remove-CaasServerDisk -ScsiId <int> -Server <ServerType> [-PassThru] [-Connection <ComputeServiceConnection>] [-WhatIf] [-Confirm] [<CommonParameters>]
 
+Remove-CaasServerDisk -Id <string> -Server <ServerType> [-PassThru] [-Connection <ComputeServiceConnection>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
 
 ## SYNTAX
 ```powershell
-syntaxItem                                                                                                       
+syntaxItem                                                                                                                                                                                                                        
 
-----------                                                                                                       
+----------                                                                                                                                                                                                                        
 
-{@{name=Remove-CaasServerDisk; CommonParameters=True; WorkflowCommonParameters=False; parameter=System.Object[]}}
+{@{name=Remove-CaasServerDisk; CommonParameters=True; WorkflowCommonParameters=False; parameter=System.Object[]}, @{name=Remove-CaasServerDisk; CommonParameters=True; WorkflowCommonParameters=False; parameter=System.Object[]}}
 ```
 
 ## DESCRIPTION
@@ -39,6 +41,16 @@ Aliases                      None
 Dynamic?                     false
 ```
  
+### -Id &lt;string&gt;
+The id of Disk
+```
+Position?                    Named
+Accept pipeline input?       false
+Parameter set name           With_DiskId
+Aliases                      None
+Dynamic?                     false
+```
+ 
 ### -PassThru &lt;switch&gt;
 Return the Server object after execution
 ```
@@ -54,7 +66,7 @@ SCSI Id of the disk to be resized
 ```
 Position?                    Named
 Accept pipeline input?       false
-Parameter set name           (All)
+Parameter set name           With_SCSIId
 Aliases                      None
 Dynamic?                     false
 ```

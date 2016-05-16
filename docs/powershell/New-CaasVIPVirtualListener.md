@@ -3,7 +3,7 @@
 
 ## SYNOPSIS
 
-New-CaasVIPVirtualListener -NetworkDomain <NetworkDomainType> -Name <string> -Type <string> -Protocol <AclProtocolType> -IPAddress <string> -ConnectionLimit <int> -ConnectionRateLimit <int> [-Description <string>] [-Port <int>] [-Enabled <bool>] [-SourcePortPreservation <string>] [-PoolId <string>] [-ClientClonePoolId <string>] [-PersistenceProfileId <string>] [-FallbackPersistenceProfileId <string>] [-OptimizationProfileId <string>] [-iRuleId <string[]>] [-Connection <ComputeServiceConnection>] [<CommonParameters>]
+New-CaasVIPVirtualListener -NetworkDomain <NetworkDomainType> -Name <string> -Type <string> -Protocol <string> -ConnectionLimit <int> -ConnectionRateLimit <int> -SourcePortPreservation <string> [-Description <string>] [-IPAddress <string>] [-Port <int>] [-Enabled <bool>] [-PoolId <string>] [-ClientClonePoolId <string>] [-PersistenceProfileId <string>] [-FallbackPersistenceProfileId <string>] [-OptimizationProfileId <string>] [-iRuleId <string[]>] [-Connection <ComputeServiceConnection>] [<CommonParameters>]
 
 
 ## SYNTAX
@@ -159,7 +159,7 @@ Aliases                      None
 Dynamic?                     false
 ```
  
-### -Protocol &lt;AclProtocolType&gt;
+### -Protocol &lt;string&gt;
 The VIP virtual listener Protocol
 ```
 Position?                    Named

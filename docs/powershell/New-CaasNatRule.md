@@ -98,8 +98,8 @@ DD.CBU.Compute.Powershell.ComputeServiceConnection
 
 
 ## OUTPUTS
-DD.CBU.Compute.Api.Contracts.Network20.ResponseType
 DD.CBU.Compute.Api.Contracts.Network.NatRuleType
+DD.CBU.Compute.Api.Contracts.Network20.ResponseType
 
 
 ## NOTES

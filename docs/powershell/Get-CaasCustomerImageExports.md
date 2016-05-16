@@ -34,7 +34,7 @@ DD.CBU.Compute.Powershell.ComputeServiceConnection
 
 
 ## OUTPUTS
-DD.CBU.Compute.Api.Contracts.Image.ImageExportType[]
+DD.CBU.Compute.Api.Contracts.Image.ImageExportType
 
 
 ## NOTES

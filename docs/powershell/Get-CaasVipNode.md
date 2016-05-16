@@ -3,7 +3,7 @@
 
 ## SYNOPSIS
 
-Get-CaasVipNode [-Name <string>] [-NetworkDomain <NetworkDomainType>] [-NodeId <guid>] [-Connection <ComputeServiceConnection>] [<CommonParameters>]
+Get-CaasVipNode [-Name <string>] [-NetworkDomain <NetworkDomainType>] [-NodeId <guid>] [-PageNumber <int>] [-PageSize <int>] [-OrderBy <string>] [-Connection <ComputeServiceConnection>] [<CommonParameters>]
 
 
 ## SYNTAX
@@ -58,6 +58,36 @@ Parameter set name           Filtered
 Aliases                      None
 Dynamic?                     false
 ```
+ 
+### -OrderBy &lt;string&gt;
+The Order By of the results, only supported for MCP2
+```
+Position?                    Named
+Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false
+```
+ 
+### -PageNumber &lt;int&gt;
+The Page Number of the result page, only supported for MCP2
+```
+Position?                    Named
+Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false
+```
+ 
+### -PageSize &lt;int&gt;
+The Page Size of the result page, only supported for MCP2
+```
+Position?                    Named
+Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false
+```
 
 ## INPUTS
 DD.CBU.Compute.Api.Contracts.Network20.NetworkDomainType
@@ -65,7 +95,7 @@ DD.CBU.Compute.Powershell.ComputeServiceConnection
 
 
 ## OUTPUTS
-DD.CBU.Compute.Api.Contracts.Network20.NodeType[]
+DD.CBU.Compute.Api.Contracts.Network20.NodeType
 
 
 ## NOTES
