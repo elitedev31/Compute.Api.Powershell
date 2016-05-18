@@ -18,6 +18,9 @@
         /// <summary>	The MCP 2.2 prefix. </summary>
         public const string MCP2_2_PREFIX = "caas/2.2/";
 
+        /// <summary>	The MCP 2.3 prefix. </summary>
+        public const string MCP2_3_PREFIX = "caas/2.3/";
+
         /// <summary>
         /// The path (relative to the base API URL) of the My Account action.
         /// </summary>
@@ -742,7 +745,7 @@
         /// <returns>	A URI. </returns>
         public static Uri DeployVlan(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/network/deployVlan", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/deployVlan", orgId), UriKind.Relative);
         }
 
         /// <summary>	The relative URI for the CaaS API for editing the VLan. </summary>
