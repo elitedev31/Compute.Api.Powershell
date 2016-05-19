@@ -46,20 +46,6 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
     }
 
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
-    public enum GatewayAddressingType
-    {
-
-        /// <remarks/>
-        LOW,
-
-        /// <remarks/>
-        HIGH
-    }
-
-    /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.81.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -77,7 +63,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 
         private IpRangeCidrType privateIpv4RangeField;
 
-        private GatewayAddressingType gatewayAddressing;
+        private string gatewayAddressingField;
 
         private string ipv4GatewayAddressField;
 
@@ -124,10 +110,10 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
         } 
         
         /// <remarks/>
-        public GatewayAddressingType GatewayAddressing
+        public string gatewayAddressing
         {
-            get { return this.gatewayAddressing; }
-            set { this.gatewayAddressing = value; }
+            get { return this.gatewayAddressingField; }
+            set { this.gatewayAddressingField = value; }
         }
 
         /// <remarks/>
@@ -343,6 +329,8 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 
         private bool privateIpv4PrefixSizeFieldSpecified;
 
+        private string gatewayAddressingField;
+
         /// <remarks/>
         public string networkDomainId
         {
@@ -384,6 +372,13 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
         {
             get { return this.privateIpv4PrefixSizeFieldSpecified; }
             set { this.privateIpv4PrefixSizeFieldSpecified = value; }
+        }
+
+        /// <remarks/>
+        public string gatewayAddressing
+        {
+            get { return this.gatewayAddressingField; }
+            set { this.gatewayAddressingField = value; }
         }
     }
 
