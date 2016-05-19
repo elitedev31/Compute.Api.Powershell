@@ -46,6 +46,20 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
     }
 
     /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
+    public enum GatewayAddressingType
+    {
+
+        /// <remarks/>
+        LOW,
+
+        /// <remarks/>
+        HIGH
+    }
+
+    /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.81.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -62,6 +76,8 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
         private string descriptionField;
 
         private IpRangeCidrType privateIpv4RangeField;
+
+        private GatewayAddressingType gatewayAddressing;
 
         private string ipv4GatewayAddressField;
 
@@ -105,6 +121,13 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
         {
             get { return this.privateIpv4RangeField; }
             set { this.privateIpv4RangeField = value; }
+        } 
+        
+        /// <remarks/>
+        public GatewayAddressingType GatewayAddressing
+        {
+            get { return this.gatewayAddressing; }
+            set { this.gatewayAddressing = value; }
         }
 
         /// <remarks/>

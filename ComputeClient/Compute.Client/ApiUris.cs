@@ -720,7 +720,7 @@
                 queryParameters.Add(string.Format("networkDomainId={0}", networkDomainId));
             }
 
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/network/vlan?{1}", orgId, String.Join("&", queryParameters)), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/vlan?{1}", orgId, String.Join("&", queryParameters)), UriKind.Relative);
         }
 
         /// <summary>	The get Virtual LAN. </summary>
@@ -729,7 +729,7 @@
         /// <returns>	The <see cref="Uri"/>. </returns>
         public static Uri GetVlan(Guid orgId, Guid vlanId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/network/vlan/{1}", orgId, vlanId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/vlan/{1}", orgId, vlanId), UriKind.Relative);
         }
 
         /// <summary>	Gets vlan by organisation identifier. </summary>
@@ -737,7 +737,7 @@
         /// <returns>	The vlan by organisation identifier. </returns>
         public static Uri GetVlanByOrgId(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/network/vlan", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/vlan", orgId), UriKind.Relative);
         }
 
         /// <summary>	The relative URI for the CaaS API for deploying the VLan. </summary>
@@ -753,7 +753,7 @@
         /// <returns>	A URI. </returns>
         public static Uri EditVlan(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/network/editVlan", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/editVlan", orgId), UriKind.Relative);
         }
 
         /// <summary>	The relative URI for the CaaS API for expanding the VLan. </summary>
@@ -761,7 +761,7 @@
         /// <returns>	A URI. </returns>
         public static Uri ExpandVlan(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/network/expandVlan", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/expandVlan", orgId), UriKind.Relative);
         }
 
         /// <summary>	Deletes the vlan described by orgId. </summary>
@@ -769,7 +769,7 @@
         /// <returns>	An URI. </returns>
         public static Uri DeleteVlan(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/network/deleteVlan", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/deleteVlan", orgId), UriKind.Relative);
         }
 
         #endregion
