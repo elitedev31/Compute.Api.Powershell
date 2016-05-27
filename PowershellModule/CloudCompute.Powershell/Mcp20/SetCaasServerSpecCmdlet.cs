@@ -55,6 +55,7 @@
                 if (isMcp1 && (CoresPerSocket.HasValue || !string.IsNullOrEmpty(CpuSpeed)))
                 {
                     WriteError(new ErrorRecord(new ArgumentException("Cannot update CoresPerSocket or CPUSpeed for MCP1 Servers"), "-4", ErrorCategory.InvalidArgument, Server));
+                    return;
                 }
 
                 var reconfigureServer = new ReconfigureServerType
