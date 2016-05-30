@@ -37,6 +37,6 @@ $buildVersion = Get-BuildVersion -ProductVersion $ProductVersion
 Write-Host "Updating solution versions to $($buildVersion.AssemblyVersion) and package version  $($buildVersion.PackageVersion)";
 
 $currentDir = (Get-Location).Path
-Update-AssemblyInfoWithBuildNumber -SolutionAssemblyInfoFile (Join-Path $currentDir "SolutionAssemblyInfo.cs") -Version $buildVersion
+Update-AssemblyInfoWithBuildNumber -SolutionAssemblyInfoFile (Join-Path $currentDir "SolutionAssemblyInfo.cs") -Version $($buildVersion.AssemblyVersion)
 Update-NuSpecWithBuildNumber -NuSpecFile (Join-Path $currentDir "Compute.Client\Compute.Client.nuspec") -Version "$($buildVersion.PackageVersion)-$ReleaseTag"
 
