@@ -30,13 +30,13 @@ Function Get-BuildVersion()
     Write-Host "BuildUri : $buildUri";
     $buildId = Split-Path -Leaf $buildUri.LocalPath
     Write-Host "buildId : $($buildUri.LocalPath)";
-    return "$($parsedVersion.Major).$($parsedVersion.Minor).$($buildId).0"
+    return @{ AssemblyVersion = "$($parsedVersion.Major).$($parsedVersion.Minor).$($buildId).0" ; PackageVersion = "$($parsedVersion.Major).$($parsedVersion.Minor).$($buildId)"}
 }
 import-module .\UpdateAssemblyInfo.psm1
 $buildVersion = Get-BuildVersion -ProductVersion $ProductVersion
-Write-Host "Updating solution versions to $buildVersion";
+Write-Host "Updating solution versions to $($buildVersion.AssemblyVersion) and package version  $($buildVersion.PackageVersion)";
 
 $currentDir = (Get-Location).Path
 Update-AssemblyInfoWithBuildNumber -SolutionAssemblyInfoFile (Join-Path $currentDir "SolutionAssemblyInfo.cs") -Version $buildVersion
-Update-NuSpecWithBuildNumber -NuSpecFile (Join-Path $currentDir "Compute.Client\Compute.Client.nuspec") -Version "$buildVersion-$ReleaseTag"
+Update-NuSpecWithBuildNumber -NuSpecFile (Join-Path $currentDir "Compute.Client\Compute.Client.nuspec") -Version "$($buildVersion.PackageVersion)-$ReleaseTag"
 
