@@ -1633,7 +1633,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri AddVipNode(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/networkDomainVip/createNode", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/networkDomainVip/createNode", orgId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for getting the VIP Nodes.</summary>
@@ -1674,7 +1674,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri CreateVirtualListener(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/networkDomainVip/createVirtualListener", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/networkDomainVip/createVirtualListener", orgId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for getting the Virtual Listeners.</summary>
