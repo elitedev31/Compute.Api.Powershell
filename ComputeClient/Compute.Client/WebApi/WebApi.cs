@@ -304,17 +304,18 @@ namespace DD.CBU.Compute.Api.Client.WebApi
 		        {
 		            throw new InvalidCredentialsException(response.RequestMessage.RequestUri);
 		        }
-		        case HttpStatusCode.Forbidden:
+                // Maintenance Window Exception                
+                case HttpStatusCode.ServiceUnavailable:
+                    {
+                        // Maintenance Window Exception                             
+                        // Handle specific CaaS Status response when posting a bad request		            
+                        throw new ServiceUnavailableException(response.RequestMessage.RequestUri);
+                    }
+                case HttpStatusCode.Forbidden:
 		        case HttpStatusCode.BadRequest:
-		        // Maintenance Window Exception                
-		        case HttpStatusCode.ServiceUnavailable:
-		        {		            
-		            // Maintenance Window Exception                             
-		            // Handle specific CaaS Status response when posting a bad request		            
-		            throw new ServiceUnavailableException(response.RequestMessage.RequestUri);		            
-		        }
-		        // Compute Api should handle Internal Server Error
-		        case HttpStatusCode.InternalServerError:
+                    throw await HandleApiRequestErrorsWithResponse(response, response.RequestMessage.RequestUri);
+                // Compute Api should handle Internal Server Error
+                case HttpStatusCode.InternalServerError:
 		        {
 		            var respone = await SafeReadContentAsync(response);
                     throw new InternalServerErrorException(response.RequestMessage.RequestUri, respone);
