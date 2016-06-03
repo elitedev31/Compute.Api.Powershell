@@ -306,12 +306,12 @@ namespace DD.CBU.Compute.Api.Client.WebApi
 		        }
                 // Maintenance Window Exception                
                 case HttpStatusCode.ServiceUnavailable:
-                    {
-                        // Maintenance Window Exception                             
-                        // Handle specific CaaS Status response when posting a bad request		            
-                        throw new ServiceUnavailableException(response.RequestMessage.RequestUri);
-                    }
-                case HttpStatusCode.Forbidden:
+		        {
+		            // Maintenance Window Exception                             
+		            // Handle specific CaaS Status response when posting a bad request		            
+		            throw new ServiceUnavailableException(response.RequestMessage.RequestUri);
+		        }
+		        case HttpStatusCode.Forbidden:
 		        case HttpStatusCode.BadRequest:
                     throw await HandleApiRequestErrorsWithResponse(response, response.RequestMessage.RequestUri);
                 // Compute Api should handle Internal Server Error
