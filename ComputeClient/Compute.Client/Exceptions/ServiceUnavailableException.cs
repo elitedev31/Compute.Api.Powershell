@@ -1,43 +1,23 @@
-﻿using DD.CBU.Compute.Api.Contracts.Network20;
-
-namespace DD.CBU.Compute.Api.Client.Exceptions
+﻿namespace DD.CBU.Compute.Api.Client.Exceptions
 {
 	using System;
 	using System.Runtime.Serialization;
-	using DD.CBU.Compute.Api.Contracts.General;
 
     /// <summary>
 	/// The bad request exception.
 	/// </summary>
 	[Serializable]
-	public class ServiceUnavailableException : ComputeApiWithStatusException
+	public class ServiceUnavailableException : ComputeApiException
     {
         /// <summary>
         /// Initialises a new instance of the <see cref="ServiceUnavailableException"/> class.
-        /// </summary>
-        /// <param name="caasOperationStatus">
-        /// The caa operation status.
-        /// </param>
+        /// </summary>   
         /// <param name="uri">
         /// The uri.
         /// </param>
-        public ServiceUnavailableException(Status caasOperationStatus, Uri uri)
-			: base(ComputeApiError.ServiceUnavailable, caasOperationStatus, uri)
+        public ServiceUnavailableException(Uri uri)
+			: base(ComputeApiError.ServiceUnavailable, uri, "Region is under maintenance")
 		{
-        }
-
-        /// <summary>
-        /// Initialises a new instance of the <see cref="ServiceUnavailableException"/> class.
-        /// </summary>
-        /// <param name="caasOperationResponse">
-        /// The caa operation response.
-        /// </param>
-        /// <param name="uri">
-        /// The uri.
-        /// </param>
-        public ServiceUnavailableException(ResponseType caasOperationResponse, Uri uri)
-            : base(ComputeApiError.ServiceUnavailable, caasOperationResponse, uri)
-        {
         }
 
         /// <summary>

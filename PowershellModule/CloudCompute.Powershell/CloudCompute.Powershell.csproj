@@ -209,6 +209,7 @@
     <Compile Include="PSCmdletCaasBase.cs" />
     <Compile Include="PsCmdletCaasPagedWithConnectionBaseExtensions.cs" />
     <Compile Include="PSCmdletCaasPagedWithConnectionBase.cs" />
+    <Compile Include="Mcp20\SetCaasServerSpecCmdlet.cs" />
     <Compile Include="TestCaasCompatibilityCmdlet.cs" />
     <Compile Include="WaitCaasServerOperationCmdlet.cs" />
     <Compile Include="RemoveCaasConnectionCmdlet.cs" />
