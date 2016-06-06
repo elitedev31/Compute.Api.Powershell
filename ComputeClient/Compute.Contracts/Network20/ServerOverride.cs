@@ -36,6 +36,42 @@
         }
     }
 
+    public partial class NewNicType
+    {
+        /// Note Only PrivaleIpv4 Or VlanId is valid,  dont specify both
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public string vlanId
+        {
+            get { return ItemElementName == PrivateIpv4OrVlanIdChoiceType.vlanId ? Item : string.Empty; }
+            set
+            {
+                // value not null or its vlan id
+                if (!string.IsNullOrWhiteSpace(value) || ItemElementName == PrivateIpv4OrVlanIdChoiceType.vlanId)
+                {
+                    Item = value;
+                    ItemElementName = PrivateIpv4OrVlanIdChoiceType.vlanId;
+                }
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public string privateIpv4
+        {
+            get { return ItemElementName == PrivateIpv4OrVlanIdChoiceType.privateIpv4 ? Item : string.Empty; }
+            set
+            {
+                // value not null or its private ipv4
+                if (!string.IsNullOrWhiteSpace(value) || ItemElementName == PrivateIpv4OrVlanIdChoiceType.privateIpv4)
+                {
+                    Item = value;
+                    ItemElementName = PrivateIpv4OrVlanIdChoiceType.privateIpv4;
+                }
+            }
+        }
+    }
+
     public partial class ServerType
     {
         /// Note, server will have either nic or NetworkInfo

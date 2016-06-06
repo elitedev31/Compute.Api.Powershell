@@ -45,6 +45,47 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
             get { return this.itemElementNameField; }
             set { this.itemElementNameField = value; }
         }
+    }    
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.81.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
+    public partial class NewNicType
+    {
+
+        private string itemField;
+
+        private string networkAdapterField;
+
+        private PrivateIpv4OrVlanIdChoiceType itemElementNameField;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("privateIpv4", typeof (string))]
+        [System.Xml.Serialization.XmlElementAttribute("vlanId", typeof (string))]
+        [System.Xml.Serialization.XmlChoiceIdentifierAttribute("ItemElementName")]
+        public string Item
+        {
+            get { return this.itemField; }
+            set { this.itemField = value; }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public PrivateIpv4OrVlanIdChoiceType ItemElementName
+        {
+            get { return this.itemElementNameField; }
+            set { this.itemElementNameField = value; }
+        }
+
+        /// <remarks/>
+        public string networkAdapter
+        {
+            get { return this.networkAdapterField; }
+            set { this.networkAdapterField = value; }
+        }
     }
 
     /// <remarks/>
@@ -722,6 +763,8 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 
         private string secondaryDnsField;
 
+        private string ipv4GatewayField;
+
         private DeployServerTypeDisk[] diskField;
 
         private string microsoftTimeZoneField;
@@ -804,6 +847,13 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
         {
             get { return this.secondaryDnsField; }
             set { this.secondaryDnsField = value; }
+        }
+        
+        /// <remarks/>
+        public string ipv4Gateway
+        {
+            get { return this.ipv4GatewayField; }
+            set { this.ipv4GatewayField = value; }
         }
 
         /// <remarks/>
@@ -937,14 +987,14 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
     public partial class DeployServerTypeNetworkInfo
     {
 
-        private VlanIdOrPrivateIpType primaryNicField;
+        private NewNicType primaryNicField;
 
-        private VlanIdOrPrivateIpType[] additionalNicField;
+        private NewNicType[] additionalNicField;
 
         private string networkDomainIdField;
 
         /// <remarks/>
-        public VlanIdOrPrivateIpType primaryNic
+        public NewNicType primaryNic
         {
             get { return this.primaryNicField; }
             set { this.primaryNicField = value; }
@@ -952,7 +1002,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("additionalNic")]
-        public VlanIdOrPrivateIpType[] additionalNic
+        public NewNicType[] additionalNic
         {
             get { return this.additionalNicField; }
             set { this.additionalNicField = value; }
