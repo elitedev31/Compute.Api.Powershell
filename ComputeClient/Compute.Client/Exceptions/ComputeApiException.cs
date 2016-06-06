@@ -129,23 +129,53 @@ namespace DD.CBU.Compute.Api.Client
 			Uri = uri;
 		}
 
-		/// <summary>
-		/// Initialises a new instance of the <see cref="ComputeApiException"/> class. 
-		/// Deserialisation constructor for <see cref="ComputeApiException"/>.
-		/// </summary>
-		/// <param name="info">
-		/// A <see cref="SerializationInfo"/> serialisation data store that holds the serialized exception data.
-		/// </param>
-		/// <param name="context">
-		/// A <see cref="StreamingContext"/> value that indicates the source of the serialised data.
-		/// </param>
-		/// <exception cref="ArgumentNullException">
-		/// The <paramref name="info"/> parameter is null.
-		/// </exception>
-		/// <exception cref="SerializationException">
-		/// The class name is <c>null</c> or <see cref="Exception.HResult"/> is zero (0).
-		/// </exception>
-		protected ComputeApiException(SerializationInfo info, StreamingContext context)
+	    /// <summary>
+	    /// Initialises a new instance of the <see cref="ComputeApiException"/> class.
+	    /// </summary>
+	    /// <param name="error">
+	    /// The error.
+	    /// </param>
+	    /// <param name="uri">
+	    /// The uri.
+	    /// </param>
+	    /// <param name="messageOrFormat">
+	    /// The message or format.
+	    /// </param>
+	    /// <param name="ex">
+	    /// Inner Exception
+	    /// </param>
+	    /// <param name="formatArguments">
+	    /// The format arguments.
+	    /// </param>
+	    public ComputeApiException(
+            ComputeApiError error,
+            Uri uri,
+            string messageOrFormat,
+            Exception ex,
+            params object[] formatArguments)
+            : base(messageOrFormat, ex, formatArguments)
+        {
+            Error = error;
+            Uri = uri;
+        }
+
+        /// <summary>
+        /// Initialises a new instance of the <see cref="ComputeApiException"/> class. 
+        /// Deserialisation constructor for <see cref="ComputeApiException"/>.
+        /// </summary>
+        /// <param name="info">
+        /// A <see cref="SerializationInfo"/> serialisation data store that holds the serialized exception data.
+        /// </param>
+        /// <param name="context">
+        /// A <see cref="StreamingContext"/> value that indicates the source of the serialised data.
+        /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// The <paramref name="info"/> parameter is null.
+        /// </exception>
+        /// <exception cref="SerializationException">
+        /// The class name is <c>null</c> or <see cref="Exception.HResult"/> is zero (0).
+        /// </exception>
+        protected ComputeApiException(SerializationInfo info, StreamingContext context)
 			: base(info, context)
 		{
 			if (info == null)

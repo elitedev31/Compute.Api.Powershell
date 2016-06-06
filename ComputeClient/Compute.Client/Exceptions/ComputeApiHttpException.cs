@@ -46,6 +46,21 @@
         /// <summary>
         /// Initialises a new instance of the <see cref="ComputeApiHttpException"/> class.
         /// </summary>
+        /// <param name="uri">
+        /// The uri.
+        /// </param>
+        /// <param name="httpMethod">Http Method</param>
+        /// <param name="httpRequestException">Http request exception</param>        
+        public ComputeApiHttpException(Uri uri, HttpMethod httpMethod, HttpRequestException httpRequestException)
+            : base(ComputeApiError.HttpException, uri, string.Empty, httpRequestException)
+        {
+            HttpMethod = httpMethod;
+            HttpStatusCode = HttpStatusCode.ServiceUnavailable;
+        }
+
+        /// <summary>
+        /// Initialises a new instance of the <see cref="ComputeApiHttpException"/> class.
+        /// </summary>
         /// <param name="info">
         /// The info.
         /// </param>
