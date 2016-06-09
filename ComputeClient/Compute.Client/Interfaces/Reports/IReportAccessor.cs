@@ -20,7 +20,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces.Reports
         /// <param name="startDate">The Start Date</param>
         /// <param name="endDate">The End Date</param>
         /// <returns>The CSV formatted result</returns>
-        Task<object> GetSummaryUsage(DateTime startDate, DateTime endDate);
+        Task<string> GetSummaryUsage(DateTime startDate, DateTime endDate);
 
         /// <summary>
         /// Retrieves a CSV-formatted daily usage report by the specifics of all usage across the account.
