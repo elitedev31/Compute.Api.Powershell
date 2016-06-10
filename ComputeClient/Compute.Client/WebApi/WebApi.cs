@@ -363,45 +363,77 @@ namespace DD.CBU.Compute.Api.Client.WebApi
 	    {
 	        Status status = null;
 	        ResponseType responseMessage = null;
+            string rawResponse = string.Empty; 
+                    
 	        if (uri.ToString().Contains(ApiUris.MCP1_0_PREFIX))
 	        {	         
-                status = await ReadResponseAsync<Status>(response.Content);
+                status = await SafeReadResponseAsync<Status>(response.Content);
             }
 	        else
 	        {
-	            responseMessage = await ReadResponseAsync<ResponseType>(response.Content);
+	            responseMessage = await SafeReadResponseAsync<ResponseType>(response.Content);	             
 	        }
 
-	        switch (response.StatusCode)
+            if (responseMessage == null && status == null)
+            {
+                rawResponse = await SafeReadContentAsync(response);
+            }
+
+            switch (response.StatusCode)
 	        {
 	            case HttpStatusCode.Forbidden:
 	            {
-	                if (uri.ToString().Contains(ApiUris.MCP1_0_PREFIX))
+	                if (status != null)
 	                    return new PermissionDeniedException(status, uri);
-                        return new PermissionDeniedException(responseMessage, uri);
+	                else if (responseMessage != null)
+	                    return new PermissionDeniedException(responseMessage, uri);
+	                else
+	                    return new PermissionDeniedException(rawResponse, uri);
 	            }
 	            case HttpStatusCode.BadRequest:
 	            {
-	                // Handle specific CaaS Status response when posting a bad request
-	                if (uri.ToString().Contains(ApiUris.MCP1_0_PREFIX))
+                        // Handle specific CaaS Status response when posting a bad request
+                        if (status != null)
                             return new BadRequestException(status, uri);
-                        return new BadRequestException(responseMessage, uri);
+                        else if (responseMessage != null)
+                            return new BadRequestException(responseMessage, uri);
+                        else
+                            return new BadRequestException(rawResponse, uri);                      
 	            }	           
                 default:
-	            {
-	                var respone = await SafeReadContentAsync(response); ;
-	                return new ComputeApiHttpException(uri, response.RequestMessage.Method, response.StatusCode, respone);
+	            {	                
+	                return new ComputeApiHttpException(uri, response.RequestMessage.Method, response.StatusCode, rawResponse);
 	            }
 	        }
 	    }
 
-	    /// <summary>
+        /// <summary>
         /// Read response with utf-8 encoding workaround
         /// </summary>
         /// <typeparam name="TResult">Result type</typeparam>
         /// <param name="content">Http content</param>
         /// <returns>Response task</returns>
-	    private async Task<TResult> ReadResponseAsync<TResult>(HttpContent content)
+	    private async Task<TResult> SafeReadResponseAsync<TResult>(HttpContent content)
+        {
+            try
+            {
+                return await ReadResponseAsync<TResult>(content);
+            }
+            catch (Exception)
+            {
+                // ignored
+            }
+            return await Task.FromResult(default(TResult));
+        }
+
+
+        /// <summary>
+        /// Read response with utf-8 encoding workaround
+        /// </summary>
+        /// <typeparam name="TResult">Result type</typeparam>
+        /// <param name="content">Http content</param>
+        /// <returns>Response task</returns>
+        private async Task<TResult> ReadResponseAsync<TResult>(HttpContent content)
 	    {
             Exception originalException = null;
             try
