@@ -149,7 +149,7 @@
         public static Uri AddNic(Guid orgId)
         {
             return new Uri(
-                String.Format(MCP2_1_PREFIX + "{0}/server/addNic", orgId), UriKind.Relative);
+                String.Format(MCP2_3_PREFIX + "{0}/server/addNic", orgId), UriKind.Relative);
         }
 
         /// <summary>	Removes a NIC from a server </summary>
