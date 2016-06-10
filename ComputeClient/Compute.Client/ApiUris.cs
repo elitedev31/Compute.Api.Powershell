@@ -683,7 +683,7 @@
         /// <returns>The URL.</returns>
         public static Uri EditFirewallRule(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/network/editFirewallRule", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/editFirewallRule", orgId), UriKind.Relative);
         }
 
         /// <summary>Gets the delete firewall rule URL.</summary>
