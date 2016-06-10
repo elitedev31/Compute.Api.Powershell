@@ -175,7 +175,6 @@ namespace DD.CBU.Compute.Api.Client.WebApi
                 throw new ComputeApiHttpException(new Uri(_httpClient.BaseAddress, relativeOperationUri), HttpMethod.Get,
                     ex);
             }
-          
 		}
 
 		/// <summary>

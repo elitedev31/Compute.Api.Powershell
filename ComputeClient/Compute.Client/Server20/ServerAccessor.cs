@@ -191,23 +191,25 @@
         /// <param name="serverId">The server id.</param>
         /// <param name="vlanId">The VLAN id</param>
         /// <param name="privateIpv4">The Private IP v4 address</param>
+        /// <param name="networkAdapter">The optional network adapter type (E1000 or VMXNET3)</param>
         /// <returns>The <see cref="Task"/>.</returns>
-        public async Task<ResponseType> AddNic(Guid serverId, Guid? vlanId, string privateIpv4)
+        public async Task<ResponseType> AddNic(Guid serverId, Guid? vlanId, string privateIpv4, string networkAdapter = null)
         {
             if (vlanId == null && string.IsNullOrEmpty(privateIpv4))
             {
                 throw new ArgumentNullException("vlanId");
             }
 
-            AddNicType addNicType = new AddNicType {serverId = serverId.ToString(), nic = new VlanIdOrPrivateIpType()};
-            if (!string.IsNullOrEmpty(privateIpv4))
+            AddNicType addNicType = new AddNicType
             {
-                addNicType.nic.privateIpv4 = privateIpv4;
-            }
-            else if (vlanId != null)
-            {
-                addNicType.nic.vlanId = vlanId.ToString();
-            }
+                serverId = serverId.ToString(),
+                nic = new VlanIdOrPrivateIpType
+                {
+                    networkAdapter = networkAdapter,
+                    privateIpv4 = !string.IsNullOrEmpty(privateIpv4) ? privateIpv4 : null,
+                    vlanId = vlanId != null ? vlanId.ToString() : null
+                }
+            };
 
             return await _apiClient.PostAsync<AddNicType, ResponseType>(ApiUris.AddNic(_apiClient.OrganizationId), addNicType);
         }

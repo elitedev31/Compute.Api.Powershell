@@ -29,8 +29,8 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
         private PrivateIpv4OrVlanIdChoiceType itemElementNameField;
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("privateIpv4", typeof (string))]
-        [System.Xml.Serialization.XmlElementAttribute("vlanId", typeof (string))]
+        [System.Xml.Serialization.XmlElementAttribute("privateIpv4", typeof (string), Order = 1)]
+        [System.Xml.Serialization.XmlElementAttribute("vlanId", typeof (string), Order = 1)]
         [System.Xml.Serialization.XmlChoiceIdentifierAttribute("ItemElementName")]
         public string Item
         {

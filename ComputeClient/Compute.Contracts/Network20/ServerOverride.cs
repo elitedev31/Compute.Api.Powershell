@@ -2,6 +2,8 @@
 {
     public partial class VlanIdOrPrivateIpType
     {
+        private string networkAdapterField;
+
         /// Note Only PrivaleIpv4 Or VlanId is valid,  dont specify both
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
@@ -33,6 +35,14 @@
                     ItemElementName = PrivateIpv4OrVlanIdChoiceType.privateIpv4;
                 }
             }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order = 2)]
+        public string networkAdapter
+        {
+            get { return this.networkAdapterField; }
+            set { this.networkAdapterField = value; }
         }
     }
 
