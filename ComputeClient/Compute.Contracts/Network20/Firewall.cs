@@ -351,10 +351,10 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
         public string protocol;
 
         /// <remarks/>
-        public IpAndPortFilterType source;
+        public IpAndPortType source;
 
         /// <remarks/>
-        public IpAndPortFilterType destination;
+        public IpAndPortType destination;
 
         /// <remarks/>
         public bool enabled;
