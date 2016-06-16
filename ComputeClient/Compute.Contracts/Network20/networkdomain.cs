@@ -44,6 +44,8 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 
         private string datacenterIdField;
 
+        private outsideTransitVlanIpv4Subnet outsideTransitVlanIpv4SubnetField;
+
         /// <remarks/>
         public string name
         {
@@ -107,6 +109,42 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
         {
             get { return this.datacenterIdField; }
             set { this.datacenterIdField = value; }
+        }
+
+        /// <remarks/>
+        public outsideTransitVlanIpv4Subnet outsideTransitVlanIpv4Subnet
+        {
+            get { return this.outsideTransitVlanIpv4SubnetField; }
+            set { this.outsideTransitVlanIpv4SubnetField = value; }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.81.0")]
+    [System.SerializableAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
+    public partial class outsideTransitVlanIpv4Subnet
+    {
+
+        private string addressField;
+
+        private int prefixSizeField;
+
+       /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string address
+        {
+            get { return this.addressField; }
+            set { this.addressField = value; }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public int prefixSize
+        {
+            get { return this.prefixSizeField; }
+            set { this.prefixSizeField = value; }
         }
     }
 

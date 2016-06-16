@@ -128,7 +128,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri NetworkDomains(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/network/networkDomain", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/networkDomain", orgId), UriKind.Relative);
         }
 
         /// <summary>The network domain.</summary>
@@ -138,7 +138,7 @@
         public static Uri NetworkDomain(Guid orgId, Guid networkDomainId)
         {
             return new Uri(
-                string.Format(MCP2_1_PREFIX + "{0}/network/networkDomain/{1}", orgId, networkDomainId), 
+                string.Format(MCP2_3_PREFIX + "{0}/network/networkDomain/{1}", orgId, networkDomainId), 
                 UriKind.Relative);
         }
 
