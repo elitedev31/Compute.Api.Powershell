@@ -82,16 +82,16 @@
         /// <param name="pagingOptions">Paging options</param>
         /// <param name="filterOptions">Filtering options</param>
         /// <returns>Operating Systems</returns>
-        public async Task<PagedResponse<OperatingSystemType>> GetOperatingSystems(string dataCenterId, IPageableRequest pagingOptions = null, OperatingSystemListOptions filterOptions = null)
+        public async Task<PagedResponse<OperatingSystemDetailType>> GetOperatingSystems(string dataCenterId, IPageableRequest pagingOptions = null, OperatingSystemListOptions filterOptions = null)
         {
-            var response = await _apiClient.GetAsync<operatingSystems>(
+            var response = await _apiClient.GetAsync<OperatingSystemsDetails>(
               ApiUris.GetMcp2OperatingSystems(_apiClient.OrganizationId, dataCenterId),
               pagingOptions,
               filterOptions);
 
-            return new PagedResponse<OperatingSystemType>
+            return new PagedResponse<OperatingSystemDetailType>
             {
-                items = response.operatingSystem,
+                items = response.operatingSystemDetail,
                 totalCount = response.totalCountSpecified ? response.totalCount : (int?)null,
                 pageCount = response.pageCountSpecified ? response.pageCount : (int?)null,
                 pageNumber = response.pageNumberSpecified ? response.pageNumber : (int?)null,

@@ -57,6 +57,6 @@ namespace DD.CBU.Compute.Api.Client.Interfaces.Infrastructure
         /// <returns>
         /// The <see cref="Task"/>.
         /// </returns>
-        Task<PagedResponse<OperatingSystemType>> GetOperatingSystems(string dataCenterId, IPageableRequest pagingOptions = null, OperatingSystemListOptions filterOptions = null);
+        Task<PagedResponse<OperatingSystemDetailType>> GetOperatingSystems(string dataCenterId, IPageableRequest pagingOptions = null, OperatingSystemListOptions filterOptions = null);
     }
 }
