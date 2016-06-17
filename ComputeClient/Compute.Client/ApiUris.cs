@@ -836,7 +836,7 @@
         /// <returns>Returns the relative URI of the REST request for creating a new NAT rule</returns>
         public static Uri CreateNatRule(Guid orgId, string networkId)
         {
-            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/{1}/natrule", orgId, networkId), UriKind.Relative);
+            return new Uri(string.Format(MCP1_0_PREFIX + "{0}/network/{1}/natrule", orgId, networkId), UriKind.Relative);
         }
 
         /// <summary>Deletes a specified NAT rule</summary>
@@ -1535,7 +1535,7 @@
         /// <returns>Returns the relative URI of the REST request for creating the NAT rule.</returns>
         public static Uri CreateNatRule(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/network/createNatRule", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/createNatRule", orgId), UriKind.Relative);
         }
 
         /// <summary>Deletes a NAT Rule. </summary>
