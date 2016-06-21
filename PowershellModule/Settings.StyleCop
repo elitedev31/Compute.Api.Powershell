@@ -3,6 +3,7 @@
     <CollectionProperty Name="RecognizedWords">
       <Value>Caas</Value>
       <Value>datacenter</Value>
+      <Value>cmdlet</Value>
     </CollectionProperty>
   </GlobalSettings>
 </StyleCopSettings>

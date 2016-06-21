@@ -33,11 +33,11 @@ namespace DD.CBU.Compute.Api.Client.Reports
         /// <param name="startDate">The Start Date</param>
         /// <param name="endDate">The End Date</param>
         /// <returns>The CSV formatted result</returns>
-        public async Task<object> GetSummaryUsage(DateTime startDate, DateTime endDate)
+        public async Task<string> GetSummaryUsage(DateTime startDate, DateTime endDate)
         {
             var data = 
                 await
-                    _apiClient.GetAsync<object>(ApiUris.SummaryUsageReport(_apiClient.OrganizationId, startDate, endDate));
+                    _apiClient.GetAsync<string>(ApiUris.SummaryUsageReport(_apiClient.OrganizationId, startDate, endDate));
             return data;
         }
 

@@ -63,6 +63,8 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 
         private IpRangeCidrType privateIpv4RangeField;
 
+        private string gatewayAddressingField;
+
         private string ipv4GatewayAddressField;
 
         private IpRangeCidrType ipv6RangeField;
@@ -105,6 +107,13 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
         {
             get { return this.privateIpv4RangeField; }
             set { this.privateIpv4RangeField = value; }
+        } 
+        
+        /// <remarks/>
+        public string gatewayAddressing
+        {
+            get { return this.gatewayAddressingField; }
+            set { this.gatewayAddressingField = value; }
         }
 
         /// <remarks/>
@@ -320,6 +329,8 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 
         private bool privateIpv4PrefixSizeFieldSpecified;
 
+        private string gatewayAddressingField;
+
         /// <remarks/>
         public string networkDomainId
         {
@@ -361,6 +372,13 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
         {
             get { return this.privateIpv4PrefixSizeFieldSpecified; }
             set { this.privateIpv4PrefixSizeFieldSpecified = value; }
+        }
+
+        /// <remarks/>
+        public string gatewayAddressing
+        {
+            get { return this.gatewayAddressingField; }
+            set { this.gatewayAddressingField = value; }
         }
     }
 

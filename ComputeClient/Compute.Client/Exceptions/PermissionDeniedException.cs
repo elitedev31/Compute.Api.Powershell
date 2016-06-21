@@ -39,6 +39,18 @@ namespace DD.CBU.Compute.Api.Client.Exceptions
         /// <summary>
         /// Initialises a new instance of the <see cref="PermissionDeniedException"/> class.
         /// </summary>
+        /// <param name="caasRawResponse">CaaS Operation Details</param>
+        /// <param name="uri">
+        /// The uri.
+        /// </param>
+        public PermissionDeniedException(string caasRawResponse, Uri uri)
+            : base(ComputeApiError.PermissionDenied, caasRawResponse, uri)
+        {
+        }
+
+        /// <summary>
+        /// Initialises a new instance of the <see cref="PermissionDeniedException"/> class.
+        /// </summary>
         /// <param name="info">
         /// The info.
         /// </param>

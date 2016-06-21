@@ -18,6 +18,9 @@
         /// <summary>	The MCP 2.2 prefix. </summary>
         public const string MCP2_2_PREFIX = "caas/2.2/";
 
+        /// <summary>	The MCP 2.3 prefix. </summary>
+        public const string MCP2_3_PREFIX = "caas/2.3/";
+
         /// <summary>
         /// The path (relative to the base API URL) of the My Account action.
         /// </summary>
@@ -125,7 +128,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri NetworkDomains(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/network/networkDomain", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/networkDomain", orgId), UriKind.Relative);
         }
 
         /// <summary>The network domain.</summary>
@@ -135,7 +138,7 @@
         public static Uri NetworkDomain(Guid orgId, Guid networkDomainId)
         {
             return new Uri(
-                string.Format(MCP2_1_PREFIX + "{0}/network/networkDomain/{1}", orgId, networkDomainId), 
+                string.Format(MCP2_3_PREFIX + "{0}/network/networkDomain/{1}", orgId, networkDomainId), 
                 UriKind.Relative);
         }
 
@@ -146,7 +149,7 @@
         public static Uri AddNic(Guid orgId)
         {
             return new Uri(
-                String.Format(MCP2_1_PREFIX + "{0}/server/addNic", orgId), UriKind.Relative);
+                String.Format(MCP2_3_PREFIX + "{0}/server/addNic", orgId), UriKind.Relative);
         }
 
         /// <summary>	Removes a NIC from a server </summary>
@@ -680,7 +683,7 @@
         /// <returns>The URL.</returns>
         public static Uri EditFirewallRule(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/network/editFirewallRule", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/editFirewallRule", orgId), UriKind.Relative);
         }
 
         /// <summary>Gets the delete firewall rule URL.</summary>
@@ -717,7 +720,7 @@
                 queryParameters.Add(string.Format("networkDomainId={0}", networkDomainId));
             }
 
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/network/vlan?{1}", orgId, String.Join("&", queryParameters)), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/vlan?{1}", orgId, String.Join("&", queryParameters)), UriKind.Relative);
         }
 
         /// <summary>	The get Virtual LAN. </summary>
@@ -726,7 +729,7 @@
         /// <returns>	The <see cref="Uri"/>. </returns>
         public static Uri GetVlan(Guid orgId, Guid vlanId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/network/vlan/{1}", orgId, vlanId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/vlan/{1}", orgId, vlanId), UriKind.Relative);
         }
 
         /// <summary>	Gets vlan by organisation identifier. </summary>
@@ -734,7 +737,7 @@
         /// <returns>	The vlan by organisation identifier. </returns>
         public static Uri GetVlanByOrgId(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/network/vlan", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/vlan", orgId), UriKind.Relative);
         }
 
         /// <summary>	The relative URI for the CaaS API for deploying the VLan. </summary>
@@ -742,7 +745,7 @@
         /// <returns>	A URI. </returns>
         public static Uri DeployVlan(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/network/deployVlan", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/deployVlan", orgId), UriKind.Relative);
         }
 
         /// <summary>	The relative URI for the CaaS API for editing the VLan. </summary>
@@ -750,7 +753,7 @@
         /// <returns>	A URI. </returns>
         public static Uri EditVlan(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/network/editVlan", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/editVlan", orgId), UriKind.Relative);
         }
 
         /// <summary>	The relative URI for the CaaS API for expanding the VLan. </summary>
@@ -758,7 +761,7 @@
         /// <returns>	A URI. </returns>
         public static Uri ExpandVlan(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/network/expandVlan", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/expandVlan", orgId), UriKind.Relative);
         }
 
         /// <summary>	Deletes the vlan described by orgId. </summary>
@@ -766,7 +769,7 @@
         /// <returns>	An URI. </returns>
         public static Uri DeleteVlan(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/network/deleteVlan", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/deleteVlan", orgId), UriKind.Relative);
         }
 
         #endregion
@@ -1532,7 +1535,7 @@
         /// <returns>Returns the relative URI of the REST request for creating the NAT rule.</returns>
         public static Uri CreateNatRule(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/network/createNatRule", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/createNatRule", orgId), UriKind.Relative);
         }
 
         /// <summary>Deletes a NAT Rule. </summary>
@@ -1630,7 +1633,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri AddVipNode(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/networkDomainVip/createNode", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/networkDomainVip/createNode", orgId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for getting the VIP Nodes.</summary>
@@ -1671,7 +1674,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri CreateVirtualListener(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/networkDomainVip/createVirtualListener", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/networkDomainVip/createVirtualListener", orgId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for getting the Virtual Listeners.</summary>
@@ -1756,7 +1759,7 @@
         /// <returns>	An URI for the mcp2.0 deploy server api. </returns>
         public static Uri DeployMCP20Server(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/server/deployServer", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/server/deployServer", orgId), UriKind.Relative);
         }
 
         /// <summary>	Clean server via MCP 2.0 api </summary>
@@ -1868,7 +1871,7 @@
         {
             return
                 new Uri(
-                    string.Format(MCP2_1_PREFIX + "{0}/infrastructure/operatingSystem?datacenterId={1}", orgId, 
+                    string.Format(MCP2_3_PREFIX + "{0}/infrastructure/operatingSystem?datacenterId={1}", orgId, 
                         dataCenterId), UriKind.Relative);
         }
 

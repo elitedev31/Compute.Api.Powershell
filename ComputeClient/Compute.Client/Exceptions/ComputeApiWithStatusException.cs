@@ -27,6 +27,27 @@ namespace DD.CBU.Compute.Api.Client.Exceptions
         public ResponseType CaaSOperationResponse { get; set; }
 
         /// <summary>
+        /// Gets or sets the caas operation response. for other operations
+        /// </summary>
+        public string CaasRawResponse { get; set; }
+
+        /// <summary>
+        /// Initialises a new instance of the <see cref="DD.CBU.Compute.Api.Client.Exceptions.ComputeApiWithStatusException"/> class.
+        /// </summary>
+        /// <param name="error">Error Type, for older clients</param>
+        /// <param name="caasRawResponse">
+        /// The caa operation status.
+        /// </param>
+        /// <param name="uri">
+        /// The uri.
+        /// </param>
+        public ComputeApiWithStatusException(ComputeApiError error, string caasRawResponse, Uri uri)
+            : base(error, uri, String.Empty)
+        {
+            CaasRawResponse = caasRawResponse;
+        }
+
+        /// <summary>
         /// Initialises a new instance of the <see cref="DD.CBU.Compute.Api.Client.Exceptions.ComputeApiWithStatusException"/> class.
         /// </summary>
         /// <param name="error">Error Type, for older clients</param>
@@ -82,6 +103,7 @@ namespace DD.CBU.Compute.Api.Client.Exceptions
 
             CaaSOperationStatus = (Status)info.GetValue("CaaSOperationStatus", typeof(Status));
             CaaSOperationResponse = (ResponseType)info.GetValue("CaaSOperationResponse", typeof(ResponseType));
+            CaasRawResponse = (string)info.GetValue("CaasRawResponse", typeof(string));
         }
 
         /// <summary>
@@ -107,6 +129,7 @@ namespace DD.CBU.Compute.Api.Client.Exceptions
             base.GetObjectData(info, context);
             info.AddValue("CaaSOperationStatus", CaaSOperationStatus);
             info.AddValue("CaaSOperationResponse", CaaSOperationResponse);
+            info.AddValue("CaasRawResponse", CaasRawResponse);
         }
 
         /// <summary>
@@ -125,6 +148,10 @@ namespace DD.CBU.Compute.Api.Client.Exceptions
                 if (CaaSOperationResponse != null)
                 {
                     sb.AppendFormat("CaaSOperationResponse: {0}", JsonConvert.SerializeObject(CaaSOperationResponse));
+                }
+                if (!string.IsNullOrWhiteSpace(CaasRawResponse))
+                {
+                    sb.AppendFormat("CaasRawResponse: {0}", CaasRawResponse);
                 }
                 return sb.ToString();
             }

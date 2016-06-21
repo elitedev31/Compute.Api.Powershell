@@ -30,7 +30,7 @@ namespace Compute.Client.UnitTests
         public void ReturnsCreateNatRuleUri()
         {
             var uri = ApiUris.CreateNatRule(_orgId);
-            Assert.AreEqual(ApiUris.MCP2_1_PREFIX + _orgId + "/network/createNatRule", uri.OriginalString);
+            Assert.AreEqual(ApiUris.MCP2_3_PREFIX + _orgId + "/network/createNatRule", uri.OriginalString);
         }
 
         [TestMethod]
@@ -116,7 +116,7 @@ namespace Compute.Client.UnitTests
         public void ReturnsAddVipNodeUri()
         {
             var uri = ApiUris.AddVipNode(_orgId);
-            Assert.AreEqual(ApiUris.MCP2_1_PREFIX + _orgId + "/networkDomainVip/createNode", uri.OriginalString);
+            Assert.AreEqual(ApiUris.MCP2_3_PREFIX + _orgId + "/networkDomainVip/createNode", uri.OriginalString);
         }
 
         [TestMethod]

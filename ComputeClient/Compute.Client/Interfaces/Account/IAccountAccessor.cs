@@ -1,6 +1,7 @@
 ﻿namespace DD.CBU.Compute.Api.Client.Interfaces.Account
 {
-	using System.Collections.Generic;
+    using System;
+    using System.Collections.Generic;
 	using System.Threading.Tasks;
 
 	using DD.CBU.Compute.Api.Contracts.Datacenter;
@@ -153,12 +154,9 @@
         /// </returns>
         Task<TwoFactorAuthentication> GetTwoFactorAuthenticationStatus();
         
-        /// <summary>
-        /// The set two factor authentication status.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="Task"/>.
-        /// </returns>
+        /// <summary>The set two factor authentication status.</summary>
+        /// <param name="status">The status.</param>
+        /// <returns>The <see cref="Task"/>.</returns>
         Task<Status> SetTwoFactorAuthenticationStatus(TwoFactorAuthentication status);
     }
 }

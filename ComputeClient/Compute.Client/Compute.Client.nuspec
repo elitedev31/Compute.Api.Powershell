@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>DD.CBU.Compute.Api.Client</id>
@@ -8,8 +8,7 @@
     <projectUrl>https://github.com/DimensionDataCBUSydney/DimensionData.ComputeClient</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Provides a client to fully manage the CaaS including deploying machines, managing backups etc.</description>
-    <summary>Dimension Data Compute as a Service client API.</summary>
-    <releaseNotes>Fixed invalid edit firewall contract.</releaseNotes>
+    <summary>Dimension Data Compute as a Service client API.</summary>    
     <copyright>Copyright Dimension Data 2015</copyright>
     <dependencies>
       <group targetFramework=".NETFramework4.5">
@@ -21,9 +20,9 @@
   <files>
     <file src="bin\Release\DD.CBU.Compute.Api.Client.dll" target="lib\net45\DD.CBU.Compute.Api.Client.dll" />
     <file src="bin\Release\DD.CBU.Compute.Api.Client.xml" target="lib\net45\DD.CBU.Compute.Api.Client.xml" />
-    <file src="bin\Release\DD.CBU.Compute.Api.Client.xml" target="lib\net45\DD.CBU.Compute.Api.Client.pdb" />
+    <file src="bin\Release\DD.CBU.Compute.Api.Client.pdb" target="lib\net45\DD.CBU.Compute.Api.Client.pdb" />
     <file src="bin\Release\DD.CBU.Compute.Api.Contracts.dll" target="lib\net45\DD.CBU.Compute.Api.Contracts.dll" />
     <file src="bin\Release\DD.CBU.Compute.Api.Contracts.xml" target="lib\net45\DD.CBU.Compute.Api.Contracts.xml" />
-    <file src="bin\Release\DD.CBU.Compute.Api.Contracts.xml" target="lib\net45\DD.CBU.Compute.Api.Contracts.pdb" />
+    <file src="bin\Release\DD.CBU.Compute.Api.Contracts.pdb" target="lib\net45\DD.CBU.Compute.Api.Contracts.pdb" />
   </files>
 </package>

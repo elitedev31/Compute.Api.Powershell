@@ -2,6 +2,8 @@
 
 namespace DD.CBU.Compute.Api.Contracts.Organization
 {
+    using System.Xml;
+    using System.Xml.Serialization;
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.18020")]
     [System.SerializableAttribute()]
@@ -14,6 +16,7 @@ namespace DD.CBU.Compute.Api.Contracts.Organization
 
         private bool enabled;
 
+        [XmlText]
         public bool Enabled
         {
             get

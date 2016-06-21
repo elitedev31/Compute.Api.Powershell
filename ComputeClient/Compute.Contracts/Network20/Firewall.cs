@@ -344,21 +344,17 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
     [System.Xml.Serialization.XmlRootAttribute("editFirewallRule", Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
     public partial class EditFirewallRuleType
     {
-
         /// <remarks/>
         public string action;
-
-        /// <remarks/>
-        public string ipVersion;
 
         /// <remarks/>
         public string protocol;
 
         /// <remarks/>
-        public IpAndPortFilterType source;
+        public IpAndPortType source;
 
         /// <remarks/>
-        public IpAndPortFilterType destination;
+        public IpAndPortType destination;
 
         /// <remarks/>
         public bool enabled;

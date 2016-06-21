@@ -208,7 +208,7 @@ namespace Compute.Client.UnitTests.Server20
 
             var client = GetWebApiClient();
             var accessor = new ServerAccessor(client);
-            var response = await accessor.AddNic(serverId, Guid.NewGuid(), null);
+            var response = await accessor.AddNic(serverId, Guid.NewGuid(), "10.10.10.10", "E1000");
 
             Assert.IsNotNull(response);
             Assert.AreEqual("ADD_NIC", response.operation);

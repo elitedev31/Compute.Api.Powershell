@@ -1,5 +1,6 @@
 ﻿namespace DD.CBU.Compute.Api.Client.Account
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -281,15 +282,12 @@
             return await _apiClient.GetAsync<TwoFactorAuthentication>(ApiUris.TwoFactorAuthenicationStatus(_apiClient.OrganizationId));
         }
 
-        /// <summary>
-        /// The set two factor authentication status.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="Task"/>.
-        /// </returns>
+        /// <summary>The set two factor authentication status.</summary>
+        /// <param name="status">The status.</param>
+        /// <returns>The <see cref="Task"/>.</returns>
         public async Task<Status> SetTwoFactorAuthenticationStatus(TwoFactorAuthentication status)
         {
-            return await _apiClient.PostAsync<Status>(ApiUris.TwoFactorAuthenicationStatus(_apiClient.OrganizationId), status.Enabled ? "true" : "false");
+            return await _apiClient.PostAsync<TwoFactorAuthentication, Status>(ApiUris.TwoFactorAuthenicationStatus(_apiClient.OrganizationId), status);
         }
 	}
 }
