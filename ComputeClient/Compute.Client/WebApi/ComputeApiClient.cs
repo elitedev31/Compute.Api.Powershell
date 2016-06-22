@@ -23,7 +23,6 @@ namespace DD.CBU.Compute.Api.Client
 	using System.Net;
 	using System.Net.Http;
 	using System.Threading.Tasks;
-
 	using DD.CBU.Compute.Api.Client.Account;
 	using DD.CBU.Compute.Api.Client.Backup;
 	using DD.CBU.Compute.Api.Client.ImportExportImages;
@@ -48,6 +47,8 @@ namespace DD.CBU.Compute.Api.Client
 	using DD.CBU.Compute.Api.Contracts.Server;
     using DD.CBU.Compute.Api.Contracts.Server10;
     using DD.CBU.Compute.Api.Contracts.Software;
+	using Drs;
+	using Interfaces.Drs;
 	using Interfaces.Tagging;
 	using Tagging;
 
@@ -207,6 +208,7 @@ namespace DD.CBU.Compute.Api.Client
 			Backup = new BackupAccessor(WebApi);
             Reports = new ReportAccessor(WebApi);
             Tagging = new TaggingAccessor(WebApi);
+            ConsistencyGroups = new ConsistencyGroupAccessor(WebApi);
 		}
 
 		#endregion
@@ -364,6 +366,11 @@ namespace DD.CBU.Compute.Api.Client
 
         /// <summary>Gets the tagging.</summary>
         public ITaggingAccessor Tagging { get; private set; }
+
+        /// <summary>
+        /// Gets the Consistency Groups.
+        /// </summary>
+        public IConsistencyGroupAccessor ConsistencyGroups { get; private set; }
 
         #endregion Instance data
 

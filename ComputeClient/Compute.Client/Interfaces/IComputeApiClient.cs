@@ -5,6 +5,7 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
     using Account;
     using Backup;
     using Contracts.Directory;
+    using Drs;
     using ImportExportImages;
     using Infrastructure;
     using Network;
@@ -75,5 +76,10 @@ namespace DD.CBU.Compute.Api.Client.Interfaces
 
         /// <summary>Gets the tagging.</summary>
         ITaggingAccessor Tagging { get; }
+
+        /// <summary>
+        /// Gets the Consistency groups.
+        /// </summary>
+        IConsistencyGroupAccessor ConsistencyGroups { get; }
     }
 }
