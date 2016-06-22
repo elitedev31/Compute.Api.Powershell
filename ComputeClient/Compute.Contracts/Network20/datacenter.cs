@@ -394,6 +394,65 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
+    public partial class DrsType
+    {
+
+        private PropertyType[] propertyField;
+
+        private IdListType targetDatacentersField;
+
+        private string maintenanceStatusField;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("property")]
+        public PropertyType[] property
+        {
+            get { return this.propertyField; }
+            set { this.propertyField = value; }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("targetDatacenters")]
+        public IdListType targetDatacenters
+        {
+            get { return this.targetDatacentersField; }
+            set { this.targetDatacentersField = value; }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string maintenanceStatus
+        {
+            get { return this.maintenanceStatusField; }
+            set { this.maintenanceStatusField = value; }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.81.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
+    public partial class IdListType
+    {
+        private string[] listField;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute()]
+        public string[] list
+        {
+            get { return this.listField; }
+            set { this.listField = value; }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.81.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
     public partial class DatacenterType
     {
 
@@ -418,6 +477,8 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
         private ConsoleAccessType consoleAccessField;
 
         private MonitoringType monitoringField;
+
+        private DrsType drsField;
 
         private string idField;
 
@@ -498,6 +559,13 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
         {
             get { return this.monitoringField; }
             set { this.monitoringField = value; }
+        }
+
+        /// <remarks/>
+        public DrsType drs
+        {
+            get { return this.drsField; }
+            set { this.drsField = value; }
         }
 
         /// <remarks/>
