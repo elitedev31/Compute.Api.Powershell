@@ -436,11 +436,11 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
     public partial class IdListType
     {
-        private string[] listField;
+        private string listField;
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute()]
-        public string[] list
+        [System.Xml.Serialization.XmlText()]
+        public string list
         {
             get { return this.listField; }
             set { this.listField = value; }
