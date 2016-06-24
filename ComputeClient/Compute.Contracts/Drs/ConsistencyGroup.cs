@@ -186,6 +186,9 @@ namespace DD.CBU.Compute.Api.Contracts.Drs
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()] public string networkDomainId;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()] public string networkDomainName;
     }
 
     /// <remarks/>
@@ -202,5 +205,8 @@ namespace DD.CBU.Compute.Api.Contracts.Drs
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()] public string networkDomainId;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()] public string networkDomainName;
     }
 }
