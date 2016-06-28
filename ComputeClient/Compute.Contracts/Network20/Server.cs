@@ -233,6 +233,8 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 
         private string datacenterIdField;
 
+        private drsEligible drsEligibleField;
+
         /// <remarks/>
         public string name
         {
@@ -377,6 +379,13 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
         {
             get { return this.datacenterIdField; }
             set { this.datacenterIdField = value; }
+        }
+
+        /// <remarks/>
+        public drsEligible drsEligible
+        {
+            get { return this.drsEligibleField; }
+            set { this.drsEligibleField = value; }
         }
     }
 
@@ -2030,5 +2039,16 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string id;
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
+    [System.Xml.Serialization.XmlRootAttribute("drsEligible", Namespace = "urn:didata.com:api:cloud:types")]
+    public partial class drsEligible
+    {
     }
 }
