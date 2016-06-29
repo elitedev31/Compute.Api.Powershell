@@ -235,8 +235,10 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 
         private drsEligible drsEligibleField;
 
-        /// <remarks/>
-        public string name
+	    private consistencyGroup consistencyGroupField;
+
+		/// <remarks/>
+		public string name
         {
             get { return this.nameField; }
             set { this.nameField = value; }
@@ -387,6 +389,13 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
             get { return this.drsEligibleField; }
             set { this.drsEligibleField = value; }
         }
+
+		/// <remarks/>
+		public consistencyGroup consistencyGroup
+	    {
+			get { return this.consistencyGroupField; }
+			set { this.consistencyGroupField = value; }
+		}
     }
 
     /// <remarks/>
@@ -2051,4 +2060,30 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
     public partial class drsEligible
     {
     }
+
+	/// <remarks/>
+	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
+	[System.SerializableAttribute()]
+	[System.Diagnostics.DebuggerStepThroughAttribute()]
+	[System.ComponentModel.DesignerCategoryAttribute("code")]
+	[System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
+	[System.Xml.Serialization.XmlRootAttribute("consistencyGroup", Namespace = "urn:didata.com:api:cloud:types")]
+	public partial class consistencyGroup
+	{
+		/// <remarks/>
+		[System.Xml.Serialization.XmlAttributeAttribute()]
+		public string id;
+
+		/// <remarks/>
+		[System.Xml.Serialization.XmlAttributeAttribute()]
+		public string name;
+
+		/// <remarks/>
+		[System.Xml.Serialization.XmlAttributeAttribute()]
+		public string status;
+
+		/// <remarks/>
+		[System.Xml.Serialization.XmlAttributeAttribute()]
+		public string serverRole;
+	}
 }
