@@ -1,4 +1,6 @@
-﻿namespace DD.CBU.Compute.Api.Client.Server20
+﻿using DD.CBU.Compute.Api.Contracts.Server;
+
+namespace DD.CBU.Compute.Api.Client.Server20
 {
     using System;
     using System.Collections.Generic;
@@ -263,10 +265,18 @@
                         ApiUris.NotifyNicIpChange(_apiClient.OrganizationId), notifyNicIpChange);
         }
 
-        /// <summary>Updates compute resource properties of a Server </summary>
-        /// <param name="reconfigureServer">Details of the server to be updated</param>
-        /// <returns>	A standard CaaS response </returns>
-        public async Task<ResponseType> ReconfigureServer(ReconfigureServerType reconfigureServer)
+		/// <summary>Edit metadata of the server</summary>
+		/// <param name="editServerMetadataType">Server metadata change model.</param>
+		/// <returns>The async type of <see cref="ResponseType"/></returns>
+		public async Task<ResponseType> EditServerMetadata(EditServerMetadataType editServerMetadataType)
+		{
+			return await _apiClient.PostAsync<EditServerMetadataType, ResponseType>(ApiUris.EditServerMetadata(_apiClient.OrganizationId), editServerMetadataType);
+		}
+
+		/// <summary>Updates compute resource properties of a Server </summary>
+		/// <param name="reconfigureServer">Details of the server to be updated</param>
+		/// <returns>	A standard CaaS response </returns>
+		public async Task<ResponseType> ReconfigureServer(ReconfigureServerType reconfigureServer)
         {
             return await _apiClient.PostAsync<ReconfigureServerType, ResponseType>(
                 ApiUris.ReconfigureServer(_apiClient.OrganizationId), 
