@@ -255,6 +255,7 @@
     <Compile Include="Server\DiskSpeedType.cs" />
     <Compile Include="Server\DiskType.cs" />
     <Compile Include="Server\DiskWithSpeedType.cs" />
+    <Compile Include="Server\EditServerMetadataType.cs" />
     <Compile Include="Server\MachineSpecificationType.cs" />
     <Compile Include="Server\MachineStatusType.cs" />
     <Compile Include="Server\NewAntiAffinityRule.cs" />

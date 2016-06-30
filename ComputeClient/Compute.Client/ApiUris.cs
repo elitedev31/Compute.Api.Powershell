@@ -407,15 +407,22 @@
             return new Uri(string.Format(MCP1_0_PREFIX + "{0}/server/{1}", orgId, serverId), UriKind.Relative);
         }
 
+		/// <summary>Edit server metadata.</summary>
+		/// <param name="orgId">The organization id</param>
+		/// <returns>Returns the relative URI of the REST request for a Edit server metadata</returns>
+		public static Uri EditServerMetadata(Guid orgId)
+		{
+			return new Uri(string.Format(MCP2_3_PREFIX + "{0}/server/editServerMetadata", orgId), UriKind.Relative);
+		}
 
-        /// <summary>Deletes the server.
-        /// <remarks>
-        /// The Server must be stopped before it can be deleted</remarks>
-        /// </summary>
-        /// <param name="orgId">The organization id</param>
-        /// <param name="serverId">The server id</param>
-        /// <returns>Returns the relative URI of the REST request for a deletion of the server</returns>
-        public static Uri DeleteServer(Guid orgId, string serverId)
+		/// <summary>Deletes the server.
+		/// <remarks>
+		/// The Server must be stopped before it can be deleted</remarks>
+		/// </summary>
+		/// <param name="orgId">The organization id</param>
+		/// <param name="serverId">The server id</param>
+		/// <returns>Returns the relative URI of the REST request for a deletion of the server</returns>
+		public static Uri DeleteServer(Guid orgId, string serverId)
         {
             return new Uri(string.Format(MCP1_0_PREFIX + "{0}/server/{1}?delete", orgId, serverId), UriKind.Relative);
         }

@@ -1,4 +1,6 @@
-﻿namespace DD.CBU.Compute.Api.Client.Server
+﻿using DD.CBU.Compute.Api.Contracts.Network20;
+
+namespace DD.CBU.Compute.Api.Client.Server
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -137,16 +139,24 @@
             return await _apiClient.PostAsync<Status>(ApiUris.ModifyServer(_apiClient.OrganizationId, serverId), poststring);
         }
 
-        /// <summary>
-        /// Powers on the server.
-        /// </summary>
-        /// <param name="serverId">
-        /// The server id.
-        /// </param>
-        /// <returns>
-        /// The <see cref="Task"/>.
-        /// </returns>		
-        public async Task<Status> ServerPowerOn(string serverId)
+		/// <summary>Edit metadata of the server</summary>
+		/// <param name="editServerMetadataType">Server metadata change model.</param>
+		/// <returns>The async type of <see cref="ResponseType"/></returns>
+		public async Task<ResponseType> EditServerMetadata(EditServerMetadataType editServerMetadataType)
+		{
+			return await _apiClient.PostAsync<EditServerMetadataType, ResponseType>(ApiUris.EditServerMetadata(_apiClient.OrganizationId), editServerMetadataType);
+		}
+
+		/// <summary>
+		/// Powers on the server.
+		/// </summary>
+		/// <param name="serverId">
+		/// The server id.
+		/// </param>
+		/// <returns>
+		/// The <see cref="Task"/>.
+		/// </returns>		
+		public async Task<Status> ServerPowerOn(string serverId)
         {
             return await _apiClient.GetAsync<Status>(ApiUris.PowerOnServer(_apiClient.OrganizationId, serverId));
         }
