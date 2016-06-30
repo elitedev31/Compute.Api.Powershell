@@ -2099,6 +2099,7 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 		private string nameField;
 		private string descriptionField;
 		private bool drsEligibleField;
+		private bool descriptionFieldSpecified;
 		private bool drsEligibleFieldSpecified;
 		private string idField;
 		/// 
@@ -2149,6 +2150,19 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 			set
 			{
 				this.drsEligibleFieldSpecified = value;
+			}
+		}
+		/// 
+		[System.Xml.Serialization.XmlIgnoreAttribute()]
+		public bool descriptionSpecified
+		{
+			get
+			{
+				return this.descriptionFieldSpecified;
+			}
+			set
+			{
+				this.descriptionFieldSpecified = value;
 			}
 		}
 		/// 
