@@ -77,6 +77,11 @@
         /// </summary>
         public const string PrivateIpv4Field = "privateIpv4";
 
+        /// <summary>
+        /// The "privateIpv4" field name.
+        /// </summary>
+        public const string DrsEligibleField = "drsEligible";
+
         /// <summary>	
         /// Identifies an individual Virtual Listener.
         /// </summary>
@@ -210,6 +215,15 @@
         {
             get { return GetFilter<string>(PrivateIpv4Field); }
             set { SetFilter(PrivateIpv4Field, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets the drsEligible filter.
+        /// </summary>
+        public bool? DrsEligible
+        {
+            get { return GetFilter<bool>(DrsEligibleField); }
+            set { SetFilter(DrsEligibleField, value); }
         }
     }
 }
