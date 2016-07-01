@@ -2193,5 +2193,13 @@
         {
             return new Uri(string.Format(MCP2_3_PREFIX + "{0}/consistencyGroup/consistencyGroup", orgId), UriKind.Relative);
         }
+
+        /// <summary>Returns the relative URI of the REST request for create consistency groups.</summary>
+        /// <param name="orgId">The organization id.</param>
+        /// <returns>The <see cref="Uri"/>.</returns>
+        public static Uri CreateConsistencyGroups(Guid orgId)
+        {
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/consistencyGroup/createConsistencyGroup", orgId), UriKind.Relative);
+        }
     }
 }

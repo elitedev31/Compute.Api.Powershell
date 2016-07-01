@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using Contracts.Drs;
     using Contracts.General;
+    using Contracts.Network20;
     using Contracts.Requests;
     using Contracts.Requests.Drs;
 
@@ -27,5 +28,12 @@
         /// <param name="pagingOptions">The pagination options.</param>
         /// <returns>Paginated result of <see cref="ConsistencyGroupType"/></returns>
         Task<PagedResponse<ConsistencyGroupType>> GetConsistencyGroupsPaginated(ConsistencyGroupListOptions filteringOptions = null, PageableRequest pagingOptions = null);
+
+        /// <summary>
+        /// The Create Consistency Group
+        /// </summary>
+        /// <param name="createConsistencyGroup">The create consistency group type.</param>
+        /// <returns>The <see cref="ResponseType"/></returns>
+        Task<ResponseType> CreateConsistencyGroup(CreateConsistencyGroupType createConsistencyGroup);
     }
 }

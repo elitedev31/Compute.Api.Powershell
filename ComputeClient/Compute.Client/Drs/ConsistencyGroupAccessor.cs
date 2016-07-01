@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using Contracts.Drs;
     using Contracts.General;
+    using Contracts.Network20;
     using Contracts.Requests;
     using Contracts.Requests.Drs;
     using Interfaces;
@@ -57,6 +58,16 @@
                 pageNumber = response.pageNumberSpecified ? response.pageNumber : (int?)null,
                 pageSize = response.pageSizeSpecified ? response.pageSize : (int?)null
             };
+        }
+
+        /// <summary>
+        /// The Create Consistency Group
+        /// </summary>
+        /// <param name="createConsistencyGroup">The create consistency group type.</param>
+        /// <returns>The <see cref="ResponseType"/></returns>
+        public async Task<ResponseType> CreateConsistencyGroup(CreateConsistencyGroupType createConsistencyGroup)
+        {
+            return await _apiClient.PostAsync<CreateConsistencyGroupType, ResponseType>(ApiUris.CreateConsistencyGroups(_apiClient.OrganizationId), createConsistencyGroup);
         }
     }
 }

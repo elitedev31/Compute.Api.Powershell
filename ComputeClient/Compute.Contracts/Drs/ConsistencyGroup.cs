@@ -209,4 +209,42 @@ namespace DD.CBU.Compute.Api.Contracts.Drs
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()] public string networkDomainName;
     }
+
+    /// 
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.34283")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "urn:didata.com:api:cloud:types", IsNullable = true)]
+    public partial class CreateConsistencyGroupType
+    {
+        /// <remarks/>
+        public string name;
+
+        /// <remarks/>
+        public string description;
+
+        /// <remarks/>
+        public int journalSizeGb;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("serverPair")] public DrsServerPairType[] serverPair;
+    }
+    /// 
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.34283")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "urn:didata.com:api:cloud:types", IsNullable = true)]
+    public partial class DrsServerPairType
+    {
+        /// <remarks/>
+        public string sourceServerId;
+
+        /// <remarks/>
+        public string targetServerId;
+        
+    }
 }
