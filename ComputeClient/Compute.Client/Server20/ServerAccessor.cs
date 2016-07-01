@@ -266,11 +266,11 @@ namespace DD.CBU.Compute.Api.Client.Server20
         }
 
 		/// <summary>Edit metadata of the server</summary>
-		/// <param name="editServerMetadataType">Server metadata change model.</param>
+		/// <param name="editServerMetadata">Server metadata change model.</param>
 		/// <returns>The async type of <see cref="ResponseType"/></returns>
-		public async Task<ResponseType> EditServerMetadata(EditServerMetadataType editServerMetadataType)
+		public async Task<ResponseType> EditServerMetadata(editServerMetadata editServerMetadata)
 		{
-			return await _apiClient.PostAsync<EditServerMetadataType, ResponseType>(ApiUris.EditServerMetadata(_apiClient.OrganizationId), editServerMetadataType);
+			return await _apiClient.PostAsync<editServerMetadata, ResponseType>(ApiUris.EditServerMetadata(_apiClient.OrganizationId), editServerMetadata);
 		}
 
 		/// <summary>Updates compute resource properties of a Server </summary>

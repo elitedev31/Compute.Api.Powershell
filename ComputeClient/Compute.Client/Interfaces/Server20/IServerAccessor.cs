@@ -135,9 +135,9 @@
         Task<ResponseType> RemoveDisk(RemoveDiskType removeDisk);
 
 		/// <summary>Edit metadata of the server</summary>
-		/// <param name="editServerMetadataType">Server metadata change model.</param>
+		/// <param name="editServerMetadata">Server metadata change model.</param>
 		/// <returns>The async type of <see cref="ResponseType"/></returns>
-		Task<ResponseType> EditServerMetadata(EditServerMetadataType editServerMetadataType);
+		Task<ResponseType> EditServerMetadata(editServerMetadata editServerMetadata);
 
     }
 }

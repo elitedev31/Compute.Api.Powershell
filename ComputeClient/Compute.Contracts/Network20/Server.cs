@@ -2093,8 +2093,8 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 	[System.Diagnostics.DebuggerStepThroughAttribute()]
 	[System.ComponentModel.DesignerCategoryAttribute("code")]
 	[System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
-	[System.Xml.Serialization.XmlRootAttribute(Namespace = "urn:didata.com:api:cloud:types", IsNullable = true)]
-	public partial class EditServerMetadataType
+	[System.Xml.Serialization.XmlRootAttribute("editServerMetadata", Namespace = "urn:didata.com:api:cloud:types", IsNullable = true)]
+	public partial class editServerMetadata
 	{
 		private string nameField;
 		private string descriptionField;
