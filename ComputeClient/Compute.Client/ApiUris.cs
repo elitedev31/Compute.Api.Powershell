@@ -2191,7 +2191,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri GetConsistencyGroups(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/consistencyGroup/consistencyGroup", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/consistencyGroup", orgId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for create consistency groups.</summary>
