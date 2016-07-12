@@ -35,5 +35,11 @@
         /// <param name="createConsistencyGroup">The create consistency group type.</param>
         /// <returns>The <see cref="ResponseType"/></returns>
         Task<ResponseType> CreateConsistencyGroup(CreateConsistencyGroupType createConsistencyGroup);
+
+        /// <summary>
+        /// The Get Consistency Group Snapshots method.
+        /// </summary>
+        /// <returns>List of <see cref="ConsistencyGroupType"/></returns>
+        Task<consistencyGroupSnapshots> GetConsistencyGroupSnapshots(ConsistencyGroupSnapshotListOptions filteringOptions = null);
     }
 }

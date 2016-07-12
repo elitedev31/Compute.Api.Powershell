@@ -69,5 +69,15 @@
         {
             return await _apiClient.PostAsync<CreateConsistencyGroupType, ResponseType>(ApiUris.CreateConsistencyGroups(_apiClient.OrganizationId), createConsistencyGroup);
         }
+
+        /// <summary>
+        /// The Get Consistency Group Snapshot method.
+        /// </summary>
+        /// <param name="filteringOptions">The filtering options.</param>
+        /// <returns>List of <see cref="consistencyGroupSnapshots"/></returns>
+        public async Task<consistencyGroupSnapshots> GetConsistencyGroupSnapshots(ConsistencyGroupSnapshotListOptions filteringOptions = null)
+        {
+            return await _apiClient.GetAsync<consistencyGroupSnapshots>(ApiUris.GetConsistencyGroupSnapshots(_apiClient.OrganizationId), null, filteringOptions);
+        }
     }
 }
