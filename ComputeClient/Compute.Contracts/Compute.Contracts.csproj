@@ -88,6 +88,7 @@
     <Compile Include="..\SolutionAssemblyInfo.cs">
       <Link>Properties\SolutionAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Drs\ConsistencyGroupSnapshot.cs" />
     <Compile Include="Drs\ConsistencyGroup.cs" />
     <Compile Include="Network20\FirewallOverride.cs" />
     <Compile Include="Network20\IpAddressList.cs" />
@@ -202,6 +203,7 @@
     <Compile Include="Network\PortRangeTypeType.cs" />
     <Compile Include="Network20\PublicIPBlock.cs" />
     <Compile Include="Network20\Server.cs" />
+    <Compile Include="Requests\Drs\ConsistencyGroupSnapshotListOptions.cs" />
     <Compile Include="Requests\Filter.cs" />
     <Compile Include="Requests\FilterOperator.cs" />
     <Compile Include="Requests\FilterableRequest.cs" />

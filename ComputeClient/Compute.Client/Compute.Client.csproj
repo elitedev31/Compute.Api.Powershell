@@ -98,6 +98,7 @@
     </Compile>
     <Compile Include="Account\AccountAccessor.cs" />
     <Compile Include="Backup\BackupAccessor.cs" />
+    <Compile Include="Drs\ConsistencyGroupSnapshotAccessor.cs" />
     <Compile Include="Drs\ConsistencyGroupAccessor.cs" />
     <Compile Include="Exceptions\ApiClientException.cs" />
     <Compile Include="ApiUris.cs" />
@@ -115,6 +116,7 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Infrastructure\InfrastructureAccessor.cs" />
     <Compile Include="Interfaces\Account\IAccountAccessor.cs" />
+    <Compile Include="Interfaces\Drs\IConsistencyGroupSnapshotAccessor.cs" />
     <Compile Include="Interfaces\Drs\IConsistencyGroupAccessor.cs" />
     <Compile Include="Interfaces\Infrastructure\IInfrastructureAccessor.cs" />
     <Compile Include="Interfaces\Backup\IBackupAccessor.cs" />
