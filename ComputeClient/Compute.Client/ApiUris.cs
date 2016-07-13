@@ -2209,5 +2209,13 @@
 		{
 			return new Uri(string.Format(MCP2_3_PREFIX + "{0}/consistencyGroup/snapshot", orgId), UriKind.Relative);
 		}
-	}
+
+        /// <summary>Returns the relative URI of the REST request for stop preview snapshot of a consistency group.</summary>
+        /// <param name="orgId">The organization id.</param>
+        /// <returns>The <see cref="Uri"/>.</returns>
+        public static Uri StopPreviewSnapshot(Guid orgId)
+        {
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/consistencyGroup/stopPreviewSnapshot", orgId), UriKind.Relative);
+        }
+    }
 }

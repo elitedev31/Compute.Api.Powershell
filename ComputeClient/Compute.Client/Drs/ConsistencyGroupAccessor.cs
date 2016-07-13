@@ -79,5 +79,15 @@
         {
             return await _apiClient.GetAsync<consistencyGroupSnapshots>(ApiUris.GetConsistencyGroupSnapshots(_apiClient.OrganizationId), null, filteringOptions);
         }
+
+        /// <summary>
+        /// The stop preview snapshot of a consistency group.
+        /// </summary>
+        /// <param name="stopPreviewSnapshotType">The stop preview snapshot type.</param>
+        /// <returns>The <see cref="ResponseType"/></returns>
+        public async Task<ResponseType> StopPreviewSnapshot(StopPreviewSnapshotType stopPreviewSnapshotType)
+        {
+            return await _apiClient.PostAsync<StopPreviewSnapshotType, ResponseType>(ApiUris.StopPreviewSnapshot(_apiClient.OrganizationId), stopPreviewSnapshotType);
+        }
     }
 }

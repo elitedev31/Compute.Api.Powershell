@@ -145,4 +145,28 @@ namespace DD.CBU.Compute.Api.Contracts.Drs
 			}
 		}
 	}
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "urn:didata.com:api:cloud:types")]
+    public class StopPreviewSnapshotType
+    {
+        private string consistencyGroupIdField;
+        /// 
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string consistencyGroupId
+        {
+            get
+            {
+                return this.consistencyGroupIdField;
+            }
+            set
+            {
+                this.consistencyGroupIdField = value;
+            }
+        }
+    }
 }

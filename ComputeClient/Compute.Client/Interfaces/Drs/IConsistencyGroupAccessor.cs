@@ -41,5 +41,12 @@
         /// </summary>
         /// <returns>List of <see cref="ConsistencyGroupType"/></returns>
         Task<consistencyGroupSnapshots> GetConsistencyGroupSnapshots(ConsistencyGroupSnapshotListOptions filteringOptions = null);
+
+        /// <summary>
+        /// The stop preview snapshot of a consistency group.
+        /// </summary>
+        /// <param name="stopPreviewSnapshotType">The stop preview snapshot type.</param>
+        /// <returns>The <see cref="ResponseType"/></returns>
+        Task<ResponseType> StopPreviewSnapshot(StopPreviewSnapshotType stopPreviewSnapshotType);
     }
 }
