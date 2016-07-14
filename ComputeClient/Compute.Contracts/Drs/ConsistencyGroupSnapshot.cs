@@ -169,4 +169,42 @@ namespace DD.CBU.Compute.Api.Contracts.Drs
             }
         }
     }
+
+	/// 
+	[System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.34283")]
+	[System.SerializableAttribute()]
+	[System.Diagnostics.DebuggerStepThroughAttribute()]
+	[System.ComponentModel.DesignerCategoryAttribute("code")]
+	[System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
+	[System.Xml.Serialization.XmlRootAttribute("startPreviewSnapshot", Namespace = "urn:didata.com:api:cloud:types", IsNullable = true)]
+	public partial class StartPreviewSnapshotType
+	{
+		private long snapshotIdField;
+		private string consistencyGroupIdField;
+		/// 
+		public long snapshotId
+		{
+			get
+			{
+				return this.snapshotIdField;
+			}
+			set
+			{
+				this.snapshotIdField = value;
+			}
+		}
+		/// 
+		[System.Xml.Serialization.XmlAttributeAttribute()]
+		public string consistencyGroupId
+		{
+			get
+			{
+				return this.consistencyGroupIdField;
+			}
+			set
+			{
+				this.consistencyGroupIdField = value;
+			}
+		}
+	}
 }

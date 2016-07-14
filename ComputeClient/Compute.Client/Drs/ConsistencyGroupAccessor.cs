@@ -89,5 +89,15 @@
         {
             return await _apiClient.PostAsync<StopPreviewSnapshotType, ResponseType>(ApiUris.StopPreviewSnapshot(_apiClient.OrganizationId), stopPreviewSnapshotType);
         }
-    }
+
+		/// <summary>
+		/// Start preview snapshot of a consistency group.
+		/// </summary>
+		/// <param name="startPreviewSnapshotType">The start preview snapshot type.</param>
+		/// <returns>The <see cref="ResponseType"/></returns>
+		public async Task<ResponseType> StartPreviewSnapshot(StartPreviewSnapshotType startPreviewSnapshotType)
+		{
+			return await _apiClient.PostAsync<StartPreviewSnapshotType, ResponseType>(ApiUris.StartPreviewSnapshot(_apiClient.OrganizationId), startPreviewSnapshotType);
+		}
+	}
 }
