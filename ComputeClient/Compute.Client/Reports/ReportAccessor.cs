@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using DD.CBU.Compute.Api.Client.Interfaces;
-using DD.CBU.Compute.Api.Client.Interfaces.Reports;
-
-namespace DD.CBU.Compute.Api.Client.Reports
+﻿namespace DD.CBU.Compute.Api.Client.Reports
 {
+    using System;
+    using System.Threading.Tasks;
+    using Interfaces;
+    using Interfaces.Reports;
+
     /// <summary>
     /// The Report type.
     /// </summary>
-    public class ReportAccessor: IReportAccessor
+    public class ReportAccessor : IReportAccessor
     {
         /// <summary>
         /// The _api client.
@@ -35,7 +34,7 @@ namespace DD.CBU.Compute.Api.Client.Reports
         /// <returns>The CSV formatted result</returns>
         public async Task<string> GetSummaryUsage(DateTime startDate, DateTime endDate)
         {
-            var data = 
+            var data =
                 await
                     _apiClient.GetAsync<string>(ApiUris.SummaryUsageReport(_apiClient.OrganizationId, startDate, endDate));
             return data;
@@ -95,6 +94,20 @@ namespace DD.CBU.Compute.Api.Client.Reports
             var data =
                 await
                     _apiClient.GetAsync<object>(ApiUris.AdminLogReport(_apiClient.OrganizationId, startDate, endDate));
+            return data;
+        }
+
+        /// <summary>
+        /// Returns a report detailing the DRS server pairs that were in existance for the supplied organizationId during the specified date range.
+        /// </summary>
+        /// <param name="startDate">The Start Date</param>
+        /// <param name="endDate">The End Date</param>
+        /// <returns>The CSV formatted result</returns>
+        public async Task<object> GetDrsPairsUsageReport(DateTime startDate, DateTime endDate)
+        {
+            var data =
+               await
+                   _apiClient.GetAsync<object>(ApiUris.DrsPairsUsageReport(_apiClient.OrganizationId, startDate, endDate));
             return data;
         }
     }

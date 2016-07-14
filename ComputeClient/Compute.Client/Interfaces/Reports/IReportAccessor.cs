@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using DD.CBU.Compute.Api.Contracts.General;
-using DD.CBU.Compute.Api.Contracts.Requests;
-using DD.CBU.Compute.Api.Contracts.Requests.Server;
-using DD.CBU.Compute.Api.Contracts.Server;
-
-namespace DD.CBU.Compute.Api.Client.Interfaces.Reports
+﻿namespace DD.CBU.Compute.Api.Client.Interfaces.Reports
 {
+    using System;
+    using System.Threading.Tasks;
+
     /// <summary>
     /// The Reports Interface
     /// </summary>
     public interface IReportAccessor
     {
-
         /// <summary>
         /// Retrieves a CSV-formatted daily usage report of the sum total usage across the account.
         /// </summary>
@@ -54,5 +48,13 @@ namespace DD.CBU.Compute.Api.Client.Interfaces.Reports
         /// <param name="endDate">The End Date</param>
         /// <returns>The CSV formatted result</returns>
         Task<object> GetAdministratorLogsReport(DateTime startDate, DateTime endDate);
+
+        /// <summary>
+        /// Returns a report detailing the DRS server pairs that were in existance for the supplied organizationId during the specified date range.
+        /// </summary>
+        /// <param name="startDate">The Start Date</param>
+        /// <param name="endDate">The End Date</param>
+        /// <returns>The CSV formatted result</returns>
+        Task<object> GetDrsPairsUsageReport(DateTime startDate, DateTime endDate);
     }
 }

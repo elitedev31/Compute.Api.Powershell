@@ -1828,6 +1828,16 @@
             return new Uri(string.Format(MCP1_0_PREFIX + "{0}/auditlog?startDate={1:yyyy-MM-dd}&endDate={2:yyyy-MM-dd}", orgId, startDate, endDate), UriKind.Relative);
         }
 
+        /// <summary>Returns the relative URI of the REST request for DRS Server Pairs usage report.</summary>
+        /// <param name="orgId">The organization id.</param>
+        /// <param name="startDate">The Start Date</param>
+        /// <param name="endDate">The End Date</param>
+        /// <returns>The <see cref="Uri"/>.</returns>
+        public static Uri DrsPairsUsageReport(Guid orgId, DateTime startDate, DateTime endDate)
+        {
+            return new Uri(string.Format(MCP1_0_PREFIX + "{0}/report/usageDrsPairs?startDate={1:yyyy-MM-dd}&endDate={2:yyyy-MM-dd}", orgId, startDate, endDate), UriKind.Relative);
+        }
+
         /// <summary>	Gets MCP 2 os images. </summary>
         /// <param name="orgId">	The organization Id. </param>
         /// <returns>	The MCP 2 images. </returns>
