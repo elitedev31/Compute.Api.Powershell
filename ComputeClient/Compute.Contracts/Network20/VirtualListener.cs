@@ -528,6 +528,8 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
 
         private string listenerIpAddressField;
 
+        private string listenerIpAddressabilityField;
+
         private int portField;
 
         private bool portFieldSpecified;
@@ -610,6 +612,13 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
         {
             get { return this.listenerIpAddressField; }
             set { this.listenerIpAddressField = value; }
+        }
+
+        /// <remarks/>
+        public string listenerIpAddressability
+        {
+            get { return this.listenerIpAddressabilityField; }
+            set { this.listenerIpAddressabilityField = value; }
         }
 
         /// <remarks/>
