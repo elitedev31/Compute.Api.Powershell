@@ -1689,7 +1689,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri GetVirtualListeners(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/networkDomainVip/virtualListener", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/networkDomainVip/virtualListener", orgId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for getting the Single Virtual Listener details.</summary>
@@ -1698,7 +1698,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri GetVirtualListener(Guid orgId, Guid virtualListenerId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/networkDomainVip/virtualListener/{1}", orgId, virtualListenerId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/networkDomainVip/virtualListener/{1}", orgId, virtualListenerId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for updating the Virtual Listener.</summary>
