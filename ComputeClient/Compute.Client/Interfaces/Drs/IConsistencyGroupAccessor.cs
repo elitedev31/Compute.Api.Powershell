@@ -48,5 +48,13 @@
         /// <param name="stopPreviewSnapshotType">The stop preview snapshot type.</param>
         /// <returns>The <see cref="ResponseType"/></returns>
         Task<ResponseType> StopPreviewSnapshot(StopPreviewSnapshotType stopPreviewSnapshotType);
-    }
+
+		/// <summary>
+		/// Start preview snapshot of a consistency group.
+		/// </summary>
+		/// <param name="startPreviewSnapshotType">The start preview snapshot type.</param>
+		/// <returns>The <see cref="ResponseType"/></returns>
+		Task<ResponseType> StartPreviewSnapshot(StartPreviewSnapshotType startPreviewSnapshotType);
+
+	}
 }
