@@ -210,15 +210,16 @@ namespace DD.CBU.Compute.Api.Contracts.Drs
         [System.Xml.Serialization.XmlAttributeAttribute()] public string networkDomainName;
     }
 
-    /// 
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.34283")]
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace = "urn:didata.com:api:cloud:types", IsNullable = true)]
+    [System.Xml.Serialization.XmlRootAttribute("createConsistencyGroup", Namespace = "urn:didata.com:api:cloud:types", IsNullable = false)]
     public partial class CreateConsistencyGroupType
     {
+
         /// <remarks/>
         public string name;
 
@@ -229,22 +230,23 @@ namespace DD.CBU.Compute.Api.Contracts.Drs
         public int journalSizeGb;
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("serverPair")] public DrsServerPairType[] serverPair;
+        [System.Xml.Serialization.XmlElementAttribute("serverPair")]
+        public DrsServerPairType[] serverPair;
     }
-    /// 
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.34283")]
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:didata.com:api:cloud:types")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace = "urn:didata.com:api:cloud:types", IsNullable = true)]
     public partial class DrsServerPairType
     {
+
         /// <remarks/>
         public string sourceServerId;
 
         /// <remarks/>
         public string targetServerId;
-        
     }
 }
