@@ -118,47 +118,71 @@ try {
 $($full.Name)
 ===================
 
-## SYNOPSIS
+Synopsis
+--------
+
 $($full.Synopsis)
 
-## SYNTAX
-``````powershell
-$((($full.syntax | Out-String) -replace "`r`n", "`r`n`r`n").Trim())
-``````
+Syntax
+------
 
-## DESCRIPTION
+.. code-block:: powershell
+
+    $((($full.syntax | Out-String) -replace "`r`n", "`r`n`r`n").Trim())
+
+
+Description
+-----------
+
 $(($full.description | Out-String).Trim())
 
-## PARAMETERS
+Parameters
+----------
+
 "@ + $(foreach ($parameter in $full.parameters.parameter) {
 @"
 
-### -$($parameter.name) &lt;$($parameter.type.name)&gt;
+-$($parameter.name) &lt;$($parameter.type.name)&gt;
+~~~~~~~~~
+
 $(($parameter.description | Out-String).Trim())
-``````
-$(((($parameter | Out-String).Trim() -split "`r`n")[-5..-1] | % { $_.Trim() }) -join "`r`n")
-``````
+
+.. code-block:: powershell
+
+    $(((($parameter | Out-String).Trim() -split "`r`n")[-5..-1] | % { $_.Trim() }) -join "`r`n")
+
 
 "@
 }) + @"
 
-## INPUTS
+INPUTS
+------
+
 $($full.inputTypes.inputType.type.name)
 
-## OUTPUTS
+OUTPUTS
+-------
+
 $($full.returnValues.returnValue[0].type.name)
 
-## NOTES
+NOTES
+-----
+
 $(($full.alertSet.alert | Out-String).Trim())
 
-## EXAMPLES
+EXAMPLES
+---------
+
 "@ + $(foreach ($example in $full.examples.example) {
 @"
 
-### $(($example.title -replace '-*', '').Trim())
-``````powershell
-$(GetCode $example)
-``````
+$(($example.title -replace '-*', '').Trim())
+~~~~~~~~~~~~~~~
+
+.. code-block:: powershell
+
+    $(GetCode $example)
+
 $(GetRemark $example)
 
 "@
