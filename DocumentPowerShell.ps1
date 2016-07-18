@@ -1,5 +1,5 @@
 Write-Host "Importing module from build."
-Import-Module .\PowershellModule\CloudCompute.Powershell\bin\Release\DD.CBU.Compute.Powershell.dll
+Import-Module .\PowershellModule\CloudCompute.Powershell\bin\Release\CaaS.psd1
 $commands = Get-Command -Module CaaS
 Write-Host "Writing documentation"
 if((Test-Path ".\docs\powershell\") -eq 0){
