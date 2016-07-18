@@ -1,4 +1,4 @@
-Import-Module CaaS
+Import-Module .\PowershellModule\CloudCompute.Powershell\bin\Release\DD.CBU.Compute.Powershell.dll
 $commands = Get-Command -Module CaaS
 
 if((Test-Path ".\docs\powershell\") -eq 0){
