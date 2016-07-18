@@ -1,0 +1,36 @@
+version: 3.1.{build}
+configuration: Release
+platform: Any CPU
+
+branches:
+  only:
+    - master
+assembly_info:
+  patch: true
+  file: AssemblyInfo.*
+  assembly_version: "{version}"
+  assembly_file_version: "{version}"
+  assembly_informational_version: "{version}"
+
+configuration: Release
+
+build:
+  project: PowershellModule\CloudCompute.PowershellModule.sln
+  publish_nuget: true
+
+after_build:
+  - ps: .\DocumentPowerShell.ps1
+
+environment:
+  access_token:
+    secure: O/sXyJYB0lM0WHQmuoG1LjfB/w9pwx8Pt3HmS13N9MXP7UqbY4/aJvJwemP0tlp2
+
+on_success:
+  - git config --global user.email "anthony.p.shaw@gmail.com"
+  - git config --global user.name "Anthony Shaw"
+  - git config --global credential.helper store
+  - git config --global push.default simple
+  - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
+  - git add docs/
+  - git commit -m "Updated docs [skip appveyor]" --allow-empty
+  - git push origin HEAD:master
