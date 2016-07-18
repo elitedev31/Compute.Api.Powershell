@@ -28,7 +28,7 @@ Description
 Parameters
 ----------
 
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -42,7 +42,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--CustomDefined1 &lt;string&gt;
+-CustomDefined1 <string>
 ~~~~~~~~~
 
 The account custom defined field 1
@@ -56,7 +56,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--CustomDefined2 &lt;string&gt;
+-CustomDefined2 <string>
 ~~~~~~~~~
 
 The account custom defined field 2
@@ -70,7 +70,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Department &lt;string&gt;
+-Department <string>
 ~~~~~~~~~
 
 The account department
@@ -84,7 +84,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--EmailAddress &lt;string&gt;
+-EmailAddress <string>
 ~~~~~~~~~
 
 The account email address
@@ -98,7 +98,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--FirstName &lt;string&gt;
+-FirstName <string>
 ~~~~~~~~~
 
 The account first name
@@ -112,7 +112,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--FullName &lt;string&gt;
+-FullName <string>
 ~~~~~~~~~
 
 The account full name
@@ -126,7 +126,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--LastName &lt;string&gt;
+-LastName <string>
 ~~~~~~~~~
 
 The account last name
@@ -140,7 +140,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Password &lt;securestring&gt;
+-Password <securestring>
 ~~~~~~~~~
 
 The account password
@@ -154,7 +154,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--PhoneCountryCode &lt;string&gt;
+-PhoneCountryCode <string>
 ~~~~~~~~~
 
 The account phone country code address
@@ -168,7 +168,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--PhoneNumber &lt;string&gt;
+-PhoneNumber <string>
 ~~~~~~~~~
 
 The account phone number
@@ -182,7 +182,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Roles &lt;Role[]&gt;
+-Roles <Role[]>
 ~~~~~~~~~
 
 The roles for this account, use the cmdlet New-CaasAccountRoles to create the values
@@ -196,7 +196,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Username &lt;string&gt;
+-Username <string>
 ~~~~~~~~~
 
 The account username.

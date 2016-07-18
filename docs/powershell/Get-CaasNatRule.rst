@@ -30,7 +30,7 @@ Description
 Parameters
 ----------
 
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -44,7 +44,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--ExternalIp &lt;string&gt;
+-ExternalIp <string>
 ~~~~~~~~~
 
 The firewall external IP
@@ -58,7 +58,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--InternalIp &lt;string&gt;
+-InternalIp <string>
 ~~~~~~~~~
 
 The firewall internal IP
@@ -72,7 +72,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Name &lt;string&gt;
+-Name <string>
 ~~~~~~~~~
 
 Name to filter
@@ -86,7 +86,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--NatRuleId &lt;guid&gt;
+-NatRuleId <guid>
 ~~~~~~~~~
 
 The NAT rule id
@@ -100,7 +100,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Network &lt;NetworkWithLocationsNetwork&gt;
+-Network <NetworkWithLocationsNetwork>
 ~~~~~~~~~
 
 The network to show the images from
@@ -114,7 +114,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--NetworkDomain &lt;NetworkDomainType&gt;
+-NetworkDomain <NetworkDomainType>
 ~~~~~~~~~
 
 The network domain
@@ -128,7 +128,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--OrderBy &lt;string&gt;
+-OrderBy <string>
 ~~~~~~~~~
 
 The Order By of the results, only supported for MCP2
@@ -142,7 +142,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--PageNumber &lt;int&gt;
+-PageNumber <int>
 ~~~~~~~~~
 
 The Page Number of the result page, only supported for MCP2
@@ -156,7 +156,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--PageSize &lt;int&gt;
+-PageSize <int>
 ~~~~~~~~~
 
 The Page Size of the result page, only supported for MCP2
@@ -170,7 +170,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--State &lt;string&gt;
+-State <string>
 ~~~~~~~~~
 
 The NAT rule state

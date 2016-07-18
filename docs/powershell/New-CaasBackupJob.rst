@@ -28,7 +28,7 @@ Description
 Parameters
 ----------
 
--BackupClient &lt;BackupClientDetailsType&gt;
+-BackupClient <BackupClientDetailsType>
 ~~~~~~~~~
 
 The backup client details to modify
@@ -42,7 +42,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -56,7 +56,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Server &lt;ServerType&gt;
+-Server <ServerType>
 ~~~~~~~~~
 
 The server to modify the backup client

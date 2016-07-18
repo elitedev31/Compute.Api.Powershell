@@ -28,7 +28,7 @@ Description
 Parameters
 ----------
 
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -42,7 +42,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Description &lt;string&gt;
+-Description <string>
 ~~~~~~~~~
 
 The target description
@@ -56,7 +56,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Network &lt;NetworkWithLocationsNetwork&gt;
+-Network <NetworkWithLocationsNetwork>
 ~~~~~~~~~
 
 The target data centre location for the customer image.
@@ -70,7 +70,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--OvfPrefix &lt;string&gt;
+-OvfPrefix <string>
 ~~~~~~~~~
 
 A prefix for this copy. Must not contain spaces.
@@ -84,7 +84,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--SourceImage &lt;ImagesWithDiskSpeedImage&gt;
+-SourceImage <ImagesWithDiskSpeedImage>
 ~~~~~~~~~
 
 The Source customer image.
@@ -98,7 +98,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--TargetImageName &lt;string&gt;
+-TargetImageName <string>
 ~~~~~~~~~
 
 The Target image name

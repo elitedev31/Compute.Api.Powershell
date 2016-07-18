@@ -30,7 +30,7 @@ Description
 Parameters
 ----------
 
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -44,7 +44,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--ExternalIP &lt;string&gt;
+-ExternalIP <string>
 ~~~~~~~~~
 
 The Firewall rule name
@@ -58,7 +58,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--InternalIP &lt;string&gt;
+-InternalIP <string>
 ~~~~~~~~~
 
 The Firewall rule name
@@ -72,7 +72,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--NatRuleName &lt;string&gt;
+-NatRuleName <string>
 ~~~~~~~~~
 
 The NAT Rule name
@@ -86,7 +86,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Network &lt;NetworkWithLocationsNetwork&gt;
+-Network <NetworkWithLocationsNetwork>
 ~~~~~~~~~
 
 The target network to add the NAT rule into.
@@ -100,7 +100,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--NetworkDomain &lt;NetworkDomainType&gt;
+-NetworkDomain <NetworkDomainType>
 ~~~~~~~~~
 
 The network domain
@@ -114,7 +114,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--SourceIpAddress &lt;ipaddress&gt;
+-SourceIpAddress <ipaddress>
 ~~~~~~~~~
 
 The source IP Address.

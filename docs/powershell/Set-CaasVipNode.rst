@@ -28,7 +28,7 @@ Description
 Parameters
 ----------
 
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -42,7 +42,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--ConnectionLimit &lt;int&gt;
+-ConnectionLimit <int>
 ~~~~~~~~~
 
 The VIP Node Connection Limit
@@ -56,7 +56,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--ConnectionRateLimit &lt;int&gt;
+-ConnectionRateLimit <int>
 ~~~~~~~~~
 
 The VIP Node Connection Rate Limit
@@ -70,7 +70,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Description &lt;string&gt;
+-Description <string>
 ~~~~~~~~~
 
 The Node description
@@ -84,7 +84,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Enabled &lt;bool&gt;
+-Enabled <bool>
 ~~~~~~~~~
 
 The VIP Node Status
@@ -98,7 +98,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--HealthMonitorId &lt;string&gt;
+-HealthMonitorId <string>
 ~~~~~~~~~
 
 The VIP Node Health Monitor Id
@@ -112,7 +112,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Node &lt;NodeType&gt;
+-Node <NodeType>
 ~~~~~~~~~
 
 The VIP Node

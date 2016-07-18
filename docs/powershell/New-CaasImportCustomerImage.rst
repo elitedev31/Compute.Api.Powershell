@@ -28,7 +28,7 @@ Description
 Parameters
 ----------
 
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -42,7 +42,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--CustomerImageName &lt;string&gt;
+-CustomerImageName <string>
 ~~~~~~~~~
 
 The Customer Image name.
@@ -56,7 +56,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Description &lt;string&gt;
+-Description <string>
 ~~~~~~~~~
 
 The description
@@ -70,7 +70,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Network &lt;NetworkWithLocationsNetwork&gt;
+-Network <NetworkWithLocationsNetwork>
 ~~~~~~~~~
 
 The target data centre location for the customer image.
@@ -84,7 +84,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--OvfPackage &lt;OvfPackageType&gt;
+-OvfPackage <OvfPackageType>
 ~~~~~~~~~
 
 An OVF Package on the organization’s FTPS account

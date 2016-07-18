@@ -30,7 +30,7 @@ Description
 Parameters
 ----------
 
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -44,7 +44,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--IpAddress &lt;string&gt;
+-IpAddress <string>
 ~~~~~~~~~
 
 Identifies an individual Private IPV4
@@ -58,7 +58,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Network &lt;NetworkWithLocationsNetwork&gt;
+-Network <NetworkWithLocationsNetwork>
 ~~~~~~~~~
 
 Identifies Cloud Network (MCP 1.0)
@@ -72,7 +72,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--NetworkId &lt;guid&gt;
+-NetworkId <guid>
 ~~~~~~~~~
 
 Identifies Cloud Network (MCP 1.0)
@@ -86,7 +86,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--OrderBy &lt;string&gt;
+-OrderBy <string>
 ~~~~~~~~~
 
 The Order By of the results, only supported for MCP2
@@ -100,7 +100,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--PageNumber &lt;int&gt;
+-PageNumber <int>
 ~~~~~~~~~
 
 The Page Number of the result page, only supported for MCP2
@@ -114,7 +114,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--PageSize &lt;int&gt;
+-PageSize <int>
 ~~~~~~~~~
 
 The Page Size of the result page, only supported for MCP2
@@ -128,7 +128,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Vlan &lt;VlanType&gt;
+-Vlan <VlanType>
 ~~~~~~~~~
 
 Identifies VLAN (MCP 2.0)
@@ -142,7 +142,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--VlanId &lt;guid&gt;
+-VlanId <guid>
 ~~~~~~~~~
 
 Identifies VLAN (MCP 2.0)

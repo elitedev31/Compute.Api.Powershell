@@ -30,7 +30,7 @@ Description
 Parameters
 ----------
 
--ChildPortList &lt;PortListType[]&gt;
+-ChildPortList <PortListType[]>
 ~~~~~~~~~
 
 Define one or more individual Port Lists on the same Network Domain
@@ -44,7 +44,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--ChildPortListId &lt;string[]&gt;
+-ChildPortListId <string[]>
 ~~~~~~~~~
 
 Define one or more individual Port Lists on the same Network Domain
@@ -58,7 +58,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -72,7 +72,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Description &lt;string&gt;
+-Description <string>
 ~~~~~~~~~
 
 The Port List description
@@ -86,7 +86,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Name &lt;string&gt;
+-Name <string>
 ~~~~~~~~~
 
 The Port List name
@@ -100,7 +100,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--NetworkDomain &lt;NetworkDomainType&gt;
+-NetworkDomain <NetworkDomainType>
 ~~~~~~~~~
 
 The network domain
@@ -114,7 +114,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--NetworkDomainId &lt;string&gt;
+-NetworkDomainId <string>
 ~~~~~~~~~
 
 The network domain id
@@ -128,7 +128,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Port &lt;PortListPort[]&gt;
+-Port <PortListPort[]>
 ~~~~~~~~~
 
 Define one or more individual Portes or ranges of Portes. Use New CaasPortRangeType command to create type

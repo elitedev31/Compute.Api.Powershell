@@ -28,7 +28,7 @@ Description
 Parameters
 ----------
 
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -42,7 +42,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--DataCenterId &lt;string&gt;
+-DataCenterId <string>
 ~~~~~~~~~
 
 The Data center Id
@@ -56,7 +56,7 @@ Aliases                      Location
 Dynamic?                     false
 
  
--Id &lt;guid&gt;
+-Id <guid>
 ~~~~~~~~~
 
 The Os Image Id
@@ -70,7 +70,7 @@ Aliases                      ImageId
 Dynamic?                     false
 
  
--Mcp1 &lt;switch&gt;
+-Mcp1 <switch>
 ~~~~~~~~~
 
 Explicitly calling MCP 1.0 Api
@@ -84,7 +84,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Name &lt;string&gt;
+-Name <string>
 ~~~~~~~~~
 
 The Os image name
@@ -98,7 +98,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Network &lt;NetworkWithLocationsNetwork&gt;
+-Network <NetworkWithLocationsNetwork>
 ~~~~~~~~~
 
 The network to show the images from
@@ -112,7 +112,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--OperatingSystemFamily &lt;string&gt;
+-OperatingSystemFamily <string>
 ~~~~~~~~~
 
 The Os family like : Unix
@@ -126,7 +126,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--OperatingSystemId &lt;string&gt;
+-OperatingSystemId <string>
 ~~~~~~~~~
 
 The Os id
@@ -140,7 +140,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--OrderBy &lt;string&gt;
+-OrderBy <string>
 ~~~~~~~~~
 
 The Order By of the results, only supported for MCP2
@@ -154,7 +154,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--PageNumber &lt;int&gt;
+-PageNumber <int>
 ~~~~~~~~~
 
 The Page Number of the result page, only supported for MCP2
@@ -168,7 +168,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--PageSize &lt;int&gt;
+-PageSize <int>
 ~~~~~~~~~
 
 The Page Size of the result page, only supported for MCP2
@@ -182,7 +182,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--State &lt;string&gt;
+-State <string>
 ~~~~~~~~~
 
 The Os image State

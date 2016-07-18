@@ -30,7 +30,7 @@ Description
 Parameters
 ----------
 
--Backup &lt;bool&gt;
+-Backup <bool>
 ~~~~~~~~~
 
 True of False for backup role
@@ -44,7 +44,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -58,7 +58,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--CreateImage &lt;bool&gt;
+-CreateImage <bool>
 ~~~~~~~~~
 
 True of False for create image role
@@ -72,7 +72,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Network &lt;bool&gt;
+-Network <bool>
 ~~~~~~~~~
 
 True of False for network role
@@ -86,7 +86,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--ReadOnly &lt;bool&gt;
+-ReadOnly <bool>
 ~~~~~~~~~
 
 True of False for reports role
@@ -100,7 +100,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Reports &lt;bool&gt;
+-Reports <bool>
 ~~~~~~~~~
 
 True of False for reports role
@@ -114,7 +114,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Server &lt;bool&gt;
+-Server <bool>
 ~~~~~~~~~
 
 True of False for server role
@@ -128,7 +128,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Storage &lt;bool&gt;
+-Storage <bool>
 ~~~~~~~~~
 
 True of False for storage role

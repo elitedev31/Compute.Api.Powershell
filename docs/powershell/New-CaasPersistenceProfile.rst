@@ -30,7 +30,7 @@ Description
 Parameters
 ----------
 
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -44,7 +44,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--CookieName &lt;string&gt;
+-CookieName <string>
 ~~~~~~~~~
 
 For HTTP_COOKIE only.The name of the cookie for the persistence profile
@@ -58,7 +58,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--CookieType &lt;PersistenceProfileCookieType&gt;
+-CookieType <PersistenceProfileCookieType>
 ~~~~~~~~~
 
 For HTTP_COOKIE only.The HTTP cookie type for the persistence profile
@@ -72,7 +72,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Direction &lt;PersistenceProfileDirection&gt;
+-Direction <PersistenceProfileDirection>
 ~~~~~~~~~
 
 For IP_NETMASK only.The direction for the persistence profile
@@ -86,7 +86,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Name &lt;string&gt;
+-Name <string>
 ~~~~~~~~~
 
 The name for the persistence profile
@@ -100,7 +100,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Netmask &lt;string&gt;
+-Netmask <string>
 ~~~~~~~~~
 
 For IP_NETMASK only.The netmask for the persistence profile
@@ -114,7 +114,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Network &lt;NetworkWithLocationsNetwork&gt;
+-Network <NetworkWithLocationsNetwork>
 ~~~~~~~~~
 
 The network to manage the VIP settings
@@ -128,7 +128,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--PassThru &lt;switch&gt;
+-PassThru <switch>
 ~~~~~~~~~
 
 Return the Probe object
@@ -142,7 +142,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--ServerFarm &lt;ServerFarm&gt;
+-ServerFarm <ServerFarm>
 ~~~~~~~~~
 
 The server farm for the persistence profile
@@ -156,7 +156,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--TimeoutMinutes &lt;int&gt;
+-TimeoutMinutes <int>
 ~~~~~~~~~
 
 The timeout in munites to the profile.

@@ -28,7 +28,7 @@ Description
 Parameters
 ----------
 
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -42,7 +42,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Network &lt;NetworkWithLocationsNetwork&gt;
+-Network <NetworkWithLocationsNetwork>
 ~~~~~~~~~
 
 The network to set the server to Vip
@@ -56,7 +56,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--PublicIpBlock &lt;IpBlockType&gt;
+-PublicIpBlock <IpBlockType>
 ~~~~~~~~~
 
 The public ip block to be released
@@ -70,7 +70,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--ServerToVipConnectivity &lt;bool&gt;
+-ServerToVipConnectivity <bool>
 ~~~~~~~~~
 
 Enable/Disable the server to vip connectivity on the Ip address block

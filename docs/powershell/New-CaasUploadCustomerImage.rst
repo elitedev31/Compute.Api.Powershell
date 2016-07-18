@@ -30,7 +30,7 @@ Description
 Parameters
 ----------
 
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -44,7 +44,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Manifest &lt;string&gt;
+-Manifest <string>
 ~~~~~~~~~
 
 The path to the manifest file
@@ -58,7 +58,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Ovf &lt;string&gt;
+-Ovf <string>
 ~~~~~~~~~
 
 The path to the OVF file.
@@ -72,7 +72,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--VirtualAppliance &lt;string&gt;
+-VirtualAppliance <string>
 ~~~~~~~~~
 
 The path to an OVA (Virtual Appliance) file.
@@ -86,7 +86,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--VirtualImage &lt;string&gt;
+-VirtualImage <string>
 ~~~~~~~~~
 
 The path to the virtual image (e.g. VMDK, VHD) file.

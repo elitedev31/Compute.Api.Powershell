@@ -30,7 +30,7 @@ Description
 Parameters
 ----------
 
--ScsiId &lt;string&gt;
+-ScsiId <string>
 ~~~~~~~~~
 
 SCSI ID from the OS or customer image
@@ -44,7 +44,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--ServerDetails &lt;CaasServerDetails&gt;
+-ServerDetails <CaasServerDetails>
 ~~~~~~~~~
 
 The server details created by New-CaasServerDetails
@@ -58,7 +58,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Speed &lt;DiskSpeedType&gt;
+-Speed <DiskSpeedType>
 ~~~~~~~~~
 
 The disk speed
@@ -72,7 +72,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--SpeedId &lt;string&gt;
+-SpeedId <string>
 ~~~~~~~~~
 
 The speedId of the new disk. The available speed Id can be retrieved using (Get-CaasDataCentre).hypervisor.diskSpeed

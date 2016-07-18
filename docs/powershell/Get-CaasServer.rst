@@ -28,7 +28,7 @@ Description
 Parameters
 ----------
 
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -42,7 +42,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Location &lt;string&gt;
+-Location <string>
 ~~~~~~~~~
 
 Location of the server to filter
@@ -56,7 +56,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Name &lt;string&gt;
+-Name <string>
 ~~~~~~~~~
 
 Name of the server to filter
@@ -70,7 +70,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Network &lt;NetworkWithLocationsNetwork&gt;
+-Network <NetworkWithLocationsNetwork>
 ~~~~~~~~~
 
 The network to show the servers from
@@ -84,7 +84,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--NetworkDomain &lt;NetworkDomainType&gt;
+-NetworkDomain <NetworkDomainType>
 ~~~~~~~~~
 
 The network domain to show the servers from
@@ -98,7 +98,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--NetworkDomainId &lt;string&gt;
+-NetworkDomainId <string>
 ~~~~~~~~~
 
 The network domain to show the servers from
@@ -112,7 +112,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--OrderBy &lt;string&gt;
+-OrderBy <string>
 ~~~~~~~~~
 
 The Order By of the results, only supported for MCP2
@@ -126,7 +126,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--PageNumber &lt;int&gt;
+-PageNumber <int>
 ~~~~~~~~~
 
 The Page Number of the result page, only supported for MCP2
@@ -140,7 +140,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--PageSize &lt;int&gt;
+-PageSize <int>
 ~~~~~~~~~
 
 The Page Size of the result page, only supported for MCP2
@@ -154,7 +154,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--ServerId &lt;guid&gt;
+-ServerId <guid>
 ~~~~~~~~~
 
 Server id  to filter
@@ -168,7 +168,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Vlan &lt;VlanType&gt;
+-Vlan <VlanType>
 ~~~~~~~~~
 
 The VLAN to filter by
@@ -182,7 +182,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--VlanId &lt;string&gt;
+-VlanId <string>
 ~~~~~~~~~
 
 The VLAN ID to filter by

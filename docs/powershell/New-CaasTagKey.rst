@@ -28,7 +28,7 @@ Description
 Parameters
 ----------
 
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -42,7 +42,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Description &lt;string&gt;
+-Description <string>
 ~~~~~~~~~
 
 The description of tag key
@@ -56,7 +56,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--DisplayOnReport &lt;bool&gt;
+-DisplayOnReport <bool>
 ~~~~~~~~~
 
 Whether the Tag Key will be displayed on reports
@@ -70,7 +70,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Name &lt;string&gt;
+-Name <string>
 ~~~~~~~~~
 
 The name of tag key
@@ -84,7 +84,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--ValueRequired &lt;bool&gt;
+-ValueRequired <bool>
 ~~~~~~~~~
 
 Whether value can be considered optional when the Tag Key is applied to a Cloud asset

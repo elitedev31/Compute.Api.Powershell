@@ -34,7 +34,7 @@ Description
 Parameters
 ----------
 
--AdminPassword &lt;string&gt;
+-AdminPassword <string>
 ~~~~~~~~~
 
 The VM administrator password
@@ -48,7 +48,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--CpuCoresPerSocket &lt;uint32&gt;
+-CpuCoresPerSocket <uint32>
 ~~~~~~~~~
 
 The cpu cores per socker for the machine.
@@ -62,7 +62,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--CpuCount &lt;uint32&gt;
+-CpuCount <uint32>
 ~~~~~~~~~
 
 The cpu count for the machine.
@@ -76,7 +76,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--CpuSpeed &lt;string&gt;
+-CpuSpeed <string>
 ~~~~~~~~~
 
 The cpu speed for the machine.
@@ -90,7 +90,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Description &lt;string&gt;
+-Description <string>
 ~~~~~~~~~
 
 The description of the VM
@@ -104,7 +104,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--IsStarted &lt;bool&gt;
+-IsStarted <bool>
 ~~~~~~~~~
 
 Will the VM be started after deployment (true|false)
@@ -118,7 +118,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--MemoryGb &lt;uint32&gt;
+-MemoryGb <uint32>
 ~~~~~~~~~
 
 The memory size in GB for the machine.
@@ -132,7 +132,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--MicrosoftTimeZone &lt;string&gt;
+-MicrosoftTimeZone <string>
 ~~~~~~~~~
 
 The  Microsoft time zone indec for windows machine.
@@ -146,7 +146,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Name &lt;string&gt;
+-Name <string>
 ~~~~~~~~~
 
 The VM name
@@ -160,7 +160,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Network &lt;NetworkWithLocationsNetwork&gt;
+-Network <NetworkWithLocationsNetwork>
 ~~~~~~~~~
 
 The network to deploy the machine to.
@@ -174,7 +174,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--NetworkDomain &lt;NetworkDomainType&gt;
+-NetworkDomain <NetworkDomainType>
 ~~~~~~~~~
 
 The network domain in which server will be deployed
@@ -188,7 +188,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--PrimaryDns &lt;string&gt;
+-PrimaryDns <string>
 ~~~~~~~~~
 
 The Primary DNS for the machine.
@@ -202,7 +202,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--PrimaryVlan &lt;VlanType&gt;
+-PrimaryVlan <VlanType>
 ~~~~~~~~~
 
 The server's primary vlan
@@ -216,7 +216,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--PrivateIp &lt;string&gt;
+-PrivateIp <string>
 ~~~~~~~~~
 
 The network private IP address that will be assigned to the machine.
@@ -230,7 +230,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--SecondaryDns &lt;string&gt;
+-SecondaryDns <string>
 ~~~~~~~~~
 
 The Secondary DNS for the machine.
@@ -244,7 +244,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--ServerImage &lt;psobject&gt;
+-ServerImage <psobject>
 ~~~~~~~~~
 
 The OS or Customer Server Image to use for deployment

@@ -30,7 +30,7 @@ Description
 Parameters
 ----------
 
--Confirm &lt;switch&gt;
+-Confirm <switch>
 ~~~~~~~~~
 
 
@@ -44,7 +44,7 @@ Aliases                      cf
 Dynamic?                     false
 
  
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -58,7 +58,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Network &lt;NetworkWithLocationsNetwork&gt;
+-Network <NetworkWithLocationsNetwork>
 ~~~~~~~~~
 
 The network to manage the VIP settings
@@ -72,7 +72,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Probe &lt;Probe&gt;
+-Probe <Probe>
 ~~~~~~~~~
 
 The probe to be removed to the server farm
@@ -86,7 +86,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--RealServer &lt;RealServer&gt;
+-RealServer <RealServer>
 ~~~~~~~~~
 
 The real server to be removed to the server farm
@@ -100,7 +100,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--RealServerPort &lt;int&gt;
+-RealServerPort <int>
 ~~~~~~~~~
 
 The real server port to be removed to the server farm
@@ -114,7 +114,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--ServerFarm &lt;ServerFarm&gt;
+-ServerFarm <ServerFarm>
 ~~~~~~~~~
 
 The server farm that will get removed a probe or real server
@@ -128,7 +128,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--WhatIf &lt;switch&gt;
+-WhatIf <switch>
 ~~~~~~~~~
 
 

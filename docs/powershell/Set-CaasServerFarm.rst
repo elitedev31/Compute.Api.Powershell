@@ -28,7 +28,7 @@ Description
 Parameters
 ----------
 
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -42,7 +42,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Network &lt;NetworkWithLocationsNetwork&gt;
+-Network <NetworkWithLocationsNetwork>
 ~~~~~~~~~
 
 The network to manage the VIP settings
@@ -56,7 +56,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Predictor &lt;ServerFarmPredictorType&gt;
+-Predictor <ServerFarmPredictorType>
 ~~~~~~~~~
 
 The server farm predictor
@@ -70,7 +70,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--ServerFarm &lt;ServerFarm&gt;
+-ServerFarm <ServerFarm>
 ~~~~~~~~~
 
 The server farm to be modified

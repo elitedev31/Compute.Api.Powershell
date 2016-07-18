@@ -34,7 +34,7 @@ Description
 Parameters
 ----------
 
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -48,7 +48,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--PrimaryPrivateIp &lt;string&gt;
+-PrimaryPrivateIp <string>
 ~~~~~~~~~
 
 The private network private IP address that will be assigned to the machine.
@@ -62,7 +62,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Server &lt;ServerType&gt;
+-Server <ServerType>
 ~~~~~~~~~
 
 The server on which the nic will be deployed
@@ -76,7 +76,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--ServerId &lt;string&gt;
+-ServerId <string>
 ~~~~~~~~~
 
 The server ID
@@ -90,7 +90,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Vlan &lt;VlanType&gt;
+-Vlan <VlanType>
 ~~~~~~~~~
 
 The server's primary network

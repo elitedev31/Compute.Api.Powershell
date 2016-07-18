@@ -30,7 +30,7 @@ Description
 Parameters
 ----------
 
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -44,7 +44,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--CpuSpeed &lt;string&gt;
+-CpuSpeed <string>
 ~~~~~~~~~
 
 The cpu speed of the customer image
@@ -58,7 +58,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--CustomerImage &lt;CustomerImageType&gt;
+-CustomerImage <CustomerImageType>
 ~~~~~~~~~
 
 The customer image
@@ -72,7 +72,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Description &lt;string&gt;
+-Description <string>
 ~~~~~~~~~
 
 The description of the customer image
@@ -86,7 +86,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--DiskSpeeds &lt;ImageMetadataTypeDisk[]&gt;
+-DiskSpeeds <ImageMetadataTypeDisk[]>
 ~~~~~~~~~
 
 The disk details of the customer image
@@ -100,7 +100,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--ImageId &lt;guid&gt;
+-ImageId <guid>
 ~~~~~~~~~
 
 The id of the customer image
@@ -114,7 +114,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--OperatingSystemId &lt;string&gt;
+-OperatingSystemId <string>
 ~~~~~~~~~
 
 The id of the operating system

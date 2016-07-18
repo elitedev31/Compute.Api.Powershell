@@ -30,7 +30,7 @@ Description
 Parameters
 ----------
 
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -44,7 +44,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--InService &lt;bool&gt;
+-InService <bool>
 ~~~~~~~~~
 
 The Vip status
@@ -58,7 +58,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--IpAddress &lt;ipaddress&gt;
+-IpAddress <ipaddress>
 ~~~~~~~~~
 
 The Vip IP address, If you do not supply an IP address, the next available public IP address from your network's public IP block(s)  will be assigned.
@@ -72,7 +72,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Name &lt;string&gt;
+-Name <string>
 ~~~~~~~~~
 
 The name for the VIP
@@ -86,7 +86,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Network &lt;NetworkWithLocationsNetwork&gt;
+-Network <NetworkWithLocationsNetwork>
 ~~~~~~~~~
 
 The network to manage the VIP settings
@@ -100,7 +100,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--PassThru &lt;switch&gt;
+-PassThru <switch>
 ~~~~~~~~~
 
 Return the RealServer object
@@ -114,7 +114,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--PersistenceProfile &lt;PersistenceProfile&gt;
+-PersistenceProfile <PersistenceProfile>
 ~~~~~~~~~
 
 The persistence profile for the VIP
@@ -128,7 +128,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Port &lt;int&gt;
+-Port <int>
 ~~~~~~~~~
 
 The port to VIP. valid range 1-65535
@@ -142,7 +142,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Protocol &lt;VipProtocol&gt;
+-Protocol <VipProtocol>
 ~~~~~~~~~
 
 The protocol for the VIP. valid TCP or UDP
@@ -156,7 +156,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--ReplyToIcmp &lt;bool&gt;
+-ReplyToIcmp <bool>
 ~~~~~~~~~
 
 The vip reply to ICMP status
@@ -170,7 +170,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--ServerFarm &lt;ServerFarm&gt;
+-ServerFarm <ServerFarm>
 ~~~~~~~~~
 
 The server farm for the VIP

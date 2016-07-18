@@ -28,7 +28,7 @@ Description
 Parameters
 ----------
 
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -42,7 +42,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--DataCenterId &lt;string&gt;
+-DataCenterId <string>
 ~~~~~~~~~
 
 The Data center Id/location for figuring out the operating systems supported
@@ -56,7 +56,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Name &lt;string&gt;
+-Name <string>
 ~~~~~~~~~
 
 The Os image name
@@ -70,7 +70,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--OperatingSystemFamily &lt;string&gt;
+-OperatingSystemFamily <string>
 ~~~~~~~~~
 
 The Os family like : Unix
@@ -84,7 +84,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--OperatingSystemId &lt;string&gt;
+-OperatingSystemId <string>
 ~~~~~~~~~
 
 The Os id, eg : CENTOS5/32
@@ -98,7 +98,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--OrderBy &lt;string&gt;
+-OrderBy <string>
 ~~~~~~~~~
 
 The Order By of the results, only supported for MCP2
@@ -112,7 +112,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--PageNumber &lt;int&gt;
+-PageNumber <int>
 ~~~~~~~~~
 
 The Page Number of the result page, only supported for MCP2
@@ -126,7 +126,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--PageSize &lt;int&gt;
+-PageSize <int>
 ~~~~~~~~~
 
 The Page Size of the result page, only supported for MCP2

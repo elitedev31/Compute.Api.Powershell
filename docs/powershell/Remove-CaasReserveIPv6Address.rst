@@ -28,7 +28,7 @@ Description
 Parameters
 ----------
 
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -42,7 +42,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--IpAddress &lt;string&gt;
+-IpAddress <string>
 ~~~~~~~~~
 
 The IPv6 address
@@ -56,7 +56,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--VlanId &lt;guid&gt;
+-VlanId <guid>
 ~~~~~~~~~
 
 The unique identifier of MCP 2.0 VLAN

@@ -28,7 +28,7 @@ Description
 Parameters
 ----------
 
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -42,7 +42,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--CoresPerSocket &lt;uint32&gt;
+-CoresPerSocket <uint32>
 ~~~~~~~~~
 
 Set the number of CPU cores per socket.
@@ -56,7 +56,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--CpuCount &lt;uint32&gt;
+-CpuCount <uint32>
 ~~~~~~~~~
 
 Set the number of virtual CPUs.
@@ -70,7 +70,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--CpuSpeed &lt;string&gt;
+-CpuSpeed <string>
 ~~~~~~~~~
 
 Set the CPU Speed of the server. The available speed Id can be retrieved using (Get-CaasDataCentre).hypervisor.cpuSpeed
@@ -84,7 +84,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--MemoryInGb &lt;uint32&gt;
+-MemoryInGb <uint32>
 ~~~~~~~~~
 
 Set the server RAM memory. Value must be represent a GB integer (e.g. 1, 2, 3, 4, etc.)
@@ -98,7 +98,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--PassThru &lt;switch&gt;
+-PassThru <switch>
 ~~~~~~~~~
 
 Return the Server object after execution
@@ -112,7 +112,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Server &lt;ServerType&gt;
+-Server <ServerType>
 ~~~~~~~~~
 
 The server to action on
