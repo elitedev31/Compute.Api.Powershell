@@ -142,7 +142,7 @@ Parameters
 "@ + $(foreach ($parameter in $full.parameters.parameter) {
 @"
 
--$($parameter.name) &lt;$($parameter.type.name)&gt;
+-$($parameter.name) <$($parameter.type.name)>
 ~~~~~~~~~
 
 $(($parameter.description | Out-String).Trim())

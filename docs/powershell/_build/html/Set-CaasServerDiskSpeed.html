@@ -1,0 +1,220 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Set-CaasServerDiskSpeed &mdash; CaaS PowerShell 3.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '3.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="CaaS PowerShell 3.1 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="set-caasserverdiskspeed">
+<h1>Set-CaasServerDiskSpeed<a class="headerlink" href="#set-caasserverdiskspeed" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<p>Set-CaasServerDiskSpeed -ScsiId &lt;int&gt; -Server &lt;ServerType&gt; [-SpeedId &lt;string&gt;] [-PassThru] [-Connection &lt;ComputeServiceConnection&gt;] [&lt;CommonParameters&gt;]</p>
+<p>Set-CaasServerDiskSpeed -ScsiId &lt;int&gt; -Server &lt;ServerType&gt; [-Speed &lt;DiskSpeedType&gt;] [-PassThru] [-Connection &lt;ComputeServiceConnection&gt;] [&lt;CommonParameters&gt;]</p>
+</div>
+<div class="section" id="syntax">
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="n">syntaxItem</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<p><a class="reference external" href="mailto:{&#37;&#52;&#48;{name=Set-CaasServerDiskSpeed">{<span>&#64;</span>{name=Set-CaasServerDiskSpeed</a>; CommonParameters=True; WorkflowCommonParameters=False; parameter=System.Object[]}, &#64;{name=Set-CaasServerDiskSpeed; CommonParameters=True; WorkflowCommonParameters=False; parameter=System.Object[]}}</p>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="connection-lt-computeserviceconnection-gt">
+<h3>-Connection &amp;lt;ComputeServiceConnection&amp;gt;<a class="headerlink" href="#connection-lt-computeserviceconnection-gt" title="Permalink to this headline">¶</a></h3>
+<p>The CaaS Connection created by New-CaasConnection</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       true (ByPropertyName)
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="passthru-lt-switch-gt">
+<h3>-PassThru &amp;lt;switch&amp;gt;<a class="headerlink" href="#passthru-lt-switch-gt" title="Permalink to this headline">¶</a></h3>
+<p>Return the Server object after execution</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="scsiid-lt-int-gt">
+<h3>-ScsiId &amp;lt;int&amp;gt;<a class="headerlink" href="#scsiid-lt-int-gt" title="Permalink to this headline">¶</a></h3>
+<p>SCSI Id of the disk to be resized</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="server-lt-servertype-gt">
+<h3>-Server &amp;lt;ServerType&amp;gt;<a class="headerlink" href="#server-lt-servertype-gt" title="Permalink to this headline">¶</a></h3>
+<p>The server to action on</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       true (ByValue)
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="speed-lt-diskspeedtype-gt">
+<h3>-Speed &amp;lt;DiskSpeedType&amp;gt;<a class="headerlink" href="#speed-lt-diskspeedtype-gt" title="Permalink to this headline">¶</a></h3>
+<p>The disk speed</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           DiskSpeedType
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="speedid-lt-string-gt">
+<h3>-SpeedId &amp;lt;string&amp;gt;<a class="headerlink" href="#speedid-lt-string-gt" title="Permalink to this headline">¶</a></h3>
+<p>The speedId of the new disk. The available speed Id can be retrieved using (Get-CaasDataCentre).hypervisor.diskSpeed</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           SpeedId
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+</div>
+<div class="section" id="inputs">
+<h2>INPUTS<a class="headerlink" href="#inputs" title="Permalink to this headline">¶</a></h2>
+<p>DD.CBU.Compute.Api.Contracts.Network20.ServerType
+DD.CBU.Compute.Powershell.ComputeServiceConnection</p>
+</div>
+<div class="section" id="outputs">
+<h2>OUTPUTS<a class="headerlink" href="#outputs" title="Permalink to this headline">¶</a></h2>
+<p>System.Object</p>
+</div>
+<div class="section" id="notes">
+<h2>NOTES<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="examples">
+<h2>EXAMPLES<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Set-CaasServerDiskSpeed</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#syntax">Syntax</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#parameters">Parameters</a><ul>
+<li><a class="reference internal" href="#connection-lt-computeserviceconnection-gt">-Connection &amp;lt;ComputeServiceConnection&amp;gt;</a></li>
+<li><a class="reference internal" href="#passthru-lt-switch-gt">-PassThru &amp;lt;switch&amp;gt;</a></li>
+<li><a class="reference internal" href="#scsiid-lt-int-gt">-ScsiId &amp;lt;int&amp;gt;</a></li>
+<li><a class="reference internal" href="#server-lt-servertype-gt">-Server &amp;lt;ServerType&amp;gt;</a></li>
+<li><a class="reference internal" href="#speed-lt-diskspeedtype-gt">-Speed &amp;lt;DiskSpeedType&amp;gt;</a></li>
+<li><a class="reference internal" href="#speedid-lt-string-gt">-SpeedId &amp;lt;string&amp;gt;</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#inputs">INPUTS</a></li>
+<li><a class="reference internal" href="#outputs">OUTPUTS</a></li>
+<li><a class="reference internal" href="#notes">NOTES</a></li>
+<li><a class="reference internal" href="#examples">EXAMPLES</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/Set-CaasServerDiskSpeed.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Dimension Data.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/Set-CaasServerDiskSpeed.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
