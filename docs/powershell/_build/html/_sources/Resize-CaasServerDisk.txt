@@ -28,7 +28,7 @@ Description
 Parameters
 ----------
 
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -42,7 +42,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--NewSizeInGB &lt;int&gt;
+-NewSizeInGB <int>
 ~~~~~~~~~
 
 New disk size in GB
@@ -56,7 +56,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--PassThru &lt;switch&gt;
+-PassThru <switch>
 ~~~~~~~~~
 
 Return the Server object after execution
@@ -70,7 +70,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--ScsiId &lt;int&gt;
+-ScsiId <int>
 ~~~~~~~~~
 
 SCSI Id of the disk to be resized
@@ -84,7 +84,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Server &lt;ServerType&gt;
+-Server <ServerType>
 ~~~~~~~~~
 
 The server to action on

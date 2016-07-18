@@ -28,7 +28,7 @@ Description
 Parameters
 ----------
 
--AclRuleName &lt;string&gt;
+-AclRuleName <string>
 ~~~~~~~~~
 
 The ACL Rule name
@@ -42,7 +42,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--AclType &lt;AclType&gt;
+-AclType <AclType>
 ~~~~~~~~~
 
 The type of the ACL. One of OUTSIDE_ACL or INSIDE_ACL. Default is OUTSIDE_ACL.
@@ -56,7 +56,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Action &lt;AclActionType&gt;
+-Action <AclActionType>
 ~~~~~~~~~
 
 The ACL action type: Permit or Deny
@@ -70,7 +70,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -84,7 +84,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--DestinationIpAddress &lt;ipaddress&gt;
+-DestinationIpAddress <ipaddress>
 ~~~~~~~~~
 
 The destination IP Address. If not supplied, ANY IP address is assumed.
@@ -98,7 +98,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--DestinationNetmask &lt;ipaddress&gt;
+-DestinationNetmask <ipaddress>
 ~~~~~~~~~
 
 The destination Netmask. If supplied with the DestinationIpAddress, represents CIDR boundary for the network.
@@ -112,7 +112,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Network &lt;NetworkWithLocationsNetwork&gt;
+-Network <NetworkWithLocationsNetwork>
 ~~~~~~~~~
 
 The target network to add the ACL rule into.
@@ -126,7 +126,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Port1 &lt;int&gt;
+-Port1 <int>
 ~~~~~~~~~
 
 Depending on the port range type - will define the port criteria
@@ -140,7 +140,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Port2 &lt;int&gt;
+-Port2 <int>
 ~~~~~~~~~
 
 Depending on the port range type - will define the port criteria
@@ -154,7 +154,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--PortRangeType &lt;PortRangeTypeType&gt;
+-PortRangeType <PortRangeTypeType>
 ~~~~~~~~~
 
 The port range type
@@ -168,7 +168,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Position &lt;int&gt;
+-Position <int>
 ~~~~~~~~~
 
 The position of the ACL rule to add
@@ -182,7 +182,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Protocol &lt;AclProtocolType&gt;
+-Protocol <AclProtocolType>
 ~~~~~~~~~
 
 The protocol
@@ -196,7 +196,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--SourceIpAddress &lt;ipaddress&gt;
+-SourceIpAddress <ipaddress>
 ~~~~~~~~~
 
 The source IP Address. If not supplied, ANY IP address is assumed.
@@ -210,7 +210,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--SourceNetmask &lt;ipaddress&gt;
+-SourceNetmask <ipaddress>
 ~~~~~~~~~
 
 The source Netmask. If supplied with the SourceIpAddress, represents CIDR boundary for the network.

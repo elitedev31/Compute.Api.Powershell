@@ -28,7 +28,7 @@ Description
 Parameters
 ----------
 
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -42,7 +42,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Name &lt;string&gt;
+-Name <string>
 ~~~~~~~~~
 
 The name for the server farm
@@ -56,7 +56,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Network &lt;NetworkWithLocationsNetwork&gt;
+-Network <NetworkWithLocationsNetwork>
 ~~~~~~~~~
 
 The network to manage the VIP settings
@@ -70,7 +70,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--PassThru &lt;switch&gt;
+-PassThru <switch>
 ~~~~~~~~~
 
 Return the ServerFarm object
@@ -84,7 +84,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Predictor &lt;ServerFarmPredictorType&gt;
+-Predictor <ServerFarmPredictorType>
 ~~~~~~~~~
 
 The server farm predictor
@@ -98,7 +98,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Probe &lt;Probe&gt;
+-Probe <Probe>
 ~~~~~~~~~
 
 The probe to be added to the server farm
@@ -112,7 +112,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--RealServer &lt;RealServer&gt;
+-RealServer <RealServer>
 ~~~~~~~~~
 
 The first real server to be added to the server farm
@@ -126,7 +126,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--RealServerPort &lt;int&gt;
+-RealServerPort <int>
 ~~~~~~~~~
 
 The first real server port to be added to the server farm

@@ -30,7 +30,7 @@ Description
 Parameters
 ----------
 
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -44,7 +44,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Network &lt;NetworkWithLocationsNetwork&gt;
+-Network <NetworkWithLocationsNetwork>
 ~~~~~~~~~
 
 The network to add the public ip addresses
@@ -58,7 +58,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--NetworkDomain &lt;NetworkDomainType&gt;
+-NetworkDomain <NetworkDomainType>
 ~~~~~~~~~
 
 The network to add the public ip addresses
@@ -72,7 +72,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--PassThru &lt;switch&gt;
+-PassThru <switch>
 ~~~~~~~~~
 
 Return the IpBlockType object

@@ -28,7 +28,7 @@ Description
 Parameters
 ----------
 
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -42,7 +42,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--PassThru &lt;switch&gt;
+-PassThru <switch>
 ~~~~~~~~~
 
 Return the  AntiAffinity object after execution
@@ -56,7 +56,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Server1 &lt;ServerType&gt;
+-Server1 <ServerType>
 ~~~~~~~~~
 
 The server to add to anti affinity rule
@@ -70,7 +70,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Server2 &lt;ServerType&gt;
+-Server2 <ServerType>
 ~~~~~~~~~
 
 The server to add to anti affinity rule

@@ -28,7 +28,7 @@ Description
 Parameters
 ----------
 
--ClientClonePoolId &lt;guid&gt;
+-ClientClonePoolId <guid>
 ~~~~~~~~~
 
 The VIP virtual listener Client Clone Pool Id
@@ -42,7 +42,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -56,7 +56,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--ConnectionLimit &lt;int&gt;
+-ConnectionLimit <int>
 ~~~~~~~~~
 
 The VIP virtual listener Connection Limit
@@ -70,7 +70,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--ConnectionRateLimit &lt;int&gt;
+-ConnectionRateLimit <int>
 ~~~~~~~~~
 
 The VIP virtual listener Connection Rate Limit
@@ -84,7 +84,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Description &lt;string&gt;
+-Description <string>
 ~~~~~~~~~
 
 The virtual listener description
@@ -98,7 +98,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Enabled &lt;bool&gt;
+-Enabled <bool>
 ~~~~~~~~~
 
 The VIP virtual listener Status
@@ -112,7 +112,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--FallbackPersistenceProfileId &lt;string&gt;
+-FallbackPersistenceProfileId <string>
 ~~~~~~~~~
 
 The VIP virtual listener Fallback Persistence Profile Id
@@ -126,7 +126,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--OptimizationProfileId &lt;string&gt;
+-OptimizationProfileId <string>
 ~~~~~~~~~
 
 The VIP virtual listener Optimization Profile Id
@@ -140,7 +140,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--PersistenceProfileId &lt;string&gt;
+-PersistenceProfileId <string>
 ~~~~~~~~~
 
 The VIP virtual listener Persistence Profile Id
@@ -154,7 +154,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--PoolId &lt;guid&gt;
+-PoolId <guid>
 ~~~~~~~~~
 
 The VIP virtual listener Pool Id
@@ -168,7 +168,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--SourcePortPreservation &lt;string&gt;
+-SourcePortPreservation <string>
 ~~~~~~~~~
 
 The VIP virtual listener Source Port Preservation
@@ -182,7 +182,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--VirtualListener &lt;VirtualListenerType&gt;
+-VirtualListener <VirtualListenerType>
 ~~~~~~~~~
 
 The virtual listener
@@ -196,7 +196,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--iRuleId &lt;string[]&gt;
+-iRuleId <string[]>
 ~~~~~~~~~
 
 The VIP virtual listener iRule Ids

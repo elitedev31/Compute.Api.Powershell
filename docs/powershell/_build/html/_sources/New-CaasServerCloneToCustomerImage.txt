@@ -28,7 +28,7 @@ Description
 Parameters
 ----------
 
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -42,7 +42,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Description &lt;string&gt;
+-Description <string>
 ~~~~~~~~~
 
 Set the customer image description
@@ -56,7 +56,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Name &lt;string&gt;
+-Name <string>
 ~~~~~~~~~
 
 Set the customer image name. Note that the Customer Image name is required to be unique in a given data center.
@@ -70,7 +70,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--PassThru &lt;switch&gt;
+-PassThru <switch>
 ~~~~~~~~~
 
 Return the Server object after execution
@@ -84,7 +84,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Server &lt;ServerType&gt;
+-Server <ServerType>
 ~~~~~~~~~
 
 The server to action on

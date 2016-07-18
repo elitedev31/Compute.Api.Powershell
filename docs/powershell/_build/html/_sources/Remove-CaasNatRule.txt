@@ -30,7 +30,7 @@ Description
 Parameters
 ----------
 
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -44,7 +44,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--NatRule &lt;psobject&gt;
+-NatRule <psobject>
 ~~~~~~~~~
 
 The NAT Rule
@@ -58,7 +58,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Network &lt;NetworkWithLocationsNetwork&gt;
+-Network <NetworkWithLocationsNetwork>
 ~~~~~~~~~
 
 The network that the ACL Rule exists
@@ -72,7 +72,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--NetworkDomain &lt;NetworkDomainType&gt;
+-NetworkDomain <NetworkDomainType>
 ~~~~~~~~~
 
 The network domain that the NAT Rule exists

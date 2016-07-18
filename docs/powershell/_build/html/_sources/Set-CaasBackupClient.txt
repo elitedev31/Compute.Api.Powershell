@@ -28,7 +28,7 @@ Description
 Parameters
 ----------
 
--Aletring &lt;AlertingType&gt;
+-Aletring <AlertingType>
 ~~~~~~~~~
 
 The alerting type to modify
@@ -42,7 +42,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--BackupClient &lt;BackupClientDetailsType&gt;
+-BackupClient <BackupClientDetailsType>
 ~~~~~~~~~
 
 The backup client details to modify
@@ -56,7 +56,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -70,7 +70,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--SchedulePolicy &lt;BackupSchedulePolicy&gt;
+-SchedulePolicy <BackupSchedulePolicy>
 ~~~~~~~~~
 
 The schedule policy to modify
@@ -84,7 +84,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Server &lt;ServerType&gt;
+-Server <ServerType>
 ~~~~~~~~~
 
 The server to modify the backup client
@@ -98,7 +98,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--StoragePolicy &lt;BackupStoragePolicy&gt;
+-StoragePolicy <BackupStoragePolicy>
 ~~~~~~~~~
 
 The storage policy to modify

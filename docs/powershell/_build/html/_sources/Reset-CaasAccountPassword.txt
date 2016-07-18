@@ -28,7 +28,7 @@ Description
 Parameters
 ----------
 
--ApiCredentials &lt;pscredential&gt;
+-ApiCredentials <pscredential>
 ~~~~~~~~~
 
 
@@ -42,7 +42,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--NewPassword &lt;securestring&gt;
+-NewPassword <securestring>
 ~~~~~~~~~
 
 
@@ -56,7 +56,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Region &lt;KnownApiRegion&gt;
+-Region <KnownApiRegion>
 ~~~~~~~~~
 
 A known cloud region for the Cloud API Uri. Not all vendor and region combinations are valid.
@@ -70,7 +70,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Vendor &lt;KnownApiVendor&gt;
+-Vendor <KnownApiVendor>
 ~~~~~~~~~
 
 A known cloud vendor for the Cloud API Uri. Not all vendor and region combinations are valid.

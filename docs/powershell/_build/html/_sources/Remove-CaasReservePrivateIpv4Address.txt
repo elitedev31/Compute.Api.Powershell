@@ -34,7 +34,7 @@ Description
 Parameters
 ----------
 
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -48,7 +48,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--IpAddress &lt;string&gt;
+-IpAddress <string>
 ~~~~~~~~~
 
 The IPv4 address
@@ -62,7 +62,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Network &lt;NetworkWithLocationsNetwork&gt;
+-Network <NetworkWithLocationsNetwork>
 ~~~~~~~~~
 
 Identifies Cloud Network (MCP 1.0)
@@ -76,7 +76,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--NetworkId &lt;guid&gt;
+-NetworkId <guid>
 ~~~~~~~~~
 
 The unique identifier of an MCP 1.0 Cloud Network
@@ -90,7 +90,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Vlan &lt;VlanType&gt;
+-Vlan <VlanType>
 ~~~~~~~~~
 
 Identifies VLAN (MCP 2.0)
@@ -104,7 +104,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--VlanId &lt;guid&gt;
+-VlanId <guid>
 ~~~~~~~~~
 
 The unique identifier of MCP 2.0 VLAN

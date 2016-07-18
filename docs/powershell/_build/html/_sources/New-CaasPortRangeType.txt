@@ -28,7 +28,7 @@ Description
 Parameters
 ----------
 
--Begin &lt;uint16&gt;
+-Begin <uint16>
 ~~~~~~~~~
 
 The Port Begin of the Range
@@ -42,7 +42,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -56,7 +56,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--End &lt;uint16&gt;
+-End <uint16>
 ~~~~~~~~~
 
 The Port End of the Range

@@ -28,7 +28,7 @@ Description
 Parameters
 ----------
 
--BackupServicePlan &lt;ServicePlan&gt;
+-BackupServicePlan <ServicePlan>
 ~~~~~~~~~
 
 The service plan of the backup
@@ -42,7 +42,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -56,7 +56,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--IsEnable &lt;bool&gt;
+-IsEnable <bool>
 ~~~~~~~~~
 
 Determines whether to enable or disable backup. If enable, you must use BackupServicePlan
@@ -70,7 +70,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Server &lt;ServerType&gt;
+-Server <ServerType>
 ~~~~~~~~~
 
 The server to action on

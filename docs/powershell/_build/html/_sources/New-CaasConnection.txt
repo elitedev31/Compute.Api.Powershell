@@ -30,7 +30,7 @@ Description
 Parameters
 ----------
 
--ApiCredentials &lt;pscredential&gt;
+-ApiCredentials <pscredential>
 ~~~~~~~~~
 
 
@@ -44,7 +44,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--ApiDomainName &lt;string&gt;
+-ApiDomainName <string>
 ~~~~~~~~~
 
 The domain name for the REST API
@@ -58,7 +58,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--FtpDomainName &lt;string&gt;
+-FtpDomainName <string>
 ~~~~~~~~~
 
 The domain name for the FTP, default is the api domain name
@@ -72,7 +72,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Name &lt;string&gt;
+-Name <string>
 ~~~~~~~~~
 
 Name to identify this connection
@@ -86,7 +86,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Region &lt;KnownApiRegion&gt;
+-Region <KnownApiRegion>
 ~~~~~~~~~
 
 A known cloud region for the Cloud API Uri. Not all vendor and region combinations are valid.
@@ -100,7 +100,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Vendor &lt;KnownApiVendor&gt;
+-Vendor <KnownApiVendor>
 ~~~~~~~~~
 
 A known cloud vendor for the Cloud API Uri. Not all vendor and region combinations are valid.

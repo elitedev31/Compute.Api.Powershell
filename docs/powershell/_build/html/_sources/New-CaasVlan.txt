@@ -28,7 +28,7 @@ Description
 Parameters
 ----------
 
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -42,7 +42,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Description &lt;string&gt;
+-Description <string>
 ~~~~~~~~~
 
 The vlan description
@@ -56,7 +56,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Name &lt;string&gt;
+-Name <string>
 ~~~~~~~~~
 
 The vlan name
@@ -70,7 +70,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--NetworkDomainId &lt;guid&gt;
+-NetworkDomainId <guid>
 ~~~~~~~~~
 
 The network domain Id
@@ -84,7 +84,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--PrivateIpv4BaseAddress &lt;ipaddress&gt;
+-PrivateIpv4BaseAddress <ipaddress>
 ~~~~~~~~~
 
 The vlan Private Ipv4BaseAddress
@@ -98,7 +98,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--PrivateIpv4PrefixSize &lt;int&gt;
+-PrivateIpv4PrefixSize <int>
 ~~~~~~~~~
 
 The vlan Private Ipv4 PrefixSize, must be between 16 and 24

@@ -28,7 +28,7 @@ Description
 Parameters
 ----------
 
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -42,7 +42,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Name &lt;string&gt;
+-Name <string>
 ~~~~~~~~~
 
 Name to filter
@@ -56,7 +56,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Server &lt;ServerType&gt;
+-Server <ServerType>
 ~~~~~~~~~
 
 The server associated with the backup client types

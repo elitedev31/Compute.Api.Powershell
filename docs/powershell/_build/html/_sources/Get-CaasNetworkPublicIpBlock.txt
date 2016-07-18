@@ -30,7 +30,7 @@ Description
 Parameters
 ----------
 
--BaseIp &lt;string&gt;
+-BaseIp <string>
 ~~~~~~~~~
 
 Filter the list based on the based public Ip block
@@ -44,7 +44,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -58,7 +58,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Id &lt;guid&gt;
+-Id <guid>
 ~~~~~~~~~
 
 Public Ip block id
@@ -72,7 +72,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Network &lt;NetworkWithLocationsNetwork&gt;
+-Network <NetworkWithLocationsNetwork>
 ~~~~~~~~~
 
 The network to get the public ip addresses
@@ -86,7 +86,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--NetworkDomain &lt;NetworkDomainType&gt;
+-NetworkDomain <NetworkDomainType>
 ~~~~~~~~~
 
 The network domain to get the public ip addresses
@@ -100,7 +100,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--OrderBy &lt;string&gt;
+-OrderBy <string>
 ~~~~~~~~~
 
 The Order By of the results, only supported for MCP2
@@ -114,7 +114,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--PageNumber &lt;int&gt;
+-PageNumber <int>
 ~~~~~~~~~
 
 The Page Number of the result page, only supported for MCP2
@@ -128,7 +128,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--PageSize &lt;int&gt;
+-PageSize <int>
 ~~~~~~~~~
 
 The Page Size of the result page, only supported for MCP2

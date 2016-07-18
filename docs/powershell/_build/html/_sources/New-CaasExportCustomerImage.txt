@@ -28,7 +28,7 @@ Description
 Parameters
 ----------
 
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -42,7 +42,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--CustomerImage &lt;ImagesWithDiskSpeedImage&gt;
+-CustomerImage <ImagesWithDiskSpeedImage>
 ~~~~~~~~~
 
 The Customer Image.
@@ -56,7 +56,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--OvfPrefix &lt;string&gt;
+-OvfPrefix <string>
 ~~~~~~~~~
 
 A prefix for this export. Must not contain spaces.

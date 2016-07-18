@@ -28,7 +28,7 @@ Description
 Parameters
 ----------
 
--BackupClient &lt;BackupClientDetailsType&gt;
+-BackupClient <BackupClientDetailsType>
 ~~~~~~~~~
 
 The backup client details to remove
@@ -42,7 +42,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Confirm &lt;switch&gt;
+-Confirm <switch>
 ~~~~~~~~~
 
 
@@ -56,7 +56,7 @@ Aliases                      cf
 Dynamic?                     false
 
  
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -70,7 +70,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Server &lt;ServerType&gt;
+-Server <ServerType>
 ~~~~~~~~~
 
 The server to remove the backup client from
@@ -84,7 +84,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--WhatIf &lt;switch&gt;
+-WhatIf <switch>
 ~~~~~~~~~
 
 

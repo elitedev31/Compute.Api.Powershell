@@ -28,7 +28,7 @@ Description
 Parameters
 ----------
 
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -42,7 +42,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--ErrorCountBeforeServerFail &lt;int&gt;
+-ErrorCountBeforeServerFail <int>
 ~~~~~~~~~
 
 The number of errors before declaring a server failure. valid range 1-65535
@@ -56,7 +56,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--FailedProbeIntervalSeconds &lt;int&gt;
+-FailedProbeIntervalSeconds <int>
 ~~~~~~~~~
 
 The number of sucesses before reenable a failed server. valid range 15-65535
@@ -70,7 +70,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--MatchContent &lt;string&gt;
+-MatchContent <string>
 ~~~~~~~~~
 
 Applicable if type is HTTP/HTTPS. The content to be matched.
@@ -84,7 +84,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--MaxReplyWaitSeconds &lt;int&gt;
+-MaxReplyWaitSeconds <int>
 ~~~~~~~~~
 
 The max number of seconds to wait for a response from a server. valid range 2-65535
@@ -98,7 +98,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Name &lt;string&gt;
+-Name <string>
 ~~~~~~~~~
 
 The name for the probe
@@ -112,7 +112,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Network &lt;NetworkWithLocationsNetwork&gt;
+-Network <NetworkWithLocationsNetwork>
 ~~~~~~~~~
 
 The network to manage the VIP settings
@@ -126,7 +126,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--PassThru &lt;switch&gt;
+-PassThru <switch>
 ~~~~~~~~~
 
 Return the Probe object
@@ -140,7 +140,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Port &lt;int&gt;
+-Port <int>
 ~~~~~~~~~
 
 The port to probe. valid range 1-65535
@@ -154,7 +154,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--ProbeIntervalSeconds &lt;int&gt;
+-ProbeIntervalSeconds <int>
 ~~~~~~~~~
 
 The interval to probe in seconds. valid range 15-65535
@@ -168,7 +168,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--RequestMethod &lt;ProbeRequestMethod&gt;
+-RequestMethod <ProbeRequestMethod>
 ~~~~~~~~~
 
 Required if type is HTTP/HTTPS. The request method to be used for the request Url
@@ -182,7 +182,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--RequestUrl &lt;string&gt;
+-RequestUrl <string>
 ~~~~~~~~~
 
 Applicable if type is HTTP/HTTPS. The Url to be requested
@@ -196,7 +196,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--StatusCodeLowerBound &lt;int&gt;
+-StatusCodeLowerBound <int>
 ~~~~~~~~~
 
 The upper bound of the HTTP status code to be matched. valid range 0-999
@@ -210,7 +210,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--StatusCodeUpperBound &lt;int&gt;
+-StatusCodeUpperBound <int>
 ~~~~~~~~~
 
 The lower bound of the HTTP status code to be matched. valid range 0-999
@@ -224,7 +224,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--SuccessCountBeforeServerEnable &lt;int&gt;
+-SuccessCountBeforeServerEnable <int>
 ~~~~~~~~~
 
 The number of sucesses before reenable a failed server. valid range 1-65535
@@ -238,7 +238,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Type &lt;ProbeType&gt;
+-Type <ProbeType>
 ~~~~~~~~~
 
 The type of probe. One of (TCP, UDP, HTTP, HTTPS, ICMP)

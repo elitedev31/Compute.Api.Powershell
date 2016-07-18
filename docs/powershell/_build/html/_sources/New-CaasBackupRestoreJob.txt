@@ -30,7 +30,7 @@ Description
 Parameters
 ----------
 
--AsAtDate &lt;datetime&gt;
+-AsAtDate <datetime>
 ~~~~~~~~~
 
 The date to restore to.
@@ -44,7 +44,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--BackupClient &lt;BackupClientDetailsType&gt;
+-BackupClient <BackupClientDetailsType>
 ~~~~~~~~~
 
 The backup client to restore, must be a file system client
@@ -58,7 +58,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--BackupClientId &lt;guid&gt;
+-BackupClientId <guid>
 ~~~~~~~~~
 
 The backup client Id to restore, must be a file system client
@@ -72,7 +72,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -86,7 +86,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Server &lt;ServerType&gt;
+-Server <ServerType>
 ~~~~~~~~~
 
 The server to restore
@@ -100,7 +100,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--ServerId &lt;guid&gt;
+-ServerId <guid>
 ~~~~~~~~~
 
 The ID of the server to restore
@@ -114,7 +114,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--TargetServer &lt;ServerType&gt;
+-TargetServer <ServerType>
 ~~~~~~~~~
 
 The target server to restore onto if out of place restore
@@ -128,7 +128,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--TargetServerId &lt;guid&gt;
+-TargetServerId <guid>
 ~~~~~~~~~
 
 The ID of the target server to restore onto if out of place restore.

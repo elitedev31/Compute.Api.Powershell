@@ -34,7 +34,7 @@ Description
 Parameters
 ----------
 
--BeginPort &lt;uint16&gt;
+-BeginPort <uint16>
 ~~~~~~~~~
 
 The Port
@@ -48,7 +48,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -62,7 +62,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--EndPort &lt;uint16&gt;
+-EndPort <uint16>
 ~~~~~~~~~
 
 The Port rang end
@@ -76,7 +76,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--IpAddress &lt;string&gt;
+-IpAddress <string>
 ~~~~~~~~~
 
 The IP Address
@@ -90,7 +90,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--IpAddressList &lt;IpAddressListType&gt;
+-IpAddressList <IpAddressListType>
 ~~~~~~~~~
 
 The IP Address List
@@ -104,7 +104,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--PortList &lt;PortListType&gt;
+-PortList <PortListType>
 ~~~~~~~~~
 
 The Port List
@@ -118,7 +118,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--PrefixSize &lt;int&gt;
+-PrefixSize <int>
 ~~~~~~~~~
 
 The IP Address Prefix Size

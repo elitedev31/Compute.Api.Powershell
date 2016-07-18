@@ -30,7 +30,7 @@ Description
 Parameters
 ----------
 
--AdminPassword &lt;string&gt;
+-AdminPassword <string>
 ~~~~~~~~~
 
 The server VM administrator password
@@ -44,7 +44,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -58,7 +58,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Description &lt;string&gt;
+-Description <string>
 ~~~~~~~~~
 
 The server description
@@ -72,7 +72,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--IsStarted &lt;bool&gt;
+-IsStarted <bool>
 ~~~~~~~~~
 
 The server start flag
@@ -86,7 +86,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Name &lt;string&gt;
+-Name <string>
 ~~~~~~~~~
 
 The server name
@@ -100,7 +100,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--NetworkDomain &lt;NetworkDomainType&gt;
+-NetworkDomain <NetworkDomainType>
 ~~~~~~~~~
 
 The network domain in which server will be deployed
@@ -114,7 +114,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--PassThru &lt;switch&gt;
+-PassThru <switch>
 ~~~~~~~~~
 
 Return the Server object after execution
@@ -128,7 +128,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--PrimaryPrivateIp &lt;string&gt;
+-PrimaryPrivateIp <string>
 ~~~~~~~~~
 
 The private network private IP address that will be assigned to the machine.
@@ -142,7 +142,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--PrimaryVlan &lt;VlanType&gt;
+-PrimaryVlan <VlanType>
 ~~~~~~~~~
 
 The server's primary vlan
@@ -156,7 +156,7 @@ Aliases                      PrimaryNetwork
 Dynamic?                     false
 
  
--ServerImage &lt;ImagesWithDiskSpeedImage&gt;
+-ServerImage <ImagesWithDiskSpeedImage>
 ~~~~~~~~~
 
 The server OS Image

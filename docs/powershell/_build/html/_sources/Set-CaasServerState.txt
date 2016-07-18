@@ -28,7 +28,7 @@ Description
 Parameters
 ----------
 
--Action &lt;SetCaasServerActionCmdlet+ServerAction&gt;
+-Action <SetCaasServerActionCmdlet+ServerAction>
 ~~~~~~~~~
 
 The server action to take
@@ -42,7 +42,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -56,7 +56,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--PassThru &lt;switch&gt;
+-PassThru <switch>
 ~~~~~~~~~
 
 Return the Server object after execution
@@ -70,7 +70,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Server &lt;ServerType&gt;
+-Server <ServerType>
 ~~~~~~~~~
 
 The server to action on

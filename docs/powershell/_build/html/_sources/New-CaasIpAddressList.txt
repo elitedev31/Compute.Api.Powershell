@@ -30,7 +30,7 @@ Description
 Parameters
 ----------
 
--ChildIpAddressList &lt;IpAddressListType[]&gt;
+-ChildIpAddressList <IpAddressListType[]>
 ~~~~~~~~~
 
 The network domain id
@@ -44,7 +44,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--ChildIpAddressListId &lt;string[]&gt;
+-ChildIpAddressListId <string[]>
 ~~~~~~~~~
 
 Define one or more individual IP Address Lists on the same Network Domain
@@ -58,7 +58,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -72,7 +72,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Description &lt;string&gt;
+-Description <string>
 ~~~~~~~~~
 
 The IP Address List description
@@ -86,7 +86,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--IpAddress &lt;IpAddressListRangeType[]&gt;
+-IpAddress <IpAddressListRangeType[]>
 ~~~~~~~~~
 
 Define one or more individual IP addresses or ranges of IP addresses. Use New CaasIpAddressRangeType to create type
@@ -100,7 +100,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--IpVersion &lt;IpVersion&gt;
+-IpVersion <IpVersion>
 ~~~~~~~~~
 
 The IP version (IPv4 / IPv6)
@@ -114,7 +114,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Name &lt;string&gt;
+-Name <string>
 ~~~~~~~~~
 
 The IP Address List name
@@ -128,7 +128,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--NetworkDomain &lt;NetworkDomainType&gt;
+-NetworkDomain <NetworkDomainType>
 ~~~~~~~~~
 
 The network domain
@@ -142,7 +142,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--NetworkDomainId &lt;string&gt;
+-NetworkDomainId <string>
 ~~~~~~~~~
 
 The network domain id

@@ -28,7 +28,7 @@ Description
 Parameters
 ----------
 
--AclRule &lt;AclRuleType&gt;
+-AclRule <AclRuleType>
 ~~~~~~~~~
 
 The ACL rule to delete
@@ -42,7 +42,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Confirm &lt;switch&gt;
+-Confirm <switch>
 ~~~~~~~~~
 
 
@@ -56,7 +56,7 @@ Aliases                      cf
 Dynamic?                     false
 
  
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -70,7 +70,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Network &lt;NetworkWithLocationsNetwork&gt;
+-Network <NetworkWithLocationsNetwork>
 ~~~~~~~~~
 
 The network that the ACL Rule exists
@@ -84,7 +84,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--WhatIf &lt;switch&gt;
+-WhatIf <switch>
 ~~~~~~~~~
 
 

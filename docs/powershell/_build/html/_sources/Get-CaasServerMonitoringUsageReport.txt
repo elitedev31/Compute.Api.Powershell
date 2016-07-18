@@ -28,7 +28,7 @@ Description
 Parameters
 ----------
 
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -42,7 +42,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--EndDate &lt;datetime&gt;
+-EndDate <datetime>
 ~~~~~~~~~
 
 The end date
@@ -56,7 +56,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--StartDate &lt;datetime&gt;
+-StartDate <datetime>
 ~~~~~~~~~
 
 The start date

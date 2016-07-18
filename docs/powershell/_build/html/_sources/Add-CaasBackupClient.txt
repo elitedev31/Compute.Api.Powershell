@@ -28,7 +28,7 @@ Description
 Parameters
 ----------
 
--ClientType &lt;BackupClientType&gt;
+-ClientType <BackupClientType>
 ~~~~~~~~~
 
 The backup client type availabe from Get-CaasBackupClientTypes cmdlet
@@ -42,7 +42,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -56,7 +56,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--EmailAddresses &lt;IReadOnlyList[string]&gt;
+-EmailAddresses <IReadOnlyList[string]>
 ~~~~~~~~~
 
 The email addresses for alerting purposes. At least one must be added when using alerting
@@ -70,7 +70,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--SchedulePolicy &lt;BackupSchedulePolicy&gt;
+-SchedulePolicy <BackupSchedulePolicy>
 ~~~~~~~~~
 
 The schedule policy availabe from Get-CaasBackupSchedulePolicies cmdlet
@@ -84,7 +84,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Server &lt;ServerType&gt;
+-Server <ServerType>
 ~~~~~~~~~
 
 The server to add the backup client
@@ -98,7 +98,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--StoragePolicy &lt;BackupStoragePolicy&gt;
+-StoragePolicy <BackupStoragePolicy>
 ~~~~~~~~~
 
 The storage policy availabe from Get-CaasBackupStoragePolicies cmdlet
@@ -112,7 +112,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Trigger &lt;TriggerType&gt;
+-Trigger <TriggerType>
 ~~~~~~~~~
 
 The trigger type for alerting purposes

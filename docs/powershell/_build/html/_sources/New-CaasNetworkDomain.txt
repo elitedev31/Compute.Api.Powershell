@@ -28,7 +28,7 @@ Description
 Parameters
 ----------
 
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -42,7 +42,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Description &lt;string&gt;
+-Description <string>
 ~~~~~~~~~
 
 The  Network Domain description
@@ -56,7 +56,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Location &lt;string&gt;
+-Location <string>
 ~~~~~~~~~
 
 The network domain location
@@ -70,7 +70,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Name &lt;string&gt;
+-Name <string>
 ~~~~~~~~~
 
 The  Network Domain name
@@ -84,7 +84,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Type &lt;NetworkDomainServiceType&gt;
+-Type <NetworkDomainServiceType>
 ~~~~~~~~~
 
 The Network Domain Type

@@ -28,7 +28,7 @@ Description
 Parameters
 ----------
 
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -42,7 +42,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Location &lt;string&gt;
+-Location <string>
 ~~~~~~~~~
 
 filter the location to show the rules
@@ -56,7 +56,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Network &lt;NetworkWithLocationsNetwork&gt;
+-Network <NetworkWithLocationsNetwork>
 ~~~~~~~~~
 
 filter the network to show the the rules
@@ -70,7 +70,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--RuleId &lt;string&gt;
+-RuleId <string>
 ~~~~~~~~~
 
 filter the Antiaffinity rule id
@@ -84,7 +84,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Server &lt;ServerType&gt;
+-Server <ServerType>
 ~~~~~~~~~
 
 find a rule base in a server

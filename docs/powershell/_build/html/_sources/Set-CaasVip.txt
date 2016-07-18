@@ -28,7 +28,7 @@ Description
 Parameters
 ----------
 
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -42,7 +42,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--InService &lt;bool&gt;
+-InService <bool>
 ~~~~~~~~~
 
 The Vip status
@@ -56,7 +56,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Network &lt;NetworkWithLocationsNetwork&gt;
+-Network <NetworkWithLocationsNetwork>
 ~~~~~~~~~
 
 The network to manage the VIP settings
@@ -70,7 +70,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--ReplyToIcmp &lt;bool&gt;
+-ReplyToIcmp <bool>
 ~~~~~~~~~
 
 The vip reply to ICMP status
@@ -84,7 +84,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Vip &lt;Vip&gt;
+-Vip <Vip>
 ~~~~~~~~~
 
 The vip to be deleted

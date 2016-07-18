@@ -28,7 +28,7 @@ Description
 Parameters
 ----------
 
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -42,7 +42,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--CpuCount &lt;int&gt;
+-CpuCount <int>
 ~~~~~~~~~
 
 Set the number of virtual CPUs.
@@ -56,7 +56,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Description &lt;string&gt;
+-Description <string>
 ~~~~~~~~~
 
 Set the server description
@@ -70,7 +70,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--MemoryInMb &lt;int&gt;
+-MemoryInMb <int>
 ~~~~~~~~~
 
 Set the server RAM memory. Value must be represent a GB integer (e.g. 1024, 2048, 3072, 4096, etc.)
@@ -84,7 +84,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Name &lt;string&gt;
+-Name <string>
 ~~~~~~~~~
 
 Set the server name on CaaS
@@ -98,7 +98,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--PassThru &lt;switch&gt;
+-PassThru <switch>
 ~~~~~~~~~
 
 Return the Server object after execution
@@ -112,7 +112,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--PrivateIp &lt;string&gt;
+-PrivateIp <string>
 ~~~~~~~~~
 
 Set the privateIp of the server
@@ -126,7 +126,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Server &lt;ServerType&gt;
+-Server <ServerType>
 ~~~~~~~~~
 
 The server to action on

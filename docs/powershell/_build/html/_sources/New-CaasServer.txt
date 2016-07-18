@@ -28,7 +28,7 @@ Description
 Parameters
 ----------
 
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -42,7 +42,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--PassThru &lt;switch&gt;
+-PassThru <switch>
 ~~~~~~~~~
 
 Return the Server object after execution
@@ -56,7 +56,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--ServerDetails &lt;CaasServerDetails&gt;
+-ServerDetails <CaasServerDetails>
 ~~~~~~~~~
 
 The server details created by New-CaasServerDetails

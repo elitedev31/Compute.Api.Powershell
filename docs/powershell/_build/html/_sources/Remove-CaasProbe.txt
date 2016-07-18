@@ -28,7 +28,7 @@ Description
 Parameters
 ----------
 
--Confirm &lt;switch&gt;
+-Confirm <switch>
 ~~~~~~~~~
 
 
@@ -42,7 +42,7 @@ Aliases                      cf
 Dynamic?                     false
 
  
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -56,7 +56,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Network &lt;NetworkWithLocationsNetwork&gt;
+-Network <NetworkWithLocationsNetwork>
 ~~~~~~~~~
 
 The network to manage the VIP settings
@@ -70,7 +70,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Probe &lt;Probe&gt;
+-Probe <Probe>
 ~~~~~~~~~
 
 The real server to be deleted
@@ -84,7 +84,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--WhatIf &lt;switch&gt;
+-WhatIf <switch>
 ~~~~~~~~~
 
 

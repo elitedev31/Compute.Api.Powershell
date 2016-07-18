@@ -30,7 +30,7 @@ Description
 Parameters
 ----------
 
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -44,7 +44,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Datacentre &lt;DatacenterWithMaintenanceStatusType&gt;
+-Datacentre <DatacenterWithMaintenanceStatusType>
 ~~~~~~~~~
 
 The data centre location where the network will be deployed.
@@ -58,7 +58,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Description &lt;string&gt;
+-Description <string>
 ~~~~~~~~~
 
 The description of the network
@@ -72,7 +72,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Location &lt;string&gt;
+-Location <string>
 ~~~~~~~~~
 
 The data centre location where the network will be deployed.
@@ -86,7 +86,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Name &lt;string&gt;
+-Name <string>
 ~~~~~~~~~
 
 A unique name for the new network to deploy

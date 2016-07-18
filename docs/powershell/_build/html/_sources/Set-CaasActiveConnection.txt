@@ -28,7 +28,7 @@ Description
 Parameters
 ----------
 
--Name &lt;string&gt;
+-Name <string>
 ~~~~~~~~~
 
 Connection name to be set as active.

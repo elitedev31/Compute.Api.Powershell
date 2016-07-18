@@ -32,7 +32,7 @@ Description
 Parameters
 ----------
 
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -46,7 +46,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Network &lt;NetworkWithLocationsNetwork&gt;
+-Network <NetworkWithLocationsNetwork>
 ~~~~~~~~~
 
 The network
@@ -60,7 +60,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--NetworkDomain &lt;NetworkDomainType&gt;
+-NetworkDomain <NetworkDomainType>
 ~~~~~~~~~
 
 The network domain
@@ -74,7 +74,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--OrderBy &lt;string&gt;
+-OrderBy <string>
 ~~~~~~~~~
 
 The Order By of the results, only supported for MCP2
@@ -88,7 +88,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--PageNumber &lt;int&gt;
+-PageNumber <int>
 ~~~~~~~~~
 
 The Page Number of the result page, only supported for MCP2
@@ -102,7 +102,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--PageSize &lt;int&gt;
+-PageSize <int>
 ~~~~~~~~~
 
 The Page Size of the result page, only supported for MCP2
@@ -116,7 +116,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--RuleId &lt;guid&gt;
+-RuleId <guid>
 ~~~~~~~~~
 
 The anti-afiinity rule id
@@ -130,7 +130,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Server &lt;ServerType&gt;
+-Server <ServerType>
 ~~~~~~~~~
 
 The Server
@@ -144,7 +144,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--State &lt;string&gt;
+-State <string>
 ~~~~~~~~~
 
 The anti-afiinity rule state

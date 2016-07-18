@@ -30,7 +30,7 @@ Description
 Parameters
 ----------
 
--AssetId &lt;string&gt;
+-AssetId <string>
 ~~~~~~~~~
 
 The UUID of the asset
@@ -44,7 +44,7 @@ Aliases                      Id
 Dynamic?                     false
 
  
--AssetType &lt;AssetType&gt;
+-AssetType <AssetType>
 ~~~~~~~~~
 
 The Asset type
@@ -58,7 +58,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -72,7 +72,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--TagKeyId &lt;string&gt;
+-TagKeyId <string>
 ~~~~~~~~~
 
 The Identification of tag key
@@ -86,7 +86,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--TagKeyName &lt;string&gt;
+-TagKeyName <string>
 ~~~~~~~~~
 
 The Identification of tag key
@@ -100,7 +100,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Value &lt;string&gt;
+-Value <string>
 ~~~~~~~~~
 
 The value of tag key

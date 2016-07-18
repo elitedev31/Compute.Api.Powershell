@@ -28,7 +28,7 @@ Description
 Parameters
 ----------
 
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -42,7 +42,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Destination &lt;IpAndPortType&gt;
+-Destination <IpAndPortType>
 ~~~~~~~~~
 
 The destination IP and Port , use New-CaasIpAndPortType
@@ -56,7 +56,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Enabled &lt;bool&gt;
+-Enabled <bool>
 ~~~~~~~~~
 
 Is Firewall enabled?
@@ -70,7 +70,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--FirewallAction &lt;string&gt;
+-FirewallAction <string>
 ~~~~~~~~~
 
 The Firewall action (Drop / Accept Decisively)
@@ -84,7 +84,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--FirewallRuleName &lt;string&gt;
+-FirewallRuleName <string>
 ~~~~~~~~~
 
 The Firewall rule name
@@ -98,7 +98,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--IpVersion &lt;IpVersion&gt;
+-IpVersion <IpVersion>
 ~~~~~~~~~
 
 The IP version (IPv4 / IPv6)
@@ -112,7 +112,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--NetworkDomain &lt;NetworkDomainType&gt;
+-NetworkDomain <NetworkDomainType>
 ~~~~~~~~~
 
 The network domain
@@ -126,7 +126,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Position &lt;RulePositionType&gt;
+-Position <RulePositionType>
 ~~~~~~~~~
 
 Rule position
@@ -140,7 +140,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Protocol &lt;AclProtocolType&gt;
+-Protocol <AclProtocolType>
 ~~~~~~~~~
 
 The protocol type
@@ -154,7 +154,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--RelativeToRule &lt;FirewallRuleType&gt;
+-RelativeToRule <FirewallRuleType>
 ~~~~~~~~~
 
 Rule relative position
@@ -168,7 +168,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Source &lt;IpAndPortType&gt;
+-Source <IpAndPortType>
 ~~~~~~~~~
 
 The source IP and Port , use New-CaasIpAndPortType

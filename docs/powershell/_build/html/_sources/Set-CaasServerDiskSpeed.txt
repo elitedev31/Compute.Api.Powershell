@@ -30,7 +30,7 @@ Description
 Parameters
 ----------
 
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -44,7 +44,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--PassThru &lt;switch&gt;
+-PassThru <switch>
 ~~~~~~~~~
 
 Return the Server object after execution
@@ -58,7 +58,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--ScsiId &lt;int&gt;
+-ScsiId <int>
 ~~~~~~~~~
 
 SCSI Id of the disk to be resized
@@ -72,7 +72,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Server &lt;ServerType&gt;
+-Server <ServerType>
 ~~~~~~~~~
 
 The server to action on
@@ -86,7 +86,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Speed &lt;DiskSpeedType&gt;
+-Speed <DiskSpeedType>
 ~~~~~~~~~
 
 The disk speed
@@ -100,7 +100,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--SpeedId &lt;string&gt;
+-SpeedId <string>
 ~~~~~~~~~
 
 The speedId of the new disk. The available speed Id can be retrieved using (Get-CaasDataCentre).hypervisor.diskSpeed

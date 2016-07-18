@@ -28,7 +28,7 @@ Description
 Parameters
 ----------
 
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -42,7 +42,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Enabled &lt;bool&gt;
+-Enabled <bool>
 ~~~~~~~~~
 
 Is VIP pool member enabled?
@@ -56,7 +56,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--PoolMember &lt;PoolMemberType&gt;
+-PoolMember <PoolMemberType>
 ~~~~~~~~~
 
 The VIP pool member

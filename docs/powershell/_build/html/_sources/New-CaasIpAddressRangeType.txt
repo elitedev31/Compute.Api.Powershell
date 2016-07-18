@@ -30,7 +30,7 @@ Description
 Parameters
 ----------
 
--Begin &lt;string&gt;
+-Begin <string>
 ~~~~~~~~~
 
 The IP Address Begin of the Range
@@ -44,7 +44,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -58,7 +58,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--End &lt;string&gt;
+-End <string>
 ~~~~~~~~~
 
 The IP Address End of the Range
@@ -72,7 +72,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--IpAddress &lt;string&gt;
+-IpAddress <string>
 ~~~~~~~~~
 
 The IP Address
@@ -86,7 +86,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--PrefixSize &lt;int&gt;
+-PrefixSize <int>
 ~~~~~~~~~
 
 The IP Address Range Prefix

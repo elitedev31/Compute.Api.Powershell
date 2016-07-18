@@ -123,13 +123,17 @@ Synopsis
 
 $($full.Synopsis)
 
+"@
+
++ @"
+
 Syntax
 ------
 
 .. code-block:: powershell
 
     $((($full.syntax | Out-String) -replace "`r`n", "`r`n`r`n").Trim())
-
+"@ + @"
 
 Description
 -----------

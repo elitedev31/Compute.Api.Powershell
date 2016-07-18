@@ -28,7 +28,7 @@ Description
 Parameters
 ----------
 
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -42,7 +42,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--VirtualListener &lt;VirtualListenerType&gt;
+-VirtualListener <VirtualListenerType>
 ~~~~~~~~~
 
 The VIP virtual listener

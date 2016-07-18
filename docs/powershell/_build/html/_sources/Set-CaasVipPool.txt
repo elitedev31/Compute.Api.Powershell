@@ -28,7 +28,7 @@ Description
 Parameters
 ----------
 
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -42,7 +42,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Description &lt;string&gt;
+-Description <string>
 ~~~~~~~~~
 
 The VIP Pool description
@@ -56,7 +56,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--HealthMonitorId &lt;string[]&gt;
+-HealthMonitorId <string[]>
 ~~~~~~~~~
 
 The VIP Pool Health Monitor Ids
@@ -70,7 +70,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--LoadBalanceMethod &lt;string&gt;
+-LoadBalanceMethod <string>
 ~~~~~~~~~
 
 The VIP Pool Load balance method
@@ -84,7 +84,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--ServiceDownAction &lt;string&gt;
+-ServiceDownAction <string>
 ~~~~~~~~~
 
 The VIP Pool Service down action
@@ -98,7 +98,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--SlowRampTime &lt;int&gt;
+-SlowRampTime <int>
 ~~~~~~~~~
 
 The VIP Pool Slow ramp time
@@ -112,7 +112,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--VipPool &lt;PoolType&gt;
+-VipPool <PoolType>
 ~~~~~~~~~
 
 The Firewall Rule

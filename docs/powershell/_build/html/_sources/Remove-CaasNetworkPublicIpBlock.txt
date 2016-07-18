@@ -30,7 +30,7 @@ Description
 Parameters
 ----------
 
--Confirm &lt;switch&gt;
+-Confirm <switch>
 ~~~~~~~~~
 
 
@@ -44,7 +44,7 @@ Aliases                      cf
 Dynamic?                     false
 
  
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -58,7 +58,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Network &lt;NetworkWithLocationsNetwork&gt;
+-Network <NetworkWithLocationsNetwork>
 ~~~~~~~~~
 
 The network to release the public ip addresses
@@ -72,7 +72,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--NetworkDomain &lt;NetworkDomainType&gt;
+-NetworkDomain <NetworkDomainType>
 ~~~~~~~~~
 
 The network domain to release the public ip addresses
@@ -86,7 +86,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--PublicIpBlock &lt;psobject&gt;
+-PublicIpBlock <psobject>
 ~~~~~~~~~
 
 The public ip block to be released
@@ -100,7 +100,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--WhatIf &lt;switch&gt;
+-WhatIf <switch>
 ~~~~~~~~~
 
 

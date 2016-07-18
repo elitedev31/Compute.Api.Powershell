@@ -28,7 +28,7 @@ Description
 Parameters
 ----------
 
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -42,7 +42,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--ErrorCountBeforeServerFail &lt;int&gt;
+-ErrorCountBeforeServerFail <int>
 ~~~~~~~~~
 
 The number of errors before declaring a server failure. valid range 1-65535
@@ -56,7 +56,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--FailedProbeIntervalSeconds &lt;int&gt;
+-FailedProbeIntervalSeconds <int>
 ~~~~~~~~~
 
 The number of sucesses before reenable a failed server. valid range 15-65535
@@ -70,7 +70,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--MaxReplyWaitSeconds &lt;int&gt;
+-MaxReplyWaitSeconds <int>
 ~~~~~~~~~
 
 The max number of seconds to wait for a response from a server. valid range 2-65535
@@ -84,7 +84,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Network &lt;NetworkWithLocationsNetwork&gt;
+-Network <NetworkWithLocationsNetwork>
 ~~~~~~~~~
 
 The network to manage the VIP settings
@@ -98,7 +98,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Probe &lt;Probe&gt;
+-Probe <Probe>
 ~~~~~~~~~
 
 The Probe object
@@ -112,7 +112,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--ProbeIntervalSeconds &lt;int&gt;
+-ProbeIntervalSeconds <int>
 ~~~~~~~~~
 
 The interval to probe in seconds. valid range 15-65535
@@ -126,7 +126,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--SuccessCountBeforeServerEnable &lt;int&gt;
+-SuccessCountBeforeServerEnable <int>
 ~~~~~~~~~
 
 The number of sucesses before reenable a failed server. valid range 1-65535

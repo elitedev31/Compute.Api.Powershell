@@ -28,7 +28,7 @@ Description
 Parameters
 ----------
 
--Connection &lt;ComputeServiceConnection&gt;
+-Connection <ComputeServiceConnection>
 ~~~~~~~~~
 
 The CaaS Connection created by New-CaasConnection
@@ -42,7 +42,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Location &lt;string&gt;
+-Location <string>
 ~~~~~~~~~
 
 Location of the server to filter
@@ -56,7 +56,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Name &lt;string&gt;
+-Name <string>
 ~~~~~~~~~
 
 Name of the server to filter
@@ -70,7 +70,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--Network &lt;NetworkWithLocationsNetwork&gt;
+-Network <NetworkWithLocationsNetwork>
 ~~~~~~~~~
 
 The network to show the servers from
@@ -84,7 +84,7 @@ Aliases                      None
 Dynamic?                     false
 
  
--ServerId &lt;string&gt;
+-ServerId <string>
 ~~~~~~~~~
 
 Server id  to filter
