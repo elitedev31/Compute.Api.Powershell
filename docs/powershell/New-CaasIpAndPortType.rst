@@ -124,7 +124,7 @@ The Port List
 -PrefixSize <int>
 ~~~~~~~~~
 
-The IP Address Prefix size
+The IP Address Prefix Size
 
 * Position?                    Named
 * Accept pipeline input?       false

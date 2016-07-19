@@ -98,8 +98,8 @@ DD.CBU.Compute.Powershell.ComputeServiceConnection
 Outputs
 -------
 
-DD.CBU.Compute.Api.Contracts.Network.IpBlockType
 DD.CBU.Compute.Api.Contracts.Network20.PublicIpBlockType
+DD.CBU.Compute.Api.Contracts.Network.IpBlockType
 
 
 Notes

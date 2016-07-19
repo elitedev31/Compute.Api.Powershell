@@ -8,7 +8,7 @@ Synopsis
 .. code-block:: powershell
     
     
-Set-CaasServerState -Action <ServerAction> -Server <ServerType> [-PassThru] [-Connection <ComputeServiceConnection>] [<CommonParameters>]
+Set-CaasServerState -Action <SetCaasServerActionCmdlet+ServerAction> -Server <ServerType> [-PassThru] [-Connection <ComputeServiceConnection>] [<CommonParameters>]
 
 
 
@@ -25,7 +25,7 @@ Parameters
 
 
 
--Action <ServerAction>
+-Action <SetCaasServerActionCmdlet+ServerAction>
 ~~~~~~~~~
 
 The server action to take
