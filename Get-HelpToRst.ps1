@@ -114,26 +114,20 @@ try {
 
     $full = Get-Help $Name -Full
 
-@"
+Write-Output "
 $($full.Name)
 ===================
 
 Synopsis
 --------
 
-$($full.Synopsis)
-
-"@
-
-+ @"
-
-Syntax
-------
-
 .. code-block:: powershell
+    
+    $($full.Synopsis)
 
-    $((($full.syntax | Out-String) -replace "`r`n", "`r`n`r`n").Trim())
-"@ + @"
+"
+
+Write-Output "
 
 Description
 -----------
@@ -143,42 +137,46 @@ $(($full.description | Out-String).Trim())
 Parameters
 ----------
 
-"@ + $(foreach ($parameter in $full.parameters.parameter) {
-@"
+"
+
+foreach ($parameter in $full.parameters.parameter) {
+    Write-Output "
 
 -$($parameter.name) <$($parameter.type.name)>
 ~~~~~~~~~
 
 $(($parameter.description | Out-String).Trim())
 
-.. code-block:: powershell
-
-    $(((($parameter | Out-String).Trim() -split "`r`n")[-5..-1] | % { $_.Trim() }) -join "`r`n")
+$( ("* " +(($parameter | Out-String).Trim() -split "`r`n")[-5..-1] | % { $_.Trim() }) -join "`r`n")
 
 
-"@
-}) + @"
+"
+}
 
-INPUTS
+Write-Output "
+
+Inputs
 ------
 
 $($full.inputTypes.inputType.type.name)
 
-OUTPUTS
+Outputs
 -------
 
 $($full.returnValues.returnValue[0].type.name)
 
-NOTES
+Notes
 -----
 
 $(($full.alertSet.alert | Out-String).Trim())
 
-EXAMPLES
+Examples
 ---------
 
-"@ + $(foreach ($example in $full.examples.example) {
-@"
+"
+
+foreach ($example in $full.examples.example) {
+    Write-Output "
 
 $(($example.title -replace '-*', '').Trim())
 ~~~~~~~~~~~~~~~
@@ -189,10 +187,8 @@ $(($example.title -replace '-*', '').Trim())
 
 $(GetRemark $example)
 
-"@
-}) + @"
-
-"@
+"
+}
 
 } finally {
     if ($Host.UI.RawUI) {
