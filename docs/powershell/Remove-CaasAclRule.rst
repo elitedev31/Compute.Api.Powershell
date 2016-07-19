@@ -30,7 +30,11 @@ Parameters
 
 The ACL rule to delete
 
-*     Position?                    Named     Accept pipeline input?       true (ByValue)     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       true (ByValue)
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -41,7 +45,11 @@ The ACL rule to delete
 
 
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           (All)     Aliases                      cf     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           (All)
+* Aliases                      cf
+* Dynamic?                     false
 
 
 
@@ -52,7 +60,11 @@ The ACL rule to delete
 
 The CaaS Connection created by New-CaasConnection
 
-*     Position?                    Named     Accept pipeline input?       true (ByPropertyName)     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       true (ByPropertyName)
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -63,7 +75,11 @@ The CaaS Connection created by New-CaasConnection
 
 The network that the ACL Rule exists
 
-*     Position?                    Named     Accept pipeline input?       true (ByPropertyName)     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       true (ByPropertyName)
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -74,7 +90,11 @@ The network that the ACL Rule exists
 
 
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           (All)     Aliases                      wi     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           (All)
+* Aliases                      wi
+* Dynamic?                     false
 
 
 

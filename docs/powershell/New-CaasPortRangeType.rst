@@ -30,7 +30,11 @@ Parameters
 
 The Port Begin of the Range
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -41,7 +45,11 @@ The Port Begin of the Range
 
 The CaaS Connection created by New-CaasConnection
 
-*     Position?                    Named     Accept pipeline input?       true (ByPropertyName)     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       true (ByPropertyName)
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -52,7 +60,11 @@ The CaaS Connection created by New-CaasConnection
 
 The Port End of the Range
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 

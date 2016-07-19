@@ -30,7 +30,11 @@ Parameters
 
 The CaaS Connection created by New-CaasConnection
 
-*     Position?                    Named     Accept pipeline input?       true (ByPropertyName)     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       true (ByPropertyName)
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -41,7 +45,11 @@ The CaaS Connection created by New-CaasConnection
 
 The network to set the server to Vip
 
-*     Position?                    Named     Accept pipeline input?       true (ByPropertyName)     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       true (ByPropertyName)
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -52,7 +60,11 @@ The network to set the server to Vip
 
 The public ip block to be released
 
-*     Position?                    Named     Accept pipeline input?       true (ByValue)     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       true (ByValue)
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -63,7 +75,11 @@ The public ip block to be released
 
 Enable/Disable the server to vip connectivity on the Ip address block
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 

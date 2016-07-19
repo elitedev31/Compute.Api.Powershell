@@ -32,7 +32,11 @@ Parameters
 
 
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           (All)     Aliases                      cf     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           (All)
+* Aliases                      cf
+* Dynamic?                     false
 
 
 
@@ -43,7 +47,11 @@ Parameters
 
 The CaaS Connection created by New-CaasConnection
 
-*     Position?                    Named     Accept pipeline input?       true (ByPropertyName)     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       true (ByPropertyName)
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -54,7 +62,11 @@ The CaaS Connection created by New-CaasConnection
 
 The id of Disk
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           With_DiskId     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           With_DiskId
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -65,7 +77,11 @@ The id of Disk
 
 Return the Server object after execution
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -76,7 +92,11 @@ Return the Server object after execution
 
 SCSI Id of the disk to be resized
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           With_SCSIId     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           With_SCSIId
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -87,7 +107,11 @@ SCSI Id of the disk to be resized
 
 The server to action on
 
-*     Position?                    Named     Accept pipeline input?       true (ByValue)     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       true (ByValue)
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -98,7 +122,11 @@ The server to action on
 
 
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           (All)     Aliases                      wi     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           (All)
+* Aliases                      wi
+* Dynamic?                     false
 
 
 

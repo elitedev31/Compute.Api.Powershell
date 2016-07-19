@@ -32,7 +32,11 @@ Parameters
 
 The CaaS Connection created by New-CaasConnection
 
-*     Position?                    Named     Accept pipeline input?       true (ByPropertyName)     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       true (ByPropertyName)
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -43,7 +47,11 @@ The CaaS Connection created by New-CaasConnection
 
 The data centre location where the network will be deployed.
 
-*     Position?                    Named     Accept pipeline input?       true (ByValue)     Parameter set name           DataCentre     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       true (ByValue)
+* Parameter set name           DataCentre
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -54,7 +62,11 @@ The data centre location where the network will be deployed.
 
 The description of the network
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -65,7 +77,11 @@ The description of the network
 
 The data centre location where the network will be deployed.
 
-*     Position?                    Named     Accept pipeline input?       true (ByValue)     Parameter set name           Location     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       true (ByValue)
+* Parameter set name           Location
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -76,7 +92,11 @@ The data centre location where the network will be deployed.
 
 A unique name for the new network to deploy
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 

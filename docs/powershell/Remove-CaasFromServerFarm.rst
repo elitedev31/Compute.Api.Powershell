@@ -32,7 +32,11 @@ Parameters
 
 
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           (All)     Aliases                      cf     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           (All)
+* Aliases                      cf
+* Dynamic?                     false
 
 
 
@@ -43,7 +47,11 @@ Parameters
 
 The CaaS Connection created by New-CaasConnection
 
-*     Position?                    Named     Accept pipeline input?       true (ByPropertyName)     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       true (ByPropertyName)
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -54,7 +62,11 @@ The CaaS Connection created by New-CaasConnection
 
 The network to manage the VIP settings
 
-*     Position?                    Named     Accept pipeline input?       true (ByPropertyName)     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       true (ByPropertyName)
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -65,7 +77,11 @@ The network to manage the VIP settings
 
 The probe to be removed to the server farm
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           Probe     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           Probe
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -76,7 +92,11 @@ The probe to be removed to the server farm
 
 The real server to be removed to the server farm
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           RealServer     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           RealServer
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -87,7 +107,11 @@ The real server to be removed to the server farm
 
 The real server port to be removed to the server farm
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           RealServer     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           RealServer
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -98,7 +122,11 @@ The real server port to be removed to the server farm
 
 The server farm that will get removed a probe or real server
 
-*     Position?                    Named     Accept pipeline input?       true (ByValue)     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       true (ByValue)
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -109,7 +137,11 @@ The server farm that will get removed a probe or real server
 
 
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           (All)     Aliases                      wi     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           (All)
+* Aliases                      wi
+* Dynamic?                     false
 
 
 

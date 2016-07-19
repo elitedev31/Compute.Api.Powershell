@@ -32,7 +32,11 @@ Parameters
 
 The CaaS Connection created by New-CaasConnection
 
-*     Position?                    Named     Accept pipeline input?       true (ByPropertyName)     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       true (ByPropertyName)
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -43,7 +47,11 @@ The CaaS Connection created by New-CaasConnection
 
 The Firewall rule name
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           MCP2     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           MCP2
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -54,7 +62,11 @@ The Firewall rule name
 
 The Firewall rule name
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           MCP2     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           MCP2
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -65,7 +77,11 @@ The Firewall rule name
 
 The NAT Rule name
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           MCP1     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           MCP1
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -76,7 +92,11 @@ The NAT Rule name
 
 The target network to add the NAT rule into.
 
-*     Position?                    Named     Accept pipeline input?       true (ByValue)     Parameter set name           MCP1     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       true (ByValue)
+* Parameter set name           MCP1
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -87,7 +107,11 @@ The target network to add the NAT rule into.
 
 The network domain
 
-*     Position?                    Named     Accept pipeline input?       true (ByValue)     Parameter set name           MCP2     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       true (ByValue)
+* Parameter set name           MCP2
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -98,7 +122,11 @@ The network domain
 
 The source IP Address.
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           MCP1     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           MCP1
+* Aliases                      None
+* Dynamic?                     false
 
 
 

@@ -34,7 +34,11 @@ Parameters
 
 The CaaS Connection created by New-CaasConnection
 
-*     Position?                    Named     Accept pipeline input?       true (ByPropertyName)     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       true (ByPropertyName)
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -45,7 +49,11 @@ The CaaS Connection created by New-CaasConnection
 
 Return the Server object after execution
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -56,7 +64,11 @@ Return the Server object after execution
 
 The Scsi Id
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           ScsiId     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           ScsiId
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -67,7 +79,11 @@ The Scsi Id
 
 The server to action on
 
-*     Position?                    Named     Accept pipeline input?       true (ByValue)     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       true (ByValue)
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -78,7 +94,11 @@ The server to action on
 
 The new disk size
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -89,7 +109,11 @@ The new disk size
 
 The disk speed to be created
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           DiskSpeedType     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           DiskSpeedType
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -100,7 +124,11 @@ The disk speed to be created
 
 The speedId of the new disk. The available speed Id can be retrieved using (Get-CaasDataCentre).hypervisor.diskSpeed
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           SpeedId     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           SpeedId
+* Aliases                      None
+* Dynamic?                     false
 
 
 

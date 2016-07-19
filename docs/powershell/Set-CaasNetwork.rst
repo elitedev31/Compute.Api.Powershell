@@ -32,7 +32,11 @@ Parameters
 
 The CaaS Connection created by New-CaasConnection
 
-*     Position?                    Named     Accept pipeline input?       true (ByPropertyName)     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       true (ByPropertyName)
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -43,7 +47,11 @@ The CaaS Connection created by New-CaasConnection
 
 Set the new description for the network
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           NetworkName     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           NetworkName
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -54,7 +62,11 @@ Set the new description for the network
 
 Enable/Disable multicast on the network
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           Multicast     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           Multicast
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -65,7 +77,11 @@ Enable/Disable multicast on the network
 
 Set new name for the network
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           NetworkName     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           NetworkName
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -76,7 +92,11 @@ Set new name for the network
 
 Set the server name on CaaS
 
-*     Position?                    Named     Accept pipeline input?       true (ByValue)     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       true (ByValue)
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 

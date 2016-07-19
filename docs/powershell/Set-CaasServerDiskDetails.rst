@@ -32,7 +32,11 @@ Parameters
 
 SCSI ID from the OS or customer image
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -43,7 +47,11 @@ SCSI ID from the OS or customer image
 
 The server details created by New-CaasServerDetails
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -54,7 +62,11 @@ The server details created by New-CaasServerDetails
 
 The disk speed
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           DiskSpeedType     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           DiskSpeedType
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -65,7 +77,11 @@ The disk speed
 
 The speedId of the new disk. The available speed Id can be retrieved using (Get-CaasDataCentre).hypervisor.diskSpeed
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           SpeedId     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           SpeedId
+* Aliases                      None
+* Dynamic?                     false
 
 
 

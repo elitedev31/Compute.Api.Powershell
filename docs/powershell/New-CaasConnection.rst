@@ -32,7 +32,11 @@ Parameters
 
 
 
-*     Position?                    Named     Accept pipeline input?       true (ByValue)     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       true (ByValue)
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -43,7 +47,11 @@ Parameters
 
 The domain name for the REST API
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           ApiDomainName     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           ApiDomainName
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -54,7 +62,11 @@ The domain name for the REST API
 
 The domain name for the FTP, default is the api domain name
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           ApiDomainName     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           ApiDomainName
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -65,7 +77,11 @@ The domain name for the FTP, default is the api domain name
 
 Name to identify this connection
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -76,7 +92,11 @@ Name to identify this connection
 
 A known cloud region for the Cloud API Uri. Not all vendor and region combinations are valid.
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           KnownApiUri     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           KnownApiUri
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -87,7 +107,11 @@ A known cloud region for the Cloud API Uri. Not all vendor and region combinatio
 
 A known cloud vendor for the Cloud API Uri. Not all vendor and region combinations are valid.
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           KnownApiUri     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           KnownApiUri
+* Aliases                      None
+* Dynamic?                     false
 
 
 

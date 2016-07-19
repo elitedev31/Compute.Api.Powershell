@@ -32,7 +32,11 @@ Parameters
 
 The date to restore to.
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -43,7 +47,11 @@ The date to restore to.
 
 The backup client to restore, must be a file system client
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           restoreByObject     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           restoreByObject
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -54,7 +62,11 @@ The backup client to restore, must be a file system client
 
 The backup client Id to restore, must be a file system client
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           restoreById     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           restoreById
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -65,7 +77,11 @@ The backup client Id to restore, must be a file system client
 
 The CaaS Connection created by New-CaasConnection
 
-*     Position?                    Named     Accept pipeline input?       true (ByPropertyName)     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       true (ByPropertyName)
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -76,7 +92,11 @@ The CaaS Connection created by New-CaasConnection
 
 The server to restore
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           restoreByObject     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           restoreByObject
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -87,7 +107,11 @@ The server to restore
 
 The ID of the server to restore
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           restoreById     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           restoreById
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -98,7 +122,11 @@ The ID of the server to restore
 
 The target server to restore onto if out of place restore
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           restoreByObject     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           restoreByObject
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -109,7 +137,11 @@ The target server to restore onto if out of place restore
 
 The ID of the target server to restore onto if out of place restore.
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           restoreById     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           restoreById
+* Aliases                      None
+* Dynamic?                     false
 
 
 

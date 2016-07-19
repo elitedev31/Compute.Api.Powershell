@@ -32,7 +32,11 @@ Parameters
 
 The CaaS Connection created by New-CaasConnection
 
-*     Position?                    Named     Accept pipeline input?       true (ByPropertyName)     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       true (ByPropertyName)
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -43,7 +47,11 @@ The CaaS Connection created by New-CaasConnection
 
 Identifies an individual Private IPV4
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -54,7 +62,11 @@ Identifies an individual Private IPV4
 
 Identifies Cloud Network (MCP 1.0)
 
-*     Position?                    Named     Accept pipeline input?       true (ByValue)     Parameter set name           With_Network     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       true (ByValue)
+* Parameter set name           With_Network
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -65,7 +77,11 @@ Identifies Cloud Network (MCP 1.0)
 
 Identifies Cloud Network (MCP 1.0)
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           With_Network     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           With_Network
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -76,7 +92,11 @@ Identifies Cloud Network (MCP 1.0)
 
 The Order By of the results, only supported for MCP2
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -87,7 +107,11 @@ The Order By of the results, only supported for MCP2
 
 The Page Number of the result page, only supported for MCP2
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -98,7 +122,11 @@ The Page Number of the result page, only supported for MCP2
 
 The Page Size of the result page, only supported for MCP2
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -109,7 +137,11 @@ The Page Size of the result page, only supported for MCP2
 
 Identifies VLAN (MCP 2.0)
 
-*     Position?                    Named     Accept pipeline input?       true (ByValue)     Parameter set name           With_Vlan     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       true (ByValue)
+* Parameter set name           With_Vlan
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -120,7 +152,11 @@ Identifies VLAN (MCP 2.0)
 
 Identifies VLAN (MCP 2.0)
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           With_Vlan     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           With_Vlan
+* Aliases                      None
+* Dynamic?                     false
 
 
 

@@ -30,7 +30,11 @@ Parameters
 
 The CaaS Connection created by New-CaasConnection
 
-*     Position?                    Named     Accept pipeline input?       true (ByPropertyName)     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       true (ByPropertyName)
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -41,7 +45,11 @@ The CaaS Connection created by New-CaasConnection
 
 The displayed on reports to filter
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           Filtered     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           Filtered
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -52,7 +60,11 @@ The displayed on reports to filter
 
 The tag key name to filter
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           Filtered     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           Filtered
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -63,7 +75,11 @@ The tag key name to filter
 
 The Order By of the results, only supported for MCP2
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -74,7 +90,11 @@ The Order By of the results, only supported for MCP2
 
 The Page Number of the result page, only supported for MCP2
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -85,7 +105,11 @@ The Page Number of the result page, only supported for MCP2
 
 The Page Size of the result page, only supported for MCP2
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -96,7 +120,11 @@ The Page Size of the result page, only supported for MCP2
 
 The tag key id to filter
 
-*     Position?                    Named     Accept pipeline input?       true (ByValue)     Parameter set name           Filtered     Aliases                      Id     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       true (ByValue)
+* Parameter set name           Filtered
+* Aliases                      Id
+* Dynamic?                     false
 
 
 
@@ -107,7 +135,11 @@ The tag key id to filter
 
 The value required to filter
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           Filtered     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           Filtered
+* Aliases                      None
+* Dynamic?                     false
 
 
 

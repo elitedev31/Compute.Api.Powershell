@@ -32,7 +32,11 @@ Parameters
 
 The CaaS Connection created by New-CaasConnection
 
-*     Position?                    Named     Accept pipeline input?       true (ByPropertyName)     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       true (ByPropertyName)
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -43,7 +47,11 @@ The CaaS Connection created by New-CaasConnection
 
 The path to the manifest file
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           IndividualFiles     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           IndividualFiles
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -54,7 +62,11 @@ The path to the manifest file
 
 The path to the OVF file.
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           IndividualFiles     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           IndividualFiles
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -65,7 +77,11 @@ The path to the OVF file.
 
 The path to an OVA (Virtual Appliance) file.
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           Appliance     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           Appliance
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -76,7 +92,11 @@ The path to an OVA (Virtual Appliance) file.
 
 The path to the virtual image (e.g. VMDK, VHD) file.
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           IndividualFiles     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           IndividualFiles
+* Aliases                      None
+* Dynamic?                     false
 
 
 

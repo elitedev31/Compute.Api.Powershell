@@ -30,7 +30,11 @@ Parameters
 
 Connection name to be set as active.
 
-*     Position?                    0     Accept pipeline input?       false     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    0
+* Accept pipeline input?       false
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 

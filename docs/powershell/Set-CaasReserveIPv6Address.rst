@@ -30,7 +30,11 @@ Parameters
 
 The CaaS Connection created by New-CaasConnection
 
-*     Position?                    Named     Accept pipeline input?       true (ByPropertyName)     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       true (ByPropertyName)
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -41,7 +45,11 @@ The CaaS Connection created by New-CaasConnection
 
 The IPv6 address
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -52,7 +60,11 @@ The IPv6 address
 
 The unique identifier of MCP 2.0 VLAN
 
-*     Position?                    Named     Accept pipeline input?       true (ByValue, ByPropertyName)     Parameter set name           (All)     Aliases                      Id     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       true (ByValue, ByPropertyName)
+* Parameter set name           (All)
+* Aliases                      Id
+* Dynamic?                     false
 
 
 

@@ -147,7 +147,7 @@ foreach ($parameter in $full.parameters.parameter) {
 
 $(($parameter.description | Out-String).Trim())
 
-$( ("* " +(($parameter | Out-String).Trim() -split "`r`n")[-5..-1] | % { $_.Trim() }) -join "`r`n")
+* $( ((($parameter | Out-String).Trim() -split "`r`n")[-5..-1] | % { $_.Trim() }) -join "`r`n* ")
 
 
 "

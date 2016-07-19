@@ -32,7 +32,11 @@ Parameters
 
 True of False for backup role
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           SubAdministrator     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           SubAdministrator
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -43,7 +47,11 @@ True of False for backup role
 
 The CaaS Connection created by New-CaasConnection
 
-*     Position?                    Named     Accept pipeline input?       true (ByPropertyName)     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       true (ByPropertyName)
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -54,7 +62,11 @@ The CaaS Connection created by New-CaasConnection
 
 True of False for create image role
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           SubAdministrator     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           SubAdministrator
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -65,7 +77,11 @@ True of False for create image role
 
 True of False for network role
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           SubAdministrator     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           SubAdministrator
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -76,7 +92,11 @@ True of False for network role
 
 True of False for reports role
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           ReadOnly     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           ReadOnly
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -87,7 +107,11 @@ True of False for reports role
 
 True of False for reports role
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           SubAdministrator     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           SubAdministrator
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -98,7 +122,11 @@ True of False for reports role
 
 True of False for server role
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           SubAdministrator     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           SubAdministrator
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -109,7 +137,11 @@ True of False for server role
 
 True of False for storage role
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           SubAdministrator     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           SubAdministrator
+* Aliases                      None
+* Dynamic?                     false
 
 
 

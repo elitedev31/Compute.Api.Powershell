@@ -36,7 +36,11 @@ Parameters
 
 The Port
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           With_IpAddressList_Port, With_IpAddress_Port     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           With_IpAddressList_Port, With_IpAddress_Port
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -47,7 +51,11 @@ The Port
 
 The CaaS Connection created by New-CaasConnection
 
-*     Position?                    Named     Accept pipeline input?       true (ByPropertyName)     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       true (ByPropertyName)
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -58,7 +66,11 @@ The CaaS Connection created by New-CaasConnection
 
 The Port rang end
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           With_IpAddressList_Port, With_IpAddress_Port     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           With_IpAddressList_Port, With_IpAddress_Port
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -69,7 +81,11 @@ The Port rang end
 
 The IP Address
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           With_IpAddress_PortList, With_IpAddress_Port     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           With_IpAddress_PortList, With_IpAddress_Port
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -80,7 +96,11 @@ The IP Address
 
 The IP Address List
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           With_IpAddressList_PortList, With_IpAddressList_Port     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           With_IpAddressList_PortList, With_IpAddressList_Port
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -91,7 +111,11 @@ The IP Address List
 
 The Port List
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           With_IpAddressList_PortList, With_IpAddress_PortList     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           With_IpAddressList_PortList, With_IpAddress_PortList
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -102,7 +126,11 @@ The Port List
 
 The IP Address Prefix size
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           With_IpAddress_PortList, With_IpAddress_Port     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           With_IpAddress_PortList, With_IpAddress_Port
+* Aliases                      None
+* Dynamic?                     false
 
 
 

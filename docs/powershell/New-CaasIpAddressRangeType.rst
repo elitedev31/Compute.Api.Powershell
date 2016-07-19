@@ -32,7 +32,11 @@ Parameters
 
 The IP Address Begin of the Range
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           Range_Ip_Address     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           Range_Ip_Address
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -43,7 +47,11 @@ The IP Address Begin of the Range
 
 The CaaS Connection created by New-CaasConnection
 
-*     Position?                    Named     Accept pipeline input?       true (ByPropertyName)     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       true (ByPropertyName)
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -54,7 +62,11 @@ The CaaS Connection created by New-CaasConnection
 
 The IP Address End of the Range
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           Range_Ip_Address     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           Range_Ip_Address
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -65,7 +77,11 @@ The IP Address End of the Range
 
 The IP Address
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           Ip_Address     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           Ip_Address
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -76,7 +92,11 @@ The IP Address
 
 The IP Address Range Prefix
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           Ip_Address     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           Ip_Address
+* Aliases                      None
+* Dynamic?                     false
 
 
 

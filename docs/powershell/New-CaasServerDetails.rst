@@ -36,7 +36,11 @@ Parameters
 
 The VM administrator password
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -47,7 +51,11 @@ The VM administrator password
 
 The cpu cores per socker for the machine.
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           MCP2_WithPrivateIp, MCP2_WithVlan     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           MCP2_WithPrivateIp, MCP2_WithVlan
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -58,7 +66,11 @@ The cpu cores per socker for the machine.
 
 The cpu count for the machine.
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           MCP2_WithPrivateIp, MCP2_WithVlan     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           MCP2_WithPrivateIp, MCP2_WithVlan
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -69,7 +81,11 @@ The cpu count for the machine.
 
 The cpu speed for the machine.
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           MCP2_WithPrivateIp, MCP2_WithVlan     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           MCP2_WithPrivateIp, MCP2_WithVlan
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -80,7 +96,11 @@ The cpu speed for the machine.
 
 The description of the VM
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -91,7 +111,11 @@ The description of the VM
 
 Will the VM be started after deployment (true|false)
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -102,7 +126,11 @@ Will the VM be started after deployment (true|false)
 
 The memory size in GB for the machine.
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           MCP2_WithPrivateIp, MCP2_WithVlan     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           MCP2_WithPrivateIp, MCP2_WithVlan
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -113,7 +141,11 @@ The memory size in GB for the machine.
 
 The  Microsoft time zone indec for windows machine.
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           MCP2_WithPrivateIp, MCP2_WithVlan     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           MCP2_WithPrivateIp, MCP2_WithVlan
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -124,7 +156,11 @@ The  Microsoft time zone indec for windows machine.
 
 The VM name
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           (All)     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           (All)
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -135,7 +171,11 @@ The VM name
 
 The network to deploy the machine to.
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           MCP1_WithNetwork     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           MCP1_WithNetwork
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -146,7 +186,11 @@ The network to deploy the machine to.
 
 The network domain in which server will be deployed
 
-*     Position?                    Named     Accept pipeline input?       true (ByValue)     Parameter set name           MCP2_WithVlan, MCP2_WithPrivateIp     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       true (ByValue)
+* Parameter set name           MCP2_WithVlan, MCP2_WithPrivateIp
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -157,7 +201,11 @@ The network domain in which server will be deployed
 
 The Primary DNS for the machine.
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           MCP2_WithPrivateIp, MCP2_WithVlan     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           MCP2_WithPrivateIp, MCP2_WithVlan
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -168,7 +216,11 @@ The Primary DNS for the machine.
 
 The server's primary vlan
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           MCP2_WithVlan     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           MCP2_WithVlan
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -179,7 +231,11 @@ The server's primary vlan
 
 The network private IP address that will be assigned to the machine.
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           MCP1_WithPrivateIp, MCP2_WithPrivateIp     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           MCP1_WithPrivateIp, MCP2_WithPrivateIp
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -190,7 +246,11 @@ The network private IP address that will be assigned to the machine.
 
 The Secondary DNS for the machine.
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           MCP2_WithPrivateIp, MCP2_WithVlan     Aliases                      None     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           MCP2_WithPrivateIp, MCP2_WithVlan
+* Aliases                      None
+* Dynamic?                     false
 
 
 
@@ -201,7 +261,11 @@ The Secondary DNS for the machine.
 
 The OS or Customer Server Image to use for deployment
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           (All)     Aliases                      OsServerImage     Dynamic?                     false
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           (All)
+* Aliases                      OsServerImage
+* Dynamic?                     false
 
 
 
