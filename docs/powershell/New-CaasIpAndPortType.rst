@@ -36,7 +36,7 @@ Parameters
 
 The Port
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           With_IpAddressList_Port, With_IpAddress_Port     Aliases                      None     Dynamic?                     false
+*     Position?                    Named     Accept pipeline input?       false     Parameter set name           With_IpAddress_Port, With_IpAddressList_Port     Aliases                      None     Dynamic?                     false
 
 
 
@@ -100,9 +100,9 @@ The Port List
 -PrefixSize <int>
 ~~~~~~~~~
 
-The IP Address Prefix size
+The IP Address Prefix Size
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           With_IpAddress_PortList, With_IpAddress_Port     Aliases                      None     Dynamic?                     false
+*     Position?                    Named     Accept pipeline input?       false     Parameter set name           With_IpAddress_Port, With_IpAddress_PortList     Aliases                      None     Dynamic?                     false
 
 
 

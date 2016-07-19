@@ -8,13 +8,13 @@ Synopsis
 .. code-block:: powershell
     
     
-New-CaasServerNic -Server <ServerType> -PrimaryPrivateIp <string> [-Connection <ComputeServiceConnection>] [<CommonParameters>]
-
 New-CaasServerNic -Server <ServerType> -Vlan <VlanType> [-Connection <ComputeServiceConnection>] [<CommonParameters>]
 
-New-CaasServerNic -ServerId <string> -PrimaryPrivateIp <string> [-Connection <ComputeServiceConnection>] [<CommonParameters>]
+New-CaasServerNic -Server <ServerType> -PrimaryPrivateIp <string> [-Connection <ComputeServiceConnection>] [<CommonParameters>]
 
 New-CaasServerNic -ServerId <string> -Vlan <VlanType> [-Connection <ComputeServiceConnection>] [<CommonParameters>]
+
+New-CaasServerNic -ServerId <string> -PrimaryPrivateIp <string> [-Connection <ComputeServiceConnection>] [<CommonParameters>]
 
 
 
@@ -47,7 +47,7 @@ The CaaS Connection created by New-CaasConnection
 
 The private network private IP address that will be assigned to the machine.
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           Server_PrivateIp, ServerId_PrivateIp     Aliases                      None     Dynamic?                     false
+*     Position?                    Named     Accept pipeline input?       false     Parameter set name           ServerId_PrivateIp, Server_PrivateIp     Aliases                      None     Dynamic?                     false
 
 
 
@@ -58,7 +58,7 @@ The private network private IP address that will be assigned to the machine.
 
 The server on which the nic will be deployed
 
-*     Position?                    Named     Accept pipeline input?       true (ByValue)     Parameter set name           Server_PrivateIp, Server_Vlan     Aliases                      None     Dynamic?                     false
+*     Position?                    Named     Accept pipeline input?       true (ByValue)     Parameter set name           Server_Vlan, Server_PrivateIp     Aliases                      None     Dynamic?                     false
 
 
 
@@ -69,7 +69,7 @@ The server on which the nic will be deployed
 
 The server ID
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           ServerId_PrivateIp, ServerId_Vlan     Aliases                      None     Dynamic?                     false
+*     Position?                    Named     Accept pipeline input?       false     Parameter set name           ServerId_Vlan, ServerId_PrivateIp     Aliases                      None     Dynamic?                     false
 
 
 
@@ -80,7 +80,7 @@ The server ID
 
 The server's primary network
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           ServerId_Vlan, Server_Vlan     Aliases                      None     Dynamic?                     false
+*     Position?                    Named     Accept pipeline input?       false     Parameter set name           Server_Vlan, ServerId_Vlan     Aliases                      None     Dynamic?                     false
 
 
 

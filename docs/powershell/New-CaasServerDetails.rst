@@ -58,7 +58,7 @@ The cpu cores per socker for the machine.
 
 The cpu count for the machine.
 
-*     Position?                    Named     Accept pipeline input?       false     Parameter set name           MCP2_WithPrivateIp, MCP2_WithVlan     Aliases                      None     Dynamic?                     false
+*     Position?                    Named     Accept pipeline input?       false     Parameter set name           MCP2_WithVlan, MCP2_WithPrivateIp     Aliases                      None     Dynamic?                     false
 
 
 
@@ -146,7 +146,7 @@ The network to deploy the machine to.
 
 The network domain in which server will be deployed
 
-*     Position?                    Named     Accept pipeline input?       true (ByValue)     Parameter set name           MCP2_WithVlan, MCP2_WithPrivateIp     Aliases                      None     Dynamic?                     false
+*     Position?                    Named     Accept pipeline input?       true (ByValue)     Parameter set name           MCP2_WithPrivateIp, MCP2_WithVlan     Aliases                      None     Dynamic?                     false
 
 
 
