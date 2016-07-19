@@ -68,7 +68,7 @@ The cpu count for the machine.
 
 * Position?                    Named
 * Accept pipeline input?       false
-* Parameter set name           MCP2_WithPrivateIp, MCP2_WithVlan
+* Parameter set name           MCP2_WithVlan, MCP2_WithPrivateIp
 * Aliases                      None
 * Dynamic?                     false
 
@@ -188,7 +188,7 @@ The network domain in which server will be deployed
 
 * Position?                    Named
 * Accept pipeline input?       true (ByValue)
-* Parameter set name           MCP2_WithVlan, MCP2_WithPrivateIp
+* Parameter set name           MCP2_WithPrivateIp, MCP2_WithVlan
 * Aliases                      None
 * Dynamic?                     false
 
