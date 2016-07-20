@@ -93,7 +93,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
             base.ProcessRecord();
 			try
 			{
-				var primaryNic = new VlanIdOrPrivateIpType
+				var primaryNic = new NewNicType
 				{
 					vlanId = PrimaryVlan != null ? PrimaryVlan.id : null, 
 					privateIpv4 = PrimaryPrivateIp
