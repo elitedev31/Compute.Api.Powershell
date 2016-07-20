@@ -32,8 +32,8 @@ namespace DD.CBU.Compute.Powershell
 		/// <summary>
 		///     The credentials used to connect to the CaaS API.
 		/// </summary>
-		[Parameter(Mandatory = true, ValueFromPipeline = true)]
-		[ValidateNotNullOrEmpty]
+		[Parameter(Mandatory = true, ValueFromPipeline = true)]        
+        [ValidateNotNullOrEmpty]
 		public PSCredential ApiCredentials { get; set; }
 
 		/// <summary>

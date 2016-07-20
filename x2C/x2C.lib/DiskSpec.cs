@@ -1,5 +1,4 @@
-﻿using DD.CBU.Compute.Api.Contracts.Server;
-
+﻿
 namespace x2C
 {
 	public class DiskSpec
@@ -8,6 +7,6 @@ namespace x2C
 
 		public long SizeGb { get; set; }
 
-		public DiskSpeedType DiskSpeed { get; set; }
+		public DD.CBU.Compute.Api.Contracts.Server.DiskSpeedType DiskSpeed { get; set; }
 	}
 }
