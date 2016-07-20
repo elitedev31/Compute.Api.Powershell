@@ -11,8 +11,11 @@ using System;
 using System.Linq;
 using System.Management.Automation;
 using System.Net.FtpClient;
+using System.Net.Http;
 using System.Threading.Tasks;
 using DD.CBU.Compute.Api.Client;
+using DD.CBU.Compute.Api.Client.Interfaces;
+using DD.CBU.Compute.Api.Client.WebApi;
 
 namespace DD.CBU.Compute.Powershell
 {
@@ -67,7 +70,14 @@ namespace DD.CBU.Compute.Powershell
 		[Parameter(Mandatory = false, ParameterSetName = "ApiDomainName", HelpMessage = "The domain name for the FTP, default is the api domain name")]
         public string FtpDomainName { get; set; }
 
-        /// <summary>
+	    /// <summary>
+	    ///     The base uri of the REST API
+	    /// </summary>        
+	    [Parameter(Mandatory = true, ParameterSetName = "HttpClient",
+	        HelpMessage = "The http client which will handle the api requests")]
+	    public HttpClient HttpClient { get; set; }
+
+	    /// <summary>
         ///     Process the record
         /// </summary>
         protected override void ProcessRecord()
@@ -159,23 +169,29 @@ namespace DD.CBU.Compute.Powershell
 
 			    apiClient = ComputeApiClient.GetComputeApiClient(baseUri, ApiCredentials.GetNetworkCredential());				
 			}
-
-			var newCloudComputeConnection = new ComputeServiceConnection(apiClient);
+		    if (ParameterSetName == "HttpClient")
+		    {
+		        apiClient = new ComputeApiClient(new HttpClientAdapter(HttpClient));
+		    }
+		  
+            var newCloudComputeConnection = new ComputeServiceConnection(apiClient);
 
 			WriteDebug("Trying to login into the CaaS");
 			newCloudComputeConnection.Account = await newCloudComputeConnection.ApiClient.Login();
 
-			// Right now we dont need to do a connect, as ftp is used in only a few commands
-			newCloudComputeConnection.FtpClient = new FtpClient
-			{
-				Host = ftpHost, 
-				EncryptionMode = FtpEncryptionMode.Explicit, 
-				DataConnectionEncryption = true, 
-				Credentials = ApiCredentials.GetNetworkCredential()
-					.GetCredential(new Uri(string.Format("ftp://{0}", ftpHost)), "Basic")
-			};
-
-			return newCloudComputeConnection;
+		    if (!String.IsNullOrWhiteSpace(ftpHost))
+		    {
+		        // Right now we dont need to do a connect, as ftp is used in only a few commands
+		        newCloudComputeConnection.FtpClient = new FtpClient
+		        {
+		            Host = ftpHost,
+		            EncryptionMode = FtpEncryptionMode.Explicit,
+		            DataConnectionEncryption = true,
+		            Credentials = ApiCredentials.GetNetworkCredential()
+		                .GetCredential(new Uri(string.Format("ftp://{0}", ftpHost)), "Basic")
+		        };
+		    }
+		    return newCloudComputeConnection;
 		}
 	}
 }
