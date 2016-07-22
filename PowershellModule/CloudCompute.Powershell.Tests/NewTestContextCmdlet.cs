@@ -1,39 +1,42 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Management.Automation;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace DD.CBU.Compute.Powershell.Tests
-{   
+{
     /// <summary>
     ///     The new caas Api Proxy Http Client.
     /// </summary>
-    [Cmdlet(VerbsCommon.New, "CaasApiProxyHttpClient")]
-    [OutputType(typeof(TestHttpClient))]
-    public class NewCaasApiProxyHttpClientCmdlet : PSCmdlet
-    {
-        /// <summary>
-        ///     Gets or sets the Mock Api's setting file path.
-        /// </summary>
+    [Cmdlet(VerbsCommon.New, "CaasTestContext")]
+    [OutputType(typeof(TestContext))]
+    public class NewCaasTestContextCmdlet : PSCmdlet
+    { /// <summary>
+      ///     Gets or sets the Mock Api's setting file path.
+      /// </summary>
         [Parameter(Mandatory = false, HelpMessage = "Mock Api's setting file path")]
-        public string ApiMocksPath { get; set; }
-
+        public string MockApisPath { get; set; }
+       
         /// <summary>
         ///     Gets or sets the folder Path where the recorded api responses would be stored
         /// </summary>
         [Parameter(Mandatory = false, HelpMessage = "Folder Path where the recorded api responses would be stored")]
-        public string ApiRecordingPath { get; set; }
+        public string MockApisRecordingPath { get; set; }
 
         /// <summary>
         ///     Gets or sets Flag specifying that in case the mock entry is not found, then should the proxy connect to the real api
         /// </summary>
         [Parameter(Mandatory = false, HelpMessage = "In case the mock entry is not found, then should the proxy connect to the real api")]
         public bool FallbackToDefaultApi { get; set; }
-        
+
         /// <summary>
         ///     Gets or sets Flag specifying that should the api proxy record the responses from the real api
         /// </summary>
         [Parameter(Mandatory = false, HelpMessage = "Should the api proxy record the responses from the real api")]
         public bool RecordApiRequestResponse { get; set; }
-        
+
         /// <summary>
         ///     Gets or sets the The real caas api to connect to in case the mock is missing
         /// </summary>
@@ -46,36 +49,23 @@ namespace DD.CBU.Compute.Powershell.Tests
 		[Parameter(Mandatory = false, HelpMessage = "In case you are connecting to the real api, provide the real credentials")]
         public PSCredential ApiCredentials { get; set; }
 
-        /// <summary>
-        ///     The process record method.
-        /// </summary>
+        [Parameter(Mandatory = false)]
+        public bool UseMockCredentials { get; set; }
+
         protected override void ProcessRecord()
         {
-            TestHttpClient response = null;
-            base.ProcessRecord();          
-            try
+            base.ProcessRecord();
+            var context = new TestContext
             {
-                var configuration = new ApiProxy.ApiProxyHttpClient.ApiProxyConfiguration
-                {
-                    ApiMocksPath = ApiMocksPath,
-                    ApiRecordingPath = ApiRecordingPath,
-                    FallbackToDefaultApi = FallbackToDefaultApi,
-                    RecordApiRequestResponse = RecordApiRequestResponse,
-                    DefaultApiAddress = DefaultApiAddress
-                };                             
-                response = new TestHttpClient(configuration, ApiCredentials);
-            }
-            catch (AggregateException ae)
-            {
-                ae.Handle(
-                    e =>
-                    {
-                        ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, new object()));
-                        return true;
-                    });
-            }
-
-            WriteObject(response);
+                ApiMocksPath = MockApisPath,
+                ApiRecordingPath = MockApisRecordingPath,
+                FallbackToDefaultApi = FallbackToDefaultApi,
+                RecordApiRequestResponse = RecordApiRequestResponse,
+                DefaultApiAddress = DefaultApiAddress,
+                ApiCredentials = ApiCredentials,
+                UseMockCredentials = UseMockCredentials
+            };
+            WriteObject(context);
         }
     }
 }

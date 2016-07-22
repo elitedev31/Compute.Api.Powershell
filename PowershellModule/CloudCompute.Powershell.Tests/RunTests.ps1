@@ -4,9 +4,9 @@
 		[Parameter(Mandatory=$false)]
 		[bool] $FallbackToDefaultApi = $True
 		)
-import-module (Join-Path $PSScriptRoot "..\CloudCompute.Powershell\bin\Release\CaaS.psd1")
+import-module (Join-Path $PSScriptRoot "..\CloudCompute.Powershell\bin\Debug\CaaS.psd1")
 import-module (Join-Path $PSScriptRoot "..\packages\Pester.3.4.0\tools\Pester.psd1")
-import-module (Join-Path $PSScriptRoot "bin\Release\CaaS_Tests.psd1")
+import-module (Join-Path $PSScriptRoot "bin\Debug\CaaS_Tests.psd1")
 import-module (Join-Path $PSScriptRoot ".\CaaSTestUtilities.psm1")
 $mockApiPath = (Join-Path $PSScriptRoot ".\MockApis")
 if($FallbackToDefaultApi -eq $True){
@@ -15,6 +15,15 @@ if($FallbackToDefaultApi -eq $True){
 else{
 	$mockApiRecordingPath = $mockApiPath
 }
-$connection = New-CaaSTestConnection -UseMockCredentials $UseMockCredentials -FallbackToDefaultApi $FallbackToDefaultApi -MockApisPath $mockApiPath -MockApisRecordingPath $mockApiRecordingPath
+if($UseMockCredentials -eq $True){
+	Write-Host "Using the Fake credentials, as we will be mocking all calls"
+	$pwd = ConvertTo-SecureString -AsPlainText "junk" -Force
+	$credential = new-object -typename System.Management.Automation.PSCredential ("Test", $pwd)				
+}
+else{		
+	Write-Host "Using the real credentials"
+	$credential = (Get-Credential)	
+}
 
-Invoke-Pester -Script @{ Path = '.\*'; Parameters = @{ Connection = $connection}; } -OutputFile .\TestOutput.xml -OutputFormat NUnitXml
+$testContext = New-CaasTestContext -UseMockCredentials $UseMockCredentials -FallbackToDefaultApi $FallbackToDefaultApi -MockApisPath $mockApiPath -MockApisRecordingPath $mockApiRecordingPath -ApiCredentials $credential -DefaultApiAddress 'https://api-au.dimensiondata.com/'
+Invoke-Pester -Script @{ Path = '.\*Tests'; Parameters = @{ TestContext = $testContext }; } -OutputFile .\TestOutput.xml -OutputFormat NUnitXml
