@@ -33,20 +33,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DD.ApiProxy, Version=1.0.11.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\packages\DD.ApiProxy.ApiProxyHttpClient.1.0.11\lib\net451\DD.ApiProxy.dll</HintPath>
+    <Reference Include="DD.ApiProxy, Version=1.0.14.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\packages\DD.ApiProxy.ApiProxyHttpClient.1.0.14\lib\net451\DD.ApiProxy.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="DD.ApiProxy.ApiProxyHttpClient, Version=1.0.11.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DD.ApiProxy.ApiProxyHttpClient.1.0.11\lib\net451\DD.ApiProxy.ApiProxyHttpClient.dll</HintPath>
+    <Reference Include="DD.ApiProxy.ApiProxyHttpClient, Version=1.0.14.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DD.ApiProxy.ApiProxyHttpClient.1.0.14\lib\net451\DD.ApiProxy.ApiProxyHttpClient.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="DD.ApiProxy.Contracts, Version=1.0.11.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DD.ApiProxy.ApiProxyHttpClient.1.0.11\lib\net451\DD.ApiProxy.Contracts.dll</HintPath>
+    <Reference Include="DD.ApiProxy.Contracts, Version=1.0.14.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DD.ApiProxy.ApiProxyHttpClient.1.0.14\lib\net451\DD.ApiProxy.Contracts.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="DD.ApiProxy.Xml, Version=1.0.11.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DD.ApiProxy.ApiProxyHttpClient.1.0.11\lib\net451\DD.ApiProxy.Xml.dll</HintPath>
+    <Reference Include="DD.ApiProxy.Xml, Version=1.0.14.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DD.ApiProxy.ApiProxyHttpClient.1.0.14\lib\net451\DD.ApiProxy.Xml.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Diagnostics.Tracing.EventSource, Version=1.1.28.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -84,10 +84,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="CaaSTestUtilities.psm1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="RunTests.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="SampleTest.ps1">
+    <None Include="ServerTests\GetServer.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="CaaS_Tests.psd1">
