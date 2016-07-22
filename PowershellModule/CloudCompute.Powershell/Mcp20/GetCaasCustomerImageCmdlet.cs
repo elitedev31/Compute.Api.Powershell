@@ -78,11 +78,12 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                         Connection.ApiClient.GetCustomerServerImages(ImageId == Guid.Empty ? null : ImageId.ToString(), Name, DataCenterId, OperatingSystemId,
                             OperatingSystemFamily).Result;
                     WriteObject(resultlist, true);
+                    return;
                 }
 
                 ServerCustomerImageListOptions options = new ServerCustomerImageListOptions
                 {
-                    Id = ImageId,
+                    Id = ImageId == Guid.Empty ? (Guid?)null : ImageId,
                     DatacenterId = DataCenterId,
                     Name = Name,
                     OperatingSystemId = OperatingSystemId,
