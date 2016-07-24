@@ -1835,7 +1835,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri DrsPairsUsageReport(Guid orgId, DateTime startDate, DateTime endDate)
         {
-            return new Uri(string.Format(MCP1_0_PREFIX + "{0}/report/usageDrsPairs?startDate={1:yyyy-MM-dd}&endDate={2:yyyy-MM-dd}", orgId, startDate, endDate), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/report/usageDrsPairs?startDate={1:yyyy-MM-dd}&endDate={2:yyyy-MM-dd}", orgId, startDate, endDate), UriKind.Relative);
         }
 
         /// <summary>	Gets MCP 2 os images. </summary>
@@ -2235,5 +2235,13 @@
 		{
 			return new Uri(string.Format(MCP2_3_PREFIX + "{0}/consistencyGroup/startPreviewSnapshot", orgId), UriKind.Relative);
 		}
-	}
+
+        /// <summary>Returns the relative URI of the REST request for delete consistency group.</summary>
+		/// <param name="orgId">The organization id.</param>
+		/// <returns>The <see cref="Uri"/>.</returns>
+		public static Uri DeleteConsistencyGroup(Guid orgId)
+        {
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/consistencyGroup/deleteConsistencyGroup", orgId), UriKind.Relative);
+        }
+    }
 }

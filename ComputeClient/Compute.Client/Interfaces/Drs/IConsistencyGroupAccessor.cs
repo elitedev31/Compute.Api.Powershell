@@ -56,5 +56,11 @@
 		/// <returns>The <see cref="ResponseType"/></returns>
 		Task<ResponseType> StartPreviewSnapshot(StartPreviewSnapshotType startPreviewSnapshotType);
 
-	}
+        /// <summary>
+        /// The Delete Consistency Group method.
+        /// </summary>
+        /// <param name="deleteConsistencyGroupType">The delete consistency group.</param>
+        /// <returns><see cref="ResponseType"/></returns>
+        Task<ResponseType> DeleteConsistencyGroup(DeleteConsistencyGroupType deleteConsistencyGroupType);
+    }
 }

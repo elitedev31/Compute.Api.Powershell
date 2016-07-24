@@ -99,5 +99,15 @@
 		{
 			return await _apiClient.PostAsync<StartPreviewSnapshotType, ResponseType>(ApiUris.StartPreviewSnapshot(_apiClient.OrganizationId), startPreviewSnapshotType);
 		}
-	}
+
+        /// <summary>
+        /// The Delete Consistency Group method.
+        /// </summary>
+        /// <param name="deleteConsistencyGroupType">The delete consistency group.</param>
+        /// <returns><see cref="ResponseType"/></returns>
+        public async Task<ResponseType> DeleteConsistencyGroup(DeleteConsistencyGroupType deleteConsistencyGroupType)
+        {
+            return await _apiClient.PostAsync<DeleteConsistencyGroupType, ResponseType>(ApiUris.DeleteConsistencyGroup(_apiClient.OrganizationId), deleteConsistencyGroupType);
+        }
+    }
 }
