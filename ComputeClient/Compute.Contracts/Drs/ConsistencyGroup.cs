@@ -264,4 +264,29 @@ namespace DD.CBU.Compute.Api.Contracts.Drs
             set { this.idField = value; }
         }
     }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "urn:didata.com:api:cloud:types")]
+    [System.Xml.Serialization.XmlRootAttribute("initiateFailover", Namespace = "urn:didata.com:api:cloud:types", IsNullable = true)]
+    public class InitiateFailoverType
+    {
+        private string consistencyGroupIdField;
+        /// 
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string consistencyGroupId
+        {
+            get
+            {
+                return this.consistencyGroupIdField;
+            }
+            set
+            {
+                this.consistencyGroupIdField = value;
+            }
+        }
+    }
 }

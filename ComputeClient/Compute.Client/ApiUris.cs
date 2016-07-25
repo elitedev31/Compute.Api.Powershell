@@ -2243,5 +2243,13 @@
         {
             return new Uri(string.Format(MCP2_3_PREFIX + "{0}/consistencyGroup/deleteConsistencyGroup", orgId), UriKind.Relative);
         }
+
+        /// <summary>Returns the relative URI of the REST request for initiate failover for a consistency group.</summary>
+        /// <param name="orgId">The organization id.</param>
+        /// <returns>The <see cref="Uri"/>.</returns>
+        public static Uri InitiateFailover(Guid orgId)
+        {
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/consistencyGroup/initiateFailover", orgId), UriKind.Relative);
+        }
     }
 }

@@ -109,5 +109,15 @@
         {
             return await _apiClient.PostAsync<DeleteConsistencyGroupType, ResponseType>(ApiUris.DeleteConsistencyGroup(_apiClient.OrganizationId), deleteConsistencyGroupType);
         }
+
+        /// <summary>
+        /// The initiate failover for a consistency group.
+        /// </summary>
+        /// <param name="InitiateFailover">The Initiate failover type.</param>
+        /// <returns>The <see cref="ResponseType"/></returns>
+        public async Task<ResponseType> InitiateFailoverForConsistencyGroup(InitiateFailoverType InitiateFailover)
+        {
+            return await _apiClient.PostAsync<InitiateFailoverType, ResponseType>(ApiUris.InitiateFailover(_apiClient.OrganizationId), InitiateFailover);
+        }
     }
 }
