@@ -20,14 +20,24 @@ namespace DD.CBU.Compute.Powershell.Tests
 
         public ComputeServiceConnection CaaSConnection { get; internal set; }
 
-        public IList<RequestReceivedEventArgs> GetApiCalledRecords(string requestUri, string httpMethod)
+        public IList<RequestReceivedEventArgs> GetApiCalledRecords(string httpMethod, string requestUri)
         {
-            return TestHttpClient.GetApiCalledRecords(requestUri, httpMethod);
+            return TestHttpClient.GetApiCalledRecords(httpMethod, requestUri);
         }
 
-        public IList<RequestReceivedEventArgs> GetApiCalledRecords(string requestUri, string httpMethod, string requestContent)
+        public IList<RequestReceivedEventArgs> GetApiCalledRecords(string httpMethod, string requestUri,  string requestContent)
         {
-            return TestHttpClient.GetApiCalledRecords(requestUri, httpMethod, requestContent);
-        }       
+            return TestHttpClient.GetApiCalledRecords(httpMethod, requestUri, requestContent);
+        }
+
+        public IList<RequestReceivedEventArgs> GetAllApiCalledRecords()
+        {
+            return TestHttpClient.GetAllApiCalledRecords();
+        }
+
+        public void SetupApiMock(string httpMethod, string requestUri,  object responseContent, int httpStatus = 200)
+        {
+            TestHttpClient.SetupApiMock(httpMethod, requestUri, responseContent, httpStatus);
+        }
     }
 }

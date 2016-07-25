@@ -5,10 +5,30 @@ param (
 		)
 
 Describe "Get-CaaSServer" {
-    It "Count Should be 32" {
+    It "List Server Api Should have no filter" {
 		$testConnection = New-CaaSTestConnection -TestContext $TestContext
-		$servers = Get-CaaSServer -Connection $testConnection.CaaSConnection
-        $servers.Count | Should Be 33
+		$servers = Get-CaaSServer -Connection $testConnection.CaaSConnection  
+        #$servers.Count | Should be 21     
 		$testConnection | Verify "GET" '/caas/2.1/a4f484de-b9ed-43e4-b565-afbf69417615/server/server' 1
+	}
+}
+
+Describe "Get-CaaSServer By Network" {
+    It "List Server Api Should have Network domain id filter" {
+		$testConnection = New-CaaSTestConnection -TestContext $TestContext
+		$servers = Get-CaaSServer -Connection $testConnection.CaaSConnection -NetworkDomainId a4f484de-b9ed-43e4-b565-afbf69417615
+		$testConnection | Verify "GET" '/caas/2.1/a4f484de-b9ed-43e4-b565-afbf69417615/server/server?networkDomainId=a4f484de-b9ed-43e4-b565-afbf69417615' 1
+	}
+}
+
+Describe "Get-CaaSServer Throws Error" {
+    It "List Server Api Should throw" {
+		$testConnection = New-CaaSTestConnection -TestContext $TestContext
+		$errorResponse = new-object -TypeName  DD.CBU.Compute.Api.Contracts.Network20.ResponseType
+		$errorResponse.operation = "LIST_SERVER"
+		$errorResponse.message = "LIST_SERVER"
+		$errorResponse.responseCode = "TEST_FAILURE"
+		$testConnection | Setup "GET" '/caas/2.1/a4f484de-b9ed-43e4-b565-afbf69417615/server/server' $errorResponse 400
+		{ Get-CaaSServer -Connection $testConnection.CaaSConnection -ErrorAction Stop } | Should Throw		
 	}
 }
