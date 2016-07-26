@@ -28,4 +28,4 @@ on_success:
   - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
   - git add docs/
   - git commit -m "Updated docs [skip appveyor]" --allow-empty
-  - git push origin
+  - ps: git push origin HEAD:"$env:APPVEYOR_REPO_BRANCH"
