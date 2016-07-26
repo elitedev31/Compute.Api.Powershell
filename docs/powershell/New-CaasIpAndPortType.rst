@@ -38,7 +38,7 @@ The Port
 
 * Position?                    Named
 * Accept pipeline input?       false
-* Parameter set name           With_IpAddress_Port, With_IpAddressList_Port
+* Parameter set name           With_IpAddressList_Port, With_IpAddress_Port
 * Aliases                      None
 * Dynamic?                     false
 
@@ -124,11 +124,11 @@ The Port List
 -PrefixSize <int>
 ~~~~~~~~~
 
-The IP Address Prefix Size
+The IP Address Prefix size
 
 * Position?                    Named
 * Accept pipeline input?       false
-* Parameter set name           With_IpAddress_Port, With_IpAddress_PortList
+* Parameter set name           With_IpAddress_PortList, With_IpAddress_Port
 * Aliases                      None
 * Dynamic?                     false
 

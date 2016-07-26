@@ -12,6 +12,8 @@ New-CaasConnection -ApiCredentials <pscredential> -Region <KnownApiRegion> [-Nam
 
 New-CaasConnection -ApiCredentials <pscredential> -ApiDomainName <string> [-Name <string>] [-FtpDomainName <string>] [<CommonParameters>]
 
+New-CaasConnection -ApiCredentials <pscredential> -HttpClient <HttpClient> [-Name <string>] [<CommonParameters>]
+
 
 
 
@@ -65,6 +67,21 @@ The domain name for the FTP, default is the api domain name
 * Position?                    Named
 * Accept pipeline input?       false
 * Parameter set name           ApiDomainName
+* Aliases                      None
+* Dynamic?                     false
+
+
+
+
+
+-HttpClient <HttpClient>
+~~~~~~~~~
+
+The http client which will handle the api requests
+
+* Position?                    Named
+* Accept pipeline input?       false
+* Parameter set name           HttpClient
 * Aliases                      None
 * Dynamic?                     false
 
