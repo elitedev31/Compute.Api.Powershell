@@ -26,6 +26,8 @@ test_script:
         Push-Location $testProjectPath
         .\RunTests.ps1 -UseMockCredentials $True -FallbackToDefaultApi $False -BuildConfiguration Release
         Pop-Location
+        $wc = New-Object 'System.Net.WebClient'
+        $wc.UploadFile("https://ci.appveyor.com/api/testresults/nunit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\PowershellModule\CloudCompute.Powershell.Tests\nunit-results.xml))
 
 on_success:
   - git config --global user.email "anthony.p.shaw@gmail.com"

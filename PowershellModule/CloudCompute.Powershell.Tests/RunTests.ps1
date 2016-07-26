@@ -28,4 +28,4 @@ else{
 }
 
 $testContext = New-CaasTestContext -UseMockCredentials $UseMockCredentials -FallbackToDefaultApi $FallbackToDefaultApi -MockApisPath $mockApiPath -MockApisRecordingPath $mockApiRecordingPath -ApiCredentials $credential -DefaultApiAddress 'https://api-au.dimensiondata.com/' -RecordApiRequestResponse $True
-Invoke-Pester -Script @{ Path = '.\*Tests'; Parameters = @{ TestContext = $testContext }; } -OutputFile .\TestOutput.xml -OutputFormat NUnitXml
+Invoke-Pester -Script @{ Path = '.\*Tests'; Parameters = @{ TestContext = $testContext }; } -OutputFile .\nunit-results.xml -OutputFormat NUnitXml
