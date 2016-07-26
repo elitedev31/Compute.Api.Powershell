@@ -20,6 +20,13 @@ environment:
   access_token:
     secure: O/sXyJYB0lM0WHQmuoG1LjfB/w9pwx8Pt3HmS13N9MXP7UqbY4/aJvJwemP0tlp2
 
+test_script:
+  - ps: | 
+        $testProjectPath = Join-Path $PSScriptRoot "\PowershellModule\CloudCompute.Powershell.Tests"
+        Push-Location $testProjectPath
+        .\RunTests.ps1 -UseMockCredentials $True -FallbackToDefaultApi $False -BuildConfiguration Release
+        Pop-Location
+
 on_success:
   - git config --global user.email "anthony.p.shaw@gmail.com"
   - git config --global user.name "Anthony Shaw"
