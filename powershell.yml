@@ -21,14 +21,11 @@ environment:
     secure: O/sXyJYB0lM0WHQmuoG1LjfB/w9pwx8Pt3HmS13N9MXP7UqbY4/aJvJwemP0tlp2
 
 on_success:
-  - ps: | 
-        git checkout "$env:APPVEYOR_REPO_BRANCH"			
-        Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
-        git remote add neworigin "$env:github_repo"
-        git config --global user.email "anthony.p.shaw@gmail.com"
-        git config --global user.name "Anthony Shaw"
-        git config --global credential.helper store
-        git config --global push.default simple		
-        git add docs/
-        git commit -m "Updated docs [skip appveyor]" --allow-empty		
-        git push neworigin "$env:APPVEYOR_REPO_BRANCH"
+  - git config --global user.email "anthony.p.shaw@gmail.com"
+  - git config --global user.name "Anthony Shaw"
+  - git config --global credential.helper store
+  - git config --global push.default simple
+  - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
+  - git add docs/
+  - git commit -m "Updated docs [skip appveyor]" --allow-empty
+  - git push origin HEAD:%APPVEYOR_REPO_BRANCH%
