@@ -1,7 +1,9 @@
 function New-CaaSTestConnection {
 	param (
 		[Parameter(Mandatory=$True)]
-		[DD.CBU.Compute.Powershell.Tests.TestContext] $TestContext
+		[DD.CBU.Compute.Powershell.Tests.TestContext] $TestContext,
+		[Parameter(Mandatory=$False)]
+		[DD.CBU.Compute.Api.Contracts.Directory.Account] $MockAccount
 		)
 	Process {								
 			$httpClient = New-CaasApiProxyHttpClient `
@@ -11,6 +13,12 @@ function New-CaaSTestConnection {
 					-FallbackToDefaultApi $TestContext.FallbackToDefaultApi `
 					-RecordApiRequestResponse $TestContext.RecordApiRequestResponse `
 					-DefaultApiAddress $TestContext.DefaultApiAddress
+			
+			# Mock the Account call	
+			if($TestContext.UseMockCredentials -eq $True -and  $MockAccount -ne $null)
+			{
+				$httpClient.SetupApiMock("GET", 'https://localhost/oec/0.9/myaccount', $MockAccount, 200)
+			}
 
 			$connection = New-CaasConnection -Name "Test" -HttpClient $httpClient.HttpClient `
 									 -ApiCredentials $httpClient.Credential				

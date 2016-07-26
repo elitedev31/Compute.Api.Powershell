@@ -23,7 +23,10 @@ Describe "Get-CaaSServer By Network" {
 
 Describe "Get-CaaSServer Throws Error" {
     It "List Server Api Should throw" {
-		$testConnection = New-CaaSTestConnection -TestContext $TestContext
+		$account = new-object -TypeName  DD.CBU.Compute.Api.Contracts.Directory.Account
+		$account.OrganizationId = 'a4f484de-b9ed-43e4-b565-afbf69417615'
+		$account.UserName = "TestUser"
+		$testConnection = New-CaaSTestConnection -TestContext $TestContext -MockAccount $account
 		$errorResponse = new-object -TypeName  DD.CBU.Compute.Api.Contracts.Network20.ResponseType
 		$errorResponse.operation = "LIST_SERVER"
 		$errorResponse.message = "LIST_SERVER"

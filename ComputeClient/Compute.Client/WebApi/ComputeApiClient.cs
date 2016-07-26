@@ -246,7 +246,7 @@ namespace DD.CBU.Compute.Api.Client
 			var messageHandler = new HttpClientHandler
 			{
 				Credentials = credentials,
-				PreAuthenticate = true
+				PreAuthenticate = true,                
 			};
 			// Handle disposing the message handler
 			var httpClient = new HttpClientAdapter(
