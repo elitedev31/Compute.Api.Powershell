@@ -15,8 +15,15 @@ function New-CaaSTestConnection {
 					-DefaultApiAddress $TestContext.DefaultApiAddress
 			
 			# Mock the Account call	
-			if($TestContext.UseMockCredentials -eq $True -and  $MockAccount -ne $null)
+			if($TestContext.UseMockCredentials -eq $True)
 			{
+				# Setup mock account in case Mock Credentials are used
+				if($MockAccount -eq $null)
+				{
+					$MockAccount = new-object -TypeName  DD.CBU.Compute.Api.Contracts.Directory.Account
+					$MockAccount.OrganizationId = 'a4f484de-b9ed-43e4-b565-afbf69417615'
+					$MockAccount.UserName = "TestUser"
+				}
 				$httpClient.SetupApiMock("GET", 'https://localhost/oec/0.9/myaccount', $MockAccount, 200)
 			}
 
