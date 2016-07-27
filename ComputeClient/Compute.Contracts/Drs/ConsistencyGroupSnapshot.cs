@@ -23,7 +23,7 @@ namespace DD.CBU.Compute.Api.Contracts.Drs
 	public partial class ConsistencyGroupSnapshotType
 	{
 		private string idField;
-		private System.DateTime createTimeField;
+		private string createTimeField;
 		private int sizeKbField;
 		/// 
 		[System.Xml.Serialization.XmlAttributeAttribute()]
@@ -40,7 +40,7 @@ namespace DD.CBU.Compute.Api.Contracts.Drs
 		}
 		/// 
 		[System.Xml.Serialization.XmlAttributeAttribute()]
-		public System.DateTime createTime
+		public string createTime
 		{
 			get
 			{

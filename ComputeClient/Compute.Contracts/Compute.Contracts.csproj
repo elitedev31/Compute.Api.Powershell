@@ -88,6 +88,7 @@
     <Compile Include="..\SolutionAssemblyInfo.cs">
       <Link>Properties\SolutionAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Drs\ConsistencyGroupOverride.cs" />
     <Compile Include="Drs\ConsistencyGroupSnapshot.cs" />
     <Compile Include="Drs\ConsistencyGroup.cs" />
     <Compile Include="Network20\FirewallOverride.cs" />
