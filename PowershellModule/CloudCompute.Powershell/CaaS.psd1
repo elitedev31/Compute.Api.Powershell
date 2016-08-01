@@ -7,7 +7,7 @@
 	RootModule = 'DD.CBU.Compute.Powershell.dll'
 
 	# Version number of this module.
-	ModuleVersion = '3.2.0'
+	ModuleVersion = '3.3.0'
 
 	# ID used to uniquely identify this module
 	GUID = '756605bc-ba11-4207-b1d1-22f1e7bd7c32'
@@ -25,7 +25,7 @@
 	Description = 'Dimension Data Cloud Compute PowerShell Module'
 
 	# Minimum version of the Windows PowerShell engine required by this module
-	PowerShellVersion = '3.2'
+	PowerShellVersion = '3.0'
 
 	# Name of the Windows PowerShell host required by this module
 	# PowerShellHostName = ''
