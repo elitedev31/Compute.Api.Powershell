@@ -1,4 +1,4 @@
-version: 3.1.{build}
+version: 3.2.{build}
 configuration: Release
 platform: Any CPU
 
@@ -30,8 +30,8 @@ test_script:
         $wc.UploadFile("https://ci.appveyor.com/api/testresults/nunit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\PowershellModule\CloudCompute.Powershell.Tests\nunit-results.xml))
 
 on_success:
-  - git config --global user.email "anthony.p.shaw@gmail.com"
-  - git config --global user.name "Anthony Shaw"
+  - git config --global user.email "%APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL%"
+  - git config --global user.name "%APPVEYOR_REPO_COMMIT_AUTHOR%"
   - git config --global credential.helper store
   - git config --global push.default simple
   - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
