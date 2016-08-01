@@ -23,7 +23,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
     ///     The Get-CaasOsImage cmdlet.
     /// </summary>
     [Cmdlet(VerbsCommon.Get, "CaasOsImage")]
-	[OutputType(typeof (DatacenterType))]
+	[OutputType(typeof (OsImageType))]
     [OutputType(typeof(ImagesWithDiskSpeedImage), ParameterSetName = new string[] { "Mcp1"})]
     public class GetCaasOsImageCmdlet : PsCmdletCaasPagedWithConnectionBase
     {
@@ -100,6 +100,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                             OperatingSystemFamily).Result;
                                         
                     WriteObject(resultlist, true);
+                    return;
                 }
 
 			    ServerOsImageListOptions options = new ServerOsImageListOptions()
