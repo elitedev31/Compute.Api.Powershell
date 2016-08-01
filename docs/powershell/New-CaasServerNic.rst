@@ -8,13 +8,13 @@ Synopsis
 .. code-block:: powershell
     
     
-New-CaasServerNic -Server <ServerType> -Vlan <VlanType> [-Connection <ComputeServiceConnection>] [<CommonParameters>]
-
 New-CaasServerNic -Server <ServerType> -PrimaryPrivateIp <string> [-Connection <ComputeServiceConnection>] [<CommonParameters>]
 
-New-CaasServerNic -ServerId <string> -Vlan <VlanType> [-Connection <ComputeServiceConnection>] [<CommonParameters>]
+New-CaasServerNic -Server <ServerType> -Vlan <VlanType> [-Connection <ComputeServiceConnection>] [<CommonParameters>]
 
 New-CaasServerNic -ServerId <string> -PrimaryPrivateIp <string> [-Connection <ComputeServiceConnection>] [<CommonParameters>]
+
+New-CaasServerNic -ServerId <string> -Vlan <VlanType> [-Connection <ComputeServiceConnection>] [<CommonParameters>]
 
 
 
@@ -53,7 +53,7 @@ The private network private IP address that will be assigned to the machine.
 
 * Position?                    Named
 * Accept pipeline input?       false
-* Parameter set name           ServerId_PrivateIp, Server_PrivateIp
+* Parameter set name           Server_PrivateIp, ServerId_PrivateIp
 * Aliases                      None
 * Dynamic?                     false
 
@@ -68,7 +68,7 @@ The server on which the nic will be deployed
 
 * Position?                    Named
 * Accept pipeline input?       true (ByValue)
-* Parameter set name           Server_Vlan, Server_PrivateIp
+* Parameter set name           Server_PrivateIp, Server_Vlan
 * Aliases                      None
 * Dynamic?                     false
 
@@ -83,7 +83,7 @@ The server ID
 
 * Position?                    Named
 * Accept pipeline input?       false
-* Parameter set name           ServerId_Vlan, ServerId_PrivateIp
+* Parameter set name           ServerId_PrivateIp, ServerId_Vlan
 * Aliases                      None
 * Dynamic?                     false
 
@@ -98,7 +98,7 @@ The server's primary network
 
 * Position?                    Named
 * Accept pipeline input?       false
-* Parameter set name           Server_Vlan, ServerId_Vlan
+* Parameter set name           ServerId_Vlan, Server_Vlan
 * Aliases                      None
 * Dynamic?                     false
 

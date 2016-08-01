@@ -1,10 +1,7 @@
-version: 3.1.{build}
+version: 3.2.{build}
 configuration: Release
 platform: Any CPU
 
-branches:
-  only:
-    - master
 assembly_info:
   patch: true
   file: AssemblyInfo.*
@@ -23,6 +20,15 @@ environment:
   access_token:
     secure: O/sXyJYB0lM0WHQmuoG1LjfB/w9pwx8Pt3HmS13N9MXP7UqbY4/aJvJwemP0tlp2
 
+test_script:
+  - ps: | 
+        $testProjectPath = Join-Path $env:APPVEYOR_BUILD_FOLDER  "\PowershellModule\CloudCompute.Powershell.Tests"
+        Push-Location $testProjectPath
+        .\RunTests.ps1 -UseMockCredentials $True -FallbackToDefaultApi $False -BuildConfiguration Release
+        Pop-Location
+        $wc = New-Object 'System.Net.WebClient'
+        $wc.UploadFile("https://ci.appveyor.com/api/testresults/nunit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\PowershellModule\CloudCompute.Powershell.Tests\nunit-results.xml))
+
 on_success:
   - git config --global user.email "anthony.p.shaw@gmail.com"
   - git config --global user.name "Anthony Shaw"
@@ -30,5 +36,5 @@ on_success:
   - git config --global push.default simple
   - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
   - git add docs/
-  - git commit -m "Updated docs [skip appveyor]" --allow-empty
-  - git push origin HEAD:master
+  - git commit -m "Updated docs [skip appveyor]"
+  - git push origin HEAD:%APPVEYOR_REPO_BRANCH%

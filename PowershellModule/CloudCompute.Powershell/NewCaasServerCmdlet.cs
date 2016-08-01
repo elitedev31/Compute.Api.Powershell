@@ -88,8 +88,8 @@ namespace DD.CBU.Compute.Powershell
 		        networkDomainInfo = new DeployServerTypeNetworkInfo
 		        {
 		            networkDomainId = ServerDetails.NetworkDomain.id,
-		            primaryNic = new VlanIdOrPrivateIpType
-                    {
+		            primaryNic = new NewNicType
+		            {
                         vlanId = ServerDetails.PrimaryVlan != null ? ServerDetails.PrimaryVlan.id : null,
                         privateIpv4 = ServerDetails.PrivateIp
                     }
