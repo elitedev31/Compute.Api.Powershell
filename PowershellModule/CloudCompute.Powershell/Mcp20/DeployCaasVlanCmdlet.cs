@@ -23,16 +23,16 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 	[OutputType(typeof (ResponseType))]
 	public class DeployCaasVlanCmdlet : PSCmdletCaasWithConnectionBase
 	{
-		/// <summary>
-		///     Gets or sets the network domain id.
-		/// </summary>
-		[Parameter(Mandatory = true, HelpMessage = "The network domain Id")]
-		public Guid NetworkDomainId { get; set; }
+        [Parameter(Mandatory = true, ParameterSetName = "With_NetworkDomainId", HelpMessage = "The network domain id")]
+        public string NetworkDomainId { get; set; }
 
-		/// <summary>
-		///     Gets or sets the name.
-		/// </summary>
-		[Parameter(Mandatory = true, HelpMessage = "The vlan name")]
+        [Parameter(Mandatory = true, ValueFromPipeline = true, ParameterSetName = "With_NetworkDomain", HelpMessage = "The network domain")]
+        public NetworkDomainType NetworkDomain { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the name.
+        /// </summary>
+        [Parameter(Mandatory = true, HelpMessage = "The vlan name")]
 		public string Name { get; set; }
 
 		/// <summary>
@@ -63,6 +63,12 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         protected override void ProcessRecord()
 		{
 			ResponseType response = null;
+
+            if (NetworkDomain != null)
+            {
+                NetworkDomainId = NetworkDomain.id;
+            }
+
 			try
 			{
 				response =
