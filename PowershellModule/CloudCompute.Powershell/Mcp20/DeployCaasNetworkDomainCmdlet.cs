@@ -8,6 +8,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
+using System.Linq;
 using System.Management.Automation;
 using DD.CBU.Compute.Api.Client;
 using DD.CBU.Compute.Api.Contracts.Network20;
@@ -45,13 +46,17 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 		[Parameter(Mandatory = true, HelpMessage = "The Network Domain Type")]
 		public NetworkDomainServiceType Type { get; set; }
 
+        [Parameter(Mandatory =false, HelpMessage = "Wait until provisioned before returning")]
+        public SwitchParameter Wait { get; set; }
+
 		/// <summary>
 		///     The process record method.
 		/// </summary>
 		protected override void ProcessRecord()
 		{
 			ResponseType response = null;
-			try
+            base.ProcessRecord();
+            try
 			{
 				response =
 					Connection.ApiClient.Networking.NetworkDomain.DeployNetworkDomain(
@@ -70,8 +75,24 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 							response.message, 
 							response.requestId, 
 							response.responseCode));
-
-				base.ProcessRecord();
+                if (this.Wait  && response != null && response.responseCode == "IN_PROGRESS")
+                {
+                    bool provisioned = false;
+                    NetworkDomainType domain = null;
+                    Guid networkDomainId = Guid.Parse(response.info.First(nvp => nvp.name == "networkDomainId").value);
+                    while (!provisioned)
+                    {
+                        domain = Connection.ApiClient.Networking.NetworkDomain.GetNetworkDomain(networkDomainId).Result;
+                        provisioned = domain.state != "IN_PROGRESS" && domain.state != "PENDING_ADD";
+                    }
+                    if (domain.state == "NORMAL")
+                        base.WriteObject(domain);
+                    else
+                        throw new Exception(string.Format("Failed to provision network domain {0}", domain.state));
+                } else
+                {
+                    base.WriteObject(response);
+                }
 			}
 			catch (AggregateException ae)
 			{
@@ -92,8 +113,6 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 						return true;
 					});
 			}
-
-			WriteObject(response);
 		}
 	}
 }

@@ -8,6 +8,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
+using System.Linq;
 using System.Management.Automation;
 using System.Net;
 using DD.CBU.Compute.Api.Client;
@@ -53,6 +54,9 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 		[Parameter(Mandatory = true, HelpMessage = "The vlan Private Ipv4 PrefixSize, must be between 16 and 24")]
         public int PrivateIpv4PrefixSize { get; set; }
 
+        [Parameter(Mandatory = false, HelpMessage = "Wait until provisioned before returning")]
+        public SwitchParameter Wait { get; set; }
+
         /// <summary>
         ///     The process record method.
         /// </summary>
@@ -81,7 +85,28 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 							response.responseCode));
 
 				base.ProcessRecord();
-			}
+
+                if (this.Wait && response != null && response.responseCode == "IN_PROGRESS")
+                {
+                    bool provisioned = false;
+                    VlanType vlan = null;
+                    Guid vlanId = Guid.Parse(response.info.First(nvp => nvp.name == "vlanId").value);
+                    while (!provisioned)
+                    {
+                        vlan = Connection.ApiClient.Networking.Vlan.GetVlan(vlanId).Result;
+                        provisioned = vlan.state != "IN_PROGRESS" && vlan.state != "PENDING_ADD";
+                    }
+                    if (vlan.state == "NORMAL")
+                        base.WriteObject(vlan);
+                    else
+                        ThrowTerminatingError(
+								new ErrorRecord(new Exception(string.Format("Failed to provision VLAN {0}", vlan.state)), "-1", ErrorCategory.ConnectionError, Connection)); 
+                }
+                else
+                {
+                    base.WriteObject(response);
+                }
+            }
 			catch (AggregateException ae)
 			{
 				ae.Handle(
@@ -101,8 +126,6 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 						return true;
 					});
 			}
-
-			WriteObject(response);
 		}
 	}
 }
