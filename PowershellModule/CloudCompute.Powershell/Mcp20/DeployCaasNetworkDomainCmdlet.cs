@@ -88,7 +88,9 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                     if (domain.state == "NORMAL")
                         base.WriteObject(domain);
                     else
-                        throw new Exception(string.Format("Failed to provision network domain {0}", domain.state));
+                        ThrowTerminatingError(
+								new ErrorRecord(new ComputeApiException(string.Format("Failed to provision network domain {0}", domain.state)), "-1", ErrorCategory.ConnectionError, Connection)); 
+
                 } else
                 {
                     base.WriteObject(response);

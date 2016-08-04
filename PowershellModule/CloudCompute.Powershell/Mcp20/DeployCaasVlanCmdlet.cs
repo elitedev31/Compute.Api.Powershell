@@ -106,7 +106,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                         base.WriteObject(vlan);
                     else
                         ThrowTerminatingError(
-								new ErrorRecord(new Exception(string.Format("Failed to provision VLAN {0}", vlan.state)), "-1", ErrorCategory.ConnectionError, Connection)); 
+								new ErrorRecord(new ComputeApiException(string.Format("Failed to provision VLAN {0}", vlan.state)), "-1", ErrorCategory.ConnectionError, Connection)); 
                 }
                 else
                 {
