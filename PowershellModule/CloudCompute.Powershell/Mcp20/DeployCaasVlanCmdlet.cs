@@ -120,7 +120,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
             obj = (T)(object)vlan;
             if (vlan.state == "FAILED")
                 ThrowTerminatingError(
-                   new ErrorRecord(new Exception(string.Format("Failed to provision VLAN {0}", vlan.state)), "-1", ErrorCategory.ConnectionError, Connection));
+                   new ErrorRecord(new ComputeApiException(string.Format("Failed to provision VLAN {0}", vlan.state)), "-1", ErrorCategory.ConnectionError, Connection));
             return (vlan.state != "IN_PROGRESS" && vlan.state != "PENDING_ADD");
         }
     }

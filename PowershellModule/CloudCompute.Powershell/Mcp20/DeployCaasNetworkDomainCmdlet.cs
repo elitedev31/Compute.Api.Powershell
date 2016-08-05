@@ -106,7 +106,8 @@ namespace DD.CBU.Compute.Powershell.Mcp20
             obj = (T)(object)domain;
             if (domain.state == "FAILED")
                 ThrowTerminatingError(
-                   new ErrorRecord(new Exception(string.Format("Failed to provision Network Domain {0}", domain.state)), "-1", ErrorCategory.ConnectionError, Connection));
+                   new ErrorRecord(new ComputeApiException(string.Format("Failed to provision network domain {0}", domain.state)), "-1", ErrorCategory.ConnectionError, Connection)); 
+
             return (domain.state != "IN_PROGRESS" && domain.state != "PENDING_ADD");
         }
     }
