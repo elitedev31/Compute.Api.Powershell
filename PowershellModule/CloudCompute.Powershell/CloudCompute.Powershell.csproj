@@ -120,6 +120,7 @@
     <Compile Include="ComputeCmdletProvider.cs" />
     <Compile Include="ComputeServiceConnection.cs" />
     <Compile Include="AddCaasBackupClientCmdlet.cs" />
+    <Compile Include="Contracts\WaitableCmdlet.cs" />
     <Compile Include="GetCaasConnectionCmdlet.cs" />
     <Compile Include="GetCaasCustomerImageExportHistoryCmdlet.cs" />
     <Compile Include="GetCaasCustomerImageExportsCmdlet.cs" />

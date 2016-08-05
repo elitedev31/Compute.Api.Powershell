@@ -12,6 +12,7 @@ using System.Linq;
 using System.Management.Automation;
 using DD.CBU.Compute.Api.Client;
 using DD.CBU.Compute.Api.Contracts.Network20;
+using DD.CBU.Compute.Powershell.Contracts;
 
 namespace DD.CBU.Compute.Powershell.Mcp20
 {
@@ -20,7 +21,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 	/// </summary>
 	[Cmdlet(VerbsCommon.New, "CaasNetworkDomain")]
 	[OutputType(typeof (ResponseType))]
-	public class DeployCaasNetworkDomainCmdlet : PSCmdletCaasWithConnectionBase
+	public class DeployCaasNetworkDomainCmdlet : WaitableCmdlet
 	{
 		/// <summary>
 		///     Gets or sets the network domain location.
@@ -45,9 +46,6 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The Network Domain Type")]
 		public NetworkDomainServiceType Type { get; set; }
-
-        [Parameter(Mandatory =false, HelpMessage = "Wait until provisioned before returning")]
-        public SwitchParameter Wait { get; set; }
 
 		/// <summary>
 		///     The process record method.
@@ -75,25 +73,11 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 							response.message, 
 							response.requestId, 
 							response.responseCode));
-                if (this.Wait  && response != null && response.responseCode == "IN_PROGRESS")
-                {
-                    bool provisioned = false;
-                    NetworkDomainType domain = null;
-                    Guid networkDomainId = Guid.Parse(response.info.First(nvp => nvp.name == "networkDomainId").value);
-                    while (!provisioned)
-                    {
-                        domain = Connection.ApiClient.Networking.NetworkDomain.GetNetworkDomain(networkDomainId).Result;
-                        provisioned = domain.state != "IN_PROGRESS" && domain.state != "PENDING_ADD";
-                    }
-                    if (domain.state == "NORMAL")
-                        base.WriteObject(domain);
-                    else
-                        throw new Exception(string.Format("Failed to provision network domain {0}", domain.state));
-                } else
-                {
-                    base.WriteObject(response);
-                }
-			}
+
+                Guid networkDomainId = Guid.Parse(response.info.First(nvp => nvp.name == "networkDomainId").value);
+
+                WaitForFailureOrCompletion<NetworkDomainType>(response, networkDomainId);
+            }
 			catch (AggregateException ae)
 			{
 				ae.Handle(
@@ -113,6 +97,16 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 						return true;
 					});
 			}
-		}
-	}
+        }
+
+        public override bool WaitOn<T>(Guid objectId, ref T obj)
+        {
+            NetworkDomainType domain = Connection.ApiClient.Networking.NetworkDomain.GetNetworkDomain(objectId).Result;
+            obj = (T)(object)domain;
+            if (domain.state == "FAILED")
+                ThrowTerminatingError(
+                   new ErrorRecord(new Exception(string.Format("Failed to provision Network Domain {0}", domain.state)), "-1", ErrorCategory.ConnectionError, Connection));
+            return (domain.state != "IN_PROGRESS" && domain.state != "PENDING_ADD");
+        }
+    }
 }

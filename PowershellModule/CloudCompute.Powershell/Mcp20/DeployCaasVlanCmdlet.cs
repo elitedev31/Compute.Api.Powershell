@@ -13,6 +13,7 @@ using System.Management.Automation;
 using System.Net;
 using DD.CBU.Compute.Api.Client;
 using DD.CBU.Compute.Api.Contracts.Network20;
+using DD.CBU.Compute.Powershell.Contracts;
 
 namespace DD.CBU.Compute.Powershell.Mcp20
 {
@@ -21,7 +22,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 	/// </summary>
 	[Cmdlet(VerbsCommon.New, "CaasVlan")]
 	[OutputType(typeof (ResponseType))]
-	public class DeployCaasVlanCmdlet : PSCmdletCaasWithConnectionBase
+	public class DeployCaasVlanCmdlet : WaitableCmdlet
 	{
         [Parameter(Mandatory = true, ParameterSetName = "With_NetworkDomainId", HelpMessage = "The network domain id")]
         public string NetworkDomainId { get; set; }
@@ -47,15 +48,11 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 		[Parameter(Mandatory = true, HelpMessage = "The vlan Private Ipv4BaseAddress")]
 		public IPAddress PrivateIpv4BaseAddress { get; set; }
 
-
         /// <summary>
 		///     Gets or sets the private ip v4 base address.
 		/// </summary>
 		[Parameter(Mandatory = true, HelpMessage = "The vlan Private Ipv4 PrefixSize, must be between 16 and 24")]
         public int PrivateIpv4PrefixSize { get; set; }
-
-        [Parameter(Mandatory = false, HelpMessage = "Wait until provisioned before returning")]
-        public SwitchParameter Wait { get; set; }
 
         /// <summary>
         ///     The process record method.
@@ -92,26 +89,9 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
 				base.ProcessRecord();
 
-                if (this.Wait && response != null && response.responseCode == "IN_PROGRESS")
-                {
-                    bool provisioned = false;
-                    VlanType vlan = null;
-                    Guid vlanId = Guid.Parse(response.info.First(nvp => nvp.name == "vlanId").value);
-                    while (!provisioned)
-                    {
-                        vlan = Connection.ApiClient.Networking.Vlan.GetVlan(vlanId).Result;
-                        provisioned = vlan.state != "IN_PROGRESS" && vlan.state != "PENDING_ADD";
-                    }
-                    if (vlan.state == "NORMAL")
-                        base.WriteObject(vlan);
-                    else
-                        ThrowTerminatingError(
-								new ErrorRecord(new Exception(string.Format("Failed to provision VLAN {0}", vlan.state)), "-1", ErrorCategory.ConnectionError, Connection)); 
-                }
-                else
-                {
-                    base.WriteObject(response);
-                }
+                Guid vlanId = Guid.Parse(response.info.First(nvp => nvp.name == "vlanId").value);
+
+                WaitForFailureOrCompletion<VlanType>(response, vlanId);
             }
 			catch (AggregateException ae)
 			{
@@ -133,5 +113,15 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 					});
 			}
 		}
-	}
+
+        public override bool WaitOn<T>(Guid objectId, ref T obj)
+        {
+            VlanType vlan = Connection.ApiClient.Networking.Vlan.GetVlan(objectId).Result;
+            obj = (T)(object)vlan;
+            if (vlan.state == "FAILED")
+                ThrowTerminatingError(
+                   new ErrorRecord(new Exception(string.Format("Failed to provision VLAN {0}", vlan.state)), "-1", ErrorCategory.ConnectionError, Connection));
+            return (vlan.state != "IN_PROGRESS" && vlan.state != "PENDING_ADD");
+        }
+    }
 }
