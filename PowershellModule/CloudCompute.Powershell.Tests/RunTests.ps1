@@ -6,6 +6,8 @@
 		[Parameter(Mandatory=$false)]
 		[string] $BuildConfiguration = 'Debug'
 		)
+
+Write-Host "!!!Using the '$BuildConfiguration' Configuration!!!"
 import-module (Join-Path $PSScriptRoot "..\CloudCompute.Powershell\bin\$BuildConfiguration\CaaS.psd1")
 import-module (Join-Path $PSScriptRoot "..\packages\Pester.3.4.0\tools\Pester.psd1")
 import-module (Join-Path $PSScriptRoot "bin\$BuildConfiguration\CaaS_Tests.psd1")
