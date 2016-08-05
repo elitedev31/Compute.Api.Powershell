@@ -5,6 +5,7 @@ using DD.CBU.Compute.Api.Client;
 using DD.CBU.Compute.Api.Client.Network20;
 using DD.CBU.Compute.Api.Contracts.Network20;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using DD.CBU.Compute.Api.Contracts.Generic;
 
 namespace Compute.Client.UnitTests.Network20
 {
