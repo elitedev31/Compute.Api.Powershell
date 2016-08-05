@@ -36,5 +36,5 @@ on_success:
   - git config --global push.default simple
   - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
   - git add docs/
-  - git commit -m "Updated docs [skip appveyor]"
-  - git push origin HEAD:%APPVEYOR_REPO_BRANCH%
+  - IF %APPVEYOR_REPO_BRANCH% == "master" (git commit -m "Updated docs [skip appveyor]")
+  - IF %APPVEYOR_REPO_BRANCH% == "master" (git push origin HEAD:%APPVEYOR_REPO_BRANCH%)
