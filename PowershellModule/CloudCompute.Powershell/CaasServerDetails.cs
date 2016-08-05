@@ -7,6 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
 using System.Collections.Generic;
 using DD.CBU.Compute.Api.Contracts.Image;
 using DD.CBU.Compute.Api.Contracts.Network;
@@ -47,12 +48,7 @@ namespace DD.CBU.Compute.Powershell
         /// <summary>
         ///     Gets or sets the image.
         /// </summary>
-        public ImagesWithDiskSpeedImage Mcp1Image { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the image.
-        /// </summary>
-        public OsImageType Mcp2Image { get; set; }
+        public string ImageId { get; set; }
 
         /// <summary>
         ///     Gets or sets the private ip.

@@ -216,7 +216,7 @@ DD.CBU.Compute.Powershell.ComputeServiceConnection
 Outputs
 -------
 
-DD.CBU.Compute.Api.Contracts.Network20.DatacenterType
+DD.CBU.Compute.Api.Contracts.Network20.OsImageType
 DD.CBU.Compute.Api.Contracts.Image.ImagesWithDiskSpeedImage
 
 
