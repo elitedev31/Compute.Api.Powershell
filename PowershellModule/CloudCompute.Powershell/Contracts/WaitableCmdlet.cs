@@ -25,11 +25,22 @@ namespace DD.CBU.Compute.Powershell.Contracts
                 while (!provisioned)
                 {
                     Update(objectId, ref provisionedObject);
-                    if (provisionedObject.state == "FAILED")
-                        ThrowTerminatingError(
-                           new ErrorRecord(new ComputeApiException(string.Format("Failed to provision {0}", provisionedObject.state)), "-1", ErrorCategory.ConnectionError, Connection));
-
-                    provisioned = (provisionedObject.state != "IN_PROGRESS" && provisionedObject.state != "PENDING_ADD");
+                    switch (provisionedObject.state)
+                    {
+                        case "NORMAL":
+                            provisioned = true;
+                            break;
+                        case "IN_PROGRESS":
+                        case "PENDING_ADD":
+                        case "PENDING_CHANGE":
+                        case "PENDING_DELETE":
+                            provisioned = false;
+                            break;
+                        default:
+                            ThrowTerminatingError(
+                                new ErrorRecord(new ComputeApiException(string.Format("Failed to provision {0}", provisionedObject.state)), "-1", ErrorCategory.ConnectionError, Connection));
+                            break;
+                    }
                     if (!provisioned)
                         Thread.Sleep(delayTime);
                 }
