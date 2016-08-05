@@ -14,6 +14,7 @@ using System.Net;
 using DD.CBU.Compute.Api.Client;
 using DD.CBU.Compute.Api.Contracts.Network20;
 using DD.CBU.Compute.Powershell.Contracts;
+using DD.CBU.Compute.Api.Contracts.Generic;
 
 namespace DD.CBU.Compute.Powershell.Mcp20
 {
@@ -91,7 +92,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
                 Guid vlanId = Guid.Parse(response.info.First(nvp => nvp.name == "vlanId").value);
 
-                WaitForFailureOrCompletion<VlanType>(response, vlanId);
+                WaitForFailureOrCompletion(response, vlanId);
             }
 			catch (AggregateException ae)
 			{
@@ -114,14 +115,9 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 			}
 		}
 
-        public override bool WaitOn<T>(Guid objectId, ref T obj)
+        public override void Update(Guid objectId, ref IEntityStatusV2 provisionedObject)
         {
-            VlanType vlan = Connection.ApiClient.Networking.Vlan.GetVlan(objectId).Result;
-            obj = (T)(object)vlan;
-            if (vlan.state == "FAILED")
-                ThrowTerminatingError(
-                   new ErrorRecord(new ComputeApiException(string.Format("Failed to provision VLAN {0}", vlan.state)), "-1", ErrorCategory.ConnectionError, Connection));
-            return (vlan.state != "IN_PROGRESS" && vlan.state != "PENDING_ADD");
+            provisionedObject = Connection.ApiClient.Networking.Vlan.GetVlan(objectId).Result;
         }
     }
 }

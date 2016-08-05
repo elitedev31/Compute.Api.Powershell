@@ -4,6 +4,8 @@ using System.Threading;
 
 namespace DD.CBU.Compute.Powershell.Contracts
 {
+    using Api.Client;
+    using Api.Contracts.Generic;
     using Api.Contracts.Network20;
 
     public abstract class WaitableCmdlet : PSCmdletCaasWithConnectionBase, IWaitable
@@ -13,17 +15,23 @@ namespace DD.CBU.Compute.Powershell.Contracts
 
         protected const int delayTime = 400; 
 
-        protected void WaitForFailureOrCompletion<T>(ResponseType response, Guid objectId)
+        protected void WaitForFailureOrCompletion(ResponseType response, Guid objectId)
         {
             if (this.Wait && response != null && response.responseCode == "IN_PROGRESS")
             {
                 bool provisioned = false;
-                T provisionedObject = default(T);
+                IEntityStatusV2 provisionedObject = default(IEntityStatusV2);
                 
                 while (!provisioned)
                 {
-                    provisioned = WaitOn<T>(objectId, ref provisionedObject);
-                    Thread.Sleep(delayTime);
+                    Update(objectId, ref provisionedObject);
+                    if (provisionedObject.state == "FAILED")
+                        ThrowTerminatingError(
+                           new ErrorRecord(new ComputeApiException(string.Format("Failed to provision {0}", provisionedObject.state)), "-1", ErrorCategory.ConnectionError, Connection));
+
+                    provisioned = (provisionedObject.state != "IN_PROGRESS" && provisionedObject.state != "PENDING_ADD");
+                    if (!provisioned)
+                        Thread.Sleep(delayTime);
                 }
                 base.WriteObject(provisionedObject);
             }
@@ -33,11 +41,11 @@ namespace DD.CBU.Compute.Powershell.Contracts
             }
         }
 
-        public abstract bool WaitOn<T>(Guid objectId, ref T provisionedObject);
+        public abstract void Update(Guid objectId, ref IEntityStatusV2 provisionedObject);
     }
 
     public interface IWaitable
     {
-        bool WaitOn<T>(Guid objectId, ref T provisionedObject);
+        void Update(Guid objectId, ref IEntityStatusV2 provisionedObject);
     }
 }

@@ -13,6 +13,7 @@ using System.Management.Automation;
 using DD.CBU.Compute.Api.Client;
 using DD.CBU.Compute.Api.Contracts.Network20;
 using DD.CBU.Compute.Powershell.Contracts;
+using DD.CBU.Compute.Api.Contracts.Generic;
 
 namespace DD.CBU.Compute.Powershell.Mcp20
 {
@@ -76,7 +77,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
                 Guid networkDomainId = Guid.Parse(response.info.First(nvp => nvp.name == "networkDomainId").value);
 
-                WaitForFailureOrCompletion<NetworkDomainType>(response, networkDomainId);
+                WaitForFailureOrCompletion(response, networkDomainId);
             }
 
 			catch (AggregateException ae)
@@ -100,15 +101,9 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 			}
         }
 
-        public override bool WaitOn<T>(Guid objectId, ref T obj)
+        public override void Update(Guid objectId, ref IEntityStatusV2 provisionedObject)
         {
-            NetworkDomainType domain = Connection.ApiClient.Networking.NetworkDomain.GetNetworkDomain(objectId).Result;
-            obj = (T)(object)domain;
-            if (domain.state == "FAILED")
-                ThrowTerminatingError(
-                   new ErrorRecord(new ComputeApiException(string.Format("Failed to provision network domain {0}", domain.state)), "-1", ErrorCategory.ConnectionError, Connection)); 
-
-            return (domain.state != "IN_PROGRESS" && domain.state != "PENDING_ADD");
+            provisionedObject = Connection.ApiClient.Networking.NetworkDomain.GetNetworkDomain(objectId).Result;
         }
     }
 }
