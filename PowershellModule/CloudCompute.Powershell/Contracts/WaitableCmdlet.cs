@@ -4,7 +4,7 @@ using System.Threading;
 
 namespace DD.CBU.Compute.Powershell.Contracts
 {
-    using DD.CBU.Compute.Api.Contracts.Network20;
+    using Api.Contracts.Network20;
 
     public abstract class WaitableCmdlet : PSCmdletCaasWithConnectionBase, IWaitable
     {

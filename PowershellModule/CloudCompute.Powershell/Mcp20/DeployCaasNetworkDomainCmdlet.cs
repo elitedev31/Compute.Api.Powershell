@@ -78,6 +78,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
                 WaitForFailureOrCompletion<NetworkDomainType>(response, networkDomainId);
             }
+
 			catch (AggregateException ae)
 			{
 				ae.Handle(
