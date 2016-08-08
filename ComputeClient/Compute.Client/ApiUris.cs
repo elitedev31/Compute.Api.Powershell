@@ -1525,7 +1525,7 @@
         /// <returns>Returns the relative URI of the REST request for getting the NAT rules</returns>
         public static Uri GetDomainNatRules(Guid orgId, string networkDomainId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/network/natRule?networkDomainId={1}", orgId, networkDomainId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/natRule?networkDomainId={1}", orgId, networkDomainId), UriKind.Relative);
         }
 
         /// <summary>Deletes a NAT Rule. </summary>
@@ -1534,7 +1534,7 @@
         /// <returns>Returns the relative URI of the REST request for getting the NAT rule.</returns>
         public static Uri GetNatRule(Guid orgId, string natRuleId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/network/natRule/{1}", orgId, natRuleId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/natRule/{1}", orgId, natRuleId), UriKind.Relative);
         }
 
         /// <summary>Creates a NAT Rule on a Network Domain in an MCP 2.0 data center location.</summary>
@@ -1550,7 +1550,7 @@
         /// <returns>Returns the relative URI of the REST request for deleting the NAT rule.</returns>
         public static Uri DeleteNatRule(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/network/deleteNatRule", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/deleteNatRule", orgId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for creating the Pool.</summary>
