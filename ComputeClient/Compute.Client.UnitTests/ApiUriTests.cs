@@ -15,7 +15,7 @@ namespace Compute.Client.UnitTests
         {
             var networkDomainId = Guid.NewGuid();
             var uri = ApiUris.GetDomainNatRules(_orgId, networkDomainId.ToString());
-            Assert.AreEqual(ApiUris.MCP2_1_PREFIX + _orgId + "/network/natRule?networkDomainId="+networkDomainId, uri.OriginalString);
+            Assert.AreEqual(ApiUris.MCP2_3_PREFIX + _orgId + "/network/natRule?networkDomainId="+networkDomainId, uri.OriginalString);
         }
 
         [TestMethod]
@@ -23,7 +23,7 @@ namespace Compute.Client.UnitTests
         {
             var networkId = Guid.NewGuid();
             var uri = ApiUris.GetNatRule(_orgId, networkId.ToString());
-            Assert.AreEqual(ApiUris.MCP2_1_PREFIX + _orgId + "/network/natRule/"+ networkId, uri.OriginalString);
+            Assert.AreEqual(ApiUris.MCP2_3_PREFIX + _orgId + "/network/natRule/"+ networkId, uri.OriginalString);
         }
 
         [TestMethod]
@@ -37,7 +37,7 @@ namespace Compute.Client.UnitTests
         public void ReturnsDeleteNatRuleUri()
         {
             var uri = ApiUris.DeleteNatRule(_orgId);
-            Assert.AreEqual(ApiUris.MCP2_1_PREFIX + _orgId + "/network/deleteNatRule", uri.OriginalString);
+            Assert.AreEqual(ApiUris.MCP2_3_PREFIX + _orgId + "/network/deleteNatRule", uri.OriginalString);
         }
 
         [TestMethod]
