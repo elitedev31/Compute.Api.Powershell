@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+  <ViewDefinitions>
+    <!-- DMS Resource -->
+    <View>
+      <Name>Serverlist</Name>
+      <ViewSelectedBy>
+        <TypeName>DD.CBU.Compute.Api.Contracts.Network20.ServerType</TypeName>
+      </ViewSelectedBy>
+      <ListControl>
+        <ListEntries>
+          <ListEntry>
+            <ListItems>
+              <ListItem>
+                <PropertyName>id</PropertyName>
+                <Label>Id</Label>
+              </ListItem>
+              <ListItem>
+                <PropertyName>name</PropertyName>
+                <Label>Name</Label>
+              </ListItem>
+              <ListItem>
+                <PropertyName>description</PropertyName>
+                <Label>Description</Label>
+              </ListItem>
+              <ListItem>
+                <PropertyName>memoryGb</PropertyName>
+                <Label>Memory (GB)</Label>
+              </ListItem>
+              <ListItem>
+                <ScriptBlock>
+                  If ($_.nic) {
+                   'MCP1'
+                  }
+                  Else {
+                  'MCP2'
+                  }
+                </ScriptBlock>
+                <Label>Type</Label>
+              </ListItem>
+              <ListItem>
+                <ScriptBlock>
+                  $_.createTime
+                </ScriptBlock>
+                <Label>Created At</Label>
+              </ListItem>
+              <ListItem>
+                <PropertyName>deployed</PropertyName>
+                <Label>Deployed</Label>
+              </ListItem>
+              <ListItem>
+                <PropertyName>started</PropertyName>
+                <Label>Started</Label>
+              </ListItem>
+              <ListItem>
+                <PropertyName>state</PropertyName>
+                <Label>State</Label>
+              </ListItem>
+              <ListItem>
+                <ScriptBlock>
+                  $_.datacenterId
+                </ScriptBlock>
+                <Label>Datacenter</Label>
+              </ListItem>
+              <ListItem>
+                <ScriptBlock>
+                  $_.operatingSystem.displayName
+                </ScriptBlock>
+                <Label>Operating System</Label>
+              </ListItem>
+              <ListItem>
+                <ScriptBlock>
+                  $_.virtualHardware.version
+                </ScriptBlock>
+                <Label>Virtual Hardware</Label>
+              </ListItem>
+              <ListItem>
+                <ScriptBlock>
+                  If ($_.nic) {
+                   $_.nic.privateIpv4
+                  }
+                  Else {
+                   $_.networkInfo.primaryNic.privateIpv4
+                  }
+                </ScriptBlock>
+                <Label>Private IPv4</Label>
+              </ListItem>
+              <ListItem>
+                <ScriptBlock>
+                  $_.cpu.count
+                </ScriptBlock>
+                <Label>CPU Count</Label>
+              </ListItem>
+              <ListItem>
+                <ScriptBlock>
+                  $_.cpu.coresPerSocket.ToString() + " core(s) per socket," + $_.cpu.speed + " speed" 
+                </ScriptBlock>
+                <Label>CPU Spec</Label>
+              </ListItem>
+              <ListItem>
+                <ScriptBlock>
+                  $_.vmwareTools.runningStatus + ", Version : " + $_.vmwareTools.apiVersion
+                </ScriptBlock>
+                <Label>VMware tools</Label>
+              </ListItem>
+              <ListItem>
+                <ScriptBlock>
+                  If (-Not $_.backup){
+                   'Disabled'
+                  } else {
+                   $_.backup.plan
+                  } 
+                </ScriptBlock>
+                <Label>Backup</Label>
+              </ListItem>
+              <ListItem>
+                <ScriptBlock>
+                  If (-Not $_.monitoring){
+                  'Disabled'
+                  } else {
+                  $_.monitoring.plan
+                  }
+                </ScriptBlock>
+                <Label>Monitoring</Label>
+              </ListItem>
+            </ListItems>
+          </ListEntry>
+        </ListEntries>
+      </ListControl>
+    </View>
+  </ViewDefinitions>
+</Configuration>

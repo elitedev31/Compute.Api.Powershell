@@ -310,6 +310,7 @@
     <None Include="BackupUtilities.psm1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="CaaS.format.ps1xml" />
     <None Include="CaaS.psd1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
