@@ -154,11 +154,14 @@
     <Compile Include="Mcp20\RemoveCaasReservePrivateIpv4AddressCmdlet.cs" />
     <Compile Include="Mcp20\RemoveCaasReserveIPv6AddressCmdlet.cs" />
     <Compile Include="Mcp20\GetCaasReserveIPv6AddressCmdlet.cs" />
+    <Compile Include="Mcp20\RestartCaasServer.cs" />
     <Compile Include="Mcp20\SetCaasReserveIPv6AddressCmdlet.cs" />
     <Compile Include="Mcp20\SetCaasReservePrivateIpv4AddressCmdlet.cs" />
     <Compile Include="Mcp20\NewCaasPortListCmdlet.cs" />
     <Compile Include="Mcp20\RemoveCaasPortListCmdlet.cs" />
     <Compile Include="Mcp20\RemoveCaasIpAddressListCmdlet.cs" />
+    <Compile Include="Mcp20\StartCaasServer.cs" />
+    <Compile Include="Mcp20\StopCaasServer.cs" />
     <Compile Include="Mcp20\UpdateCaasPortListCmdlet.cs" />
     <Compile Include="Mcp20\UpdateCaasIpAddressListCmdlet.cs" />
     <Compile Include="Mcp20\NewCaasIpAddressListCmdlet.cs" />
