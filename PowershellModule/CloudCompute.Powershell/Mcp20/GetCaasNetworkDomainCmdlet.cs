@@ -36,10 +36,15 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 		[Parameter(Mandatory = false, ParameterSetName = "FilterByName", HelpMessage = "NetworkDomain name")]
 		public string NetworkDomainName { get; set; }
 
-		/// <summary>
-		///     The process record method.
-		/// </summary>
-		protected override void ProcessRecord()
+        /// <summary>
+        ///     Get a CaaS network domain by Datacenter Id
+        /// </summary>
+        [Parameter(Mandatory = false, HelpMessage = "Datacenter Id")]
+        public string DatacenterId { get; set; }
+        /// <summary>
+        ///     The process record method.
+        /// </summary>
+        protected override void ProcessRecord()
 		{		
 			base.ProcessRecord();
 			try
@@ -59,6 +64,11 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 									Id = NetworkDomainId
 								};
 				}
+
+                if (!string.IsNullOrWhiteSpace(DatacenterId))
+                {
+                    options.DatacenterId = DatacenterId;
+                }
 
 			    this.WritePagedObject(
 			        Connection.ApiClient.Networking.NetworkDomain.GetNetworkDomainsPaginated(options, PageableRequest)
