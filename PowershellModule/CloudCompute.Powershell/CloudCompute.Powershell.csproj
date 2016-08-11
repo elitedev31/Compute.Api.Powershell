@@ -132,7 +132,6 @@
     <Compile Include="Mcp20\GetCaasIpAddressCmdlet.cs" />
     <Compile Include="Mcp20\GetCaasServerCmdlet.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Mcp20\DeployCaasNetworkDomainCmdlet.cs" />
     <Compile Include="Mcp20\DisableCaasServerMonitoringCmdlet.cs" />
     <Compile Include="Mcp20\GetCaasOperatingSystemCmdlet.cs" />
     <Compile Include="Mcp20\GetCaasOsImageCmdlet.cs" />
@@ -149,6 +148,7 @@
     <Compile Include="Mcp20\Model\TagKeyValue.cs" />
     <Compile Include="Mcp20\Model\TagKeyNameIdType.cs" />
     <Compile Include="Mcp20\NewCaasIpAndPortTypeCmdlet.cs" />
+    <Compile Include="Mcp20\NewCaasNetworkDomainCmdlet.cs" />
     <Compile Include="Mcp20\NewCaasPortRangeTypeCmdlet.cs" />
     <Compile Include="Mcp20\NewCaasIpAddressRangeTypeCmdlet.cs" />
     <Compile Include="Mcp20\RemoveCaasReservePrivateIpv4AddressCmdlet.cs" />
