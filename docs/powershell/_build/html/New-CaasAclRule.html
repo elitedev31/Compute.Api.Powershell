@@ -1,0 +1,315 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>New-CaasAclRule &mdash; CaaS PowerShell 3.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '3.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="CaaS PowerShell 3.1 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="new-caasaclrule">
+<h1>New-CaasAclRule<a class="headerlink" href="#new-caasaclrule" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<p>New-CaasAclRule -Network &lt;NetworkWithLocationsNetwork&gt; -AclRuleName &lt;string&gt; -Position &lt;int&gt; -Action &lt;AclActionType&gt; -Protocol &lt;AclProtocolType&gt; [-SourceIpAddress &lt;ipaddress&gt;] [-SourceNetmask &lt;ipaddress&gt;] [-DestinationIpAddress &lt;ipaddress&gt;] [-DestinationNetmask &lt;ipaddress&gt;] [-PortRangeType &lt;PortRangeTypeType&gt;] [-Port1 &lt;int&gt;] [-Port2 &lt;int&gt;] [-AclType &lt;AclType&gt;] [-Connection &lt;ComputeServiceConnection&gt;] [&lt;CommonParameters&gt;]</p>
+</div>
+<div class="section" id="syntax">
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="n">syntaxItem</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<p><a class="reference external" href="mailto:{&#37;&#52;&#48;{name=New-CaasAclRule">{<span>&#64;</span>{name=New-CaasAclRule</a>; CommonParameters=True; WorkflowCommonParameters=False; parameter=System.Object[]}}</p>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="aclrulename-string">
+<h3>-AclRuleName &lt;string&gt;<a class="headerlink" href="#aclrulename-string" title="Permalink to this headline">¶</a></h3>
+<p>The ACL Rule name</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="acltype-acltype">
+<h3>-AclType &lt;AclType&gt;<a class="headerlink" href="#acltype-acltype" title="Permalink to this headline">¶</a></h3>
+<p>The type of the ACL. One of OUTSIDE_ACL or INSIDE_ACL. Default is OUTSIDE_ACL.</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="action-aclactiontype">
+<h3>-Action &lt;AclActionType&gt;<a class="headerlink" href="#action-aclactiontype" title="Permalink to this headline">¶</a></h3>
+<p>The ACL action type: Permit or Deny</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="connection-computeserviceconnection">
+<h3>-Connection &lt;ComputeServiceConnection&gt;<a class="headerlink" href="#connection-computeserviceconnection" title="Permalink to this headline">¶</a></h3>
+<p>The CaaS Connection created by New-CaasConnection</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       true (ByPropertyName)
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="destinationipaddress-ipaddress">
+<h3>-DestinationIpAddress &lt;ipaddress&gt;<a class="headerlink" href="#destinationipaddress-ipaddress" title="Permalink to this headline">¶</a></h3>
+<p>The destination IP Address. If not supplied, ANY IP address is assumed.</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="destinationnetmask-ipaddress">
+<h3>-DestinationNetmask &lt;ipaddress&gt;<a class="headerlink" href="#destinationnetmask-ipaddress" title="Permalink to this headline">¶</a></h3>
+<p>The destination Netmask. If supplied with the DestinationIpAddress, represents CIDR boundary for the network.</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="network-networkwithlocationsnetwork">
+<h3>-Network &lt;NetworkWithLocationsNetwork&gt;<a class="headerlink" href="#network-networkwithlocationsnetwork" title="Permalink to this headline">¶</a></h3>
+<p>The target network to add the ACL rule into.</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       true (ByValue)
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="port1-int">
+<h3>-Port1 &lt;int&gt;<a class="headerlink" href="#port1-int" title="Permalink to this headline">¶</a></h3>
+<p>Depending on the port range type - will define the port criteria</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="port2-int">
+<h3>-Port2 &lt;int&gt;<a class="headerlink" href="#port2-int" title="Permalink to this headline">¶</a></h3>
+<p>Depending on the port range type - will define the port criteria</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="portrangetype-portrangetypetype">
+<h3>-PortRangeType &lt;PortRangeTypeType&gt;<a class="headerlink" href="#portrangetype-portrangetypetype" title="Permalink to this headline">¶</a></h3>
+<p>The port range type</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="position-int">
+<h3>-Position &lt;int&gt;<a class="headerlink" href="#position-int" title="Permalink to this headline">¶</a></h3>
+<p>The position of the ACL rule to add</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="protocol-aclprotocoltype">
+<h3>-Protocol &lt;AclProtocolType&gt;<a class="headerlink" href="#protocol-aclprotocoltype" title="Permalink to this headline">¶</a></h3>
+<p>The protocol</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="sourceipaddress-ipaddress">
+<h3>-SourceIpAddress &lt;ipaddress&gt;<a class="headerlink" href="#sourceipaddress-ipaddress" title="Permalink to this headline">¶</a></h3>
+<p>The source IP Address. If not supplied, ANY IP address is assumed.</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="sourcenetmask-ipaddress">
+<h3>-SourceNetmask &lt;ipaddress&gt;<a class="headerlink" href="#sourcenetmask-ipaddress" title="Permalink to this headline">¶</a></h3>
+<p>The source Netmask. If supplied with the SourceIpAddress, represents CIDR boundary for the network.</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+</div>
+<div class="section" id="inputs">
+<h2>INPUTS<a class="headerlink" href="#inputs" title="Permalink to this headline">¶</a></h2>
+<p>DD.CBU.Compute.Api.Contracts.Network.NetworkWithLocationsNetwork
+DD.CBU.Compute.Powershell.ComputeServiceConnection</p>
+</div>
+<div class="section" id="outputs">
+<h2>OUTPUTS<a class="headerlink" href="#outputs" title="Permalink to this headline">¶</a></h2>
+<p>DD.CBU.Compute.Api.Contracts.Network.AclRuleType</p>
+</div>
+<div class="section" id="notes">
+<h2>NOTES<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="examples">
+<h2>EXAMPLES<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">New-CaasAclRule</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#syntax">Syntax</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#parameters">Parameters</a><ul>
+<li><a class="reference internal" href="#aclrulename-string">-AclRuleName &lt;string&gt;</a></li>
+<li><a class="reference internal" href="#acltype-acltype">-AclType &lt;AclType&gt;</a></li>
+<li><a class="reference internal" href="#action-aclactiontype">-Action &lt;AclActionType&gt;</a></li>
+<li><a class="reference internal" href="#connection-computeserviceconnection">-Connection &lt;ComputeServiceConnection&gt;</a></li>
+<li><a class="reference internal" href="#destinationipaddress-ipaddress">-DestinationIpAddress &lt;ipaddress&gt;</a></li>
+<li><a class="reference internal" href="#destinationnetmask-ipaddress">-DestinationNetmask &lt;ipaddress&gt;</a></li>
+<li><a class="reference internal" href="#network-networkwithlocationsnetwork">-Network &lt;NetworkWithLocationsNetwork&gt;</a></li>
+<li><a class="reference internal" href="#port1-int">-Port1 &lt;int&gt;</a></li>
+<li><a class="reference internal" href="#port2-int">-Port2 &lt;int&gt;</a></li>
+<li><a class="reference internal" href="#portrangetype-portrangetypetype">-PortRangeType &lt;PortRangeTypeType&gt;</a></li>
+<li><a class="reference internal" href="#position-int">-Position &lt;int&gt;</a></li>
+<li><a class="reference internal" href="#protocol-aclprotocoltype">-Protocol &lt;AclProtocolType&gt;</a></li>
+<li><a class="reference internal" href="#sourceipaddress-ipaddress">-SourceIpAddress &lt;ipaddress&gt;</a></li>
+<li><a class="reference internal" href="#sourcenetmask-ipaddress">-SourceNetmask &lt;ipaddress&gt;</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#inputs">INPUTS</a></li>
+<li><a class="reference internal" href="#outputs">OUTPUTS</a></li>
+<li><a class="reference internal" href="#notes">NOTES</a></li>
+<li><a class="reference internal" href="#examples">EXAMPLES</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/New-CaasAclRule.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Dimension Data.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/New-CaasAclRule.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

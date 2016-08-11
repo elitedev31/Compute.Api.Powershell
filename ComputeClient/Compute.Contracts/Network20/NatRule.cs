@@ -94,16 +94,40 @@ namespace DD.CBU.Compute.Api.Contracts.Network20
         /// <remarks/>
         public System.DateTime createTime;
 
-        /// <remarks/>
-        public string state;
+        private string stateField;
 
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string id;
+        private string idField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string datacenterId;
+
+        /// <remarks/>
+        public string state
+        {
+            get
+            {
+                return this.stateField;
+            }
+            set
+            {
+                this.stateField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string id
+        {
+            get
+            {
+                return this.idField;
+            }
+            set
+            {
+                this.idField = value;
+            }
+        }
     }
 
     /// <remarks/>

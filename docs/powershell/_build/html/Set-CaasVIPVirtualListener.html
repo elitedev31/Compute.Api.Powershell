@@ -1,0 +1,303 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Set-CaasVIPVirtualListener &mdash; CaaS PowerShell 3.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '3.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="CaaS PowerShell 3.1 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="set-caasvipvirtuallistener">
+<h1>Set-CaasVIPVirtualListener<a class="headerlink" href="#set-caasvipvirtuallistener" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<p>Set-CaasVIPVirtualListener -VirtualListener &lt;VirtualListenerType&gt; -ConnectionLimit &lt;int&gt; -ConnectionRateLimit &lt;int&gt; [-Description &lt;string&gt;] [-Enabled &lt;bool&gt;] [-SourcePortPreservation &lt;string&gt;] [-PoolId &lt;guid&gt;] [-ClientClonePoolId &lt;guid&gt;] [-PersistenceProfileId &lt;string&gt;] [-FallbackPersistenceProfileId &lt;string&gt;] [-OptimizationProfileId &lt;string&gt;] [-iRuleId &lt;string[]&gt;] [-Connection &lt;ComputeServiceConnection&gt;] [&lt;CommonParameters&gt;]</p>
+</div>
+<div class="section" id="syntax">
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="n">syntaxItem</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<p><a class="reference external" href="mailto:{&#37;&#52;&#48;{name=Set-CaasVIPVirtualListener">{<span>&#64;</span>{name=Set-CaasVIPVirtualListener</a>; CommonParameters=True; WorkflowCommonParameters=False; parameter=System.Object[]}}</p>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="clientclonepoolid-guid">
+<h3>-ClientClonePoolId &lt;guid&gt;<a class="headerlink" href="#clientclonepoolid-guid" title="Permalink to this headline">¶</a></h3>
+<p>The VIP virtual listener Client Clone Pool Id</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="connection-computeserviceconnection">
+<h3>-Connection &lt;ComputeServiceConnection&gt;<a class="headerlink" href="#connection-computeserviceconnection" title="Permalink to this headline">¶</a></h3>
+<p>The CaaS Connection created by New-CaasConnection</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       true (ByPropertyName)
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="connectionlimit-int">
+<h3>-ConnectionLimit &lt;int&gt;<a class="headerlink" href="#connectionlimit-int" title="Permalink to this headline">¶</a></h3>
+<p>The VIP virtual listener Connection Limit</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="connectionratelimit-int">
+<h3>-ConnectionRateLimit &lt;int&gt;<a class="headerlink" href="#connectionratelimit-int" title="Permalink to this headline">¶</a></h3>
+<p>The VIP virtual listener Connection Rate Limit</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="description-string">
+<h3>-Description &lt;string&gt;<a class="headerlink" href="#description-string" title="Permalink to this headline">¶</a></h3>
+<p>The virtual listener description</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="enabled-bool">
+<h3>-Enabled &lt;bool&gt;<a class="headerlink" href="#enabled-bool" title="Permalink to this headline">¶</a></h3>
+<p>The VIP virtual listener Status</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="fallbackpersistenceprofileid-string">
+<h3>-FallbackPersistenceProfileId &lt;string&gt;<a class="headerlink" href="#fallbackpersistenceprofileid-string" title="Permalink to this headline">¶</a></h3>
+<p>The VIP virtual listener Fallback Persistence Profile Id</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="optimizationprofileid-string">
+<h3>-OptimizationProfileId &lt;string&gt;<a class="headerlink" href="#optimizationprofileid-string" title="Permalink to this headline">¶</a></h3>
+<p>The VIP virtual listener Optimization Profile Id</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="persistenceprofileid-string">
+<h3>-PersistenceProfileId &lt;string&gt;<a class="headerlink" href="#persistenceprofileid-string" title="Permalink to this headline">¶</a></h3>
+<p>The VIP virtual listener Persistence Profile Id</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="poolid-guid">
+<h3>-PoolId &lt;guid&gt;<a class="headerlink" href="#poolid-guid" title="Permalink to this headline">¶</a></h3>
+<p>The VIP virtual listener Pool Id</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="sourceportpreservation-string">
+<h3>-SourcePortPreservation &lt;string&gt;<a class="headerlink" href="#sourceportpreservation-string" title="Permalink to this headline">¶</a></h3>
+<p>The VIP virtual listener Source Port Preservation</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="virtuallistener-virtuallistenertype">
+<h3>-VirtualListener &lt;VirtualListenerType&gt;<a class="headerlink" href="#virtuallistener-virtuallistenertype" title="Permalink to this headline">¶</a></h3>
+<p>The virtual listener</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       true (ByValue)
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="iruleid-string">
+<h3>-iRuleId &lt;string[]&gt;<a class="headerlink" href="#iruleid-string" title="Permalink to this headline">¶</a></h3>
+<p>The VIP virtual listener iRule Ids</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+</div>
+<div class="section" id="inputs">
+<h2>INPUTS<a class="headerlink" href="#inputs" title="Permalink to this headline">¶</a></h2>
+<p>DD.CBU.Compute.Api.Contracts.Network20.VirtualListenerType
+DD.CBU.Compute.Powershell.ComputeServiceConnection</p>
+</div>
+<div class="section" id="outputs">
+<h2>OUTPUTS<a class="headerlink" href="#outputs" title="Permalink to this headline">¶</a></h2>
+<p>DD.CBU.Compute.Api.Contracts.Network20.ResponseType</p>
+</div>
+<div class="section" id="notes">
+<h2>NOTES<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="examples">
+<h2>EXAMPLES<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Set-CaasVIPVirtualListener</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#syntax">Syntax</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#parameters">Parameters</a><ul>
+<li><a class="reference internal" href="#clientclonepoolid-guid">-ClientClonePoolId &lt;guid&gt;</a></li>
+<li><a class="reference internal" href="#connection-computeserviceconnection">-Connection &lt;ComputeServiceConnection&gt;</a></li>
+<li><a class="reference internal" href="#connectionlimit-int">-ConnectionLimit &lt;int&gt;</a></li>
+<li><a class="reference internal" href="#connectionratelimit-int">-ConnectionRateLimit &lt;int&gt;</a></li>
+<li><a class="reference internal" href="#description-string">-Description &lt;string&gt;</a></li>
+<li><a class="reference internal" href="#enabled-bool">-Enabled &lt;bool&gt;</a></li>
+<li><a class="reference internal" href="#fallbackpersistenceprofileid-string">-FallbackPersistenceProfileId &lt;string&gt;</a></li>
+<li><a class="reference internal" href="#optimizationprofileid-string">-OptimizationProfileId &lt;string&gt;</a></li>
+<li><a class="reference internal" href="#persistenceprofileid-string">-PersistenceProfileId &lt;string&gt;</a></li>
+<li><a class="reference internal" href="#poolid-guid">-PoolId &lt;guid&gt;</a></li>
+<li><a class="reference internal" href="#sourceportpreservation-string">-SourcePortPreservation &lt;string&gt;</a></li>
+<li><a class="reference internal" href="#virtuallistener-virtuallistenertype">-VirtualListener &lt;VirtualListenerType&gt;</a></li>
+<li><a class="reference internal" href="#iruleid-string">-iRuleId &lt;string[]&gt;</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#inputs">INPUTS</a></li>
+<li><a class="reference internal" href="#outputs">OUTPUTS</a></li>
+<li><a class="reference internal" href="#notes">NOTES</a></li>
+<li><a class="reference internal" href="#examples">EXAMPLES</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/Set-CaasVIPVirtualListener.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Dimension Data.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/Set-CaasVIPVirtualListener.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

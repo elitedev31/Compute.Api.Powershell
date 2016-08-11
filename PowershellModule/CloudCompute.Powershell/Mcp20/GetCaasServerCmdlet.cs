@@ -80,13 +80,26 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
 			try
 			{
+			    Guid vlanId;                
+                if (!Guid.TryParse(VlanId, out vlanId))
+			    {
+			        vlanId = Vlan != null ? Guid.Parse(Vlan.id) : Guid.Empty;
+			    }
+               
+                Guid networkDomainId;
+                if (!Guid.TryParse(NetworkDomainId, out networkDomainId))
+                {
+                    networkDomainId = NetworkDomain != null ? Guid.Parse(NetworkDomain.id) : Guid.Empty;
+                }                          
+               
+
 			    this.WritePagedObject(Connection.ApiClient.ServerManagement.Server.GetServersPaginated(new ServerListOptions()
 			    {
 			        Id = ServerId,
 			        Name = Name,
 			        NetworkId = Network != null ? Guid.Parse(Network.id) : (Guid?) null,
-			        NetworkDomainId = NetworkDomain != null ? Guid.Parse(NetworkDomain.id) : (Guid?) null,
-			        VlanId = Vlan != null ? Guid.Parse(Vlan.id) : (Guid?) null,
+			        NetworkDomainId = networkDomainId != Guid.Empty? networkDomainId : (Guid?)null,
+			        VlanId = vlanId != Guid.Empty? vlanId : (Guid?)null,
 			        DatacenterId = Location
 			    }, PageableRequest).Result);
 			}

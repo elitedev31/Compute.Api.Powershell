@@ -88,8 +88,8 @@ namespace DD.CBU.Compute.Powershell
 		        networkDomainInfo = new DeployServerTypeNetworkInfo
 		        {
 		            networkDomainId = ServerDetails.NetworkDomain.id,
-		            primaryNic = new VlanIdOrPrivateIpType
-                    {
+		            primaryNic = new NewNicType
+		            {
                         vlanId = ServerDetails.PrimaryVlan != null ? ServerDetails.PrimaryVlan.id : null,
                         privateIpv4 = ServerDetails.PrivateIp
                     }
@@ -128,7 +128,7 @@ namespace DD.CBU.Compute.Powershell
             {
                 name = ServerDetails.Name,
                 description = ServerDetails.Description,
-                imageId = ServerDetails.Mcp1Image != null? ServerDetails.Mcp1Image.id : ServerDetails.Mcp2Image.id,
+                imageId = ServerDetails.ImageId,
                 start = ServerDetails.IsStarted,
                 administratorPassword = ServerDetails.AdministratorPassword,
                 network = networkInfo,

@@ -1,0 +1,40 @@
+version: 3.2.{build}
+configuration: Release
+platform: Any CPU
+
+assembly_info:
+  patch: true
+  file: AssemblyInfo.*
+  assembly_version: "{version}"
+  assembly_file_version: "{version}"
+  assembly_informational_version: "{version}"
+
+build:
+  project: PowershellModule\CloudCompute.PowershellModule.sln
+  publish_nuget: true
+
+after_build:
+  - ps: .\DocumentPowerShell.ps1
+
+environment:
+  access_token:
+    secure: O/sXyJYB0lM0WHQmuoG1LjfB/w9pwx8Pt3HmS13N9MXP7UqbY4/aJvJwemP0tlp2
+
+test_script:
+  - ps: | 
+        $testProjectPath = Join-Path $env:APPVEYOR_BUILD_FOLDER  "\PowershellModule\CloudCompute.Powershell.Tests"
+        Push-Location $testProjectPath
+        .\RunTests.ps1 -UseMockCredentials $True -FallbackToDefaultApi $False -BuildConfiguration Release
+        Pop-Location
+        $wc = New-Object 'System.Net.WebClient'
+        $wc.UploadFile("https://ci.appveyor.com/api/testresults/nunit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\PowershellModule\CloudCompute.Powershell.Tests\nunit-results.xml))
+
+on_success:
+  - git config --global user.email "%APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL%"
+  - git config --global user.name "%APPVEYOR_REPO_COMMIT_AUTHOR%"
+  - git config --global credential.helper store
+  - git config --global push.default simple
+  - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
+  - git add docs/
+  - IF %APPVEYOR_REPO_BRANCH% == "master" (git commit -m "Updated docs [skip appveyor]")
+  - IF %APPVEYOR_REPO_BRANCH% == "master" (git push origin HEAD:%APPVEYOR_REPO_BRANCH%)

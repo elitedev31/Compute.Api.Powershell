@@ -8,9 +8,12 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
+using System.Linq;
 using System.Management.Automation;
 using DD.CBU.Compute.Api.Client;
 using DD.CBU.Compute.Api.Contracts.Network20;
+using DD.CBU.Compute.Powershell.Contracts;
+using DD.CBU.Compute.Api.Contracts.Generic;
 
 namespace DD.CBU.Compute.Powershell.Mcp20
 {
@@ -19,7 +22,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 	/// </summary>
 	[Cmdlet(VerbsCommon.New, "CaasNetworkDomain")]
 	[OutputType(typeof (ResponseType))]
-	public class DeployCaasNetworkDomainCmdlet : PSCmdletCaasWithConnectionBase
+	public class DeployCaasNetworkDomainCmdlet : WaitableCmdlet
 	{
 		/// <summary>
 		///     Gets or sets the network domain location.
@@ -51,7 +54,8 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 		protected override void ProcessRecord()
 		{
 			ResponseType response = null;
-			try
+            base.ProcessRecord();
+            try
 			{
 				response =
 					Connection.ApiClient.Networking.NetworkDomain.DeployNetworkDomain(
@@ -71,8 +75,11 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 							response.requestId, 
 							response.responseCode));
 
-				base.ProcessRecord();
-			}
+                Guid networkDomainId = Guid.Parse(response.info.First(nvp => nvp.name == "networkDomainId").value);
+
+                WaitForFailureOrCompletion(response, networkDomainId);
+            }
+
 			catch (AggregateException ae)
 			{
 				ae.Handle(
@@ -92,8 +99,11 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 						return true;
 					});
 			}
+        }
 
-			WriteObject(response);
-		}
-	}
+        public override void Update(Guid objectId, ref IEntityStatusV2 provisionedObject)
+        {
+            provisionedObject = Connection.ApiClient.Networking.NetworkDomain.GetNetworkDomain(objectId).Result;
+        }
+    }
 }

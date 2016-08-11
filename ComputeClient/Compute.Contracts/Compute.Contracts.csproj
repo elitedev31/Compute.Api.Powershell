@@ -91,6 +91,8 @@
     <Compile Include="Drs\ConsistencyGroupOverride.cs" />
     <Compile Include="Drs\ConsistencyGroupSnapshot.cs" />
     <Compile Include="Drs\ConsistencyGroup.cs" />
+    <Compile Include="EntityStatus.cs" />
+    <Compile Include="Generic\IEntityStatusV2.cs" />
     <Compile Include="Network20\FirewallOverride.cs" />
     <Compile Include="Network20\IpAddressList.cs" />
     <Compile Include="Network20\PortList.cs" />

@@ -1,0 +1,341 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>New-CaasServerDetails &mdash; CaaS PowerShell 3.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '3.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="CaaS PowerShell 3.1 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="new-caasserverdetails">
+<h1>New-CaasServerDetails<a class="headerlink" href="#new-caasserverdetails" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<p>New-CaasServerDetails -Name &lt;string&gt; -AdminPassword &lt;string&gt; -IsStarted &lt;bool&gt; -ServerImage &lt;psobject&gt; -Network &lt;NetworkWithLocationsNetwork&gt; [-Description &lt;string&gt;] [&lt;CommonParameters&gt;]</p>
+<p>New-CaasServerDetails -Name &lt;string&gt; -AdminPassword &lt;string&gt; -IsStarted &lt;bool&gt; -ServerImage &lt;psobject&gt; -PrimaryVlan &lt;VlanType&gt; -NetworkDomain &lt;NetworkDomainType&gt; [-Description &lt;string&gt;] [-CpuSpeed &lt;string&gt;] [-CpuCount &lt;uint32&gt;] [-CpuCoresPerSocket &lt;uint32&gt;] [-MemoryGb &lt;uint32&gt;] [-PrimaryDns &lt;string&gt;] [-SecondaryDns &lt;string&gt;] [-MicrosoftTimeZone &lt;string&gt;] [&lt;CommonParameters&gt;]</p>
+<p>New-CaasServerDetails -Name &lt;string&gt; -AdminPassword &lt;string&gt; -IsStarted &lt;bool&gt; -ServerImage &lt;psobject&gt; -NetworkDomain &lt;NetworkDomainType&gt; -PrivateIp &lt;string&gt; [-Description &lt;string&gt;] [-CpuSpeed &lt;string&gt;] [-CpuCount &lt;uint32&gt;] [-CpuCoresPerSocket &lt;uint32&gt;] [-MemoryGb &lt;uint32&gt;] [-PrimaryDns &lt;string&gt;] [-SecondaryDns &lt;string&gt;] [-MicrosoftTimeZone &lt;string&gt;] [&lt;CommonParameters&gt;]</p>
+<p>New-CaasServerDetails -Name &lt;string&gt; -AdminPassword &lt;string&gt; -IsStarted &lt;bool&gt; -ServerImage &lt;psobject&gt; -PrivateIp &lt;string&gt; [-Description &lt;string&gt;] [&lt;CommonParameters&gt;]</p>
+</div>
+<div class="section" id="syntax">
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="n">syntaxItem</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<p><a class="reference external" href="mailto:{&#37;&#52;&#48;{name=New-CaasServerDetails">{<span>&#64;</span>{name=New-CaasServerDetails</a>; CommonParameters=True; WorkflowCommonParameters=False; parameter=System.Object[]}, &#64;{name=New-CaasServerDetails; CommonParameters=True; WorkflowCommonParameters=False; parameter=System.Object[]}, &#64;{name=New-CaasServerDetails; CommonParameters=True; WorkflowCommonParameters=False; parameter=System.Object[]}, &#64;{name=New-CaasServerDetails; CommonParameters=True; WorkflowCommonParameters=False; parameter=System.Object[]}}</p>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="adminpassword-string">
+<h3>-AdminPassword &lt;string&gt;<a class="headerlink" href="#adminpassword-string" title="Permalink to this headline">¶</a></h3>
+<p>The VM administrator password</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="cpucorespersocket-uint32">
+<h3>-CpuCoresPerSocket &lt;uint32&gt;<a class="headerlink" href="#cpucorespersocket-uint32" title="Permalink to this headline">¶</a></h3>
+<p>The cpu cores per socker for the machine.</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           MCP2_WithPrivateIp, MCP2_WithVlan
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="cpucount-uint32">
+<h3>-CpuCount &lt;uint32&gt;<a class="headerlink" href="#cpucount-uint32" title="Permalink to this headline">¶</a></h3>
+<p>The cpu count for the machine.</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           MCP2_WithVlan, MCP2_WithPrivateIp
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="cpuspeed-string">
+<h3>-CpuSpeed &lt;string&gt;<a class="headerlink" href="#cpuspeed-string" title="Permalink to this headline">¶</a></h3>
+<p>The cpu speed for the machine.</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           MCP2_WithPrivateIp, MCP2_WithVlan
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="description-string">
+<h3>-Description &lt;string&gt;<a class="headerlink" href="#description-string" title="Permalink to this headline">¶</a></h3>
+<p>The description of the VM</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="isstarted-bool">
+<h3>-IsStarted &lt;bool&gt;<a class="headerlink" href="#isstarted-bool" title="Permalink to this headline">¶</a></h3>
+<p>Will the VM be started after deployment (true|false)</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="memorygb-uint32">
+<h3>-MemoryGb &lt;uint32&gt;<a class="headerlink" href="#memorygb-uint32" title="Permalink to this headline">¶</a></h3>
+<p>The memory size in GB for the machine.</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           MCP2_WithPrivateIp, MCP2_WithVlan
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="microsofttimezone-string">
+<h3>-MicrosoftTimeZone &lt;string&gt;<a class="headerlink" href="#microsofttimezone-string" title="Permalink to this headline">¶</a></h3>
+<p>The  Microsoft time zone indec for windows machine.</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           MCP2_WithPrivateIp, MCP2_WithVlan
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="name-string">
+<h3>-Name &lt;string&gt;<a class="headerlink" href="#name-string" title="Permalink to this headline">¶</a></h3>
+<p>The VM name</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="network-networkwithlocationsnetwork">
+<h3>-Network &lt;NetworkWithLocationsNetwork&gt;<a class="headerlink" href="#network-networkwithlocationsnetwork" title="Permalink to this headline">¶</a></h3>
+<p>The network to deploy the machine to.</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           MCP1_WithNetwork
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="networkdomain-networkdomaintype">
+<h3>-NetworkDomain &lt;NetworkDomainType&gt;<a class="headerlink" href="#networkdomain-networkdomaintype" title="Permalink to this headline">¶</a></h3>
+<p>The network domain in which server will be deployed</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       true (ByValue)
+Parameter set name           MCP2_WithPrivateIp, MCP2_WithVlan
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="primarydns-string">
+<h3>-PrimaryDns &lt;string&gt;<a class="headerlink" href="#primarydns-string" title="Permalink to this headline">¶</a></h3>
+<p>The Primary DNS for the machine.</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           MCP2_WithPrivateIp, MCP2_WithVlan
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="primaryvlan-vlantype">
+<h3>-PrimaryVlan &lt;VlanType&gt;<a class="headerlink" href="#primaryvlan-vlantype" title="Permalink to this headline">¶</a></h3>
+<p>The server&#8217;s primary vlan</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           MCP2_WithVlan
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="privateip-string">
+<h3>-PrivateIp &lt;string&gt;<a class="headerlink" href="#privateip-string" title="Permalink to this headline">¶</a></h3>
+<p>The network private IP address that will be assigned to the machine.</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           MCP1_WithPrivateIp, MCP2_WithPrivateIp
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="secondarydns-string">
+<h3>-SecondaryDns &lt;string&gt;<a class="headerlink" href="#secondarydns-string" title="Permalink to this headline">¶</a></h3>
+<p>The Secondary DNS for the machine.</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           MCP2_WithPrivateIp, MCP2_WithVlan
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="serverimage-psobject">
+<h3>-ServerImage &lt;psobject&gt;<a class="headerlink" href="#serverimage-psobject" title="Permalink to this headline">¶</a></h3>
+<p>The OS or Customer Server Image to use for deployment</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      OsServerImage
+Dynamic?                     false</p>
+</div>
+</div>
+<div class="section" id="inputs">
+<h2>INPUTS<a class="headerlink" href="#inputs" title="Permalink to this headline">¶</a></h2>
+<p>DD.CBU.Compute.Api.Contracts.Network20.NetworkDomainType</p>
+</div>
+<div class="section" id="outputs">
+<h2>OUTPUTS<a class="headerlink" href="#outputs" title="Permalink to this headline">¶</a></h2>
+<p>DD.CBU.Compute.Powershell.CaasServerDetails</p>
+</div>
+<div class="section" id="notes">
+<h2>NOTES<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="examples">
+<h2>EXAMPLES<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">New-CaasServerDetails</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#syntax">Syntax</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#parameters">Parameters</a><ul>
+<li><a class="reference internal" href="#adminpassword-string">-AdminPassword &lt;string&gt;</a></li>
+<li><a class="reference internal" href="#cpucorespersocket-uint32">-CpuCoresPerSocket &lt;uint32&gt;</a></li>
+<li><a class="reference internal" href="#cpucount-uint32">-CpuCount &lt;uint32&gt;</a></li>
+<li><a class="reference internal" href="#cpuspeed-string">-CpuSpeed &lt;string&gt;</a></li>
+<li><a class="reference internal" href="#description-string">-Description &lt;string&gt;</a></li>
+<li><a class="reference internal" href="#isstarted-bool">-IsStarted &lt;bool&gt;</a></li>
+<li><a class="reference internal" href="#memorygb-uint32">-MemoryGb &lt;uint32&gt;</a></li>
+<li><a class="reference internal" href="#microsofttimezone-string">-MicrosoftTimeZone &lt;string&gt;</a></li>
+<li><a class="reference internal" href="#name-string">-Name &lt;string&gt;</a></li>
+<li><a class="reference internal" href="#network-networkwithlocationsnetwork">-Network &lt;NetworkWithLocationsNetwork&gt;</a></li>
+<li><a class="reference internal" href="#networkdomain-networkdomaintype">-NetworkDomain &lt;NetworkDomainType&gt;</a></li>
+<li><a class="reference internal" href="#primarydns-string">-PrimaryDns &lt;string&gt;</a></li>
+<li><a class="reference internal" href="#primaryvlan-vlantype">-PrimaryVlan &lt;VlanType&gt;</a></li>
+<li><a class="reference internal" href="#privateip-string">-PrivateIp &lt;string&gt;</a></li>
+<li><a class="reference internal" href="#secondarydns-string">-SecondaryDns &lt;string&gt;</a></li>
+<li><a class="reference internal" href="#serverimage-psobject">-ServerImage &lt;psobject&gt;</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#inputs">INPUTS</a></li>
+<li><a class="reference internal" href="#outputs">OUTPUTS</a></li>
+<li><a class="reference internal" href="#notes">NOTES</a></li>
+<li><a class="reference internal" href="#examples">EXAMPLES</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/New-CaasServerDetails.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Dimension Data.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/New-CaasServerDetails.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

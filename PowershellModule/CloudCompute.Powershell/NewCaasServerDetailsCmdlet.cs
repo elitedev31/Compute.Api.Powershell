@@ -54,11 +54,11 @@ namespace DD.CBU.Compute.Powershell
 		/// </summary>
 		[Alias("OsServerImage")]
 		[Parameter(Mandatory = true, HelpMessage = "The OS or Customer Server Image to use for deployment")]
-		public PSObject ServerImage { get; set; }
+		public PSObject ServerImage { get; set; }      
 
-		/// <summary>
-		///     The network to deploy the machine to
-		/// </summary>		
+        /// <summary>
+        ///     The network to deploy the machine to
+        /// </summary>		
         [Parameter(Mandatory = true, ParameterSetName = "MCP1_WithNetwork", HelpMessage = "The network to deploy the machine to.")]
         public NetworkWithLocationsNetwork Network { get; set; }
 
@@ -150,14 +150,16 @@ namespace DD.CBU.Compute.Powershell
 
             var mcp1OsImage = ServerImage.BaseObject as ImagesWithDiskSpeedImage;
             var mcp2OsImage = ServerImage.BaseObject as OsImageType;
+            var mcp2OsCustomerImage = ServerImage.BaseObject as CustomerImageType;          
 
-            if (mcp2OsImage == null && mcp1OsImage == null)
+            if (mcp2OsImage == null && mcp1OsImage == null && mcp2OsCustomerImage == null)
             {
                 ThrowTerminatingError(
                     new ErrorRecord(
-                        new ArgumentException("ServerImage type cannot be converted to " +
-                                              typeof (ImagesWithDiskSpeedImage) + "or to" + typeof (OsImageType)), "-3",
-                        ErrorCategory.InvalidArgument, null));
+                        new ArgumentException(string.Format("ServerImage type cannot be converted to {0},{1} or {2}",
+                            typeof (ImagesWithDiskSpeedImage), typeof (OsImageType), typeof (CustomerImageType))),
+                        "-3",
+                        ErrorCategory.InvalidArgument, null));                                
             }
                 
             WriteObject(
@@ -170,8 +172,7 @@ namespace DD.CBU.Compute.Powershell
 					Network = Network, 
                     NetworkDomain = NetworkDomain,
                     PrimaryVlan = PrimaryVlan,
-					Mcp1Image = mcp1OsImage, 
-                    Mcp2Image = mcp2OsImage,
+                    ImageId = mcp2OsImage != null ? mcp2OsImage.id : mcp1OsImage != null? mcp1OsImage.id: mcp2OsCustomerImage != null? mcp2OsCustomerImage.id : string.Empty,                  
                     PrivateIp = PrivateIp,
                     CpuDetails = (!string.IsNullOrWhiteSpace(CpuSpeed) || CpuCoresPerSocket > 0 || CpuCount > 0)? cpuType : null,
                     MicrosoftTimeZone = MicrosoftTimeZone,

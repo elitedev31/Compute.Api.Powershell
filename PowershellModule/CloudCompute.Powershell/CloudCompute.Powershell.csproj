@@ -71,14 +71,15 @@
     <CodeAnalysisRuleSet>..\..\CaaS_PS.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <DocumentationFile>bin\Release\DD.CBU.Compute.Powershell.XML</DocumentationFile>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DD.CBU.Compute.Api.Client, Version=3.1.336.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
-      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.1.336-develop\lib\net45\DD.CBU.Compute.Api.Client.dll</HintPath>
+    <Reference Include="DD.CBU.Compute.Api.Client, Version=3.2.416.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
+      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.2.416-develop\lib\net45\DD.CBU.Compute.Api.Client.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="DD.CBU.Compute.Api.Contracts, Version=3.1.336.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
-      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.1.336-develop\lib\net45\DD.CBU.Compute.Api.Contracts.dll</HintPath>
+    <Reference Include="DD.CBU.Compute.Api.Contracts, Version=3.2.416.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
+      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.2.416-develop\lib\net45\DD.CBU.Compute.Api.Contracts.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
@@ -119,6 +120,7 @@
     <Compile Include="ComputeCmdletProvider.cs" />
     <Compile Include="ComputeServiceConnection.cs" />
     <Compile Include="AddCaasBackupClientCmdlet.cs" />
+    <Compile Include="Contracts\WaitableCmdlet.cs" />
     <Compile Include="GetCaasConnectionCmdlet.cs" />
     <Compile Include="GetCaasCustomerImageExportHistoryCmdlet.cs" />
     <Compile Include="GetCaasCustomerImageExportsCmdlet.cs" />
@@ -152,11 +154,14 @@
     <Compile Include="Mcp20\RemoveCaasReservePrivateIpv4AddressCmdlet.cs" />
     <Compile Include="Mcp20\RemoveCaasReserveIPv6AddressCmdlet.cs" />
     <Compile Include="Mcp20\GetCaasReserveIPv6AddressCmdlet.cs" />
+    <Compile Include="Mcp20\RestartCaasServer.cs" />
     <Compile Include="Mcp20\SetCaasReserveIPv6AddressCmdlet.cs" />
     <Compile Include="Mcp20\SetCaasReservePrivateIpv4AddressCmdlet.cs" />
     <Compile Include="Mcp20\NewCaasPortListCmdlet.cs" />
     <Compile Include="Mcp20\RemoveCaasPortListCmdlet.cs" />
     <Compile Include="Mcp20\RemoveCaasIpAddressListCmdlet.cs" />
+    <Compile Include="Mcp20\StartCaasServer.cs" />
+    <Compile Include="Mcp20\StopCaasServer.cs" />
     <Compile Include="Mcp20\UpdateCaasPortListCmdlet.cs" />
     <Compile Include="Mcp20\UpdateCaasIpAddressListCmdlet.cs" />
     <Compile Include="Mcp20\NewCaasIpAddressListCmdlet.cs" />
@@ -305,6 +310,7 @@
     <None Include="BackupUtilities.psm1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="CaaS.format.ps1xml" />
     <None Include="CaaS.psd1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

@@ -1,0 +1,303 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>New-CaasAccount &mdash; CaaS PowerShell 3.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '3.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="CaaS PowerShell 3.1 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="new-caasaccount">
+<h1>New-CaasAccount<a class="headerlink" href="#new-caasaccount" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<p>New-CaasAccount -Username &lt;string&gt; -FullName &lt;string&gt; -FirstName &lt;string&gt; -LastName &lt;string&gt; -Password &lt;securestring&gt; -EmailAddress &lt;string&gt; [-Department &lt;string&gt;] [-PhoneCountryCode &lt;string&gt;] [-PhoneNumber &lt;string&gt;] [-CustomDefined1 &lt;string&gt;] [-CustomDefined2 &lt;string&gt;] [-Roles &lt;Role[]&gt;] [-Connection &lt;ComputeServiceConnection&gt;] [&lt;CommonParameters&gt;]</p>
+</div>
+<div class="section" id="syntax">
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="n">syntaxItem</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<p><a class="reference external" href="mailto:{&#37;&#52;&#48;{name=New-CaasAccount">{<span>&#64;</span>{name=New-CaasAccount</a>; CommonParameters=True; WorkflowCommonParameters=False; parameter=System.Object[]}}</p>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="connection-computeserviceconnection">
+<h3>-Connection &lt;ComputeServiceConnection&gt;<a class="headerlink" href="#connection-computeserviceconnection" title="Permalink to this headline">¶</a></h3>
+<p>The CaaS Connection created by New-CaasConnection</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       true (ByPropertyName)
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="customdefined1-string">
+<h3>-CustomDefined1 &lt;string&gt;<a class="headerlink" href="#customdefined1-string" title="Permalink to this headline">¶</a></h3>
+<p>The account custom defined field 1</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="customdefined2-string">
+<h3>-CustomDefined2 &lt;string&gt;<a class="headerlink" href="#customdefined2-string" title="Permalink to this headline">¶</a></h3>
+<p>The account custom defined field 2</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="department-string">
+<h3>-Department &lt;string&gt;<a class="headerlink" href="#department-string" title="Permalink to this headline">¶</a></h3>
+<p>The account department</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="emailaddress-string">
+<h3>-EmailAddress &lt;string&gt;<a class="headerlink" href="#emailaddress-string" title="Permalink to this headline">¶</a></h3>
+<p>The account email address</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="firstname-string">
+<h3>-FirstName &lt;string&gt;<a class="headerlink" href="#firstname-string" title="Permalink to this headline">¶</a></h3>
+<p>The account first name</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="fullname-string">
+<h3>-FullName &lt;string&gt;<a class="headerlink" href="#fullname-string" title="Permalink to this headline">¶</a></h3>
+<p>The account full name</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="lastname-string">
+<h3>-LastName &lt;string&gt;<a class="headerlink" href="#lastname-string" title="Permalink to this headline">¶</a></h3>
+<p>The account last name</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="password-securestring">
+<h3>-Password &lt;securestring&gt;<a class="headerlink" href="#password-securestring" title="Permalink to this headline">¶</a></h3>
+<p>The account password</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="phonecountrycode-string">
+<h3>-PhoneCountryCode &lt;string&gt;<a class="headerlink" href="#phonecountrycode-string" title="Permalink to this headline">¶</a></h3>
+<p>The account phone country code address</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="phonenumber-string">
+<h3>-PhoneNumber &lt;string&gt;<a class="headerlink" href="#phonenumber-string" title="Permalink to this headline">¶</a></h3>
+<p>The account phone number</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="roles-role">
+<h3>-Roles &lt;Role[]&gt;<a class="headerlink" href="#roles-role" title="Permalink to this headline">¶</a></h3>
+<p>The roles for this account, use the cmdlet New-CaasAccountRoles to create the values</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       true (ByValue)
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+<div class="section" id="username-string">
+<h3>-Username &lt;string&gt;<a class="headerlink" href="#username-string" title="Permalink to this headline">¶</a></h3>
+<p>The account username.</p>
+<div class="highlight-powershell"><div class="highlight"><pre><span></span><span class="k">Position</span><span class="p">?</span>                    <span class="n">Named</span>
+</pre></div>
+</div>
+<p>Accept pipeline input?       false
+Parameter set name           (All)
+Aliases                      None
+Dynamic?                     false</p>
+</div>
+</div>
+<div class="section" id="inputs">
+<h2>INPUTS<a class="headerlink" href="#inputs" title="Permalink to this headline">¶</a></h2>
+<p>DD.CBU.Compute.Api.Contracts.Directory.Role[]
+DD.CBU.Compute.Powershell.ComputeServiceConnection</p>
+</div>
+<div class="section" id="outputs">
+<h2>OUTPUTS<a class="headerlink" href="#outputs" title="Permalink to this headline">¶</a></h2>
+<p>System.Object</p>
+</div>
+<div class="section" id="notes">
+<h2>NOTES<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="examples">
+<h2>EXAMPLES<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">New-CaasAccount</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#syntax">Syntax</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#parameters">Parameters</a><ul>
+<li><a class="reference internal" href="#connection-computeserviceconnection">-Connection &lt;ComputeServiceConnection&gt;</a></li>
+<li><a class="reference internal" href="#customdefined1-string">-CustomDefined1 &lt;string&gt;</a></li>
+<li><a class="reference internal" href="#customdefined2-string">-CustomDefined2 &lt;string&gt;</a></li>
+<li><a class="reference internal" href="#department-string">-Department &lt;string&gt;</a></li>
+<li><a class="reference internal" href="#emailaddress-string">-EmailAddress &lt;string&gt;</a></li>
+<li><a class="reference internal" href="#firstname-string">-FirstName &lt;string&gt;</a></li>
+<li><a class="reference internal" href="#fullname-string">-FullName &lt;string&gt;</a></li>
+<li><a class="reference internal" href="#lastname-string">-LastName &lt;string&gt;</a></li>
+<li><a class="reference internal" href="#password-securestring">-Password &lt;securestring&gt;</a></li>
+<li><a class="reference internal" href="#phonecountrycode-string">-PhoneCountryCode &lt;string&gt;</a></li>
+<li><a class="reference internal" href="#phonenumber-string">-PhoneNumber &lt;string&gt;</a></li>
+<li><a class="reference internal" href="#roles-role">-Roles &lt;Role[]&gt;</a></li>
+<li><a class="reference internal" href="#username-string">-Username &lt;string&gt;</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#inputs">INPUTS</a></li>
+<li><a class="reference internal" href="#outputs">OUTPUTS</a></li>
+<li><a class="reference internal" href="#notes">NOTES</a></li>
+<li><a class="reference internal" href="#examples">EXAMPLES</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/New-CaasAccount.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Dimension Data.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/New-CaasAccount.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
