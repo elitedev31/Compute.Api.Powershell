@@ -8,7 +8,7 @@ namespace DD.CBU.Compute.Powershell.Tests
     /// </summary>
     [Cmdlet(VerbsCommon.New, "CaasApiProxyHttpClient")]
     [OutputType(typeof(TestHttpClient))]
-    public class NewCaasApiProxyHttpClientCmdlet : PSCmdlet
+    public class NewCaasApiProxyHttpClientCmdlet : PSCmdletCaasBase
     {
         /// <summary>
         ///     Gets or sets the Mock Api's setting file path.

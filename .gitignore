@@ -335,3 +335,4 @@ UpgradeLog*.htm
 FakesAssemblies/
 *.nupkg
 PowershellModule/CloudCompute.Powershell.Tests/nunit-results.xml
+PowershellModule/CloudCompute.Powershell.Tests/MockApisRecordings/

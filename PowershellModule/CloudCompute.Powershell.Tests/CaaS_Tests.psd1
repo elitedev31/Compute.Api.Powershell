@@ -46,7 +46,7 @@
 	RequiredModules = @()
 
 	# Assemblies that must be loaded prior to importing this module
-	RequiredAssemblies = @('Newtonsoft.Json.dll','System.Net.Http.Formatting.dll','DD.ApiProxy.dll','DD.ApiProxy.ApiProxyHttpClient.dll', 'DD.ApiProxy.Contracts.dll','DD.ApiProxy.Xml.dll','Microsoft.Diagnostics.Tracing.EventSource.dll','System.Web.Http','System.Net.Http')
+	RequiredAssemblies = @()
 
 	# Script files (.ps1) that are run in the caller's environment prior to importing this module.
 	ScriptsToProcess = @()

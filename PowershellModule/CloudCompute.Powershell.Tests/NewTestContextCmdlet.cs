@@ -12,7 +12,7 @@ namespace DD.CBU.Compute.Powershell.Tests
     /// </summary>
     [Cmdlet(VerbsCommon.New, "CaasTestContext")]
     [OutputType(typeof(TestContext))]
-    public class NewCaasTestContextCmdlet : PSCmdlet
+    public class NewCaasTestContextCmdlet : PSCmdletCaasBase
     { /// <summary>
       ///     Gets or sets the Mock Api's setting file path.
       /// </summary>
@@ -52,6 +52,9 @@ namespace DD.CBU.Compute.Powershell.Tests
         [Parameter(Mandatory = false)]
         public bool UseMockCredentials { get; set; }
 
+        [Parameter(Mandatory = true)]
+        public Guid CaaSClientId { get; set; }
+
         protected override void ProcessRecord()
         {
             base.ProcessRecord();
@@ -63,7 +66,8 @@ namespace DD.CBU.Compute.Powershell.Tests
                 RecordApiRequestResponse = RecordApiRequestResponse,
                 DefaultApiAddress = DefaultApiAddress,
                 ApiCredentials = ApiCredentials,
-                UseMockCredentials = UseMockCredentials
+                UseMockCredentials = UseMockCredentials,
+                CaaSClientId = CaaSClientId
             };
             WriteObject(context);
         }

@@ -4,7 +4,9 @@
 		[Parameter(Mandatory=$false)]
 		[bool] $FallbackToDefaultApi = $True,
 		[Parameter(Mandatory=$false)]
-		[string] $BuildConfiguration = 'Debug'
+		[string] $BuildConfiguration = 'Debug',
+		[Parameter(Mandatory=$false)]
+		[Guid] $CaaSClientId = 'a4f484de-b9ed-43e4-b565-afbf69417615'
 		)
 
 Write-Host "!!!Using the '$BuildConfiguration' Configuration!!!"
@@ -29,5 +31,5 @@ else{
 	$credential = (Get-Credential)	
 }
 
-$testContext = New-CaasTestContext -UseMockCredentials $UseMockCredentials -FallbackToDefaultApi $FallbackToDefaultApi -MockApisPath $mockApiPath -MockApisRecordingPath $mockApiRecordingPath -ApiCredentials $credential -DefaultApiAddress 'https://api-au.dimensiondata.com/' -RecordApiRequestResponse $True
+$testContext = New-CaasTestContext -UseMockCredentials $UseMockCredentials -FallbackToDefaultApi $FallbackToDefaultApi -MockApisPath $mockApiPath -MockApisRecordingPath $mockApiRecordingPath -ApiCredentials $credential -DefaultApiAddress 'https://api-au.dimensiondata.com/' -RecordApiRequestResponse $True -CaaSClientId $CaaSClientId
 Invoke-Pester -Script @{ Path = '.\*Tests'; Parameters = @{ TestContext = $testContext }; } -OutputFile .\nunit-results.xml -OutputFormat NUnitXml

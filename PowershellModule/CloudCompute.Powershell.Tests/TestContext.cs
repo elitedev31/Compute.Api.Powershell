@@ -41,5 +41,7 @@ namespace DD.CBU.Compute.Powershell.Tests
         public PSCredential ApiCredentials { get; set; }
 
         public bool UseMockCredentials { get; set; }
+
+        public Guid CaaSClientId { get; set; }
     }
 }

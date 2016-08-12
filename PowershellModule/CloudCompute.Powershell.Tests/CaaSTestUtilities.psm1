@@ -21,7 +21,7 @@ function New-CaaSTestConnection {
 				if($MockAccount -eq $null)
 				{
 					$MockAccount = new-object -TypeName  DD.CBU.Compute.Api.Contracts.Directory.Account
-					$MockAccount.OrganizationId = 'a4f484de-b9ed-43e4-b565-afbf69417615'
+					$MockAccount.OrganizationId = $TestContext.CaaSClientId
 					$MockAccount.UserName = "TestUser"
 				}
 				$httpClient.SetupApiMock("GET", 'https://localhost/oec/0.9/myaccount', $MockAccount, 200)
