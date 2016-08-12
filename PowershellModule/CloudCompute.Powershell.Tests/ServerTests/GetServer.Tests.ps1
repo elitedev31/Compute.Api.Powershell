@@ -9,7 +9,7 @@ Describe "Get-CaaSServer" {
 		$testConnection = New-CaaSTestConnection -TestContext $TestContext
 		$servers = Get-CaaSServer -Connection $testConnection.CaaSConnection  
         #$servers.Count | Should be 21     
-		$testConnection | Verify "GET" '/caas/2.1/a4f484de-b9ed-43e4-b565-afbf69417615/server/server' 1
+		$testConnection | Verify "GET" "/caas/2.1/$($testConnection.CaaSClientId)/server/server" 1
 	}
 }
 
@@ -17,7 +17,7 @@ Describe "Get-CaaSServer By Network Domain Id" {
     It "List Server Api Should have Network domain id filter" {
 		$testConnection = New-CaaSTestConnection -TestContext $TestContext
 		$servers = Get-CaaSServer -Connection $testConnection.CaaSConnection -NetworkDomainId a4f484de-b9ed-43e4-b565-afbf69417615
-		$testConnection | Verify "GET" '/caas/2.1/a4f484de-b9ed-43e4-b565-afbf69417615/server/server?networkDomainId=a4f484de-b9ed-43e4-b565-afbf69417615' 1
+		$testConnection | Verify "GET" "/caas/2.1/$($testConnection.CaaSClientId)/server/server?networkDomainId=a4f484de-b9ed-43e4-b565-afbf69417615" 1
 	}
 }
 
@@ -25,7 +25,7 @@ Describe "Get-CaaSServer By Vlan Id" {
     It "List Server Api Should have Network domain id filter" {
 		$testConnection = New-CaaSTestConnection -TestContext $TestContext
 		$servers = Get-CaaSServer -Connection $testConnection.CaaSConnection -VlanId a4f484de-b9ed-43e4-b565-afbf69417615
-		$testConnection | Verify "GET" '/caas/2.1/a4f484de-b9ed-43e4-b565-afbf69417615/server/server?vlanId=a4f484de-b9ed-43e4-b565-afbf69417615' 1
+		$testConnection | Verify "GET" "/caas/2.1/$($testConnection.CaaSClientId)/server/server?vlanId=a4f484de-b9ed-43e4-b565-afbf69417615" 1
 	}
 }
 

@@ -12,7 +12,7 @@ namespace DD.CBU.Compute.Powershell.Tests
     /// </summary>
     [Cmdlet(VerbsCommon.New, "TestConnection")]
     [OutputType(typeof(TestCaaSConnection))]
-    public class NewTestConnectionCmdlet : PSCmdlet
+    public class NewTestConnectionCmdlet : PSCmdletCaasBase
     { 
         [Parameter(Mandatory = true, HelpMessage = "Test CaaS Http client")]
         public TestHttpClient TestHttpClient { get; set; }
@@ -20,7 +20,7 @@ namespace DD.CBU.Compute.Powershell.Tests
        
         [Parameter(Mandatory = true, HelpMessage = "CaaS Connection")]
         public ComputeServiceConnection CaaSConnection { get; set; }
-     
+
         protected override void ProcessRecord()
         {
             base.ProcessRecord();

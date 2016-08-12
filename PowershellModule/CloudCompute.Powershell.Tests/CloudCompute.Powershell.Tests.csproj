@@ -53,6 +53,7 @@
       <HintPath>..\packages\DD.ApiProxy.ApiProxyHttpClient.1.0.24\lib\net451\DD.ApiProxy.Xml.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="DD.CBU.Compute.Api.Contracts, Version=3.2.416.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c" />
     <Reference Include="Microsoft.Diagnostics.Tracing.EventSource, Version=1.1.28.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Diagnostics.Tracing.EventSource.Redist.1.1.28\lib\net40\Microsoft.Diagnostics.Tracing.EventSource.dll</HintPath>
       <Private>True</Private>
@@ -87,6 +88,7 @@
     <Compile Include="NewTestConnectionCmdlet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="NewTestContextCmdlet.cs" />
+    <Compile Include="PSCmdletCaasBase.cs" />
     <Compile Include="TestHttpClient.cs" />
     <Compile Include="TestContext.cs" />
     <Compile Include="TestCaaSConnection.cs" />
