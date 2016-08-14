@@ -4,32 +4,35 @@ param (
 		[DD.CBU.Compute.Powershell.Tests.TestContext] $TestContext
 		)
 
-
-Describe "Get-CaaSNetworkDomain filter by datacenterId" {
-    It "Get-CaaSNetworkDomain Should Get the list of Network Domains" {
+Describe "Get-CaaSNetworkDomain" {
+    It "List Network Domain Api Should have no filter" {
 		$testConnection = New-CaaSTestConnection -TestContext $TestContext
-		$domain = Get-CaasNetworkDomain -NetworkDomainName River_Lab -Connection $testConnection.CaaSConnection -DatacenterId AU9
-		$domain | Should Not BeNullOrEmpty
-		$testConnection | Verify "GET" '/caas/2.3/a4f484de-b9ed-43e4-b565-afbf69417615/network/networkDomain?name=River_Lab&datacenterId=AU9' 1
+		$domains = Get-CaaSNetworkDomain -Connection $testConnection.CaaSConnection
+		$testConnection | Verify "GET" "/caas/2.3/$($testConnection.CaaSClientId)/network/networkDomain" 1
+	}
+}
+
+Describe "Get-CaaSNetworkDomain By Datacenter Id" {
+    It "List Network Domain Api Should have Datacenter id filter" {
+		$testConnection = New-CaaSTestConnection -TestContext $TestContext
+		$domains = Get-CaaSNetworkDomain -Connection $testConnection.CaaSConnection -DatacenterId AU9
+		$testConnection | Verify "GET" "/caas/2.3/$($testConnection.CaaSClientId)/network/networkDomain?datacenterId=AU9" 1
 	}
 }
 
 Describe "Get-CaaSNetworkDomain filter by NetworkDomainName" {
     It "Get-CaaSNetworkDomain Should Get the list of Network Domains" {
 		$testConnection = New-CaaSTestConnection -TestContext $TestContext
-		$domain = Get-CaasNetworkDomain -NetworkDomainName River_Lab -Connection $testConnection.CaaSConnection
-		$domain | Should Not BeNullOrEmpty
-		$testConnection | Verify "GET" '/caas/2.3/a4f484de-b9ed-43e4-b565-afbf69417615/network/networkDomain?name=River_Lab' 1
+		$domains = Get-CaaSNetworkDomain -Connection $testConnection.CaaSConnection -Name River_Lab
+		$testConnection | Verify "GET" "/caas/2.3/$($testConnection.CaaSClientId)/network/networkDomain?name=River_Lab" 1
 	}
 }
 
-
-Describe "Get-CaaSNetworkDomain filter by NetworkDomainId" {
-    It "Get-CaaSNetworkDomain Should Get the list of Network Domains" {
+Describe "Get-CaaSNetworkDomain By Network Domain Id" {
+    It "List Network Domain Api Should have Network domain id filter" {
 		$testConnection = New-CaaSTestConnection -TestContext $TestContext
-		$domain = Get-CaasNetworkDomain -NetworkDomainId bcf42c64-8d19-4844-b0ae-eac6a2f4b486 -Connection $testConnection.CaaSConnection
-		$domain | Should Not BeNullOrEmpty
-		$testConnection | Verify "GET" '/caas/2.3/a4f484de-b9ed-43e4-b565-afbf69417615/network/networkDomain?id=bcf42c64-8d19-4844-b0ae-eac6a2f4b486' 1
+		$domains = Get-CaaSNetworkDomain -Connection $testConnection.CaaSConnection -Id a4f484de-b9ed-43e4-b565-afbf69417615
+		$testConnection | Verify "GET" "/caas/2.3/$($testConnection.CaaSClientId)/network/networkDomain?id=a4f484de-b9ed-43e4-b565-afbf69417615" 1
 	}
 }
 
@@ -39,25 +42,33 @@ Describe "New-CaaSNetworkDomain" {
 		$response = new-object -TypeName  DD.CBU.Compute.Api.Contracts.Network20.ResponseType
 		$response.operation = "CREATE NETWORKDOMAIN"
 		$response.message = "CREATE NETWORKDOMAIN"
+		$response.info = @()
+		$networkIdInfo = new-object -TypeName DD.CBU.Compute.Api.Contracts.Network20.NameValuePairType
+		$networkIdInfo.name = "networkDomainId"
+		$networkIdInfo.value = "a4f484de-b9ed-43e4-b565-afbf69417615"
+		$response.info += $networkIdInfo
 		$response.responseCode = "OK"
-		$testConnection | Setup "POST" '/caas/2.3/a4f484de-b9ed-43e4-b565-afbf69417615/network/deployNetworkDomain' $response 200
-		$NetworkDomain = New-CaasNetworkDomain -DatacenterId AU9 -Name NetworkDomainName -Type Advanced -Connection $testConnection.CaaSConnection
-		$NetworkDomain | Should Not BeNullOrEmpty
-		$testConnection | Verify "POST" '/caas/2.3/a4f484de-b9ed-43e4-b565-afbf69417615/network/deployNetworkDomain' 1
+		$testConnection | Setup "POST" "/caas/2.1/$($testConnection.CaaSClientId)/network/deployNetworkDomain" $response 200
+		New-CaasNetworkDomain -Connection $testConnection.CaaSConnection -DatacenterId AU9 -Name RandomNetworkName_1 -Type Advanced
+		$testConnection | Verify "POST" "/caas/2.1/$($testConnection.CaaSClientId)/network/deployNetworkDomain" 1
 	}
 }
 
 Describe "Remove-CaaSNetworkDomain" {
-    It "Remove-CaaSNetworkDomain Should Remove a Network Domain" {
+    It "Remove-CaaSNetworkDomain Should remove a Network Domain" {
 		$testConnection = New-CaaSTestConnection -TestContext $TestContext
-		$NetworkDomain = Get-CaasNetworkDomain -NetworkDomainId bcf42c64-8d19-4844-b0ae-eac6a2f4b486 -Connection $testConnection.CaaSConnection
-		$NetworkDomain | Should Not BeNullOrEmpty
+		$domains = Get-CaaSNetworkDomain -Connection $testConnection.CaaSConnection -Id a4f484de-b9ed-43e4-b565-afbf69417615
 		$response = new-object -TypeName  DD.CBU.Compute.Api.Contracts.Network20.ResponseType
 		$response.operation = "REMOVE NETWORKDOMAIN"
 		$response.message = "REMOVE NETWORKDOMAIN"
+		$response.info = @()
+		$networkIdInfo = new-object -TypeName DD.CBU.Compute.Api.Contracts.Network20.NameValuePairType
+		$networkIdInfo.name = "networkDomainId"
+		$networkIdInfo.value = "a4f484de-b9ed-43e4-b565-afbf69417615"
+		$response.info += $networkIdInfo
 		$response.responseCode = "OK"
-		$testConnection | Setup "POST" '/caas/2.3/a4f484de-b9ed-43e4-b565-afbf69417615/network/deleteNetworkDomain' $response 200
-		$NetworkDomain = Remove-CaasNetworkDomain -NetworkDomain $NetworkDomain -Connection $testConnection.CaaSConnection
-		$testConnection | Verify "POST" '/caas/2.3/a4f484de-b9ed-43e4-b565-afbf69417615/network/deleteNetworkDomain' 1
+		$testConnection | Setup "POST" "/caas/2.1/$($testConnection.CaaSClientId)/network/deployNetworkDomain" $response 200
+		New-CaasNetworkDomain -Connection $testConnection.CaaSConnection -DatacenterId AU9 -Name RandomNetworkName_1 -Type Advanced
+		$testConnection | Verify "POST" "/caas/2.1/$($testConnection.CaaSClientId)/network/deployNetworkDomain" 1
 	}
 }
