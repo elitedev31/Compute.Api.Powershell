@@ -39,7 +39,7 @@ Describe "Get-CaaSServer Throws Error" {
 		$errorResponse.operation = "LIST_SERVER"
 		$errorResponse.message = "LIST_SERVER"
 		$errorResponse.responseCode = "TEST_FAILURE"
-		$testConnection | Setup "GET" '/caas/2.1/a4f484de-b9ed-43e4-b565-afbf69417615/server/server' $errorResponse 400
+		$testConnection | Setup "GET" "/caas/2.1/$($testConnection.CaaSClientId)/server/server" $errorResponse 400
 		{ Get-CaaSServer -Connection $testConnection.CaaSConnection -ErrorAction Stop } | Should Throw		
 	}
 }
