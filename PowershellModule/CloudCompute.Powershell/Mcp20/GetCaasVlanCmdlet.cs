@@ -24,44 +24,48 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 	[OutputType(typeof (VlanType))]
 	public class GetCaasVlanCmdlet : PsCmdletCaasPagedWithConnectionBase
     {
-		/// <summary>
-		///     Gets or sets the name.
-		/// </summary>
-		[Parameter(Mandatory = false, ParameterSetName = "Filtered", ValueFromPipeline = false, 
-			HelpMessage = "The virtual lan name")]
-		public string Name { get; set; }
+        /// <summary>
+        ///     Get CaaS VLAN by VLAN ID
+        /// </summary>
+        [Parameter(Mandatory = false, HelpMessage = "The virtual lan id")]
+        [Alias("VirtualLanId")]
+        public Guid Id { get; set; }
 
-		/// <summary>
-		///     Gets or sets the network domain.
-		/// </summary>
-		[Parameter(Mandatory = false, ParameterSetName = "Filtered", ValueFromPipeline = true, 
-			HelpMessage = "The virtual lan domain")]
+        /// <summary>
+        ///     Get CaaS VLAN by VLAN Name
+        /// </summary>
+        [Parameter(Mandatory = false, HelpMessage = "The virtual lan name")]
+        public string Name { get; set; }
+
+        /// <summary>
+        ///     Get CaaS VLAN by Datacenter Id
+        /// </summary>
+        [Parameter(Mandatory = false, HelpMessage = "Datacenter Id")]
+        public string DatacenterId { get; set; }
+
+        /// <summary>
+        ///     Get CaaS VLAN by Network Domain.
+        /// </summary>
+        [Parameter(Mandatory = false, ValueFromPipeline = true, HelpMessage = "The virtual lan domain")]
 		public NetworkDomainType NetworkDomain { get; set; }
-
-		/// <summary>
-		///     Gets or sets the network domain.
-		/// </summary>
-		[Parameter(Mandatory = false, ParameterSetName = "Filtered", ValueFromPipeline = false, 
-			HelpMessage = "The virtual lan domain")]
-		public Guid VirtualLanId { get; set; }
-
-		/// <summary>
-		///     The process record method.
-		/// </summary>
-		protected override void ProcessRecord()
+        
+        /// <summary>
+        ///     The process record method.
+        /// </summary>
+        protected override void ProcessRecord()
 		{			
 			base.ProcessRecord();
 			try
 			{
-			    this.WritePagedObject(Connection.ApiClient.Networking.Vlan.GetVlansPaginated(
-			        ParameterSetName.Equals("Filtered")
-			            ? new VlanListOptions
-			            {
-			                Id = VirtualLanId != Guid.Empty ? VirtualLanId : (Guid?) null,
-			                Name = Name,
-			                NetworkDomainId = (NetworkDomain != null) ? Guid.Parse(NetworkDomain.id) : (Guid?) null
-			            }
-			            : null, PageableRequest).Result);
+                this.WritePagedObject(Connection.ApiClient.Networking.Vlan.GetVlansPaginated(
+                     new VlanListOptions
+                     {
+                         DatacenterId = DatacenterId,
+                         Id = Id != Guid.Empty ? Id : (Guid?)null,
+                         Name = Name,
+                         NetworkDomainId = (NetworkDomain != null) ? Guid.Parse(NetworkDomain.id) : (Guid?)null
+                     }
+                        , PageableRequest).Result);
 			}
 			catch (AggregateException ae)
 			{

@@ -72,3 +72,44 @@ Describe "Remove-CaaSNetworkDomain" {
 		$testConnection | Verify "POST" "/caas/2.1/$($testConnection.CaaSClientId)/network/deployNetworkDomain" 1
 	}
 }
+
+Describe "Get-CaasVlan" {
+    It "List Vlan Api Should have no filter" {
+		$testConnection = New-CaaSTestConnection -TestContext $TestContext
+		$vlans = Get-CaasVlan -Connection $testConnection.CaaSConnection
+		$testConnection | Verify "GET" "/caas/2.3/$($testConnection.CaaSClientId)/network/vlan" 1
+	}
+}
+
+Describe "Get-CaasVlan By Datacenter Id" {
+    It "List Vlan Api Should have Datacenter id filter" {
+		$testConnection = New-CaaSTestConnection -TestContext $TestContext
+		$vlans = Get-CaasVlan -Connection $testConnection.CaaSConnection -DatacenterId AU9
+		$testConnection | Verify "GET" "/caas/2.3/$($testConnection.CaaSClientId)/network/vlan?datacenterId=AU9" 1
+	}
+}
+
+Describe "Get-CaasVlan filter by Vlan Name" {
+    It "Get-CaasVlan Should Get the list of Vlan by name" {
+		$testConnection = New-CaaSTestConnection -TestContext $TestContext
+		$vlans = Get-CaasVlan -Connection $testConnection.CaaSConnection -Name River_vlan
+		$testConnection | Verify "GET" "/caas/2.3/$($testConnection.CaaSClientId)/network/vlan?name=River_vlan" 1
+	}
+}
+
+Describe "Get-CaasVlan By Vlan Id" {
+    It "List Vlan Should have id filter" {
+		$testConnection = New-CaaSTestConnection -TestContext $TestContext
+		$vlans = Get-CaasVlan -Connection $testConnection.CaaSConnection -Id c0512714-6be2-467e-a123-98959679365c
+		$testConnection | Verify "GET" "/caas/2.3/$($testConnection.CaaSClientId)/network/vlan?id=c0512714-6be2-467e-a123-98959679365c" 1
+	}
+}
+
+Describe "Get-CaasVlan By Network Domain" {
+    It "List Vlan Should have id filter" {
+		$testConnection = New-CaaSTestConnection -TestContext $TestContext
+		$networkdomain = Get-CaaSNetworkDomain -Connection $testConnection.CaaSConnection -Name River_Lab
+		$vlans = Get-CaasVlan -Connection $testConnection.CaaSConnection -NetworkDomain $networkdomain
+		$testConnection | Verify "GET" "/caas/2.3/$($testConnection.CaaSClientId)/network/vlan?networkDomainid=$($networkdomain.id)" 1
+	}
+}
