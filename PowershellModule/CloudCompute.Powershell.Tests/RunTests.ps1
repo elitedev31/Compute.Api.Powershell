@@ -6,7 +6,7 @@
 		[Parameter(Mandatory=$false)]
 		[string] $BuildConfiguration = 'Debug',
 		[Parameter(Mandatory=$false)]
-		[Guid] $CaaSClientId = 'a4f484de-b9ed-43e4-b565-afbf69417615',
+		[Guid] $CaaSClientId = '1578108f-e4aa-4ab7-8b2b-b9244482df93',
 		[parameter(Mandatory=$false)]
 		[PSCredential]$Cred
 		)
