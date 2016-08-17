@@ -28,13 +28,15 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 		///     Get a CaaS network domain by NetworkDomain Id
 		/// </summary>
 		[Parameter(Mandatory = false, ParameterSetName = "FilterById", HelpMessage = "NetworkDomain id")]
-		public Guid NetworkDomainId { get; set; }
+        [Alias("NetworkDomainId")]
+		public Guid Id { get; set; }
 
 		/// <summary>
 		///     Get a CaaS network domain by NetworkDomain Name
 		/// </summary>
 		[Parameter(Mandatory = false, ParameterSetName = "FilterByName", HelpMessage = "NetworkDomain name")]
-		public string NetworkDomainName { get; set; }
+        [Alias("NetworkDomainName")]
+        public string Name { get; set; }
 
         /// <summary>
         ///     Get a CaaS network domain by Datacenter Id
@@ -49,31 +51,15 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 			base.ProcessRecord();
 			try
 			{
-				NetworkDomainListOptions options = null;
-				if (ParameterSetName.Equals("FilterByName"))
-				{
-					options = new NetworkDomainListOptions
-								{
-									Name = NetworkDomainName
-								};
-				}
-				else if (ParameterSetName.Equals("FilterById"))
-				{
-					options = new NetworkDomainListOptions
-								{
-									Id = NetworkDomainId
-								};
-				}
-
-                if (!string.IsNullOrWhiteSpace(DatacenterId))
-                {
-                    options.DatacenterId = DatacenterId;
-                }
-
-			    this.WritePagedObject(
-			        Connection.ApiClient.Networking.NetworkDomain.GetNetworkDomainsPaginated(options, PageableRequest)
-			            .Result);
-			}
+				this.WritePagedObject(Connection.ApiClient.Networking.NetworkDomain.GetNetworkDomainsPaginated(
+                     new NetworkDomainListOptions
+                     {
+                         DatacenterId = DatacenterId,
+                         Id = Id != Guid.Empty ? Id : (Guid?)null,
+                         Name = Name,
+                     }
+                        , PageableRequest).Result);
+            }
 			catch (AggregateException ae)
 			{
 				ae.Handle(

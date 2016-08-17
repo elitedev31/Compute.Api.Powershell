@@ -73,6 +73,9 @@
     <DocumentationFile>bin\Release\DD.CBU.Compute.Powershell.XML</DocumentationFile>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="DD.CBU.Compute.Api.Client, Version=3.2.416.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
       <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.2.416-develop\lib\net45\DD.CBU.Compute.Api.Client.dll</HintPath>
@@ -132,7 +135,6 @@
     <Compile Include="Mcp20\GetCaasIpAddressCmdlet.cs" />
     <Compile Include="Mcp20\GetCaasServerCmdlet.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Mcp20\DeployCaasNetworkDomainCmdlet.cs" />
     <Compile Include="Mcp20\DisableCaasServerMonitoringCmdlet.cs" />
     <Compile Include="Mcp20\GetCaasOperatingSystemCmdlet.cs" />
     <Compile Include="Mcp20\GetCaasOsImageCmdlet.cs" />
@@ -149,8 +151,10 @@
     <Compile Include="Mcp20\Model\TagKeyValue.cs" />
     <Compile Include="Mcp20\Model\TagKeyNameIdType.cs" />
     <Compile Include="Mcp20\NewCaasIpAndPortTypeCmdlet.cs" />
+    <Compile Include="Mcp20\NewCaasNetworkDomainCmdlet.cs" />
     <Compile Include="Mcp20\NewCaasPortRangeTypeCmdlet.cs" />
     <Compile Include="Mcp20\NewCaasIpAddressRangeTypeCmdlet.cs" />
+    <Compile Include="Mcp20\NewCaasVlanCmdlet.cs" />
     <Compile Include="Mcp20\RemoveCaasReservePrivateIpv4AddressCmdlet.cs" />
     <Compile Include="Mcp20\RemoveCaasReserveIPv6AddressCmdlet.cs" />
     <Compile Include="Mcp20\GetCaasReserveIPv6AddressCmdlet.cs" />
@@ -172,7 +176,6 @@
     <Compile Include="Mcp20\GetCaasNatRuleCmdlet.cs" />
     <Compile Include="Mcp20\GetCaasFirewallRuleCmdlet.cs" />
     <Compile Include="Mcp20\GetCaasNetworkDomainCmdlet.cs" />
-    <Compile Include="Mcp20\DeployCaasVlanCmdlet.cs" />
     <Compile Include="Mcp20\GetCaasVipNodeCmdlet.cs" />
     <Compile Include="Mcp20\GetCaasVIPVirtualListenerCmdlet.cs" />
     <Compile Include="Mcp20\GetCaasVlanCmdlet.cs" />
@@ -335,6 +338,14 @@
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
