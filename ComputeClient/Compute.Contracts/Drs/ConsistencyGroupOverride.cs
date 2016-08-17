@@ -5,6 +5,8 @@
     public partial class ConsistencyGroupSnapshotType
     {
         /// <remarks/>
-        public DateTimeOffset createTimeOffset => DateTimeOffset.Parse(createTime);
+        public DateTimeOffset createTimeOffset {
+            get { return DateTimeOffset.Parse(createTime); }
+        }
     }
 }
