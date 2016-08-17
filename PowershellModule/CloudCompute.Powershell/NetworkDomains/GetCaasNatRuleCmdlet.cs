@@ -28,13 +28,13 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         /// <summary>	
         /// Gets or sets internal IP address.
         /// </summary>        
-        [Parameter(Mandatory = false, ParameterSetName = "MCP2", HelpMessage = "The firewall internal IP")]
+        [Parameter(Mandatory = false, ParameterSetName = "MCP2", HelpMessage = "The NAT rule Internal IP")]
         public string InternalIp { get; set; }
 
         /// <summary>	
         /// Identifies internal IP address.
         /// </summary>        
-        [Parameter(Mandatory = false, ParameterSetName = "MCP2", HelpMessage = "The firewall external IP")]
+        [Parameter(Mandatory = false, ParameterSetName = "MCP2", HelpMessage = "The NAT rule External IP")]
         public string ExternalIp { get; set; }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         /// <summary>
 		///     The network to show the NAT rules from
 		/// </summary>
-		[Parameter(Mandatory = true, ParameterSetName = "MCP1", ValueFromPipeline = true, HelpMessage = "The network to show the images from")]
+		[Parameter(Mandatory = true, ParameterSetName = "MCP1", ValueFromPipeline = true, HelpMessage = "The network to show NAT Rules from")]
         public NetworkWithLocationsNetwork Network { get; set; }
 
         /// <summary>

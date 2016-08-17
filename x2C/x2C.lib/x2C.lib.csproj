@@ -44,12 +44,12 @@
     <AssemblyOriginatorKeyFile>CaaS_PS.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DD.CBU.Compute.Api.Client, Version=3.2.385.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
-      <HintPath>..\..\PowershellModule\packages\DD.CBU.Compute.Api.Client.3.2.385-develop\lib\net45\DD.CBU.Compute.Api.Client.dll</HintPath>
+    <Reference Include="DD.CBU.Compute.Api.Client, Version=3.2.10814.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
+      <HintPath>..\..\PowershellModule\packages\DD.CBU.Compute.Api.Client.3.2.10814.0-feature\lib\net45\DD.CBU.Compute.Api.Client.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="DD.CBU.Compute.Api.Contracts, Version=3.2.385.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
-      <HintPath>..\..\PowershellModule\packages\DD.CBU.Compute.Api.Client.3.2.385-develop\lib\net45\DD.CBU.Compute.Api.Contracts.dll</HintPath>
+    <Reference Include="DD.CBU.Compute.Api.Contracts, Version=3.2.10814.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
+      <HintPath>..\..\PowershellModule\packages\DD.CBU.Compute.Api.Client.3.2.10814.0-feature\lib\net45\DD.CBU.Compute.Api.Contracts.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />

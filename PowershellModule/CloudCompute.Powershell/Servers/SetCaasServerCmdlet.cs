@@ -6,18 +6,21 @@
 //   The set server state cmdlet.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace DD.CBU.Compute.Powershell
 {
     using System;
     using System.Management.Automation;
     using Api.Client;
     using Api.Contracts.General;
+    using Api.Contracts.Network20;
 
     /// <summary>
     ///     The set server state cmdlet.
     /// </summary>
     [Cmdlet(VerbsCommon.Set, "CaasServer")]
-    [OutputType(typeof(Status))]
+    [OutputType(typeof(ResponseType))]
+    [OutputType(typeof(Status), ParameterSetName = new []{"MCP1"})]
     public class SetCaasServerCmdlet : PsCmdletCaasServerBase
     {
         /// <summary>
@@ -36,21 +39,21 @@ namespace DD.CBU.Compute.Powershell
         /// <summary>
         ///     Gets or sets the memory in mb.
         /// </summary>
-        [Parameter(Mandatory = false, HelpMessage = "Set the server RAM memory. Value must be represent a GB integer (e.g. 1024, 2048, 3072, 4096, etc.)")]
+        [Parameter(Mandatory = false, HelpMessage = "Set the server RAM memory. Value must be represent a GB integer (e.g. 1024, 2048, 3072, 4096, etc.)", ParameterSetName= "MCP1")]
         [Obsolete("Please use Set-CaasServerSpec")]
         public int? MemoryInMb { get; set; }
 
         /// <summary>
         ///     Gets or sets the CPU count.
         /// </summary>
-        [Parameter(Mandatory = false, HelpMessage = "Set the number of virtual CPUs.")]
+        [Parameter(Mandatory = false, HelpMessage = "Set the number of virtual CPUs.", ParameterSetName = "MCP1")]
         [Obsolete("Please use Set-CaasServerSpec")]
         public int? CpuCount { get; set; }
 
         /// <summary>
         ///     Gets or sets the private IP.
         /// </summary>
-        [Parameter(Mandatory = false, HelpMessage = "Set the privateIp of the server")]
+        [Parameter(Mandatory = false, HelpMessage = "Set the privateIp of the server", ParameterSetName = "MCP1")]
         public string PrivateIp { get; set; }
 
         /// <summary>
@@ -70,18 +73,22 @@ namespace DD.CBU.Compute.Powershell
             try
             {
                 var isMcp2 = Server.networkInfo != null;
-                if ((MemoryInMb.HasValue || CpuCount.HasValue) && isMcp2)
+                if (MemoryInMb.HasValue || CpuCount.HasValue)
                 {
-                    WriteError(new ErrorRecord(new ArgumentException("Please use Set-CaasServerSpec to update Memory and CPU"), "-3", ErrorCategory.InvalidArgument, Connection));
-                    return;
+                    if (isMcp2)
+                    {
+                        WriteError(new ErrorRecord(new ArgumentException("Please use Set-CaasServerSpec to update Memory and CPU"), "-3", ErrorCategory.InvalidArgument, Connection));
+                        return;
+                    }
+                    var status = Connection.ApiClient.ServerManagementLegacy.Server.ModifyServer(Server.id, "", "", MemoryInMb ?? 0, CpuCount ?? 0, PrivateIp).Result;
+                    WriteObject(status);
                 }
 
-                // if description only updating the api will throw error. So we just pass the server name to the api 
-                var name = string.IsNullOrEmpty(Name) ? Server.name : Name;
-                var memory = MemoryInMb.HasValue ? MemoryInMb.Value : 0;
-                var cpuCount = CpuCount.HasValue ? CpuCount.Value : 0;
-                var status = Connection.ApiClient.ServerManagementLegacy.Server.ModifyServer(Server.id, name, Description, memory, cpuCount, PrivateIp).Result;
-                WriteObject(status);
+                if (!string.IsNullOrEmpty(Name) || !string.IsNullOrEmpty(Description))
+                {
+                    var editServerResponse = Connection.ApiClient.ServerManagement.Server.EditServerMetadata(new editServerMetadata { name = Name, description = Description, descriptionSpecified = !string.IsNullOrEmpty(Description), drsEligibleSpecified = false });
+                    WriteObject(editServerResponse);
+                }
             }
             catch (AggregateException ae)
             {

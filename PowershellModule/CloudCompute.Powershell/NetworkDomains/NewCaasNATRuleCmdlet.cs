@@ -26,13 +26,13 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         /// <summary>
 		///     Gets or sets the Internal IP Address.
 		/// </summary>
-		[Parameter(Mandatory = true, ParameterSetName = "MCP2", HelpMessage = "The Firewall rule name" )]
+		[Parameter(Mandatory = true, ParameterSetName = "MCP2", HelpMessage = "The NAT rule Internal IP")]
         public string InternalIP { get; set; }
 
         /// <summary>
         ///     Gets or sets the External IP Address.
         /// </summary>
-        [Parameter(Mandatory = true, ParameterSetName = "MCP2", HelpMessage = "The Firewall rule name")]
+        [Parameter(Mandatory = true, ParameterSetName = "MCP2", HelpMessage = "The NAT rule External IP")]
         public string ExternalIP { get; set; }
 
         /// <summary>

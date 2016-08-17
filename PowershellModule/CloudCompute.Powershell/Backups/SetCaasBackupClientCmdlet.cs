@@ -55,10 +55,11 @@ namespace DD.CBU.Compute.Powershell
 		[Parameter(HelpMessage = "The alerting type to modify")]
 		public AlertingType Aletring { get; set; }
 
-		/// <summary>
-		///     The process record method.
-		/// </summary>
-		protected override void ProcessRecord()
+
+        /// <summary>
+        ///     The process record method.
+        /// </summary>
+        protected override void ProcessRecord()
 		{
 			base.ProcessRecord();
 
