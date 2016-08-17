@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="NewCaasVlanCmdlet.cs" company="">
+// <copyright file="DeployCaasVlanCmdlet.cs" company="">
 //   
 // </copyright>
 // <summary>
@@ -7,21 +7,21 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System;
-using System.Linq;
-using System.Management.Automation;
-using System.Net;
-using DD.CBU.Compute.Api.Client;
-using DD.CBU.Compute.Api.Contracts.Network20;
-using DD.CBU.Compute.Powershell.Contracts;
-using DD.CBU.Compute.Api.Contracts.Generic;
-
 namespace DD.CBU.Compute.Powershell.Mcp20
 {
+    using System;
+    using System.Linq;
+    using System.Management.Automation;
+    using System.Net;
+    using Api.Client;
+    using Api.Contracts.Generic;
+    using Api.Contracts.Network20;
+    using Contracts;
+
     /// <summary>
-	///     The new CaaS Virtual Machine cmdlet.
-	/// </summary>
-	[Cmdlet(VerbsCommon.New, "CaasVlan")]
+    ///     The new CaaS Virtual Machine cmdlet.
+    /// </summary>
+    [Cmdlet(VerbsCommon.New, "CaasVlan")]
     [OutputType(typeof(ResponseType))]
     public class NewCaasVlanCmdlet : WaitableCmdlet
     {
@@ -50,18 +50,22 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         public IPAddress PrivateIpv4BaseAddress { get; set; }
 
         /// <summary>
-		///     Gets or sets the private ip v4 base address.
-		/// </summary>
-		[Parameter(Mandatory = true, HelpMessage = "The vlan Private Ipv4 PrefixSize, must be between 16 and 24")]
+        ///     Gets or sets the private ip v4 base address.
+        /// </summary>
+        [Parameter(Mandatory = true, HelpMessage = "The vlan Private Ipv4 PrefixSize, must be between 16 and 24")]
         public int PrivateIpv4PrefixSize { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the private ip v4 base address.
+        /// </summary>
+        [Parameter(Mandatory = false, HelpMessage = "The vlan Gateway Addressing (HIGH/LOW). Defaults to LOW if not provided.")]
+        public string GatewayAddressing { get; set; }
 
         /// <summary>
         ///     The process record method.
         /// </summary>
         protected override void ProcessRecord()
         {
-            ResponseType response = null;
-
             if (NetworkDomain != null)
             {
                 NetworkDomainId = NetworkDomain.id;
@@ -69,16 +73,16 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
             try
             {
-                response =
-                    Connection.ApiClient.Networking.Vlan.DeployVlan(
-                        new DeployVlanType
-                        {
-                            name = Name,
-                            description = Description,
-                            networkDomainId = NetworkDomainId.ToString(),
-                            privateIpv4BaseAddress = PrivateIpv4BaseAddress.MapToIPv4().ToString(),
-                            privateIpv4PrefixSize = PrivateIpv4PrefixSize
-                        }).Result;
+                var response = Connection.ApiClient.Networking.Vlan.DeployVlan(
+                    new DeployVlanType
+                    {
+                        name = Name,
+                        description = Description,
+                        networkDomainId = NetworkDomainId,
+                        privateIpv4BaseAddress = PrivateIpv4BaseAddress.MapToIPv4().ToString(),
+                        privateIpv4PrefixSize = PrivateIpv4PrefixSize,
+                        gatewayAddressing = GatewayAddressing
+                    }).Result;
                 if (response != null)
                     WriteDebug(
                         string.Format(

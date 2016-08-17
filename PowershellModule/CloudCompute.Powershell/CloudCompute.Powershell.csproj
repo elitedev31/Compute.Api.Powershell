@@ -77,12 +77,12 @@
     <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DD.CBU.Compute.Api.Client, Version=3.2.10871.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
-      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.2.10871.0-feature\lib\net45\DD.CBU.Compute.Api.Client.dll</HintPath>
+    <Reference Include="DD.CBU.Compute.Api.Client, Version=3.2.445.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
+      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.2.445-develop\lib\net45\DD.CBU.Compute.Api.Client.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="DD.CBU.Compute.Api.Contracts, Version=3.2.10871.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
-      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.2.10871.0-feature\lib\net45\DD.CBU.Compute.Api.Contracts.dll</HintPath>
+    <Reference Include="DD.CBU.Compute.Api.Contracts, Version=3.2.445.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
+      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.2.445-develop\lib\net45\DD.CBU.Compute.Api.Contracts.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
@@ -137,7 +137,6 @@
     <Compile Include="FirewallRules\GetCaasIpAddressCmdlet.cs" />
     <Compile Include="Servers\GetCaasServerCmdlet.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="NetworkDomains\DeployCaasNetworkDomainCmdlet.cs" />
     <Compile Include="Servers\DisableCaasServerMonitoringCmdlet.cs" />
     <Compile Include="Infrastructure\GetCaasOperatingSystemCmdlet.cs" />
     <Compile Include="Images\GetCaasOsImageCmdlet.cs" />
@@ -177,7 +176,6 @@
     <Compile Include="NetworkDomains\GetCaasNatRuleCmdlet.cs" />
     <Compile Include="FirewallRules\GetCaasFirewallRuleCmdlet.cs" />
     <Compile Include="NetworkDomains\GetCaasNetworkDomainCmdlet.cs" />
-    <Compile Include="Vlans\DeployCaasVlanCmdlet.cs" />
     <Compile Include="NetworkDomainVips\GetCaasVipNodeCmdlet.cs" />
     <Compile Include="NetworkDomainVips\GetCaasVIPVirtualListenerCmdlet.cs" />
     <Compile Include="Vlans\GetCaasVlanCmdlet.cs" />
