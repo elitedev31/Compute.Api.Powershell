@@ -86,7 +86,7 @@ namespace DD.CBU.Compute.Powershell
 
                 if (!string.IsNullOrEmpty(Name) || !string.IsNullOrEmpty(Description))
                 {
-                    var editServerResponse = Connection.ApiClient.ServerManagement.Server.EditServerMetadata(new editServerMetadata { name = Name, description = Description, descriptionSpecified = !string.IsNullOrEmpty(Description), drsEligibleSpecified = false });
+                    var editServerResponse = Connection.ApiClient.ServerManagement.Server.EditServerMetadata(new editServerMetadata { id = Server.id, name = Name, description = Description, descriptionSpecified = !string.IsNullOrEmpty(Description)}).Result;
                     WriteObject(editServerResponse);
                 }
             }
