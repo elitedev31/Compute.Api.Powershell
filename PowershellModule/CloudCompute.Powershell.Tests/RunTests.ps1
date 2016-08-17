@@ -4,7 +4,11 @@
 		[Parameter(Mandatory=$false)]
 		[bool] $FallbackToDefaultApi = $True,
 		[Parameter(Mandatory=$false)]
-		[string] $BuildConfiguration = 'Debug'
+		[string] $BuildConfiguration = 'Debug',
+		[Parameter(Mandatory=$false)]
+		[Guid] $CaaSClientId = '1578108f-e4aa-4ab7-8b2b-b9244482df93',
+		[parameter(Mandatory=$false)]
+		[PSCredential]$Cred
 		)
 
 Write-Host "!!!Using the '$BuildConfiguration' Configuration!!!"
@@ -26,8 +30,15 @@ if($UseMockCredentials -eq $True){
 }
 else{		
 	Write-Host "Using the real credentials"
-	$credential = (Get-Credential)	
+	if ($Cred -eq $null)
+	{
+		$credential = (Get-Credential)
+	}
+	else
+	{
+		$credential = $Cred
+	}
 }
 
-$testContext = New-CaasTestContext -UseMockCredentials $UseMockCredentials -FallbackToDefaultApi $FallbackToDefaultApi -MockApisPath $mockApiPath -MockApisRecordingPath $mockApiRecordingPath -ApiCredentials $credential -DefaultApiAddress 'https://api-au.dimensiondata.com/' -RecordApiRequestResponse $True
+$testContext = New-CaasTestContext -UseMockCredentials $UseMockCredentials -FallbackToDefaultApi $FallbackToDefaultApi -MockApisPath $mockApiPath -MockApisRecordingPath $mockApiRecordingPath -ApiCredentials $credential -DefaultApiAddress 'https://api-au.dimensiondata.com/' -RecordApiRequestResponse $True -CaaSClientId $CaaSClientId
 Invoke-Pester -Script @{ Path = '.\*Tests'; Parameters = @{ TestContext = $testContext }; } -OutputFile .\nunit-results.xml -OutputFormat NUnitXml

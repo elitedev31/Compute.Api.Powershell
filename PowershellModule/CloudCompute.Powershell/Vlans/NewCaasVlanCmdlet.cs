@@ -1,49 +1,59 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="DeployCaasNetworkDomainCmdlet.cs" company="">
+// <copyright file="NewCaasVlanCmdlet.cs" company="">
 //   
 // </copyright>
 // <summary>
-//   The new CaaS Network Domain cmdlet.
+//   The new CaaS Virtual Machine cmdlet.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
+using System.Linq;
 using System.Management.Automation;
+using System.Net;
 using DD.CBU.Compute.Api.Client;
 using DD.CBU.Compute.Api.Contracts.Network20;
+using DD.CBU.Compute.Powershell.Contracts;
+using DD.CBU.Compute.Api.Contracts.Generic;
 
 namespace DD.CBU.Compute.Powershell.Mcp20
 {
     /// <summary>
-    ///     The new CaaS Network Domain cmdlet.
-    /// </summary>
-    [Cmdlet(VerbsCommon.New, "CaasNetworkDomain")]
+	///     The new CaaS Virtual Machine cmdlet.
+	/// </summary>
+	[Cmdlet(VerbsCommon.New, "CaasVlan")]
     [OutputType(typeof(ResponseType))]
-    public class DeployCaasNetworkDomainCmdlet : PSCmdletCaasWithConnectionBase
+    public class NewCaasVlanCmdlet : WaitableCmdlet
     {
-        /// <summary>
-        ///     Gets or sets the network domain location.
-        /// </summary>
-        [Parameter(Mandatory = true, HelpMessage = "The network domain location")]
-        public string Location { get; set; }
+        [Parameter(Mandatory = true, ParameterSetName = "With_NetworkDomainId", HelpMessage = "The network domain id")]
+        public string NetworkDomainId { get; set; }
+
+        [Parameter(Mandatory = true, ValueFromPipeline = true, ParameterSetName = "With_NetworkDomain", HelpMessage = "The network domain")]
+        public NetworkDomainType NetworkDomain { get; set; }
 
         /// <summary>
         ///     Gets or sets the name.
         /// </summary>
-        [Parameter(Mandatory = true, HelpMessage = "The  Network Domain name")]
+        [Parameter(Mandatory = true, HelpMessage = "The vlan name")]
         public string Name { get; set; }
 
         /// <summary>
         ///     Gets or sets the description.
         /// </summary>
-        [Parameter(Mandatory = false, HelpMessage = "The  Network Domain description")]
+        [Parameter(Mandatory = false, HelpMessage = "The vlan description")]
         public string Description { get; set; }
 
         /// <summary>
-        ///     Gets or sets the NetworkDomainType.
+        ///     Gets or sets the private ip v4 base address.
         /// </summary>
-        [Parameter(Mandatory = true, HelpMessage = "The Network Domain Type")]
-        public NetworkDomainServiceType Type { get; set; }
+        [Parameter(Mandatory = true, HelpMessage = "The vlan Private Ipv4BaseAddress")]
+        public IPAddress PrivateIpv4BaseAddress { get; set; }
+
+        /// <summary>
+		///     Gets or sets the private ip v4 base address.
+		/// </summary>
+		[Parameter(Mandatory = true, HelpMessage = "The vlan Private Ipv4 PrefixSize, must be between 16 and 24")]
+        public int PrivateIpv4PrefixSize { get; set; }
 
         /// <summary>
         ///     The process record method.
@@ -51,16 +61,23 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         protected override void ProcessRecord()
         {
             ResponseType response = null;
+
+            if (NetworkDomain != null)
+            {
+                NetworkDomainId = NetworkDomain.id;
+            }
+
             try
             {
                 response =
-                    Connection.ApiClient.Networking.NetworkDomain.DeployNetworkDomain(
-                        new DeployNetworkDomainType
+                    Connection.ApiClient.Networking.Vlan.DeployVlan(
+                        new DeployVlanType
                         {
                             name = Name,
                             description = Description,
-                            datacenterId = Location,
-                            type = Type.ToString().ToUpperInvariant()
+                            networkDomainId = NetworkDomainId.ToString(),
+                            privateIpv4BaseAddress = PrivateIpv4BaseAddress.MapToIPv4().ToString(),
+                            privateIpv4PrefixSize = PrivateIpv4PrefixSize
                         }).Result;
                 if (response != null)
                     WriteDebug(
@@ -72,6 +89,10 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                             response.responseCode));
 
                 base.ProcessRecord();
+
+                Guid vlanId = Guid.Parse(response.info.First(nvp => nvp.name == "vlanId").value);
+
+                WaitForFailureOrCompletion(response, vlanId);
             }
             catch (AggregateException ae)
             {
@@ -92,8 +113,11 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                         return true;
                     });
             }
+        }
 
-            WriteObject(response);
+        public override void Update(Guid objectId, ref IEntityStatusV2 provisionedObject)
+        {
+            provisionedObject = Connection.ApiClient.Networking.Vlan.GetVlan(objectId).Result;
         }
     }
 }

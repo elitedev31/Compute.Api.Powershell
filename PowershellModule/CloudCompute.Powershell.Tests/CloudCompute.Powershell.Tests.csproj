@@ -37,28 +37,36 @@
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DD.ApiProxy, Version=1.0.23.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\packages\DD.ApiProxy.ApiProxyHttpClient.1.0.23\lib\net451\DD.ApiProxy.dll</HintPath>
+    <Reference Include="DD.ApiProxy, Version=1.0.24.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\packages\DD.ApiProxy.ApiProxyHttpClient.1.0.24\lib\net451\DD.ApiProxy.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="DD.ApiProxy.ApiProxyHttpClient, Version=1.0.23.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DD.ApiProxy.ApiProxyHttpClient.1.0.23\lib\net451\DD.ApiProxy.ApiProxyHttpClient.dll</HintPath>
+    <Reference Include="DD.ApiProxy.ApiProxyHttpClient, Version=1.0.24.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DD.ApiProxy.ApiProxyHttpClient.1.0.24\lib\net451\DD.ApiProxy.ApiProxyHttpClient.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="DD.ApiProxy.Contracts, Version=1.0.23.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DD.ApiProxy.ApiProxyHttpClient.1.0.23\lib\net451\DD.ApiProxy.Contracts.dll</HintPath>
+    <Reference Include="DD.ApiProxy.Contracts, Version=1.0.24.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DD.ApiProxy.ApiProxyHttpClient.1.0.24\lib\net451\DD.ApiProxy.Contracts.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="DD.ApiProxy.Xml, Version=1.0.23.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DD.ApiProxy.ApiProxyHttpClient.1.0.23\lib\net451\DD.ApiProxy.Xml.dll</HintPath>
+    <Reference Include="DD.ApiProxy.Xml, Version=1.0.24.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DD.ApiProxy.ApiProxyHttpClient.1.0.24\lib\net451\DD.ApiProxy.Xml.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DD.CBU.Compute.Api.Client, Version=3.2.10871.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
+      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.2.10871.0-feature\lib\net45\DD.CBU.Compute.Api.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DD.CBU.Compute.Api.Contracts, Version=3.2.10871.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
+      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.2.10871.0-feature\lib\net45\DD.CBU.Compute.Api.Contracts.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Diagnostics.Tracing.EventSource, Version=1.1.28.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Diagnostics.Tracing.EventSource.Redist.1.1.28\lib\net40\Microsoft.Diagnostics.Tracing.EventSource.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -87,6 +95,7 @@
     <Compile Include="NewTestConnectionCmdlet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="NewTestContextCmdlet.cs" />
+    <Compile Include="PSCmdletCaasBase.cs" />
     <Compile Include="TestHttpClient.cs" />
     <Compile Include="TestContext.cs" />
     <Compile Include="TestCaaSConnection.cs" />
@@ -98,6 +107,9 @@
     </None>
     <None Include="DeployServerTests\NewServerDetails.Tests.ps1" />
     <None Include="RunTests.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="ServerTests\NetworkDomain.Tests.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="ServerTests\ServerActions.Tests.ps1">

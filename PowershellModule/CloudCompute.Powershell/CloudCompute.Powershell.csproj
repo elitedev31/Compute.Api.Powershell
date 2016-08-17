@@ -73,13 +73,16 @@
     <DocumentationFile>bin\Release\DD.CBU.Compute.Powershell.XML</DocumentationFile>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DD.CBU.Compute.Api.Client, Version=3.2.10814.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
-      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.2.10814.0-feature\lib\net45\DD.CBU.Compute.Api.Client.dll</HintPath>
+    <Reference Include="DD.CBU.Compute.Api.Client, Version=3.2.10871.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
+      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.2.10871.0-feature\lib\net45\DD.CBU.Compute.Api.Client.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="DD.CBU.Compute.Api.Contracts, Version=3.2.10814.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
-      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.2.10814.0-feature\lib\net45\DD.CBU.Compute.Api.Contracts.dll</HintPath>
+    <Reference Include="DD.CBU.Compute.Api.Contracts, Version=3.2.10871.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
+      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.2.10871.0-feature\lib\net45\DD.CBU.Compute.Api.Contracts.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
@@ -114,6 +117,7 @@
       <Link>Properties\SolutionAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Backups\DiasbleCaasServerBackupCmdlet.cs" />
+    <Compile Include="NetworkDomains\NewCaasNetworkDomainCmdlet.cs" />
     <Compile Include="NetworkVips\AddCaasToServerFarmCmdlet.cs" />
     <Compile Include="Servers\CaasServerDiskDetails.cs" />
     <Compile Include="Servers\CaasServerDetails.cs" />
@@ -192,6 +196,7 @@
     <Compile Include="NetworkDomainVips\NewCaasVipNodeCmdlet.cs" />
     <Compile Include="NetworkDomainVips\NewCaasVIPVirtualListenerCmdlet.cs" />
     <Compile Include="NetworkDomains\RemoveCaasNetworkDomainCmdlet.cs" />
+    <Compile Include="Vlans\NewCaasVlanCmdlet.cs" />
     <Compile Include="Vlans\RemoveCaasVlanCmdlet.cs" />
     <Compile Include="NetworkDomainVips\RemoveCaasVipPoolMemberCmdlet.cs" />
     <Compile Include="NetworkDomainVips\RemoveCaasVipPoolCmdlet.cs" />
@@ -339,6 +344,14 @@
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
