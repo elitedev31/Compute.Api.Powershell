@@ -12,12 +12,6 @@
         /// <summary>	The MCP 1.0 prefix. </summary>
         public const string MCP1_0_PREFIX = "oec/0.9/";
 
-        /// <summary>	The MCP 2.0 prefix. </summary>
-        public const string MCP2_1_PREFIX = "caas/2.1/";
-
-        /// <summary>	The MCP 2.2 prefix. </summary>
-        public const string MCP2_2_PREFIX = "caas/2.2/";
-
         /// <summary>	The MCP 2.3 prefix. </summary>
         public const string MCP2_3_PREFIX = "caas/2.3/";
 
@@ -157,7 +151,7 @@
         /// <returns>	An URI. </returns>
         public static Uri RemoveNic(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/server/removeNic", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/server/removeNic", orgId), UriKind.Relative);
         }
 
 
@@ -167,7 +161,7 @@
         /// <returns>	An URI. </returns>
         public static Uri ListNics(Guid orgId, Guid vlanId)
         {
-            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/server/nic?vlanId={1}", orgId, vlanId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/server/nic?vlanId={1}", orgId, vlanId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for Botify NIC IP change.</summary>
@@ -175,7 +169,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri NotifyNicIpChange(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/server/notifyNicIpChange", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/server/notifyNicIpChange", orgId), UriKind.Relative);
         }
 
         /// <summary>	Get the URI for creating a network domain. </summary>
@@ -183,7 +177,7 @@
         /// <returns>	The <see cref="Uri"/>. </returns>
         public static Uri CreateNetworkDomain(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/network/deployNetworkDomain", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/deployNetworkDomain", orgId), UriKind.Relative);
         }
 
         /// <summary>The modify network domain.</summary>
@@ -191,7 +185,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri ModifyNetworkDomain(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/network/editNetworkDomain", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/editNetworkDomain", orgId), UriKind.Relative);
         }
 
         /// <summary>	Deletes the network domain described by orgId. </summary>
@@ -199,7 +193,7 @@
         /// <returns>	An URI. </returns>
         public static Uri DeleteNetworkDomain(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/network/deleteNetworkDomain", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/deleteNetworkDomain", orgId), UriKind.Relative);
         }
 
         /// <summary>Deploy server on network domains url.</summary>
@@ -207,7 +201,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri DeployServerOnNetworkDomain(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/server/deployServer", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/server/deployServer", orgId), UriKind.Relative);
         }
 
         /// <summary>Get the relative URI for the CaaS API action that retrieves a list of all data centres available for use by the specified organisation.</summary>
@@ -628,7 +622,7 @@
         /// <returns>The URL.</returns>
         public static Uri GetMcp2GetAntiAffinityRules(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/server/antiAffinityRule", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/server/antiAffinityRule", orgId), UriKind.Relative);
         }
 
         /// <summary>Gets the list anti affinity rule URL.</summary>
@@ -637,7 +631,7 @@
         /// <returns>The URL.</returns>
         public static Uri GetMcp2GetAntiAffinityRulesForServer(Guid orgId, Guid serverId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/server/antiAffinityRule?serverId={1}", orgId, serverId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/server/antiAffinityRule?serverId={1}", orgId, serverId), UriKind.Relative);
         }
 
         /// <summary>Gets the list anti affinity rule URL.</summary>
@@ -646,7 +640,7 @@
         /// <returns>The URL.</returns>
         public static Uri GetMcp2GetAntiAffinityRulesForNetwork(Guid orgId, Guid networkId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/server/antiAffinityRule?networkId={1}", orgId, networkId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/server/antiAffinityRule?networkId={1}", orgId, networkId), UriKind.Relative);
         }
 
         /// <summary>Gets the list anti affinity rule URL.</summary>
@@ -655,7 +649,7 @@
         /// <returns>The URL.</returns>
         public static Uri GetMcp2GetAntiAffinityRulesForNetworkDomain(Guid orgId, Guid networkDomainId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/server/antiAffinityRule?networkDomainId={1}", orgId, networkDomainId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/server/antiAffinityRule?networkDomainId={1}", orgId, networkDomainId), UriKind.Relative);
         }
 
         #region FirewallRule
@@ -665,7 +659,7 @@
         /// <returns>The URL.</returns>
         public static Uri GetFirewallRules(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/network/firewallRule", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/firewallRule", orgId), UriKind.Relative);
         }
 
         /// <summary>Gets the get firewall rule URL.</summary>
@@ -674,7 +668,7 @@
         /// <returns>The URL.</returns>
         public static Uri GetFirewallRule(Guid orgId, Guid firewallRuleId)
         {
-            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/network/firewallRule/{1}", orgId, firewallRuleId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/firewallRule/{1}", orgId, firewallRuleId), UriKind.Relative);
         }
 
         /// <summary>Gets the create firewall rule URL.</summary>
@@ -682,7 +676,7 @@
         /// <returns>The URL.</returns>
         public static Uri CreateFirewallRule(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/network/createFirewallRule", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/createFirewallRule", orgId), UriKind.Relative);
         }
 
         /// <summary>Gets the edit firewall rule URL.</summary>
@@ -698,7 +692,7 @@
         /// <returns>The URL.</returns>
         public static Uri DeleteFirewallRule(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/network/deleteFirewallRule", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/deleteFirewallRule", orgId), UriKind.Relative);
         }
 
         #endregion
@@ -1362,7 +1356,7 @@
         /// <returns>The URL</returns>
         public static Uri EnableServerMonitoring(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/server/enableServerMonitoring", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/server/enableServerMonitoring", orgId), UriKind.Relative);
         }
 
         /// <summary>Gets the URL to change the server monitoring plan</summary>
@@ -1370,7 +1364,7 @@
         /// <returns>The URL</returns>
         public static Uri ChangeServerMonitoringPlan(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/server/changeServerMonitoringPlan", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/server/changeServerMonitoringPlan", orgId), UriKind.Relative);
         }
 
         /// <summary>Gets the URL to disable server monitoring</summary>
@@ -1378,7 +1372,7 @@
         /// <returns>The URL</returns>
         public static Uri DisableServerMonitoring(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/server/disableServerMonitoring", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/server/disableServerMonitoring", orgId), UriKind.Relative);
         }
 
         /// <summary>Gets the URL to retrieve server monitoring usage report</summary>
@@ -1388,7 +1382,7 @@
         /// <returns>The URL</returns>
         public static Uri GetMonitoringUsageReport(Guid orgId, DateTime startDate, DateTime? endDate)
         {
-            var url = string.Format(MCP2_1_PREFIX + "{0}/report/usageMonitoring?startDate={1}", orgId, startDate.ToString("yyyy-MM-dd"));
+            var url = string.Format(MCP2_3_PREFIX + "{0}/report/usageMonitoring?startDate={1}", orgId, startDate.ToString("yyyy-MM-dd"));
 
             if (endDate.HasValue)
             {
@@ -1405,7 +1399,7 @@
         /// <returns>	An URI. </returns>
         public static Uri AddPublicIpBlock(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/network/addPublicIpBlock", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/addPublicIpBlock", orgId), UriKind.Relative);
         }
 
         /// <summary>	Gets public IP blocks. </summary>
@@ -1415,7 +1409,7 @@
         /// <returns>	The public IP blocks. </returns>
         public static Uri GetPublicIpBlocks(Guid orgId, string networkDomainId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/network/publicIpBlock?networkDomainId={1}", orgId, networkDomainId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/publicIpBlock?networkDomainId={1}", orgId, networkDomainId), UriKind.Relative);
         }
 
         /// <summary>	Gets public IP block. </summary>
@@ -1424,7 +1418,7 @@
         /// <returns>	The public IP block. </returns>
         public static Uri GetPublicIpBlock(Guid orgId, string publicIpBlockId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/network/publicIpBlock/{1}", orgId, publicIpBlockId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/publicIpBlock/{1}", orgId, publicIpBlockId), UriKind.Relative);
         }
 
         /// <summary>	Gets reserved public addresses. </summary>
@@ -1433,7 +1427,7 @@
         /// <returns>	The reserved public addresses. </returns>
         public static Uri GetReservedPublicAddresses(Guid orgId, string networkDomainId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/network/reservedPublicIpv4Address?networkDomainId={1}", orgId, networkDomainId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/reservedPublicIpv4Address?networkDomainId={1}", orgId, networkDomainId), UriKind.Relative);
         }
 
         /// <summary>	Gets reserved public addresses for network. </summary>
@@ -1442,7 +1436,7 @@
         /// <returns>	The reserved public addresses for network. </returns>
         public static Uri GetReservedPublicAddressesForNetwork(Guid orgId, string networkId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/network/reservedPublicIpv4Address?networkId={1}", orgId, networkId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/reservedPublicIpv4Address?networkId={1}", orgId, networkId), UriKind.Relative);
         }
 
         /// <summary>	Gets reserved private addresses. </summary>
@@ -1451,7 +1445,7 @@
         /// <returns>	The reserved public addresses. </returns>
         public static Uri GetReservedPrivateAddresses(Guid orgId, string vlanId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/network/reservedPrivateIpv4Address?vlanId={1}", orgId, vlanId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/reservedPrivateIpv4Address?vlanId={1}", orgId, vlanId), UriKind.Relative);
         }
 
         /// <summary>	Deletes the server. </summary>
@@ -1459,7 +1453,7 @@
         /// <returns>	Returns the relative URI of the REST request for a deletion of the server. </returns>
         public static Uri DeleteServer(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/server/deleteServer", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/server/deleteServer", orgId), UriKind.Relative);
         }
 
         /// <summary>	Starts a server. </summary>
@@ -1467,7 +1461,7 @@
         /// <returns>	An URI. </returns>
         public static Uri StartServer(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/server/startServer", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/server/startServer", orgId), UriKind.Relative);
         }
 
         /// <summary>	Resets the server (hard reset). </summary>
@@ -1475,7 +1469,7 @@
         /// <returns>	An URI. </returns>
         public static Uri ResetServer(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/server/resetServer", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/server/resetServer", orgId), UriKind.Relative);
         }
 
         /// <summary>	A "graceful" reboot of the server. </summary>
@@ -1483,7 +1477,7 @@
         /// <returns>	Returns the relative URI of the REST request for rebooting the server. </returns>
         public static Uri RebootServer(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/server/rebootServer", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/server/rebootServer", orgId), UriKind.Relative);
         }
 
         /// <summary>	A “graceful” stop of a server by initiating a shutdown sequence within the guest
@@ -1492,7 +1486,7 @@
         /// <returns>	Returns the relative URI of the REST request for a graceful shutdown of the server.</returns>
         public static Uri ShutdownServer(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/server/shutdownServer", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/server/shutdownServer", orgId), UriKind.Relative);
         }
 
         /// <summary>	Power off server. </summary>
@@ -1500,7 +1494,7 @@
         /// <returns>	An URI. </returns>
         public static Uri PowerOffServer(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/server/powerOffServer", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/server/powerOffServer", orgId), UriKind.Relative);
         }
 
         /// <summary>	Updates the vmware tools described by orgId. </summary>
@@ -1508,7 +1502,7 @@
         /// <returns>	An URI. </returns>
         public static Uri UpdateVmwareTools(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/server/updateVmwareTools", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/server/updateVmwareTools", orgId), UriKind.Relative);
         }
 
         /// <summary>	upgrade virtual hardware for the server. </summary>
@@ -1516,7 +1510,7 @@
         /// <returns>	An URI. </returns>
         public static Uri UpgradeVirtualHardware(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/server/upgradeVirtualHardware", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/server/upgradeVirtualHardware", orgId), UriKind.Relative);
         }
 
         /// <summary>Gets all the NAT rules for a specified network.</summary>
@@ -1558,7 +1552,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri CreatePool(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/networkDomainVip/createPool", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/networkDomainVip/createPool", orgId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for getting the Pools.</summary>
@@ -1566,7 +1560,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri GetPools(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/networkDomainVip/pool", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/networkDomainVip/pool", orgId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for getting the Single Pool details.</summary>
@@ -1575,7 +1569,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri GetPool(Guid orgId, Guid poolId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/networkDomainVip/pool/{1}", orgId, poolId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/networkDomainVip/pool/{1}", orgId, poolId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for updating the Pool.</summary>
@@ -1583,7 +1577,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri EditPool(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/networkDomainVip/editPool", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/networkDomainVip/editPool", orgId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for deleting the Pool.</summary>
@@ -1591,7 +1585,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri DeletePool(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/networkDomainVip/deletePool", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/networkDomainVip/deletePool", orgId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for creating the Pool Member.</summary>
@@ -1599,7 +1593,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri AddPoolMember(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/networkDomainVip/addPoolMember", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/networkDomainVip/addPoolMember", orgId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for getting the Pool Members.</summary>
@@ -1607,7 +1601,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri GetPoolMembers(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/networkDomainVip/poolMember", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/networkDomainVip/poolMember", orgId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for getting the Single Pool Member details.</summary>
@@ -1616,7 +1610,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri GetPoolMember(Guid orgId, Guid poolMemberId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/networkDomainVip/poolMember/{1}", orgId, poolMemberId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/networkDomainVip/poolMember/{1}", orgId, poolMemberId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for updating the Pool Member.</summary>
@@ -1624,7 +1618,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri EditPoolMember(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/networkDomainVip/editPoolMember", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/networkDomainVip/editPoolMember", orgId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for deleting the Pool Member.</summary>
@@ -1632,7 +1626,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri DeletePoolMember(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/networkDomainVip/removePoolMember", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/networkDomainVip/removePoolMember", orgId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for creating the VIP Node.</summary>
@@ -1648,7 +1642,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri GetVipNodes(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/networkDomainVip/node", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/networkDomainVip/node", orgId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for getting the Single VIP Node details.</summary>
@@ -1657,7 +1651,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri GetVipNode(Guid orgId, Guid vipNodeId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/networkDomainVip/node/{1}", orgId, vipNodeId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/networkDomainVip/node/{1}", orgId, vipNodeId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for updating the VIP Node.</summary>
@@ -1665,7 +1659,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri EditVipNode(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/networkDomainVip/editNode", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/networkDomainVip/editNode", orgId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for deleting the VIP Node.</summary>
@@ -1673,7 +1667,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri DeleteVipNode(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/networkDomainVip/deleteNode", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/networkDomainVip/deleteNode", orgId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for creating the Virtual Listener.</summary>
@@ -1706,7 +1700,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri EditVirtualListener(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/networkDomainVip/editVirtualListener", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/networkDomainVip/editVirtualListener", orgId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for deleting the Virtual Listener.</summary>
@@ -1714,7 +1708,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri DeleteVirtualListener(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/networkDomainVip/deleteVirtualListener", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/networkDomainVip/deleteVirtualListener", orgId), UriKind.Relative);
         }
 
         /// <summary>Returns the get default health monitor URL.</summary>
@@ -1723,7 +1717,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri GetDefaultHealthMonitors(Guid orgId, Guid networkDomainId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/networkDomainVip/defaultHealthMonitor?networkDomainId={1}", orgId, networkDomainId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/networkDomainVip/defaultHealthMonitor?networkDomainId={1}", orgId, networkDomainId), UriKind.Relative);
         }
 
         /// <summary>Returns the get default persistence profile URL.</summary>
@@ -1732,7 +1726,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri GetDefaultPersistenceProfile(Guid orgId, Guid networkDomainId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/networkDomainVip/defaultPersistenceProfile?networkDomainId={1}", orgId, networkDomainId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/networkDomainVip/defaultPersistenceProfile?networkDomainId={1}", orgId, networkDomainId), UriKind.Relative);
         }
 
         /// <summary>Returns the get default iRule URL.</summary>
@@ -1741,7 +1735,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri GetDefaultIrule(Guid orgId, Guid networkDomainId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/networkDomainVip/defaultIrule?networkDomainId={1}", orgId, networkDomainId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/networkDomainVip/defaultIrule?networkDomainId={1}", orgId, networkDomainId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for notify private IP address change.</summary>
@@ -1758,7 +1752,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri RemovePublicIpv4AddressBlock(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/network/removePublicIpBlock", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/removePublicIpBlock", orgId), UriKind.Relative);
         }
 
         /// <summary>	Deploy server via MCP 2.0 api </summary>
@@ -1774,7 +1768,7 @@
         /// <returns>	An URI for the mcp2.0 clean server api. </returns>
         public static Uri CleanServer(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/server/cleanServer", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/server/cleanServer", orgId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for usage summary.</summary>
@@ -1843,7 +1837,7 @@
         /// <returns>	The MCP 2 images. </returns>
         public static Uri GetMcp2OsImages(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/image/osImage", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/image/osImage", orgId), UriKind.Relative);
         }
 
         /// <summary>	Gets MCP 2 os images. </summary>
@@ -1852,7 +1846,7 @@
         /// <returns>	The MCP 2 images. </returns>
         public static Uri GetMcp2OsImage(Guid orgId, Guid imageId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/image/osImage/{1}", orgId, imageId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/image/osImage/{1}", orgId, imageId), UriKind.Relative);
         }
 
         /// <summary>	Gets MCP 2 customer images. </summary>
@@ -1860,7 +1854,7 @@
         /// <returns>	The MCP 2 images. </returns>
         public static Uri GetMcp2CustomerImages(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/image/customerImage", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/image/customerImage", orgId), UriKind.Relative);
         }
 
         /// <summary>	Gets MCP 2 customer image. </summary>
@@ -1869,7 +1863,7 @@
         /// <returns>	The MCP 2 images. </returns>
         public static Uri GetMcp2CustomerImage(Guid orgId, Guid imageId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/image/customerImage/{1}", orgId, imageId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/image/customerImage/{1}", orgId, imageId), UriKind.Relative);
         }
 
         /// <summary>	Edit MCP 2 customer image metadata </summary>
@@ -1877,7 +1871,7 @@
         /// <returns>	Url endpoint </returns>
         public static Uri EditMcp2CustomerImageMetadata(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/image/editImageMetadata", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/image/editImageMetadata", orgId), UriKind.Relative);
         }
 
         /// <summary>	Get MCP 2 operating systems</summary>
@@ -1897,7 +1891,7 @@
         /// <returns>	Url endpoint </returns>
         public static Uri CreateSecurityGroup(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/securityGroup/createSecurityGroup", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/securityGroup/createSecurityGroup", orgId), UriKind.Relative);
         }
 
         /// <summary>	Edit security group</summary>
@@ -1905,7 +1899,7 @@
         /// <returns>	Url endpoint </returns>
         public static Uri EditSecurityGroup(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/securityGroup/editSecurityGroup", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/securityGroup/editSecurityGroup", orgId), UriKind.Relative);
         }
 
         /// <summary>	Delete security group</summary>
@@ -1913,7 +1907,7 @@
         /// <returns>	Url endpoint </returns>
         public static Uri DeleteSecurityGroup(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/securityGroup/deleteSecurityGroup", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/securityGroup/deleteSecurityGroup", orgId), UriKind.Relative);
         }
 
         /// <summary>	Add nic to security group</summary>
@@ -1921,7 +1915,7 @@
         /// <returns>	Url endpoint </returns>
         public static Uri AddNicToSecurityGroup(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/securityGroup/addNicToSecurityGroup", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/securityGroup/addNicToSecurityGroup", orgId), UriKind.Relative);
         }
 
         /// <summary>	Remove Nic from security group</summary>
@@ -1929,7 +1923,7 @@
         /// <returns>	Url endpoint </returns>
         public static Uri RemoveNicFromSecurityGroup(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/securityGroup/removeNicFromSecurityGroup", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/securityGroup/removeNicFromSecurityGroup", orgId), UriKind.Relative);
         }
 
         /// <summary>	Get security group</summary>
@@ -1938,7 +1932,7 @@
         /// <returns>	Url endpoint </returns>
         public static Uri GetSecurityGroupForVlan(Guid orgId, Guid vlanId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/securityGroup/securityGroup?vlanId={1}", orgId, vlanId), 
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/securityGroup/securityGroup?vlanId={1}", orgId, vlanId), 
                 UriKind.Relative);
         }
 
@@ -1948,7 +1942,7 @@
         /// <returns>	Url endpoint </returns>
         public static Uri GetSecurityGroupForServer(Guid orgId, Guid serverId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/securityGroup/securityGroup?serverId={1}", orgId, serverId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/securityGroup/securityGroup?serverId={1}", orgId, serverId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for reconfiguring the server.</summary>
@@ -1956,7 +1950,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri ReconfigureServer(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_1_PREFIX + "{0}/server/reconfigureServer", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/server/reconfigureServer", orgId), UriKind.Relative);
         }
 
         /// <summary>Retrieves a list of compatible target Servers for an Out of Place given a specific deployed Server and Backup Client Type as input.</summary>
@@ -1984,7 +1978,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri CreateIpAddressList(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/network/createIpAddressList", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/createIpAddressList", orgId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for list ip address list.</summary>
@@ -1993,7 +1987,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri ListIpAddressList(Guid orgId, Guid networkDomainId)
         {
-            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/network/ipAddressList?networkDomainId={1}", orgId, networkDomainId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/ipAddressList?networkDomainId={1}", orgId, networkDomainId), UriKind.Relative);
         }
 
 
@@ -2003,7 +1997,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri GetIpAddressList(Guid orgId, Guid ipAddressListId)
         {
-            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/network/ipAddressList/{1}", orgId, ipAddressListId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/ipAddressList/{1}", orgId, ipAddressListId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for edit ip address list.</summary>
@@ -2011,7 +2005,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri EditIpAddressList(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/network/editIpAddressList", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/editIpAddressList", orgId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for delete ip address list.</summary>
@@ -2019,7 +2013,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri DeleteIpAddressList(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/network/deleteIpAddressList", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/deleteIpAddressList", orgId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for create port list.</summary>
@@ -2027,7 +2021,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri CreatePortList(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/network/createPortList", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/createPortList", orgId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for list port list.</summary>
@@ -2036,7 +2030,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri ListPortList(Guid orgId, Guid networkDomainId)
         {
-            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/network/portList?networkDomainId={1}", orgId, networkDomainId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/portList?networkDomainId={1}", orgId, networkDomainId), UriKind.Relative);
         }
 
 
@@ -2046,7 +2040,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri GetPortList(Guid orgId, Guid portListId)
         {
-            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/network/portList/{1}", orgId, portListId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/portList/{1}", orgId, portListId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for edit port list.</summary>
@@ -2054,7 +2048,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri EditPortList(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/network/editPortList", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/editPortList", orgId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for delete port list.</summary>
@@ -2062,7 +2056,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri DeletePortList(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/network/deletePortList", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/deletePortList", orgId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for adding disk to server.</summary>
@@ -2070,7 +2064,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri AddDisk(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/server/addDisk", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/server/addDisk", orgId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for removing disk from server.</summary>
@@ -2078,7 +2072,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri RemoveDisk(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/server/removeDisk", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/server/removeDisk", orgId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for reserving private ip v4 address.</summary>
@@ -2086,7 +2080,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri ReservePrivateIpv4Address(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/network/reservePrivateIpv4Address", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/reservePrivateIpv4Address", orgId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for unreserving private ip v4 address.</summary>
@@ -2094,7 +2088,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri UnreservePrivateIpv4Address(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/network/unreservePrivateIpv4Address", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/unreservePrivateIpv4Address", orgId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for reserving ip v6 address.</summary>
@@ -2102,7 +2096,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri ReserveIpv6Address(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/network/reserveIpv6Address", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/reserveIpv6Address", orgId), UriKind.Relative);
         }
 
         /// <summary>The get reserved ipv 6 addresses.</summary>
@@ -2110,7 +2104,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri GetReservedIpv6Addresses(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/network/reservedIpv6Address", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/reservedIpv6Address", orgId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for unreserving ip v6 address.</summary>
@@ -2118,7 +2112,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri UnreserveIpv6Address(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/network/unreserveIpv6Address", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/unreserveIpv6Address", orgId), UriKind.Relative);
         }
 
         /// <summary>The get reserved private ipv 4 addresses.</summary>
@@ -2126,7 +2120,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri GetReservedPrivateIpv4Addresses(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/network/reservedPrivateIpv4Address", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/network/reservedPrivateIpv4Address", orgId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for create tag key.</summary>
@@ -2134,7 +2128,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri CreateTagKey(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/tag/createTagKey", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/tag/createTagKey", orgId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for list tag key.</summary>
@@ -2142,7 +2136,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri ListTagKeys(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/tag/tagKey", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/tag/tagKey", orgId), UriKind.Relative);
         }
 
 
@@ -2152,7 +2146,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri GetTagKey(Guid orgId, Guid tagKeyId)
         {
-            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/tag/tagKey/{1}", orgId, tagKeyId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/tag/tagKey/{1}", orgId, tagKeyId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for edit tag key.</summary>
@@ -2160,7 +2154,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri EditTagKey(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/tag/editTagKey", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/tag/editTagKey", orgId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for delete tag key.</summary>
@@ -2168,7 +2162,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri DeleteTagKey(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/tag/deleteTagKey", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/tag/deleteTagKey", orgId), UriKind.Relative);
         }
 
 
@@ -2177,7 +2171,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri ApplyTags(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/tag/applyTags", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/tag/applyTags", orgId), UriKind.Relative);
         }
 
         /// <summary>The get tags.</summary>
@@ -2185,7 +2179,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri GetTags(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/tag/tag", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/tag/tag", orgId), UriKind.Relative);
         }
 
         /// <summary>The remove tag.</summary>
@@ -2193,7 +2187,7 @@
         /// <returns>The <see cref="Uri"/>.</returns>
         public static Uri RemoveTag(Guid orgId)
         {
-            return new Uri(string.Format(MCP2_2_PREFIX + "{0}/tag/removeTags", orgId), UriKind.Relative);
+            return new Uri(string.Format(MCP2_3_PREFIX + "{0}/tag/removeTags", orgId), UriKind.Relative);
         }
 
         /// <summary>Returns the relative URI of the REST request for get consistency groups.</summary>
