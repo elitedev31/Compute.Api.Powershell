@@ -73,7 +73,7 @@ namespace DD.CBU.Compute.Powershell
             try
             {
                 var isMcp2 = Server.networkInfo != null;
-                if (MemoryInMb.HasValue || CpuCount.HasValue)
+                if (MemoryInMb.HasValue || CpuCount.HasValue || !string.IsNullOrEmpty(PrivateIp))
                 {
                     if (isMcp2)
                     {

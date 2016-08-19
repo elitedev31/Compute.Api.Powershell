@@ -133,6 +133,25 @@ Describe "New-CaasVlan" {
 	}
 }
 
+Describe "New-CaasVlan" {
+    It "New-CaasVlan Should Create a new Vlan With GatewayAddressing" {
+		$testConnection = New-CaaSTestConnection -TestContext $TestContext
+		$networkdomain = Get-CaaSNetworkDomain -Connection $testConnection.CaaSConnection -Name River_Lab
+		$response = new-object -TypeName  DD.CBU.Compute.Api.Contracts.Network20.ResponseType
+		$response.operation = "CREATE VLAN"
+		$response.message = "CREATE VLAN"
+		$response.info = @()
+		$vlanInfo = new-object -TypeName DD.CBU.Compute.Api.Contracts.Network20.NameValuePairType
+		$vlanInfo.name = "vlanId"
+		$vlanInfo.value = "1578108f-e4aa-4ab7-8b2b-b9244482df93"
+		$response.info += $vlanInfo
+		$response.responseCode = "OK"
+		$testConnection | Setup "POST" "/caas/2.3/$($testConnection.CaaSClientId)/network/deployVlan" $response 200
+		New-CaasVlan -Connection $testConnection.CaaSConnection -NetworkDomain $networkdomain -Name vlan02 -PrivateIpv4BaseAddress 172.20.2.0 -PrivateIpv4PrefixSize 24 -GatewayAddressing 'HIGH'
+		$testConnection | Verify "POST" "/caas/2.3/$($testConnection.CaaSClientId)/network/deployVlan" 1
+	}
+}
+
 Describe "Remove-CaasVlan" {
     It "Remove-CaasVlan Should remove a Vlan" {
 		$testConnection = New-CaaSTestConnection -TestContext $TestContext
@@ -149,5 +168,43 @@ Describe "Remove-CaasVlan" {
 		$testConnection | Setup "POST" "/caas/2.3/$($testConnection.CaaSClientId)/network/deleteVlan" $response 200
 		Remove-CaasVlan -Connection $testConnection.CaaSConnection -Vlan $vlans
 		$testConnection | Verify "POST" "/caas/2.3/$($testConnection.CaaSClientId)/network/deleteVlan" 1
+	}
+}
+
+Describe "Set-CaasVlan" {
+    It "Set-CaasVlan Should Update the Name and description" {
+		$testConnection = New-CaaSTestConnection -TestContext $TestContext
+		$vlan = Get-CaasVlan -Connection $testConnection.CaaSConnection -Id 91d21154-3414-4f87-9af5-a656884b49bc
+		$response = new-object -TypeName  DD.CBU.Compute.Api.Contracts.Network20.ResponseType
+		$response.operation = "EDIT_VLAN"
+		$response.message = "EDIT_VLAN"
+		$response.info = @()
+		$vlanInfo = new-object -TypeName DD.CBU.Compute.Api.Contracts.Network20.NameValuePairType
+		$vlanInfo.name = "vlanId"
+		$vlanInfo.value = "1578108f-e4aa-4ab7-8b2b-b9244482df93"
+		$response.info += $vlanInfo
+		$response.responseCode = "OK"
+		$testConnection | Setup "POST" "/caas/2.3/$($testConnection.CaaSClientId)/network/editVlan" $response 200
+		Set-CaasVlan -Connection $testConnection.CaaSConnection -Vlan $vlan -Name vlan02 -Description TestDescription
+		$testConnection | Verify "POST" "/caas/2.3/$($testConnection.CaaSClientId)/network/editVlan" 1
+	}
+}
+
+Describe "Resize-CaasVlan" {
+    It "Resize-CaasVlan Should Expand the VLAN" {
+		$testConnection = New-CaaSTestConnection -TestContext $TestContext
+		$vlan = Get-CaasVlan -Connection $testConnection.CaaSConnection -Id 91d21154-3414-4f87-9af5-a656884b49bc
+		$response = new-object -TypeName  DD.CBU.Compute.Api.Contracts.Network20.ResponseType
+		$response.operation = "EXPAND_VLAN"
+		$response.message = "EXPAND_VLAN"
+		$response.info = @()
+		$vlanInfo = new-object -TypeName DD.CBU.Compute.Api.Contracts.Network20.NameValuePairType
+		$vlanInfo.name = "vlanId"
+		$vlanInfo.value = "1578108f-e4aa-4ab7-8b2b-b9244482df93"
+		$response.info += $vlanInfo
+		$response.responseCode = "OK"
+		$testConnection | Setup "POST" "/caas/2.3/$($testConnection.CaaSClientId)/network/expandVlan" $response 200
+		Resize-CaasVlan -Connection $testConnection.CaaSConnection -Vlan $vlan -PrivateIpv4PrefixSize 22
+		$testConnection | Verify "POST" "/caas/2.3/$($testConnection.CaaSClientId)/network/expandVlan" 1
 	}
 }

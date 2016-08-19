@@ -15,8 +15,11 @@
         /// <summary>
         ///     Gets or sets the name.
         /// </summary>
-        [Parameter(Mandatory = true, HelpMessage = "The VLAN Id")]
+        [Parameter(Mandatory = true, ParameterSetName = "With_VlanId", HelpMessage = "The VLAN Id")]
         public Guid Id { get; set; }
+
+        [Parameter(Mandatory = true, ValueFromPipeline = true, ParameterSetName = "With_Vlan", HelpMessage = "The VLAN")]
+        public VlanType Vlan { get; set; }
 
         /// <summary>
         ///     Gets or sets the name.
@@ -32,6 +35,10 @@
 
         protected override void ProcessRecord()
         {
+            if (Vlan != null)
+            {
+                Id = Guid.Parse(Vlan.id);
+            }
             ResponseType response = null;
             base.ProcessRecord();
             try

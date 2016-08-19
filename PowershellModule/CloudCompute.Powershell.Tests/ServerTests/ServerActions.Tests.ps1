@@ -79,3 +79,55 @@ Describe "Restart-CaaSServer -Force" {
 		$testConnection | Verify "POST" "/caas/2.1/$($testConnection.CaaSClientId)/server/resetServer" 1
 	}
 }
+
+Describe "Set-CaaSServer" {
+    It "Set-CaaSServer Should update name and description" {
+		$testConnection = New-CaaSTestConnection -TestContext $TestContext
+		$server = Get-CaaSServer -Connection $testConnection.CaaSConnection -ServerId 94e46b99-0e94-4625-9d36-eede640ca909
+		$server | Should Not BeNullOrEmpty		
+		$response = new-object -TypeName  DD.CBU.Compute.Api.Contracts.Network20.ResponseType
+		$response.operation = "EDIT_SERVER_METADATA"
+		$response.message = "EDIT_SERVER_METADATA"
+		$response.responseCode = "OK"
+		$testConnection | Setup "POST" "/caas/2.3/$($testConnection.CaaSClientId)/server/editServerMetadata" $response 200
+		Set-CaasServer -Server $server -Connection $testConnection.CaaSConnection -Name "NewTestServerName" -Description "NewTestDescription"
+		$testConnection | Verify "POST" "/caas/2.3/$($testConnection.CaaSClientId)/server/editServerMetadata" 1
+	}
+}
+
+Describe "Set-CaaSServer" {
+    It "Set-CaaSServer Should update name and Memmory" {
+		$testConnection = New-CaaSTestConnection -TestContext $TestContext
+		$serverId = "94e46b99-0e94-4625-9d36-eede640ca909"
+		$server = Get-CaaSServer -Connection $testConnection.CaaSConnection -ServerId 94e46b99-0e94-4625-9d36-eede640ca909
+		$server | Should Not BeNullOrEmpty		
+		$editResponse = new-object -TypeName  DD.CBU.Compute.Api.Contracts.Network20.ResponseType
+		$editResponse.operation = "EDIT_SERVER_METADATA"
+		$editResponse.message = "EDIT_SERVER_METADATA"
+		$editResponse.responseCode = "OK"
+		$response = new-object -TypeName  DD.CBU.Compute.Api.Contracts.General.Status
+		$response.operation = "EDIT_SERVER_METADATA"
+		$response.resultDetail = "EDIT_SERVER_METADATA"
+		$response.resultCode = "OK"
+		$testConnection | Setup "POST" "/caas/2.3/$($testConnection.CaaSClientId)/server/editServerMetadata" $editResponse 200
+		$testConnection | Setup "POST" "/oec/0.9/$($testConnection.CaaSClientId)/server/$($serverId)" $response 200
+		Set-CaasServer -Server $server -Connection $testConnection.CaaSConnection -Name "NewTestServerName" -MemoryInMb 1024
+		$testConnection | Verify "POST" "/caas/2.3/$($testConnection.CaaSClientId)/server/editServerMetadata" 1
+	}
+}
+
+Describe "Set-CaaSServer" {
+    It "Set-CaaSServer Should update PrivateIP for MCP1 Server" {
+		$testConnection = New-CaaSTestConnection -TestContext $TestContext
+		$serverId = "94e46b99-0e94-4625-9d36-eede640ca909"
+		$server = Get-CaaSServer -Connection $testConnection.CaaSConnection -ServerId $serverId
+		$server | Should Not BeNullOrEmpty		
+		$response = new-object -TypeName  DD.CBU.Compute.Api.Contracts.General.Status
+		$response.operation = "EDIT_SERVER_METADATA"
+		$response.resultDetail = "EDIT_SERVER_METADATA"
+		$response.resultCode = "OK"
+		$testConnection | Setup "POST" "/oec/0.9/$($testConnection.CaaSClientId)/server/$($serverId)" $response 200
+		Set-CaasServer -Server $server -Connection $testConnection.CaaSConnection -PrivateIp "192.168.0.6"
+		$testConnection | Verify "POST" "/oec/0.9/$($testConnection.CaaSClientId)/server/$($serverId)" 1
+	}
+}
