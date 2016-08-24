@@ -1,9 +1,9 @@
 DimensionData.ComputeClient
 ===========================
 
-[![Build status](https://ci.appveyor.com/api/projects/status/fs6f9o10y38d1t5v?svg=true)](https://ci.appveyor.com/project/tonybaloney/dimensiondata-computeclient)
+[![Build status](https://ci.appveyor.com/api/projects/status/fs6f9o10y38d1t5v?svg=true)](https://ci.appveyor.com/project/tonybaloney/dimensiondata-computeclient-gtwpk)
 
-A C# client library and PowerShell cmdlets for the Dimension Data CaaS API.
+A  PowerShell cmdlets for the Dimension Data CaaS API.
 
 This is the source code from the team that have put together the client libraries based on the REST API spec published online 
 
