@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<reservedPublicIpv4Addresses
-xmlns="urn:didata.com:api:cloud:types" pageNumber="1" pageCount="1"
-totalCount="1" pageSize="250">
-  <ip datacenterId="NA9" ipBlockId="cacc028a-7f12-11e4-a91c-0030487e0302"
-  networkDomainId="802abc9f-45a7-4efb-9d5a-810082368708">165.180.12.12</ip>
-</reservedPublicIpv4Addresses>

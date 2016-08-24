@@ -1,8 +1,0 @@
-﻿<response requestId="NA9/2015-03-08T06:53:59.331-04:00/75b54fae-dedb-49ceaa7f-494c73fc45e5" xmlns="urn:didata.com:api:cloud:types">
-  <operation>NOTIFY_NIC_IP_ADDRESS_CHANGE</operation>
-  <responseCode>IN_PROGRESS</responseCode>
-  <message>
-    Request to notify system of IP change for NIC 5999db1d-725c-46ba-
-    9d4e-d33991e61ab1 is being processed
-  </message>
-</response>

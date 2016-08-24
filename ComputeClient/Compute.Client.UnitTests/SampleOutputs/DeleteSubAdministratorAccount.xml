@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Status xmlns="http://oec.api.opsource.net/schemas/general">
-  <operation>Delete Account</operation>
-  <result>SUCCESS</result>
-  <resultDetail>Delete Account jpublic submitted</resultDetail>
-  <resultCode>REASON_0</resultCode>
-</Status>
