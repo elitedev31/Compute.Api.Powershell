@@ -21,7 +21,7 @@ environment:
     secure: O/sXyJYB0lM0WHQmuoG1LjfB/w9pwx8Pt3HmS13N9MXP7UqbY4/aJvJwemP0tlp2
 
 artifacts:
-  - path: 'bin\$(configuration)\*'
+  - path: 'PowershellModule\bin\$(configuration)\*'
     name: CaaS.Powershell.Internal
     type: zip
 
