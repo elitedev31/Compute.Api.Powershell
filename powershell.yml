@@ -25,6 +25,11 @@ artifacts:
     name: CaaS.Powershell.Internal
     type: zip
 
+deploy:
+  release: CaaS.Powershell.Internal-v$(appveyor_build_version)
+  description: 'CaaS Powershell Zip Release'
+  provider: Local
+  artifact: CaaS.Powershell.Internal
 
 test_script:
   - ps: | 
