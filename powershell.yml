@@ -21,15 +21,10 @@ environment:
     secure: O/sXyJYB0lM0WHQmuoG1LjfB/w9pwx8Pt3HmS13N9MXP7UqbY4/aJvJwemP0tlp2
 
 artifacts:
-  - path: PowershellModule\bin\$(configuration)
+  - path: PowershellModule\CloudCompute.Powershell\bin\$(configuration)
     name: CaaS.Powershell.Internal
     type: zip
 
-deploy:
-  release: CaaS.Powershell.Internal-v$(appveyor_build_version)
-  description: 'CaaS Powershell Zip Release'
-  provider: Local
-  artifact: CaaS.Powershell.Internal
 
 test_script:
   - ps: | 
