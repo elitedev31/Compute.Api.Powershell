@@ -24,7 +24,8 @@ artifacts:
   - path: 'bin\$(configuration)\*'
     name: CaaS.Powershell.Internal
     type: zip
-	
+
+
 test_script:
   - ps: | 
         $testProjectPath = Join-Path $env:APPVEYOR_BUILD_FOLDER  "\PowershellModule\CloudCompute.Powershell.Tests"
