@@ -119,6 +119,7 @@
     <Compile Include="Backups\DiasbleCaasServerBackupCmdlet.cs" />
     <Compile Include="NetworkDomains\NewCaasNetworkDomainCmdlet.cs" />
     <Compile Include="NetworkVips\AddCaasToServerFarmCmdlet.cs" />
+    <Compile Include="Report\GetDetailedUsageReportCmdlet.cs" />
     <Compile Include="Servers\CaasServerDiskDetails.cs" />
     <Compile Include="Servers\CaasServerDetails.cs" />
     <Compile Include="CloudComputePsException.cs" />
@@ -144,7 +145,7 @@
     <Compile Include="NetworkDomains\GetCaasDefaultPresistenceProfilesCmdlet.cs" />
     <Compile Include="NetworkDomainVips\GetCaasDefaultHealthMonitorsCmdlet.cs" />
     <Compile Include="NetworkDomains\GetCaasAntiAffinityRulesCmdlet.cs" />
-    <Compile Include="Servers\GetCaasServerMonitoringUsageReportCmdlet.cs" />
+    <Compile Include="Report\GetCaasServerMonitoringUsageReportCmdlet.cs" />
     <Compile Include="Tags\GetCaasTagCmdlet.cs" />
     <Compile Include="Model\IPVersion.cs" />
     <Compile Include="Model\PortListPort.cs" />
