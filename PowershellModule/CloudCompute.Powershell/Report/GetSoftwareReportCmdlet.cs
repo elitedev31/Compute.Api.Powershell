@@ -12,11 +12,11 @@ namespace DD.CBU.Compute.Powershell.Mcp20
     using Api.Contracts.Requests.Network20;
 
     /// <summary>
-    ///     The Get detailed usage report
+    ///     The Get software report
     /// </summary>
-    [Cmdlet(VerbsCommon.Get, "CaasDetailedUsageReport")]
+    [Cmdlet(VerbsCommon.Get, "CaasSoftwareReport")]
     [OutputType(typeof(string))]
-    public class GetDetailedUsageReportCmdlet : PSCmdletCaasWithConnectionBase
+    public class GetSoftwareReportCmdlet : PSCmdletCaasWithConnectionBase
     {        
         /// <summary>
         ///     Gets or sets start date.
@@ -41,7 +41,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
             try
             {
-                var result = Connection.ApiClient.Reports.GetDetailedUsageReport(StartDate, EndDate).Result;
+                var result = Connection.ApiClient.Reports.GetSoftwareUnitsUsageReport(StartDate, EndDate).Result;
                 WriteObject(result.ToString());
             }
             catch (AggregateException ae)
