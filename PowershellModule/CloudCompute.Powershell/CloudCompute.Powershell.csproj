@@ -119,6 +119,7 @@
     <Compile Include="Backups\DiasbleCaasServerBackupCmdlet.cs" />
     <Compile Include="NetworkDomains\NewCaasNetworkDomainCmdlet.cs" />
     <Compile Include="NetworkVips\AddCaasToServerFarmCmdlet.cs" />
+    <Compile Include="Report\GetSoftwareReportCmdlet.cs" />
     <Compile Include="Report\GetDetailedUsageReportCmdlet.cs" />
     <Compile Include="Servers\CaasServerDiskDetails.cs" />
     <Compile Include="Servers\CaasServerDetails.cs" />
