@@ -120,7 +120,7 @@
     <Compile Include="NetworkDomains\NewCaasNetworkDomainCmdlet.cs" />
     <Compile Include="NetworkVips\AddCaasToServerFarmCmdlet.cs" />
     <Compile Include="Report\GetAdminReportCmdlet.cs" />
-    <Compile Include="Report\GetDrsPairUsageReportCmdlet.cs" />
+    <Compile Include="Report\GetDrsUsageReportCmdlet.cs" />
     <Compile Include="Report\GetBackupUsageReportCmdlet.cs" />
     <Compile Include="Report\GetSummaryUsageReportCmdlet.cs" />
     <Compile Include="Report\GetSoftwareReportCmdlet.cs" />
