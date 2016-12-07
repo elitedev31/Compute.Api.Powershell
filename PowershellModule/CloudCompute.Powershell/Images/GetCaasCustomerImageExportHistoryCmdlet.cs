@@ -13,6 +13,9 @@ using System.Linq;
 using System.Management.Automation;
 using DD.CBU.Compute.Api.Client;
 using DD.CBU.Compute.Api.Contracts.Image;
+using DD.CBU.Compute.Api.Contracts.Requests.Server20;
+using DD.CBU.Compute.Api.Contracts.Image20;
+using DD.CBU.Compute.Api.Contracts.General;
 
 namespace DD.CBU.Compute.Powershell
 {
@@ -21,25 +24,81 @@ namespace DD.CBU.Compute.Powershell
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasCustomerImageExportHistory")]
 	[OutputType(typeof (ImageExportRecord))]
-	public class GetCaasCustomerImageExportHistoryCmdlet : PSCmdletCaasWithConnectionBase
-	{
-		/// <summary>
-		///     Gets or sets the records to return.
-		/// </summary>
-		[Parameter(Mandatory = false, HelpMessage = "Number of records to return, max 100.")]
-		public int RecordsToReturn { get; set; }
+	public class GetCaasCustomerImageExportHistoryCmdlet : PsCmdletCaasPagedWithConnectionBase
+    {
+        /// <summary>
+        /// Image Export ID
+        /// </summary>
+        [Parameter(Mandatory = false, HelpMessage ="Image Export ID")]
+        public string ImageExportId { get; set; }
 
-		/// <summary>
-		///     The process record method.
-		/// </summary>
-		protected override void ProcessRecord()
+        /// <summary>
+        /// Image ID
+        /// </summary>
+        [Parameter(Mandatory = false, HelpMessage = "Image ID")]
+        public string ImageId { get; set; }
+
+        /// <summary>
+        /// Datacenter ID
+        /// </summary>
+        [Parameter(Mandatory = false, HelpMessage = "Datacenter ID")]
+        public string DatacenterId { get; set; }
+
+        /// <summary>
+        /// Image name
+        /// </summary>
+        [Parameter(Mandatory = false, HelpMessage = "Image Name")]
+        public string ImageName { get; set; }
+
+        /// <summary>
+        /// Ovf Package prefix
+        /// </summary>
+        [Parameter(Mandatory = false, HelpMessage = "OVF package prefix")]
+        public string OvfPackagePrefix { get; set; }
+
+        /// <summary>
+        /// Start time
+        /// </summary>
+        [Parameter(Mandatory = false, HelpMessage = "Start time")]
+        public DateTimeOffset? StartTime { get; set; }
+
+        /// <summary>
+        /// End time
+        /// </summary>
+        [Parameter(Mandatory = false, HelpMessage = "End time")]
+        public DateTimeOffset? EndTime { get; set; }
+
+        /// <summary>
+        /// User name
+        /// </summary>
+        [Parameter(Mandatory = false, HelpMessage = "user Name")]
+        public string UserName { get; set; }
+
+
+        /// <summary>
+        ///     The process record method.
+        /// </summary>
+        protected override void ProcessRecord()
 		{
 			base.ProcessRecord();
 
 			try
 			{
-				IEnumerable<ImageExportRecord> resultlist = GetCustomerImageExportHistory();
-				if (resultlist != null && resultlist.Any())
+                var option = new CustomerImageExportHistoryOptions
+                {
+                    ImageExportId = ImageExportId,
+                    ImageId = ImageId,
+                    DatacenterId = DatacenterId,
+                    ImageName = ImageName,
+                    OvfPackagePrefix = OvfPackagePrefix,
+                    StartTime = StartTime,
+                    EndTime = EndTime,
+                    UserName = UserName
+                };
+                
+
+                IEnumerable<HistoricalImageExportType> resultlist = Connection.ApiClient.ServerManagement.ServerImage.GetCustomerImagesExportHistory(option, PageableRequest).Result.items;
+                if (resultlist != null && resultlist.Any())
 				{
 					switch (resultlist.Count())
 					{
@@ -74,17 +133,6 @@ namespace DD.CBU.Compute.Powershell
 						return true;
 					});
 			}
-		}
-
-		/// <summary>
-		///     Gets the customer image imports
-		/// </summary>
-		/// <returns>
-		///     The customer image imports in progress
-		/// </returns>
-		private IEnumerable<ImageExportRecord> GetCustomerImageExportHistory()
-		{
-			return Connection.ApiClient.ImportExportCustomerImage.GetCustomerImagesExportHistory(RecordsToReturn).Result;
 		}
 	}
 }
