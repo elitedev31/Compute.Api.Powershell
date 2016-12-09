@@ -11,6 +11,7 @@ using System;
 using System.Management.Automation;
 using DD.CBU.Compute.Api.Client;
 using DD.CBU.Compute.Api.Contracts.General;
+using DD.CBU.Compute.Api.Contracts.Server;
 
 namespace DD.CBU.Compute.Powershell
 {
@@ -19,11 +20,17 @@ namespace DD.CBU.Compute.Powershell
 	/// </summary>
 	[Cmdlet(VerbsCommon.New, "CaasServerCloneToCustomerImage")]
 	public class NewCaasServerCloneToCustomerImageCmdlet : PsCmdletCaasServerBase
-	{
-		/// <summary>
-		///     Customer Image name
-		/// </summary>
-		[Parameter(Mandatory = true, 
+    {
+        ///// <summary>
+        ///// ID for Customer Image to clone
+        ///// </summary>
+        //[Parameter(Mandatory = true, HelpMessage = "Identifies the Server to be cloned")]
+        //public string Id { get; set; }
+
+        /// <summary>
+        ///     Customer Image name
+        /// </summary>
+        [Parameter(Mandatory = true, 
 			HelpMessage =
 				"Set the customer image name. Note that the Customer Image name is required to be unique in a given data center.")]
 		public string Name { get; set; }
@@ -34,23 +41,63 @@ namespace DD.CBU.Compute.Powershell
 		[Parameter(Mandatory = false, HelpMessage = "Set the customer image description")]
 		public string Description { get; set; }
 
-		/// <summary>
-		///     The process record method.
-		/// </summary>
-		protected override void ProcessRecord()
+        /// <summary>
+        /// For multiple cluster environments, it is possible to set a destination
+        /// cluster for the new Customer Image.Note that performance of this
+        /// function is optimal when either the Server cluster and destination
+        /// are the same or when shared data storage is in place for the
+        /// multiple clusters.See List Data Centers for cluster and shared
+        /// datastore information for the Data Center where the Server
+        /// resides.
+        /// </summary>
+        [Parameter(Mandatory = false, HelpMessage = "Set the destination cluster for the new customer image")]
+        public string ClusterId { get; set; }
+
+        private bool _guestOsCustomization = true;
+
+
+        /// <summary>
+        /// Will default to true if not supplied. If set to false this property tells
+        /// CloudControl that Servers deployed from the resulting Customer
+        /// Image should NOT utilize Guest OS Customization.
+        /// The source Server must be stopped if false is provided for
+        /// guestOsCustomization.
+        /// </summary>
+        [Parameter(Mandatory = false, HelpMessage = "If set to false this property tells CloudControl that Servers deployed from the resulting Customer Image should NOT utilize Guest OS Customization")]
+        public bool guestOsCustomization
+        {
+            get { return _guestOsCustomization; }
+            set { _guestOsCustomization = value; }
+        }
+        /// <summary>
+        ///     The process record method.
+        /// </summary>
+        protected override void ProcessRecord()
 		{
 			try
 			{
-				Status status =
-					Connection.ApiClient.ServerManagementLegacy.Server.ServerCloneToCustomerImage(Server.id, Name, Description).Result;
-				if (status != null)
+                var cloneServerType = new CloneServerType()
+                {
+                    id = Server.id,
+                    imageName = Name,
+                    description = Description,
+                    clusterId = ClusterId,
+                    guestOsCustomization = guestOsCustomization,
+                    guestOsCustomizationSpecified = guestOsCustomization ? false : true 
+                };
+
+
+                var status = Connection.ApiClient.ServerManagement.Server.CloneServer(cloneServerType).Result;
+                //Status status =
+                //	Connection.ApiClient.ServerManagementLegacy.Server.ServerCloneToCustomerImage(Server.id, Name, Description).Result;
+                if (status != null)
 					WriteDebug(
 						string.Format(
 							"{0} resulted in {1} ({2}): {3}", 
 							status.operation, 
-							status.result, 
-							status.resultCode, 
-							status.resultDetail));
+							status.error, 
+							status.responseCode, 
+							status.message));
 			}
 			catch (AggregateException ae)
 			{
