@@ -13,6 +13,7 @@ using System.Linq;
 using System.Management.Automation;
 using DD.CBU.Compute.Api.Client;
 using DD.CBU.Compute.Api.Contracts.Network20;
+using DD.CBU.Compute.Api.Contracts.Server;
 
 namespace DD.CBU.Compute.Powershell
 {
@@ -23,17 +24,37 @@ namespace DD.CBU.Compute.Powershell
 	[OutputType(typeof(Api.Contracts.Network20.ServerType))]
 	public class NewCaasServerCmdlet : PSCmdletCaasWithConnectionBase
 	{
-		/// <summary>
-		///     The Server Details that will be used to deploy the VM
-		/// </summary>
-		[Parameter(Mandatory = true, ValueFromPipeline = true, 
+        bool _GuestOsCustomization = true;
+
+        /// <summary>
+        ///     The Server Details that will be used to deploy the VM
+        /// </summary>
+        [Parameter(Mandatory = true, ValueFromPipeline = true, 
 			HelpMessage = "The server details created by New-CaasServerDetails")]
 		public CaasServerDetails ServerDetails { get; set; }
 
-		/// <summary>
-		///     Switch to return the server object after execution
-		/// </summary>
-		[Parameter(Mandatory = false, HelpMessage = "Return the Server object after execution")]
+        /// <summary>
+        ///     Use Guest OS Customization
+        /// </summary>
+        [Parameter(Mandatory = false, HelpMessage = "Set to true for Guest OS customization")]
+        public bool GuestOsCustomization = true;
+
+        //public bool GuestOsCustomization
+        //{
+        //    get
+        //    {
+        //        return _GuestOsCustomization;
+        //    }
+        //    set
+        //    {
+        //        _GuestOsCustomization = true;
+        //    }
+        //} 
+
+        /// <summary>
+        ///     Switch to return the server object after execution
+        /// </summary>
+        [Parameter(Mandatory = false, HelpMessage = "Return the Server object after execution")]
 		public SwitchParameter PassThru { get; set; }
 
 
@@ -123,26 +144,48 @@ namespace DD.CBU.Compute.Powershell
 
 				diskarray = disks.ToArray();
 			}
+            ResponseType response = null;
 
-            var server = new DeployServerType
+            if (GuestOsCustomization)
             {
-                name = ServerDetails.Name,
-                description = ServerDetails.Description,
-                imageId = ServerDetails.ImageId,
-                start = ServerDetails.IsStarted,
-                administratorPassword = ServerDetails.AdministratorPassword,
-                network = networkInfo,
-                networkInfo = networkDomainInfo,
-                disk = diskarray,
-                cpu = ServerDetails.CpuDetails,
-                primaryDns = ServerDetails.PrimaryDns,
-                secondaryDns = ServerDetails.SecondaryDns,
-                microsoftTimeZone = ServerDetails.MicrosoftTimeZone,
-                memoryGb = ServerDetails.MemoryGb,
-                memoryGbSpecified = (ServerDetails.MemoryGb > 0)
-            };
+                var server = new DeployServerType
+                {
+                    name = ServerDetails.Name,
+                    description = ServerDetails.Description,
+                    imageId = ServerDetails.ImageId,
+                    start = ServerDetails.IsStarted,
+                    administratorPassword = ServerDetails.AdministratorPassword,
+                    network = networkInfo,
+                    networkInfo = networkDomainInfo,
+                    disk = diskarray,
+                    cpu = ServerDetails.CpuDetails,
+                    primaryDns = ServerDetails.PrimaryDns,
+                    secondaryDns = ServerDetails.SecondaryDns,
+                    microsoftTimeZone = ServerDetails.MicrosoftTimeZone,
+                    memoryGb = ServerDetails.MemoryGb,
+                    memoryGbSpecified = (ServerDetails.MemoryGb > 0)
+                };
 
-            var response = Connection.ApiClient.ServerManagement.Server.DeployServer(server).Result;
+                response = Connection.ApiClient.ServerManagement.Server.DeployServer(server).Result;
+            }
+            else
+            {
+                var server = new DeployUncustomizedServerType
+                {
+                    name = ServerDetails.Name,
+                    description = ServerDetails.Description,
+                    imageId = ServerDetails.ImageId,
+                    start = ServerDetails.IsStarted,
+                    networkInfo = networkDomainInfo,
+                    disk = diskarray,
+                    cpu = ServerDetails.CpuDetails,
+                    memoryGb = ServerDetails.MemoryGb,
+                    memoryGbSpecified = (ServerDetails.MemoryGb > 0)
+                };
+
+                response = Connection.ApiClient.ServerManagement.Server.DeployUncustomizedServer(server).Result;
+
+            }
 
             // get the server id from status message
             var serverInfo = response.info.Single(info => info.name == "serverId");

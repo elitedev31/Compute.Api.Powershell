@@ -59,7 +59,7 @@ namespace DD.CBU.Compute.Powershell
         /// <summary>
         ///     The network to deploy the machine to
         /// </summary>		
-        [Parameter(Mandatory = true, ParameterSetName = "MCP1_WithNetwork", HelpMessage = "The network to deploy the machine to.")]
+        [Parameter(Mandatory = false, ParameterSetName = "MCP1_WithNetwork", HelpMessage = "Required for MCP1 only. The network to deploy the machine to.")]
         public NetworkWithLocationsNetwork Network { get; set; }
 
         /// <summary>
@@ -78,8 +78,8 @@ namespace DD.CBU.Compute.Powershell
         /// <summary>
         ///     The privateIp address of the machine
         /// </summary>
-        [Parameter(Mandatory = true, ParameterSetName = "MCP1_WithPrivateIp", HelpMessage = "The network private IP address that will be assigned to the machine.")]
-        [Parameter(Mandatory = true, ParameterSetName = "MCP2_WithPrivateIp", HelpMessage = "The network private IP address that will be assigned to the machine.")]
+        [Parameter(Mandatory = false, ParameterSetName = "MCP1_WithPrivateIp", HelpMessage = "The network private IP address that will be assigned to the machine.")]
+        [Parameter(Mandatory = false, ParameterSetName = "MCP2_WithPrivateIp", HelpMessage = "The network private IP address that will be assigned to the machine.")]
         public string PrivateIp { get; set; }
 
         /// <summary>

@@ -151,6 +151,7 @@
     <Compile Include="NetworkDomainVips\GetCaasDefaultHealthMonitorsCmdlet.cs" />
     <Compile Include="NetworkDomains\GetCaasAntiAffinityRulesCmdlet.cs" />
     <Compile Include="Report\GetCaasServerMonitoringUsageReportCmdlet.cs" />
+    <Compile Include="Servers\NewCaasServerNoCustomisationCmdlet.cs" />
     <Compile Include="Tags\GetCaasTagCmdlet.cs" />
     <Compile Include="Model\IPVersion.cs" />
     <Compile Include="Model\PortListPort.cs" />
