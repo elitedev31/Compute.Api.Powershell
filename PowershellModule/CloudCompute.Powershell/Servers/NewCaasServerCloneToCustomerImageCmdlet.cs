@@ -53,9 +53,6 @@ namespace DD.CBU.Compute.Powershell
         [Parameter(Mandatory = false, HelpMessage = "Set the destination cluster for the new customer image")]
         public string ClusterId { get; set; }
 
-        private bool _guestOsCustomization = true;
-
-
         /// <summary>
         /// Will default to true if not supplied. If set to false this property tells
         /// CloudControl that Servers deployed from the resulting Customer
@@ -64,11 +61,8 @@ namespace DD.CBU.Compute.Powershell
         /// guestOsCustomization.
         /// </summary>
         [Parameter(Mandatory = false, HelpMessage = "If set to false this property tells CloudControl that Servers deployed from the resulting Customer Image should NOT utilize Guest OS Customization")]
-        public bool guestOsCustomization
-        {
-            get { return _guestOsCustomization; }
-            set { _guestOsCustomization = value; }
-        }
+        public bool? GuestOsCustomization { get; set; }
+
         /// <summary>
         ///     The process record method.
         /// </summary>
@@ -82,14 +76,11 @@ namespace DD.CBU.Compute.Powershell
                     imageName = Name,
                     description = Description,
                     clusterId = ClusterId,
-                    guestOsCustomization = guestOsCustomization,
-                    guestOsCustomizationSpecified = guestOsCustomization ? false : true 
+                    guestOsCustomization = GuestOsCustomization.Value,
+                    guestOsCustomizationSpecified = GuestOsCustomization.HasValue
                 };
 
-
                 var status = Connection.ApiClient.ServerManagement.Server.CloneServer(cloneServerType).Result;
-                //Status status =
-                //	Connection.ApiClient.ServerManagementLegacy.Server.ServerCloneToCustomerImage(Server.id, Name, Description).Result;
                 if (status != null)
 					WriteDebug(
 						string.Format(
@@ -110,7 +101,6 @@ namespace DD.CBU.Compute.Powershell
 						}
 						else
 						{
-// if (e is HttpRequestException)
 							ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, Connection));
 						}
 
