@@ -76,7 +76,7 @@ namespace DD.CBU.Compute.Powershell
                     imageName = Name,
                     description = Description,
                     clusterId = ClusterId,
-                    guestOsCustomization = GuestOsCustomization.Value,
+                    guestOsCustomization = GuestOsCustomization.HasValue?GuestOsCustomization.Value:true,
                     guestOsCustomizationSpecified = GuestOsCustomization.HasValue
                 };
 
