@@ -28,7 +28,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         ///     Gets or sets end date.
         /// </summary>
         [Parameter(Mandatory = false, HelpMessage = "The end date")]
-        public DateTime EndDate { get; set; }
+        public DateTime? EndDate { get; set; }
 
         protected override void ProcessRecord()
         {
@@ -41,7 +41,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
             try
             {
-                var result = Connection.ApiClient.Reports.GetSoftwareUnitsUsageReport(StartDate, EndDate).Result;
+                var result = Connection.ApiClient.Reports.GetSoftwareUnitsUsageReport(StartDate, EndDate.Value).Result;
                 WriteObject(result.ToString());
             }
             catch (AggregateException ae)
