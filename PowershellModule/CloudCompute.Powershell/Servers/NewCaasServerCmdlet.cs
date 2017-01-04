@@ -24,8 +24,6 @@ namespace DD.CBU.Compute.Powershell
 	[OutputType(typeof(Api.Contracts.Network20.ServerType))]
 	public class NewCaasServerCmdlet : PSCmdletCaasWithConnectionBase
 	{
-        bool _GuestOsCustomization = true;
-
         /// <summary>
         ///     The Server Details that will be used to deploy the VM
         /// </summary>
@@ -37,19 +35,7 @@ namespace DD.CBU.Compute.Powershell
         ///     Use Guest OS Customization
         /// </summary>
         [Parameter(Mandatory = false, HelpMessage = "Set to true for Guest OS customization")]
-        public bool GuestOsCustomization = true;
-
-        //public bool GuestOsCustomization
-        //{
-        //    get
-        //    {
-        //        return _GuestOsCustomization;
-        //    }
-        //    set
-        //    {
-        //        _GuestOsCustomization = true;
-        //    }
-        //} 
+        public bool? GuestOsCustomization;
 
         /// <summary>
         ///     Switch to return the server object after execution
@@ -80,7 +66,6 @@ namespace DD.CBU.Compute.Powershell
 						}
 						else
 						{
-// if (e is HttpRequestException)
 							ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, Connection));
 						}
 
@@ -146,7 +131,25 @@ namespace DD.CBU.Compute.Powershell
 			}
             ResponseType response = null;
 
-            if (GuestOsCustomization)
+            if (GuestOsCustomization.HasValue && GuestOsCustomization == false)
+            {
+                var server = new DeployUncustomizedServerType
+                {
+                    name = ServerDetails.Name,
+                    description = ServerDetails.Description,
+                    imageId = ServerDetails.ImageId,
+                    start = ServerDetails.IsStarted,
+                    networkInfo = networkDomainInfo,
+                    disk = diskarray,
+                    cpu = ServerDetails.CpuDetails,
+                    memoryGb = ServerDetails.MemoryGb,
+                    memoryGbSpecified = (ServerDetails.MemoryGb > 0),
+
+                };
+
+                response = Connection.ApiClient.ServerManagement.Server.DeployUncustomizedServer(server).Result;
+            }
+            else
             {
                 var server = new DeployServerType
                 {
@@ -167,24 +170,6 @@ namespace DD.CBU.Compute.Powershell
                 };
 
                 response = Connection.ApiClient.ServerManagement.Server.DeployServer(server).Result;
-            }
-            else
-            {
-                var server = new DeployUncustomizedServerType
-                {
-                    name = ServerDetails.Name,
-                    description = ServerDetails.Description,
-                    imageId = ServerDetails.ImageId,
-                    start = ServerDetails.IsStarted,
-                    networkInfo = networkDomainInfo,
-                    disk = diskarray,
-                    cpu = ServerDetails.CpuDetails,
-                    memoryGb = ServerDetails.MemoryGb,
-                    memoryGbSpecified = (ServerDetails.MemoryGb > 0)
-                };
-
-                response = Connection.ApiClient.ServerManagement.Server.DeployUncustomizedServer(server).Result;
-
             }
 
             // get the server id from status message
