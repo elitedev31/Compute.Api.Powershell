@@ -32,7 +32,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
         protected override void ProcessRecord()
         {
-            if (EndDate == DateTime.MinValue)
+            if (EndDate == DateTime.MinValue || null == EndDate)
             {
                 EndDate = DateTime.Now;
             }
