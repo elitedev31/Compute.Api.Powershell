@@ -14,9 +14,9 @@ Describe "Start-CaaSServer" {
 		$response.operation = "START_SERVER"
 		$response.message = "START_SERVER"
 		$response.responseCode = "OK"
-		$testConnection | Setup "POST" "/caas/2.1/$($testConnection.CaaSClientId)/server/startServer" $response 200
+		$testConnection | Setup "POST" "/caas/2.4/$($testConnection.CaaSClientId)/server/startServer" $response 200
 		Start-CaasServer -Server $server -Connection $testConnection.CaaSConnection	
-		$testConnection | Verify "POST" "/caas/2.1/$($testConnection.CaaSClientId)/server/startServer" 1
+		$testConnection | Verify "POST" "/caas/2.4/$($testConnection.CaaSClientId)/server/startServer" 1
 	}
 }
 
@@ -29,9 +29,9 @@ Describe "Stop-CaaSServer" {
 		$response.operation = "STOP SERVER"
 		$response.message = "STOP SERVER"
 		$response.responseCode = "OK"
-		$testConnection | Setup "POST" "/caas/2.1/$($testConnection.CaaSClientId)/server/shutdownServer" $response 200
+		$testConnection | Setup "POST" "/caas/2.4/$($testConnection.CaaSClientId)/server/shutdownServer" $response 200
 		Stop-CaasServer -Server $server -Connection $testConnection.CaaSConnection	
-		$testConnection | Verify "POST" "/caas/2.1/$($testConnection.CaaSClientId)/server/shutdownServer" 1
+		$testConnection | Verify "POST" "/caas/2.4/$($testConnection.CaaSClientId)/server/shutdownServer" 1
 	}
 }
 
@@ -44,9 +44,9 @@ Describe "Stop-CaaSServer -Force" {
 		$response.operation = "POWEROFF SERVER"
 		$response.message = "POWEROFF SERVER"
 		$response.responseCode = "OK"
-		$testConnection | Setup "POST" "/caas/2.1/$($testConnection.CaaSClientId)/server/powerOffServer" $response 200
+		$testConnection | Setup "POST" "/caas/2.4/$($testConnection.CaaSClientId)/server/powerOffServer" $response 200
 		Stop-CaasServer -Server $server -Connection $testConnection.CaaSConnection -Force
-		$testConnection | Verify "POST" "/caas/2.1/$($testConnection.CaaSClientId)/server/powerOffServer" 1
+		$testConnection | Verify "POST" "/caas/2.4/$($testConnection.CaaSClientId)/server/powerOffServer" 1
 	}
 }
 
@@ -59,9 +59,9 @@ Describe "Restart-CaaSServer" {
 		$response.operation = "RESTART SERVER"
 		$response.message = "RESTART SERVER"
 		$response.responseCode = "OK"
-		$testConnection | Setup "POST" "/caas/2.1/$($testConnection.CaaSClientId)/server/rebootServer" $response 200
+		$testConnection | Setup "POST" "/caas/2.4/$($testConnection.CaaSClientId)/server/rebootServer" $response 200
 		Restart-CaasServer -Server $server -Connection $testConnection.CaaSConnection	
-		$testConnection | Verify "POST" "/caas/2.1/$($testConnection.CaaSClientId)/server/rebootServer" 1
+		$testConnection | Verify "POST" "/caas/2.4/$($testConnection.CaaSClientId)/server/rebootServer" 1
 	}
 }
 
@@ -74,9 +74,9 @@ Describe "Restart-CaaSServer -Force" {
 		$response.operation = "RESET SERVER"
 		$response.message = "RESET SERVER"
 		$response.responseCode = "OK"
-		$testConnection | Setup "POST" "/caas/2.1/$($testConnection.CaaSClientId)/server/resetServer" $response 200
+		$testConnection | Setup "POST" "/caas/2.4/$($testConnection.CaaSClientId)/server/resetServer" $response 200
 		Restart-CaasServer -Server $server -Connection $testConnection.CaaSConnection -Force
-		$testConnection | Verify "POST" "/caas/2.1/$($testConnection.CaaSClientId)/server/resetServer" 1
+		$testConnection | Verify "POST" "/caas/2.4/$($testConnection.CaaSClientId)/server/resetServer" 1
 	}
 }
 

@@ -48,9 +48,9 @@ Describe "New-CaaSNetworkDomain" {
 		$networkIdInfo.value = "a4f484de-b9ed-43e4-b565-afbf69417615"
 		$response.info += $networkIdInfo
 		$response.responseCode = "OK"
-		$testConnection | Setup "POST" "/caas/2.1/$($testConnection.CaaSClientId)/network/deployNetworkDomain" $response 200
+		$testConnection | Setup "POST" "/caas/2.4/$($testConnection.CaaSClientId)/network/deployNetworkDomain" $response 200
 		New-CaasNetworkDomain -Connection $testConnection.CaaSConnection -DatacenterId AU9 -Name RandomNetworkName_1 -Type Advanced
-		$testConnection | Verify "POST" "/caas/2.1/$($testConnection.CaaSClientId)/network/deployNetworkDomain" 1
+		$testConnection | Verify "POST" "/caas/2.4/$($testConnection.CaaSClientId)/network/deployNetworkDomain" 1
 	}
 }
 
@@ -67,9 +67,9 @@ Describe "Remove-CaaSNetworkDomain" {
 		$networkIdInfo.value = "a4f484de-b9ed-43e4-b565-afbf69417615"
 		$response.info += $networkIdInfo
 		$response.responseCode = "OK"
-		$testConnection | Setup "POST" "/caas/2.1/$($testConnection.CaaSClientId)/network/deleteNetworkDomain" $response 200
+		$testConnection | Setup "POST" "/caas/2.4/$($testConnection.CaaSClientId)/network/deleteNetworkDomain" $response 200
 		Remove-CaasNetworkDomain -Connection $testConnection.CaaSConnection -NetworkDomain $domains
-		$testConnection | Verify "POST" "/caas/2.1/$($testConnection.CaaSClientId)/network/deleteNetworkDomain" 1
+		$testConnection | Verify "POST" "/caas/2.4/$($testConnection.CaaSClientId)/network/deleteNetworkDomain" 1
 	}
 }
 
