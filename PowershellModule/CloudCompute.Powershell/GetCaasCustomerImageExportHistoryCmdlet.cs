@@ -84,7 +84,7 @@ namespace DD.CBU.Compute.Powershell
 		/// </returns>
 		private IEnumerable<ImageExportRecord> GetCustomerImageExportHistory()
 		{
-			return Connection.ApiClient.ImportExportCustomerImage.GetCustomerImagesExportHistory(RecordsToReturn).Result;
+			return Connection.ApiClient.ImportExportCustomerImage.GetCustomerImagesExportHistory_09(RecordsToReturn).Result;
 		}
 	}
 }
