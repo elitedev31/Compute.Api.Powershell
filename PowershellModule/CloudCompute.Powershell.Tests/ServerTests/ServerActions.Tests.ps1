@@ -89,9 +89,9 @@ Describe "Set-CaaSServer" {
 		$response.operation = "EDIT_SERVER_METADATA"
 		$response.message = "EDIT_SERVER_METADATA"
 		$response.responseCode = "OK"
-		$testConnection | Setup "POST" "/caas/2.3/$($testConnection.CaaSClientId)/server/editServerMetadata" $response 200
+		$testConnection | Setup "POST" "/caas/2.4/$($testConnection.CaaSClientId)/server/editServerMetadata" $response 200
 		Set-CaasServer -Server $server -Connection $testConnection.CaaSConnection -Name "NewTestServerName" -Description "NewTestDescription"
-		$testConnection | Verify "POST" "/caas/2.3/$($testConnection.CaaSClientId)/server/editServerMetadata" 1
+		$testConnection | Verify "POST" "/caas/2.4/$($testConnection.CaaSClientId)/server/editServerMetadata" 1
 	}
 }
 
@@ -109,10 +109,10 @@ Describe "Set-CaaSServer" {
 		$response.operation = "EDIT_SERVER_METADATA"
 		$response.resultDetail = "EDIT_SERVER_METADATA"
 		$response.resultCode = "OK"
-		$testConnection | Setup "POST" "/caas/2.3/$($testConnection.CaaSClientId)/server/editServerMetadata" $editResponse 200
+		$testConnection | Setup "POST" "/caas/2.4/$($testConnection.CaaSClientId)/server/editServerMetadata" $editResponse 200
 		$testConnection | Setup "POST" "/oec/0.9/$($testConnection.CaaSClientId)/server/$($serverId)" $response 200
 		Set-CaasServer -Server $server -Connection $testConnection.CaaSConnection -Name "NewTestServerName" -MemoryInMb 1024
-		$testConnection | Verify "POST" "/caas/2.3/$($testConnection.CaaSClientId)/server/editServerMetadata" 1
+		$testConnection | Verify "POST" "/caas/2.4/$($testConnection.CaaSClientId)/server/editServerMetadata" 1
 	}
 }
 
