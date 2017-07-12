@@ -15,7 +15,9 @@ using DD.CBU.Compute.Api.Contracts.Network20;
 
 namespace DD.CBU.Compute.Powershell
 {
-	/// <summary>
+    using System.Management.Automation;
+
+    /// <summary>
 	///     The caas server details.
 	/// </summary>
 	public class CaasServerDetails
@@ -89,6 +91,12 @@ namespace DD.CBU.Compute.Powershell
         ///     The  Microsoft time zone for windows machine
         /// </summary>
         public string MicrosoftTimeZone { get; set; }
+
+        /// <summary>
+        ///     The  Microsoft time zone for windows machine
+        /// </summary>
+        [Parameter(Mandatory = false, HelpMessage = "Set the destination cluster for the new CaaS Server")]
+        public string ClusterId { get; set; }
 
         /// <summary>
         ///     Gets or sets the internal disk details.

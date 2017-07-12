@@ -144,7 +144,7 @@ namespace DD.CBU.Compute.Powershell
                     cpu = ServerDetails.CpuDetails,
                     memoryGb = ServerDetails.MemoryGb,
                     memoryGbSpecified = (ServerDetails.MemoryGb > 0),
-
+                    clusterId = ServerDetails.ClusterId
                 };
 
                 response = Connection.ApiClient.ServerManagement.Server.DeployUncustomizedServer(server).Result;
@@ -166,7 +166,8 @@ namespace DD.CBU.Compute.Powershell
                     secondaryDns = ServerDetails.SecondaryDns,
                     microsoftTimeZone = ServerDetails.MicrosoftTimeZone,
                     memoryGb = ServerDetails.MemoryGb,
-                    memoryGbSpecified = (ServerDetails.MemoryGb > 0)
+                    memoryGbSpecified = (ServerDetails.MemoryGb > 0),
+                    clusterId = ServerDetails.ClusterId
                 };
 
                 response = Connection.ApiClient.ServerManagement.Server.DeployServer(server).Result;
