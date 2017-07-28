@@ -130,7 +130,7 @@ namespace DD.CBU.Compute.Powershell
 		{
 			var account = new AccountWithPhoneNumber
 			{
-				userName = connection.Account.UserName, 
+				userName = connection.User.UserName, 
 				password = NewPassword.ToPlainString()
 			};
 

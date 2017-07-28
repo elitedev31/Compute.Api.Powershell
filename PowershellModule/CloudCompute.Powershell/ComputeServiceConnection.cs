@@ -41,7 +41,7 @@ namespace DD.CBU.Compute.Powershell
 		/// <summary>
 		///     The CaaS account targeted by the connection.
 		/// </summary>
-		public IAccount Account { get; internal set; }
+		public IUser User { get; internal set; }
 
 		/// <summary>
 		///     The CaaS FTP client.

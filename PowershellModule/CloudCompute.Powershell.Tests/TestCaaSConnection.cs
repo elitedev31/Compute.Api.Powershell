@@ -20,7 +20,7 @@ namespace DD.CBU.Compute.Powershell.Tests
 
         public ComputeServiceConnection CaaSConnection { get; internal set; }
 
-        public Guid CaaSClientId => CaaSConnection.Account.OrganizationId;
+        public Guid CaaSClientId => CaaSConnection.User.OrganizationId;
 
         public IList<RequestReceivedEventArgs> GetApiCalledRecords(string httpMethod, string requestUri)
         {

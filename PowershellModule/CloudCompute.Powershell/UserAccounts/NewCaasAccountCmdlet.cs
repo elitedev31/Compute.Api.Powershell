@@ -152,7 +152,7 @@ namespace DD.CBU.Compute.Powershell
 
 		    var account = new AccountWithPhoneNumber
 			{
-				orgId = Connection.Account.OrganizationId.ToString(), 
+				orgId = Connection.User.OrganizationId.ToString(), 
 				userName = Username, 
 				password = Password.ToPlainString(), 
 				fullName = FullName, 

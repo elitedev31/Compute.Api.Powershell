@@ -16,7 +16,7 @@ namespace DD.CBU.Compute.Powershell
 		/// <summary>
 		///     Gets or sets the scsi id.
 		/// </summary>
-		public string ScsiId { get; set; }
+		public string DiskId { get; set; }
 
 		/// <summary>
 		///     Gets or sets the speed id.

@@ -77,12 +77,12 @@
     <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DD.CBU.Compute.Api.Client, Version=3.3.493.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
-      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.3.493\lib\net45\DD.CBU.Compute.Api.Client.dll</HintPath>
+    <Reference Include="DD.CBU.Compute.Api.Client, Version=3.6.17786.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
+      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.6.17786.0-feature\lib\net45\DD.CBU.Compute.Api.Client.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="DD.CBU.Compute.Api.Contracts, Version=3.3.493.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
-      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.3.493\lib\net45\DD.CBU.Compute.Api.Contracts.dll</HintPath>
+    <Reference Include="DD.CBU.Compute.Api.Contracts, Version=3.6.17786.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
+      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.6.17786.0-feature\lib\net45\DD.CBU.Compute.Api.Contracts.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
@@ -125,6 +125,7 @@
     <Compile Include="Report\GetSummaryUsageReportCmdlet.cs" />
     <Compile Include="Report\GetSoftwareReportCmdlet.cs" />
     <Compile Include="Report\GetDetailedUsageReportCmdlet.cs" />
+    <Compile Include="Servers\AddCaasServerScsiControllerCmdlet.cs" />
     <Compile Include="Servers\CaasServerDiskDetails.cs" />
     <Compile Include="Servers\CaasServerDetails.cs" />
     <Compile Include="CloudComputePsException.cs" />
@@ -151,6 +152,8 @@
     <Compile Include="NetworkDomainVips\GetCaasDefaultHealthMonitorsCmdlet.cs" />
     <Compile Include="NetworkDomains\GetCaasAntiAffinityRulesCmdlet.cs" />
     <Compile Include="Report\GetCaasServerMonitoringUsageReportCmdlet.cs" />
+    <Compile Include="Servers\RemoveCaasServerFlpFileCmdlet.cs" />
+    <Compile Include="Servers\RemoveCaasServerIsoFileCmdlet.cs" />
     <Compile Include="Tags\GetCaasTagCmdlet.cs" />
     <Compile Include="Model\IPVersion.cs" />
     <Compile Include="Model\PortListPort.cs" />

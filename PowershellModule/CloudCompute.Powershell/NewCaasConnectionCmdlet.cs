@@ -177,7 +177,7 @@ namespace DD.CBU.Compute.Powershell
             var newCloudComputeConnection = new ComputeServiceConnection(apiClient);
 
 			WriteDebug("Trying to login into the CaaS");
-			newCloudComputeConnection.Account = await newCloudComputeConnection.ApiClient.Login();
+			newCloudComputeConnection.User = await newCloudComputeConnection.ApiClient.LoginAsync();
 
 		    if (!String.IsNullOrWhiteSpace(ftpHost))
 		    {

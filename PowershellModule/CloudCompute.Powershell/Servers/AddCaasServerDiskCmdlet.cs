@@ -7,24 +7,26 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System;
-using System.Globalization;
-using System.Management.Automation;
-using DD.CBU.Compute.Api.Client;
-using DD.CBU.Compute.Api.Contracts.General;
-
 namespace DD.CBU.Compute.Powershell
 {
-    using DD.CBU.Compute.Api.Contracts.Network20;
-
-    using DiskSpeedType = DD.CBU.Compute.Api.Contracts.Server.DiskSpeedType;
+    using System;
+    using System.Management.Automation;
+    using Api.Client;
+    using Api.Contracts.Network20;
+    using DiskSpeedType = Api.Contracts.Server.DiskSpeedType;
 
     /// <summary>
     ///     The new CAAS Virtual Machine CMDLET.
     /// </summary>
     [Cmdlet(VerbsCommon.Add, "CaasServerDisk")]
-    public class AddCaasServerDiskCmdlet : PsCmdletCaasServerBase
+    public class AddCaasServerDiskCmdlet : PSCmdletCaasWithConnectionBase
     {
+        /// <summary>
+        ///     Gets or sets the server.
+        /// </summary>
+        [Parameter(Mandatory = false, ParameterSetName = "ServerType", HelpMessage = "The server to add the Disk", ValueFromPipeline = true)]
+        public ServerType Server { get; set; }
+
         /// <summary>
         ///     Gets or sets the size in gb.
         /// </summary>
@@ -34,17 +36,29 @@ namespace DD.CBU.Compute.Powershell
         /// <summary>
         ///     Gets or sets the speed id.
         /// </summary>
-        [Parameter(Mandatory = false, ParameterSetName = "SpeedId", HelpMessage = "The speedId of the new disk. The available speed Id can be retrieved using (Get-CaasDataCentre).hypervisor.diskSpeed")]
+        [Parameter(Mandatory = false, HelpMessage = "The speedId of the new disk. The available speed Id can be retrieved using (Get-CaasDataCentre).hypervisor.diskSpeed")]
         public string SpeedId { get; set; }
 
         /// <summary>
         ///     Gets or sets the speed.
         /// </summary>
-        [Parameter(Mandatory = false, ParameterSetName = "DiskSpeedType", HelpMessage = "The disk speed to be created")]
+        [Parameter(Mandatory = false, HelpMessage = "The disk speed to be created")]
         public DiskSpeedType Speed { get; set; }
 
-        [Parameter(Mandatory = false, ParameterSetName = "ScsiId", HelpMessage = "The Scsi Id")]
+        [Parameter(Mandatory = false, ParameterSetName = "Scsi", HelpMessage = "The SCSI Controller Id")]
+        public string ScsiControllerId { get; set; }
+
+        [Parameter(Mandatory = false, ParameterSetName = "Scsi", HelpMessage = "The Scsi Id")]
         public int? ScsiId { get; set; }
+
+        [Parameter(Mandatory = false, ParameterSetName = "IDE", HelpMessage = "The IDE Controller Id")]
+        public string IdeControllerId { get; set; }
+
+        [Parameter(Mandatory = false, ParameterSetName = "SATA", HelpMessage = "The SATA Controller Id")]
+        public string SataControllerId { get; set; }
+
+        [Parameter(Mandatory = false, ParameterSetName = "SATA", HelpMessage = "The Sata Id")]
+        public int? SataId { get; set; }
 
         /// <summary>
         ///     The process record method.
@@ -55,21 +69,64 @@ namespace DD.CBU.Compute.Powershell
             ResponseType response = null;
             try
             {
-                if (ParameterSetName.Equals("DiskSpeedType"))
+                AddDiskType request = null;
+                switch (ParameterSetName)
+                {
+                    case "ServerType":
+                        request = new AddDiskType
+                        {
+                            sizeGb = SizeInGB,
+                            speed = SpeedId,
+                            ItemElementName = AddDiskItemChoiceType.serverId,
+                            Item = Server.id,
+                        };
+                        break;
+                    case "Scsi":
+                        request = new AddDiskType
+                        {
+                            sizeGb = SizeInGB,
+                            speed = SpeedId,
+                            Item = new ScsiControllerType
+                            {
+                                controllerId = ScsiControllerId,
+                                scsiId = ScsiId.Value,
+                                scsiIdSpecified = ScsiId.HasValue
+                            }
+                        };
+                        break;
+                    case "IDE":
+                        request = new AddDiskType
+                        {
+                            sizeGb = SizeInGB,
+                            speed = SpeedId,
+                            Item = new IdeControllerType
+                            {
+                                controllerId = IdeControllerId
+                            }
+                        };
+                        break;
+                    case "SATA":
+                        request = new AddDiskType
+                        {
+                            sizeGb = SizeInGB,
+                            speed = SpeedId,
+                            Item = new SataControllerType
+                            {
+                                controllerId = SataControllerId,
+                                sataId = SataId.Value,
+                                sataIdSpecified = SataId.HasValue
+                            }
+                        };
+                        break;
+                }
+
+                if (string.IsNullOrEmpty(SpeedId))
                 {
                     SpeedId = Speed.ToString();
                 }
 
                 response =
-                    Connection.ApiClient.ServerManagement.Server.AddDisk(
-                        new AddDiskType
-                        {
-                            id = Server.id,
-                            sizeGb = SizeInGB,
-                            speed = Speed.ToString(),
-                            scsiId = ScsiId ?? 0,
-                            scsiIdSpecified = ScsiId.HasValue
-                        }).Result;
+                    Connection.ApiClient.ServerManagement.Server.AddDisk(request).Result;
             }
             catch (AggregateException ae)
             {

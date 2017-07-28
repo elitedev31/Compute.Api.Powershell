@@ -29,10 +29,10 @@ namespace DD.CBU.Compute.Powershell
 		public CaasServerDetails ServerDetails { get; set; }
 
 		/// <summary>
-		///     SCSI ID from the OS or customer image
+		///     Disk ID from the OS or customer image
 		/// </summary>
-		[Parameter(Mandatory = true, HelpMessage = "SCSI ID from the OS or customer image")]
-		public string ScsiId { get; set; }
+		[Parameter(Mandatory = true, HelpMessage = "Disk ID from the OS or customer image")]
+		public string DiskId { get; set; }
 
 
 		/// <summary>
@@ -71,13 +71,13 @@ namespace DD.CBU.Compute.Powershell
 			if (ServerDetails.InternalDiskDetails == null)
 				ServerDetails.InternalDiskDetails = new List<CaasServerDiskDetails>();
 
-			CaasServerDiskDetails diskdetails = ServerDetails.InternalDiskDetails.Find(disk => disk.ScsiId == ScsiId);
+			CaasServerDiskDetails diskdetails = ServerDetails.InternalDiskDetails.Find(disk => disk.DiskId == DiskId);
 			if (diskdetails == null)
 			{
 				diskdetails =
 					new CaasServerDiskDetails
 					{
-						ScsiId = ScsiId, 
+						DiskId = DiskId, 
 						SpeedId = SpeedId
 					};
 				ServerDetails.InternalDiskDetails.Add(diskdetails);

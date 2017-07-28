@@ -40,7 +40,7 @@ namespace DD.CBU.Compute.Powershell
                     case "With_DiskId":
                         break;
                     default:
-                        if (!ShouldProcess(string.Concat("Disk SCACI Id", ScsiId.ToString(CultureInfo.InvariantCulture))))
+                        if (!ShouldProcess(string.Concat("Disk SCSI Id", ScsiId.ToString(CultureInfo.InvariantCulture))))
                         {
                             return;
                         }

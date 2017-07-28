@@ -121,7 +121,8 @@ namespace DD.CBU.Compute.Powershell
 					var disk =
 						new DeployServerTypeDisk
                         {
-							scsiId = ushort.Parse(item.ScsiId), 
+                            
+							id = item.DiskId, 
 							speed = item.SpeedId
 						};
 					disks.Add(disk);
