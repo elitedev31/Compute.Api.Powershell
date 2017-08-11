@@ -77,12 +77,12 @@
     <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DD.CBU.Compute.Api.Client, Version=3.6.17786.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
-      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.6.17786.0-feature\lib\net45\DD.CBU.Compute.Api.Client.dll</HintPath>
+    <Reference Include="DD.CBU.Compute.Api.Client, Version=3.4.0.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
+      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.4.0\lib\net45\DD.CBU.Compute.Api.Client.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="DD.CBU.Compute.Api.Contracts, Version=3.6.17786.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
-      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.6.17786.0-feature\lib\net45\DD.CBU.Compute.Api.Contracts.dll</HintPath>
+    <Reference Include="DD.CBU.Compute.Api.Contracts, Version=3.4.0.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
+      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.4.0\lib\net45\DD.CBU.Compute.Api.Contracts.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
