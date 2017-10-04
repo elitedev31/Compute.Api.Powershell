@@ -51,7 +51,7 @@ namespace DD.CBU.Compute.Powershell
                         {
                             serverId = Server.id,
                             adapterType = AdapterType,
-                            busNumber = BusNumber.Value,
+                            busNumber = BusNumber ?? 0,
                             busNumberSpecified = BusNumber.HasValue
                         }).Result;
             }

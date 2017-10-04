@@ -86,10 +86,11 @@ namespace DD.CBU.Compute.Powershell
                         {
                             sizeGb = SizeInGB,
                             speed = SpeedId,
+                            ItemElementName = AddDiskItemChoiceType.scsiController,
                             Item = new ScsiControllerType
                             {
                                 controllerId = ScsiControllerId,
-                                scsiId = ScsiId.Value,
+                                scsiId = ScsiId ?? 0,
                                 scsiIdSpecified = ScsiId.HasValue
                             }
                         };
@@ -99,6 +100,7 @@ namespace DD.CBU.Compute.Powershell
                         {
                             sizeGb = SizeInGB,
                             speed = SpeedId,
+                            ItemElementName = AddDiskItemChoiceType.ideController,
                             Item = new IdeControllerType
                             {
                                 controllerId = IdeControllerId
@@ -110,10 +112,11 @@ namespace DD.CBU.Compute.Powershell
                         {
                             sizeGb = SizeInGB,
                             speed = SpeedId,
+                            ItemElementName = AddDiskItemChoiceType.sataController,
                             Item = new SataControllerType
                             {
                                 controllerId = SataControllerId,
-                                sataId = SataId.Value,
+                                sataId = SataId ?? 0,
                                 sataIdSpecified = SataId.HasValue
                             }
                         };
