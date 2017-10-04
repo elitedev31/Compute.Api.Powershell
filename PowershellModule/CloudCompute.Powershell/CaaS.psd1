@@ -7,7 +7,7 @@
 	RootModule = 'DD.CBU.Compute.Powershell.dll'
 
 	# Version number of this module.
-	ModuleVersion = '3.6.0'
+	ModuleVersion = '3.6.1'
 
 	# ID used to uniquely identify this module
 	GUID = '756605bc-ba11-4207-b1d1-22f1e7bd7c32'
