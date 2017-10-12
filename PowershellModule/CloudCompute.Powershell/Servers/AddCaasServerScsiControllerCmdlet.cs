@@ -29,7 +29,7 @@ namespace DD.CBU.Compute.Powershell
         /// <summary>
         ///     Gets or sets the speed id.
         /// </summary>
-        [Parameter(Mandatory = false, ParameterSetName = "SpeedId", HelpMessage = "The speedId of the new disk. The available speed Id can be retrieved using (Get-CaasDataCentre).hypervisor.diskSpeed")]
+        [Parameter(Mandatory = true, ParameterSetName = "SpeedId", HelpMessage = "The speedId of the new disk. The available speed Id can be retrieved using (Get-CaasDataCentre).hypervisor.diskSpeed")]
         public string AdapterType { get; set; }
 
 
