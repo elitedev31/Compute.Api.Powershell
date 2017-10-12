@@ -9,14 +9,22 @@ namespace DD.CBU.Compute.Powershell
     /// Stop Server
     /// </summary>
     [Cmdlet(VerbsLifecycle.Stop, "CaasServer")]
-    public class StopCaasServer : PsCmdletCaasServerBase
+    public class StopCaasServer : PSCmdletCaasWithConnectionBase
     {
         /// <summary>
-        ///     Stop Caas Server
-        /// </summary>
-        /// 
+		///     The Server
+		/// </summary>
+		[Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The Server to be stopped", ParameterSetName = "Server")]
+        public ServerType Server { get; set; }
 
-        [Parameter(Mandatory = false, HelpMessage = "PowerOff the server")]
+        /// <summary>
+        ///     Gets or sets the server id.
+        /// </summary>
+        [Parameter(Mandatory = true, HelpMessage = "The Server Id to be stopped", ParameterSetName = "ServerId")]
+        public string ServerId { get; set; }
+
+
+        [Parameter(Mandatory = false, HelpMessage = "Force PowerOff the server")]
         public SwitchParameter Force { get; set; }
 
         protected override void ProcessRecord()
@@ -24,7 +32,7 @@ namespace DD.CBU.Compute.Powershell
             try
             {
                 ResponseType status = null;
-                Guid serverId = Guid.Parse(Server.id);
+                var serverId = Guid.Parse(Server != null ? Server.id : ServerId);
                 if (Force.IsPresent)
                 {
                     status = Connection.ApiClient.ServerManagement.Server.PowerOffServer(serverId).Result;

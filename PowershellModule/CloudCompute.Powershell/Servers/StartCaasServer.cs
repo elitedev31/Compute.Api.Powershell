@@ -6,22 +6,29 @@ using System.Management.Automation;
 namespace DD.CBU.Compute.Powershell
 {
     /// <summary>
-    /// Stop Server
+    /// Star CaaS Server
     /// </summary>
     [Cmdlet(VerbsLifecycle.Start, "CaasServer")]
-    public class StartCaasServer : PsCmdletCaasServerBase
+    public class StartCaasServer : PSCmdletCaasWithConnectionBase
     {
         /// <summary>
-        ///     Stop Caas Server
+		///     The Server
+		/// </summary>
+		[Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The Server to be started", ParameterSetName = "Server")]
+        public ServerType Server { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the server id.
         /// </summary>
-        /// 
-        
+        [Parameter(Mandatory = true, HelpMessage = "The Server Id to be started", ParameterSetName = "ServerId")]
+        public string ServerId { get; set; }
+
         protected override void ProcessRecord()
         {
             try
             {
                 ResponseType status = null;
-                Guid serverId = Guid.Parse(Server.id);
+                var serverId = Guid.Parse(Server != null ? Server.id : ServerId);
                 status = Connection.ApiClient.ServerManagement.Server.StartServer(serverId).Result;
 
                 if (status != null)
