@@ -64,7 +64,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 				var nic = new AddNicType
 				{
 					serverId = Server != null ? Server.id : ServerId,
-                    nic = new VlanIdOrPrivateIpType
+                    nic = new NewNicType
                     {
                         privateIpv4 = PrimaryPrivateIp,
                         vlanId = Vlan != null? Vlan.id : null

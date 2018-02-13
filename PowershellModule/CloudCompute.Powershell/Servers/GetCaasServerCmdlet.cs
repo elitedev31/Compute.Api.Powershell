@@ -71,6 +71,13 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 		public string Location { get; set; }
 
 
+        /// <summary>
+		///     Get a CaaS server by State
+		/// </summary>
+		[Parameter(Mandatory = false, HelpMessage = "State of the server to filter")]
+		public string State { get; set; }
+
+
 		/// <summary>
 		///     The process record method.
 		/// </summary>
@@ -100,7 +107,8 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 			        NetworkId = Network != null ? Guid.Parse(Network.id) : (Guid?) null,
 			        NetworkDomainId = networkDomainId != Guid.Empty? networkDomainId : (Guid?)null,
 			        VlanId = vlanId != Guid.Empty? vlanId : (Guid?)null,
-			        DatacenterId = Location
+			        DatacenterId = Location,
+                    State = State
 			    }, PageableRequest).Result);
 			}
 			catch (AggregateException ae)

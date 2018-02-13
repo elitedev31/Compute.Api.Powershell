@@ -25,12 +25,6 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 	public class GetCaasOperatingSystemCmdlet : PsCmdletCaasPagedWithConnectionBase
     {   
         /// <summary>
-        /// Gets or sets the Datacenter Id.        
-        /// </summary>        
-        [Parameter(Mandatory = true, ValueFromPipeline = true, HelpMessage = "The Data center Id/location for figuring out the operating systems supported")]
-        public string DataCenterId { get; set; }
-
-        /// <summary>
         /// Gets or sets the Name of the OS Image.
         /// </summary>     
         [Parameter(Mandatory = false, ValueFromPipeline = true, ParameterSetName = "Filtered", HelpMessage = "The Os image name")]   
@@ -65,7 +59,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 			            Family = OperatingSystemFamily
 			        };
 
-			    this.WritePagedObject(Connection.ApiClient.Infrastructure.GetOperatingSystems(DataCenterId, PageableRequest, options).Result);
+			    this.WritePagedObject(Connection.ApiClient.Infrastructure.GetOperatingSystems(PageableRequest, options).Result);
             }
 			catch (AggregateException ae)
 			{
