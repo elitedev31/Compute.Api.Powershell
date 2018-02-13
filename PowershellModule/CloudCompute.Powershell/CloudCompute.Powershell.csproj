@@ -78,11 +78,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DD.CBU.Compute.Api.Client, Version=3.7.2.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
-      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.7.6-dev\lib\net45\DD.CBU.Compute.Api.Client.dll</HintPath>
+      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.7.7-dev\lib\net45\DD.CBU.Compute.Api.Client.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="DD.CBU.Compute.Api.Contracts, Version=3.7.2.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
-      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.7.6-dev\lib\net45\DD.CBU.Compute.Api.Contracts.dll</HintPath>
+      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.7.7-dev\lib\net45\DD.CBU.Compute.Api.Contracts.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
@@ -117,7 +117,7 @@
       <Link>Properties\SolutionAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Backups\DiasbleCaasServerBackupCmdlet.cs" />
-    <Compile Include="Datacenters\GetCaasSnapshotWindowsCmdlet.cs" />
+    <Compile Include="Snapshots\GetCaasSnapshotWindowsCmdlet.cs" />
     <Compile Include="NetworkDomains\NewCaasNetworkDomainCmdlet.cs" />
     <Compile Include="NetworkVips\AddCaasToServerFarmCmdlet.cs" />
     <Compile Include="Report\GetAdminReportCmdlet.cs" />
@@ -154,6 +154,8 @@
     <Compile Include="NetworkDomainVips\GetCaasDefaultHealthMonitorsCmdlet.cs" />
     <Compile Include="NetworkDomains\GetCaasAntiAffinityRulesCmdlet.cs" />
     <Compile Include="Report\GetCaasServerMonitoringUsageReportCmdlet.cs" />
+    <Compile Include="Snapshots\GetCaasServerSnapshotsCmdlet.cs" />
+    <Compile Include="Snapshots\NewCaasServerFromSnapshotCmdlet.cs" />
     <Compile Include="Snapshots\RemoveCaasServerSnapshotCmdlet.cs" />
     <Compile Include="Servers\RemoveCaasServerFlpFileCmdlet.cs" />
     <Compile Include="Servers\RemoveCaasServerIsoFileCmdlet.cs" />
