@@ -159,6 +159,7 @@
     <Compile Include="Snapshots\RemoveCaasServerSnapshotCmdlet.cs" />
     <Compile Include="Servers\RemoveCaasServerFlpFileCmdlet.cs" />
     <Compile Include="Servers\RemoveCaasServerIsoFileCmdlet.cs" />
+    <Compile Include="Snapshots\SetCaasServerSnapahotMigrateCmdlet.cs" />
     <Compile Include="Tags\GetCaasTagCmdlet.cs" />
     <Compile Include="Model\IPVersion.cs" />
     <Compile Include="Model\PortListPort.cs" />
