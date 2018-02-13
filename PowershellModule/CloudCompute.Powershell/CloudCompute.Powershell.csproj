@@ -117,6 +117,7 @@
       <Link>Properties\SolutionAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Backups\DiasbleCaasServerBackupCmdlet.cs" />
+    <Compile Include="Datacenters\GetCaasSnapshotWindowsCmdlet.cs" />
     <Compile Include="NetworkDomains\NewCaasNetworkDomainCmdlet.cs" />
     <Compile Include="NetworkVips\AddCaasToServerFarmCmdlet.cs" />
     <Compile Include="Report\GetAdminReportCmdlet.cs" />
@@ -137,6 +138,7 @@
     <Compile Include="Images\GetCaasCustomerImageExportHistoryCmdlet.cs" />
     <Compile Include="Images\GetCaasCustomerImageExportsCmdlet.cs" />
     <Compile Include="Images\GetCaasExportedImageCmdlet.cs" />
+    <Compile Include="Snapshots\EnableCaasServerSnapshotCmdlet.cs" />
     <Compile Include="Servers\GetCaasNicsCmdlet.cs" />
     <Compile Include="FirewallRules\GetCaasPortListCmdlet.cs" />
     <Compile Include="NetworkDomains\GetCaasReservePrivateIpv4AddressCmdlet.cs" />
@@ -152,6 +154,7 @@
     <Compile Include="NetworkDomainVips\GetCaasDefaultHealthMonitorsCmdlet.cs" />
     <Compile Include="NetworkDomains\GetCaasAntiAffinityRulesCmdlet.cs" />
     <Compile Include="Report\GetCaasServerMonitoringUsageReportCmdlet.cs" />
+    <Compile Include="Snapshots\RemoveCaasServerSnapshotCmdlet.cs" />
     <Compile Include="Servers\RemoveCaasServerFlpFileCmdlet.cs" />
     <Compile Include="Servers\RemoveCaasServerIsoFileCmdlet.cs" />
     <Compile Include="Tags\GetCaasTagCmdlet.cs" />
