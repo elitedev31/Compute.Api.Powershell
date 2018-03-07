@@ -21,15 +21,15 @@ namespace DD.CBU.Compute.Powershell
     ///     The new CaaS Virtual Machine cmdlet.
     /// </summary>
     [Cmdlet(VerbsCommon.New, "CaasServer")]
-	[OutputType(typeof(Api.Contracts.Network20.ServerType))]
-	public class NewCaasServerCmdlet : PSCmdletCaasWithConnectionBase
-	{
+    [OutputType(typeof(Api.Contracts.Network20.ServerType))]
+    public class NewCaasServerCmdlet : PSCmdletCaasWithConnectionBase
+    {
         /// <summary>
         ///     The Server Details that will be used to deploy the VM
         /// </summary>
-        [Parameter(Mandatory = true, ValueFromPipeline = true, 
-			HelpMessage = "The server details created by New-CaasServerDetails")]
-		public CaasServerDetails ServerDetails { get; set; }
+        [Parameter(Mandatory = true, ValueFromPipeline = true,
+            HelpMessage = "The server details created by New-CaasServerDetails")]
+        public CaasServerDetails ServerDetails { get; set; }
 
         /// <summary>
         ///     Use Guest OS Customization
@@ -41,41 +41,41 @@ namespace DD.CBU.Compute.Powershell
         ///     Switch to return the server object after execution
         /// </summary>
         [Parameter(Mandatory = false, HelpMessage = "Return the Server object after execution")]
-		public SwitchParameter PassThru { get; set; }
+        public SwitchParameter PassThru { get; set; }
 
 
-		/// <summary>
-		///     The process record method.
-		/// </summary>
-		protected override void ProcessRecord()
-		{
-			Api.Contracts.Network20.ServerType server = null;
-			base.ProcessRecord();
-			try
-			{
-				server = DeployServerTask();
-			}
-			catch (AggregateException ae)
-			{
-				ae.Handle(
-					e =>
-					{
-						if (e is ComputeApiException)
-						{
-							WriteError(new ErrorRecord(e, "-2", ErrorCategory.InvalidOperation, Connection));
-						}
-						else
-						{
-							ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, Connection));
-						}
+        /// <summary>
+        ///     The process record method.
+        /// </summary>
+        protected override void ProcessRecord()
+        {
+            Api.Contracts.Network20.ServerType server = null;
+            base.ProcessRecord();
+            try
+            {
+                server = DeployServerTask();
+            }
+            catch (AggregateException ae)
+            {
+                ae.Handle(
+                    e =>
+                    {
+                        if (e is ComputeApiException)
+                        {
+                            WriteError(new ErrorRecord(e, "-2", ErrorCategory.InvalidOperation, Connection));
+                        }
+                        else
+                        {
+                            ThrowTerminatingError(new ErrorRecord(e, "-1", ErrorCategory.ConnectionError, Connection));
+                        }
 
-						return true;
-					});
-			}
+                        return true;
+                    });
+            }
 
-			if (PassThru.IsPresent)
-				WriteObject(server);
-		}
+            if (PassThru.IsPresent)
+                WriteObject(server);
+        }
 
         /// <summary>
         ///     The deploy server task.
@@ -84,52 +84,54 @@ namespace DD.CBU.Compute.Powershell
         ///     The <see cref="ServerType" />.
         /// </returns>
         private Api.Contracts.Network20.ServerType DeployServerTask()
-		{
-			Api.Contracts.Network20.ServerType deployedServer = null;
-		    DeployServerTypeNetwork networkInfo = null;
-		    DeployServerTypeNetworkInfo networkDomainInfo = null;
+        {
+            Api.Contracts.Network20.ServerType deployedServer = null;
+            DeployServerTypeNetwork networkInfo = null;
+            DeployServerTypeNetworkInfo networkDomainInfo = null;
 
-		    if (ServerDetails.NetworkDomain != null)
-		    {              
-		        networkDomainInfo = new DeployServerTypeNetworkInfo
-		        {
-		            networkDomainId = ServerDetails.NetworkDomain.id,
-		            primaryNic = new NewNicType
-		            {
+            if (ServerDetails.NetworkDomain != null)
+            {
+                networkDomainInfo = new DeployServerTypeNetworkInfo
+                {
+                    networkDomainId = ServerDetails.NetworkDomain.id,
+                    primaryNic = new NewNicType
+                    {
                         vlanId = ServerDetails.PrimaryVlan != null ? ServerDetails.PrimaryVlan.id : null,
-                        privateIpv4 = ServerDetails.PrivateIp
+                        privateIpv4 = ServerDetails.PrivateIp,
+                        connected = ServerDetails.PrimaryNicConnected.Value,
+                        connectedSpecified = ServerDetails.PrimaryNicConnected.HasValue
                     }
                 };
-		    }
-		    else
-		    {
+            }
+            else
+            {
                 networkInfo = new DeployServerTypeNetwork
-		        {
-		            networkId = ServerDetails.Network != null ? ServerDetails.Network.id : null,
-		            privateIpv4 = ServerDetails.PrivateIp
-		        };
-		    }
+                {
+                    networkId = ServerDetails.Network != null ? ServerDetails.Network.id : null,
+                    privateIpv4 = ServerDetails.PrivateIp
+                };
+            }
 
-			// convert CaasServerDiskDetails to Disk[]
-			DeployServerTypeDisk[] diskarray = null;
-			if (ServerDetails.InternalDiskDetails != null &&
-			    ServerDetails.InternalDiskDetails.Count > 0)
-			{
-				var disks = new List<DeployServerTypeDisk>();
-				foreach (CaasServerDiskDetails item in ServerDetails.InternalDiskDetails)
-				{
-					var disk =
-						new DeployServerTypeDisk
+            // convert CaasServerDiskDetails to Disk[]
+            DeployServerTypeDisk[] diskarray = null;
+            if (ServerDetails.InternalDiskDetails != null &&
+                ServerDetails.InternalDiskDetails.Count > 0)
+            {
+                var disks = new List<DeployServerTypeDisk>();
+                foreach (CaasServerDiskDetails item in ServerDetails.InternalDiskDetails)
+                {
+                    var disk =
+                        new DeployServerTypeDisk
                         {
-                            
-							id = item.DiskId, 
-							speed = item.SpeedId
-						};
-					disks.Add(disk);
-				}
 
-				diskarray = disks.ToArray();
-			}
+                            id = item.DiskId,
+                            speed = item.SpeedId
+                        };
+                    disks.Add(disk);
+                }
+
+                diskarray = disks.ToArray();
+            }
             ResponseType response = null;
 
             if (GuestOsCustomization.HasValue && GuestOsCustomization == false)
@@ -189,7 +191,7 @@ namespace DD.CBU.Compute.Powershell
                         response.responseCode,
                         response.message,
                         response.requestId));
-			return deployedServer;
-		}
-	}
+            return deployedServer;
+        }
+    }
 }

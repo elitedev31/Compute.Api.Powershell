@@ -58,6 +58,11 @@ namespace DD.CBU.Compute.Powershell
         public string PrivateIp { get; set; }
 
         /// <summary>
+        ///     Gets or sets the primary Nic Connection State.
+        /// </summary>
+		public bool? PrimaryNicConnected { get; set; }
+
+        /// <summary>
         ///     Gets or sets the network domain.
         /// </summary>
         public NetworkDomainType NetworkDomain { get; set; }

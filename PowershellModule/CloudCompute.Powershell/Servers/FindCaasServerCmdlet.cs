@@ -1,9 +1,9 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="GetCaasDataCentreCmdlet.cs" company="">
+// <copyright file="GetCaasServerCmdlet.cs" company="">
 //   
 // </copyright>
 // <summary>
-//   The Get-CaasDataCentre cmdlet.
+//   The get deployed server cmdlet.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -13,26 +13,19 @@ namespace DD.CBU.Compute.Powershell.Mcp20
     using System.Management.Automation;
     using Api.Client;
     using Api.Contracts.Network20;
-    using Api.Contracts.Requests.Infrastructure;
 
     /// <summary>
-    ///     The Get-CaasSnapshotWindows cmdlet.
+    ///     The get deployed server cmdlet.
     /// </summary>
-    [Cmdlet(VerbsCommon.Get, "CaasSnapshotWindows")]
-    [OutputType(typeof(SnapshotWindowType))]
-    public class GetCaasSnapshotWindowsCmdlet : PsCmdletCaasPagedWithConnectionBase
+    [Cmdlet(VerbsCommon.Find, "CaasServer")]
+    [OutputType(typeof(ServerType))]
+    public class FindCaasServerCmdlet : PSCmdletCaasWithConnectionBase
     {
-        [Parameter(Mandatory = true, HelpMessage = "The data center Id")]
-        public string DatacenterId { get; set; }
-
-        [Parameter(Mandatory = true, HelpMessage = "The Service Plan")]
-        public string ServicePlan { get; set; }
-
-        [Parameter(Mandatory = false, ParameterSetName = "Filtered", HelpMessage = "The Snapshot Id")]
-        public string Id { get; set; }
-
-        [Parameter(Mandatory = false, ParameterSetName = "Filtered", HelpMessage = "The slots available")]
-        public bool? SlotsAvailable { get; set; }
+        /// <summary>
+        ///     Get a CaaS server by ServerId
+        /// </summary>
+        [Parameter(Mandatory = true, HelpMessage = "Server id")]
+        public Guid ServerId { get; set; }
 
         /// <summary>
         ///     The process record method.
@@ -43,13 +36,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
             try
             {
-                this.WritePagedObject<SnapshotWindowType>(Connection.ApiClient.Infrastructure.GetSnapshotWindowPaginated(
-                    (ParameterSetName.Equals("Filtered")
-                        ? new SnapshotWindowListOptions
-                        {
-                            Id = Id,
-                            SlotsAvailable = SlotsAvailable.Value
-                        } : null), PageableRequest).Result);
+                this.WriteObject(Connection.ApiClient.ServerManagement.Server.GetServer(ServerId).Result);
             }
             catch (AggregateException ae)
             {

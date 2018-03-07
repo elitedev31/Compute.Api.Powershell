@@ -41,9 +41,13 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         /// </summary>        
         [Parameter(Mandatory = false, ValueFromPipeline = true, ParameterSetName = "Filtered", HelpMessage = "The Os family like : Unix")]
         public string OperatingSystemFamily { get; set; }
+
+        [Parameter(Mandatory = true, HelpMessage = "The data center Id")]
+        public string DatacenterId { get; set; }
+
         /// <summary>
         ///     The process record method.
-        /// </summary>
+        /// </summary> 
         protected override void ProcessRecord()
 		{
 			base.ProcessRecord();
@@ -59,7 +63,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 			            Family = OperatingSystemFamily
 			        };
 
-			    this.WritePagedObject(Connection.ApiClient.Infrastructure.GetOperatingSystems(PageableRequest, options).Result);
+			    this.WritePagedObject(Connection.ApiClient.Infrastructure.GetOperatingSystems(DatacenterId, PageableRequest, options).Result);
             }
 			catch (AggregateException ae)
 			{

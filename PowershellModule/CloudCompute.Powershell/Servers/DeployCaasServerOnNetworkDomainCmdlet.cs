@@ -84,6 +84,12 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 			HelpMessage = "The private network private IP address that will be assigned to the machine.")]
 		public string PrimaryPrivateIp { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the primary Nic Connection State.
+        /// </summary>
+        [Parameter(Mandatory = false, HelpMessage = "The primary nic to be in Connected/Disconnected state.")]
+		public bool? PrimaryNicConnected { get; set; }
+
 		/// <summary>
 		///     The process record method.
 		/// </summary>
@@ -96,7 +102,9 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 				var primaryNic = new NewNicType
 				{
 					vlanId = PrimaryVlan != null ? PrimaryVlan.id : null, 
-					privateIpv4 = PrimaryPrivateIp
+					privateIpv4 = PrimaryPrivateIp,
+                    connected = PrimaryNicConnected.Value,
+                    connectedSpecified = PrimaryNicConnected.HasValue
 				};
 
 				var server = new DeployServerType
