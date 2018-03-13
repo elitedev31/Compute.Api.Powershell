@@ -20,7 +20,8 @@ namespace DD.CBU.Compute.Powershell
 	///     The Get-CaasDataCentre cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "CaasAccounts")]
-	[OutputType(typeof (AccountWithPhoneNumber))]
+	[OutputType(typeof (UserType))]
+    [Obsolete("Please Use Get-CaasUser insted.")]
 	public class GetCaasAccountsCmdlet : PSCmdletCaasWithConnectionBase
 	{
 		/// <summary>

@@ -78,11 +78,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DD.CBU.Compute.Api.Client, Version=3.6.50.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
-      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.6.65\lib\net45\DD.CBU.Compute.Api.Client.dll</HintPath>
+      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.6.70\lib\net45\DD.CBU.Compute.Api.Client.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="DD.CBU.Compute.Api.Contracts, Version=3.6.50.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
-      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.6.65\lib\net45\DD.CBU.Compute.Api.Contracts.dll</HintPath>
+      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.6.70\lib\net45\DD.CBU.Compute.Api.Contracts.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
@@ -117,6 +117,7 @@
       <Link>Properties\SolutionAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Backups\DiasbleCaasServerBackupCmdlet.cs" />
+    <Compile Include="Infrastructure\GetCaasGeographicRegionsCmdlet.cs" />
     <Compile Include="Servers\FindCaasServerCmdlet.cs" />
     <Compile Include="Servers\SetCaasServerNicConnectionCmdlet.cs" />
     <Compile Include="Snapshots\GetCaasSnapshotWindowsCmdlet.cs" />
@@ -195,6 +196,7 @@
     <Compile Include="NetworkDomains\GetCaasNetworkDomainCmdlet.cs" />
     <Compile Include="NetworkDomainVips\GetCaasVipNodeCmdlet.cs" />
     <Compile Include="NetworkDomainVips\GetCaasVIPVirtualListenerCmdlet.cs" />
+    <Compile Include="UserAccounts\GetCaasUsersCmdlet.cs" />
     <Compile Include="Vlans\GetCaasVlanCmdlet.cs" />
     <Compile Include="NetworkDomains\NetworkDomainType.cs" />
     <Compile Include="Servers\DeployCaasServerOnNetworkDomainCmdlet.cs" />

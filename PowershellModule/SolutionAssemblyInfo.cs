@@ -14,5 +14,5 @@ using System.Reflection;
 [assembly: AssemblyCopyright("Copyright © Dimension Data 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-[assembly: AssemblyVersion("3.5.0.0")]
-[assembly: AssemblyFileVersion("3.5.0.0")]
+[assembly: AssemblyVersion("3.6.4.0")]
+[assembly: AssemblyFileVersion("3.6.4.0")]
