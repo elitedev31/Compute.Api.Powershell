@@ -14,10 +14,13 @@ using DD.CBU.Compute.Api.Contracts.General;
 
 namespace DD.CBU.Compute.Powershell
 {
-	/// <summary>
+    using Api.Contracts.Network20;
+
+    /// <summary>
 	///     The Re,pve CaaS Virtual Machine cmdlet.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Remove, "CaasServer", SupportsShouldProcess = true)]
+    [OutputType(typeof(ResponseType))]
 	public class RemoveCaasServerCmdlet : PsCmdletCaasServerBase
 	{
 		/// <summary>
@@ -28,16 +31,9 @@ namespace DD.CBU.Compute.Powershell
 			try
 			{
 				if (!ShouldProcess(Server.name)) return;
-				Status status = Connection.ApiClient.ServerManagementLegacy.Server.ServerDelete(Server.id).Result;
+				var status = Connection.ApiClient.ServerManagement.Server.DeleteServer(Guid.Parse(Server.id)).Result;
 
-				if (status != null)
-					WriteDebug(
-						string.Format(
-							"{0} resulted in {1} ({2}): {3}", 
-							status.operation, 
-							status.result, 
-							status.resultCode, 
-							status.resultDetail));
+				WriteObject(status);
 			}
 			catch (AggregateException ae)
 			{

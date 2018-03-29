@@ -9,6 +9,7 @@ namespace DD.CBU.Compute.Powershell
     /// Stop Server
     /// </summary>
     [Cmdlet(VerbsLifecycle.Restart, "CaasServer")]
+    [OutputType(typeof(ResponseType))]
     public class RestartCaasServer : PsCmdletCaasServerBase
     {
         /// <summary>
@@ -17,6 +18,7 @@ namespace DD.CBU.Compute.Powershell
         /// 
         [Parameter(Mandatory = false, HelpMessage = "Reset the server instead of gracefully reboot")]
         public SwitchParameter Force { get; set; }
+
         protected override void ProcessRecord()
         {
             try

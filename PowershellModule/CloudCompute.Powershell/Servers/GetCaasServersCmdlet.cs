@@ -77,6 +77,12 @@ namespace DD.CBU.Compute.Powershell.Mcp20
         /// <summary>
         ///     Get a CaaS server by State
         /// </summary>
+        [Parameter(Mandatory = false, HelpMessage = "Whether the server is started or not filter")]
+        public bool? Started { get; set; }
+
+        /// <summary>
+        ///     Get a CaaS server by State
+        /// </summary>
         [Parameter(Mandatory = false, HelpMessage = "Tag Key Id of the server to filter")]
         public Guid? TagKeyId { get; set; }
 
@@ -124,7 +130,8 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                     State = State,
                     TagKeyId = TagKeyId,
                     TagKeyName = TagKeyName,
-                    TagValue = TagValue
+                    TagValue = TagValue,
+                    Started = Started
                 }, PageableRequest).Result);
             }
             catch (AggregateException ae)

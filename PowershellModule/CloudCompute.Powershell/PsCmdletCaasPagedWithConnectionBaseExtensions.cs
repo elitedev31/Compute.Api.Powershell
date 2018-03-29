@@ -18,7 +18,7 @@ namespace DD.CBU.Compute.Powershell
         /// <typeparam name="T">Type of the Item</typeparam>
         /// <param name="cmdLet">Paged CommandLet</param>
         /// <param name="pagedResponse">Paged Response</param>        
-        public static void WritePagedObject<T>(this PsCmdletCaasPagedWithConnectionBase cmdLet, PagedResponse<T> pagedResponse)
+        public static void  WritePagedObject<T>(this PsCmdletCaasPagedWithConnectionBase cmdLet, PagedResponse<T> pagedResponse)
         {
             if (cmdLet == null)
                 return;

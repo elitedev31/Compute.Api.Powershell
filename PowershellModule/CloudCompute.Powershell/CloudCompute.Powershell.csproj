@@ -118,6 +118,7 @@
     </Compile>
     <Compile Include="Backups\DiasbleCaasServerBackupCmdlet.cs" />
     <Compile Include="Infrastructure\GetCaasGeographicRegionsCmdlet.cs" />
+    <Compile Include="NetworkDomains\GetCaasReservedPublicIpAddressCmdlet.cs" />
     <Compile Include="Servers\FindCaasServerCmdlet.cs" />
     <Compile Include="Servers\SetCaasServerNicConnectionCmdlet.cs" />
     <Compile Include="Snapshots\GetCaasSnapshotWindowsCmdlet.cs" />
