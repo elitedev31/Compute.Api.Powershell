@@ -24,12 +24,6 @@ namespace DD.CBU.Compute.Powershell
     public class NewCaasServerFromSnapshotCmdlet : PSCmdletCaasWithConnectionBase
     {
         /// <summary>
-        ///     The  snpashot server id.
-        /// </summary>
-        [Parameter(Mandatory = true, HelpMessage = "Set the Snapshot Server Id")]
-        public Guid SnapshotServerId { get; set; }
-
-        /// <summary>
         ///     The  snapshot Id.
         /// </summary>
         [Parameter(Mandatory = true, HelpMessage = "Set the snapshot Id")]
@@ -83,7 +77,6 @@ namespace DD.CBU.Compute.Powershell
             {
                 var request = new CreateSnapshotPreviewServerType
                 {
-                    snapshotServerId = SnapshotServerId.ToString(),
                     snapshotId = SnapshotId.ToString(),
                     serverName = Name,
                     serverDescription = Description,

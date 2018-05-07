@@ -43,7 +43,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 
             try
             {
-                this.WritePagedObject<SnapshotWindowType>(Connection.ApiClient.Infrastructure.GetSnapshotWindowPaginated(
+                this.WritePagedObject<SnapshotWindowType>(Connection.ApiClient.Infrastructure.GetSnapshotWindowPaginated(DatacenterId, ServicePlan, 
                     (ParameterSetName.Equals("Filtered")
                         ? new SnapshotWindowListOptions
                         {

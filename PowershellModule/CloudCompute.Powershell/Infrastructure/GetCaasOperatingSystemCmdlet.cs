@@ -63,7 +63,7 @@ namespace DD.CBU.Compute.Powershell.Mcp20
 			            Family = OperatingSystemFamily
 			        };
 
-			    this.WritePagedObject(Connection.ApiClient.Infrastructure.GetOperatingSystems(DatacenterId, PageableRequest, options).Result);
+			    this.WritePagedObject(Connection.ApiClient.Infrastructure.GetOperatingSystems(PageableRequest, options).Result);
             }
 			catch (AggregateException ae)
 			{

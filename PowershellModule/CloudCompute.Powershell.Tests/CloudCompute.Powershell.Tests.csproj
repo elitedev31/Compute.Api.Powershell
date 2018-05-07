@@ -37,36 +37,36 @@
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DD.ApiProxy, Version=1.0.24.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\packages\DD.ApiProxy.ApiProxyHttpClient.1.0.24\lib\net451\DD.ApiProxy.dll</HintPath>
+    <Reference Include="DD.ApiProxy, Version=1.0.28.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\packages\DD.ApiProxy.ApiProxyHttpClient.1.0.28\lib\net451\DD.ApiProxy.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="DD.ApiProxy.ApiProxyHttpClient, Version=1.0.24.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DD.ApiProxy.ApiProxyHttpClient.1.0.24\lib\net451\DD.ApiProxy.ApiProxyHttpClient.dll</HintPath>
+    <Reference Include="DD.ApiProxy.ApiProxyHttpClient, Version=1.0.28.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DD.ApiProxy.ApiProxyHttpClient.1.0.28\lib\net451\DD.ApiProxy.ApiProxyHttpClient.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="DD.ApiProxy.Contracts, Version=1.0.24.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DD.ApiProxy.ApiProxyHttpClient.1.0.24\lib\net451\DD.ApiProxy.Contracts.dll</HintPath>
+    <Reference Include="DD.ApiProxy.Contracts, Version=1.0.28.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DD.ApiProxy.ApiProxyHttpClient.1.0.28\lib\net451\DD.ApiProxy.Contracts.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="DD.ApiProxy.Xml, Version=1.0.24.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DD.ApiProxy.ApiProxyHttpClient.1.0.24\lib\net451\DD.ApiProxy.Xml.dll</HintPath>
+    <Reference Include="DD.ApiProxy.Xml, Version=1.0.28.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DD.ApiProxy.ApiProxyHttpClient.1.0.28\lib\net451\DD.ApiProxy.Xml.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="DD.CBU.Compute.Api.Client, Version=3.6.50.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
-      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.6.70\lib\net45\DD.CBU.Compute.Api.Client.dll</HintPath>
+    <Reference Include="DD.CBU.Compute.Api.Client, Version=3.7.21.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
+      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.7.79\lib\net45\DD.CBU.Compute.Api.Client.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="DD.CBU.Compute.Api.Contracts, Version=3.6.50.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
-      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.6.70\lib\net45\DD.CBU.Compute.Api.Contracts.dll</HintPath>
+    <Reference Include="DD.CBU.Compute.Api.Contracts, Version=3.7.21.0, Culture=neutral, PublicKeyToken=52cdfe53446c826c, processorArchitecture=MSIL">
+      <HintPath>..\packages\DD.CBU.Compute.Api.Client.3.7.79\lib\net45\DD.CBU.Compute.Api.Contracts.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Diagnostics.Tracing.EventSource, Version=1.1.28.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Diagnostics.Tracing.EventSource.Redist.1.1.28\lib\net40\Microsoft.Diagnostics.Tracing.EventSource.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -75,12 +75,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Windows\Microsoft.NET\assembly\GAC_MSIL\System.Management.Automation\v4.0_3.0.0.0__31bf3856ad364e35\System.Management.Automation.dll</HintPath>
     </Reference>
-    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.5\lib\net45\System.Net.Http.Formatting.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    <Reference Include="System.Web.Http, Version=5.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.5\lib\net45\System.Web.Http.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Xml.Linq" />
