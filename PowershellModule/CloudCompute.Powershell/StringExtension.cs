@@ -95,6 +95,21 @@
 
         public static string ReplaceFirst(this string text, string search, string replace)
         {
+            if (string.IsNullOrWhiteSpace(text))
+            {
+                throw new ArgumentNullException(nameof(text));
+            }
+
+            if (string.IsNullOrWhiteSpace(search))
+            {
+                throw new ArgumentNullException(nameof(search));
+            }
+
+            if (string.IsNullOrWhiteSpace(replace))
+            {
+                throw new ArgumentNullException(nameof(replace));
+            }
+
             int pos = text.IndexOf(search, StringComparison.InvariantCultureIgnoreCase);
             if (pos < 0)
             {
