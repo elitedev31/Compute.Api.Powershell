@@ -7,19 +7,19 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System;
-using System.Linq;
-using System.Management.Automation;
-using System.Net.FtpClient;
-using System.Net.Http;
-using System.Threading.Tasks;
-using DD.CBU.Compute.Api.Client;
-using DD.CBU.Compute.Api.Client.Interfaces;
-using DD.CBU.Compute.Api.Client.WebApi;
-using System.Net;
-
 namespace DD.CBU.Compute.Powershell
 {
+    using System;
+    using System.Linq;
+    using System.Management.Automation;
+    using System.Net;
+    using System.Net.FtpClient;
+    using System.Net.Http;
+    using System.Threading.Tasks;
+    using Api.Client;
+    using Api.Client.Interfaces;
+    using Api.Client.WebApi;
+
     /// <summary>
     ///     The "New-CaasConnection" Cmdlet.
     /// </summary>
@@ -66,9 +66,9 @@ namespace DD.CBU.Compute.Powershell
         public string ApiDomainName { get; set; }
 
         /// <summary>
-		///     The base uri of the FTP domain
-		/// </summary>		
-		[Parameter(Mandatory = false, ParameterSetName = "ApiDomainName", HelpMessage = "The domain name for the FTP, default is the api domain name")]
+        ///     The base uri of the FTP domain
+        /// </summary>		
+        [Parameter(Mandatory = false, ParameterSetName = "ApiDomainName", HelpMessage = "The domain name for the FTP, default is the api domain name")]
         public string FtpDomainName { get; set; }
 
         /// <summary>
@@ -79,12 +79,6 @@ namespace DD.CBU.Compute.Powershell
         public HttpClient HttpClient { get; set; }
 
         /// <summary>
-        ///     HTTP trace log file path
-        /// </summary>
-        [Parameter(Mandatory = false, HelpMessage = "File path to log all the HTTP trace")]
-        public string LogFilePath { get; set; }
-
-        /// <summary>
         ///     Process the record
         /// </summary>
         protected override void ProcessRecord()
@@ -92,18 +86,17 @@ namespace DD.CBU.Compute.Powershell
             base.ProcessRecord();
 
             ComputeServiceConnection newCloudComputeConnection = null;
-            var connectionName = string.IsNullOrEmpty(Name) ? Guid.NewGuid().ToString() : Name;
 
             WriteDebug("Trying to login to the REST API");
             try
             {
-                newCloudComputeConnection = LoginTask(connectionName).Result;
+                newCloudComputeConnection = LoginTask().Result;
                 if (newCloudComputeConnection != null)
                 {
                     WriteDebug(string.Format("CaaS connection created successfully: {0}", newCloudComputeConnection));
                     if (string.IsNullOrEmpty(Name))
                     {
-                        Name = connectionName;
+                        Name = Guid.NewGuid().ToString();
                         WriteWarning(
                             string.Format("Connection name not specified. Therefore this connection name will be a random GUID: {0}", Name));
                     }
@@ -137,7 +130,7 @@ namespace DD.CBU.Compute.Powershell
         /// <returns>
         ///     The CaaS connection
         /// </returns>
-        private async Task<ComputeServiceConnection> LoginTask(string connectionName)
+        private async Task<ComputeServiceConnection> LoginTask()
         {
             string ftpHost = string.Empty;
             IComputeApiClient apiClient = null;
@@ -145,7 +138,7 @@ namespace DD.CBU.Compute.Powershell
             if (ParameterSetName == "KnownApiUri")
             {
                 var baseUri = KnownApiUri.Instance.GetBaseUri(Vendor, Region);
-                apiClient = GetComputeApiClient(baseUri, ApiCredentials.GetNetworkCredential(), LogFilePath, connectionName);
+                apiClient = GetComputeApiClient(baseUri, ApiCredentials.GetNetworkCredential());
                 ftpHost = ComputeApiClient.GetFtpHost(Vendor, Region);
             }
 
@@ -175,7 +168,7 @@ namespace DD.CBU.Compute.Powershell
                     }
                 }
 
-                apiClient = GetComputeApiClient(baseUri, ApiCredentials.GetNetworkCredential(), LogFilePath, connectionName);
+                apiClient = GetComputeApiClient(baseUri, ApiCredentials.GetNetworkCredential());
             }
             if (ParameterSetName == "HttpClient")
             {
@@ -185,7 +178,8 @@ namespace DD.CBU.Compute.Powershell
             var newCloudComputeConnection = new ComputeServiceConnection(apiClient);
 
             WriteDebug("Trying to login into the CaaS");
-            newCloudComputeConnection.User = await newCloudComputeConnection.ApiClient.LoginAsync();
+            newCloudComputeConnection.User = await apiClient.LoginAsync();
+            // await newCloudComputeConnection.ApiClient.LoginAsync();
 
             if (!String.IsNullOrWhiteSpace(ftpHost))
             {
@@ -208,19 +202,27 @@ namespace DD.CBU.Compute.Powershell
         /// <param name="logFile">The Log File Path</param>
         /// <param name="connectionName">The Connection Name</param>
         /// <returns>The <see cref="IComputeApiClient"/>.</returns>
-        private IComputeApiClient GetComputeApiClient(Uri baseUri, ICredentials credentials, string logFile, string connectionName)
+        private IComputeApiClient GetComputeApiClient(Uri baseUri, ICredentials credentials)
         {
-            LogWriter logWriter = null;
-            if (!string.IsNullOrWhiteSpace(logFile))
-            {
-                logWriter = new LogWriter(logFile, connectionName);
-            }
             var messageHandler = new ApiMessageHandler(
                 (requestMethod, requestUri, responseStatusCode, timeTaken, userName, requestContent, responseContent) =>
                 {
-                    if (logWriter != null)
+                    WriteVerbose($"HTTP Request Verb: {requestMethod}");
+                    WriteVerbose($"HTTP Request Uri: {requestUri}");
+                    WriteVerbose($"HTTP Response Status Code: {responseStatusCode}");
+                    WriteVerbose($"HTTP Request Time Taken(in ms): {timeTaken}");
+                    WriteVerbose($"HTTP Requested UserName: {userName}");
+                    if (!string.IsNullOrWhiteSpace(requestContent))
                     {
-                        logWriter.WriteLog($"{requestMethod}, {requestUri}, {responseStatusCode}, {timeTaken}, {userName}, {requestContent}, {responseContent}");
+                        WriteVerbose($"HTTP Request Content: {requestContent}");
+                    }
+                    if (responseStatusCode != "OK")
+                    {
+                        WriteVerbose($"HTTP Response Content: {responseContent}");
+                    }
+                    else
+                    {
+                        WriteDebug($"HTTP Response Content: {responseContent}");
                     }
                 }, true);
 
@@ -234,8 +236,7 @@ namespace DD.CBU.Compute.Powershell
                     BaseAddress = baseUri,
                     Timeout = TimeSpan.FromMinutes(5),
                 });
-
-            // we will not try to login again, assuming the clientId remains the same accross the regions
+            // w e will not try to login again, assuming the clientId remains the same accross the regions
             return new ComputeApiClient(httpClient);
         }
     }
