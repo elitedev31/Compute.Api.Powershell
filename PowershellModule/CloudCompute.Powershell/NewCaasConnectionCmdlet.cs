@@ -78,6 +78,8 @@ namespace DD.CBU.Compute.Powershell
             HelpMessage = "The http client which will handle the api requests")]
         public HttpClient HttpClient { get; set; }
 
+        private HttpTraceLogger _logger;
+
         /// <summary>
         ///     Process the record
         /// </summary>
@@ -134,11 +136,14 @@ namespace DD.CBU.Compute.Powershell
         {
             string ftpHost = string.Empty;
             IComputeApiClient apiClient = null;
+            var messageHandler = GetMessageHandler(ApiCredentials.GetNetworkCredential());
+            _logger = new HttpTraceLogger(this);
+            messageHandler.LogEventHandler += _logger.LogRequestHandler;
 
             if (ParameterSetName == "KnownApiUri")
             {
                 var baseUri = KnownApiUri.Instance.GetBaseUri(Vendor, Region);
-                apiClient = GetComputeApiClient(baseUri, ApiCredentials.GetNetworkCredential());
+                apiClient = GetComputeApiClient(baseUri, messageHandler);
                 ftpHost = ComputeApiClient.GetFtpHost(Vendor, Region);
             }
 
@@ -158,7 +163,7 @@ namespace DD.CBU.Compute.Powershell
                 }
 
                 // Handle explicit FTP host name
-                if (!String.IsNullOrWhiteSpace(FtpDomainName))
+                if (!string.IsNullOrWhiteSpace(FtpDomainName))
                 {
                     ftpHost = FtpDomainName;
                     Uri ftpUri;
@@ -168,20 +173,20 @@ namespace DD.CBU.Compute.Powershell
                     }
                 }
 
-                apiClient = GetComputeApiClient(baseUri, ApiCredentials.GetNetworkCredential());
+                apiClient = GetComputeApiClient(baseUri, messageHandler);
             }
             if (ParameterSetName == "HttpClient")
             {
                 apiClient = new ComputeApiClient(new HttpClientAdapter(HttpClient));
             }
 
-            var newCloudComputeConnection = new ComputeServiceConnection(apiClient);
+            var newCloudComputeConnection = new ComputeServiceConnection(apiClient, messageHandler);
 
             WriteDebug("Trying to login into the CaaS");
             newCloudComputeConnection.User = await apiClient.LoginAsync();
             // await newCloudComputeConnection.ApiClient.LoginAsync();
 
-            if (!String.IsNullOrWhiteSpace(ftpHost))
+            if (!string.IsNullOrWhiteSpace(ftpHost))
             {
                 // Right now we dont need to do a connect, as ftp is used in only a few commands
                 newCloudComputeConnection.FtpClient = new FtpClient
@@ -193,7 +198,17 @@ namespace DD.CBU.Compute.Powershell
                         .GetCredential(new Uri(string.Format("ftp://{0}", ftpHost)), "Basic")
                 };
             }
+            messageHandler.LogEventHandler -= _logger.LogRequestHandler;
             return newCloudComputeConnection;
+        }
+
+        private ApiMessageHandler GetMessageHandler(ICredentials credentials)
+        {
+            var messageHandler = new ApiMessageHandler(true);
+            messageHandler.Credentials = credentials;
+            messageHandler.PreAuthenticate = true;
+
+            return messageHandler;
         }
 
         /// <summary>The get compute api client.</summary>
@@ -202,33 +217,8 @@ namespace DD.CBU.Compute.Powershell
         /// <param name="logFile">The Log File Path</param>
         /// <param name="connectionName">The Connection Name</param>
         /// <returns>The <see cref="IComputeApiClient"/>.</returns>
-        private IComputeApiClient GetComputeApiClient(Uri baseUri, ICredentials credentials)
+        private IComputeApiClient GetComputeApiClient(Uri baseUri, ApiMessageHandler messageHandler)
         {
-            var messageHandler = new ApiMessageHandler(
-                (requestMethod, requestUri, responseStatusCode, timeTaken, userName, requestContent, responseContent) =>
-                {
-                    WriteVerbose($"HTTP Request Verb: {requestMethod}");
-                    WriteVerbose($"HTTP Request Uri: {requestUri}");
-                    WriteVerbose($"HTTP Response Status Code: {responseStatusCode}");
-                    WriteVerbose($"HTTP Request Time Taken(in ms): {timeTaken}");
-                    WriteVerbose($"HTTP Requested UserName: {userName}");
-                    if (!string.IsNullOrWhiteSpace(requestContent))
-                    {
-                        WriteVerbose($"HTTP Request Content: {requestContent}");
-                    }
-                    if (responseStatusCode != "OK")
-                    {
-                        WriteVerbose($"HTTP Response Content: {responseContent}");
-                    }
-                    else
-                    {
-                        WriteDebug($"HTTP Response Content: {responseContent}");
-                    }
-                }, true);
-
-            messageHandler.Credentials = credentials;
-            messageHandler.PreAuthenticate = true;
-
             // Handle disposing the message handler
             var httpClient = new HttpClientAdapter(
                 new HttpClient(messageHandler, disposeHandler: true)
@@ -236,8 +226,15 @@ namespace DD.CBU.Compute.Powershell
                     BaseAddress = baseUri,
                     Timeout = TimeSpan.FromMinutes(5),
                 });
-            // w e will not try to login again, assuming the clientId remains the same accross the regions
+
+            // we will not try to login again, assuming the clientId remains the same accross the regions
             return new ComputeApiClient(httpClient);
+        }
+
+        protected override void EndProcessing()
+        {
+            base.EndProcessing();
+            _logger.LogMessages();
         }
     }
 }

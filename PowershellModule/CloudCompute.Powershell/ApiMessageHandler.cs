@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Text.RegularExpressions;
-using System.Threading;
-using System.Threading.Tasks;
-
-namespace DD.CBU.Compute.Powershell
+﻿namespace DD.CBU.Compute.Powershell
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Net.Http;
+    using System.Text.RegularExpressions;
+    using System.Threading;
+    using System.Threading.Tasks;
+
     /// <summary>
     /// The HTTP message handler for the CaaS API.
     /// Intended to be used like an <see cref="HttpClientHandler"/> (as the terminus in an HTTP client pipeline).
@@ -74,7 +74,7 @@ namespace DD.CBU.Compute.Powershell
         /// <summary>
         /// TraceHttp log method
         /// </summary>
-        private readonly TraceHttpRequest _logEvent;
+        public TraceHttpRequest LogEventHandler;
 
         /// <summary>
         /// Boolean representing if we need to enable request and response content tracing
@@ -86,12 +86,22 @@ namespace DD.CBU.Compute.Powershell
         /// </summary>
         /// <param name="logEvent">TraceHttp log method</param>
         /// <param name="enableContentTracing">Boolean representing if we need to enable request and response content tracing</param>
+        public ApiMessageHandler(bool enableContentTracing = false)
+        {
+            _enableContentTracing = enableContentTracing;
+        }
+
+        /// <summary>
+        /// Instance of a message handler
+        /// </summary>
+        /// <param name="logEvent">TraceHttp log method</param>
+        /// <param name="enableContentTracing">Boolean representing if we need to enable request and response content tracing</param>
         public ApiMessageHandler(TraceHttpRequest logEvent, bool enableContentTracing = false)
         {
             if (logEvent == null)
                 throw new ArgumentNullException(nameof(logEvent));
 
-            _logEvent = logEvent;
+            LogEventHandler = logEvent;
             _enableContentTracing = enableContentTracing;
         }
 
@@ -127,6 +137,7 @@ namespace DD.CBU.Compute.Powershell
             string userName,
             string requestContent,
             string responseContent);
+
 
         /// <summary>
         /// Asynchronously execute an HTTP request.
@@ -230,7 +241,7 @@ namespace DD.CBU.Compute.Powershell
                     userName = credentials.UserName;
                 }
 
-                _logEvent?.Invoke(
+                LogEventHandler?.Invoke(
                     requestMethod,
                     SanitizeUri(requestUri),
                     responseStatusCode,
@@ -239,7 +250,7 @@ namespace DD.CBU.Compute.Powershell
                     SanitizeContent(requestContent),
                     SanitizeContent(responseContent));
             }
-            catch
+            catch(Exception ex)
             {
                 // ignored
             }
@@ -258,13 +269,13 @@ namespace DD.CBU.Compute.Powershell
             }
 
             var firstSanitization = UriPatterns.Aggregate(
-                    uri,
-                    (current, pattern) => Regex.Replace(current, pattern.Item1, pattern.Item2, RegexOptions.IgnoreCase));
+                uri,
+                (current, pattern) => Regex.Replace(current, pattern.Item1, pattern.Item2, RegexOptions.IgnoreCase));
 
             // We will always log unescaped uri
             return UriPatterns.Aggregate(
-                  Uri.UnescapeDataString(firstSanitization),
-                  (current, pattern) => Regex.Replace(current, pattern.Item1, pattern.Item2, RegexOptions.IgnoreCase));
+                Uri.UnescapeDataString(firstSanitization),
+                (current, pattern) => Regex.Replace(current, pattern.Item1, pattern.Item2, RegexOptions.IgnoreCase));
         }
 
         /// <summary>
