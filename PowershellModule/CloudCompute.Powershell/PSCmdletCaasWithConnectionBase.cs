@@ -57,5 +57,11 @@ namespace DD.CBU.Compute.Powershell
             Connection.OnRequestStart -= _logger.LogRequestHandler;
             _logger.LogMessages();
         }
+
+        protected override void StopProcessing()
+        {
+            base.StopProcessing();
+            Connection.OnRequestStart -= _logger.LogRequestHandler;
+        }
     }
 }
