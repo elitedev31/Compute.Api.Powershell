@@ -98,7 +98,7 @@ namespace DD.CBU.Compute.Powershell
                     {
                         vlanId = ServerDetails.PrimaryVlan != null ? ServerDetails.PrimaryVlan.id : null,
                         privateIpv4 = ServerDetails.PrivateIp,
-                        connected = ServerDetails.PrimaryNicConnected.Value,
+                        connected = ServerDetails.PrimaryNicConnected != null ? ServerDetails.PrimaryNicConnected.Value : (bool?)null,
                         connectedSpecified = ServerDetails.PrimaryNicConnected.HasValue
                     }
                 };
