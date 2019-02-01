@@ -13,6 +13,8 @@ using DD.CBU.Compute.Api.Client;
 
 namespace DD.CBU.Compute.Powershell
 {
+    using Api.Contracts.Snapshot;
+
     [Cmdlet(VerbsCommon.Remove, "CaasServerSnapshot", SupportsShouldProcess = true)]
     public class RemoveCaasServerSnapshotCmdlet : PsCmdletCaasServerBase
     {
@@ -24,7 +26,7 @@ namespace DD.CBU.Compute.Powershell
             base.ProcessRecord();
             try
             {
-                WriteObject(Connection.ApiClient.ServerManagement.Server.DisableSnapshotService(new Api.Contracts.Network20.ServerIdType { serverId = Server.id }).Result);
+                WriteObject(Connection.ApiClient.ServerManagement.Server.DisableSnapshotService(new DisableSnapshotServiceType { serverId = Server.id }).Result);
             }
             catch (AggregateException ae)
             {

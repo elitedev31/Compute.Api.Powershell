@@ -4,6 +4,7 @@
     using System.Management.Automation;
     using Api.Client;
     using Api.Contracts.Network20;
+    using Api.Contracts.Snapshot;
 
     /// <summary>
     ///     The set server snapshot migrate cmdlet.
@@ -21,7 +22,7 @@
             base.ProcessRecord();
             try
             {
-                response = Connection.ApiClient.Snapshot.MigrateSnapshotPreviewServer(new ServerIdType { serverId = Server.id }).Result;
+                response = Connection.ApiClient.Snapshot.MigrateSnapshotPreviewServer(new MigrateSnapshotPreviewServerType { serverId = Server.id }).Result;
             }
             catch (AggregateException ae)
             {
