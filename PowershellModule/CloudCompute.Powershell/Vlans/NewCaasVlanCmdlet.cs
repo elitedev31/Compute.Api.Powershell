@@ -79,7 +79,8 @@ namespace DD.CBU.Compute.Powershell.Mcp20
                         name = Name,
                         description = Description,
                         networkDomainId = NetworkDomainId,
-                        privateIpv4PrefixSize = PrivateIpv4PrefixSize
+                        privateIpv4PrefixSize = PrivateIpv4PrefixSize,
+                        privateIpv4NetworkAddress = PrivateIpv4BaseAddress
                     }).Result;
                 if (response != null)
                     WriteDebug(
